@@ -58,6 +58,8 @@
     "pandoc",
     "pkgdown",
     "purrr",
+    "pxcor",
+    "pycor",
     "ragg",
     "readr",
     "repostatus",

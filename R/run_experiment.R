@@ -40,7 +40,69 @@
 #'
 #' @examples
 #' \dontrun{
-#'   1 + 1
+#'   # Change the path below to point to your NetLogo executable
+#'   netlogo_path <- file.path("", "opt", "netlogo-7-0-0", "bin", "NetLogo")
+#'
+#'   # Change the path below to point to the 'Wolf Sheep Simple 5' NetLogo
+#'   # model file in the Model Library
+#'   model_path <- file.path(
+#'     "", "opt", "netlogo-7-0-0", "models", "IABM Textbook", "chapter 4",
+#'     "Wolf Sheep Simple 5.nlogox"
+#'   )
+#'
+#'   setup_file <- create_experiment(
+#'     name = "Wolf Sheep Simple Model Analysis",
+#'     repetitions = 10,
+#'     sequential_run_order = TRUE,
+#'     run_metrics_every_step = TRUE,
+#'     setup = "setup",
+#'     go = "go",
+#'     time_limit = 1000,
+#'     metrics = c(
+#'       'count wolves',
+#'       'count sheep'
+#'     ),
+#'     run_metrics_condition = NULL,
+#'     constants = list(
+#'       "number-of-sheep" = 500,
+#'       "number-of-wolves" = list(
+#'         first = 5,
+#'         step = 1,
+#'         last = 15
+#'       ),
+#'       "movement-cost" = 0.5,
+#'       "grass-regrowth-rate" = 0.3,
+#'       "energy-gain-from-grass" = 2,
+#'       "energy-gain-from-sheep" = 5
+#'     )
+#'   )
+#'
+#'   run_experiment(
+#'     netlogo_path = netlogo_path,
+#'     model_path = model_path,
+#'     setup_file = setup_file
+#'   )
+#'
+#'   # Expected output:
+#'
+#'   #> # A tibble: 110,110 × 10
+#'   #>   run_number number_of_sheep number_of_wolves movement_cost
+#'   #>         <dbl>           <dbl>            <dbl>         <dbl>
+#'   #>  1          3             500                5           0.5
+#'   #>  2          9             500                5           0.5
+#'   #>  3          4             500                5           0.5
+#'   #>  4          1             500                5           0.5
+#'   #>  5          6             500                5           0.5
+#'   #>  6          8             500                5           0.5
+#'   #>  7          7             500                5           0.5
+#'   #>  8          2             500                5           0.5
+#'   #>  9          5             500                5           0.5
+#'   #> 10          2             500                5           0.5
+#'   #>  # ℹ 110,100 more rows
+#'   #>  # ℹ 6 more variables: grass_regrowth_rate <dbl>,
+#'   #>  #   energy_gain_from_grass <dbl>, energy_gain_from_sheep <dbl>,
+#'   #>  #   step <dbl>, count_wolves <dbl>, count_sheep <dbl>
+#'   #>  # ℹ Use `print(n = ...)` to see more rows
 #' }
 run_experiment <- function(
   netlogo_path,
@@ -58,7 +120,9 @@ run_experiment <- function(
   checkmate::assert_choice(fs::path_ext(model_path), model_path_choices)
   checkmate::assert_string(experiment, null.ok = TRUE)
   checkmate::assert_string(setup_file, null.ok = TRUE)
-  if (!is.null(setup_file)) checkmate::assert_file_exists(setup_file)
+  if (!is.null(setup_file)) {
+    checkmate::assert_file_exists(setup_file, extension = "xml")
+  }
   checkmate::assert_character(other_args, null.ok = TRUE)
   checkmate::assert_flag(parse)
 
@@ -80,9 +144,9 @@ run_experiment <- function(
     )
   }
 
-  file <- tempfile(pattern = "table-", fileext = ".csv")
+  file <- temp_file(pattern = "table-", fileext = ".csv")
 
-  raw_data <- system2(
+  raw_data <- system_2(
     command = glue::glue("{netlogo_path}"),
     args = c(
       "--headless ",
@@ -117,7 +181,12 @@ run_experiment <- function(
   } else {
     if(isTRUE(parse)) {
       out |>
-        dplyr::mutate(dplyr::across(dplyr::everything(), parse_netlogo_list))
+        dplyr::mutate(
+          dplyr::across(
+            .cols = dplyr::everything(),
+            .fns = parse_netlogo_list
+          )
+        )
     } else {
       out
     }

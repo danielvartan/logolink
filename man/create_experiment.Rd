@@ -103,7 +103,36 @@ since NetLogo only accepts double quotes for strings.
 }
 }
 \examples{
-1 + 1
+setup_file <- create_experiment(
+  name = "Wolf Sheep Simple Model Analysis",
+  repetitions = 10,
+  sequential_run_order = TRUE,
+  run_metrics_every_step = TRUE,
+  setup = "setup",
+  go = "go",
+  time_limit = 1000,
+  metrics = c(
+    'count wolves',
+    'count sheep'
+  ),
+  run_metrics_condition = NULL,
+  constants = list(
+    "number-of-sheep" = 500,
+    "number-of-wolves" = list(
+      first = 5,
+      step = 1,
+      last = 15
+    ),
+    "movement-cost" = 0.5,
+    "grass-regrowth-rate" = 0.3,
+    "energy-gain-from-grass" = 2,
+    "energy-gain-from-sheep" = 5
+  )
+)
+
+setup_file
+
+setup_file |> inspect_experiment_file()
 }
 \seealso{
 Other NetLogo functions: 

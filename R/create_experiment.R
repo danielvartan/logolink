@@ -70,7 +70,36 @@
 #' @export
 #'
 #' @examples
-#' 1 + 1
+#' setup_file <- create_experiment(
+#'   name = "Wolf Sheep Simple Model Analysis",
+#'   repetitions = 10,
+#'   sequential_run_order = TRUE,
+#'   run_metrics_every_step = TRUE,
+#'   setup = "setup",
+#'   go = "go",
+#'   time_limit = 1000,
+#'   metrics = c(
+#'     'count wolves',
+#'     'count sheep'
+#'   ),
+#'   run_metrics_condition = NULL,
+#'   constants = list(
+#'     "number-of-sheep" = 500,
+#'     "number-of-wolves" = list(
+#'       first = 5,
+#'       step = 1,
+#'       last = 15
+#'     ),
+#'     "movement-cost" = 0.5,
+#'     "grass-regrowth-rate" = 0.3,
+#'     "energy-gain-from-grass" = 2,
+#'     "energy-gain-from-sheep" = 5
+#'   )
+#' )
+#'
+#' setup_file
+#'
+#' setup_file |> inspect_experiment_file()
 create_experiment <- function(
   name = "",
   repetitions = 1,
@@ -101,9 +130,6 @@ create_experiment <- function(
   checkmate::assert_character(metrics, min.len = 1)
   checkmate::assert_string(run_metrics_condition, null.ok = TRUE)
   checkmate::assert_list(constants, null.ok = TRUE)
-
-  declaration <- '<?xml version=\"1.0\" encoding=\"UTF-8\"?>'
-  doctype <- '<!DOCTYPE experiments SYSTEM "behaviorspace.dtd">'
 
   root <- xml2::xml_new_root("experiments")
 
@@ -178,7 +204,6 @@ create_experiment <- function(
     readr::read_lines() |>
     magrittr::extract(-1) |>
     stringr::str_remove_all("NULL") |>
-    # c(declaration, doctype, .) |>
     readr::write_lines(file)
 
   file

@@ -1,5 +1,7 @@
 library(checkmate)
 library(dplyr)
+library(magrittr)
+library(readr)
 library(testthat)
 
 library(logolink)
