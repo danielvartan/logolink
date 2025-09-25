@@ -1,0 +1,53 @@
+url: https://danielvartan.github.io/logolink/
+
+template:
+  bslib:
+    version: 5
+    brand: "./_brand.yml"
+  math-rendering: mathjax
+  light-switch: true
+  opengraph:
+    image:
+      src: man/figures/og-image.png
+      alt: "logolink"
+  params:
+    noindex: false
+
+navbar:
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - news
+    right:
+    - search
+    - lightswitch
+    - github
+  components:
+    home: ~
+    intro: ~
+    articles: ~
+
+reference:
+- title: NetLogo
+  desc: >
+    Functions to setup and control NetLogo.
+  contents:
+  - create_experiment
+  - run_experiment
+
+# - title: Utilities
+#   desc: >
+#     Utility functions to help with data manipulation and retrieval.
+#   contents:
+#   - parse_patches
+
+authors:
+  Daniel Vartanian:
+    href: https://github.com/danielvartan/
+
+development:
+  mode: unreleased
+  version_label: warning

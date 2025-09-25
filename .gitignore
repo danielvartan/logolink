@@ -1,0 +1,16 @@
+.Rapp.history
+.RData
+.Renviron
+.Rhistory
+.Ruserdata
+*.knit.md
+*.utf8.md
+/.quarto/
+/.Rproj.user/
+/*_cache/
+/*.Rcheck/
+/cache/
+/docs/
+/revdep/
+/vignettes/*.html
+/vignettes/*.pdf

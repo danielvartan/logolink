@@ -1,0 +1,101 @@
+meta:
+  name:
+    short: "logolink"
+    long: "logolink: Control NetLogo from R"
+  link:
+    home: https://danielvartan.github.io/logolink
+    github: https://github.com/danielvartan/logolink
+  description: |
+    Tools to setup and execute NetLogo simulations from R.
+
+logo:
+  images:
+    logo:
+      path: man/figures/logo.png
+      alt: "Hex logo"
+    og-image:
+      path: man/figures/og-image.png
+      alt: "Open Graph Image"
+
+color:
+  palette: # Based on NetLogo 7.0.0
+    white: "#ffffff"
+    black: "#000000"
+    red: "#f61501"
+    dark-red: "#c20101"
+    blue: "#43b8ff"
+    blue-gradient-dark: "#0099f5"
+    blue-gradient-light: "#98d8ff"
+    yellow: "#ffc336"
+    dark-yellow: "#de9b01"
+    green: "#2bdb3d" # Derived considering official color angles
+    website-blue: "#0670ed" # Avoid using!
+    website-light-blue: "#d4e5f2"
+    website-white-text: "#fdfdfd"
+    light-theme-blue: "#0670ed"
+    light-theme-light-blue: "#cfe5ff"
+    light-theme-gray: "#d7d7d7"
+    light-theme-light-gray: "#eeeeee"
+    light-theme-dark-gray: "#cccccc"
+    light-theme-white: "#ffffff"
+    light-theme-black: "#000000"
+    dark-theme-blue: "#0670ed"
+    dark-theme-dark-blue: "#003675"
+    dark-theme-gray: "#4f4f4f"
+    dark-theme-light-gray: "#cccccc"
+    dark-theme-dark-gray-1: "#46464c"
+    dark-theme-dark-gray-2: "#2d2d36"
+    dark-theme-dark-gray-3: "#161616"
+    dark-theme-white: "#ffffff"
+    dark-theme-black: "#000000"
+    classic-theme-aquamarine: "#82bcb7"
+    classic-theme-red: "#c86767"
+    classic-theme-purple: "#bcbce6"
+    classic-theme-sand: "#e1e1b6"
+    classic-theme-gray: "#cccccc"
+    classic-theme-white: "#ffffff"
+    classic-theme-black: "#000000"
+    classic-theme-light-gray: "#eeeeee"
+    color-swatch-gray: "#8d8d8d" # Based on NetLogo 7.0.0
+    color-swatch-red: "#d73229"
+    color-swatch-orange: "#f16a15"
+    color-swatch-brown: "#9d6e48"
+    color-swatch-yellow: "#ecec29"
+    color-swatch-green: "#59b03c"
+    color-swatch-lime: "#2cd13b"
+    color-swatch-turquoise: "#1d9f78"
+    color-swatch-cyan: "#54c4c4"
+    color-swatch-sky: "#2d8dbe"
+    color-swatch-blue: "#345da9"
+    color-swatch-violet: "#7c50a4"
+    color-swatch-magenta: "#a71b6a"
+    color-swatch-pink: "#d9637f"
+  background: white
+  primary: red
+  secondary: blue
+  tertiary: yellow
+  success: blue
+  info: blue
+  warning: dark-yellow
+  danger: red
+  light: white
+  dark: black
+
+typography:
+  fonts:
+    - family: Inter # Used on NetLogo Website
+      source: google
+    - family: Fragment Mono # Not official!
+      source: google
+  base:
+    family: Inter
+    line-height: 1.6 # 1.6em
+    weight: normal
+  headings:
+    color: black
+    family: Inter
+    weight: 700
+  link:
+    color: website-blue
+    decoration: none
+  monospace: Fragment Mono

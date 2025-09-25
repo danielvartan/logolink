@@ -1,0 +1,277 @@
+# logolink <a href = "https://danielvartan.github.io/brandr/"><img src = "man/figures/logo.svg" align="right" width="120" /></a>
+
+<!-- quarto render -->
+
+<!-- badges: start -->
+[![Project Status: Active - The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![License:
+GPLv3](https://img.shields.io/badge/license-GPLv3-bd0000.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
+<!-- badges: end -->
+
+## Overview
+
+`logolink` is an R package that provides simple tools to set up and run
+NetLogo simulations directly from R. It is designed for NetLogo 7 and
+does not support older versions.
+
+The package offers an updated and streamlined approach to running
+NetLogo models from R. It follows the [tidyverse
+principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and
+integrates smoothly with the [tidyverse
+ecosystem](https://www.tidyverse.org/).
+
+<!-- Related R packages include [`RNetLogo`](https://cran.r-project.org/web/packages/RNetLogo/index.html) and [`nlrx`](https://cran.r-project.org/web/packages/nlrx/index.html). -->
+
+> If you find this project useful, please consider giving it a star!  
+> [![GitHub repo
+> stars](https://img.shields.io/github/stars/danielvartan/logolink)](https://github.com/danielvartan/logolink/)
+
+## Installation
+
+You can install `logolink` using the
+[`remotes`](https://github.com/r-lib/remotes) package:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("danielvartan/logolink", dependencies = TRUE)
+```
+
+## Usage
+
+`logolink` usage is very straightforward. The main functions are:
+
+- [`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html):
+  Creates a NetLogo experiment XML file
+- [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html):
+  Runs a NetLogo BehaviorSpace experiment
+
+Along with this package, you will also need NetLogo 7 or higher
+installed on your computer. You can download it from the [NetLogo
+website](https://ccl.northwestern.edu/netlogo/download.shtml).
+
+### Setting the NetLogo Path
+
+`logolink` requires the path to the NetLogo executable when running
+simulations with the
+[`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html)
+function. This path is OS-independent and easy to locate. On Windows,
+for example, it is typically something like
+`C:/Program Files/NetLogo 7.0.0/NetLogo.exe`.
+
+Example:
+
+``` r
+netlogo_path <- file.path("", "opt", "netlogo-7-0-0", "bin", "NetLogo")
+
+netlogo_path
+#> [1] "/opt/netlogo-7-0-0/bin/NetLogo"
+```
+
+### Creating an Experiment
+
+To start running your model from R you first need to setup an
+experiment. You can do this by setting a
+[BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment
+with
+[`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html).
+This function will create a `.xml` file that contains all the
+information about your experiment, including the parameters to vary, the
+metrics to collect, and the number of runs to perform.
+
+Alternatively, you can set up your experiment directly in NetLogo and
+save it as part of your model. In this case, you can skip the
+[`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html)
+step and just provide the name of the experiment when running the model
+with
+[`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html).
+
+Example:
+
+``` r
+library(logolink)
+
+setup_file <- create_experiment(
+  name = "Wolf Sheep Simple Model Analysis",
+  repetitions = 10,
+  sequential_run_order = TRUE,
+  run_metrics_every_step = TRUE,
+  setup = "setup",
+  go = "go",
+  time_limit = 1000,
+  metrics = c(
+    'count wolves',
+    'count sheep'
+  ),
+  run_metrics_condition = NULL,
+  constants = list(
+    "number-of-sheep" = 500,
+    "number-of-wolves" = list(
+      first = 5,
+      step = 1,
+      last = 15
+    ),
+    "movement-cost" = 0.5,
+    "grass-regrowth-rate" = 0.3,
+    "energy-gain-from-grass" = 2,
+    "energy-gain-from-sheep" = 5
+  )
+)
+```
+
+``` r
+library(readr)
+
+read_lines(setup_file) |> paste(collapse = "\n") |> cat()
+#> <experiments>
+#>   <experiment name="Wolf Sheep Simple Model Analysis" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="true">
+#>     <setup>setup</setup>
+#>     <go>go</go>
+#>     <timeLimit steps="1000"></timeLimit>
+#>     <metric>count wolves</metric>
+#>     <metric>count sheep</metric>
+#>     <enumeratedValueSet variable="number-of-sheep">
+#>       <value value="500"></value>
+#>     </enumeratedValueSet>
+#>     <steppedValueSet variable="number-of-wolves" first="5" step="1" last="15"></steppedValueSet>
+#>     <enumeratedValueSet variable="movement-cost">
+#>       <value value="0.5"></value>
+#>     </enumeratedValueSet>
+#>     <enumeratedValueSet variable="grass-regrowth-rate">
+#>       <value value="0.3"></value>
+#>     </enumeratedValueSet>
+#>     <enumeratedValueSet variable="energy-gain-from-grass">
+#>       <value value="2"></value>
+#>     </enumeratedValueSet>
+#>     <enumeratedValueSet variable="energy-gain-from-sheep">
+#>       <value value="5"></value>
+#>     </enumeratedValueSet>
+#>   </experiment>
+#> </experiments>
+```
+
+### Running an Experiment
+
+With the experiment file created, you can now run your model using the
+[`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html)
+function. This function will execute the NetLogo model with the
+specified parameters and return the results as a tidy data frame.
+
+``` r
+results <- run_experiment(
+  netlogo_path = netlogo_path,
+  model_path = file.path(
+    "/opt/netlogo-7-0-0/models/IABM Textbook/chapter 4",
+    "Wolf Sheep Simple 5.nlogox"
+  ),
+  setup_file = setup_file,
+  parse = FALSE
+)
+```
+
+``` r
+library(dplyr)
+
+results |> glimpse()
+#> Rows: 110,110
+#> Columns: 10
+#> $ run_number             <dbl> 6, 2, 7, 8, 4, 3, 5, 9, 1, 6, 7, 8, 3, 1, 9,…
+#> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
+#> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
+#> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…
+#> $ grass_regrowth_rate    <dbl> 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3,…
+#> $ energy_gain_from_grass <dbl> 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,…
+#> $ energy_gain_from_sheep <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
+#> $ step                   <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1,…
+#> $ count_wolves           <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
+#> $ count_sheep            <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
+```
+
+### Analyzing the Data
+
+Below is a simple example of how to visualize the results using
+[`ggplot2`](https://ggplot2.tidyverse.org/).
+
+``` r
+library(dplyr)
+
+data <-
+  results |>
+  group_by(step, number_of_wolves) |>
+  summarise(
+    across(everything(), ~ mean(.x, na.rm = TRUE))
+  ) |>
+  arrange(number_of_wolves, step)
+```
+
+``` r
+library(ggplot2)
+
+data |>
+  mutate(number_of_wolves = as.factor(number_of_wolves)) |>
+  ggplot(
+    aes(
+      x = step,
+      y = count_sheep,
+      group = number_of_wolves,
+      color = number_of_wolves
+    )
+  ) +
+    labs(
+      x = "Time step",
+      y = "Average number of sheep",
+      color = "Wolves"
+    ) +
+  geom_line()
+```
+
+![](man/figures/unnamed-chunk-8-1.png)
+
+Please refer to the [BehaviorSpace
+Guide](https://docs.netlogo.org/behaviorspace.html) for complete
+guidance on how to set and run experiments in NetLogo. To gain a better
+understand of the basic mechanics behind R and NetLogo communication,
+see the [Running from the command
+line](https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line)
+section.
+
+Click [here](https://danielvartan.github.io/logolink/reference/) to see
+`logolink` full list of functions.
+
+## License
+
+[![](https://img.shields.io/badge/license-GPLv3-bd0000.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+``` text
+Copyright (C) 2025 Daniel Vartanian
+
+logolink is free software: you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+this program. If not, see <https://www.gnu.org/licenses/>.
+```
+
+## Contributing
+
+[![](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
+
+Contributions are welcome! Whether you want to report bugs, suggest
+features, or improve the code or documentation, your input is highly
+valued. Please check the [issues
+tab](https://github.com/danielvartan/logolink/issues) for existing
+issues or to open a new one.
+
+[![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/danielvartan)
+
+You can also support the development of `logolink` by becoming a
+sponsor. Click [here](https://github.com/sponsors/danielvartan) to make
+a donation. Please mention `logolink` in your donation message.

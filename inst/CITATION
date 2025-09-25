@@ -1,0 +1,32 @@
+utils::bibentry(
+  header = "To cite logolink in publications use:",
+  bibtype = "Misc",
+  title = paste0(
+    "logolink:", " ",
+    "Control NetLogo from R"
+  ),
+  author = c(
+    person(
+      given = "Daniel",
+      family = "Vartanian",
+      role = c("aut", "cre", "ccp", "cph"),
+      email = "danielvartan@proton.me",
+      comment = c(ORCID = "0000-0001-7782-759X")
+    )
+  ),
+  year = "2025",
+  url = paste0(
+    "https://danielvartan.github.io/",
+    "logolink"
+  ),
+  note = "R package",
+  textVersion = paste0(
+    "Vartanian, D", ". ",
+    "(2025)", ". ",
+    "logolink:", " ",
+    "Control NetLogo from R", " ",
+    "[Computer software]", ". ",
+    "https://danielvartan.github.io/",
+    "logolink"
+  )
+)
