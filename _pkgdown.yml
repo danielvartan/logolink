@@ -38,11 +38,11 @@ reference:
   - create_experiment
   - run_experiment
 
-# - title: Utilities
-#   desc: >
-#     Utility functions to help with data manipulation and retrieval.
-#   contents:
-#   - parse_patches
+- title: Utilities
+  desc: >
+    Utility functions to help with data manipulation and retrieval.
+  contents:
+  - inspect_experiment_file
 
 authors:
   Daniel Vartanian:
