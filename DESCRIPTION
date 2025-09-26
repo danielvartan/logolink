@@ -10,7 +10,9 @@ Authors@R: c(
             comment = c(ORCID = "0000-0001-7782-759X")
         )
     )
-Description: Simple tools to setup and execute NetLogo simulations from R.
+Description: An R interface to NetLogo that provides comprehensive tools for
+    programmatically setting up and executing NetLogo agent-based model
+    simulation.
 License: GPL (>= 3) + file LICENSE
 URL: https://danielvartan.github.io/logolink/,
     https://github.com/danielvartan/logolink/

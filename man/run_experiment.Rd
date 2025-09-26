@@ -9,14 +9,14 @@ run_experiment(
   model_path,
   experiment = NULL,
   setup_file = NULL,
-  other_args = NULL,
+  other_arguments = NULL,
   parse = TRUE
 )
 }
 \arguments{
 \item{netlogo_path}{A string specifying the path to the NetLogo executable.
 In Windows, this is usually something like
-\verb{C:/Program Files/NetLogo 7.0.0/NetLogo.exe}.}
+\verb{C:\\Program Files\\NetLogo 7.0.0\\NetLogo.exe}.}
 
 \item{model_path}{A string specifying the path to the NetLogo model file
 (with extension \code{.nlogo}, \code{.nlogo3d}, \code{.nlogox}, or \code{.nlogox3d}).}
@@ -29,15 +29,16 @@ containing the experiment definition. This file can be created using
 \code{\link[=create_experiment]{create_experiment()}} or exported from the
 NetLogo BehaviorSpace interface (default: \code{NULL}).}
 
-\item{other_args}{(optional) A character vector specifying any additional
-command-line arguments to pass to the NetLogo executable. For example,
-you can use \code{c("--threads", "4")} to specify the number of threads to use
-(default: \code{NULL}).}
+\item{other_arguments}{(optional) A \code{\link[=character]{character}} vector
+specifying any additional command-line arguments to pass to the NetLogo
+executable. For example, you can use \code{c("--threads 4")} to specify the
+number of threads to use (default: \code{NULL}).}
 
-\item{parse}{(optional) A boolean indicating whether to parse NetLogo lists
-in the output data frame (default: \code{TRUE}). If \code{TRUE}, columns containing
+\item{parse}{(optional) A \code{\link[=logical]{logical}} flag indicating whether to
+parse NetLogo lists in the output data frame. If \code{TRUE}, columns containing
 NetLogo lists (e.g., \verb{[1 2 3]}) will be converted to R lists. If \code{FALSE},
-the columns will remain as character strings.}
+the columns will remain as \code{\link[=character]{character}} strings
+(default: \code{TRUE}).}
 }
 \value{
 A \code{\link[dplyr:reexports]{tibble}} containing the results of the
@@ -47,8 +48,8 @@ experiment.
 \code{run_experiment()} runs a NetLogo BehaviorSpace experiment in headless mode
 and returns the results as a tidy data frame. It can be used with
 \code{\link[=create_experiment]{create_experiment()}} to create the experiment XML
-file on the fly, or with an existing experiment defined in an XML file or
-stored in the NetLogo model file.
+file on the fly, or with an existing experiment stored in the NetLogo model
+file.
 
 Please refer to the
 \href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace Guide} for
@@ -56,11 +57,13 @@ complete guidance on how to set and run experiments in NetLogo.
 }
 \examples{
 \dontrun{
-  # Change the path below to point to your NetLogo executable
+  # Using `create_experiment()` to Create the Experiment XML File
+
+  ## Change the path below to point to your NetLogo executable
   netlogo_path <- file.path("", "opt", "netlogo-7-0-0", "bin", "NetLogo")
 
-  # Change the path below to point to the 'Wolf Sheep Simple 5' NetLogo
-  # model file in the Model Library
+  ## Change the path below to point to the 'Wolf Sheep Simple 5' NetLogo
+  ## model file in the Model Library
   model_path <- file.path(
     "", "opt", "netlogo-7-0-0", "models", "IABM Textbook", "chapter 4",
     "Wolf Sheep Simple 5.nlogox"
@@ -98,9 +101,7 @@ complete guidance on how to set and run experiments in NetLogo.
     model_path = model_path,
     setup_file = setup_file
   )
-
-  # Expected output:
-
+  ## Expected output:
   #> # A tibble: 110,110 × 10
   #>   run_number number_of_sheep number_of_wolves movement_cost
   #>         <dbl>           <dbl>            <dbl>         <dbl>
@@ -119,6 +120,34 @@ complete guidance on how to set and run experiments in NetLogo.
   #>  #   energy_gain_from_grass <dbl>, energy_gain_from_sheep <dbl>,
   #>  #   step <dbl>, count_wolves <dbl>, count_sheep <dbl>
   #>  # ℹ Use `print(n = ...)` to see more rows
+
+  # Using an Experiment Defined in the NetLogo Model File
+
+  run_experiment(
+    netlogo_path = netlogo_path,
+    model_path = model_path,
+    experiment = "Wolf Sheep Simple model analysis"
+  )
+  ## Expected output:
+  #> # A tibble: 110 × 11
+  #>    run_number energy_gain_from_grass number_of_wolves movement_cost
+  #>         <dbl>                  <dbl>            <dbl>         <dbl>
+  #>  1          4                      2                5           0.5
+  #>  2          8                      2                5           0.5
+  #>  3          2                      2                5           0.5
+  #>  4          9                      2                5           0.5
+  #>  5          1                      2                5           0.5
+  #>  6          5                      2                5           0.5
+  #>  7          7                      2                5           0.5
+  #>  8          3                      2                5           0.5
+  #>  9          6                      2                5           0.5
+  #> 10         12                      2                6           0.5
+  #> # ℹ 100 more rows
+  #> # ℹ 7 more variables: energy_gain_from_sheep <dbl>,
+  #> #   number_of_sheep <dbl>, grass_regrowth_rate <dbl>, step <dbl>,
+  #> #   count_wolves <dbl>, count_sheep <dbl>,
+  #> #   sum_grass_amount_of_patches <dbl>
+  #> # ℹ Use `print(n = ...)` to see more rows
 }
 }
 \seealso{

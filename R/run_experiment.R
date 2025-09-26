@@ -5,8 +5,8 @@
 #' `run_experiment()` runs a NetLogo BehaviorSpace experiment in headless mode
 #' and returns the results as a tidy data frame. It can be used with
 #' [`create_experiment()`][create_experiment()] to create the experiment XML
-#' file on the fly, or with an existing experiment defined in an XML file or
-#' stored in the NetLogo model file.
+#' file on the fly, or with an existing experiment stored in the NetLogo model
+#' file.
 #'
 #' Please refer to the
 #' [BehaviorSpace Guide](https://docs.netlogo.org/behaviorspace.html) for
@@ -14,7 +14,7 @@
 #'
 #' @param netlogo_path A string specifying the path to the NetLogo executable.
 #'   In Windows, this is usually something like
-#'   `C:/Program Files/NetLogo 7.0.0/NetLogo.exe`.
+#'   `C:\Program Files\NetLogo 7.0.0\NetLogo.exe`.
 #' @param model_path A string specifying the path to the NetLogo model file
 #'   (with extension `.nlogo`, `.nlogo3d`, `.nlogox`, or `.nlogox3d`).
 #' @param experiment (optional) A string specifying the name of the experiment
@@ -23,14 +23,15 @@
 #'   containing the experiment definition. This file can be created using
 #'  [`create_experiment()`][create_experiment()] or exported from the
 #'  NetLogo BehaviorSpace interface (default: `NULL`).
-#' @param other_args (optional) A character vector specifying any additional
-#'   command-line arguments to pass to the NetLogo executable. For example,
-#'   you can use `c("--threads", "4")` to specify the number of threads to use
-#'   (default: `NULL`).
-#' @param parse (optional) A boolean indicating whether to parse NetLogo lists
-#'   in the output data frame (default: `TRUE`). If `TRUE`, columns containing
+#' @param other_arguments (optional) A [`character`][character()] vector
+#'   specifying any additional command-line arguments to pass to the NetLogo
+#'   executable. For example, you can use `c("--threads 4")` to specify the
+#'   number of threads to use (default: `NULL`).
+#' @param parse (optional) A [`logical`][logical()] flag indicating whether to
+#'   parse NetLogo lists in the output data frame. If `TRUE`, columns containing
 #'   NetLogo lists (e.g., `[1 2 3]`) will be converted to R lists. If `FALSE`,
-#'   the columns will remain as character strings.
+#'   the columns will remain as [`character`][character()] strings
+#'   (default: `TRUE`).
 #'
 #' @return A [`tibble`][dplyr::as_tibble()] containing the results of the
 #'   experiment.
@@ -40,11 +41,13 @@
 #'
 #' @examples
 #' \dontrun{
-#'   # Change the path below to point to your NetLogo executable
+#'   # Using `create_experiment()` to Create the Experiment XML File
+#'
+#'   ## Change the path below to point to your NetLogo executable
 #'   netlogo_path <- file.path("", "opt", "netlogo-7-0-0", "bin", "NetLogo")
 #'
-#'   # Change the path below to point to the 'Wolf Sheep Simple 5' NetLogo
-#'   # model file in the Model Library
+#'   ## Change the path below to point to the 'Wolf Sheep Simple 5' NetLogo
+#'   ## model file in the Model Library
 #'   model_path <- file.path(
 #'     "", "opt", "netlogo-7-0-0", "models", "IABM Textbook", "chapter 4",
 #'     "Wolf Sheep Simple 5.nlogox"
@@ -82,9 +85,7 @@
 #'     model_path = model_path,
 #'     setup_file = setup_file
 #'   )
-#'
-#'   # Expected output:
-#'
+#'   ## Expected output:
 #'   #> # A tibble: 110,110 × 10
 #'   #>   run_number number_of_sheep number_of_wolves movement_cost
 #'   #>         <dbl>           <dbl>            <dbl>         <dbl>
@@ -103,13 +104,41 @@
 #'   #>  #   energy_gain_from_grass <dbl>, energy_gain_from_sheep <dbl>,
 #'   #>  #   step <dbl>, count_wolves <dbl>, count_sheep <dbl>
 #'   #>  # ℹ Use `print(n = ...)` to see more rows
+#'
+#'   # Using an Experiment Defined in the NetLogo Model File
+#'
+#'   run_experiment(
+#'     netlogo_path = netlogo_path,
+#'     model_path = model_path,
+#'     experiment = "Wolf Sheep Simple model analysis"
+#'   )
+#'   ## Expected output:
+#'   #> # A tibble: 110 × 11
+#'   #>    run_number energy_gain_from_grass number_of_wolves movement_cost
+#'   #>         <dbl>                  <dbl>            <dbl>         <dbl>
+#'   #>  1          4                      2                5           0.5
+#'   #>  2          8                      2                5           0.5
+#'   #>  3          2                      2                5           0.5
+#'   #>  4          9                      2                5           0.5
+#'   #>  5          1                      2                5           0.5
+#'   #>  6          5                      2                5           0.5
+#'   #>  7          7                      2                5           0.5
+#'   #>  8          3                      2                5           0.5
+#'   #>  9          6                      2                5           0.5
+#'   #> 10         12                      2                6           0.5
+#'   #> # ℹ 100 more rows
+#'   #> # ℹ 7 more variables: energy_gain_from_sheep <dbl>,
+#'   #> #   number_of_sheep <dbl>, grass_regrowth_rate <dbl>, step <dbl>,
+#'   #> #   count_wolves <dbl>, count_sheep <dbl>,
+#'   #> #   sum_grass_amount_of_patches <dbl>
+#'   #> # ℹ Use `print(n = ...)` to see more rows
 #' }
 run_experiment <- function(
   netlogo_path,
   model_path,
   experiment = NULL,
   setup_file = NULL,
-  other_args = NULL,
+  other_arguments = NULL,
   parse = TRUE
 ) {
   model_path_choices <- c("nlogo", "nlogo3d", "nlogox", "nlogox3d")
@@ -123,7 +152,7 @@ run_experiment <- function(
   if (!is.null(setup_file)) {
     checkmate::assert_file_exists(setup_file, extension = "xml")
   }
-  checkmate::assert_character(other_args, null.ok = TRUE)
+  checkmate::assert_character(other_arguments, null.ok = TRUE)
   checkmate::assert_flag(parse)
 
   if (is.null(experiment) && is.null(setup_file)) {
@@ -163,7 +192,7 @@ run_experiment <- function(
       ),
       # "--table -",
       glue::glue("--table {glue::double_quote(file)}"),
-      other_args
+      other_arguments
     ),
     stdout = TRUE,
     stderr = TRUE

@@ -33,16 +33,17 @@ navbar:
 reference:
 - title: NetLogo
   desc: >
-    Functions to setup and control NetLogo.
+    Functions to setup and execute NetLogo.
   contents:
   - create_experiment
   - run_experiment
 
 - title: Utilities
   desc: >
-    Utility functions to help with data manipulation and retrieval.
+    Utility functions to help with parsing and data manipulation.
   contents:
   - inspect_experiment_file
+  - parse_netlogo_list
 
 authors:
   Daniel Vartanian:

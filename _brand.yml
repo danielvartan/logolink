@@ -22,6 +22,7 @@ color:
     white: "#ffffff"
     black: "#000000"
     red: "#f61501"
+    light-red: "#ff6b69" # colorspace::lighten("#f61501", 0.25)
     dark-red: "#c20101"
     blue: "#43b8ff"
     blue-gradient-dark: "#0099f5"
@@ -78,14 +79,14 @@ color:
   info: blue
   warning: dark-yellow
   danger: red
-  light: white
-  dark: black
+  light: light-theme-white
+  dark: dark-theme-dark-gray-3
 
 typography:
   fonts:
     - family: Inter # Used on NetLogo Website
       source: google
-    - family: Fragment Mono # Not official!
+    - family: Source Code Pro # Not official!
       source: google
   base:
     family: Inter
@@ -96,6 +97,40 @@ typography:
     family: Inter
     weight: 700
   link:
-    color: website-blue
+    color: light-theme-blue
     decoration: none
-  monospace: Fragment Mono
+  monospace:
+    family: Source Code Pro
+    size: 1em
+  monospace-inline:
+    family: Source Code Pro
+    color: purple
+    background-color: light-theme-light-gray
+  monospace-block:
+    family: Source Code Pro
+    background-color: light-theme-light-gray
+
+defaults:
+  bootstrap:
+    defaults:
+      navbar-bg: $brand-light-theme-blue
+    rules: |
+      .text-warning {
+        color: #ff6b69 !important;
+      }
+
+      code {
+        color: #f61501;
+      }
+
+      pre, .nav-link, .navbar-brand {
+        color: var(--bs-navbar-brand-color) !important;
+      }
+
+      [data-bs-theme="dark"] a {
+        color: #43b8ff;
+      }
+
+      [data-bs-theme="dark"] body {
+        background-color: #2d2d36;
+      }

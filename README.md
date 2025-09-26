@@ -6,6 +6,10 @@
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![](https://www.r-pkg.org/badges/version/logolink)](https://cran.r-project.org/package=logolink)
+[![R build
+status](https://github.com/danielvartan/logolink/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/danielvartan/logolink/actions)
+[![](https://codecov.io/gh/danielvartan/logolink/branch/main/graph/badge.svg)](https://app.codecov.io/gh/danielvartan/logolink)
 [![License:
 GPLv3](https://img.shields.io/badge/license-GPLv3-bd0000.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
@@ -13,30 +17,47 @@ GPLv3](https://img.shields.io/badge/license-GPLv3-bd0000.svg)](https://www.gnu.o
 
 ## Overview
 
-`logolink` is an R package that provides simple tools to set up and run
-NetLogo simulations directly from R. It is designed for NetLogo 7 and
-does not support older versions.
+`logolink` is an [R](https://www.r-project.org/) package that provides
+simple tools to set up and run [NetLogo](https://www.netlogo.org/)
+simulations directly from R. It is designed for NetLogo 7 and does not
+support older versions.
 
-The package offers an updated and streamlined approach to running
-NetLogo models from R. It follows the [tidyverse
+The package offers a modern and streamlined approach to running NetLogo
+models from R. It follows the [tidyverse
 principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and
 integrates smoothly with the [tidyverse
 ecosystem](https://www.tidyverse.org/).
-
-<!-- Related R packages include [`RNetLogo`](https://cran.r-project.org/web/packages/RNetLogo/index.html) and [`nlrx`](https://cran.r-project.org/web/packages/nlrx/index.html). -->
 
 > If you find this project useful, please consider giving it a star!  
 > [![GitHub repo
 > stars](https://img.shields.io/github/stars/danielvartan/logolink)](https://github.com/danielvartan/logolink/)
 
+## Another R Package for NetLogo?
+
+Yes! Other R packages also connect R and NetLogo, but `logolink` is
+actively maintained, consistent with tidyverse conventions, and
+straightforward to use. It is designed to simplify experiment setup and
+execution while remaining flexible.
+
+For context,
+[`RNetLogo`](https://cran.r-project.org/web/packages/RNetLogo/index.html)
+supports older NetLogo versions but is no longer actively maintained.
+[`nlrx`](https://cran.r-project.org/web/packages/nlrx/index.html)
+provides a powerful framework for managing experiments and results, but
+it does not support NetLogo 7 and has [many unresolved
+issues](https://github.com/ropensci/nlrx/issues). `logolink` complements
+these packages by focusing on simplicity, full compatibility with
+NetLogo 7, and seamless integration into modern R workflows.
+
 ## Installation
 
-You can install `logolink` using the
+You can install the development version of `logolink` from
+[GitHub](https://github.com/) with the
 [`remotes`](https://github.com/r-lib/remotes) package:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("danielvartan/logolink", dependencies = TRUE)
+remotes::install_github("danielvartan/logolink")
 ```
 
 ## Usage
@@ -44,7 +65,7 @@ remotes::install_github("danielvartan/logolink", dependencies = TRUE)
 `logolink` usage is very straightforward. The main functions are:
 
 - [`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html):
-  Creates a NetLogo experiment XML file
+  Creates a NetLogo BehaviorSpace experiment XML file
 - [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html):
   Runs a NetLogo BehaviorSpace experiment
 
@@ -57,11 +78,11 @@ website](https://ccl.northwestern.edu/netlogo/download.shtml).
 `logolink` requires the path to the NetLogo executable when running
 simulations with the
 [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html)
-function. This path is OS-independent and easy to locate. On Windows,
+function. This path is OS-independent, but easy to locate. On Windows,
 for example, it is typically something like
-`C:/Program Files/NetLogo 7.0.0/NetLogo.exe`.
+`C:\Program Files\NetLogo 7.0.0\NetLogo.exe`.
 
-Example:
+Example (Linux):
 
 ``` r
 netlogo_path <- file.path("", "opt", "netlogo-7-0-0", "bin", "NetLogo")
@@ -75,9 +96,10 @@ netlogo_path
 To start running your model from R you first need to setup an
 experiment. You can do this by setting a
 [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment
-with
-[`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html).
-This function will create a `.xml` file that contains all the
+with the
+[`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html)
+function. This function will create a
+[XML](https://en.wikipedia.org/wiki/XML) file that contains all the
 information about your experiment, including the parameters to vary, the
 metrics to collect, and the number of runs to perform.
 
@@ -122,9 +144,7 @@ setup_file <- create_experiment(
 ```
 
 ``` r
-library(readr)
-
-read_lines(setup_file) |> paste(collapse = "\n") |> cat()
+setup_file |> inspect_experiment_file()
 #> <experiments>
 #>   <experiment name="Wolf Sheep Simple Model Analysis" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="true">
 #>     <setup>setup</setup>
@@ -160,14 +180,17 @@ function. This function will execute the NetLogo model with the
 specified parameters and return the results as a tidy data frame.
 
 ``` r
+model_path <- file.path(
+  "", "opt", "netlogo-7-0-0", "models", "IABM Textbook", "chapter 4",
+  "Wolf Sheep Simple 5.nlogox"
+)
+```
+
+``` r
 results <- run_experiment(
   netlogo_path = netlogo_path,
-  model_path = file.path(
-    "/opt/netlogo-7-0-0/models/IABM Textbook/chapter 4",
-    "Wolf Sheep Simple 5.nlogox"
-  ),
-  setup_file = setup_file,
-  parse = FALSE
+  model_path = model_path,
+  setup_file = setup_file
 )
 ```
 
@@ -177,7 +200,7 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 6, 2, 7, 8, 4, 3, 5, 9, 1, 6, 7, 8, 3, 1, 9,…
+#> $ run_number             <dbl> 4, 5, 9, 1, 8, 3, 7, 6, 2, 7, 3, 8, 9, 4, 5,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…
@@ -189,7 +212,7 @@ results |> glimpse()
 #> $ count_sheep            <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 ```
 
-### Analyzing the Data
+### Analyzing the Data (Bonus Section)
 
 Below is a simple example of how to visualize the results using
 [`ggplot2`](https://ggplot2.tidyverse.org/).
@@ -227,18 +250,43 @@ data |>
   geom_line()
 ```
 
-![](man/figures/unnamed-chunk-8-1.png)
+![](man/figures/readme-wolf-sheep-model-plot-1.png)
 
 Please refer to the [BehaviorSpace
 Guide](https://docs.netlogo.org/behaviorspace.html) for complete
 guidance on how to set and run experiments in NetLogo. To gain a better
 understand of the basic mechanics behind R and NetLogo communication,
-see the [Running from the command
-line](https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line)
+see the [Running from the Command
+Line](https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line)
 section.
 
 Click [here](https://danielvartan.github.io/logolink/reference/) to see
 `logolink` full list of functions.
+
+## Citation
+
+If you use this package in your research, please cite it to acknowledge
+the effort put into its development and maintenance. Your citation helps
+support its continued improvement.
+
+``` r
+citation("logolink")
+#> To cite logolink in publications use:
+#> 
+#>   Vartanian, D. (2025). logolink: Control NetLogo from R [Computer
+#>   software]. https://doi.org/10.32614/CRAN.package.logolink
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Misc{,
+#>     title = {logolink: Control NetLogo from R},
+#>     author = {Daniel Vartanian},
+#>     year = {2025},
+#>     url = {https://CRAN.R-project.org/package=logolink},
+#>     doi = {10.32614/CRAN.package.logolink},
+#>     note = {R package},
+#>   }
+```
 
 ## License
 
@@ -275,3 +323,8 @@ issues or to open a new one.
 You can also support the development of `logolink` by becoming a
 sponsor. Click [here](https://github.com/sponsors/danielvartan) to make
 a donation. Please mention `logolink` in your donation message.
+
+## Acknowledgments
+
+`logolink` brand identity is based on
+[NetLogo](https://www.netlogo.org/) brand identity.

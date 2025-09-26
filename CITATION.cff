@@ -9,10 +9,12 @@ type: software
 license: GPL-3.0-or-later
 title: 'logolink: Control NetLogo from R'
 version: 0.1.0.9000
+doi: 10.32614/CRAN.package.logolink
 identifiers:
 - type: url
   value: https://github.com/danielvartan/logolink/
-abstract: Simple tools to setup and execute NetLogo simulations from R.
+abstract: An R interface to NetLogo that provides comprehensive tools for programmatically
+  setting up and executing NetLogo agent-based model simulation.
 authors:
 - family-names: Vartanian
   given-names: Daniel
@@ -27,7 +29,8 @@ preferred-citation:
     email: danielvartan@proton.me
     orcid: https://orcid.org/0000-0001-7782-759X
   year: '2025'
-  url: https://danielvartan.github.io/logolink
+  url: https://CRAN.R-project.org/package=logolink
+  doi: 10.32614/CRAN.package.logolink
   notes: R package
 repository-code: https://github.com/danielvartan/logolink/issues/
 url: https://danielvartan.github.io/logolink/
@@ -257,11 +260,13 @@ references:
   abstract: 'covr: Test Coverage for Packages'
   notes: Suggests
   url: https://covr.r-lib.org
+  repository: https://CRAN.R-project.org/package=covr
   authors:
   - family-names: Hester
     given-names: Jim
     email: james.f.hester@gmail.com
   year: '2025'
+  doi: 10.32614/CRAN.package.covr
   version: '>= 3.6.4'
 - type: software
   title: knitr

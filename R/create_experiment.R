@@ -1,9 +1,9 @@
-#' Create a NetLogo experiment XML file
+#' Create a NetLogo BehaviorSpace experiment XML file
 #'
 #' @description
 #'
-#' `create_experiment()` creates a NetLogo experiment XML in a temporary file
-#' that can be used to run headless experiments with the
+#' `create_experiment()` creates a NetLogo BehaviorSpace experiment XML in a
+#' temporary file that can be used to run headless experiments with the
 #' [`run_experiment()`][run_experiment()] function.
 #'
 #' Please refer to the
@@ -15,15 +15,15 @@
 #' ## Constants
 #'
 #' The `constants` argument allows you to specify the parameters to vary in the
-#' experiment. It should be a named list where each name corresponds to a
-#' NetLogo variable. The value for each name can be either:
+#' experiment. It should be a named [`list`][list()] where each name corresponds
+#' to a NetLogo variable. The value for each name can be either:
 #'
 #' - A single value (for enumerated values). For example, to set the variable
 #'  `initial-number-of-turtles` to `10`, you would use
 #' `list("initial-number-of-turtles" = 10)`.
-#' - A list with `first`, `step`, and `last` elements (for stepped values). For
-#'  example, to vary the variable `initial-number-of-turtles` from `10` to
-#' `50` in steps of `10`, you would use
+#' - A [`list`][list()] with `first`, `step`, and `last` elements (for stepped
+#'  values). For example, to vary the variable `initial-number-of-turtles` from
+#' `10` to `50` in steps of `10`, you would use
 #' `list("initial-number-of-turtles" = list(first = 10, step = 10, last = 50))`.
 #'
 #' Please note that any mistake in the constants names will cause the experiment
@@ -36,10 +36,11 @@
 #'   (default: `""`).
 #' @param repetitions (optional) An integer number specifying the number of
 #'   times to repeat the experiment (default: `1`).
-#' @param sequential_run_order (optional) A boolean indicating whether to run
-#'   the experiments in sequential order (default: `TRUE`).
-#' @param run_metrics_every_step (optional) A boolean indicating whether to
-#'   record metrics at every step (default: `FALSE`).
+#' @param sequential_run_order (optional) A [`logical`][logical()] flag
+#'   indicating whether to run the experiments in sequential order
+#'   (default: `TRUE`).
+#' @param run_metrics_every_step (optional) A [`logical`][logical()] flag
+#'   indicating whether to record metrics at every step (default: `FALSE`).
 #' @param pre_experiment (optional) A string specifying the NetLogo command to
 #'   run before the experiment starts (default: `NULL`).
 #' @param setup A string specifying the NetLogo command to set up the model
@@ -54,15 +55,16 @@
 #'   of steps to run for each repetition (default: `1`).
 #' @param exit_condition (optional) A string specifying the NetLogo command
 #'   that defines the exit condition for the experiment (default: `NULL`).
-#' @param metrics A character vector specifying the NetLogo commands to
-#'   record as metrics (default: `c('count turtles', 'count patches')`).
+#' @param metrics A [`character`][character()] vector specifying the NetLogo
+#'   commands to record as metrics
+#'   (default: `c('count turtles', 'count patches')`).
 #' @param run_metrics_condition (optional) A string specifying the NetLogo
 #'   command that defines the condition to record metrics (default: `NULL`).
-#' @param constants (optional) A named list specifying the constants to vary
-#'   in the experiment. Each element can be either a single value (for
-#'   enumerated values) or a list with `first`, `step`, and `last` elements
-#'   (for stepped values). See the *Details* and  *Examples* sections to learn
-#'   more (default: `NULL`).
+#' @param constants (optional) A named [`list`][list()] specifying the constants
+#'   to vary in the experiment. Each element can be either a single value (for
+#'   enumerated values) or a [`list`][list()] with `first`, `step`, and `last`
+#'   elements (for stepped values). See the *Details* and  *Examples* sections
+#'   to learn more (default: `NULL`).
 #'
 #' @return A string with the path to the created XML file.
 #'
@@ -129,7 +131,7 @@ create_experiment <- function(
   checkmate::assert_string(exit_condition, null.ok = TRUE)
   checkmate::assert_character(metrics, min.len = 1)
   checkmate::assert_string(run_metrics_condition, null.ok = TRUE)
-  checkmate::assert_list(constants, null.ok = TRUE)
+  checkmate::assert_list(constants, names = "named", null.ok = TRUE)
 
   root <- xml2::xml_new_root("experiments")
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_experiment.R
 \name{create_experiment}
 \alias{create_experiment}
-\title{Create a NetLogo experiment XML file}
+\title{Create a NetLogo BehaviorSpace experiment XML file}
 \usage{
 create_experiment(
   name = "",
@@ -28,11 +28,12 @@ create_experiment(
 \item{repetitions}{(optional) An integer number specifying the number of
 times to repeat the experiment (default: \code{1}).}
 
-\item{sequential_run_order}{(optional) A boolean indicating whether to run
-the experiments in sequential order (default: \code{TRUE}).}
+\item{sequential_run_order}{(optional) A \code{\link[=logical]{logical}} flag
+indicating whether to run the experiments in sequential order
+(default: \code{TRUE}).}
 
-\item{run_metrics_every_step}{(optional) A boolean indicating whether to
-record metrics at every step (default: \code{FALSE}).}
+\item{run_metrics_every_step}{(optional) A \code{\link[=logical]{logical}} flag
+indicating whether to record metrics at every step (default: \code{FALSE}).}
 
 \item{pre_experiment}{(optional) A string specifying the NetLogo command to
 run before the experiment starts (default: \code{NULL}).}
@@ -55,24 +56,25 @@ of steps to run for each repetition (default: \code{1}).}
 \item{exit_condition}{(optional) A string specifying the NetLogo command
 that defines the exit condition for the experiment (default: \code{NULL}).}
 
-\item{metrics}{A character vector specifying the NetLogo commands to
-record as metrics (default: \code{c('count turtles', 'count patches')}).}
+\item{metrics}{A \code{\link[=character]{character}} vector specifying the NetLogo
+commands to record as metrics
+(default: \code{c('count turtles', 'count patches')}).}
 
 \item{run_metrics_condition}{(optional) A string specifying the NetLogo
 command that defines the condition to record metrics (default: \code{NULL}).}
 
-\item{constants}{(optional) A named list specifying the constants to vary
-in the experiment. Each element can be either a single value (for
-enumerated values) or a list with \code{first}, \code{step}, and \code{last} elements
-(for stepped values). See the \emph{Details} and  \emph{Examples} sections to learn
-more (default: \code{NULL}).}
+\item{constants}{(optional) A named \code{\link[=list]{list}} specifying the constants
+to vary in the experiment. Each element can be either a single value (for
+enumerated values) or a \code{\link[=list]{list}} with \code{first}, \code{step}, and \code{last}
+elements (for stepped values). See the \emph{Details} and  \emph{Examples} sections
+to learn more (default: \code{NULL}).}
 }
 \value{
 A string with the path to the created XML file.
 }
 \description{
-\code{create_experiment()} creates a NetLogo experiment XML in a temporary file
-that can be used to run headless experiments with the
+\code{create_experiment()} creates a NetLogo BehaviorSpace experiment XML in a
+temporary file that can be used to run headless experiments with the
 \code{\link[=run_experiment]{run_experiment()}} function.
 
 Please refer to the
@@ -83,15 +85,15 @@ complete guidance on how to set and run experiments in NetLogo.
 \subsection{Constants}{
 
 The \code{constants} argument allows you to specify the parameters to vary in the
-experiment. It should be a named list where each name corresponds to a
-NetLogo variable. The value for each name can be either:
+experiment. It should be a named \code{\link[=list]{list}} where each name corresponds
+to a NetLogo variable. The value for each name can be either:
 \itemize{
 \item A single value (for enumerated values). For example, to set the variable
 \code{initial-number-of-turtles} to \code{10}, you would use
 \code{list("initial-number-of-turtles" = 10)}.
-\item A list with \code{first}, \code{step}, and \code{last} elements (for stepped values). For
-example, to vary the variable \code{initial-number-of-turtles} from \code{10} to
-\code{50} in steps of \code{10}, you would use
+\item A \code{\link[=list]{list}} with \code{first}, \code{step}, and \code{last} elements (for stepped
+values). For example, to vary the variable \code{initial-number-of-turtles} from
+\code{10} to \code{50} in steps of \code{10}, you would use
 \code{list("initial-number-of-turtles" = list(first = 10, step = 10, last = 50))}.
 }
 

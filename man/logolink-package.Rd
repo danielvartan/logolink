@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Simple tools to setup and execute NetLogo simulations from R.
+An R interface to NetLogo that provides comprehensive tools for programmatically setting up and executing NetLogo agent-based model simulation.
 }
 \seealso{
 Useful links:

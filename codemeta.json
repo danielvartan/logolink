@@ -2,7 +2,7 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "logolink",
-  "description": "Simple tools to setup and execute NetLogo simulations from R.",
+  "description": "An R interface to NetLogo that provides comprehensive tools for programmatically setting up and executing NetLogo agent-based model simulation.",
   "name": "logolink: Control NetLogo from R",
   "relatedLink": "https://danielvartan.github.io/logolink/",
   "codeRepository": "https://github.com/danielvartan/logolink/",
@@ -274,7 +274,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "240.029KB",
+  "fileSize": "271.293KB",
   "citation": [
     {
       "@type": "CreativeWork",
@@ -289,10 +289,16 @@
         }
       ],
       "name": "logolink: Control NetLogo from R",
-      "url": "https://danielvartan.github.io/logolink",
-      "description": "R package"
+      "identifier": "10.32614/CRAN.package.logolink",
+      "url": "https://CRAN.R-project.org/package=logolink",
+      "description": "R package",
+      "@id": "https://doi.org/10.32614/CRAN.package.logolink",
+      "sameAs": "https://doi.org/10.32614/CRAN.package.logolink"
     }
   ],
   "releaseNotes": "https://github.com/danielvartan/logolink/blob/main/NEWS.md",
-  "developmentStatus": "https://www.repostatus.org/#active"
+  "readme": "https://github.com/danielvartan/logolink/blob/main/README.md",
+  "contIntegration": ["https://github.com/danielvartan/logolink/actions", "https://app.codecov.io/gh/danielvartan/logolink"],
+  "developmentStatus": "https://www.repostatus.org/#active",
+  "keywords": ["agent-based-modeling", "apis", "behaviorspace", "complexity-science", "individual-based-modeling", "netlogo", "r-packages", "rstats", "simulations"]
 }

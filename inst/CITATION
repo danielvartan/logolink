@@ -16,7 +16,11 @@ utils::bibentry(
   ),
   year = "2025",
   url = paste0(
-    "https://danielvartan.github.io/",
+    "https://CRAN.R-project.org/package=",
+    "logolink"
+  ),
+  doi = paste0(
+    "10.32614/CRAN.package.",
     "logolink"
   ),
   note = "R package",
@@ -26,7 +30,7 @@ utils::bibentry(
     "logolink:", " ",
     "Control NetLogo from R", " ",
     "[Computer software]", ". ",
-    "https://danielvartan.github.io/",
+    "https://doi.org/10.32614/CRAN.package.",
     "logolink"
   )
 )

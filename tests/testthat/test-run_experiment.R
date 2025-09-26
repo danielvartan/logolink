@@ -41,7 +41,7 @@ test_that("`run_experiment()` | General test", {
     model_path = model_path,
     experiment = NULL,
     setup_file = setup_file,
-    other_args = NULL,
+    other_arguments = NULL,
     parse = TRUE
   ) |>
     expect_tibble(ncols = 10)
@@ -51,7 +51,7 @@ test_that("`run_experiment()` | General test", {
     model_path = model_path,
     experiment = NULL,
     setup_file = setup_file,
-    other_args = NULL,
+    other_arguments = NULL,
     parse = FALSE
   ) |>
     expect_tibble(ncols = 10)
@@ -81,7 +81,7 @@ test_that("`run_experiment()` | Error test", {
     model_path = model_path,
     experiment = NULL,
     setup_file = setup_file,
-    other_args = NULL,
+    other_arguments = NULL,
     parse = FALSE
   ) |>
     expect_error()
@@ -93,7 +93,7 @@ test_that("`run_experiment()` | Error test", {
     model_path = 1,
     experiment = NULL,
     setup_file = setup_file,
-    other_args = NULL,
+    other_arguments = NULL,
     parse = FALSE
   ) |>
     expect_error()
@@ -105,7 +105,7 @@ test_that("`run_experiment()` | Error test", {
     model_path = tempfile(fileext = ".nlogox"),
     experiment = NULL,
     setup_file = setup_file,
-    other_args = NULL,
+    other_arguments = NULL,
     parse = FALSE
   ) |>
     expect_error()
@@ -117,7 +117,7 @@ test_that("`run_experiment()` | Error test", {
     model_path = model_path_2,
     experiment = NULL,
     setup_file = setup_file,
-    other_args = NULL,
+    other_arguments = NULL,
     parse = FALSE
   ) |>
     expect_error()
@@ -129,7 +129,7 @@ test_that("`run_experiment()` | Error test", {
     model_path = model_path,
     experiment = 1,
     setup_file = setup_file,
-    other_args = NULL,
+    other_arguments = NULL,
     parse = FALSE
   ) |>
     expect_error()
@@ -141,7 +141,7 @@ test_that("`run_experiment()` | Error test", {
     model_path = model_path,
     experiment = NULL,
     setup_file = 1,
-    other_args = NULL,
+    other_arguments = NULL,
     parse = FALSE
   ) |>
     expect_error()
@@ -153,19 +153,19 @@ test_that("`run_experiment()` | Error test", {
     model_path = model_path,
     experiment = NULL,
     setup_file = tempfile(),
-    other_args = NULL,
+    other_arguments = NULL,
     parse = FALSE
   ) |>
     expect_error()
 
-  # checkmate::assert_character(other_args, null.ok = TRUE)
+  # checkmate::assert_character(other_arguments, null.ok = TRUE)
 
   run_experiment(
     netlogo_path = "",
     model_path = model_path,
     experiment = NULL,
     setup_file = setup_file,
-    other_args = 1,
+    other_arguments = 1,
     parse = FALSE
   ) |>
     expect_error()
@@ -177,7 +177,7 @@ test_that("`run_experiment()` | Error test", {
     model_path = model_path,
     experiment = NULL,
     setup_file = setup_file,
-    other_args = NULL,
+    other_arguments = NULL,
     parse = ""
   ) |>
     expect_error()
@@ -189,7 +189,7 @@ test_that("`run_experiment()` | Error test", {
     model_path = model_path,
     experiment = NULL,
     setup_file = NULL,
-    other_args = NULL,
+    other_arguments = NULL,
     parse = FALSE
   ) |>
     expect_error()
@@ -201,7 +201,7 @@ test_that("`run_experiment()` | Error test", {
     model_path = model_path,
     experiment = "Test",
     setup_file = setup_file,
-    other_args = NULL,
+    other_arguments = NULL,
     parse = FALSE
   ) |>
     expect_error()
@@ -218,7 +218,7 @@ test_that("`run_experiment()` | Error test", {
     model_path = model_path,
     experiment = NULL,
     setup_file = setup_file,
-    other_args = NULL,
+    other_arguments = NULL,
     parse = TRUE
   ) |>
     expect_error()
