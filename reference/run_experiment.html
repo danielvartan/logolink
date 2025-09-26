@@ -5,18 +5,18 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Inter-0.4.10/font.css" rel="stylesheet"><link href="../deps/Fragment_Mono-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Run a NetLogo BehaviorSpace experiment — run_experiment"><meta name="description" content="run_experiment() runs a NetLogo BehaviorSpace experiment in headless mode
+</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Inter-0.4.10/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Run a NetLogo BehaviorSpace experiment — run_experiment"><meta name="description" content="run_experiment() runs a NetLogo BehaviorSpace experiment in headless mode
 and returns the results as a tidy data frame. It can be used with
 create_experiment() to create the experiment XML
-file on the fly, or with an existing experiment defined in an XML file or
-stored in the NetLogo model file.
+file on the fly, or with an existing experiment stored in the NetLogo model
+file.
 Please refer to the
 BehaviorSpace Guide for
 complete guidance on how to set and run experiments in NetLogo."><meta property="og:description" content="run_experiment() runs a NetLogo BehaviorSpace experiment in headless mode
 and returns the results as a tidy data frame. It can be used with
 create_experiment() to create the experiment XML
-file on the fly, or with an existing experiment defined in an XML file or
-stored in the NetLogo model file.
+file on the fly, or with an existing experiment stored in the NetLogo model
+file.
 Please refer to the
 BehaviorSpace Guide for
 complete guidance on how to set and run experiments in NetLogo."><meta property="og:image" content="https://danielvartan.github.io/logolink/reference/figures/og-image.png"><meta property="og:image:alt" content="logolink"></head><body>
@@ -62,8 +62,8 @@ complete guidance on how to set and run experiments in NetLogo."><meta property=
     <p><code>run_experiment()</code> runs a NetLogo BehaviorSpace experiment in headless mode
 and returns the results as a tidy data frame. It can be used with
 <code><a href="create_experiment.html">create_experiment()</a></code> to create the experiment XML
-file on the fly, or with an existing experiment defined in an XML file or
-stored in the NetLogo model file.</p>
+file on the fly, or with an existing experiment stored in the NetLogo model
+file.</p>
 <p>Please refer to the
 <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace Guide</a> for
 complete guidance on how to set and run experiments in NetLogo.</p>
@@ -76,7 +76,7 @@ complete guidance on how to set and run experiments in NetLogo.</p>
 <span>  <span class="va">model_path</span>,</span>
 <span>  experiment <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  setup_file <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  other_args <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  other_arguments <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -88,7 +88,7 @@ complete guidance on how to set and run experiments in NetLogo.</p>
 <dl><dt id="arg-netlogo-path">netlogo_path<a class="anchor" aria-label="anchor" href="#arg-netlogo-path"></a></dt>
 <dd><p>A string specifying the path to the NetLogo executable.
 In Windows, this is usually something like
-<code>C:/Program Files/NetLogo 7.0.0/NetLogo.exe</code>.</p></dd>
+<code>C:\Program Files\NetLogo 7.0.0\NetLogo.exe</code>.</p></dd>
 
 
 <dt id="arg-model-path">model_path<a class="anchor" aria-label="anchor" href="#arg-model-path"></a></dt>
@@ -108,18 +108,19 @@ containing the experiment definition. This file can be created using
 NetLogo BehaviorSpace interface (default: <code>NULL</code>).</p></dd>
 
 
-<dt id="arg-other-args">other_args<a class="anchor" aria-label="anchor" href="#arg-other-args"></a></dt>
-<dd><p>(optional) A character vector specifying any additional
-command-line arguments to pass to the NetLogo executable. For example,
-you can use <code>c("--threads", "4")</code> to specify the number of threads to use
-(default: <code>NULL</code>).</p></dd>
+<dt id="arg-other-arguments">other_arguments<a class="anchor" aria-label="anchor" href="#arg-other-arguments"></a></dt>
+<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector
+specifying any additional command-line arguments to pass to the NetLogo
+executable. For example, you can use <code>c("--threads 4")</code> to specify the
+number of threads to use (default: <code>NULL</code>).</p></dd>
 
 
 <dt id="arg-parse">parse<a class="anchor" aria-label="anchor" href="#arg-parse"></a></dt>
-<dd><p>(optional) A boolean indicating whether to parse NetLogo lists
-in the output data frame (default: <code>TRUE</code>). If <code>TRUE</code>, columns containing
+<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></code> flag indicating whether to
+parse NetLogo lists in the output data frame. If <code>TRUE</code>, columns containing
 NetLogo lists (e.g., <code>[1 2 3]</code>) will be converted to R lists. If <code>FALSE</code>,
-the columns will remain as character strings.</p></dd>
+the columns will remain as <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> strings
+(default: <code>TRUE</code>).</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -136,7 +137,97 @@ experiment.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span>  <span class="fl">1</span> <span class="op">+</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span>  <span class="co"># Using `create_experiment()` to Create the Experiment XML File</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co">## Change the path below to point to your NetLogo executable</span></span></span>
+<span class="r-in"><span>  <span class="va">netlogo_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"opt"</span>, <span class="st">"netlogo-7-0-0"</span>, <span class="st">"bin"</span>, <span class="st">"NetLogo"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co">## Change the path below to point to the 'Wolf Sheep Simple 5' NetLogo</span></span></span>
+<span class="r-in"><span>  <span class="co">## model file in the Model Library</span></span></span>
+<span class="r-in"><span>  <span class="va">model_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">""</span>, <span class="st">"opt"</span>, <span class="st">"netlogo-7-0-0"</span>, <span class="st">"models"</span>, <span class="st">"IABM Textbook"</span>, <span class="st">"chapter 4"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"Wolf Sheep Simple 5.nlogox"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_experiment.html">create_experiment</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    name <span class="op">=</span> <span class="st">"Wolf Sheep Simple Model Analysis"</span>,</span></span>
+<span class="r-in"><span>    repetitions <span class="op">=</span> <span class="fl">10</span>,</span></span>
+<span class="r-in"><span>    sequential_run_order <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>    run_metrics_every_step <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>    setup <span class="op">=</span> <span class="st">"setup"</span>,</span></span>
+<span class="r-in"><span>    go <span class="op">=</span> <span class="st">"go"</span>,</span></span>
+<span class="r-in"><span>    time_limit <span class="op">=</span> <span class="fl">1000</span>,</span></span>
+<span class="r-in"><span>    metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">'count wolves'</span>,</span></span>
+<span class="r-in"><span>      <span class="st">'count sheep'</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span>,</span></span>
+<span class="r-in"><span>    run_metrics_condition <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
+<span class="r-in"><span>    constants <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">"number-of-sheep"</span> <span class="op">=</span> <span class="fl">500</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"number-of-wolves"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>        first <span class="op">=</span> <span class="fl">5</span>,</span></span>
+<span class="r-in"><span>        step <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>        last <span class="op">=</span> <span class="fl">15</span></span></span>
+<span class="r-in"><span>      <span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"movement-cost"</span> <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"grass-regrowth-rate"</span> <span class="op">=</span> <span class="fl">0.3</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"energy-gain-from-grass"</span> <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"energy-gain-from-sheep"</span> <span class="op">=</span> <span class="fl">5</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu">run_experiment</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    netlogo_path <span class="op">=</span> <span class="va">netlogo_path</span>,</span></span>
+<span class="r-in"><span>    model_path <span class="op">=</span> <span class="va">model_path</span>,</span></span>
+<span class="r-in"><span>    setup_file <span class="op">=</span> <span class="va">setup_file</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co">## Expected output:</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt; # A tibble: 110,110 × 10</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;   run_number number_of_sheep number_of_wolves movement_cost</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;         &lt;dbl&gt;           &lt;dbl&gt;            &lt;dbl&gt;         &lt;dbl&gt;</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  1          3             500                5           0.5</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  2          9             500                5           0.5</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  3          4             500                5           0.5</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  4          1             500                5           0.5</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  5          6             500                5           0.5</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  6          8             500                5           0.5</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  7          7             500                5           0.5</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  8          2             500                5           0.5</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  9          5             500                5           0.5</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt; 10          2             500                5           0.5</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  # ℹ 110,100 more rows</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  # ℹ 6 more variables: grass_regrowth_rate &lt;dbl&gt;,</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  #   energy_gain_from_grass &lt;dbl&gt;, energy_gain_from_sheep &lt;dbl&gt;,</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  #   step &lt;dbl&gt;, count_wolves &lt;dbl&gt;, count_sheep &lt;dbl&gt;</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  # ℹ Use `print(n = ...)` to see more rows</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># Using an Experiment Defined in the NetLogo Model File</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu">run_experiment</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    netlogo_path <span class="op">=</span> <span class="va">netlogo_path</span>,</span></span>
+<span class="r-in"><span>    model_path <span class="op">=</span> <span class="va">model_path</span>,</span></span>
+<span class="r-in"><span>    experiment <span class="op">=</span> <span class="st">"Wolf Sheep Simple model analysis"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co">## Expected output:</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt; # A tibble: 110 × 11</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;    run_number energy_gain_from_grass number_of_wolves movement_cost</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;         &lt;dbl&gt;                  &lt;dbl&gt;            &lt;dbl&gt;         &lt;dbl&gt;</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  1          4                      2                5           0.5</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  2          8                      2                5           0.5</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  3          2                      2                5           0.5</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  4          9                      2                5           0.5</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  5          1                      2                5           0.5</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  6          5                      2                5           0.5</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  7          7                      2                5           0.5</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  8          3                      2                5           0.5</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt;  9          6                      2                5           0.5</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt; 10         12                      2                6           0.5</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt; # ℹ 100 more rows</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt; # ℹ 7 more variables: energy_gain_from_sheep &lt;dbl&gt;,</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt; #   number_of_sheep &lt;dbl&gt;, grass_regrowth_rate &lt;dbl&gt;, step &lt;dbl&gt;,</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt; #   count_wolves &lt;dbl&gt;, count_sheep &lt;dbl&gt;,</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt; #   sum_grass_amount_of_patches &lt;dbl&gt;</span></span></span>
+<span class="r-in"><span>  <span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

@@ -20,12 +20,12 @@
 </script><script src="lightswitch.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Inter-0.4.10/font.css" rel="stylesheet">
-<link href="deps/Fragment_Mono-0.4.10/font.css" rel="stylesheet">
+<link href="deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Control NetLogo from R">
-<meta name="description" content="Simple tools to setup and execute NetLogo simulations from R.">
-<meta property="og:description" content="Simple tools to setup and execute NetLogo simulations from R.">
+<meta name="description" content="An R interface to NetLogo that provides comprehensive tools for programmatically setting up and executing NetLogo agent-based model simulation.">
+<meta property="og:description" content="An R interface to NetLogo that provides comprehensive tools for programmatically setting up and executing NetLogo agent-based model simulation.">
 <meta property="og:image" content="https://danielvartan.github.io/logolink/reference/figures/og-image.png">
 <meta property="og:image:alt" content="logolink">
 </head>
@@ -81,20 +81,25 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p><code>logolink</code> is an R package that provides simple tools to set up and run NetLogo simulations directly from R. It is designed for NetLogo 7 and does not support older versions.</p>
-<p>The package offers an updated and streamlined approach to running NetLogo models from R. It follows the <a href="https://tidyverse.tidyverse.org/articles/manifesto.html" class="external-link">tidyverse principles</a> and integrates smoothly with the <a href="https://www.tidyverse.org/" class="external-link">tidyverse ecosystem</a>.</p>
-<!-- Related R packages include [`RNetLogo`](https://cran.r-project.org/web/packages/RNetLogo/index.html) and [`nlrx`](https://cran.r-project.org/web/packages/nlrx/index.html). -->
+<p><code>logolink</code> is an <a href="https://www.r-project.org/" class="external-link">R</a> package that provides simple tools to set up and run <a href="https://www.netlogo.org/" class="external-link">NetLogo</a> simulations directly from R. It is designed for NetLogo 7 and does not support older versions.</p>
+<p>The package offers a modern and streamlined approach to running NetLogo models from R. It follows the <a href="https://tidyverse.tidyverse.org/articles/manifesto.html" class="external-link">tidyverse principles</a> and integrates smoothly with the <a href="https://www.tidyverse.org/" class="external-link">tidyverse ecosystem</a>.</p>
 <blockquote>
 <p>If you find this project useful, please consider giving it a star!   <a href="https://github.com/danielvartan/logolink/" class="external-link"><img src="https://img.shields.io/github/stars/danielvartan/logolink" alt="GitHub repo stars"></a></p>
 </blockquote>
 </div>
 <div class="section level2">
+<h2 id="another-r-package-for-netlogo">Another R Package for NetLogo?<a class="anchor" aria-label="anchor" href="#another-r-package-for-netlogo"></a>
+</h2>
+<p>Yes! Other R packages also connect R and NetLogo, but <code>logolink</code> is actively maintained, consistent with tidyverse conventions, and straightforward to use. It is designed to simplify experiment setup and execution while remaining flexible.</p>
+<p>For context, <a href="https://cran.r-project.org/web/packages/RNetLogo/index.html" class="external-link"><code>RNetLogo</code></a> supports older NetLogo versions but is no longer actively maintained. <a href="https://cran.r-project.org/web/packages/nlrx/index.html" class="external-link"><code>nlrx</code></a> provides a powerful framework for managing experiments and results, but it does not support NetLogo 7 and has <a href="https://github.com/ropensci/nlrx/issues" class="external-link">many unresolved issues</a>. <code>logolink</code> complements these packages by focusing on simplicity, full compatibility with NetLogo 7, and seamless integration into modern R workflows.</p>
+</div>
+<div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install <code>logolink</code> using the <a href="https://github.com/r-lib/remotes" class="external-link"><code>remotes</code></a> package:</p>
+<p>You can install the development version of <code>logolink</code> from <a href="https://github.com/" class="external-link">GitHub</a> with the <a href="https://github.com/r-lib/remotes" class="external-link"><code>remotes</code></a> package:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"danielvartan/logolink"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"danielvartan/logolink"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -102,7 +107,7 @@
 <p><code>logolink</code> usage is very straightforward. The main functions are:</p>
 <ul>
 <li>
-<a href="https://danielvartan.github.io/logolink/reference/create_experiment.html"><code>create_experiment</code></a>: Creates a NetLogo experiment XML file</li>
+<a href="https://danielvartan.github.io/logolink/reference/create_experiment.html"><code>create_experiment</code></a>: Creates a NetLogo BehaviorSpace experiment XML file</li>
 <li>
 <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a>: Runs a NetLogo BehaviorSpace experiment</li>
 </ul>
@@ -110,8 +115,8 @@
 <div class="section level3">
 <h3 id="setting-the-netlogo-path">Setting the NetLogo Path<a class="anchor" aria-label="anchor" href="#setting-the-netlogo-path"></a>
 </h3>
-<p><code>logolink</code> requires the path to the NetLogo executable when running simulations with the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a> function. This path is OS-independent and easy to locate. On Windows, for example, it is typically something like <code>C:/Program Files/NetLogo 7.0.0/NetLogo.exe</code>.</p>
-<p>Example:</p>
+<p><code>logolink</code> requires the path to the NetLogo executable when running simulations with the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a> function. This path is OS-independent, but easy to locate. On Windows, for example, it is typically something like <code>C:\Program Files\NetLogo 7.0.0\NetLogo.exe</code>.</p>
+<p>Example (Linux):</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">netlogo_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"opt"</span>, <span class="st">"netlogo-7-0-0"</span>, <span class="st">"bin"</span>, <span class="st">"NetLogo"</span><span class="op">)</span></span>
 <span></span>
@@ -121,7 +126,7 @@
 <div class="section level3">
 <h3 id="creating-an-experiment">Creating an Experiment<a class="anchor" aria-label="anchor" href="#creating-an-experiment"></a>
 </h3>
-<p>To start running your model from R you first need to setup an experiment. You can do this by setting a <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a> experiment with <a href="https://danielvartan.github.io/logolink/reference/create_experiment.html"><code>create_experiment</code></a>. This function will create a <code>.xml</code> file that contains all the information about your experiment, including the parameters to vary, the metrics to collect, and the number of runs to perform.</p>
+<p>To start running your model from R you first need to setup an experiment. You can do this by setting a <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a> experiment with the <a href="https://danielvartan.github.io/logolink/reference/create_experiment.html"><code>create_experiment</code></a> function. This function will create a <a href="https://en.wikipedia.org/wiki/XML" class="external-link">XML</a> file that contains all the information about your experiment, including the parameters to vary, the metrics to collect, and the number of runs to perform.</p>
 <p>Alternatively, you can set up your experiment directly in NetLogo and save it as part of your model. In this case, you can skip the <a href="https://danielvartan.github.io/logolink/reference/create_experiment.html"><code>create_experiment</code></a> step and just provide the name of the experiment when running the model with <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a>.</p>
 <p>Example:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -154,9 +159,7 @@
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org" class="external-link">readr</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_lines.html" class="external-link">read_lines</a></span><span class="op">(</span><span class="va">setup_file</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span>collapse <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/inspect_experiment_file.html">inspect_experiment_file</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;experiments&gt;</span></span>
 <span><span class="co">#&gt;   &lt;experiment name="Wolf Sheep Simple Model Analysis" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="true"&gt;</span></span>
 <span><span class="co">#&gt;     &lt;setup&gt;setup&lt;/setup&gt;</span></span>
@@ -188,22 +191,23 @@
 </h3>
 <p>With the experiment file created, you can now run your model using the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a> function. This function will execute the NetLogo model with the specified parameters and return the results as a tidy data frame.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/run_experiment.html">run_experiment</a></span><span class="op">(</span></span>
-<span>  netlogo_path <span class="op">=</span> <span class="va">netlogo_path</span>,</span>
-<span>  model_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span>
-<span>    <span class="st">"/opt/netlogo-7-0-0/models/IABM Textbook/chapter 4"</span>,</span>
-<span>    <span class="st">"Wolf Sheep Simple 5.nlogox"</span></span>
-<span>  <span class="op">)</span>,</span>
-<span>  setup_file <span class="op">=</span> <span class="va">setup_file</span>,</span>
-<span>  parse <span class="op">=</span> <span class="cn">FALSE</span></span>
+<code class="sourceCode R"><span><span class="va">model_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span>
+<span>  <span class="st">""</span>, <span class="st">"opt"</span>, <span class="st">"netlogo-7-0-0"</span>, <span class="st">"models"</span>, <span class="st">"IABM Textbook"</span>, <span class="st">"chapter 4"</span>,</span>
+<span>  <span class="st">"Wolf Sheep Simple 5.nlogox"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/run_experiment.html">run_experiment</a></span><span class="op">(</span></span>
+<span>  netlogo_path <span class="op">=</span> <span class="va">netlogo_path</span>,</span>
+<span>  model_path <span class="op">=</span> <span class="va">model_path</span>,</span>
+<span>  setup_file <span class="op">=</span> <span class="va">setup_file</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 110,110</span></span>
 <span><span class="co">#&gt; Columns: 10</span></span>
-<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 6, 2, 7, 8, 4, 3, 5, 9, 1, 6, 7, 8, 3, 1, 9,…</span></span>
+<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 4, 5, 9, 1, 8, 3, 7, 6, 2, 7, 3, 8, 9, 4, 5,…</span></span>
 <span><span class="co">#&gt; $ number_of_sheep        &lt;dbl&gt; 500, 500, 500, 500, 500, 500, 500, 500, 500,…</span></span>
 <span><span class="co">#&gt; $ number_of_wolves       &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…</span></span>
 <span><span class="co">#&gt; $ movement_cost          &lt;dbl&gt; 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…</span></span>
@@ -215,10 +219,10 @@
 <span><span class="co">#&gt; $ count_sheep            &lt;dbl&gt; 500, 500, 500, 500, 500, 500, 500, 500, 500,…</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="analyzing-the-data">Analyzing the Data<a class="anchor" aria-label="anchor" href="#analyzing-the-data"></a>
+<h3 id="analyzing-the-data-bonus-section">Analyzing the Data (Bonus Section)<a class="anchor" aria-label="anchor" href="#analyzing-the-data-bonus-section"></a>
 </h3>
 <p>Below is a simple example of how to visualize the results using <a href="https://ggplot2.tidyverse.org/" class="external-link"><code>ggplot2</code></a>.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span></span>
@@ -228,7 +232,7 @@
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">number_of_wolves</span>, <span class="va">step</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">data</span> <span class="op">|&gt;</span></span>
@@ -247,10 +251,32 @@
 <span>      color <span class="op">=</span> <span class="st">"Wolves"</span></span>
 <span>    <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-8-1.png"></p>
-<p>Please refer to the <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace Guide</a> for complete guidance on how to set and run experiments in NetLogo. To gain a better understand of the basic mechanics behind R and NetLogo communication, see the <a href="https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line" class="external-link">Running from the command line</a> section.</p>
+<p><img src="reference/figures/readme-wolf-sheep-model-plot-1.png"></p>
+<p>Please refer to the <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace Guide</a> for complete guidance on how to set and run experiments in NetLogo. To gain a better understand of the basic mechanics behind R and NetLogo communication, see the <a href="https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line" class="external-link">Running from the Command Line</a> section.</p>
 <p>Click <a href="https://danielvartan.github.io/logolink/reference/">here</a> to see <code>logolink</code> full list of functions.</p>
 </div>
+</div>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
+<p>If you use this package in your research, please cite it to acknowledge the effort put into its development and maintenance. Your citation helps support its continued improvement.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"logolink"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; To cite logolink in publications use:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Vartanian, D. (2025). logolink: Control NetLogo from R [Computer</span></span>
+<span><span class="co">#&gt;   software]. https://doi.org/10.32614/CRAN.package.logolink</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   @Misc{,</span></span>
+<span><span class="co">#&gt;     title = {logolink: Control NetLogo from R},</span></span>
+<span><span class="co">#&gt;     author = {Daniel Vartanian},</span></span>
+<span><span class="co">#&gt;     year = {2025},</span></span>
+<span><span class="co">#&gt;     url = {https://CRAN.R-project.org/package=logolink},</span></span>
+<span><span class="co">#&gt;     doi = {10.32614/CRAN.package.logolink},</span></span>
+<span><span class="co">#&gt;     note = {R package},</span></span>
+<span><span class="co">#&gt;   }</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
@@ -277,6 +303,11 @@ this program. If not, see &lt;https://www.gnu.org/licenses/&gt;.</code></pre>
 <p>Contributions are welcome! Whether you want to report bugs, suggest features, or improve the code or documentation, your input is highly valued. Please check the <a href="https://github.com/danielvartan/logolink/issues" class="external-link">issues tab</a> for existing issues or to open a new one.</p>
 <p><a href="https://github.com/sponsors/danielvartan" class="external-link"><img src="https://img.shields.io/static/v1?label=Sponsor&amp;message=%E2%9D%A4&amp;logo=GitHub&amp;color=%23fe8e86"></a></p>
 <p>You can also support the development of <code>logolink</code> by becoming a sponsor. Click <a href="https://github.com/sponsors/danielvartan" class="external-link">here</a> to make a donation. Please mention <code>logolink</code> in your donation message.</p>
+</div>
+<div class="section level2">
+<h2 id="acknowledgments">Acknowledgments<a class="anchor" aria-label="anchor" href="#acknowledgments"></a>
+</h2>
+<p><code>logolink</code> brand identity is based on <a href="https://www.netlogo.org/" class="external-link">NetLogo</a> brand identity.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -321,6 +352,9 @@ this program. If not, see &lt;https://www.gnu.org/licenses/&gt;.</code></pre>
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://www.repostatus.org/#active" class="external-link"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active - The project has reached a stable, usable state and is being actively developed."></a></li>
+<li><a href="https://cran.r-project.org/package=logolink" class="external-link"><img src="https://www.r-pkg.org/badges/version/logolink"></a></li>
+<li><a href="https://github.com/danielvartan/logolink/actions" class="external-link"><img src="https://github.com/danielvartan/logolink/workflows/R-CMD-check.yaml/badge.svg" alt="R build status"></a></li>
+<li><a href="https://app.codecov.io/gh/danielvartan/logolink" class="external-link"><img src="https://codecov.io/gh/danielvartan/logolink/branch/main/graph/badge.svg"></a></li>
 <li><a href="https://www.gnu.org/licenses/gpl-3.0" class="external-link"><img src="https://img.shields.io/badge/license-GPLv3-bd0000.svg" alt="License: GPLv3"></a></li>
 <li><a href="CODE_OF_CONDUCT.html"><img src="https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg"></a></li>
 </ul>
