@@ -14,7 +14,7 @@ GPLv3](https://img.shields.io/badge/license-GPLv3-bd0000.svg)](https://www.gnu.o
 [![FAIR checklist
 badge](https://img.shields.io/badge/fairsoftwarechecklist.net--00a7d9)](https://fairsoftwarechecklist.net/v0.2/?f=31&a=32113&i=32322&r=133)
 [![fair-software.eu](https://img.shields.io/badge/fair--software.eu-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F-green)](https://fair-software.eu)
-[![](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
+[![](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://www.contributor-covenant.org/version/2/1/code_of_conduct/)
 <!-- badges: end -->
 
 ## Overview
@@ -207,7 +207,7 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 4, 7, 2, 3, 9, 8, 5, 6, 1, 6, 8, 5, 1, 9, 4,…
+#> $ run_number             <dbl> 2, 6, 4, 5, 1, 8, 9, 3, 7, 2, 6, 5, 4, 1, 3,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…
@@ -316,7 +316,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 
 ## Contributing
 
-[![](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
+[![](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://www.contributor-covenant.org/version/2/1/code_of_conduct/)
 
 Contributions are welcome! Whether you want to report bugs, suggest
 features, or improve the code or documentation, your input is highly

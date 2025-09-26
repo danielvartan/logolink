@@ -15,6 +15,7 @@
 ^data-raw$
 ^doc$
 ^docs$
+^LICENSE$
 ^LICENSE\.md$
 ^man-roxygen$
 ^Meta$

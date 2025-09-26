@@ -1,5 +1,5 @@
 Package: logolink
-Title: Run NetLogo from R
+Title: Run 'NetLogo' from R
 Version: 0.1.0
 Authors@R: c(
         person(
@@ -10,9 +10,9 @@ Authors@R: c(
             comment = c(ORCID = "0000-0001-7782-759X")
         )
     )
-Description: An R interface to NetLogo that provides comprehensive tools for
-    programmatically setting up and executing NetLogo simulations.
-License: GPL (>= 3) + file LICENSE
+Description: An R interface to 'NetLogo' that provides comprehensive tools for
+    programmatically setting up and executing 'NetLogo' simulations.
+License: GPL (>= 3)
 URL: https://danielvartan.github.io/logolink/,
     https://github.com/danielvartan/logolink/
 BugReports: https://github.com/danielvartan/logolink/issues/
