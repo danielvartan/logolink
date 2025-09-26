@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Control NetLogo from R • logolink</title>
+<title>Run NetLogo from R • logolink</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -23,9 +23,9 @@
 <link href="deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Control NetLogo from R">
-<meta name="description" content="An R interface to NetLogo that provides comprehensive tools for programmatically setting up and executing NetLogo agent-based model simulation.">
-<meta property="og:description" content="An R interface to NetLogo that provides comprehensive tools for programmatically setting up and executing NetLogo agent-based model simulation.">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Run NetLogo from R">
+<meta name="description" content="An R interface to NetLogo that provides comprehensive tools for programmatically setting up and executing NetLogo simulations.">
+<meta property="og:description" content="An R interface to NetLogo that provides comprehensive tools for programmatically setting up and executing NetLogo simulations.">
 <meta property="og:image" content="https://danielvartan.github.io/logolink/reference/figures/og-image.png">
 <meta property="og:image:alt" content="logolink">
 </head>
@@ -91,7 +91,7 @@
 <h2 id="another-r-package-for-netlogo">Another R Package for NetLogo?<a class="anchor" aria-label="anchor" href="#another-r-package-for-netlogo"></a>
 </h2>
 <p>Yes! Other R packages also connect R and NetLogo, but <code>logolink</code> is actively maintained, consistent with tidyverse conventions, and straightforward to use. It is designed to simplify experiment setup and execution while remaining flexible.</p>
-<p>For context, <a href="https://cran.r-project.org/web/packages/RNetLogo/index.html" class="external-link"><code>RNetLogo</code></a> supports older NetLogo versions but is no longer actively maintained. <a href="https://cran.r-project.org/web/packages/nlrx/index.html" class="external-link"><code>nlrx</code></a> provides a powerful framework for managing experiments and results, but it does not support NetLogo 7 and has <a href="https://github.com/ropensci/nlrx/issues" class="external-link">many unresolved issues</a>. <code>logolink</code> complements these packages by focusing on simplicity, full compatibility with NetLogo 7, and seamless integration into modern R workflows.</p>
+<p>For context, <a href="https://cran.r-project.org/web/packages/RNetLogo/index.html" class="external-link"><code>RNetLogo</code></a> supports older NetLogo versions but is no longer actively maintained. <a href="https://cran.r-project.org/web/packages/nlrx/index.html" class="external-link"><code>nlrx</code></a> provides a powerful framework for managing experiments and results, but currently <a href="https://docs.ropensci.org/nlrx/reference/supported_netlogo_versions.html" class="external-link">supports</a> only up to NetLogo 6.3.0 and has <a href="https://github.com/ropensci/nlrx/issues" class="external-link">many unresolved issues</a>. <code>logolink</code> complements these packages by focusing on simplicity, full compatibility with NetLogo 7, and seamless integration into modern R workflows.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -207,7 +207,7 @@
 <span><span class="va">results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 110,110</span></span>
 <span><span class="co">#&gt; Columns: 10</span></span>
-<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 4, 5, 9, 1, 8, 3, 7, 6, 2, 7, 3, 8, 9, 4, 5,…</span></span>
+<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 6, 7, 9, 3, 1, 2, 8, 4, 5, 4, 6, 9, 3, 2, 1,…</span></span>
 <span><span class="co">#&gt; $ number_of_sheep        &lt;dbl&gt; 500, 500, 500, 500, 500, 500, 500, 500, 500,…</span></span>
 <span><span class="co">#&gt; $ number_of_wolves       &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…</span></span>
 <span><span class="co">#&gt; $ movement_cost          &lt;dbl&gt; 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…</span></span>
