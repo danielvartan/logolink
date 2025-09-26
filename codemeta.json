@@ -8,7 +8,7 @@
   "codeRepository": "https://github.com/danielvartan/logolink/",
   "issueTracker": "https://github.com/danielvartan/logolink/issues/",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.1.0.9000",
+  "version": "0.1.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -274,7 +274,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "271.297KB",
+  "fileSize": "272.531KB",
   "citation": [
     {
       "@type": "CreativeWork",
@@ -288,17 +288,14 @@
           "@id": "https://orcid.org/0000-0001-7782-759X"
         }
       ],
-      "name": "logolink: Control NetLogo from R",
-      "identifier": "10.32614/CRAN.package.logolink",
-      "url": "https://CRAN.R-project.org/package=logolink",
-      "description": "R package",
-      "@id": "https://doi.org/10.32614/CRAN.package.logolink",
-      "sameAs": "https://doi.org/10.32614/CRAN.package.logolink"
+      "name": "logolink: Run NetLogo from R",
+      "url": "https://github.com/danielvartan/logolink",
+      "description": "R package"
     }
   ],
   "releaseNotes": "https://github.com/danielvartan/logolink/blob/main/NEWS.md",
   "readme": "https://github.com/danielvartan/logolink/blob/main/README.md",
   "contIntegration": ["https://github.com/danielvartan/logolink/actions", "https://app.codecov.io/gh/danielvartan/logolink"],
   "developmentStatus": "https://www.repostatus.org/#active",
-  "keywords": ["agent-based-modeling", "apis", "behaviorspace", "complexity-science", "individual-based-modeling", "netlogo", "r-packages", "rstats", "simulations", "computational-science", "multi-agent-systems", "headless-execution"]
+  "keywords": ["agent-based-modeling", "apis", "behaviorspace", "complexity-science", "individual-based-modeling", "netlogo", "r-packages", "rstats", "simulations", "computational-science", "multi-agent-systems", "headless-execution", "computational-social-science", "data-science", "ecological-modeling", "environmental-modeling", "system-dynamics", "tidyverse"]
 }

@@ -99,11 +99,11 @@
 #'   #>  8          2             500                5           0.5
 #'   #>  9          5             500                5           0.5
 #'   #> 10          2             500                5           0.5
-#'   #>  # ℹ 110,100 more rows
-#'   #>  # ℹ 6 more variables: grass_regrowth_rate <dbl>,
-#'   #>  #   energy_gain_from_grass <dbl>, energy_gain_from_sheep <dbl>,
-#'   #>  #   step <dbl>, count_wolves <dbl>, count_sheep <dbl>
-#'   #>  # ℹ Use `print(n = ...)` to see more rows
+#'   #>  # 110,100 more rows
+#'   #>  # 6 more variables: grass_regrowth_rate <dbl>,
+#'   #>  # energy_gain_from_grass <dbl>, energy_gain_from_sheep <dbl>,
+#'   #>  # step <dbl>, count_wolves <dbl>, count_sheep <dbl>
+#'   #>  # Use `print(n = ...)` to see more rows
 #'
 #'   # Using an Experiment Defined in the NetLogo Model File
 #'
@@ -126,12 +126,12 @@
 #'   #>  8          3                      2                5           0.5
 #'   #>  9          6                      2                5           0.5
 #'   #> 10         12                      2                6           0.5
-#'   #> # ℹ 100 more rows
-#'   #> # ℹ 7 more variables: energy_gain_from_sheep <dbl>,
-#'   #> #   number_of_sheep <dbl>, grass_regrowth_rate <dbl>, step <dbl>,
-#'   #> #   count_wolves <dbl>, count_sheep <dbl>,
-#'   #> #   sum_grass_amount_of_patches <dbl>
-#'   #> # ℹ Use `print(n = ...)` to see more rows
+#'   #> # 100 more rows
+#'   #> # 7 more variables: energy_gain_from_sheep <dbl>,
+#'   #> # number_of_sheep <dbl>, grass_regrowth_rate <dbl>, step <dbl>,
+#'   #> # count_wolves <dbl>, count_sheep <dbl>,
+#'   #> # sum_grass_amount_of_patches <dbl>
+#'   #> # Use `print(n = ...)` to see more rows
 #' }
 run_experiment <- function(
   netlogo_path,
@@ -168,7 +168,7 @@ run_experiment <- function(
     cli::cli_abort(
       paste0(
         "Only one of {.strong {cli::col_blue('experiment')}} or ",
-      "{.strong {cli::col_red('setup_file')}} can be provided."
+        "{.strong {cli::col_red('setup_file')}} can be provided."
       )
     )
   }
@@ -200,15 +200,15 @@ run_experiment <- function(
 
   out <-
     file |>
-      readr::read_delim(delim = ",", skip = 6) |>
-      janitor::clean_names() |>
-      suppressWarnings() |>
-      suppressMessages()
+    readr::read_delim(delim = ",", skip = 6) |>
+    janitor::clean_names() |>
+    suppressWarnings() |>
+    suppressMessages()
 
   if (nrow(out) == 0) {
     raw_data |> paste(collapse = "\n") |> cli::cli_abort()
   } else {
-    if(isTRUE(parse)) {
+    if (isTRUE(parse)) {
       out |>
         dplyr::mutate(
           dplyr::across(

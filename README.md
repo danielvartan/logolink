@@ -6,12 +6,14 @@
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![](https://www.r-pkg.org/badges/version/logolink)](https://cran.r-project.org/package=logolink)
 [![R build
 status](https://github.com/danielvartan/logolink/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/danielvartan/logolink/actions)
 [![](https://codecov.io/gh/danielvartan/logolink/branch/main/graph/badge.svg)](https://app.codecov.io/gh/danielvartan/logolink)
 [![License:
 GPLv3](https://img.shields.io/badge/license-GPLv3-bd0000.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![FAIR checklist
+badge](https://img.shields.io/badge/fairsoftwarechecklist.net--00a7d9)](https://fairsoftwarechecklist.net/v0.2/?f=31&a=32113&i=32322&r=133)
+[![fair-software.eu](https://img.shields.io/badge/fair--software.eu-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F-green)](https://fair-software.eu)
 [![](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 <!-- badges: end -->
 
@@ -39,12 +41,10 @@ actively maintained, consistent with tidyverse conventions, and
 straightforward to use. It is designed to simplify experiment setup and
 execution while remaining flexible.
 
-For context,
-[`RNetLogo`](https://cran.r-project.org/web/packages/RNetLogo/index.html)
+For context, [`RNetLogo`](https://CRAN.R-project.org/package=RNetLogo)
 supports older NetLogo versions but is no longer actively maintained.
-[`nlrx`](https://cran.r-project.org/web/packages/nlrx/index.html)
-provides a powerful framework for managing experiments and results, but
-currently
+[`nlrx`](https://CRAN.R-project.org/package=nlrx) provides a powerful
+framework for managing experiments and results, but currently
 [supports](https://docs.ropensci.org/nlrx/reference/supported_netlogo_versions.html)
 only up to NetLogo 6.3.0 and has [many unresolved
 issues](https://github.com/ropensci/nlrx/issues). `logolink` complements
@@ -53,9 +53,14 @@ NetLogo 7, and seamless integration into modern R workflows.
 
 ## Installation
 
-You can install the development version of `logolink` from
-[GitHub](https://github.com/) with the
-[`remotes`](https://github.com/r-lib/remotes) package:
+You can install the released version of `logolink` from
+[CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("logolink")
+```
+
+And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
@@ -73,7 +78,7 @@ remotes::install_github("danielvartan/logolink")
 
 Along with this package, you will also need NetLogo 7 or higher
 installed on your computer. You can download it from the [NetLogo
-website](https://ccl.northwestern.edu/netlogo/download.shtml).
+website](https://www.netlogo.org).
 
 ### Setting the NetLogo Path
 
@@ -202,7 +207,7 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 6, 7, 9, 3, 1, 2, 8, 4, 5, 4, 6, 9, 3, 2, 1,…
+#> $ run_number             <dbl> 4, 7, 2, 3, 9, 8, 5, 6, 1, 6, 8, 5, 1, 9, 4,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…
@@ -275,17 +280,16 @@ support its continued improvement.
 citation("logolink")
 #> To cite logolink in publications use:
 #> 
-#>   Vartanian, D. (2025). logolink: Control NetLogo from R [Computer
-#>   software]. https://doi.org/10.32614/CRAN.package.logolink
+#>   Vartanian, D. (2025). logolink: Run NetLogo from R [Computer
+#>   software]. https://github.com/danielvartan/logolink
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Misc{,
-#>     title = {logolink: Control NetLogo from R},
+#>     title = {logolink: Run NetLogo from R},
 #>     author = {Daniel Vartanian},
 #>     year = {2025},
-#>     url = {https://CRAN.R-project.org/package=logolink},
-#>     doi = {10.32614/CRAN.package.logolink},
+#>     url = {https://github.com/danielvartan/logolink},
 #>     note = {R package},
 #>   }
 ```
@@ -328,5 +332,5 @@ a donation. Please mention `logolink` in your donation message.
 
 ## Acknowledgments
 
-`logolink` brand identity is based on
+`logolink` brand identity is based on the
 [NetLogo](https://www.netlogo.org/) brand identity.

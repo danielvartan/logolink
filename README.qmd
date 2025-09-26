@@ -26,13 +26,44 @@ source(here("R", ".setup.R"))
 
 cat(
   badge_repostatus("active"),
-  badge_cran_release(),
+  # badge_cran_release(),
   badge_github_actions(action = "R-CMD-check.yaml"),
   badge_codecov() |> shush(),
+  # badge_custom(
+  #   x = "DOI",
+  #   y = "10.32614/CRAN.package.logolink",
+  #   color = "1284C5",
+  #   url = "https://doi.org/10.32614/CRAN.package.logolink"
+  # ),
   badge_license(
     license = "GPLv3",
     color = "bd0000",
     url = "https://www.gnu.org/licenses/gpl-3.0"
+  ),
+  paste0(
+    "[![",
+    "FAIR checklist badge",
+    "](",
+    "https://img.shields.io/badge/",
+    "fairsoftwarechecklist.net", "-",
+    "-",
+    "00a7d9",
+    ")](",
+    "https://fairsoftwarechecklist.net/v0.2/?f=31&a=32113&i=32322&r=133",
+    ")"
+  ),
+  paste0(
+    "[![",
+    "fair-software.eu",
+    "](",
+    "https://img.shields.io/badge/",
+    "fair--software.eu", "-",
+    "%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F",
+    "-",
+    "green",
+    ")](",
+    "https://fair-software.eu",
+    ")"
   ),
   badge_custom(
     "Contributor%20Covenant",
@@ -57,13 +88,19 @@ principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and integra
 
 Yes! Other R packages also connect R and NetLogo, but `logolink` is actively maintained, consistent with tidyverse conventions, and straightforward to use. It is designed to simplify experiment setup and execution while remaining flexible.
 
-For context, [`RNetLogo`](https://cran.r-project.org/web/packages/RNetLogo/index.html) supports older NetLogo versions but is no longer actively maintained. [`nlrx`](https://cran.r-project.org/web/packages/nlrx/index.html) provides a powerful framework for managing experiments and results, but currently [supports](https://docs.ropensci.org/nlrx/reference/supported_netlogo_versions.html) only up to NetLogo 6.3.0 and has [many unresolved issues](https://github.com/ropensci/nlrx/issues). `logolink` complements these packages by focusing on simplicity, full compatibility with NetLogo 7, and seamless integration into modern R workflows.
+For context, [`RNetLogo`](https://CRAN.R-project.org/package=RNetLogo) supports older NetLogo versions but is no longer actively maintained. [`nlrx`](https://CRAN.R-project.org/package=nlrx) provides a powerful framework for managing experiments and results, but currently [supports](https://docs.ropensci.org/nlrx/reference/supported_netlogo_versions.html) only up to NetLogo 6.3.0 and has [many unresolved issues](https://github.com/ropensci/nlrx/issues). `logolink` complements these packages by focusing on simplicity, full compatibility with NetLogo 7, and seamless integration into modern R workflows.
 
 ## Installation
 
-You can install the development version of `logolink` from [GitHub](https://github.com/) with the [`remotes`](https://github.com/r-lib/remotes) package:
+You can install the released version of `logolink` from [CRAN](https://CRAN.R-project.org) with:
 
-``` r
+```r
+install.packages("logolink")
+```
+
+And the development version from [GitHub](https://github.com/) with:
+
+```r
 # install.packages("remotes")
 remotes::install_github("danielvartan/logolink")
 ```
@@ -75,7 +112,7 @@ remotes::install_github("danielvartan/logolink")
 - [`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html): Creates a NetLogo BehaviorSpace experiment XML file
 - [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html): Runs a NetLogo BehaviorSpace experiment
 
-Along with this package, you will also need NetLogo 7 or higher installed on your computer. You can download it from the [NetLogo website](https://ccl.northwestern.edu/netlogo/download.shtml).
+Along with this package, you will also need NetLogo 7 or higher installed on your computer. You can download it from the [NetLogo website](https://www.netlogo.org).
 
 ### Setting the NetLogo Path
 
@@ -265,4 +302,4 @@ You can also support the development of `logolink` by becoming a sponsor. Click 
 
 ## Acknowledgments
 
-`logolink` brand identity is based on [NetLogo](https://www.netlogo.org/) brand identity.
+`logolink` brand identity is based on the [NetLogo](https://www.netlogo.org/) brand identity.

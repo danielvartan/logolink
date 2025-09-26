@@ -3,7 +3,7 @@ utils::bibentry(
   bibtype = "Misc",
   title = paste0(
     "logolink:", " ",
-    "Control NetLogo from R"
+    "Run NetLogo from R"
   ),
   author = c(
     person(
@@ -16,11 +16,7 @@ utils::bibentry(
   ),
   year = "2025",
   url = paste0(
-    "https://CRAN.R-project.org/package=",
-    "logolink"
-  ),
-  doi = paste0(
-    "10.32614/CRAN.package.",
+    "https://github.com/danielvartan/",
     "logolink"
   ),
   note = "R package",
@@ -28,9 +24,9 @@ utils::bibentry(
     "Vartanian, D", ". ",
     "(2025)", ". ",
     "logolink:", " ",
-    "Control NetLogo from R", " ",
+    "Run NetLogo from R", " ",
     "[Computer software]", ". ",
-    "https://doi.org/10.32614/CRAN.package.",
+    "https://github.com/danielvartan/",
     "logolink"
   )
 )

@@ -4,11 +4,11 @@
 \name{logolink-package}
 \alias{logolink}
 \alias{logolink-package}
-\title{logolink: Control NetLogo from R}
+\title{logolink: Run NetLogo from R}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-An R interface to NetLogo that provides comprehensive tools for programmatically setting up and executing NetLogo agent-based model simulation.
+An R interface to NetLogo that provides comprehensive tools for programmatically setting up and executing NetLogo simulations.
 }
 \seealso{
 Useful links:
