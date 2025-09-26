@@ -81,8 +81,8 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p><code>logolink</code> is an <a href="https://www.r-project.org/" class="external-link">R</a> package that provides simple tools to set up and run <a href="https://www.netlogo.org/" class="external-link">NetLogo</a> simulations directly from R. It is designed for NetLogo 7 and does not support older versions.</p>
-<p>The package offers a modern and streamlined approach to running NetLogo models from R. It follows the <a href="https://tidyverse.tidyverse.org/articles/manifesto.html" class="external-link">tidyverse principles</a> and integrates smoothly with the <a href="https://www.tidyverse.org/" class="external-link">tidyverse ecosystem</a>.</p>
+<p><code>logolink</code> is an <a href="https://www.r-project.org/" class="external-link">R</a> package that makes it easy to set up and run <a href="https://www.netlogo.org/" class="external-link">NetLogo</a> simulations directly from R. It is built for NetLogo 7 and does not support older versions.</p>
+<p>The package takes a modern, streamlined approach to running NetLogo models. It follows the <a href="https://tidyverse.tidyverse.org/articles/manifesto.html" class="external-link">tidyverse principles</a> and integrates naturally with the <a href="https://www.tidyverse.org/" class="external-link">tidyverse ecosystem</a>.</p>
 <blockquote>
 <p>If you find this project useful, please consider giving it a star!   <a href="https://github.com/danielvartan/logolink/" class="external-link"><img src="https://img.shields.io/github/stars/danielvartan/logolink" alt="GitHub repo stars"></a></p>
 </blockquote>
@@ -90,8 +90,8 @@
 <div class="section level2">
 <h2 id="another-r-package-for-netlogo">Another R Package for NetLogo?<a class="anchor" aria-label="anchor" href="#another-r-package-for-netlogo"></a>
 </h2>
-<p>Yes! Other R packages also connect R and NetLogo, but <code>logolink</code> is actively maintained, consistent with tidyverse conventions, and straightforward to use. It is designed to simplify experiment setup and execution while remaining flexible.</p>
-<p>For context, <a href="https://CRAN.R-project.org/package=RNetLogo" class="external-link"><code>RNetLogo</code></a> supports older NetLogo versions but is no longer actively maintained. <a href="https://CRAN.R-project.org/package=nlrx" class="external-link"><code>nlrx</code></a> provides a powerful framework for managing experiments and results, but currently <a href="https://docs.ropensci.org/nlrx/reference/supported_netlogo_versions.html" class="external-link">supports</a> only up to NetLogo 6.3.0 and has <a href="https://github.com/ropensci/nlrx/issues" class="external-link">many unresolved issues</a>. <code>logolink</code> complements these packages by focusing on simplicity, full compatibility with NetLogo 7, and seamless integration into modern R workflows.</p>
+<p>While other R packages connect R and NetLogo, <code>logolink</code> is currently the only one that fully supports the latest NetLogo release (NetLogo 7). It is actively maintained, follows tidyverse conventions, and is designed to be simple and straightforward to use.</p>
+<p>For context, <a href="https://CRAN.R-project.org/package=RNetLogo" class="external-link"><code>RNetLogo</code></a> works only with older versions (up to version 6.0.0, released in December 2016) and has not been updated since June 2017. <a href="https://CRAN.R-project.org/package=nlrx" class="external-link"><code>nlrx</code></a> provides a powerful framework for managing experiments and results, but <a href="https://docs.ropensci.org/nlrx/reference/supported_netlogo_versions.html" class="external-link">supports</a> only up to NetLogo 6.3.0 (released in September 2022) and has <a href="https://github.com/ropensci/nlrx/issues" class="external-link">many unresolved issues</a>. <code>logolink</code> complements these packages by focusing on simplicity, full compatibility with NetLogo 7, and seamless integration into modern R workflows.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -210,7 +210,7 @@
 <span><span class="va">results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 110,110</span></span>
 <span><span class="co">#&gt; Columns: 10</span></span>
-<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 2, 6, 4, 5, 1, 8, 9, 3, 7, 2, 6, 5, 4, 1, 3,…</span></span>
+<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 8, 1, 7, 6, 2, 5, 3, 4, 9, 5, 8, 3, 9, 6, 7,…</span></span>
 <span><span class="co">#&gt; $ number_of_sheep        &lt;dbl&gt; 500, 500, 500, 500, 500, 500, 500, 500, 500,…</span></span>
 <span><span class="co">#&gt; $ number_of_wolves       &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…</span></span>
 <span><span class="co">#&gt; $ movement_cost          &lt;dbl&gt; 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…</span></span>
@@ -255,7 +255,7 @@
 <span>    <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/readme-wolf-sheep-model-plot-1.png"></p>
-<p>Please refer to the <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace Guide</a> for complete guidance on how to set and run experiments in NetLogo. To gain a better understand of the basic mechanics behind R and NetLogo communication, see the <a href="https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line" class="external-link">Running from the Command Line</a> section.</p>
+<p>Please refer to the <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace Guide</a> for complete guidance on how to set and run experiments in NetLogo. To gain a better understand of the mechanics behind R and NetLogo communication, see the <a href="https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line" class="external-link">Running from the Command Line</a> section.</p>
 <p>Click <a href="https://danielvartan.github.io/logolink/reference/">here</a> to see <code>logolink</code> full list of functions.</p>
 </div>
 </div>
