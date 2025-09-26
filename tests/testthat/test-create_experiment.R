@@ -33,7 +33,9 @@ test_that("`create_experiment()` | General test", {
       "movement-cost" = 0.5,
       "grass-regrowth-rate" = 0.3,
       "energy-gain-from-grass" = 2,
-      "energy-gain-from-sheep" = 5
+      "energy-gain-from-sheep" = 5,
+      "character-constant-test" = "a string constant",
+      "logical-constant-test" = TRUE
     )
   ) |>
     expect_file_exists(extension = "xml")

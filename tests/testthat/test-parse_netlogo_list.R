@@ -30,6 +30,10 @@ test_that("`parse_netlogo_list()` | General test", {
   c('[true false true]', '[false true false]') |>
     parse_netlogo_list() |>
     expect_equal(list(c(TRUE, FALSE, TRUE), c(FALSE, TRUE, FALSE)))
+
+  "[NaN]" |>
+    parse_netlogo_list() |>
+    expect_equal(list(c("NaN")))
 })
 
 test_that("`parse_netlogo_list()` | Error test", {
