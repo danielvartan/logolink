@@ -2,7 +2,7 @@
 
 - This is a **resubmission** of the package’s first release to CRAN.
 
-## CRAN Feedback
+## Latest CRAN Feedback
 
 "
 Thanks, we see:
@@ -73,27 +73,16 @@ goodpractice::gp()
 
 There were 0 ERRORs and 0 WARNINGs.
 
-There were 2 NOTEs (excluding the *New submission* note).
+There were 1 NOTE (excluding the *New submission* note).
 
 ### Note 1
 
 ```text
 Possibly misspelled words in DESCRIPTION:
-  NetLogo (2:12, 13:32, 14:47)
   programmatically (14:5)
 ```
 
-These are false positives. The word 'NetLogo' refers to the NetLogo software. The word 'programmatically' is a valid English word.
-
-## Note 2
-
-```text
-Found the following (possibly) invalid file URI:
-  URI: CODE_OF_CONDUCT.md
-    From: README.md
-```
-
-This is a false positive. The link to `CODE_OF_CONDUCT.md` is valid.
+This is a false positive. The word 'programmatically' is a valid English word.
 
 ## `lintr` Results (Arch Linux)
 

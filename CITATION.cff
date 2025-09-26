@@ -13,7 +13,7 @@ identifiers:
 - type: url
   value: https://github.com/danielvartan/logolink/
 abstract: An R interface to 'NetLogo' that provides comprehensive tools for programmatically
-  setting up and executing NetLogo simulations.
+  setting up and executing 'NetLogo' simulations.
 authors:
 - family-names: Vartanian
   given-names: Daniel

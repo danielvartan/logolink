@@ -19,15 +19,15 @@ badge](https://img.shields.io/badge/fairsoftwarechecklist.net--00a7d9)](https://
 
 ## Overview
 
-`logolink` is an [R](https://www.r-project.org/) package that provides
-simple tools to set up and run [NetLogo](https://www.netlogo.org/)
-simulations directly from R. It is designed for NetLogo 7 and does not
-support older versions.
+`logolink` is an [R](https://www.r-project.org/) package that makes it
+easy to set up and run [NetLogo](https://www.netlogo.org/) simulations
+directly from R. It is built for NetLogo 7 and does not support older
+versions.
 
-The package offers a modern and streamlined approach to running NetLogo
-models from R. It follows the [tidyverse
+The package takes a modern, streamlined approach to running NetLogo
+models. It follows the [tidyverse
 principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and
-integrates smoothly with the [tidyverse
+integrates naturally with the [tidyverse
 ecosystem](https://www.tidyverse.org/).
 
 > If you find this project useful, please consider giving it a star!  
@@ -36,20 +36,21 @@ ecosystem](https://www.tidyverse.org/).
 
 ## Another R Package for NetLogo?
 
-Yes! Other R packages also connect R and NetLogo, but `logolink` is
-actively maintained, consistent with tidyverse conventions, and
-straightforward to use. It is designed to simplify experiment setup and
-execution while remaining flexible.
+While other R packages connect R and NetLogo, `logolink` is currently
+the only one that fully supports the latest NetLogo release (NetLogo 7).
+It is actively maintained, follows tidyverse conventions, and is
+designed to be simple and straightforward to use.
 
 For context, [`RNetLogo`](https://CRAN.R-project.org/package=RNetLogo)
-supports older NetLogo versions but is no longer actively maintained.
+works only with older versions (up to version 6.0.0, released in
+December 2016) and has not been updated since June 2017.
 [`nlrx`](https://CRAN.R-project.org/package=nlrx) provides a powerful
-framework for managing experiments and results, but currently
+framework for managing experiments and results, but
 [supports](https://docs.ropensci.org/nlrx/reference/supported_netlogo_versions.html)
-only up to NetLogo 6.3.0 and has [many unresolved
-issues](https://github.com/ropensci/nlrx/issues). `logolink` complements
-these packages by focusing on simplicity, full compatibility with
-NetLogo 7, and seamless integration into modern R workflows.
+only up to NetLogo 6.3.0 (released in September 2022) and has [many
+unresolved issues](https://github.com/ropensci/nlrx/issues). `logolink`
+complements these packages by focusing on simplicity, full compatibility
+with NetLogo 7, and seamless integration into modern R workflows.
 
 ## Installation
 
@@ -207,7 +208,7 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 2, 6, 4, 5, 1, 8, 9, 3, 7, 2, 6, 5, 4, 1, 3,…
+#> $ run_number             <dbl> 8, 1, 7, 6, 2, 5, 3, 4, 9, 5, 8, 3, 9, 6, 7,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…
@@ -262,8 +263,8 @@ data |>
 Please refer to the [BehaviorSpace
 Guide](https://docs.netlogo.org/behaviorspace.html) for complete
 guidance on how to set and run experiments in NetLogo. To gain a better
-understand of the basic mechanics behind R and NetLogo communication,
-see the [Running from the Command
+understand of the mechanics behind R and NetLogo communication, see the
+[Running from the Command
 Line](https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line)
 section.
 
