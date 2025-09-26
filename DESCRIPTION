@@ -1,5 +1,5 @@
 Package: logolink
-Title: Control NetLogo from R
+Title: Run NetLogo from R
 Version: 0.1.0.9000
 Authors@R: c(
         person(
@@ -11,8 +11,7 @@ Authors@R: c(
         )
     )
 Description: An R interface to NetLogo that provides comprehensive tools for
-    programmatically setting up and executing NetLogo agent-based model
-    simulation.
+    programmatically setting up and executing NetLogo simulations.
 License: GPL (>= 3) + file LICENSE
 URL: https://danielvartan.github.io/logolink/,
     https://github.com/danielvartan/logolink/

@@ -78,7 +78,7 @@ test_that("`run_experiment()` | Error test", {
 
   run_experiment(
     netlogo_path = 1,
-    model_path = model_path,
+    model_path = model_path_1,
     experiment = NULL,
     setup_file = setup_file,
     other_arguments = NULL,
@@ -126,7 +126,7 @@ test_that("`run_experiment()` | Error test", {
 
   run_experiment(
     netlogo_path = "",
-    model_path = model_path,
+    model_path = model_path_1,
     experiment = 1,
     setup_file = setup_file,
     other_arguments = NULL,
@@ -138,7 +138,7 @@ test_that("`run_experiment()` | Error test", {
 
   run_experiment(
     netlogo_path = "",
-    model_path = model_path,
+    model_path = model_path_1,
     experiment = NULL,
     setup_file = 1,
     other_arguments = NULL,
@@ -150,9 +150,9 @@ test_that("`run_experiment()` | Error test", {
 
   run_experiment(
     netlogo_path = "",
-    model_path = model_path,
+    model_path = model_path_1,
     experiment = NULL,
-    setup_file = tempfile(),
+    setup_file = tempfile(fileext = ".xml"),
     other_arguments = NULL,
     parse = FALSE
   ) |>
@@ -162,7 +162,7 @@ test_that("`run_experiment()` | Error test", {
 
   run_experiment(
     netlogo_path = "",
-    model_path = model_path,
+    model_path = model_path_1,
     experiment = NULL,
     setup_file = setup_file,
     other_arguments = 1,
@@ -174,7 +174,7 @@ test_that("`run_experiment()` | Error test", {
 
   run_experiment(
     netlogo_path = "",
-    model_path = model_path,
+    model_path = model_path_1,
     experiment = NULL,
     setup_file = setup_file,
     other_arguments = NULL,
@@ -186,7 +186,7 @@ test_that("`run_experiment()` | Error test", {
 
   run_experiment(
     netlogo_path = "",
-    model_path = model_path,
+    model_path = model_path_1,
     experiment = NULL,
     setup_file = NULL,
     other_arguments = NULL,
@@ -198,7 +198,7 @@ test_that("`run_experiment()` | Error test", {
 
   run_experiment(
     netlogo_path = "",
-    model_path = model_path,
+    model_path = model_path_1,
     experiment = "Test",
     setup_file = setup_file,
     other_arguments = NULL,
@@ -215,7 +215,7 @@ test_that("`run_experiment()` | Error test", {
 
   run_experiment(
     netlogo_path = "",
-    model_path = model_path,
+    model_path = model_path_1,
     experiment = NULL,
     setup_file = setup_file,
     other_arguments = NULL,

@@ -2,8 +2,8 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "logolink",
-  "description": "An R interface to NetLogo that provides comprehensive tools for programmatically setting up and executing NetLogo agent-based model simulation.",
-  "name": "logolink: Control NetLogo from R",
+  "description": "An R interface to NetLogo that provides comprehensive tools for programmatically setting up and executing NetLogo simulations.",
+  "name": "logolink: Run NetLogo from R",
   "relatedLink": "https://danielvartan.github.io/logolink/",
   "codeRepository": "https://github.com/danielvartan/logolink/",
   "issueTracker": "https://github.com/danielvartan/logolink/issues/",
@@ -274,7 +274,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "271.293KB",
+  "fileSize": "271.297KB",
   "citation": [
     {
       "@type": "CreativeWork",
@@ -300,5 +300,5 @@
   "readme": "https://github.com/danielvartan/logolink/blob/main/README.md",
   "contIntegration": ["https://github.com/danielvartan/logolink/actions", "https://app.codecov.io/gh/danielvartan/logolink"],
   "developmentStatus": "https://www.repostatus.org/#active",
-  "keywords": ["agent-based-modeling", "apis", "behaviorspace", "complexity-science", "individual-based-modeling", "netlogo", "r-packages", "rstats", "simulations"]
+  "keywords": ["agent-based-modeling", "apis", "behaviorspace", "complexity-science", "individual-based-modeling", "netlogo", "r-packages", "rstats", "simulations", "computational-science", "multi-agent-systems", "headless-execution"]
 }

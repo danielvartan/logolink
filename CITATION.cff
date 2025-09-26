@@ -7,14 +7,14 @@ cff-version: 1.2.0
 message: 'To cite package "logolink" in publications use:'
 type: software
 license: GPL-3.0-or-later
-title: 'logolink: Control NetLogo from R'
+title: 'logolink: Run NetLogo from R'
 version: 0.1.0.9000
 doi: 10.32614/CRAN.package.logolink
 identifiers:
 - type: url
   value: https://github.com/danielvartan/logolink/
 abstract: An R interface to NetLogo that provides comprehensive tools for programmatically
-  setting up and executing NetLogo agent-based model simulation.
+  setting up and executing NetLogo simulations.
 authors:
 - family-names: Vartanian
   given-names: Daniel

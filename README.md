@@ -44,7 +44,9 @@ For context,
 supports older NetLogo versions but is no longer actively maintained.
 [`nlrx`](https://cran.r-project.org/web/packages/nlrx/index.html)
 provides a powerful framework for managing experiments and results, but
-it does not support NetLogo 7 and has [many unresolved
+currently
+[supports](https://docs.ropensci.org/nlrx/reference/supported_netlogo_versions.html)
+only up to NetLogo 6.3.0 and has [many unresolved
 issues](https://github.com/ropensci/nlrx/issues). `logolink` complements
 these packages by focusing on simplicity, full compatibility with
 NetLogo 7, and seamless integration into modern R workflows.
@@ -200,7 +202,7 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 4, 5, 9, 1, 8, 3, 7, 6, 2, 7, 3, 8, 9, 4, 5,…
+#> $ run_number             <dbl> 6, 7, 9, 3, 1, 2, 8, 4, 5, 4, 6, 9, 3, 2, 1,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…

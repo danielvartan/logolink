@@ -57,7 +57,7 @@ principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and integra
 
 Yes! Other R packages also connect R and NetLogo, but `logolink` is actively maintained, consistent with tidyverse conventions, and straightforward to use. It is designed to simplify experiment setup and execution while remaining flexible.
 
-For context, [`RNetLogo`](https://cran.r-project.org/web/packages/RNetLogo/index.html) supports older NetLogo versions but is no longer actively maintained. [`nlrx`](https://cran.r-project.org/web/packages/nlrx/index.html) provides a powerful framework for managing experiments and results, but it does not support NetLogo 7 and has [many unresolved issues](https://github.com/ropensci/nlrx/issues). `logolink` complements these packages by focusing on simplicity, full compatibility with NetLogo 7, and seamless integration into modern R workflows.
+For context, [`RNetLogo`](https://cran.r-project.org/web/packages/RNetLogo/index.html) supports older NetLogo versions but is no longer actively maintained. [`nlrx`](https://cran.r-project.org/web/packages/nlrx/index.html) provides a powerful framework for managing experiments and results, but currently [supports](https://docs.ropensci.org/nlrx/reference/supported_netlogo_versions.html) only up to NetLogo 6.3.0 and has [many unresolved issues](https://github.com/ropensci/nlrx/issues). `logolink` complements these packages by focusing on simplicity, full compatibility with NetLogo 7, and seamless integration into modern R workflows.
 
 ## Installation
 
