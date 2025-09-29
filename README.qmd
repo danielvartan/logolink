@@ -27,14 +27,15 @@ source(here("R", ".setup.R"))
 cat(
   badge_repostatus("active"),
   # badge_cran_release(),
-  badge_github_actions(action = "R-CMD-check.yaml"),
-  badge_codecov() |> shush(),
   # badge_custom(
-  #   x = "DOI",
+  #   x = "doi",
   #   y = "10.32614/CRAN.package.logolink",
   #   color = "1284C5",
   #   url = "https://doi.org/10.32614/CRAN.package.logolink"
   # ),
+  # badge_cran_download(type = "grand-total"),
+  badge_github_actions(action = "R-CMD-check.yaml"),
+  badge_codecov() |> shush(),
   badge_license(
     license = "GPLv3",
     color = "bd0000",
@@ -66,10 +67,10 @@ cat(
     ")"
   ),
   badge_custom(
-    "Contributor%20Covenant",
-    "3.0",
-    "4baaaa",
-    "https://www.contributor-covenant.org/version/3/0/code_of_conduct/"
+    x = "Contributor%20Covenant",
+    y = "3.0",
+    color = "4baaaa",
+    url = "https://www.contributor-covenant.org/version/3/0/code_of_conduct/"
   )
 )
 ```
@@ -109,8 +110,8 @@ remotes::install_github("danielvartan/logolink")
 
 `logolink` usage is very straightforward. The main functions are:
 
-- [`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html): Creates a NetLogo BehaviorSpace experiment XML file
-- [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html): Runs a NetLogo BehaviorSpace experiment
+- [`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html): Create a NetLogo BehaviorSpace experiment XML file.
+- [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html): Run a NetLogo BehaviorSpace experiment.
 
 Along with this package, you will also need NetLogo 7 or higher installed on your computer. You can download it from the [NetLogo website](https://www.netlogo.org).
 
@@ -285,11 +286,11 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 #| output: asis
 
 cat(
-  badge_custom( # Contributor Covenant
-    "Contributor%20Covenant",
-    "3.0",
-    "4baaaa",
-    "https://www.contributor-covenant.org/version/3/0/code_of_conduct/"
+  badge_custom(
+    x = "Contributor%20Covenant",
+    y = "3.0",
+    color = "4baaaa",
+    url = "https://www.contributor-covenant.org/version/3/0/code_of_conduct/"
   )
 )
 ```
