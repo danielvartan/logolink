@@ -1,6 +1,8 @@
 ## Release Summary
 
-- This is a **resubmission** of the package’s first release to CRAN.
+This is a **resubmission** of the package’s first release to CRAN.
+
+Please disregard a past resubmission attempt. This resubmission is complete and addresses all issues raised by CRAN.
 
 ## Latest CRAN Feedback
 

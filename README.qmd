@@ -83,7 +83,7 @@ cat(
 The package takes a modern, streamlined approach to running NetLogo models. It follows the [tidyverse
 principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and integrates naturally with the [tidyverse ecosystem](https://www.tidyverse.org/).
 
-> If you find this project useful, please consider giving it a star! &nbsp; [![GitHub repo stars](https://img.shields.io/github/stars/danielvartan/logolink)](https://github.com/danielvartan/logolink/)
+> If you find this project useful, please consider giving it a star! &nbsp; [![GitHub Repository Stars](https://img.shields.io/github/stars/danielvartan/logolink)](https://github.com/danielvartan/logolink/)
 
 ## Another R Package for NetLogo?
 

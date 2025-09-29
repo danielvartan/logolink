@@ -31,8 +31,8 @@ integrates naturally with the [tidyverse
 ecosystem](https://www.tidyverse.org/).
 
 > If you find this project useful, please consider giving it a star!  
-> [![GitHub repo
-> stars](https://img.shields.io/github/stars/danielvartan/logolink)](https://github.com/danielvartan/logolink/)
+> [![GitHub Repository
+> Stars](https://img.shields.io/github/stars/danielvartan/logolink)](https://github.com/danielvartan/logolink/)
 
 ## Another R Package for NetLogo?
 
@@ -208,7 +208,7 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 8, 2, 5, 9, 1, 4, 3, 7, 6, 1, 3, 4, 6, 2, 7,…
+#> $ run_number             <dbl> 9, 4, 1, 2, 8, 6, 7, 5, 3, 4, 3, 7, 1, 8, 9,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…
