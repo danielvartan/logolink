@@ -25,7 +25,7 @@ If the input does not contain NetLogo-style lists, it returns the original
 vector unchanged.
 }
 \examples{
-# Scalar Examples
+# Scalar Examples -----
 
 '["a" "b" "c"]' |> parse_netlogo_list()
 
@@ -35,7 +35,7 @@ vector unchanged.
 
 '[true false true]' |> parse_netlogo_list()
 
-# Vector Examples
+# Vector Examples -----
 
 c('["a" "b" "c"]', '["d" "e" "f"]') |> parse_netlogo_list()
 

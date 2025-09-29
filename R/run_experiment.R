@@ -40,19 +40,21 @@
 #' @export
 #'
 #' @examples
+#' # Set the Environment -----
+#'
+#' ## Change the path below to point to your NetLogo executable.
+#' netlogo_path <- file.path("", "opt", "netlogo-7-0-0", "bin", "NetLogo")
+#'
+#' ## Change the path below to point to the 'Wolf Sheep Simple 5' NetLogo
+#' ## model file in the Model Library.
+#' model_path <- file.path(
+#'   "", "opt", "netlogo-7-0-0", "models", "IABM Textbook", "chapter 4",
+#'   "Wolf Sheep Simple 5.nlogox"
+#' )
+#'
+#' # Using `create_experiment()` to Create the Experiment XML File -----
+#'
 #' \dontrun{
-#'   # Using `create_experiment()` to Create the Experiment XML File
-#'
-#'   ## Change the path below to point to your NetLogo executable
-#'   netlogo_path <- file.path("", "opt", "netlogo-7-0-0", "bin", "NetLogo")
-#'
-#'   ## Change the path below to point to the 'Wolf Sheep Simple 5' NetLogo
-#'   ## model file in the Model Library
-#'   model_path <- file.path(
-#'     "", "opt", "netlogo-7-0-0", "models", "IABM Textbook", "chapter 4",
-#'     "Wolf Sheep Simple 5.nlogox"
-#'   )
-#'
 #'   setup_file <- create_experiment(
 #'     name = "Wolf Sheep Simple Model Analysis",
 #'     repetitions = 10,
@@ -104,9 +106,11 @@
 #'   #>  # energy_gain_from_grass <dbl>, energy_gain_from_sheep <dbl>,
 #'   #>  # step <dbl>, count_wolves <dbl>, count_sheep <dbl>
 #'   #>  # Use `print(n = ...)` to see more rows
+#' }
 #'
-#'   # Using an Experiment Defined in the NetLogo Model File
+#' # Using an Experiment Defined in the NetLogo Model File -----
 #'
+#' \dontrun{
 #'   run_experiment(
 #'     netlogo_path = netlogo_path,
 #'     model_path = model_path,

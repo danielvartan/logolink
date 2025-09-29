@@ -21,7 +21,7 @@
 #' @export
 #'
 #' @examples
-#' # Scalar Examples
+#' # Scalar Examples -----
 #'
 #' '["a" "b" "c"]' |> parse_netlogo_list()
 #'
@@ -31,7 +31,7 @@
 #'
 #' '[true false true]' |> parse_netlogo_list()
 #'
-#' # Vector Examples
+#' # Vector Examples -----
 #'
 #' c('["a" "b" "c"]', '["d" "e" "f"]') |> parse_netlogo_list()
 #'
