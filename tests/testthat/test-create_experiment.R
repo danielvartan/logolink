@@ -1,14 +1,12 @@
-test_that("`create_experiment()` | General test", {
-  library(checkmate)
-  library(readr)
-
-  create_experiment() |> expect_file_exists(extension = "xml")
+testthat::test_that("`create_experiment()` | General test", {
+  create_experiment() |>
+    checkmate::expect_file_exists(extension = "xml")
 
   create_experiment() |>
-    read_lines() |>
-    expect_character() |>
-    extract(1) |>
-    expect_string(pattern = "<experiments>")
+    readr::read_lines() |>
+    checkmate::expect_character() |>
+    magrittr::extract(1) |>
+    checkmate::expect_string(pattern = "<experiments>")
 
   create_experiment(
     name = "Wolf Sheep Simple Model Analysis",
@@ -38,7 +36,7 @@ test_that("`create_experiment()` | General test", {
       "logical-constant-test" = TRUE
     )
   ) |>
-    expect_file_exists(extension = "xml")
+    checkmate::expect_file_exists(extension = "xml")
 })
 
 test_that("`create_experiment()` | Error test", {
@@ -60,7 +58,7 @@ test_that("`create_experiment()` | Error test", {
     run_metrics_condition = NULL,
     constants = NULL
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # checkmate::assert_int(repetitions, lower = 1)
 
@@ -80,7 +78,7 @@ test_that("`create_experiment()` | Error test", {
     run_metrics_condition = NULL,
     constants = NULL
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # checkmate::assert_flag(sequential_run_order)
 
@@ -100,7 +98,7 @@ test_that("`create_experiment()` | Error test", {
     run_metrics_condition = NULL,
     constants = NULL
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # checkmate::assert_flag(run_metrics_every_step)
 
@@ -120,7 +118,7 @@ test_that("`create_experiment()` | Error test", {
     run_metrics_condition = NULL,
     constants = NULL
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # checkmate::assert_string(pre_experiment, null.ok = TRUE)
 
@@ -140,7 +138,7 @@ test_that("`create_experiment()` | Error test", {
     run_metrics_condition = NULL,
     constants = NULL
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # checkmate::assert_string(setup)
 
@@ -160,7 +158,7 @@ test_that("`create_experiment()` | Error test", {
     run_metrics_condition = NULL,
     constants = NULL
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # checkmate::assert_string(go)
 
@@ -180,7 +178,7 @@ test_that("`create_experiment()` | Error test", {
     run_metrics_condition = NULL,
     constants = NULL
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # checkmate::assert_string(post_run, null.ok = TRUE)
 
@@ -200,7 +198,7 @@ test_that("`create_experiment()` | Error test", {
     run_metrics_condition = NULL,
     constants = NULL
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # checkmate::assert_string(post_experiment, null.ok = TRUE)
 
@@ -220,7 +218,7 @@ test_that("`create_experiment()` | Error test", {
     run_metrics_condition = NULL,
     constants = NULL
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # checkmate::assert_int(time_limit, lower = 1)
 
@@ -240,7 +238,7 @@ test_that("`create_experiment()` | Error test", {
     run_metrics_condition = NULL,
     constants = NULL
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # checkmate::assert_string(exit_condition, null.ok = TRUE)
 
@@ -260,7 +258,7 @@ test_that("`create_experiment()` | Error test", {
     run_metrics_condition = NULL,
     constants = NULL
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # checkmate::assert_character(metrics, min.len = 1)
 
@@ -280,7 +278,7 @@ test_that("`create_experiment()` | Error test", {
     run_metrics_condition = NULL,
     constants = NULL
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # checkmate::assert_string(run_metrics_condition, null.ok = TRUE)
 
@@ -300,7 +298,7 @@ test_that("`create_experiment()` | Error test", {
     run_metrics_condition = 1,
     constants = NULL
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # checkmate::assert_list(constants, null.ok = TRUE)
 
@@ -320,5 +318,5 @@ test_that("`create_experiment()` | Error test", {
     run_metrics_condition = NULL,
     constants = "a"
   ) |>
-    expect_error()
+    testthat::expect_error()
 })

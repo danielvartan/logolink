@@ -1,9 +1,7 @@
-test_that("`system_2()` | General test", {
-  system_2() |> expect_error()
+testthat::test_that("`system_2()` | General test", {
+  system_2() |> testthat::expect_error()
 })
 
-test_that("`temp_file()` | General test", {
-  library(checkmate)
-
-  temp_file() |> expect_string()
+testthat::test_that("`temp_file()` | General test", {
+  temp_file() |> checkmate::expect_string()
 })

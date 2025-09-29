@@ -1,7 +1,4 @@
-test_that("`run_experiment()` | General test", {
-  library(datasets)
-  library(readr)
-
+testthat::test_that("`run_experiment()` | General test", {
   model_path <- tempfile(fileext = ".nlogox")
   setup_file <- tempfile(pattern = "experiment-", fileext = ".xml")
   table_file <- tempfile(pattern = "table-", fileext = ".csv")
@@ -29,9 +26,9 @@ test_that("`run_experiment()` | General test", {
     '"9","500","5","0.5","0.3","2","5","0","5","500"',
     '"4","500","5","0.5","0.3","2","5","0","5","500"'
   ) |>
-    writeLines(table_file)
+    readr::write_lines(table_file)
 
-  local_mocked_bindings(
+  testthat::local_mocked_bindings(
     system_2 = function(...) "Test",
     temp_file = function(...) table_file
   )
@@ -44,7 +41,7 @@ test_that("`run_experiment()` | General test", {
     other_arguments = NULL,
     parse = TRUE
   ) |>
-    expect_tibble(ncols = 10)
+    checkmate::expect_tibble(ncols = 10)
 
   run_experiment(
     netlogo_path = "",
@@ -54,14 +51,10 @@ test_that("`run_experiment()` | General test", {
     other_arguments = NULL,
     parse = FALSE
   ) |>
-    expect_tibble(ncols = 10)
+    checkmate::expect_tibble(ncols = 10)
 })
 
-test_that("`run_experiment()` | Error test", {
-  library(checkmate)
-  library(dplyr)
-  library(readr)
-
+testthat::test_that("`run_experiment()` | Error test", {
   model_path_1 <- tempfile(fileext = ".nlogox")
   model_path_2 <- tempfile(fileext = ".txt")
   setup_file <- tempfile(pattern = "experiment-", fileext = ".xml")
@@ -72,7 +65,8 @@ test_that("`run_experiment()` | Error test", {
   setup_file |> file.create()
   table_file |> file.create()
 
-  tibble(a = character(), b = character()) |> write_csv(table_file)
+  dplyr::tibble(a = character(), b = character()) |>
+    readr::write_csv(table_file)
 
   # checkmate::assert_string(netlogo_path)
 
@@ -84,7 +78,7 @@ test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # checkmate::assert_string(model_path)
 
@@ -96,7 +90,7 @@ test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # checkmate::assert_file_exists(model_path)
 
@@ -108,7 +102,7 @@ test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # checkmate::assert_choice(fs::path_ext(model_path), model_path_choices)
 
@@ -120,7 +114,7 @@ test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # checkmate::assert_string(experiment, null.ok = TRUE)
 
@@ -144,7 +138,7 @@ test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # if (!is.null(setup_file)) { [...]
 
@@ -156,7 +150,7 @@ test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # checkmate::assert_character(other_arguments, null.ok = TRUE)
 
@@ -168,7 +162,7 @@ test_that("`run_experiment()` | Error test", {
     other_arguments = 1,
     parse = FALSE
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # checkmate::assert_flag(parse)
 
@@ -192,7 +186,7 @@ test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # if (!is.null(experiment) && !is.null(setup_file)) { [...]
 
@@ -204,11 +198,11 @@ test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # if (nrow(out) == 0) { [...]
 
-  local_mocked_bindings(
+  testthat::local_mocked_bindings(
     system_2 = function(...) "Test",
     temp_file = function(...) table_file
   )
@@ -221,5 +215,5 @@ test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = TRUE
   ) |>
-    expect_error()
+    testthat::expect_error()
 })
