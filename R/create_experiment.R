@@ -123,8 +123,8 @@ create_experiment <- function(
   checkmate::assert_flag(sequential_run_order)
   checkmate::assert_flag(run_metrics_every_step)
   checkmate::assert_string(pre_experiment, null.ok = TRUE)
-  checkmate::assert_string(setup)
-  checkmate::assert_string(go)
+  checkmate::assert_string(setup, null.ok = TRUE)
+  checkmate::assert_string(go, null.ok = TRUE)
   checkmate::assert_string(post_run, null.ok = TRUE)
   checkmate::assert_string(post_experiment, null.ok = TRUE)
   checkmate::assert_int(time_limit, lower = 1)
@@ -139,10 +139,10 @@ create_experiment <- function(
     root |>
     xml2::xml_add_child(
       "experiment",
-      name = name,
-      repetitions = repetitions,
-      sequentialRunOrder = tolower(sequential_run_order),
-      runMetricsEveryStep = tolower(run_metrics_every_step)
+      name = name |> unname(),
+      repetitions = repetitions |> unname(),
+      sequentialRunOrder = tolower(sequential_run_order) |> unname(),
+      runMetricsEveryStep = tolower(run_metrics_every_step) |> unname()
     )
 
   simple_elements <- list(
@@ -156,15 +156,17 @@ create_experiment <- function(
   )
 
   for (i in seq_along(simple_elements)) {
-    i_value <- simple_elements[[i]]
+    i_value <- simple_elements[[i]] |> unname()
 
     if (!is.null(i_value)) {
       experiment |> xml2::xml_add_child(names(simple_elements)[i], i_value)
     }
   }
 
-  experiment |> xml2::xml_add_child("timeLimit", NULL, steps = time_limit)
-  for (i in metrics) experiment |> xml2::xml_add_child("metric", i)
+  experiment |>
+    xml2::xml_add_child("timeLimit", NULL, steps = time_limit |> unname())
+
+  for (i in metrics) experiment |> xml2::xml_add_child("metric", i |> unname())
 
   if (!is.null(constants) && length(constants) > 0) {
     for (i in seq_along(constants)) {
@@ -181,9 +183,9 @@ create_experiment <- function(
             "steppedValueSet",
             NULL,
             variable = names(constants)[i],
-            first = i_value$first,
-            step = i_value$step,
-            last = i_value$last
+            first = i_value$first |> unname(),
+            step = i_value$step |> unname(),
+            last = i_value$last |> unname()
           )
       } else {
         if (is.character(i_value)) i_value <- paste0('\"', i_value, '\"')
@@ -194,7 +196,7 @@ create_experiment <- function(
             "enumeratedValueSet",
             variable = names(constants)[i]
           ) |>
-          xml2::xml_add_child("value", NULL, value = i_value)
+          xml2::xml_add_child("value", NULL, value = i_value |> unname())
       }
     }
   }
