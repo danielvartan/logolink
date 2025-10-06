@@ -70,7 +70,8 @@ cat(
     x = "Contributor%20Covenant",
     y = "3.0",
     color = "4baaaa",
-    url = "https://www.contributor-covenant.org/version/3/0/code_of_conduct/"
+    url = "https://www.contributor-covenant.org/version/3/0/code_of_conduct/",
+    alt = "Contributor Covenant 3.0 Code of Conduct"
   )
 )
 ```
@@ -290,7 +291,8 @@ cat(
     x = "Contributor%20Covenant",
     y = "3.0",
     color = "4baaaa",
-    url = "https://www.contributor-covenant.org/version/3/0/code_of_conduct/"
+    url = "https://www.contributor-covenant.org/version/3/0/code_of_conduct/",
+    alt = "Contributor Covenant 3.0 Code of Conduct"
   )
 )
 ```

@@ -1,5 +1,5 @@
 Package: logolink
-Title: Run 'NetLogo' from R
+Title: An Interface for Running 'NetLogo' Simulations
 Version: 0.1.0
 Authors@R: c(
         person(
@@ -10,8 +10,10 @@ Authors@R: c(
             comment = c(ORCID = "0000-0001-7782-759X")
         )
     )
-Description: An R interface to 'NetLogo' that provides comprehensive tools for
-    programmatically setting up and executing 'NetLogo' simulations.
+Description: An interface for 'NetLogo' <https://www.netlogo.org> that enables
+    programmatic setup and execution of simulations. Designed to facilitate
+    integrating 'NetLogo' models into reproducible workflows by creating and
+    running 'BehaviorSpace' experiments and retrieving their results.
 License: GPL (>= 3)
 URL: https://danielvartan.github.io/logolink/,
     https://github.com/danielvartan/logolink/

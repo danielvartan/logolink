@@ -7,13 +7,15 @@ cff-version: 1.2.0
 message: 'To cite package "logolink" in publications use:'
 type: software
 license: GPL-3.0-or-later
-title: 'logolink: Run ''NetLogo'' from R'
+title: 'logolink: An Interface for Running ''NetLogo'' Simulations'
 version: 0.1.0
 identifiers:
 - type: url
   value: https://github.com/danielvartan/logolink/
-abstract: An R interface to 'NetLogo' that provides comprehensive tools for programmatically
-  setting up and executing 'NetLogo' simulations.
+abstract: An interface for 'NetLogo' <https://www.netlogo.org> that enables programmatic
+  setup and execution of simulations. Designed to facilitate integrating 'NetLogo'
+  models into reproducible workflows by creating and running 'BehaviorSpace' experiments
+  and retrieving their results.
 authors:
 - family-names: Vartanian
   given-names: Daniel
@@ -21,7 +23,7 @@ authors:
   orcid: https://orcid.org/0000-0001-7782-759X
 preferred-citation:
   type: generic
-  title: 'logolink: Run NetLogo from R'
+  title: 'logolink: An interface for running NetLogo simulations'
   authors:
   - family-names: Vartanian
     given-names: Daniel

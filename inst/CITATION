@@ -3,7 +3,7 @@ utils::bibentry(
   bibtype = "Misc",
   title = paste0(
     "logolink:", " ",
-    "Run NetLogo from R"
+    "An interface for running NetLogo simulations"
   ),
   author = c(
     person(
@@ -24,7 +24,7 @@ utils::bibentry(
     "Vartanian, D", ". ",
     "(2025)", ". ",
     "logolink:", " ",
-    "Run NetLogo from R", " ",
+    "An interface for running NetLogo simulations", " ",
     "[Computer software]", ". ",
     "https://github.com/danielvartan/",
     "logolink"

@@ -14,7 +14,8 @@ GPLv3](https://img.shields.io/badge/license-GPLv3-bd0000.svg)](https://www.gnu.o
 [![FAIR checklist
 badge](https://img.shields.io/badge/fairsoftwarechecklist.net--00a7d9)](https://fairsoftwarechecklist.net/v0.2/?f=31&a=32113&i=32322&r=133)
 [![fair-software.eu](https://img.shields.io/badge/fair--software.eu-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F-green)](https://fair-software.eu)
-[![](https://img.shields.io/badge/Contributor%20Covenant-3.0-4baaaa.svg)](https://www.contributor-covenant.org/version/3/0/code_of_conduct/)
+[![Contributor Covenant 3.0 Code of
+Conduct](https://img.shields.io/badge/Contributor%20Covenant-3.0-4baaaa.svg)](https://www.contributor-covenant.org/version/3/0/code_of_conduct/)
 <!-- badges: end -->
 
 ## Overview
@@ -208,7 +209,7 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 9, 4, 1, 2, 8, 6, 7, 5, 3, 4, 3, 7, 1, 8, 9,…
+#> $ run_number             <dbl> 6, 7, 4, 3, 5, 2, 8, 1, 9, 2, 1, 6, 4, 7, 8,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…
@@ -281,13 +282,14 @@ support its continued improvement.
 citation("logolink")
 #> To cite logolink in publications use:
 #> 
-#>   Vartanian, D. (2025). logolink: Run NetLogo from R [Computer
-#>   software]. https://github.com/danielvartan/logolink
+#>   Vartanian, D. (2025). logolink: An interface for running NetLogo
+#>   simulations [Computer software].
+#>   https://github.com/danielvartan/logolink
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Misc{,
-#>     title = {logolink: Run NetLogo from R},
+#>     title = {logolink: An interface for running NetLogo simulations},
 #>     author = {Daniel Vartanian},
 #>     year = {2025},
 #>     url = {https://github.com/danielvartan/logolink},

@@ -2,9 +2,41 @@
 
 This is a **resubmission** of the package’s first release to CRAN.
 
-Please disregard a past resubmission attempt. This resubmission is complete and addresses all issues raised by CRAN.
+Please note that 'BehaviorSpace' is an extension that comes bundled with 'NetLogo', so it would be inappropriate to include a separate reference link for it in the description.
 
 ## Latest CRAN Feedback
+
+### 2025-10-06
+
+"
+Thanks,
+
+The Description field is intended to be a (one paragraph) description of
+what the package does and why it may be useful. Please add more details
+about the package functionality and implemented methods in your
+Description text.
+For more details:
+<https://contributor.r-project.org/cran-cookbook/general_issues.html#description-length>
+
+
+Please omit the redundant "from R"/"AN R" at the end/start of your title
+and description.
+
+Please provide a link to the used webservices (NetLogo) to the
+description field of your DESCRIPTION file in the form
+<http:...> or <https:...>
+with angle brackets for auto-linking and no space after 'http:' and
+'https:'.
+For more details:
+<https://contributor.r-project.org/cran-cookbook/description_issues.html#references>
+
+Please fix and resubmit.
+
+Best,
+Benjamin Altmann
+"
+
+### 2025-09-26
 
 "
 Thanks, we see:
@@ -39,11 +71,12 @@ Best,
 Uwe Ligges
 "
 
-## Responses
+## Responses to CRAN Feedbacks
 
 - Removed `+ file LICENSE` and deleted the `LICENSE` file.
 - Updated the `DESCRIPTION` file: "NetLogo" is now single quoted in both the Title and Description fields.
 - Fixed the `README.md` link by replacing the reference to `CODE_OF_CONDUCT.md`.
+- Fixed the Title and Description fields as requested.
 
 ## Test Environments
 
@@ -107,7 +140,7 @@ No spelling errors found.
 ## `goodpractice` Results (Arch Linux)
 
 ```text
-♥ Heh! Tiptop package! Keep up the priceless work!
+♥ Ah! Rad package! Keep up the lovely work!
 ```
 
 ---

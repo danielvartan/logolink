@@ -4,11 +4,11 @@
 \name{logolink-package}
 \alias{logolink}
 \alias{logolink-package}
-\title{logolink: Run 'NetLogo' from R}
+\title{logolink: An Interface for Running 'NetLogo' Simulations}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-An R interface to 'NetLogo' that provides comprehensive tools for programmatically setting up and executing 'NetLogo' simulations.
+An interface for 'NetLogo' \url{https://www.netlogo.org} that enables programmatic setup and execution of simulations. Designed to facilitate integrating 'NetLogo' models into reproducible workflows by creating and running 'BehaviorSpace' experiments and retrieving their results.
 }
 \seealso{
 Useful links:
