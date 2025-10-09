@@ -26,14 +26,14 @@ source(here("R", ".setup.R"))
 
 cat(
   badge_repostatus("active"),
-  # badge_cran_release(),
-  # badge_custom(
-  #   x = "doi",
-  #   y = "10.32614/CRAN.package.logolink",
-  #   color = "1284C5",
-  #   url = "https://doi.org/10.32614/CRAN.package.logolink"
-  # ),
-  # badge_cran_download(type = "grand-total"),
+  badge_cran_release(),
+  badge_custom(
+    x = "doi",
+    y = "10.32614/CRAN.package.logolink",
+    color = "1284C5",
+    url = "https://doi.org/10.32614/CRAN.package.logolink"
+  ),
+  badge_cran_download(type = "grand-total"),
   badge_github_actions(action = "R-CMD-check.yaml"),
   badge_codecov() |> shush(),
   badge_license(

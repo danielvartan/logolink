@@ -8,7 +8,7 @@
   "codeRepository": "https://github.com/danielvartan/logolink/",
   "issueTracker": "https://github.com/danielvartan/logolink/issues/",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.1.0",
+  "version": "0.1.0.9000",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -274,7 +274,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "275.17KB",
+  "fileSize": "271.954KB",
   "citation": [
     {
       "@type": "CreativeWork",
@@ -288,9 +288,11 @@
           "@id": "https://orcid.org/0000-0001-7782-759X"
         }
       ],
-      "name": "logolink: An interface for running NetLogo simulations",
-      "url": "https://github.com/danielvartan/logolink",
-      "description": "R package"
+      "name": "logolink: An interface for running NetLogo simulations from R",
+      "identifier": "10.32614/CRAN.package.logolink",
+      "description": "Computer software",
+      "@id": "https://doi.org/10.32614/CRAN.package.logolink",
+      "sameAs": "https://doi.org/10.32614/CRAN.package.logolink"
     }
   ],
   "releaseNotes": "https://github.com/danielvartan/logolink/blob/main/NEWS.md",

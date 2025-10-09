@@ -6,6 +6,9 @@
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![](https://www.r-pkg.org/badges/version/logolink)](https://cran.r-project.org/package=logolink)
+[![](https://img.shields.io/badge/doi-10.32614/CRAN.package.logolink-1284C5.svg)](https://doi.org/10.32614/CRAN.package.logolink)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/logolink)](https://cran.r-project.org/package=logolink)
 [![R build
 status](https://github.com/danielvartan/logolink/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/danielvartan/logolink/actions)
 [![](https://codecov.io/gh/danielvartan/logolink/branch/main/graph/badge.svg)](https://app.codecov.io/gh/danielvartan/logolink)
@@ -209,7 +212,7 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 6, 7, 4, 3, 5, 2, 8, 1, 9, 2, 1, 6, 4, 7, 8,…
+#> $ run_number             <dbl> 8, 1, 7, 2, 4, 3, 5, 6, 9, 4, 5, 1, 2, 6, 3,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…
@@ -283,17 +286,17 @@ citation("logolink")
 #> To cite logolink in publications use:
 #> 
 #>   Vartanian, D. (2025). logolink: An interface for running NetLogo
-#>   simulations [Computer software].
-#>   https://github.com/danielvartan/logolink
+#>   simulations from R [Computer software]. CRAN.
+#>   https://doi.org/10.32614/CRAN.package.logolink
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Misc{,
-#>     title = {logolink: An interface for running NetLogo simulations},
+#>     title = {logolink: An interface for running NetLogo simulations from R},
 #>     author = {Daniel Vartanian},
 #>     year = {2025},
-#>     url = {https://github.com/danielvartan/logolink},
-#>     note = {R package},
+#>     doi = {10.32614/CRAN.package.logolink},
+#>     note = {Computer software},
 #>   }
 ```
 
