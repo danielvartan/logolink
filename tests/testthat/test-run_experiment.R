@@ -28,6 +28,10 @@ testthat::test_that("`run_experiment()` | General test", {
   ) |>
     readr::write_lines(table_file)
 
+  netlogo_home <- Sys.getenv("NETLOGO_HOME")
+
+  Sys.setenv("NETLOGO_HOME" = tempdir())
+
   testthat::local_mocked_bindings(
     system_2 = function(...) "Test",
     temp_file = function(...) table_file
@@ -35,36 +39,38 @@ testthat::test_that("`run_experiment()` | General test", {
 
   run_experiment(
     model_path = model_path,
-    experiment = NULL,
     setup_file = setup_file,
-    other_arguments = NULL,
     parse = TRUE
   ) |>
     checkmate::expect_tibble(ncols = 10)
 
   run_experiment(
     model_path = model_path,
-    experiment = NULL,
     setup_file = setup_file,
-    other_arguments = NULL,
     parse = FALSE
   ) |>
     checkmate::expect_tibble(ncols = 10)
+
+  Sys.setenv("NETLOGO_HOME" = netlogo_home)
 })
 
 testthat::test_that("`run_experiment()` | Error test", {
   model_path_1 <- tempfile(fileext = ".nlogox")
   model_path_2 <- tempfile(fileext = ".txt")
   setup_file <- tempfile(pattern = "experiment-", fileext = ".xml")
-  table_file <- tempfile(pattern = "table-", fileext = ".csv")
+  table_file_1 <- tempfile(pattern = "table-", fileext = ".csv")
+  table_file_2 <- tempfile(pattern = "table-", fileext = ".csv")
 
   model_path_1 |> file.create()
   model_path_2 |> file.create()
   setup_file |> file.create()
-  table_file |> file.create()
+  table_file_1 |> file.create()
+  table_file_2 |> file.create()
+
+  dplyr::tibble(a = 1:10, b = 1:10) |> readr::write_csv(table_file_1)
 
   dplyr::tibble(a = character(), b = character()) |>
-    readr::write_csv(table_file)
+    readr::write_csv(table_file_2)
 
   # checkmate::assert_string(model_path)
 
@@ -74,6 +80,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     setup_file = setup_file,
     other_arguments = NULL,
     parse = FALSE,
+    netlogo_home = Sys.getenv("NETLOGO_HOME"),
     netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
@@ -86,6 +93,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     setup_file = setup_file,
     other_arguments = NULL,
     parse = FALSE,
+    netlogo_home = Sys.getenv("NETLOGO_HOME"),
     netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
@@ -98,6 +106,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     setup_file = setup_file,
     other_arguments = NULL,
     parse = FALSE,
+    netlogo_home = Sys.getenv("NETLOGO_HOME"),
     netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
@@ -110,9 +119,10 @@ testthat::test_that("`run_experiment()` | Error test", {
     setup_file = setup_file,
     other_arguments = NULL,
     parse = FALSE,
+    netlogo_home = Sys.getenv("NETLOGO_HOME"),
     netlogo_path = lifecycle::deprecated()
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # checkmate::assert_string(setup_file, null.ok = TRUE)
 
@@ -122,6 +132,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     setup_file = 1,
     other_arguments = NULL,
     parse = FALSE,
+    netlogo_home = Sys.getenv("NETLOGO_HOME"),
     netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
@@ -134,6 +145,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     setup_file = tempfile(fileext = ".xml"),
     other_arguments = NULL,
     parse = FALSE,
+    netlogo_home = Sys.getenv("NETLOGO_HOME"),
     netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
@@ -146,6 +158,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     setup_file = setup_file,
     other_arguments = 1,
     parse = FALSE,
+    netlogo_home = Sys.getenv("NETLOGO_HOME"),
     netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
@@ -158,9 +171,10 @@ testthat::test_that("`run_experiment()` | Error test", {
     setup_file = setup_file,
     other_arguments = NULL,
     parse = "",
+    netlogo_home = Sys.getenv("NETLOGO_HOME"),
     netlogo_path = lifecycle::deprecated()
   ) |>
-    expect_error()
+    testthat::expect_error()
 
   # if (is.null(experiment) && is.null(setup_file)) { [...]
 
@@ -170,6 +184,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     setup_file = NULL,
     other_arguments = NULL,
     parse = FALSE,
+    netlogo_home = Sys.getenv("NETLOGO_HOME"),
     netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
@@ -182,11 +197,17 @@ testthat::test_that("`run_experiment()` | Error test", {
     setup_file = setup_file,
     other_arguments = NULL,
     parse = FALSE,
+    netlogo_home = Sys.getenv("NETLOGO_HOME"),
     netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
 
   # if (lifecycle::is_present(netlogo_path)) { [...]
+
+  testthat::local_mocked_bindings(
+    system_2 = function(...) "Test",
+    temp_file = function(...) table_file_1
+  )
 
   run_experiment(
     model_path = model_path_1,
@@ -194,11 +215,12 @@ testthat::test_that("`run_experiment()` | Error test", {
     setup_file = setup_file,
     other_arguments = NULL,
     parse = FALSE,
-    netlogo_path = "!!!"
+    netlogo_home = Sys.getenv("NETLOGO_HOME"),
+    netlogo_path = model_path_1
   ) |>
-    testthat::expect_error()
+    testthat::expect_warning()
 
-  # if (Sys.getenv("NETLOGO_HOME") == "") { [...]
+  # if (identical(netlogo_path, Sys.getenv("NETLOGO_HOME")) && [...]
 
   netlogo_home <- Sys.getenv("NETLOGO_HOME")
 
@@ -210,6 +232,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     setup_file = setup_file,
     other_arguments = NULL,
     parse = FALSE,
+    netlogo_home = Sys.getenv("NETLOGO_HOME"),
     netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
@@ -220,7 +243,7 @@ testthat::test_that("`run_experiment()` | Error test", {
 
   testthat::local_mocked_bindings(
     system_2 = function(...) "Test",
-    temp_file = function(...) table_file
+    temp_file = function(...) table_file_2
   )
 
   run_experiment(
@@ -229,6 +252,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     setup_file = setup_file,
     other_arguments = NULL,
     parse = TRUE,
+    netlogo_home = Sys.getenv("NETLOGO_HOME"),
     netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()

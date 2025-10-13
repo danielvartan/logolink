@@ -23,16 +23,16 @@ Conduct](https://img.shields.io/badge/Contributor%20Covenant-3.0-4baaaa.svg)](ht
 
 ## Overview
 
-`logolink` is an [R](https://www.r-project.org/) package that makes it
-easy to set up and run [NetLogo](https://www.netlogo.org/) simulations
-directly from R. It is built for NetLogo 7 and does not support older
-versions.
-
-The package takes a modern, streamlined approach to running NetLogo
-models. It follows the [tidyverse
+`logolink` is an [R](https://www.r-project.org/) package that simplifies
+setting up and running [NetLogo](https://www.netlogo.org/) simulations
+directly from R. It offers a modern, streamlined interface for running
+models, following the [tidyverse
 principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and
-integrates naturally with the [tidyverse
+integrating seamlessly with the broader [tidyverse
 ecosystem](https://www.tidyverse.org/).
+
+`logolink` is designed for NetLogo 7 and is not compatible with earlier
+versions.
 
 > If you find this project useful, please consider giving it a star!  
 > [![GitHub Repository
@@ -87,16 +87,19 @@ website](https://www.netlogo.org).
 
 ### Setting the NetLogo Path
 
-> \[!IMPORTANT\] The procedure for setting the NetLogo path has changed.
-> If you are using the CRAN version of `logolink` (version 0.1.0). Click
-> [here](https://github.com/danielvartan/logolink/tree/v0.1.0?tab=readme-ov-file#setting-the-netlogo-path)
-> to see the old instructions.
+> [!IMPORTANT]
+> The procedure for setting the NetLogo path has changed. If you are using the CRAN version of `logolink` (version 0.1.0). Click [here](https://github.com/danielvartan/logolink/tree/v0.1.0?tab=readme-ov-file#setting-the-netlogo-path) to see the old instructions.
 
 `logolink` requires the path to the NetLogo installation to be set as an
 environment variable named `NETLOGO_HOME` when running simulations. The
 exact path varies depending on your operating system but is usually easy
 to find. On Windows, for example, it typically looks like
 `C:\Program Files\NetLogo 7.0.0`.
+
+You can set this environment variable temporarily in your R session
+using `Sys.setenv("NETLOGO_HOME" = "[PATH]")`, or permanently by adding
+it to your [`.Renviron`](https://rstats.wtf/r-startup.html#renviron)
+file.
 
 Example (Windows):
 
@@ -216,7 +219,7 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 1, 2, 5, 8, 6, 7, 9, 4, 3, 5, 3, 2, 6, 4, 9,…
+#> $ run_number             <dbl> 5, 8, 1, 9, 6, 3, 7, 2, 4, 5, 1, 8, 9, 3, 6,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…

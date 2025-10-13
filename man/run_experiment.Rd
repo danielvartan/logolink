@@ -10,6 +10,7 @@ run_experiment(
   setup_file = NULL,
   other_arguments = NULL,
   parse = TRUE,
+  netlogo_home = Sys.getenv("NETLOGO_HOME"),
   netlogo_path = lifecycle::deprecated()
 )
 }
@@ -35,6 +36,12 @@ parse NetLogo lists in the output data frame. If \code{TRUE}, columns containing
 NetLogo lists (e.g., \verb{[1 2 3]}) will be converted to R lists. If \code{FALSE},
 the columns will remain as \code{\link[=character]{character}} strings
 (default: \code{TRUE}).}
+
+\item{netlogo_home}{(optional) A string specifying the path to the NetLogo
+installation directory. If not provided, the function will use the value of
+the \code{NETLOGO_HOME} environment variable. This argument is useful if you
+want to override the environment variable for a specific function call
+(default: \code{Sys.getenv("NETLOGO_HOME")}).}
 
 \item{netlogo_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is no
 longer supported. See the \emph{Details} section for more information.}

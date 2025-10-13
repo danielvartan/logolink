@@ -42,6 +42,11 @@
 #'   NetLogo lists (e.g., `[1 2 3]`) will be converted to R lists. If `FALSE`,
 #'   the columns will remain as [`character`][character()] strings
 #'   (default: `TRUE`).
+#' @param netlogo_home (optional) A string specifying the path to the NetLogo
+#'   installation directory. If not provided, the function will use the value of
+#'   the `NETLOGO_HOME` environment variable. This argument is useful if you
+#'   want to override the environment variable for a specific function call
+#'   (default: `Sys.getenv("NETLOGO_HOME")`).
 #' @param netlogo_path `r lifecycle::badge("deprecated")` This argument is no
 #'   longer supported. See the *Details* section for more information.
 #'
@@ -154,6 +159,7 @@ run_experiment <- function(
   setup_file = NULL,
   other_arguments = NULL,
   parse = TRUE,
+  netlogo_home = Sys.getenv("NETLOGO_HOME"),
   netlogo_path = lifecycle::deprecated()
 ) {
   model_path_choices <- c("nlogo", "nlogo3d", "nlogox", "nlogox3d")
@@ -202,7 +208,10 @@ run_experiment <- function(
     checkmate::assert_string(netlogo_path)
     checkmate::assert_file_exists(netlogo_path)
   } else {
-    if (Sys.getenv("NETLOGO_HOME") == "") {
+    if (
+      identical(netlogo_path, Sys.getenv("NETLOGO_HOME")) &&
+        Sys.getenv("NETLOGO_HOME") == ""
+    ) {
       cli::cli_abort(
         paste0(
           "The NetLogo home directory is not set. Please set it using ",
@@ -213,10 +222,10 @@ run_experiment <- function(
       )
     }
 
-    netlogo_path <-
-      Sys.getenv("NETLOGO_HOME") |>
-      normalizePath(mustWork = FALSE) |>
-      file.path("bin", "NetLogo")
+    checkmate::assert_string(netlogo_home)
+    checkmate::assert_directory_exists(netlogo_home)
+
+    netlogo_path <- netlogo_home |> file.path("bin", "NetLogo")
   }
 
   file <- temp_file(pattern = "table-", fileext = ".csv")
