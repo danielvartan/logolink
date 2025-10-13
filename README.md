@@ -221,7 +221,7 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 7, 3, 5, 2, 8, 1, 4, 6, 9, 5, 9, 1, 7, 4, 3,…
+#> $ run_number             <dbl> 7, 6, 5, 9, 4, 8, 1, 3, 2, 8, 6, 4, 2, 7, 3,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…
@@ -333,11 +333,14 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 
 [![](https://img.shields.io/badge/Contributor%20Covenant-3.0-4baaaa.svg)](https://www.contributor-covenant.org/version/3/0/code_of_conduct/)
 
-Contributions are welcome! Whether you want to report bugs, suggest
-features, or improve the code or documentation, your input is highly
-valued. Please check the [issues
-tab](https://github.com/danielvartan/logolink/issues) for existing
-issues or to open a new one.
+Contributions are always welcome! Whether you want to report bugs,
+suggest new features, or help improve the code or documentation, your
+input makes a difference. Before opening a new issue, please take a
+moment to review our [Guidelines for
+Contributing](https://danielvartan.github.io/logolink/CONTRIBUTING.html)
+and check the [issues
+tab](https://github.com/danielvartan/logolink/issues) to see if your
+topic has already been reported.
 
 [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/danielvartan)
 
