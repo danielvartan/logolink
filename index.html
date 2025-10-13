@@ -119,7 +119,7 @@
 <h3 id="setting-the-netlogo-path">Setting the NetLogo Path<a class="anchor" aria-label="anchor" href="#setting-the-netlogo-path"></a>
 </h3>
 <blockquote>
-<p>[!IMPORTANT] The procedure for setting the NetLogo path has changed. If you are using the CRAN version of <code>logolink</code> (version 0.1.0). Click <a href="https://github.com/danielvartan/logolink/tree/v0.1.0?tab=readme-ov-file#setting-the-netlogo-path" class="external-link">here</a> to see the old instructions.</p>
+<p>The procedure for setting the NetLogo path has changed. If you are using the CRAN version of <code>logolink</code> (version 0.1.0). Click <a href="https://github.com/danielvartan/logolink/tree/v0.1.0?tab=readme-ov-file#setting-the-netlogo-path" class="external-link">here</a> to see the old instructions.</p>
 </blockquote>
 <p><code>logolink</code> requires the path to the NetLogo installation to be set as an environment variable named <code>NETLOGO_HOME</code> when running simulations. The exact path varies depending on your operating system but is usually easy to find. On Windows, for example, it typically looks like <code>C:\Program Files\NetLogo 7.0.0</code>.</p>
 <p>You can set this environment variable temporarily in your R session using <code>Sys.setenv("NETLOGO_HOME" = "[PATH]")</code>, or permanently by adding it to your <a href="https://rstats.wtf/r-startup.html#renviron" class="external-link"><code>.Renviron</code></a> file.</p>
@@ -214,7 +214,7 @@
 <span><span class="va">results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 110,110</span></span>
 <span><span class="co">#&gt; Columns: 10</span></span>
-<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 5, 8, 1, 9, 6, 3, 7, 2, 4, 5, 1, 8, 9, 3, 6,…</span></span>
+<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 5, 9, 6, 8, 7, 2, 1, 4, 3, 4, 1, 3, 2, 8, 9,…</span></span>
 <span><span class="co">#&gt; $ number_of_sheep        &lt;dbl&gt; 500, 500, 500, 500, 500, 500, 500, 500, 500,…</span></span>
 <span><span class="co">#&gt; $ number_of_wolves       &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…</span></span>
 <span><span class="co">#&gt; $ movement_cost          &lt;dbl&gt; 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…</span></span>
