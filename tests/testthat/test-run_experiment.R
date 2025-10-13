@@ -241,6 +241,10 @@ testthat::test_that("`run_experiment()` | Error test", {
 
   # if (nrow(out) == 0) { [...]
 
+  netlogo_home <- Sys.getenv("NETLOGO_HOME")
+
+  Sys.setenv("NETLOGO_HOME" = tempdir())
+
   testthat::local_mocked_bindings(
     system_2 = function(...) "Test",
     temp_file = function(...) table_file_2
@@ -256,4 +260,6 @@ testthat::test_that("`run_experiment()` | Error test", {
     netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
+
+  Sys.setenv("NETLOGO_HOME" = netlogo_home)
 })

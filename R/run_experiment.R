@@ -209,15 +209,14 @@ run_experiment <- function(
     checkmate::assert_file_exists(netlogo_path)
   } else {
     if (
-      identical(netlogo_path, Sys.getenv("NETLOGO_HOME")) &&
+      identical(netlogo_home, Sys.getenv("NETLOGO_HOME")) &&
         Sys.getenv("NETLOGO_HOME") == ""
     ) {
       cli::cli_abort(
         paste0(
-          "The NetLogo home directory is not set. Please set it using ",
+          "The NetLogo installation directory is not set. Please set it using ",
           "the {.strong {cli::col_red('NETLOGO_HOME')}} environment variable ",
-          "(e.g., `Sys.setenv(",
-          "{.strong {cli::col_blue('NETLOGO_HOME')}} = 'path')`)."
+          '(e.g., `Sys.setenv("NETLOGO_HOME" = "[PATH]")`).'
         )
       )
     }
