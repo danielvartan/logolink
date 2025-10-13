@@ -2,7 +2,7 @@
 % Please edit documentation in R/parse_netlogo_list.R
 \name{parse_netlogo_list}
 \alias{parse_netlogo_list}
-\title{Parse NetLogo Lists}
+\title{Parse NetLogo lists}
 \usage{
 parse_netlogo_list(x)
 }
@@ -20,12 +20,11 @@ NetLogo-style lists; otherwise, returns the original vector.
 \code{\link[=numeric]{numeric}}, \code{\link[=integer]{integer}}, \code{\link[=logical]{logical}},
 and \code{\link[=character]{character}} types within the lists and converts them
 accordingly.
-
-If the input does not contain NetLogo-style lists, it returns the original
-vector unchanged.
 }
 \examples{
 # Scalar Examples -----
+
+'[1]' |> parse_netlogo_list()
 
 '["a" "b" "c"]' |> parse_netlogo_list()
 
@@ -44,6 +43,20 @@ c('[1 2 3]', '[4 5 6]') |> parse_netlogo_list()
 c('[1.1 2.1 3.1]', '[4.1 5.1 6.1]') |> parse_netlogo_list()
 
 c('[true false true]', '[false true false]') |> parse_netlogo_list()
+
+# Combined Examples -----
+
+c('["a" "b" "c"]', '[4 5 6]') |> parse_netlogo_list()
+
+c('[1.1 2.1 3.1]', '[true false true]') |> parse_netlogo_list()
+
+c('[1.1 "a" true]') |> parse_netlogo_list()
+
+# Nested Examples -----
+
+c('["a" "b" "c" [1 2]]', '[4 5 6]') |> parse_netlogo_list()
+
+c('["a" "b" "c" [1 2] true ["d" "c"]]') |> parse_netlogo_list()
 }
 \seealso{
 Other Utility functions: 

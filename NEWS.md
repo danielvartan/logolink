@@ -2,6 +2,7 @@
 
 - Added [`lifecycle`](https://lifecycle.r-lib.org/) as a dependency.
 - Deprecated the `netlogo_path` argument in `run_experiment()`. The NetLogo path must now be set using an environment variable named `NETLOGO_HOME` (e.g., `Sys.setenv("NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.0"))`).
+- Improved the heuristics in `parse_netlogo_list()`.
 
 # logolink 0.1.0
 

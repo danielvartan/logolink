@@ -51,6 +51,14 @@ A \code{\link[dplyr:reexports]{tibble}} containing the results of the
 experiment.
 }
 \description{
+\strong{Note}: The procedure for setting the NetLogo path has changed. For users
+of the CRAN release of \code{logolink} (version 0.1.0), see the previous
+instructions
+\href{https://github.com/danielvartan/logolink/tree/v0.1.0?tab=readme-ov-file#setting-the-netlogo-path}{here}.
+To access the latest features and improvements, install the development
+version of \code{logolink} from GitHub using:
+\code{remotes::install_github("danielvartan/logolink")}.
+
 \code{run_experiment()} runs a NetLogo BehaviorSpace experiment in headless mode
 and returns the results as a tidy data frame. It can be used with
 \code{\link[=create_experiment]{create_experiment()}} to create the experiment XML
