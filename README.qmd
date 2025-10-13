@@ -117,7 +117,7 @@ Along with this package, you will also need NetLogo 7 or higher installed on you
 
 ### Setting the NetLogo Path
 
-> The procedure for setting the NetLogo path has changed. If you are using the CRAN version of `logolink` (version 0.1.0). Click [here](https://github.com/danielvartan/logolink/tree/v0.1.0?tab=readme-ov-file#setting-the-netlogo-path) to see the old instructions.
+> The procedure for setting the NetLogo path has changed. If you're using the CRAN release of `logolink` (version 0.1.0), you can find the previous instructions [here](https://github.com/danielvartan/logolink/tree/v0.1.0?tab=readme-ov-file#setting-the-netlogo-path).
 
 `logolink` requires the path to the NetLogo installation to be set as an environment variable named `NETLOGO_HOME` when running simulations. The exact path varies depending on your operating system but is usually easy to find. On Windows, for example, it typically looks like `C:\Program Files\NetLogo 7.0.0`.
 
