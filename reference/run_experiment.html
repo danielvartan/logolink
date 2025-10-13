@@ -10,16 +10,22 @@ and returns the results as a tidy data frame. It can be used with
 create_experiment() to create the experiment XML
 file on the fly, or with an existing experiment stored in the NetLogo model
 file.
-Please refer to the
-BehaviorSpace Guide for
-complete guidance on how to set and run experiments in NetLogo."><meta property="og:description" content="run_experiment() runs a NetLogo BehaviorSpace experiment in headless mode
+Note that this function requires the path to the NetLogo installation to be
+set as an environment variable named NETLOGO_HOME. See the Details
+section for more information.
+For complete guidance on setting up and running experiments in NetLogo,
+please refer to the
+BehaviorSpace Guide."><meta property="og:description" content="run_experiment() runs a NetLogo BehaviorSpace experiment in headless mode
 and returns the results as a tidy data frame. It can be used with
 create_experiment() to create the experiment XML
 file on the fly, or with an existing experiment stored in the NetLogo model
 file.
-Please refer to the
-BehaviorSpace Guide for
-complete guidance on how to set and run experiments in NetLogo."><meta property="og:image" content="https://danielvartan.github.io/logolink/reference/figures/og-image.png"><meta property="og:image:alt" content="logolink"></head><body>
+Note that this function requires the path to the NetLogo installation to be
+set as an environment variable named NETLOGO_HOME. See the Details
+section for more information.
+For complete guidance on setting up and running experiments in NetLogo,
+please refer to the
+BehaviorSpace Guide."><meta property="og:image" content="https://danielvartan.github.io/logolink/reference/figures/og-image.png"><meta property="og:image:alt" content="logolink"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -64,20 +70,23 @@ and returns the results as a tidy data frame. It can be used with
 <code><a href="create_experiment.html">create_experiment()</a></code> to create the experiment XML
 file on the fly, or with an existing experiment stored in the NetLogo model
 file.</p>
-<p>Please refer to the
-<a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace Guide</a> for
-complete guidance on how to set and run experiments in NetLogo.</p>
+<p>Note that this function requires the path to the NetLogo installation to be
+set as an environment variable named <code>NETLOGO_HOME</code>. See the <em>Details</em>
+section for more information.</p>
+<p>For complete guidance on setting up and running experiments in NetLogo,
+please refer to the
+<a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace Guide</a>.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">run_experiment</span><span class="op">(</span></span>
-<span>  <span class="va">netlogo_path</span>,</span>
 <span>  <span class="va">model_path</span>,</span>
 <span>  experiment <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  setup_file <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  other_arguments <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  parse <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  parse <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  netlogo_path <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -85,13 +94,7 @@ complete guidance on how to set and run experiments in NetLogo.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-netlogo-path">netlogo_path<a class="anchor" aria-label="anchor" href="#arg-netlogo-path"></a></dt>
-<dd><p>A string specifying the path to the NetLogo executable.
-In Windows, this is usually something like
-<code>C:\Program Files\NetLogo 7.0.0\NetLogo.exe</code>.</p></dd>
-
-
-<dt id="arg-model-path">model_path<a class="anchor" aria-label="anchor" href="#arg-model-path"></a></dt>
+<dl><dt id="arg-model-path">model_path<a class="anchor" aria-label="anchor" href="#arg-model-path"></a></dt>
 <dd><p>A string specifying the path to the NetLogo model file
 (with extension <code>.nlogo</code>, <code>.nlogo3d</code>, <code>.nlogox</code>, or <code>.nlogox3d</code>).</p></dd>
 
@@ -122,11 +125,25 @@ NetLogo lists (e.g., <code>[1 2 3]</code>) will be converted to R lists. If <cod
 the columns will remain as <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> strings
 (default: <code>TRUE</code>).</p></dd>
 
+
+<dt id="arg-netlogo-path">netlogo_path<a class="anchor" aria-label="anchor" href="#arg-netlogo-path"></a></dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> This argument is no
+longer supported. See the <em>Details</em> section for more information.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <code><a href="https://dplyr.tidyverse.org/reference/reexports.html" class="external-link">tibble</a></code> containing the results of the
 experiment.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p><code>run_experiment()</code> requires the path to the NetLogo installation to be set
+as an environment variable named <code>NETLOGO_HOME</code>. On Windows, the path
+typically looks like <code>C:\Program Files\NetLogo 7.0.0</code>. You can set this
+environment variable temporarily in your R session using
+<code>Sys.setenv("NETLOGO_HOME" = "[PATH]")</code>, or permanently by adding it to your
+<a href="https://rstats.wtf/r-startup.html#renviron" class="external-link"><code>.Renviron</code></a> file.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -138,15 +155,16 @@ experiment.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Set the Environment -----</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## Change the path below to point to your NetLogo executable.</span></span></span>
-<span class="r-in"><span><span class="va">netlogo_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"opt"</span>, <span class="st">"netlogo-7-0-0"</span>, <span class="st">"bin"</span>, <span class="st">"NetLogo"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## Change the path below to point to the 'Wolf Sheep Simple 5' NetLogo</span></span></span>
-<span class="r-in"><span><span class="co">## model file in the Model Library.</span></span></span>
-<span class="r-in"><span><span class="va">model_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="st">""</span>, <span class="st">"opt"</span>, <span class="st">"netlogo-7-0-0"</span>, <span class="st">"models"</span>, <span class="st">"IABM Textbook"</span>, <span class="st">"chapter 4"</span>,</span></span>
-<span class="r-in"><span>  <span class="st">"Wolf Sheep Simple 5.nlogox"</span></span></span>
+<span class="r-in"><span><span class="co">## Change the path below to point to your NetLogo installation folder.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"NETLOGO_HOME"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"C:"</span>, <span class="st">"Program Files"</span>, <span class="st">"NetLogo 7.0.0"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">model_path</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"NETLOGO_HOME"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"models"</span>, <span class="st">"IABM Textbook"</span>, <span class="st">"chapter 4"</span>, <span class="st">"Wolf Sheep Simple 5.nlogox"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Using `create_experiment()` to Create the Experiment XML File -----</span></span></span>
 <span class="r-in"><span></span></span>
@@ -179,7 +197,6 @@ experiment.</p>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="fu">run_experiment</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    netlogo_path <span class="op">=</span> <span class="va">netlogo_path</span>,</span></span>
 <span class="r-in"><span>    model_path <span class="op">=</span> <span class="va">model_path</span>,</span></span>
 <span class="r-in"><span>    setup_file <span class="op">=</span> <span class="va">setup_file</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
@@ -208,7 +225,6 @@ experiment.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span>  <span class="fu">run_experiment</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    netlogo_path <span class="op">=</span> <span class="va">netlogo_path</span>,</span></span>
 <span class="r-in"><span>    model_path <span class="op">=</span> <span class="va">model_path</span>,</span></span>
 <span class="r-in"><span>    experiment <span class="op">=</span> <span class="st">"Wolf Sheep Simple model analysis"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>

@@ -118,13 +118,16 @@
 <div class="section level3">
 <h3 id="setting-the-netlogo-path">Setting the NetLogo Path<a class="anchor" aria-label="anchor" href="#setting-the-netlogo-path"></a>
 </h3>
-<p><code>logolink</code> requires the path to the NetLogo executable when running simulations with the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a> function. This path is OS-independent, but easy to locate. On Windows, for example, it is typically something like <code>C:\Program Files\NetLogo 7.0.0\NetLogo.exe</code>.</p>
-<p>Example (Linux):</p>
+<blockquote>
+<p>[!IMPORTANT] The procedure for setting the NetLogo path has changed. If you are using the CRAN version of <code>logolink</code> (version 0.1.0). Click <a href="https://github.com/danielvartan/logolink/tree/v0.1.0?tab=readme-ov-file#setting-the-netlogo-path" class="external-link">here</a> to see the old instructions.</p>
+</blockquote>
+<p><code>logolink</code> requires the path to the NetLogo installation to be set as an environment variable named <code>NETLOGO_HOME</code> when running simulations. The exact path varies depending on your operating system but is usually easy to find. On Windows, for example, it typically looks like <code>C:\Program Files\NetLogo 7.0.0</code>.</p>
+<p>Example (Windows):</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">netlogo_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"opt"</span>, <span class="st">"netlogo-7-0-0"</span>, <span class="st">"bin"</span>, <span class="st">"NetLogo"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"NETLOGO_HOME"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"C:"</span>, <span class="st">"Program Files"</span>, <span class="st">"NetLogo 7.0.0"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">netlogo_path</span></span>
-<span><span class="co">#&gt; [1] "/opt/netlogo-7-0-0/bin/NetLogo"</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"NETLOGO_HOME"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "C:\Program Files\NetLogo 7.0.0"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="creating-an-experiment">Creating an Experiment<a class="anchor" aria-label="anchor" href="#creating-an-experiment"></a>
@@ -194,13 +197,13 @@
 </h3>
 <p>With the experiment file created, you can now run your model using the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a> function. This function will execute the NetLogo model with the specified parameters and return the results as a tidy data frame.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span>
-<span>  <span class="st">""</span>, <span class="st">"opt"</span>, <span class="st">"netlogo-7-0-0"</span>, <span class="st">"models"</span>, <span class="st">"IABM Textbook"</span>, <span class="st">"chapter 4"</span>,</span>
-<span>  <span class="st">"Wolf Sheep Simple 5.nlogox"</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">model_path</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"NETLOGO_HOME"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span>
+<span>    <span class="st">"models"</span>, <span class="st">"IABM Textbook"</span>, <span class="st">"chapter 4"</span>, <span class="st">"Wolf Sheep Simple 5.nlogox"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/run_experiment.html">run_experiment</a></span><span class="op">(</span></span>
-<span>  netlogo_path <span class="op">=</span> <span class="va">netlogo_path</span>,</span>
 <span>  model_path <span class="op">=</span> <span class="va">model_path</span>,</span>
 <span>  setup_file <span class="op">=</span> <span class="va">setup_file</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -210,7 +213,7 @@
 <span><span class="va">results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 110,110</span></span>
 <span><span class="co">#&gt; Columns: 10</span></span>
-<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 8, 1, 7, 2, 4, 3, 5, 6, 9, 4, 5, 1, 2, 6, 3,…</span></span>
+<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 1, 2, 5, 8, 6, 7, 9, 4, 3, 5, 3, 2, 6, 4, 9,…</span></span>
 <span><span class="co">#&gt; $ number_of_sheep        &lt;dbl&gt; 500, 500, 500, 500, 500, 500, 500, 500, 500,…</span></span>
 <span><span class="co">#&gt; $ number_of_wolves       &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…</span></span>
 <span><span class="co">#&gt; $ movement_cost          &lt;dbl&gt; 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…</span></span>
@@ -316,6 +319,7 @@ this program. If not, see &lt;https://www.gnu.org/licenses/&gt;.</code></pre>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=logolink" class="external-link">View on CRAN</a></li>
 <li><a href="https://github.com/danielvartan/logolink/" class="external-link">Browse source code</a></li>
 <li><a href="https://github.com/danielvartan/logolink/issues/" class="external-link">Report a bug</a></li>
 </ul>
