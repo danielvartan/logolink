@@ -34,7 +34,6 @@ testthat::test_that("`run_experiment()` | General test", {
   )
 
   run_experiment(
-    netlogo_path = "",
     model_path = model_path,
     experiment = NULL,
     setup_file = setup_file,
@@ -44,7 +43,6 @@ testthat::test_that("`run_experiment()` | General test", {
     checkmate::expect_tibble(ncols = 10)
 
   run_experiment(
-    netlogo_path = "",
     model_path = model_path,
     experiment = NULL,
     setup_file = setup_file,
@@ -68,137 +66,155 @@ testthat::test_that("`run_experiment()` | Error test", {
   dplyr::tibble(a = character(), b = character()) |>
     readr::write_csv(table_file)
 
-  # checkmate::assert_string(netlogo_path)
-
-  run_experiment(
-    netlogo_path = 1,
-    model_path = model_path_1,
-    experiment = NULL,
-    setup_file = setup_file,
-    other_arguments = NULL,
-    parse = FALSE
-  ) |>
-    testthat::expect_error()
-
   # checkmate::assert_string(model_path)
 
   run_experiment(
-    netlogo_path = "",
     model_path = 1,
     experiment = NULL,
     setup_file = setup_file,
     other_arguments = NULL,
-    parse = FALSE
+    parse = FALSE,
+    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
 
   # checkmate::assert_file_exists(model_path)
 
   run_experiment(
-    netlogo_path = "",
     model_path = tempfile(fileext = ".nlogox"),
     experiment = NULL,
     setup_file = setup_file,
     other_arguments = NULL,
-    parse = FALSE
+    parse = FALSE,
+    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
 
   # checkmate::assert_choice(fs::path_ext(model_path), model_path_choices)
 
   run_experiment(
-    netlogo_path = "",
     model_path = model_path_2,
     experiment = NULL,
     setup_file = setup_file,
     other_arguments = NULL,
-    parse = FALSE
+    parse = FALSE,
+    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
 
   # checkmate::assert_string(experiment, null.ok = TRUE)
 
   run_experiment(
-    netlogo_path = "",
     model_path = model_path_1,
     experiment = 1,
     setup_file = setup_file,
     other_arguments = NULL,
-    parse = FALSE
+    parse = FALSE,
+    netlogo_path = lifecycle::deprecated()
   ) |>
     expect_error()
 
   # checkmate::assert_string(setup_file, null.ok = TRUE)
 
   run_experiment(
-    netlogo_path = "",
     model_path = model_path_1,
     experiment = NULL,
     setup_file = 1,
     other_arguments = NULL,
-    parse = FALSE
+    parse = FALSE,
+    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
 
   # if (!is.null(setup_file)) { [...]
 
   run_experiment(
-    netlogo_path = "",
     model_path = model_path_1,
     experiment = NULL,
     setup_file = tempfile(fileext = ".xml"),
     other_arguments = NULL,
-    parse = FALSE
+    parse = FALSE,
+    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
 
   # checkmate::assert_character(other_arguments, null.ok = TRUE)
 
   run_experiment(
-    netlogo_path = "",
     model_path = model_path_1,
     experiment = NULL,
     setup_file = setup_file,
     other_arguments = 1,
-    parse = FALSE
+    parse = FALSE,
+    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
 
   # checkmate::assert_flag(parse)
 
   run_experiment(
-    netlogo_path = "",
     model_path = model_path_1,
     experiment = NULL,
     setup_file = setup_file,
     other_arguments = NULL,
-    parse = ""
+    parse = "",
+    netlogo_path = lifecycle::deprecated()
   ) |>
     expect_error()
 
   # if (is.null(experiment) && is.null(setup_file)) { [...]
 
   run_experiment(
-    netlogo_path = "",
     model_path = model_path_1,
     experiment = NULL,
     setup_file = NULL,
     other_arguments = NULL,
-    parse = FALSE
+    parse = FALSE,
+    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
 
   # if (!is.null(experiment) && !is.null(setup_file)) { [...]
 
   run_experiment(
-    netlogo_path = "",
     model_path = model_path_1,
     experiment = "Test",
     setup_file = setup_file,
     other_arguments = NULL,
-    parse = FALSE
+    parse = FALSE,
+    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
+
+  # if (lifecycle::is_present(netlogo_path)) { [...]
+
+  run_experiment(
+    model_path = model_path_1,
+    experiment = NULL,
+    setup_file = setup_file,
+    other_arguments = NULL,
+    parse = FALSE,
+    netlogo_path = "!!!"
+  ) |>
+    testthat::expect_error()
+
+  # if (Sys.getenv("NETLOGO_HOME") == "") { [...]
+
+  netlogo_home <- Sys.getenv("NETLOGO_HOME")
+
+  Sys.setenv("NETLOGO_HOME" = "")
+
+  run_experiment(
+    model_path = model_path_1,
+    experiment = NULL,
+    setup_file = setup_file,
+    other_arguments = NULL,
+    parse = FALSE,
+    netlogo_path = lifecycle::deprecated()
+  ) |>
+    testthat::expect_error()
+
+  Sys.setenv("NETLOGO_HOME" = netlogo_home)
 
   # if (nrow(out) == 0) { [...]
 
@@ -208,12 +224,12 @@ testthat::test_that("`run_experiment()` | Error test", {
   )
 
   run_experiment(
-    netlogo_path = "",
     model_path = model_path_1,
     experiment = NULL,
     setup_file = setup_file,
     other_arguments = NULL,
-    parse = TRUE
+    parse = TRUE,
+    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
 })

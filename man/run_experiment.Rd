@@ -5,19 +5,15 @@
 \title{Run a NetLogo BehaviorSpace experiment}
 \usage{
 run_experiment(
-  netlogo_path,
   model_path,
   experiment = NULL,
   setup_file = NULL,
   other_arguments = NULL,
-  parse = TRUE
+  parse = TRUE,
+  netlogo_path = lifecycle::deprecated()
 )
 }
 \arguments{
-\item{netlogo_path}{A string specifying the path to the NetLogo executable.
-In Windows, this is usually something like
-\verb{C:\\Program Files\\NetLogo 7.0.0\\NetLogo.exe}.}
-
 \item{model_path}{A string specifying the path to the NetLogo model file
 (with extension \code{.nlogo}, \code{.nlogo3d}, \code{.nlogox}, or \code{.nlogox3d}).}
 
@@ -39,6 +35,9 @@ parse NetLogo lists in the output data frame. If \code{TRUE}, columns containing
 NetLogo lists (e.g., \verb{[1 2 3]}) will be converted to R lists. If \code{FALSE},
 the columns will remain as \code{\link[=character]{character}} strings
 (default: \code{TRUE}).}
+
+\item{netlogo_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is no
+longer supported. See the \emph{Details} section for more information.}
 }
 \value{
 A \code{\link[dplyr:reexports]{tibble}} containing the results of the
@@ -51,22 +50,35 @@ and returns the results as a tidy data frame. It can be used with
 file on the fly, or with an existing experiment stored in the NetLogo model
 file.
 
-Please refer to the
-\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace Guide} for
-complete guidance on how to set and run experiments in NetLogo.
+Note that this function requires the path to the NetLogo installation to be
+set as an environment variable named \code{NETLOGO_HOME}. See the \emph{Details}
+section for more information.
+
+For complete guidance on setting up and running experiments in NetLogo,
+please refer to the
+\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace Guide}.
+}
+\details{
+\code{run_experiment()} requires the path to the NetLogo installation to be set
+as an environment variable named \code{NETLOGO_HOME}. On Windows, the path
+typically looks like \verb{C:\\Program Files\\NetLogo 7.0.0}. You can set this
+environment variable temporarily in your R session using
+\code{Sys.setenv("NETLOGO_HOME" = "[PATH]")}, or permanently by adding it to your
+\href{https://rstats.wtf/r-startup.html#renviron}{\code{.Renviron}} file.
 }
 \examples{
 # Set the Environment -----
 
-## Change the path below to point to your NetLogo executable.
-netlogo_path <- file.path("", "opt", "netlogo-7-0-0", "bin", "NetLogo")
-
-## Change the path below to point to the 'Wolf Sheep Simple 5' NetLogo
-## model file in the Model Library.
-model_path <- file.path(
-  "", "opt", "netlogo-7-0-0", "models", "IABM Textbook", "chapter 4",
-  "Wolf Sheep Simple 5.nlogox"
+## Change the path below to point to your NetLogo installation folder.
+Sys.setenv(
+  "NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.0")
 )
+
+model_path <-
+  Sys.getenv("NETLOGO_HOME") |>
+  file.path(
+    "models", "IABM Textbook", "chapter 4", "Wolf Sheep Simple 5.nlogox"
+  )
 
 # Using `create_experiment()` to Create the Experiment XML File -----
 
@@ -99,7 +111,6 @@ model_path <- file.path(
   )
 
   run_experiment(
-    netlogo_path = netlogo_path,
     model_path = model_path,
     setup_file = setup_file
   )
@@ -128,7 +139,6 @@ model_path <- file.path(
 
 \dontrun{
   run_experiment(
-    netlogo_path = netlogo_path,
     model_path = model_path,
     experiment = "Wolf Sheep Simple model analysis"
   )

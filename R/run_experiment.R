@@ -8,13 +8,23 @@
 #' file on the fly, or with an existing experiment stored in the NetLogo model
 #' file.
 #'
-#' Please refer to the
-#' [BehaviorSpace Guide](https://docs.netlogo.org/behaviorspace.html) for
-#' complete guidance on how to set and run experiments in NetLogo.
+#' Note that this function requires the path to the NetLogo installation to be
+#' set as an environment variable named `NETLOGO_HOME`. See the *Details*
+#' section for more information.
 #'
-#' @param netlogo_path A string specifying the path to the NetLogo executable.
-#'   In Windows, this is usually something like
-#'   `C:\Program Files\NetLogo 7.0.0\NetLogo.exe`.
+#' For complete guidance on setting up and running experiments in NetLogo,
+#' please refer to the
+#' [BehaviorSpace Guide](https://docs.netlogo.org/behaviorspace.html).
+#'
+#' @details
+#'
+#' `run_experiment()` requires the path to the NetLogo installation to be set
+#' as an environment variable named `NETLOGO_HOME`. On Windows, the path
+#' typically looks like `C:\Program Files\NetLogo 7.0.0`. You can set this
+#' environment variable temporarily in your R session using
+#' `Sys.setenv("NETLOGO_HOME" = "[PATH]")`, or permanently by adding it to your
+#' [`.Renviron`](https://rstats.wtf/r-startup.html#renviron) file.
+#'
 #' @param model_path A string specifying the path to the NetLogo model file
 #'   (with extension `.nlogo`, `.nlogo3d`, `.nlogox`, or `.nlogox3d`).
 #' @param experiment (optional) A string specifying the name of the experiment
@@ -32,6 +42,8 @@
 #'   NetLogo lists (e.g., `[1 2 3]`) will be converted to R lists. If `FALSE`,
 #'   the columns will remain as [`character`][character()] strings
 #'   (default: `TRUE`).
+#' @param netlogo_path `r lifecycle::badge("deprecated")` This argument is no
+#'   longer supported. See the *Details* section for more information.
 #'
 #' @return A [`tibble`][dplyr::as_tibble()] containing the results of the
 #'   experiment.
@@ -42,15 +54,16 @@
 #' @examples
 #' # Set the Environment -----
 #'
-#' ## Change the path below to point to your NetLogo executable.
-#' netlogo_path <- file.path("", "opt", "netlogo-7-0-0", "bin", "NetLogo")
-#'
-#' ## Change the path below to point to the 'Wolf Sheep Simple 5' NetLogo
-#' ## model file in the Model Library.
-#' model_path <- file.path(
-#'   "", "opt", "netlogo-7-0-0", "models", "IABM Textbook", "chapter 4",
-#'   "Wolf Sheep Simple 5.nlogox"
+#' ## Change the path below to point to your NetLogo installation folder.
+#' Sys.setenv(
+#'   "NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.0")
 #' )
+#'
+#' model_path <-
+#'   Sys.getenv("NETLOGO_HOME") |>
+#'   file.path(
+#'     "models", "IABM Textbook", "chapter 4", "Wolf Sheep Simple 5.nlogox"
+#'   )
 #'
 #' # Using `create_experiment()` to Create the Experiment XML File -----
 #'
@@ -83,7 +96,6 @@
 #'   )
 #'
 #'   run_experiment(
-#'     netlogo_path = netlogo_path,
 #'     model_path = model_path,
 #'     setup_file = setup_file
 #'   )
@@ -112,7 +124,6 @@
 #'
 #' \dontrun{
 #'   run_experiment(
-#'     netlogo_path = netlogo_path,
 #'     model_path = model_path,
 #'     experiment = "Wolf Sheep Simple model analysis"
 #'   )
@@ -138,16 +149,15 @@
 #'   #> # Use `print(n = ...)` to see more rows
 #' }
 run_experiment <- function(
-  netlogo_path,
   model_path,
   experiment = NULL,
   setup_file = NULL,
   other_arguments = NULL,
-  parse = TRUE
+  parse = TRUE,
+  netlogo_path = lifecycle::deprecated()
 ) {
   model_path_choices <- c("nlogo", "nlogo3d", "nlogox", "nlogox3d")
 
-  checkmate::assert_string(netlogo_path)
   checkmate::assert_string(model_path)
   checkmate::assert_file_exists(model_path)
   checkmate::assert_choice(fs::path_ext(model_path), model_path_choices)
@@ -175,6 +185,38 @@ run_experiment <- function(
         "{.strong {cli::col_red('setup_file')}} can be provided."
       )
     )
+  }
+
+  if (lifecycle::is_present(netlogo_path)) {
+    lifecycle::deprecate_warn(
+      when = "0.1.0.9000",
+      what = "run_experiment(netlogo_path)",
+      details = paste0(
+        "Specifying the NetLogo path via the 'netlogo_path' argument ",
+        "is deprecated. Please set the NetLogo home directory using the ",
+        "'NETLOGO_HOME' environment variable instead ",
+        '(e.g., `Sys.setenv("NETLOGO_HOME" = "path")`).'
+      )
+    )
+
+    checkmate::assert_string(netlogo_path)
+    checkmate::assert_file_exists(netlogo_path)
+  } else {
+    if (Sys.getenv("NETLOGO_HOME") == "") {
+      cli::cli_abort(
+        paste0(
+          "The NetLogo home directory is not set. Please set it using ",
+          "the {.strong {cli::col_red('NETLOGO_HOME')}} environment variable ",
+          "(e.g., `Sys.setenv(",
+          "{.strong {cli::col_blue('NETLOGO_HOME')}} = 'path')`)."
+        )
+      )
+    }
+
+    netlogo_path <-
+      Sys.getenv("NETLOGO_HOME") |>
+      normalizePath(mustWork = FALSE) |>
+      file.path("bin", "NetLogo")
   }
 
   file <- temp_file(pattern = "table-", fileext = ".csv")

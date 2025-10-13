@@ -44,7 +44,7 @@ opts_chunk$set(
 
 # Set `brandr` -----
 
-options(BRANDR_BRAND_YML = here("inst", "extdata", "_brand.yml"))
+options(BRANDR_BRAND_YML = here("_brand.yml"))
 
 # Set and Load Fonts -----
 

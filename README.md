@@ -87,20 +87,24 @@ website](https://www.netlogo.org).
 
 ### Setting the NetLogo Path
 
-`logolink` requires the path to the NetLogo executable when running
-simulations with the
-[`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html)
-function. This path is OS-independent, but easy to locate. On Windows,
-for example, it is typically something like
-`C:\Program Files\NetLogo 7.0.0\NetLogo.exe`.
+> \[!IMPORTANT\] The procedure for setting the NetLogo path has changed.
+> If you are using the CRAN version of `logolink` (version 0.1.0). Click
+> [here](https://github.com/danielvartan/logolink/tree/v0.1.0?tab=readme-ov-file#setting-the-netlogo-path)
+> to see the old instructions.
 
-Example (Linux):
+`logolink` requires the path to the NetLogo installation to be set as an
+environment variable named `NETLOGO_HOME` when running simulations. The
+exact path varies depending on your operating system but is usually easy
+to find. On Windows, for example, it typically looks like
+`C:\Program Files\NetLogo 7.0.0`.
+
+Example (Windows):
 
 ``` r
-netlogo_path <- file.path("", "opt", "netlogo-7-0-0", "bin", "NetLogo")
+Sys.setenv("NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.0"))
 
-netlogo_path
-#> [1] "/opt/netlogo-7-0-0/bin/NetLogo"
+Sys.getenv("NETLOGO_HOME")
+#> [1] "C:\Program Files\NetLogo 7.0.0"
 ```
 
 ### Creating an Experiment
@@ -192,15 +196,15 @@ function. This function will execute the NetLogo model with the
 specified parameters and return the results as a tidy data frame.
 
 ``` r
-model_path <- file.path(
-  "", "opt", "netlogo-7-0-0", "models", "IABM Textbook", "chapter 4",
-  "Wolf Sheep Simple 5.nlogox"
-)
+model_path <-
+  Sys.getenv("NETLOGO_HOME") |>
+  file.path(
+    "models", "IABM Textbook", "chapter 4", "Wolf Sheep Simple 5.nlogox"
+  )
 ```
 
 ``` r
 results <- run_experiment(
-  netlogo_path = netlogo_path,
   model_path = model_path,
   setup_file = setup_file
 )
@@ -212,7 +216,7 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 8, 1, 7, 2, 4, 3, 5, 6, 9, 4, 5, 1, 2, 6, 3,…
+#> $ run_number             <dbl> 1, 2, 5, 8, 6, 7, 9, 4, 3, 5, 3, 2, 6, 4, 9,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…

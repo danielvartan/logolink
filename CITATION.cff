@@ -11,6 +11,8 @@ title: 'logolink: An Interface for Running ''NetLogo'' Simulations'
 version: 0.1.0.9000
 doi: 10.32614/CRAN.package.logolink
 identifiers:
+- type: doi
+  value: 10.32614/CRAN.package.logolink
 - type: url
   value: https://github.com/danielvartan/logolink/
 abstract: An interface for 'NetLogo' <https://www.netlogo.org> that enables programmatic
@@ -33,6 +35,7 @@ preferred-citation:
   year: '2025'
   doi: 10.32614/CRAN.package.logolink
   notes: Computer software
+repository: https://CRAN.R-project.org/package=logolink
 repository-code: https://github.com/danielvartan/logolink/issues/
 url: https://danielvartan.github.io/logolink/
 contact:
@@ -153,6 +156,23 @@ references:
   year: '2025'
   doi: 10.32614/CRAN.package.janitor
   version: '>= 2.2.1'
+- type: software
+  title: lifecycle
+  abstract: 'lifecycle: Manage the Life Cycle of your Package Functions'
+  notes: Imports
+  url: https://lifecycle.r-lib.org/
+  repository: https://CRAN.R-project.org/package=lifecycle
+  authors:
+  - family-names: Henry
+    given-names: Lionel
+    email: lionel@posit.co
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+    orcid: https://orcid.org/0000-0003-4757-117X
+  year: '2025'
+  doi: 10.32614/CRAN.package.lifecycle
+  version: '>= 1.0.4'
 - type: software
   title: magrittr
   abstract: 'magrittr: A Forward-Pipe Operator for R'

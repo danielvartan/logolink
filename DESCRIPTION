@@ -27,6 +27,7 @@ Imports:
     fs (>= 1.6.6),
     glue (>= 1.8.0),
     janitor (>= 2.2.1),
+    lifecycle (>= 1.0.4),
     magrittr (>= 2.0.4),
     purrr (>= 1.1.0),
     readr (>= 2.1.5),
