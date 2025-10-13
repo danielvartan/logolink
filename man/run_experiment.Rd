@@ -76,16 +76,18 @@ environment variable temporarily in your R session using
 \examples{
 # Set the Environment -----
 
-## Change the path below to point to your NetLogo installation folder.
-Sys.setenv(
-  "NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.0")
-)
-
-model_path <-
-  Sys.getenv("NETLOGO_HOME") |>
-  file.path(
-    "models", "IABM Textbook", "chapter 4", "Wolf Sheep Simple 5.nlogox"
+\dontrun{
+  ## Change the path below to point to your NetLogo installation folder.
+  Sys.setenv(
+    "NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.0")
   )
+
+  model_path <-
+    Sys.getenv("NETLOGO_HOME") |>
+    file.path(
+      "models", "IABM Textbook", "chapter 4", "Wolf Sheep Simple 5.nlogox"
+    )
+}
 
 # Using `create_experiment()` to Create the Experiment XML File -----
 
