@@ -73,27 +73,10 @@ website](https://www.netlogo.org).
 ### Setting the NetLogo Path
 
 `logolink` will try to find out the path to the NetLogo installation
-automatically, but **if it fails**, you will need to set it manually.
-
-This requires the path to the NetLogo installation to be set as an
-environment variable named `NETLOGO_HOME` when running simulations. The
-exact path varies depending on your operating system but is usually easy
-to find. On Windows, for example, it typically looks like
-`C:\Program Files\NetLogo 7.0.2`.
-
-You can set this environment variable temporarily in your R session
-using `Sys.setenv("NETLOGO_HOME" = "[PATH]")`, or permanently by adding
-it to your [`.Renviron`](https://rstats.wtf/r-startup.html#renviron)
-file.
-
-Example (Windows):
-
-``` r
-Sys.setenv(NETLOGO_HOME = file.path("C:", "Program Files", "NetLogo 7.0.2"))
-
-Sys.getenv("NETLOGO_HOME")
-#> [1] "C:\Program Files\NetLogo 7.0.2"
-```
+automatically, but **if it fails**, you will need to set it manually. In
+the latter case, see the documentation of the
+[`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html)
+function for more details.
 
 ### Creating an Experiment
 
@@ -211,16 +194,16 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 6, 1, 2, 3, 7, 9, 8, 4, 5, 4, 1, 5, 6, 2, 9,…
+#> $ run_number             <dbl> 5, 4, 4, 5, 4, 4, 9, 5, 3, 6, 7, 1, 4, 8, 4,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…
 #> $ grass_regrowth_rate    <dbl> 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3,…
 #> $ energy_gain_from_grass <dbl> 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,…
 #> $ energy_gain_from_sheep <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
-#> $ step                   <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1,…
+#> $ step                   <dbl> 0, 0, 1, 1, 2, 3, 0, 2, 0, 0, 0, 0, 4, 0, 5,…
 #> $ count_wolves           <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
-#> $ count_sheep            <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
+#> $ count_sheep            <dbl> 500, 500, 498, 498, 498, 495, 500, 497, 500,…
 ```
 
 ### Analyzing the Data (Bonus Section)

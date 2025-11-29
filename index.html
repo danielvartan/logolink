@@ -122,15 +122,7 @@
 <div class="section level3">
 <h3 id="setting-the-netlogo-path">Setting the NetLogo Path<a class="anchor" aria-label="anchor" href="#setting-the-netlogo-path"></a>
 </h3>
-<p><code>logolink</code> will try to find out the path to the NetLogo installation automatically, but <strong>if it fails</strong>, you will need to set it manually.</p>
-<p>This requires the path to the NetLogo installation to be set as an environment variable named <code>NETLOGO_HOME</code> when running simulations. The exact path varies depending on your operating system but is usually easy to find. On Windows, for example, it typically looks like <code>C:\Program Files\NetLogo 7.0.2</code>.</p>
-<p>You can set this environment variable temporarily in your R session using <code>Sys.setenv("NETLOGO_HOME" = "[PATH]")</code>, or permanently by adding it to your <a href="https://rstats.wtf/r-startup.html#renviron" class="external-link"><code>.Renviron</code></a> file.</p>
-<p>Example (Windows):</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>NETLOGO_HOME <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"C:"</span>, <span class="st">"Program Files"</span>, <span class="st">"NetLogo 7.0.2"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"NETLOGO_HOME"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "C:\Program Files\NetLogo 7.0.2"</span></span></code></pre></div>
+<p><code>logolink</code> will try to find out the path to the NetLogo installation automatically, but <strong>if it fails</strong>, you will need to set it manually. In the latter case, see the documentation of the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a> function for more details.</p>
 </div>
 <div class="section level3">
 <h3 id="creating-an-experiment">Creating an Experiment<a class="anchor" aria-label="anchor" href="#creating-an-experiment"></a>
@@ -138,9 +130,9 @@
 <p>To start running your model from R you first need to setup an experiment. You can do this by setting a <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a> experiment with the <a href="https://danielvartan.github.io/logolink/reference/create_experiment.html"><code>create_experiment</code></a> function. This function will create a <a href="https://en.wikipedia.org/wiki/XML" class="external-link">XML</a> file that contains all the information about your experiment, including the parameters to vary, the metrics to collect, and the number of runs to perform.</p>
 <p>Alternatively, you can set up your experiment directly in NetLogo and save it as part of your model. In this case, you can skip the <a href="https://danielvartan.github.io/logolink/reference/create_experiment.html"><code>create_experiment</code></a> step and just provide the name of the experiment when running the model with <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a>.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://danielvartan.github.io/logolink/">logolink</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/create_experiment.html">create_experiment</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="st">"Wolf Sheep Simple Model Analysis"</span>,</span>
 <span>  repetitions <span class="op">=</span> <span class="fl">10</span>,</span>
@@ -167,7 +159,7 @@
 <span>    <span class="st">"energy-gain-from-sheep"</span> <span class="op">=</span> <span class="fl">5</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/inspect_experiment_file.html">inspect_experiment_file</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;experiments&gt;</span></span>
 <span><span class="co">#&gt;   &lt;experiment name="Wolf Sheep Simple Model Analysis" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="true" timeLimit="1000"&gt;</span></span>
@@ -202,7 +194,7 @@
 <h3 id="running-an-experiment">Running an Experiment<a class="anchor" aria-label="anchor" href="#running-an-experiment"></a>
 </h3>
 <p>With the experiment file created, you can now run your model using the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a> function. This function will execute the NetLogo model with the specified parameters and return the results as a tidy data frame.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model_path</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"NETLOGO_HOME"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span>
@@ -211,32 +203,32 @@
 <span>    <span class="st">"chapter 4"</span>,</span>
 <span>    <span class="st">"Wolf Sheep Simple 5.nlogox"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">model_path</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/run_experiment.html">run_experiment</a></span><span class="op">(</span>setup_file <span class="op">=</span> <span class="va">setup_file</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 110,110</span></span>
 <span><span class="co">#&gt; Columns: 10</span></span>
-<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 6, 1, 2, 3, 7, 9, 8, 4, 5, 4, 1, 5, 6, 2, 9,…</span></span>
+<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 5, 4, 4, 5, 4, 4, 9, 5, 3, 6, 7, 1, 4, 8, 4,…</span></span>
 <span><span class="co">#&gt; $ number_of_sheep        &lt;dbl&gt; 500, 500, 500, 500, 500, 500, 500, 500, 500,…</span></span>
 <span><span class="co">#&gt; $ number_of_wolves       &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…</span></span>
 <span><span class="co">#&gt; $ movement_cost          &lt;dbl&gt; 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…</span></span>
 <span><span class="co">#&gt; $ grass_regrowth_rate    &lt;dbl&gt; 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3,…</span></span>
 <span><span class="co">#&gt; $ energy_gain_from_grass &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,…</span></span>
 <span><span class="co">#&gt; $ energy_gain_from_sheep &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…</span></span>
-<span><span class="co">#&gt; $ step                   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1,…</span></span>
+<span><span class="co">#&gt; $ step                   &lt;dbl&gt; 0, 0, 1, 1, 2, 3, 0, 2, 0, 0, 0, 0, 4, 0, 5,…</span></span>
 <span><span class="co">#&gt; $ count_wolves           &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…</span></span>
-<span><span class="co">#&gt; $ count_sheep            &lt;dbl&gt; 500, 500, 500, 500, 500, 500, 500, 500, 500,…</span></span></code></pre></div>
+<span><span class="co">#&gt; $ count_sheep            &lt;dbl&gt; 500, 500, 498, 498, 498, 495, 500, 497, 500,…</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="analyzing-the-data-bonus-section">Analyzing the Data (Bonus Section)<a class="anchor" aria-label="anchor" href="#analyzing-the-data-bonus-section"></a>
 </h3>
 <p>Below is a simple example of how to visualize the results using <a href="https://ggplot2.tidyverse.org/" class="external-link"><code>ggplot2</code></a>.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span></span>
@@ -246,7 +238,7 @@
 <span>    .by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">step</span>, <span class="va">number_of_wolves</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">number_of_wolves</span>, <span class="va">step</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">data</span> <span class="op">|&gt;</span></span>
@@ -274,7 +266,7 @@
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
 <p>If you use this package in your research, please cite it to acknowledge the effort put into its development and maintenance. Your citation helps support its continued improvement.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"logolink"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; To cite logolink in publications use:</span></span>
 <span><span class="co">#&gt; </span></span>
