@@ -33,6 +33,7 @@ testthat::test_that("`run_experiment()` | General test", {
   Sys.setenv("NETLOGO_HOME" = tempdir())
 
   testthat::local_mocked_bindings(
+    assert_netlogo_works = function(...) NULL,
     system_2 = function(...) "Test",
     temp_file = function(...) table_file
   )
@@ -77,6 +78,7 @@ testthat::test_that("`run_experiment()` | Messages & Warnings test", {
   Sys.setenv("NETLOGO_HOME" = tempdir())
 
   testthat::local_mocked_bindings(
+    assert_netlogo_works = function(...) NULL,
     system_2 = function(...) "Test",
     temp_file = function(...) table_file_2
   )
@@ -106,6 +108,7 @@ testthat::test_that("`run_experiment()` | Messages & Warnings test", {
   Sys.setenv("NETLOGO_HOME" = tempdir())
 
   testthat::local_mocked_bindings(
+    assert_netlogo_works = function(...) NULL,
     system_2 = function(...) "Test",
     temp_file = function(...) table_file_1
   )
@@ -135,6 +138,7 @@ testthat::test_that("`run_experiment()` | Messages & Warnings test", {
   Sys.setenv("NETLOGO_HOME" = tempdir())
 
   testthat::local_mocked_bindings(
+    assert_netlogo_works = function(...) NULL,
     system_2 = function(...) `attributes<-`(NULL, list(status = 124)),
     temp_file = function(...) table_file_1
   )
@@ -333,6 +337,7 @@ testthat::test_that("`run_experiment()` | Error test", {
   # if (lifecycle::is_present(netlogo_path)) { [...]
 
   testthat::local_mocked_bindings(
+    assert_netlogo_works = function(...) NULL,
     system_2 = function(...) "Test",
     temp_file = function(...) table_file_1
   )
@@ -378,6 +383,7 @@ testthat::test_that("`run_experiment()` | Error test", {
   Sys.setenv("NETLOGO_HOME" = tempdir())
 
   testthat::local_mocked_bindings(
+    assert_netlogo_works = function(...) NULL,
     system_2 = function(...) `attributes<-`("Test", list(status = 5)),
     temp_file = function(...) table_file_1
   )
