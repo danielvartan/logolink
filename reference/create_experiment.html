@@ -23,7 +23,7 @@ complete guidance on how to set and run experiments in NetLogo."><meta property=
 
     <a class="navbar-brand me-2" href="../index.html">logolink</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0.9000</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -192,7 +192,7 @@ since NetLogo only accepts double quotes for strings.</p>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other NetLogo functions:
-<code><a href="run_experiment.html">run_experiment</a>()</code></p></div>
+<code><a href="run_experiment.html">run_experiment()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -225,32 +225,35 @@ since NetLogo only accepts double quotes for strings.</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpON45bB/experiment-1e812f6c69eb.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpRFg07c/experiment-19eb463c3f53.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment_file.html">inspect_experiment_file</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;experiment name="Wolf Sheep Simple Model Analysis" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="true"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;experiment name="Wolf Sheep Simple Model Analysis" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="true" timeLimit="1000"&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;setup&gt;setup&lt;/setup&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;go&gt;go&lt;/go&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;timeLimit steps="1000"&gt;&lt;/timeLimit&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;metric&gt;count wolves&lt;/metric&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;metric&gt;count sheep&lt;/metric&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;enumeratedValueSet variable="number-of-sheep"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;value value="500"&gt;&lt;/value&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/enumeratedValueSet&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;steppedValueSet variable="number-of-wolves" first="5" step="1" last="15"&gt;&lt;/steppedValueSet&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;enumeratedValueSet variable="movement-cost"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;value value="0.5"&gt;&lt;/value&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/enumeratedValueSet&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;enumeratedValueSet variable="grass-regrowth-rate"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;value value="0.3"&gt;&lt;/value&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/enumeratedValueSet&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;enumeratedValueSet variable="energy-gain-from-grass"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;value value="2"&gt;&lt;/value&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/enumeratedValueSet&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;enumeratedValueSet variable="energy-gain-from-sheep"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;value value="5"&gt;&lt;/value&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;metrics&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;metric&gt;count wolves&lt;/metric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;metric&gt;count sheep&lt;/metric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/metrics&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;constants&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="number-of-sheep"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="500"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;steppedValueSet variable="number-of-wolves" first="5" step="1" last="15"&gt;&lt;/steppedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="movement-cost"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="0.5"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="grass-regrowth-rate"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="0.3"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="energy-gain-from-grass"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="2"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="energy-gain-from-sheep"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="5"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/constants&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/experiment&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/experiments&gt;</span>
 </code></pre></div>
@@ -264,7 +267,7 @@ since NetLogo only accepts double quotes for strings.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

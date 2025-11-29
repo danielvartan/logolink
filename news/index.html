@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">logolink</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0.9000</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,9 +45,11 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0.9000" id="logolink-0109000-development-version">logolink 0.1.0.9000 (development version)<a class="anchor" aria-label="anchor" href="#logolink-0109000-development-version"></a></h2>
-<ul><li>Added <a href="https://lifecycle.r-lib.org/" class="external-link"><code>lifecycle</code></a> as a dependency.</li>
-<li>Deprecated the <code>netlogo_path</code> argument in <code><a href="../reference/run_experiment.html">run_experiment()</a></code>. The NetLogo path must now be set using an environment variable named <code>NETLOGO_HOME</code> (e.g., <code>Sys.setenv("NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.0"))</code>).</li>
+<ul><li>Added support for NetLogo 7.0.1 and above. This NetLogo patch release changed the XML structure of BehaviorSpace experiments; <code>logolink</code> now supports the new format.</li>
+<li>Added <a href="https://lifecycle.r-lib.org/" class="external-link"><code>lifecycle</code></a> as a dependency.</li>
+<li>Deprecated the <code>netlogo_path</code> argument in <code><a href="../reference/run_experiment.html">run_experiment()</a></code>. The NetLogo path must now be set using an environment variable named <code>NETLOGO_HOME</code> (e.g., <code>Sys.setenv("NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.2"))</code>).</li>
 <li>Improved the heuristics in <code><a href="../reference/parse_netlogo_list.html">parse_netlogo_list()</a></code>.</li>
+<li>Improved the documentation.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="logolink-010">logolink 0.1.0<a class="anchor" aria-label="anchor" href="#logolink-010"></a></h2><p class="text-muted">CRAN release: 2025-10-09</p>
@@ -66,7 +68,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
