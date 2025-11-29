@@ -242,6 +242,8 @@ run_experiment <- function(
   netlogo_path <- fs::path_expand(netlogo_path)
   model_path <- fs::path_expand(model_path)
 
+  cli::cli_progress_step("Running model")
+
   raw_data <- system_2(
     command = glue::glue("{netlogo_path}"),
     args = c(
@@ -265,6 +267,8 @@ run_experiment <- function(
     stderr = TRUE
   )
 
+  cli::cli_progress_step("Reading output")
+
   out <-
     file |>
     readr::read_delim(delim = ",", skip = 6) |>
@@ -276,6 +280,8 @@ run_experiment <- function(
     raw_data |> paste(collapse = "\n") |> cli::cli_abort()
   } else {
     if (isTRUE(parse)) {
+      cli::cli_progress_step("Parsing lists")
+
       out |>
         dplyr::mutate(
           dplyr::across(
