@@ -234,7 +234,7 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 8, 4, 3, 9, 7, 5, 2, 6, 1, 6, 1, 5, 9, 4, 7,…
+#> $ run_number             <dbl> 6, 1, 2, 3, 7, 9, 8, 4, 5, 4, 1, 5, 6, 2, 9,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…
@@ -306,13 +306,13 @@ support its continued improvement.
 ``` r
 citation("logolink")
 #> To cite logolink in publications use:
-#>
+#> 
 #>   Vartanian, D. (2025). logolink: An interface for running NetLogo
 #>   simulations from R [Computer software]. CRAN.
 #>   https://doi.org/10.32614/CRAN.package.logolink
-#>
+#> 
 #> A BibTeX entry for LaTeX users is
-#>
+#> 
 #>   @Misc{,
 #>     title = {logolink: An interface for running NetLogo simulations from R},
 #>     author = {Daniel Vartanian},

@@ -46,6 +46,8 @@ find_netlogo_executable <- function(
 
   netlogo_home <- fs::path_expand(netlogo_home)
 
+  out <- ""
+
   if (!Sys.getenv("NETLOGO_EXE") == "") {
     out <-
       Sys.getenv("NETLOGO_EXE") |>
