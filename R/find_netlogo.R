@@ -56,17 +56,11 @@ find_netlogo_executable <- function(
 
   if (!netlogo_home == "" && !file.exists(out)) {
     if (.Platform$OS.type == "windows") {
-      out <- fs::path(netlogo_home, "NetLogo.exe")
+      out <- fs::path(netlogo_home, "NetLogo_Console.exe")
     } else if (Sys.info()["sysname"] == "Darwin") {
-      out <- fs::path(
-        netlogo_home,
-        "NetLogo.app",
-        "Contents",
-        "MacOS",
-        "NetLogo"
-      )
+      out <- fs::path(netlogo_home, "NetLogo_Console")
     } else {
-      out <- fs::path(netlogo_home, "bin", "NetLogo")
+      out <- fs::path(netlogo_home, "NetLogo_Console")
     }
   }
 
@@ -91,8 +85,24 @@ find_netlogo_version <- function(
 ) {
   checkmate::assert_string(netlogo_home)
 
-  find_netlogo_executable(netlogo_home) |>
-    system2(args = c("--version"), stdout = TRUE, stderr = TRUE) |>
-    stringr::str_remove_all("NetLogo") |>
-    stringr::str_squish()
+  netlogo_home <- fs::path_expand(netlogo_home)
+  executable_path <- find_netlogo_executable(netlogo_home)
+
+  if (executable_path == "") {
+    out <-
+      netlogo_home |>
+      basename() |>
+      stringr::str_extract("\\d+.\\d+(.\\d+)?") |>
+      stringr::str_replace_all("\\D", ".")
+
+    if (is.na(out)) out <- ""
+  } else {
+    out <-
+      executable_path |>
+      system2(args = c("--version"), stdout = TRUE, stderr = TRUE) |>
+      stringr::str_remove_all("NetLogo") |>
+      stringr::str_squish()
+  }
+
+  out
 }
