@@ -265,7 +265,7 @@ run_experiment <- function(
 
   cli::cli_progress_step("Running model")
 
-  raw_data <-
+  system2_output <-
     system_2(
       command = glue::glue("{netlogo_path}"),
       args = args,
@@ -278,8 +278,10 @@ run_experiment <- function(
 
   cli::cli_progress_done()
 
+  # print(command)
+
   status <-
-    raw_data |>
+    system2_output |>
     attributes() |>
     magrittr::extract2("status")
 
@@ -290,6 +292,14 @@ run_experiment <- function(
           "The experiment timed out after ",
           "{.strong {cli::col_red(timeout)}} seconds. ",
           "Results may be incomplete."
+        )
+      )
+    } else {
+      cli::cli_abort(
+        paste0(
+          "NetLogo produced the following error during the experiment run:",
+          "\n\n",
+          paste(system2_output, collapse = "\n")
         )
       )
     }
@@ -304,31 +314,36 @@ run_experiment <- function(
     suppressWarnings() |>
     suppressMessages()
 
-  if (!length(raw_data) == 0) {
-    cli::cli_abort(
+  cli::cli_progress_done()
+
+  if (isTRUE(parse)) {
+    cli::cli_progress_step("Parsing lists")
+
+    out <-
+      out |>
+      dplyr::mutate(
+        dplyr::across(
+          .cols = dplyr::everything(),
+          .fns = parse_netlogo_list
+        )
+      )
+
+    cli::cli_progress_done()
+  }
+
+  if (nrow(out) == 0) {
+    cli::cli_alert_warning("The experiment run did not return any results.")
+  }
+
+  if (!length(system2_output) == 0) {
+    cli::cli_alert_info(
       paste0(
-        "NetLogo produced the following error during the experiment run:",
+        "The experiment run generated the following non-tabular output:",
         "\n\n",
-        paste(raw_data, collapse = "\n")
+        paste(system2_output, collapse = "\n")
       )
     )
-  } else if (nrow(out) == 0) {
-    cli::cli_alert_warning("The experiment run did not return any data.")
-
-    out
-  } else {
-    if (isTRUE(parse)) {
-      cli::cli_progress_step("Parsing lists")
-
-      out |>
-        dplyr::mutate(
-          dplyr::across(
-            .cols = dplyr::everything(),
-            .fns = parse_netlogo_list
-          )
-        )
-    } else {
-      out
-    }
   }
+
+  out
 }
