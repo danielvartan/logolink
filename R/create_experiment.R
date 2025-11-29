@@ -142,7 +142,8 @@ create_experiment <- function(
       name = name |> unname(),
       repetitions = repetitions |> unname(),
       sequentialRunOrder = tolower(sequential_run_order) |> unname(),
-      runMetricsEveryStep = tolower(run_metrics_every_step) |> unname()
+      runMetricsEveryStep = tolower(run_metrics_every_step) |> unname(),
+      timeLimit = time_limit |> unname()
     )
 
   simple_elements <- list(
@@ -159,14 +160,23 @@ create_experiment <- function(
     i_value <- simple_elements[[i]] |> unname()
 
     if (!is.null(i_value)) {
-      experiment |> xml2::xml_add_child(names(simple_elements)[i], i_value)
+      experiment |>
+        xml2::xml_add_child(names(simple_elements)[i], i_value)
     }
   }
 
-  experiment |>
-    xml2::xml_add_child("timeLimit", NULL, steps = time_limit |> unname())
+  metrics_node <-
+    experiment |>
+    xml2::xml_add_child("metrics")
 
-  for (i in metrics) experiment |> xml2::xml_add_child("metric", i |> unname())
+  for (i in metrics) {
+    metrics_node |>
+      xml2::xml_add_child("metric", i |> unname())
+  }
+
+  constants_node <-
+    experiment |>
+    xml2::xml_add_child("constants")
 
   if (!is.null(constants) && length(constants) > 0) {
     for (i in seq_along(constants)) {
@@ -178,7 +188,7 @@ create_experiment <- function(
         checkmate::assert_int(i_value$step, lower = 1)
         checkmate::assert_number(i_value$last)
 
-        experiment |>
+        constants_node |>
           xml2::xml_add_child(
             "steppedValueSet",
             NULL,
@@ -191,7 +201,7 @@ create_experiment <- function(
         if (is.character(i_value)) i_value <- paste0('\"', i_value, '\"')
         if (is.logical(i_value)) i_value <- tolower(i_value)
 
-        experiment |>
+        constants_node |>
           xml2::xml_add_child(
             "enumeratedValueSet",
             variable = names(constants)[i]

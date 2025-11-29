@@ -28,7 +28,7 @@
 #'
 #' `run_experiment()` requires the path to the NetLogo installation to be set
 #' as an environment variable named `NETLOGO_HOME`. On Windows, the path
-#' typically looks like `C:\Program Files\NetLogo 7.0.0`. You can set this
+#' typically looks like `C:\Program Files\NetLogo 7.0.2`. You can set this
 #' environment variable temporarily in your R session using
 #' `Sys.setenv("NETLOGO_HOME" = "[PATH]")`, or permanently by adding it to your
 #' [`.Renviron`](https://rstats.wtf/r-startup.html#renviron) file.
@@ -70,7 +70,7 @@
 #' \dontrun{
 #'   ## Change the path below to point to your NetLogo installation folder.
 #'   Sys.setenv(
-#'     "NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.0")
+#'     "NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.2")
 #'   )
 #'
 #'   model_path <-
@@ -208,9 +208,9 @@ run_experiment <- function(
       when = "0.1.0.9000",
       what = "run_experiment(netlogo_path)",
       details = paste0(
-        "Specifying the NetLogo path via the 'netlogo_path' argument ",
+        "Specifying the NetLogo path via the `netlogo_path` argument ",
         "is deprecated. Please set the NetLogo home directory using the ",
-        "'NETLOGO_HOME' environment variable instead ",
+        "`NETLOGO_HOME` environment variable instead ",
         '(e.g., `Sys.setenv("NETLOGO_HOME" = "path")`).'
       )
     )
@@ -220,12 +220,13 @@ run_experiment <- function(
   } else {
     if (
       identical(netlogo_home, Sys.getenv("NETLOGO_HOME")) &&
-        Sys.getenv("NETLOGO_HOME") == ""
+        (Sys.getenv("NETLOGO_HOME") == "")
     ) {
       cli::cli_abort(
         paste0(
-          "The NetLogo installation directory is not set. Please set it using ",
-          "the {.strong {cli::col_red('NETLOGO_HOME')}} environment variable ",
+          "The NetLogo installation directory is not set. ",
+          "Please set it using the ",
+          "{.strong {cli::col_red('NETLOGO_HOME')}} environment variable ",
           '(e.g., `Sys.setenv("NETLOGO_HOME" = "[PATH]")`).'
         )
       )
@@ -238,6 +239,8 @@ run_experiment <- function(
   }
 
   file <- temp_file(pattern = "table-", fileext = ".csv")
+  netlogo_path <- fs::path_expand(netlogo_path)
+  model_path <- fs::path_expand(model_path)
 
   raw_data <- system_2(
     command = glue::glue("{netlogo_path}"),
