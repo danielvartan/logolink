@@ -8,7 +8,7 @@ testthat::test_that("`run_experiment()` | General test", {
   table_file |> file.create()
 
   c(
-    '"BehaviorSpace results (NetLogo 7.0.0)","Table version 2.0"',
+    '"BehaviorSpace results (NetLogo 7.*.*)","Table version 2.0"',
     paste0(
       '"/opt/netlogo-7-0-0/models/IABM Textbook/chapter 4/',
       'Wolf Sheep Simple 5.nlogox"'

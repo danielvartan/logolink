@@ -7,11 +7,12 @@
 inspect_experiment_file(file)
 }
 \arguments{
-\item{file}{A string specifying the path to the BehaviorSpace experiment
-XML file.}
+\item{file}{A \code{\link[base:character]{character}} string specifying the path to
+the BehaviorSpace experiment XML file.}
 }
 \value{
-An invisible \code{NULL}. This function is used for its side effect.
+An \link[base:invisible]{invisible} \code{NULL}. This function is used for its
+side effect.
 }
 \description{
 \code{inspect_experiment_file()} reads and prints the content of a
@@ -23,8 +24,4 @@ file <- create_experiment(name = "My Experiment")
 
 file |> inspect_experiment_file()
 }
-\seealso{
-Other Utility functions: 
-\code{\link{parse_netlogo_list}()}
-}
-\concept{Utility functions}
+\concept{utility functions}

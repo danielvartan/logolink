@@ -32,7 +32,7 @@ set.seed(2025)
 
 # Set `knitr`` -----
 
-clean_cache() |> shush()
+clean_cache()
 
 opts_chunk$set(
   comment = "#>",
@@ -48,7 +48,7 @@ options(BRANDR_BRAND_YML = here("_brand.yml"))
 
 # Set and Load Fonts -----
 
-font_paths(here("ttf")) |> invisible()
+font_paths(here("ttf"))
 
 font_add(
   family = "inter",

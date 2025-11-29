@@ -13,7 +13,7 @@ library(stringr)
 
 # Remove Empty Lines from `README.md` -----
 
-remove_blank_line_dups(here("README.md"))
+here("README.md") |> remove_blank_line_dups()
 
 # Fix Image Links in `README.md` -----
 
@@ -48,7 +48,7 @@ update_pkg_versions()
 
 # Update Package Year in `LICENSE` and `inst/CITATION` -----
 
-update_pkg_year(c(here("LICENSE"), here("inst", "CITATION")))
+here("inst", "CITATION") |> update_pkg_year()
 
 # Update `cffr` and `codemeta` -----
 

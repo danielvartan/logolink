@@ -6,7 +6,7 @@ utils::bibentry(
     "An interface for running NetLogo simulations from R"
   ),
   author = c(
-    person(
+    utils::person(
       given = "Daniel",
       family = "Vartanian",
       role = c("aut", "cre", "ccp", "cph"),

@@ -6,12 +6,13 @@
 #' BehaviorSpace experiment XML file. This is useful for debugging and
 #' understanding the structure of the experiment file.
 #'
-#' @param file A string specifying the path to the BehaviorSpace experiment
-#'   XML file.
+#' @param file A [`character`][base::character] string specifying the path to
+#'   the BehaviorSpace experiment XML file.
 #'
-#' @return An invisible `NULL`. This function is used for its side effect.
+#' @return An [invisible][base::invisible] `NULL`. This function is used for its
+#' side effect.
 #'
-#' @family Utility functions
+#' @family utility functions
 #' @export
 #'
 #' @examples

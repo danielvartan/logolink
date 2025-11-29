@@ -8,7 +8,7 @@ message: 'To cite package "logolink" in publications use:'
 type: software
 license: GPL-3.0-or-later
 title: 'logolink: An Interface for Running ''NetLogo'' Simulations'
-version: 0.1.0.9000
+version: 0.1.1
 doi: 10.32614/CRAN.package.logolink
 identifiers:
 - type: doi
@@ -205,7 +205,7 @@ references:
     email: lionel@posit.co
   year: '2025'
   doi: 10.32614/CRAN.package.purrr
-  version: '>= 1.1.0'
+  version: '>= 1.2.0'
 - type: software
   title: readr
   abstract: 'readr: Read Rectangular Text Data'
@@ -224,7 +224,7 @@ references:
     orcid: https://orcid.org/0000-0002-6983-2759
   year: '2025'
   doi: 10.32614/CRAN.package.readr
-  version: '>= 2.1.5'
+  version: '>= 2.1.6'
 - type: software
   title: stringr
   abstract: 'stringr: Simple, Consistent Wrappers for Common String Operations'
@@ -237,7 +237,7 @@ references:
     email: hadley@posit.co
   year: '2025'
   doi: 10.32614/CRAN.package.stringr
-  version: '>= 1.5.2'
+  version: '>= 1.6.0'
 - type: software
   title: xml2
   abstract: 'xml2: Parse XML'
@@ -254,7 +254,7 @@ references:
     email: jeroenooms@gmail.com
   year: '2025'
   doi: 10.32614/CRAN.package.xml2
-  version: '>= 1.4.0'
+  version: '>= 1.5.0'
 - type: software
   title: bslib
   abstract: 'bslib: Custom ''Bootstrap'' ''Sass'' Themes for ''shiny'' and ''rmarkdown'''
@@ -288,7 +288,7 @@ references:
     email: james.f.hester@gmail.com
   year: '2025'
   doi: 10.32614/CRAN.package.covr
-  version: '>= 3.6.4'
+  version: '>= 3.6.5'
 - type: software
   title: knitr
   abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
@@ -332,7 +332,7 @@ references:
     email: hadley@posit.co
   year: '2025'
   doi: 10.32614/CRAN.package.testthat
-  version: '>= 3.2.3'
+  version: '>= 3.3.0'
 - type: software
   title: tibble
   abstract: 'tibble: Simple Data Frames'

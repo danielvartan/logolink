@@ -2,7 +2,9 @@
 
 This is a minor release in the 0.*.* series.
 
-As of this version, the NetLogo path must now be set using an environment variable named `NETLOGO_HOME` (e.g., `Sys.setenv("NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.0"))`).
+NetLogo 7 received a patch release (7.0.1) that addressed several issues. This update also introduced a new XML structure for BehaviorSpace experiments, which required updates to `logolink` to ensure compatibility.
+
+See the `NEWS.md` file for a detailed list of changes.
 
 ## Test Environments
 

@@ -2,6 +2,8 @@
 
 <!-- quarto render -->
 
+<!-- Install the package before rendering this file: `devtools::install()` -->
+
 <!-- badges: start -->
 [![Project Status: Active - The project has reached a stable, usable
 state and is being actively
@@ -31,19 +33,29 @@ principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and
 integrating seamlessly with the broader [tidyverse
 ecosystem](https://www.tidyverse.org/).
 
-`logolink` is designed for NetLogo 7 and is not compatible with earlier
-versions.
+`logolink` is designed for NetLogo **7.0.1 and above** and is not
+compatible with earlier versions.
+
+> **Note**: NetLogo 7 received a patch release (7.0.1) that addressed
+> several issues. This update also introduced a new XML structure for
+> BehaviorSpace experiments. To use `logolink`, you must have NetLogo
+> 7.0.1 or a later version installed.
 
 > If you find this project useful, please consider giving it a star!  
 > [![GitHub Repository
 > Stars](https://img.shields.io/github/stars/danielvartan/logolink)](https://github.com/danielvartan/logolink/)
 
+> The continuous development of `logolink` depends on community support.
+> If you find this project useful, and can afford to do so, please
+> consider becoming a sponsor.  
+> [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/danielvartan)
+
 ## Another R Package for NetLogo?
 
 While other R packages connect R and NetLogo, `logolink` is currently
-the only one that fully supports the latest NetLogo release (NetLogo 7).
-It is actively maintained, follows tidyverse conventions, and is
-designed to be simple and straightforward to use.
+the only one that fully supports the latest NetLogo release. It is
+actively maintained, follows tidyverse conventions, and is designed to
+be simple and straightforward to use.
 
 For context, [`RNetLogo`](https://CRAN.R-project.org/package=RNetLogo)
 works only with older versions (up to version 6.0.0, released in
@@ -81,7 +93,7 @@ remotes::install_github("danielvartan/logolink")
 - [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html):
   Run a NetLogo BehaviorSpace experiment.
 
-Along with this package, you will also need NetLogo 7 or higher
+Along with this package, you will also need NetLogo 7.0.1 or higher
 installed on your computer. You can download it from the [NetLogo
 website](https://www.netlogo.org).
 
@@ -96,7 +108,7 @@ website](https://www.netlogo.org).
 environment variable named `NETLOGO_HOME` when running simulations. The
 exact path varies depending on your operating system but is usually easy
 to find. On Windows, for example, it typically looks like
-`C:\Program Files\NetLogo 7.0.0`.
+`C:\Program Files\NetLogo 7.0.2`.
 
 You can set this environment variable temporarily in your R session
 using `Sys.setenv("NETLOGO_HOME" = "[PATH]")`, or permanently by adding
@@ -106,10 +118,10 @@ file.
 Example (Windows):
 
 ``` r
-Sys.setenv("NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.0"))
+Sys.setenv("NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.2"))
 
 Sys.getenv("NETLOGO_HOME")
-#> [1] "C:\Program Files\NetLogo 7.0.0"
+#> [1] "C:\Program Files\NetLogo 7.0.2"
 ```
 
 ### Creating an Experiment
@@ -135,7 +147,9 @@ Example:
 
 ``` r
 library(logolink)
+```
 
+``` r
 setup_file <- create_experiment(
   name = "Wolf Sheep Simple Model Analysis",
   repetitions = 10,
@@ -167,28 +181,31 @@ setup_file <- create_experiment(
 ``` r
 setup_file |> inspect_experiment_file()
 #> <experiments>
-#>   <experiment name="Wolf Sheep Simple Model Analysis" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="true">
+#>   <experiment name="Wolf Sheep Simple Model Analysis" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="true" timeLimit="1000">
 #>     <setup>setup</setup>
 #>     <go>go</go>
-#>     <timeLimit steps="1000"></timeLimit>
-#>     <metric>count wolves</metric>
-#>     <metric>count sheep</metric>
-#>     <enumeratedValueSet variable="number-of-sheep">
-#>       <value value="500"></value>
-#>     </enumeratedValueSet>
-#>     <steppedValueSet variable="number-of-wolves" first="5" step="1" last="15"></steppedValueSet>
-#>     <enumeratedValueSet variable="movement-cost">
-#>       <value value="0.5"></value>
-#>     </enumeratedValueSet>
-#>     <enumeratedValueSet variable="grass-regrowth-rate">
-#>       <value value="0.3"></value>
-#>     </enumeratedValueSet>
-#>     <enumeratedValueSet variable="energy-gain-from-grass">
-#>       <value value="2"></value>
-#>     </enumeratedValueSet>
-#>     <enumeratedValueSet variable="energy-gain-from-sheep">
-#>       <value value="5"></value>
-#>     </enumeratedValueSet>
+#>     <metrics>
+#>       <metric>count wolves</metric>
+#>       <metric>count sheep</metric>
+#>     </metrics>
+#>     <constants>
+#>       <enumeratedValueSet variable="number-of-sheep">
+#>         <value value="500"></value>
+#>       </enumeratedValueSet>
+#>       <steppedValueSet variable="number-of-wolves" first="5" step="1" last="15"></steppedValueSet>
+#>       <enumeratedValueSet variable="movement-cost">
+#>         <value value="0.5"></value>
+#>       </enumeratedValueSet>
+#>       <enumeratedValueSet variable="grass-regrowth-rate">
+#>         <value value="0.3"></value>
+#>       </enumeratedValueSet>
+#>       <enumeratedValueSet variable="energy-gain-from-grass">
+#>         <value value="2"></value>
+#>       </enumeratedValueSet>
+#>       <enumeratedValueSet variable="energy-gain-from-sheep">
+#>         <value value="5"></value>
+#>       </enumeratedValueSet>
+#>     </constants>
 #>   </experiment>
 #> </experiments>
 ```
@@ -204,7 +221,10 @@ specified parameters and return the results as a tidy data frame.
 model_path <-
   Sys.getenv("NETLOGO_HOME") |>
   file.path(
-    "models", "IABM Textbook", "chapter 4", "Wolf Sheep Simple 5.nlogox"
+    "models",
+    "IABM Textbook",
+    "chapter 4",
+    "Wolf Sheep Simple 5.nlogox"
   )
 ```
 
@@ -221,14 +241,14 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 5, 9, 7, 2, 4, 6, 3, 1, 8, 9, 5, 4, 6, 1, 3,…
+#> $ run_number             <dbl> 9, 7, 6, 3, 2, 8, 1, 4, 5, 7, 3, 9, 2, 7, 8,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…
 #> $ grass_regrowth_rate    <dbl> 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3,…
 #> $ energy_gain_from_grass <dbl> 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,…
 #> $ energy_gain_from_sheep <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
-#> $ step                   <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1,…
+#> $ step                   <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 1,…
 #> $ count_wolves           <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ count_sheep            <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 ```
@@ -243,9 +263,9 @@ library(dplyr)
 
 data <-
   results |>
-  group_by(step, number_of_wolves) |>
-  summarise(
-    across(everything(), ~ mean(.x, na.rm = TRUE))
+  summarize(
+    across(everything(), ~ mean(.x, na.rm = TRUE)),
+    .by = c(step, number_of_wolves)
   ) |>
   arrange(number_of_wolves, step)
 ```

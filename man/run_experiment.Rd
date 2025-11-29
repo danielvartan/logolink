@@ -76,7 +76,7 @@ please refer to the
 \details{
 \code{run_experiment()} requires the path to the NetLogo installation to be set
 as an environment variable named \code{NETLOGO_HOME}. On Windows, the path
-typically looks like \verb{C:\\Program Files\\NetLogo 7.0.0}. You can set this
+typically looks like \verb{C:\\Program Files\\NetLogo 7.0.2}. You can set this
 environment variable temporarily in your R session using
 \code{Sys.setenv("NETLOGO_HOME" = "[PATH]")}, or permanently by adding it to your
 \href{https://rstats.wtf/r-startup.html#renviron}{\code{.Renviron}} file.
@@ -87,7 +87,7 @@ environment variable temporarily in your R session using
 \dontrun{
   ## Change the path below to point to your NetLogo installation folder.
   Sys.setenv(
-    "NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.0")
+    "NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.2")
   )
 
   model_path <-
