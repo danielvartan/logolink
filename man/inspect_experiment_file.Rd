@@ -24,4 +24,8 @@ file <- create_experiment(name = "My Experiment")
 
 file |> inspect_experiment_file()
 }
+\seealso{
+Other utility functions: 
+\code{\link{parse_netlogo_list}()}
+}
 \concept{utility functions}

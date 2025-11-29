@@ -93,6 +93,7 @@
     "stringr",
     "summarise",
     "sysfonts",
+    "sysname",
     "tcltk",
     "testthat",
     "tibble",

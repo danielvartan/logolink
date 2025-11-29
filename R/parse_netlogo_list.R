@@ -14,7 +14,7 @@
 #' @return A [`list`][list()] of parsed elements if the input contains
 #'   NetLogo-style lists; otherwise, returns the original vector.
 #'
-#' @family Utility functions
+#' @family utility functions
 #' @export
 #'
 #' @examples
@@ -91,11 +91,11 @@ parse_netlogo_list.scalar <- function(x) { #nolint
       parse(text = _) |>
       eval()
 
-    while (length(out) == 1 && !test_one_depth(out)) {
+    while (length(out) == 1 && !test_one_depth_list(out)) {
       out <- purrr::flatten(out)
     }
 
-    if (test_one_depth(out) && test_same_class(out)) {
+    if (test_one_depth_list(out) && test_same_class(out)) {
       out <- unlist(out)
 
       if (checkmate::test_integerish(out)) {
@@ -103,12 +103,12 @@ parse_netlogo_list.scalar <- function(x) { #nolint
       } else {
         out
       }
-    } else if (test_one_depth(out) && !test_same_class(out)) {
+    } else if (test_one_depth_list(out) && !test_same_class(out)) {
       out
     } else {
       out <-
         out |>
-        purrr::map(\(x) if (!test_nested(x)) x |> unlist() else x)
+        purrr::map(\(x) if (!test_nested_list(x)) x |> unlist() else x)
 
       data <- out
       ref_index <- 1

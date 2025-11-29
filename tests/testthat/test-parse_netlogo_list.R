@@ -86,6 +86,10 @@ testthat::test_that("`parse_netlogo_list()` | Non-character values test", {
   1:10 |>
     parse_netlogo_list() |>
     testthat::expect_equal(1:10)
+
+  1:10 |>
+    parse_netlogo_list.scalar() |>
+    testthat::expect_equal(1:10)
 })
 
 testthat::test_that("`parse_netlogo_list()` | Error test", {

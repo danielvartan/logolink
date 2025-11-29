@@ -8,9 +8,10 @@
 #' file on the fly, or with an existing experiment stored in the NetLogo model
 #' file.
 #'
-#' Note that this function requires the path to the NetLogo installation to be
-#' set as an environment variable named `NETLOGO_HOME`. See the *Details*
-#' section for more information.
+#' The function tries to locate the NetLogo installation automatically.
+#' If it fails, you must set the path manually by defining the
+#' `NETLOGO_HOME` environment variable and pointing it to the NetLogo
+#' installation directory. See the *Details* section for more information.
 #'
 #' For complete guidance on setting up and running experiments in NetLogo,
 #' please refer to the
@@ -18,12 +19,17 @@
 #'
 #' @details
 #'
-#' `run_experiment()` requires the path to the NetLogo installation to be set
-#' as an environment variable named `NETLOGO_HOME`. On Windows, the path
-#' typically looks like `C:\Program Files\NetLogo 7.0.2`. You can set this
-#' environment variable temporarily in your R session using
+#' If `run_experiment()` cannot find the NetLogo installation,
+#' you will need to set the path manually using the `NETLOGO_HOME` environment
+#' variable. On Windows, a typical path is `C:\Program Files\NetLogo 7.0.2`.
+#' You can set this variable temporarily in your R session with
 #' `Sys.setenv("NETLOGO_HOME" = "[PATH]")`, or permanently by adding it to your
 #' [`.Renviron`](https://rstats.wtf/r-startup.html#renviron) file.
+#'
+#' If even after setting the `NETLOGO_HOME` environment variable you still
+#' encounter issues, please try to set a `NETLOGO_EXE` environment variable to
+#' the path of the NetLogo executable. On Windows, this would be the full path
+#' to `NetLogo.exe` (e.g., `C:\Program Files\NetLogo 7.0.2\NetLogo.exe`).
 #'
 #' @param model_path A string specifying the path to the NetLogo model file
 #'   (with extension `.nlogo`, `.nlogo3d`, `.nlogox`, or `.nlogox3d`).
@@ -51,7 +57,7 @@
 #'   installation directory. If not provided, the function will use the value of
 #'   the `NETLOGO_HOME` environment variable. This argument is useful if you
 #'   want to override the environment variable for a specific function call
-#'   (default: `Sys.getenv("NETLOGO_HOME")`).
+#'   (default: `logolink:::find_netlogo_home()`).
 #' @param netlogo_path `r lifecycle::badge("deprecated")` This argument is no
 #'   longer supported. See the *Details* section for more information.
 #'
@@ -167,7 +173,7 @@ run_experiment <- function(
   other_arguments = NULL,
   parse = TRUE,
   timeout = Inf,
-  netlogo_home = Sys.getenv("NETLOGO_HOME"),
+  netlogo_home = find_netlogo_home(),
   netlogo_path = lifecycle::deprecated()
 ) {
   model_path_choices <- c("nlogo", "nlogo3d", "nlogox", "nlogox3d")
@@ -217,6 +223,8 @@ run_experiment <- function(
 
     checkmate::assert_string(netlogo_path)
     checkmate::assert_file_exists(netlogo_path)
+
+    netlogo_executable <- stringr::str_remove(netlogo_path, "\\.exe$")
   } else {
     if (
       identical(netlogo_home, Sys.getenv("NETLOGO_HOME")) &&
@@ -235,11 +243,14 @@ run_experiment <- function(
     checkmate::assert_string(netlogo_home)
     checkmate::assert_directory_exists(netlogo_home)
 
-    netlogo_path <- netlogo_home |> file.path("bin", "NetLogo")
+    netlogo_executable <-
+      netlogo_home |>
+      find_netlogo_executable()
   }
 
+  assert_netlogo_works(netlogo_home)
+
   file <- temp_file(pattern = "table-", fileext = ".csv")
-  netlogo_path <- fs::path_expand(netlogo_path)
   model_path <- fs::path_expand(model_path)
   timeout <- ifelse(is.infinite(timeout), 0, as.integer(timeout))
 
@@ -261,13 +272,13 @@ run_experiment <- function(
     other_arguments
   )
 
-  command <- glue::glue("{netlogo_path} {paste0(args, collapse = ' ')}")
+  command <- glue::glue("{netlogo_executable} {paste0(args, collapse = ' ')}")
 
   cli::cli_progress_step("Running model")
 
   system2_output <-
     system_2(
-      command = glue::glue("{netlogo_path}"),
+      command = glue::glue("{netlogo_executable}"),
       args = args,
       stdout = TRUE,
       stderr = TRUE,

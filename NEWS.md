@@ -5,6 +5,7 @@
 - Deprecated the `netlogo_path` argument in `run_experiment()`. The NetLogo path must now be set using an environment variable named `NETLOGO_HOME` (e.g., `Sys.setenv("NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.2"))`).
 - Added the parameter `timeout` to `run_experiment()` to specify the maximum time (in seconds) to wait for an experiment to complete before terminating it.
 - Added support for non-tabular data in `run_experiment()`. The function now print those outputs in the console.
+- Added heuristics to automatically detect NetLogo installation paths on Windows, macOS, and Linux.
 - Added new unit tests.
 - Improved the heuristics in `parse_netlogo_list()`.
 - Improved the documentation.

@@ -125,9 +125,9 @@ Along with this package, you will also need NetLogo 7.0.1 or higher installed on
 
 ### Setting the NetLogo Path
 
-> The procedure for setting the NetLogo path has changed. If you're using the CRAN release of `logolink` (version 0.1.0), you can find the previous instructions [here](https://github.com/danielvartan/logolink/tree/v0.1.0?tab=readme-ov-file#setting-the-netlogo-path).
+`logolink` will try to find out the path to the NetLogo installation automatically, but **if it fails**, you will need to set it manually.
 
-`logolink` requires the path to the NetLogo installation to be set as an environment variable named `NETLOGO_HOME` when running simulations. The exact path varies depending on your operating system but is usually easy to find. On Windows, for example, it typically looks like `C:\Program Files\NetLogo 7.0.2`.
+This requires the path to the NetLogo installation to be set as an environment variable named `NETLOGO_HOME` when running simulations. The exact path varies depending on your operating system but is usually easy to find. On Windows, for example, it typically looks like `C:\Program Files\NetLogo 7.0.2`.
 
 You can set this environment variable temporarily in your R session using `Sys.setenv("NETLOGO_HOME" = "[PATH]")`, or permanently by adding it to your [`.Renviron`](https://rstats.wtf/r-startup.html#renviron) file.
 
@@ -136,16 +136,10 @@ Example (Windows):
 ```{r}
 #| eval: false
 
-Sys.setenv("NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.2"))
+Sys.setenv(NETLOGO_HOME = file.path("C:", "Program Files", "NetLogo 7.0.2"))
 
 Sys.getenv("NETLOGO_HOME")
 #> [1] "C:\Program Files\NetLogo 7.0.2"
-```
-
-```{r}
-#| include: false
-
-Sys.setenv("NETLOGO_HOME" = file.path("~", ".opt", "netlogo-7-0-2"))
 ```
 
 ### Creating an Experiment
@@ -161,6 +155,8 @@ library(logolink)
 ```
 
 ```{r}
+#| label: setup_file
+
 setup_file <- create_experiment(
   name = "Wolf Sheep Simple Model Analysis",
   repetitions = 10,
@@ -209,6 +205,9 @@ model_path <-
 ```
 
 ```{r}
+#| label: run_experiment
+#| output: false
+
 results <-
   model_path |>
   run_experiment(setup_file = setup_file)

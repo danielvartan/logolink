@@ -378,7 +378,7 @@ testthat::test_that("`run_experiment()` | Error test", {
   Sys.setenv("NETLOGO_HOME" = tempdir())
 
   testthat::local_mocked_bindings(
-    system_2 = function(...) `attributes<-`("Test", list(status = 1)),
+    system_2 = function(...) `attributes<-`("Test", list(status = 5)),
     temp_file = function(...) table_file_1
   )
 
@@ -388,7 +388,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     setup_file = setup_file,
     other_arguments = NULL,
     parse = TRUE,
-    timeout = 1,
+    timeout = Inf,
     netlogo_home = Sys.getenv("NETLOGO_HOME"),
     netlogo_path = lifecycle::deprecated()
   ) |>

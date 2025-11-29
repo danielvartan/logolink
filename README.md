@@ -95,12 +95,10 @@ website](https://www.netlogo.org).
 
 ### Setting the NetLogo Path
 
-> The procedure for setting the NetLogo path has changed. If you’re
-> using the CRAN release of `logolink` (version 0.1.0), you can find the
-> previous instructions
-> [here](https://github.com/danielvartan/logolink/tree/v0.1.0?tab=readme-ov-file#setting-the-netlogo-path).
+`logolink` will try to find out the path to the NetLogo installation
+automatically, but **if it fails**, you will need to set it manually.
 
-`logolink` requires the path to the NetLogo installation to be set as an
+This requires the path to the NetLogo installation to be set as an
 environment variable named `NETLOGO_HOME` when running simulations. The
 exact path varies depending on your operating system but is usually easy
 to find. On Windows, for example, it typically looks like
@@ -114,7 +112,7 @@ file.
 Example (Windows):
 
 ``` r
-Sys.setenv("NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.2"))
+Sys.setenv(NETLOGO_HOME = file.path("C:", "Program Files", "NetLogo 7.0.2"))
 
 Sys.getenv("NETLOGO_HOME")
 #> [1] "C:\Program Files\NetLogo 7.0.2"
@@ -225,10 +223,9 @@ model_path <-
 ```
 
 ``` r
-results <- run_experiment(
-  model_path = model_path,
-  setup_file = setup_file
-)
+results <-
+  model_path |>
+  run_experiment(setup_file = setup_file)
 ```
 
 ``` r
@@ -237,7 +234,7 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 1, 4, 8, 3, 6, 9, 5, 2, 7, 7, 9, 5, 8, 4, 6,…
+#> $ run_number             <dbl> 8, 4, 3, 9, 7, 5, 2, 6, 1, 6, 1, 5, 9, 4, 7,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…

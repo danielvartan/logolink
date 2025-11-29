@@ -58,4 +58,8 @@ c('["a" "b" "c" [1 2]]', '[4 5 6]') |> parse_netlogo_list()
 
 c('["a" "b" "c" [1 2] true ["d" "c"]]') |> parse_netlogo_list()
 }
-\concept{Utility functions}
+\seealso{
+Other utility functions: 
+\code{\link{inspect_experiment_file}()}
+}
+\concept{utility functions}
