@@ -87,9 +87,7 @@ cat(
 
 `logolink` is an [R](https://www.r-project.org/) package that simplifies setting up and running [NetLogo](https://www.netlogo.org/) simulations directly from R. It offers a modern, streamlined interface for running models, following the [tidyverse principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and integrating seamlessly with the broader [tidyverse ecosystem](https://www.tidyverse.org/).
 
-`logolink` is designed for NetLogo **7.0.1 and above** and is not compatible with earlier versions.
-
-> **Note**: NetLogo 7 received a patch release (7.0.1) that addressed several issues. This update also introduced a new XML structure for BehaviorSpace experiments. To use `logolink`, you must have NetLogo 7.0.1 or a later version installed.
+The package is designed to work with NetLogo **7.0.1 and above**. If you need support for earlier NetLogo releases (up to 7.0.0), use an older version of this package.
 
 > If you find this project useful, please consider giving it a star! &nbsp; [![GitHub Repository Stars](https://img.shields.io/github/stars/danielvartan/logolink)](https://github.com/danielvartan/logolink/)
 
@@ -211,10 +209,9 @@ model_path <-
 ```
 
 ```{r}
-results <- run_experiment(
-  model_path = model_path,
-  setup_file = setup_file
-)
+results <-
+  model_path |>
+  run_experiment(setup_file = setup_file)
 ```
 
 ```{r}

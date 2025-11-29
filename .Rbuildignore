@@ -23,4 +23,5 @@
 ^R/\.post-render\.R$
 ^R/\.setup\.R$
 ^README\.qmd$
+^tests/qmd$
 ^ttf$

@@ -1,0 +1,127 @@
+```{r}
+#| label: setup
+#| include: false
+
+library(here)
+
+source(here("R", ".setup.R"))
+```
+
+## Overview
+
+This document tests `logolink` under the different experiments set in the Wolf Sheep Predation model included in NetLogo.
+
+## Set the Environment
+
+### Load Packages
+
+```{r}
+library(logolink)
+```
+
+```{r}
+library(dplyr)
+```
+
+### Set NetLogo Path
+
+```{r}
+Sys.setenv("NETLOGO_HOME" = file.path("~", ".opt", "netlogo-7-0-2"))
+```
+
+```{r}
+Sys.getenv("NETLOGO_HOME")
+```
+
+### Set Model Path
+
+```{r}
+model_path <-
+  Sys.getenv("NETLOGO_HOME") |>
+  file.path(
+    "models",
+    "Sample Models",
+    "Biology",
+    "Wolf Sheep Predation.nlogox"
+  )
+```
+
+## BehaviorSpace Combinatorial
+
+```{r}
+experiment <- "BehaviorSpace combinatorial"
+```
+
+```{r}
+results <-
+  model_path |>
+  run_experiment(experiment = experiment)
+```
+
+```{r}
+results |> glimpse()
+```
+
+## Behaviorspace Run 3 Experiments
+
+```{r}
+experiment <- "BehaviorSpace run 3 experiments"
+```
+
+```{r}
+results <-
+  model_path |>
+  run_experiment(experiment = experiment)
+```
+
+```{r}
+results |> glimpse()
+```
+
+## BehaviorSpace run 3 variable values per experiments
+
+```{r}
+experiment <- "BehaviorSpace run 3 variable values per experiments"
+```
+
+```{r}
+results <-
+  model_path |>
+  run_experiment(experiment = experiment)
+```
+
+```{r}
+results |> glimpse()
+```
+
+## BehaviorSpace Subset
+
+```{r}
+experiment <- "BehaviorSpace subset"
+```
+
+```{r}
+results <-
+  model_path |>
+  run_experiment(experiment = experiment)
+```
+
+```{r}
+results |> glimpse()
+```
+
+## New BehaviorSpace Features
+
+```{r}
+experiment <- "New BehaviorSpace Features"
+```
+
+```{r}
+results <-
+  model_path |>
+  run_experiment(experiment = experiment)
+```
+
+```{r}
+results |> glimpse()
+```

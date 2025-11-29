@@ -65,7 +65,7 @@ testthat::test_that("`parse_netlogo_list()` | Combined test", {
 })
 
 testthat::test_that("`parse_netlogo_list()` | Nested test", {
-  c('["a" "b" "c" [1 2]]', '[4 5 6]')|>
+  c('["a" "b" "c" [1 2]]', '[4 5 6]') |>
     parse_netlogo_list() |>
     testthat::expect_equal(list(list(c("a", "b", "c"), 1:2), 4:6))
 
@@ -74,6 +74,18 @@ testthat::test_that("`parse_netlogo_list()` | Nested test", {
     testthat::expect_equal(
       list(list(c("a", "b", "c"), 1:2, TRUE, c("d", "c")))
     )
+})
+
+testthat::test_that("`parse_netlogo_list()` | Simple character test", {
+  letters |>
+    parse_netlogo_list() |>
+    testthat::expect_equal(letters)
+})
+
+testthat::test_that("`parse_netlogo_list()` | Non-character values test", {
+  1:10 |>
+    parse_netlogo_list() |>
+    testthat::expect_equal(1:10)
 })
 
 testthat::test_that("`parse_netlogo_list()` | Error test", {

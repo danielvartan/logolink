@@ -56,19 +56,21 @@
 parse_netlogo_list <- function(x) {
   checkmate::assert_atomic(x)
 
-  out <- x |> purrr::map(parse_netlogo_list.scalar)
-
-  if (
+  if (is.character(x)) {
+    if (
     test_unitary_list(x) &&
       !any(stringr::str_detect(x, "^\\[.*\\]$"), na.rm = TRUE)
-  ) {
-    x
+    ) {
+      x
+    } else {
+      x |> purrr::map(parse_netlogo_list.scalar)
+    }
   } else {
-    out
+    x
   }
 }
 
-parse_netlogo_list.scalar <- function(x) {
+parse_netlogo_list.scalar <- function(x) { #nolint
   checkmate::assert_atomic(x)
 
   # R CMD Check variable bindings fix.
