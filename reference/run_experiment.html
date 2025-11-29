@@ -5,14 +5,7 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Inter-0.4.10/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Run a NetLogo BehaviorSpace experiment — run_experiment"><meta name="description" content='Note: The procedure for setting the NetLogo path has changed. For users
-of the CRAN release of logolink (version 0.1.0), see the previous
-instructions
-here.
-To access the latest features and improvements, install the development
-version of logolink from GitHub using:
-remotes::install_github("danielvartan/logolink").
-run_experiment() runs a NetLogo BehaviorSpace experiment in headless mode
+</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Inter-0.4.10/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Run a NetLogo BehaviorSpace experiment — run_experiment"><meta name="description" content="run_experiment() runs a NetLogo BehaviorSpace experiment in headless mode
 and returns the results as a tidy data frame. It can be used with
 create_experiment() to create the experiment XML
 file on the fly, or with an existing experiment stored in the NetLogo model
@@ -22,14 +15,7 @@ set as an environment variable named NETLOGO_HOME. See the Details
 section for more information.
 For complete guidance on setting up and running experiments in NetLogo,
 please refer to the
-BehaviorSpace Guide.'><meta property="og:description" content='Note: The procedure for setting the NetLogo path has changed. For users
-of the CRAN release of logolink (version 0.1.0), see the previous
-instructions
-here.
-To access the latest features and improvements, install the development
-version of logolink from GitHub using:
-remotes::install_github("danielvartan/logolink").
-run_experiment() runs a NetLogo BehaviorSpace experiment in headless mode
+BehaviorSpace Guide."><meta property="og:description" content="run_experiment() runs a NetLogo BehaviorSpace experiment in headless mode
 and returns the results as a tidy data frame. It can be used with
 create_experiment() to create the experiment XML
 file on the fly, or with an existing experiment stored in the NetLogo model
@@ -39,7 +25,7 @@ set as an environment variable named NETLOGO_HOME. See the Details
 section for more information.
 For complete guidance on setting up and running experiments in NetLogo,
 please refer to the
-BehaviorSpace Guide.'><meta property="og:image" content="https://danielvartan.github.io/logolink/reference/figures/og-image.png"><meta property="og:image:alt" content="logolink"></head><body>
+BehaviorSpace Guide."><meta property="og:image" content="https://danielvartan.github.io/logolink/reference/figures/og-image.png"><meta property="og:image:alt" content="logolink"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -47,7 +33,7 @@ BehaviorSpace Guide.'><meta property="og:image" content="https://danielvartan.gi
 
     <a class="navbar-brand me-2" href="../index.html">logolink</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.1</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,14 +65,7 @@ BehaviorSpace Guide.'><meta property="og:image" content="https://danielvartan.gi
     </div>
 
     <div class="ref-description section level2">
-    <p><strong>Note</strong>: The procedure for setting the NetLogo path has changed. For users
-of the CRAN release of <code>logolink</code> (version 0.1.0), see the previous
-instructions
-<a href="https://github.com/danielvartan/logolink/tree/v0.1.0?tab=readme-ov-file#setting-the-netlogo-path" class="external-link">here</a>.
-To access the latest features and improvements, install the development
-version of <code>logolink</code> from GitHub using:
-<code>remotes::install_github("danielvartan/logolink")</code>.</p>
-<p><code>run_experiment()</code> runs a NetLogo BehaviorSpace experiment in headless mode
+    <p><code>run_experiment()</code> runs a NetLogo BehaviorSpace experiment in headless mode
 and returns the results as a tidy data frame. It can be used with
 <code><a href="create_experiment.html">create_experiment()</a></code> to create the experiment XML
 file on the fly, or with an existing experiment stored in the NetLogo model
@@ -107,6 +86,7 @@ please refer to the
 <span>  setup_file <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  other_arguments <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  timeout <span class="op">=</span> <span class="cn">Inf</span>,</span>
 <span>  netlogo_home <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"NETLOGO_HOME"</span><span class="op">)</span>,</span>
 <span>  netlogo_path <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -146,6 +126,14 @@ parse NetLogo lists in the output data frame. If <code>TRUE</code>, columns cont
 NetLogo lists (e.g., <code>[1 2 3]</code>) will be converted to R lists. If <code>FALSE</code>,
 the columns will remain as <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> strings
 (default: <code>TRUE</code>).</p></dd>
+
+
+<dt id="arg-timeout">timeout<a class="anchor" aria-label="anchor" href="#arg-timeout"></a></dt>
+<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a></code> value specifying the
+maximum time (in seconds) to wait for the NetLogo process to complete. If
+the process exceeds this time limit, it will be terminated, and the
+function will return the available output up to that point. Use <code>Inf</code>
+for no time limit (default: <code>Inf</code>).</p></dd>
 
 
 <dt id="arg-netlogo-home">netlogo_home<a class="anchor" aria-label="anchor" href="#arg-netlogo-home"></a></dt>

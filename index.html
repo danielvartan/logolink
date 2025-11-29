@@ -37,7 +37,7 @@
 
     <a class="navbar-brand me-2" href="index.html">logolink</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.1</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,10 +83,7 @@
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
 <p><code>logolink</code> is an <a href="https://www.r-project.org/" class="external-link">R</a> package that simplifies setting up and running <a href="https://www.netlogo.org/" class="external-link">NetLogo</a> simulations directly from R. It offers a modern, streamlined interface for running models, following the <a href="https://tidyverse.tidyverse.org/articles/manifesto.html" class="external-link">tidyverse principles</a> and integrating seamlessly with the broader <a href="https://www.tidyverse.org/" class="external-link">tidyverse ecosystem</a>.</p>
-<p><code>logolink</code> is designed for NetLogo <strong>7.0.1 and above</strong> and is not compatible with earlier versions.</p>
-<blockquote>
-<p><strong>Note</strong>: NetLogo 7 received a patch release (7.0.1) that addressed several issues. This update also introduced a new XML structure for BehaviorSpace experiments. To use <code>logolink</code>, you must have NetLogo 7.0.1 or a later version installed.</p>
-</blockquote>
+<p>The package is designed to work with NetLogo <strong>7.0.1 and above</strong>. If you need support for earlier NetLogo releases (up to 7.0.0), use an older version of this package.</p>
 <blockquote>
 <p>If you find this project useful, please consider giving it a star!   <a href="https://github.com/danielvartan/logolink/" class="external-link"><img src="https://img.shields.io/github/stars/danielvartan/logolink" alt="GitHub Repository Stars"></a></p>
 </blockquote>
@@ -227,14 +224,14 @@
 <span><span class="va">results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 110,110</span></span>
 <span><span class="co">#&gt; Columns: 10</span></span>
-<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 9, 7, 6, 3, 2, 8, 1, 4, 5, 7, 3, 9, 2, 7, 8,…</span></span>
+<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 1, 4, 8, 3, 6, 9, 5, 2, 7, 7, 9, 5, 8, 4, 6,…</span></span>
 <span><span class="co">#&gt; $ number_of_sheep        &lt;dbl&gt; 500, 500, 500, 500, 500, 500, 500, 500, 500,…</span></span>
 <span><span class="co">#&gt; $ number_of_wolves       &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…</span></span>
 <span><span class="co">#&gt; $ movement_cost          &lt;dbl&gt; 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…</span></span>
 <span><span class="co">#&gt; $ grass_regrowth_rate    &lt;dbl&gt; 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3,…</span></span>
 <span><span class="co">#&gt; $ energy_gain_from_grass &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,…</span></span>
 <span><span class="co">#&gt; $ energy_gain_from_sheep &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…</span></span>
-<span><span class="co">#&gt; $ step                   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 1,…</span></span>
+<span><span class="co">#&gt; $ step                   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1,…</span></span>
 <span><span class="co">#&gt; $ count_wolves           &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…</span></span>
 <span><span class="co">#&gt; $ count_sheep            &lt;dbl&gt; 500, 500, 500, 500, 500, 500, 500, 500, 500,…</span></span></code></pre></div>
 </div>

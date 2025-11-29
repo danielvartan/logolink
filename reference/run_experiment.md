@@ -1,13 +1,5 @@
 # Run a NetLogo BehaviorSpace experiment
 
-**Note**: The procedure for setting the NetLogo path has changed. For
-users of the CRAN release of `logolink` (version 0.1.0), see the
-previous instructions
-[here](https://github.com/danielvartan/logolink/tree/v0.1.0?tab=readme-ov-file#setting-the-netlogo-path).
-To access the latest features and improvements, install the development
-version of `logolink` from GitHub using:
-`remotes::install_github("danielvartan/logolink")`.
-
 `run_experiment()` runs a NetLogo BehaviorSpace experiment in headless
 mode and returns the results as a tidy data frame. It can be used with
 [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md)
@@ -31,6 +23,7 @@ run_experiment(
   setup_file = NULL,
   other_arguments = NULL,
   parse = TRUE,
+  timeout = Inf,
   netlogo_home = Sys.getenv("NETLOGO_HOME"),
   netlogo_path = lifecycle::deprecated()
 )
@@ -71,6 +64,14 @@ run_experiment(
   converted to R lists. If `FALSE`, the columns will remain as
   [`character`](https://rdrr.io/r/base/character.html) strings (default:
   `TRUE`).
+
+- timeout:
+
+  (optional) A [`numeric`](https://rdrr.io/r/base/numeric.html) value
+  specifying the maximum time (in seconds) to wait for the NetLogo
+  process to complete. If the process exceeds this time limit, it will
+  be terminated, and the function will return the available output up to
+  that point. Use `Inf` for no time limit (default: `Inf`).
 
 - netlogo_home:
 
