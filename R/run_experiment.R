@@ -2,14 +2,6 @@
 #'
 #' @description
 #'
-#' **Note**: The procedure for setting the NetLogo path has changed. For users
-#' of the CRAN release of `logolink` (version 0.1.0), see the previous
-#' instructions
-#' [here](https://github.com/danielvartan/logolink/tree/v0.1.0?tab=readme-ov-file#setting-the-netlogo-path).
-#' To access the latest features and improvements, install the development
-#' version of `logolink` from GitHub using:
-#' `remotes::install_github("danielvartan/logolink")`.
-#'
 #' `run_experiment()` runs a NetLogo BehaviorSpace experiment in headless mode
 #' and returns the results as a tidy data frame. It can be used with
 #' [`create_experiment()`][create_experiment()] to create the experiment XML
@@ -50,6 +42,11 @@
 #'   NetLogo lists (e.g., `[1 2 3]`) will be converted to R lists. If `FALSE`,
 #'   the columns will remain as [`character`][character()] strings
 #'   (default: `TRUE`).
+#' @param timeout (optional) A [`numeric`][numeric()] value specifying the
+#'   maximum time (in seconds) to wait for the NetLogo process to complete. If
+#'   the process exceeds this time limit, it will be terminated, and the
+#'   function will return the available output up to that point. Use `Inf`
+#'   for no time limit (default: `Inf`).
 #' @param netlogo_home (optional) A string specifying the path to the NetLogo
 #'   installation directory. If not provided, the function will use the value of
 #'   the `NETLOGO_HOME` environment variable. This argument is useful if you
@@ -169,6 +166,7 @@ run_experiment <- function(
   setup_file = NULL,
   other_arguments = NULL,
   parse = TRUE,
+  timeout = Inf,
   netlogo_home = Sys.getenv("NETLOGO_HOME"),
   netlogo_path = lifecycle::deprecated()
 ) {
@@ -179,11 +177,13 @@ run_experiment <- function(
   checkmate::assert_choice(fs::path_ext(model_path), model_path_choices)
   checkmate::assert_string(experiment, null.ok = TRUE)
   checkmate::assert_string(setup_file, null.ok = TRUE)
+  checkmate::assert_character(other_arguments, null.ok = TRUE)
+  checkmate::assert_flag(parse)
+  checkmate::assert_number(timeout, lower = 0)
+
   if (!is.null(setup_file)) {
     checkmate::assert_file_exists(setup_file, extension = "xml")
   }
-  checkmate::assert_character(other_arguments, null.ok = TRUE)
-  checkmate::assert_flag(parse)
 
   if (is.null(experiment) && is.null(setup_file)) {
     cli::cli_abort(
@@ -241,31 +241,59 @@ run_experiment <- function(
   file <- temp_file(pattern = "table-", fileext = ".csv")
   netlogo_path <- fs::path_expand(netlogo_path)
   model_path <- fs::path_expand(model_path)
+  timeout <- ifelse(is.infinite(timeout), 0, as.integer(timeout))
+
+  args <- c(
+    "--headless ",
+    glue::glue("--model {glue::double_quote(model_path)}"),
+    ifelse(
+      !is.null(experiment),
+      glue::glue("--experiment {glue::double_quote(experiment)}"),
+      ""
+    ),
+    ifelse(
+      !is.null(setup_file),
+      glue::glue("--setup-file {glue::double_quote(setup_file)}"),
+      ""
+    ),
+    # "--table -",
+    glue::glue("--table {glue::double_quote(file)}"),
+    other_arguments
+  )
+
+  command <- glue::glue("{netlogo_path} {paste0(args, collapse = ' ')}")
 
   cli::cli_progress_step("Running model")
 
-  raw_data <- system_2(
-    command = glue::glue("{netlogo_path}"),
-    args = c(
-      "--headless ",
-      glue::glue("--model {glue::double_quote(model_path)}"),
-      ifelse(
-        !is.null(experiment),
-        glue::glue("--experiment {glue::double_quote(experiment)}"),
-        ""
-      ),
-      ifelse(
-        !is.null(setup_file),
-        glue::glue("--setup-file {glue::double_quote(setup_file)}"),
-        ""
-      ),
-      # "--table -",
-      glue::glue("--table {glue::double_quote(file)}"),
-      other_arguments
-    ),
-    stdout = TRUE,
-    stderr = TRUE
-  )
+  raw_data <-
+    system_2(
+      command = glue::glue("{netlogo_path}"),
+      args = args,
+      stdout = TRUE,
+      stderr = TRUE,
+      timeout = timeout
+    ) |>
+    suppressMessages() |>
+    suppressWarnings()
+
+  cli::cli_progress_done()
+
+  status <-
+    raw_data |>
+    attributes() |>
+    magrittr::extract2("status")
+
+  if (!is.null(status)) {
+    if (status == 124) {
+      cli::cli_alert_warning(
+        paste0(
+          "The experiment timed out after ",
+          "{.strong {cli::col_red(timeout)}} seconds. ",
+          "Results may be incomplete."
+        )
+      )
+    }
+  }
 
   cli::cli_progress_step("Reading output")
 
@@ -276,8 +304,18 @@ run_experiment <- function(
     suppressWarnings() |>
     suppressMessages()
 
-  if (nrow(out) == 0) {
-    raw_data |> paste(collapse = "\n") |> cli::cli_abort()
+  if (!length(raw_data) == 0) {
+    cli::cli_abort(
+      paste0(
+        "NetLogo produced the following error during the experiment run:",
+        "\n\n",
+        paste(raw_data, collapse = "\n")
+      )
+    )
+  } else if (nrow(out) == 0) {
+    cli::cli_alert_warning("The experiment run did not return any data.")
+
+    out
   } else {
     if (isTRUE(parse)) {
       cli::cli_progress_step("Parsing lists")

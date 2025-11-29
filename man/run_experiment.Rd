@@ -10,6 +10,7 @@ run_experiment(
   setup_file = NULL,
   other_arguments = NULL,
   parse = TRUE,
+  timeout = Inf,
   netlogo_home = Sys.getenv("NETLOGO_HOME"),
   netlogo_path = lifecycle::deprecated()
 )
@@ -37,6 +38,12 @@ NetLogo lists (e.g., \verb{[1 2 3]}) will be converted to R lists. If \code{FALS
 the columns will remain as \code{\link[=character]{character}} strings
 (default: \code{TRUE}).}
 
+\item{timeout}{(optional) A \code{\link[=numeric]{numeric}} value specifying the
+maximum time (in seconds) to wait for the NetLogo process to complete. If
+the process exceeds this time limit, it will be terminated, and the
+function will return the available output up to that point. Use \code{Inf}
+for no time limit (default: \code{Inf}).}
+
 \item{netlogo_home}{(optional) A string specifying the path to the NetLogo
 installation directory. If not provided, the function will use the value of
 the \code{NETLOGO_HOME} environment variable. This argument is useful if you
@@ -51,14 +58,6 @@ A \code{\link[dplyr:reexports]{tibble}} containing the results of the
 experiment.
 }
 \description{
-\strong{Note}: The procedure for setting the NetLogo path has changed. For users
-of the CRAN release of \code{logolink} (version 0.1.0), see the previous
-instructions
-\href{https://github.com/danielvartan/logolink/tree/v0.1.0?tab=readme-ov-file#setting-the-netlogo-path}{here}.
-To access the latest features and improvements, install the development
-version of \code{logolink} from GitHub using:
-\code{remotes::install_github("danielvartan/logolink")}.
-
 \code{run_experiment()} runs a NetLogo BehaviorSpace experiment in headless mode
 and returns the results as a tidy data frame. It can be used with
 \code{\link[=create_experiment]{create_experiment()}} to create the experiment XML
