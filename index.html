@@ -122,14 +122,12 @@
 <div class="section level3">
 <h3 id="setting-the-netlogo-path">Setting the NetLogo Path<a class="anchor" aria-label="anchor" href="#setting-the-netlogo-path"></a>
 </h3>
-<blockquote>
-<p>The procedure for setting the NetLogo path has changed. If you’re using the CRAN release of <code>logolink</code> (version 0.1.0), you can find the previous instructions <a href="https://github.com/danielvartan/logolink/tree/v0.1.0?tab=readme-ov-file#setting-the-netlogo-path" class="external-link">here</a>.</p>
-</blockquote>
-<p><code>logolink</code> requires the path to the NetLogo installation to be set as an environment variable named <code>NETLOGO_HOME</code> when running simulations. The exact path varies depending on your operating system but is usually easy to find. On Windows, for example, it typically looks like <code>C:\Program Files\NetLogo 7.0.2</code>.</p>
+<p><code>logolink</code> will try to find out the path to the NetLogo installation automatically, but <strong>if it fails</strong>, you will need to set it manually.</p>
+<p>This requires the path to the NetLogo installation to be set as an environment variable named <code>NETLOGO_HOME</code> when running simulations. The exact path varies depending on your operating system but is usually easy to find. On Windows, for example, it typically looks like <code>C:\Program Files\NetLogo 7.0.2</code>.</p>
 <p>You can set this environment variable temporarily in your R session using <code>Sys.setenv("NETLOGO_HOME" = "[PATH]")</code>, or permanently by adding it to your <a href="https://rstats.wtf/r-startup.html#renviron" class="external-link"><code>.Renviron</code></a> file.</p>
 <p>Example (Windows):</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"NETLOGO_HOME"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"C:"</span>, <span class="st">"Program Files"</span>, <span class="st">"NetLogo 7.0.2"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>NETLOGO_HOME <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"C:"</span>, <span class="st">"Program Files"</span>, <span class="st">"NetLogo 7.0.2"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"NETLOGO_HOME"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "C:\Program Files\NetLogo 7.0.2"</span></span></code></pre></div>
@@ -214,17 +212,16 @@
 <span>    <span class="st">"Wolf Sheep Simple 5.nlogox"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/run_experiment.html">run_experiment</a></span><span class="op">(</span></span>
-<span>  model_path <span class="op">=</span> <span class="va">model_path</span>,</span>
-<span>  setup_file <span class="op">=</span> <span class="va">setup_file</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span></span>
+<span>  <span class="va">model_path</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/run_experiment.html">run_experiment</a></span><span class="op">(</span>setup_file <span class="op">=</span> <span class="va">setup_file</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 110,110</span></span>
 <span><span class="co">#&gt; Columns: 10</span></span>
-<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 1, 4, 8, 3, 6, 9, 5, 2, 7, 7, 9, 5, 8, 4, 6,…</span></span>
+<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 8, 4, 3, 9, 7, 5, 2, 6, 1, 6, 1, 5, 9, 4, 7,…</span></span>
 <span><span class="co">#&gt; $ number_of_sheep        &lt;dbl&gt; 500, 500, 500, 500, 500, 500, 500, 500, 500,…</span></span>
 <span><span class="co">#&gt; $ number_of_wolves       &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…</span></span>
 <span><span class="co">#&gt; $ movement_cost          &lt;dbl&gt; 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…</span></span>

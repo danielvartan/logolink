@@ -22,6 +22,11 @@ inspect_experiment_file(file)
 An [invisible](https://rdrr.io/r/base/invisible.html) `NULL`. This
 function is used for its side effect.
 
+## See also
+
+Other utility functions:
+[`parse_netlogo_list()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_list.md)
+
 ## Examples
 
 ``` r

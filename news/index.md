@@ -18,6 +18,8 @@
 - Added support for non-tabular data in
   [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md).
   The function now print those outputs in the console.
+- Added heuristics to automatically detect NetLogo installation paths on
+  Windows, macOS, and Linux.
 - Added new unit tests.
 - Improved the heuristics in
   [`parse_netlogo_list()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_list.md).

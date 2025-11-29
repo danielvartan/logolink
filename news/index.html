@@ -50,6 +50,7 @@
 <li>Deprecated the <code>netlogo_path</code> argument in <code><a href="../reference/run_experiment.html">run_experiment()</a></code>. The NetLogo path must now be set using an environment variable named <code>NETLOGO_HOME</code> (e.g., <code>Sys.setenv("NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.2"))</code>).</li>
 <li>Added the parameter <code>timeout</code> to <code><a href="../reference/run_experiment.html">run_experiment()</a></code> to specify the maximum time (in seconds) to wait for an experiment to complete before terminating it.</li>
 <li>Added support for non-tabular data in <code><a href="../reference/run_experiment.html">run_experiment()</a></code>. The function now print those outputs in the console.</li>
+<li>Added heuristics to automatically detect NetLogo installation paths on Windows, macOS, and Linux.</li>
 <li>Added new unit tests.</li>
 <li>Improved the heuristics in <code><a href="../reference/parse_netlogo_list.html">parse_netlogo_list()</a></code>.</li>
 <li>Improved the documentation.</li>

@@ -10,9 +10,10 @@ and returns the results as a tidy data frame. It can be used with
 create_experiment() to create the experiment XML
 file on the fly, or with an existing experiment stored in the NetLogo model
 file.
-Note that this function requires the path to the NetLogo installation to be
-set as an environment variable named NETLOGO_HOME. See the Details
-section for more information.
+The function tries to locate the NetLogo installation automatically.
+If it fails, you must set the path manually by defining the
+NETLOGO_HOME environment variable and pointing it to the NetLogo
+installation directory. See the Details section for more information.
 For complete guidance on setting up and running experiments in NetLogo,
 please refer to the
 BehaviorSpace Guide."><meta property="og:description" content="run_experiment() runs a NetLogo BehaviorSpace experiment in headless mode
@@ -20,9 +21,10 @@ and returns the results as a tidy data frame. It can be used with
 create_experiment() to create the experiment XML
 file on the fly, or with an existing experiment stored in the NetLogo model
 file.
-Note that this function requires the path to the NetLogo installation to be
-set as an environment variable named NETLOGO_HOME. See the Details
-section for more information.
+The function tries to locate the NetLogo installation automatically.
+If it fails, you must set the path manually by defining the
+NETLOGO_HOME environment variable and pointing it to the NetLogo
+installation directory. See the Details section for more information.
 For complete guidance on setting up and running experiments in NetLogo,
 please refer to the
 BehaviorSpace Guide."><meta property="og:image" content="https://danielvartan.github.io/logolink/reference/figures/og-image.png"><meta property="og:image:alt" content="logolink"></head><body>
@@ -70,9 +72,10 @@ and returns the results as a tidy data frame. It can be used with
 <code><a href="create_experiment.html">create_experiment()</a></code> to create the experiment XML
 file on the fly, or with an existing experiment stored in the NetLogo model
 file.</p>
-<p>Note that this function requires the path to the NetLogo installation to be
-set as an environment variable named <code>NETLOGO_HOME</code>. See the <em>Details</em>
-section for more information.</p>
+<p>The function tries to locate the NetLogo installation automatically.
+If it fails, you must set the path manually by defining the
+<code>NETLOGO_HOME</code> environment variable and pointing it to the NetLogo
+installation directory. See the <em>Details</em> section for more information.</p>
 <p>For complete guidance on setting up and running experiments in NetLogo,
 please refer to the
 <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace Guide</a>.</p>
@@ -87,7 +90,7 @@ please refer to the
 <span>  other_arguments <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  timeout <span class="op">=</span> <span class="cn">Inf</span>,</span>
-<span>  netlogo_home <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"NETLOGO_HOME"</span><span class="op">)</span>,</span>
+<span>  netlogo_home <span class="op">=</span> <span class="fu">find_netlogo_home</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  netlogo_path <span class="op">=</span> <span class="fu">lifecycle</span><span class="fu">::</span><span class="fu"><a href="https://lifecycle.r-lib.org/reference/deprecated.html" class="external-link">deprecated</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -141,7 +144,7 @@ for no time limit (default: <code>Inf</code>).</p></dd>
 installation directory. If not provided, the function will use the value of
 the <code>NETLOGO_HOME</code> environment variable. This argument is useful if you
 want to override the environment variable for a specific function call
-(default: <code>Sys.getenv("NETLOGO_HOME")</code>).</p></dd>
+(default: <code>logolink:::find_netlogo_home()</code>).</p></dd>
 
 
 <dt id="arg-netlogo-path">netlogo_path<a class="anchor" aria-label="anchor" href="#arg-netlogo-path"></a></dt>
@@ -156,12 +159,16 @@ experiment.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p><code>run_experiment()</code> requires the path to the NetLogo installation to be set
-as an environment variable named <code>NETLOGO_HOME</code>. On Windows, the path
-typically looks like <code>C:\Program Files\NetLogo 7.0.2</code>. You can set this
-environment variable temporarily in your R session using
+    <p>If <code>run_experiment()</code> cannot find the NetLogo installation,
+you will need to set the path manually using the <code>NETLOGO_HOME</code> environment
+variable. On Windows, a typical path is <code>C:\Program Files\NetLogo 7.0.2</code>.
+You can set this variable temporarily in your R session with
 <code>Sys.setenv("NETLOGO_HOME" = "[PATH]")</code>, or permanently by adding it to your
 <a href="https://rstats.wtf/r-startup.html#renviron" class="external-link"><code>.Renviron</code></a> file.</p>
+<p>If even after setting the <code>NETLOGO_HOME</code> environment variable you still
+encounter issues, please try to set a <code>NETLOGO_EXE</code> environment variable to
+the path of the NetLogo executable. On Windows, this would be the full path
+to <code>NetLogo.exe</code> (e.g., <code>C:\Program Files\NetLogo 7.0.2\NetLogo.exe</code>).</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

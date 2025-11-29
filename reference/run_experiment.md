@@ -6,9 +6,10 @@ mode and returns the results as a tidy data frame. It can be used with
 to create the experiment XML file on the fly, or with an existing
 experiment stored in the NetLogo model file.
 
-Note that this function requires the path to the NetLogo installation to
-be set as an environment variable named `NETLOGO_HOME`. See the
-*Details* section for more information.
+The function tries to locate the NetLogo installation automatically. If
+it fails, you must set the path manually by defining the `NETLOGO_HOME`
+environment variable and pointing it to the NetLogo installation
+directory. See the *Details* section for more information.
 
 For complete guidance on setting up and running experiments in NetLogo,
 please refer to the [BehaviorSpace
@@ -24,7 +25,7 @@ run_experiment(
   other_arguments = NULL,
   parse = TRUE,
   timeout = Inf,
-  netlogo_home = Sys.getenv("NETLOGO_HOME"),
+  netlogo_home = find_netlogo_home(),
   netlogo_path = lifecycle::deprecated()
 )
 ```
@@ -79,7 +80,7 @@ run_experiment(
   directory. If not provided, the function will use the value of the
   `NETLOGO_HOME` environment variable. This argument is useful if you
   want to override the environment variable for a specific function call
-  (default: `Sys.getenv("NETLOGO_HOME")`).
+  (default: `logolink:::find_netlogo_home()`).
 
 - netlogo_path:
 
@@ -93,12 +94,19 @@ containing the results of the experiment.
 
 ## Details
 
-`run_experiment()` requires the path to the NetLogo installation to be
-set as an environment variable named `NETLOGO_HOME`. On Windows, the
-path typically looks like `C:\Program Files\NetLogo 7.0.2`. You can set
-this environment variable temporarily in your R session using
-`Sys.setenv("NETLOGO_HOME" = "[PATH]")`, or permanently by adding it to
-your [`.Renviron`](https://rstats.wtf/r-startup.html#renviron) file.
+If `run_experiment()` cannot find the NetLogo installation, you will
+need to set the path manually using the `NETLOGO_HOME` environment
+variable. On Windows, a typical path is
+`C:\Program Files\NetLogo 7.0.2`. You can set this variable temporarily
+in your R session with `Sys.setenv("NETLOGO_HOME" = "[PATH]")`, or
+permanently by adding it to your
+[`.Renviron`](https://rstats.wtf/r-startup.html#renviron) file.
+
+If even after setting the `NETLOGO_HOME` environment variable you still
+encounter issues, please try to set a `NETLOGO_EXE` environment variable
+to the path of the NetLogo executable. On Windows, this would be the
+full path to `NetLogo.exe` (e.g.,
+`C:\Program Files\NetLogo 7.0.2\NetLogo.exe`).
 
 ## See also
 

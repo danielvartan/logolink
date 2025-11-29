@@ -28,6 +28,11 @@ A [`list`](https://rdrr.io/r/base/list.html) of parsed elements if the
 input contains NetLogo-style lists; otherwise, returns the original
 vector.
 
+## See also
+
+Other utility functions:
+[`inspect_experiment_file()`](https://danielvartan.github.io/logolink/reference/inspect_experiment_file.md)
+
 ## Examples
 
 ``` r
