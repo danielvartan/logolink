@@ -272,7 +272,9 @@ run_experiment <- function(
     other_arguments
   )
 
-  command <- glue::glue("{netlogo_executable} {paste0(args, collapse = ' ')}")
+  command <- glue::glue( #nolint
+    "{netlogo_executable} {paste0(args, collapse = ' ')}"
+  )
 
   cli::cli_progress_step("Running model")
 

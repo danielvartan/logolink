@@ -58,8 +58,8 @@ parse_netlogo_list <- function(x) {
 
   if (is.character(x)) {
     if (
-    test_unitary_list(x) &&
-      !any(stringr::str_detect(x, "^\\[.*\\]$"), na.rm = TRUE)
+      test_unitary_list(x) &&
+        !any(stringr::str_detect(x, "^\\[.*\\]$"), na.rm = TRUE)
     ) {
       x
     } else {

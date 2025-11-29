@@ -31,7 +31,7 @@ directly from R. It offers a modern, streamlined interface for running
 models, following the [tidyverse
 principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and
 integrating seamlessly with the broader [tidyverse
-ecosystem](https://www.tidyverse.org/).
+ecosystem](https://tidyverse.org/).
 
 The package is designed to work with NetLogo **7.0.1 and above**. If you
 need support for earlier NetLogo releases (up to 7.0.0), use an older
@@ -306,13 +306,13 @@ support its continued improvement.
 ``` r
 citation("logolink")
 #> To cite logolink in publications use:
-#> 
+#>
 #>   Vartanian, D. (2025). logolink: An interface for running NetLogo
 #>   simulations from R [Computer software]. CRAN.
 #>   https://doi.org/10.32614/CRAN.package.logolink
-#> 
+#>
 #> A BibTeX entry for LaTeX users is
-#> 
+#>
 #>   @Misc{,
 #>     title = {logolink: An interface for running NetLogo simulations from R},
 #>     author = {Daniel Vartanian},
