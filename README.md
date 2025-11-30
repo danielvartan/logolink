@@ -102,7 +102,7 @@ library(logolink)
 ### Setting the NetLogo Path
 
 `logolink` will try to find out the path to the NetLogo installation
-automatically. This is usually successful, but **if it fails**, you will
+automatically. This is usually successful, but if it fails, you will
 need to set it manually. In the latter case, see the documentation of
 the
 [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html)
@@ -230,7 +230,7 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 1, 5, 7, 9, 4, 8, 2, 3, 6, 1, 8, 7, 5, 9, 3,…
+#> $ run_number             <dbl> 4, 3, 9, 1, 2, 7, 6, 8, 5, 5, 3, 8, 7, 9, 2,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…
@@ -364,17 +364,18 @@ a donation. Please mention `logolink` in your donation message.
 
 <table>
   <tr>
-    <td width="30%">
+    <td width="30%" valign="middle">
       <br/>
       <br/>
       <p align="center">
         <a href="https://www.fsp.usp.br/sustentarea/">
-          <img src="man/figures/sustentarea-logo.svg" width="125"/>
+          <img src="man/figures/sustentarea-logo.svg" width="115"/>
         </a>
       </p>
       <br/>
+      <br/>
     </td>
-    <td width="70%">
+    <td width="70%" valign="middle">
       <p>
         This work was developed with support from the 
         <a href="https://www.fsp.usp.br/sustentarea/">Sustentarea</a>
@@ -386,7 +387,8 @@ a donation. Please mention `logolink` in your donation message.
 
 <table>
   <tr>
-    <td width="30%">
+    <td width="30%" valign="middle">
+      <br/>
       <br/>
       <p align="center">
         <a href="https://www.gov.br/cnpq/">
@@ -394,8 +396,9 @@ a donation. Please mention `logolink` in your donation message.
         </a>
       </p>
       <br/>
+      <br/>
     </td>
-    <td width="70%">
+    <td width="70%" valign="middle">
       <p>
         This work was supported by the Department of Science and 
         Technology of the Secretariat of Science, Technology, and Innovation 

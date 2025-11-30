@@ -9,7 +9,7 @@
 #' file.
 #'
 #' The function tries to locate the NetLogo installation automatically.
-#' This is usually successful, but **if it fails**, you will need to set it
+#' This is usually successful, but if it fails, you will need to set it
 #' manually. In the latter case, see *Details* section for more information.
 #'
 #' For complete guidance on setting up and running experiments in NetLogo,
@@ -26,7 +26,7 @@
 #' You can set this variable temporarily in your R session with:
 #'
 #' ```r
-#' Sys.setenv("NETLOGO_HOME" = "PATH/TO/NETLOGO/INSTALLATION")
+#' Sys.setenv(NETLOGO_HOME = "PATH/TO/NETLOGO/INSTALLATION")
 #' ```
 #'
 #' or permanently by adding it to your

@@ -133,7 +133,7 @@ library(logolink)
 
 ### Setting the NetLogo Path
 
-`logolink` will try to find out the path to the NetLogo installation automatically. This is usually successful, but **if it fails**, you will need to set it manually. In the latter case, see the documentation of the [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html) function for more details.
+`logolink` will try to find out the path to the NetLogo installation automatically. This is usually successful, but if it fails, you will need to set it manually. In the latter case, see the documentation of the [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html) function for more details.
 
 ### Creating an Experiment
 
@@ -337,15 +337,18 @@ tags$table(
       tags$p(
         tags$a(
           tags$img(
-            src = "man/figures/sustentarea-logo.svg", # Don't use `here()` here.
-            width = 125
+            # Don't use `here()` here.
+            src = "man/figures/sustentarea-logo.svg",
+            width = 115
           ),
           href = "https://www.fsp.usp.br/sustentarea/"
         ),
         align = "center"
       ),
       tags$br(),
-      width = "30%"
+      tags$br(),
+      width = "30%",
+      valign = "middle"
     ),
     tags$td(
       tags$p(
@@ -362,7 +365,8 @@ tags$table(
         ),
         ")."
       ),
-      width = "70%"
+      width = "70%",
+      valign = "middle"
     )
   )
 ) |>
@@ -372,10 +376,12 @@ tags$table(
   tags$tr(
     tags$td(
       tags$br(),
+      tags$br(),
       tags$p(
         tags$a(
           tags$img(
-            src = "man/figures/cnpq-logo.svg", # Don't use `here()` here.
+            # Don't use `here()` here.
+            src = "man/figures/cnpq-logo.svg",
             width = 150
           ),
           href = "https://www.gov.br/cnpq/"
@@ -383,7 +389,9 @@ tags$table(
         align = "center"
       ),
       tags$br(),
-      width = "30%"
+      tags$br(),
+      width = "30%",
+      valign = "middle"
     ),
     tags$td(
       tags$p(
@@ -410,7 +418,8 @@ tags$table(
         ),
         ") (grant no. 444588/2023-0)."
       ),
-      width = "70%"
+      width = "70%",
+      valign = "middle"
     )
   )
 ) |>

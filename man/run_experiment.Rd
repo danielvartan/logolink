@@ -70,7 +70,7 @@ file on the fly, or with an existing experiment stored in the NetLogo model
 file.
 
 The function tries to locate the NetLogo installation automatically.
-This is usually successful, but \strong{if it fails}, you will need to set it
+This is usually successful, but if it fails, you will need to set it
 manually. In the latter case, see \emph{Details} section for more information.
 
 For complete guidance on setting up and running experiments in NetLogo,
@@ -85,7 +85,7 @@ set the path manually using the \code{NETLOGO_HOME} environment variable. On
 Windows, a typical path is something like \verb{C:\\Program Files\\NetLogo 7.0.2}.
 You can set this variable temporarily in your R session with:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{Sys.setenv("NETLOGO_HOME" = "PATH/TO/NETLOGO/INSTALLATION")
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{Sys.setenv(NETLOGO_HOME = "PATH/TO/NETLOGO/INSTALLATION")
 }\if{html}{\out{</div>}}
 
 or permanently by adding it to your
