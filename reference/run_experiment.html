@@ -71,7 +71,7 @@ and returns the results as a tidy data frame. It can be used with
 file on the fly, or with an existing experiment stored in the NetLogo model
 file.</p>
 <p>The function tries to locate the NetLogo installation automatically.
-This is usually successful, but <strong>if it fails</strong>, you will need to set it
+This is usually successful, but if it fails, you will need to set it
 manually. In the latter case, see <em>Details</em> section for more information.</p>
 <p>For complete guidance on setting up and running experiments in NetLogo,
 please refer to the
@@ -172,7 +172,7 @@ experiment.</p>
 set the path manually using the <code>NETLOGO_HOME</code> environment variable. On
 Windows, a typical path is something like <code>C:\Program Files\NetLogo 7.0.2</code>.
 You can set this variable temporarily in your R session with:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"NETLOGO_HOME"</span> <span class="op">=</span> <span class="st">"PATH/TO/NETLOGO/INSTALLATION"</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>NETLOGO_HOME <span class="op">=</span> <span class="st">"PATH/TO/NETLOGO/INSTALLATION"</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>or permanently by adding it to your
 <a href="https://rstats.wtf/r-startup.html#renviron" class="external-link"><code>.Renviron</code></a> file.</p>
 <p>If even after setting the <code>NETLOGO_HOME</code> variable you still encounter issues,

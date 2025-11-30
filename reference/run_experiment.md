@@ -7,7 +7,7 @@ to create the experiment XML file on the fly, or with an existing
 experiment stored in the NetLogo model file.
 
 The function tries to locate the NetLogo installation automatically.
-This is usually successful, but **if it fails**, you will need to set it
+This is usually successful, but if it fails, you will need to set it
 manually. In the latter case, see *Details* section for more
 information.
 
@@ -110,7 +110,7 @@ variable. On Windows, a typical path is something like
 `C:\Program Files\NetLogo 7.0.2`. You can set this variable temporarily
 in your R session with:
 
-    Sys.setenv("NETLOGO_HOME" = "PATH/TO/NETLOGO/INSTALLATION")
+    Sys.setenv(NETLOGO_HOME = "PATH/TO/NETLOGO/INSTALLATION")
 
 or permanently by adding it to your
 [`.Renviron`](https://rstats.wtf/r-startup.html#renviron) file.

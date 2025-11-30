@@ -6,8 +6,8 @@
   maintainer, conceptor, copyright holder.
   [](https://orcid.org/0000-0001-7782-759X)
 
-- **Aline Martins Carvalho**. Scientific advisor.
-  [](https://orcid.org/0000-0002-4900-5609)
+- **[Aline Martins Carvalho](https://github.com/alinenutri/)**.
+  Scientific advisor. [](https://orcid.org/0000-0002-4900-5609)
 
 - **[Leandro Garcia](https://github.com/leandromtg/)**. Scientific
   advisor. [](https://orcid.org/0000-0001-5947-2617)
