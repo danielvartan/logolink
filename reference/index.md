@@ -13,10 +13,10 @@ Functions to setup and execute NetLogo.
 
 Utility functions to help with parsing and data manipulation.
 
-- [`find_netlogo_console()`](https://danielvartan.github.io/logolink/reference/find_netlogo_console.md)
-  : Find NetLogo Executable File
 - [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)
   : Find NetLogo Installation Directory
+- [`find_netlogo_console()`](https://danielvartan.github.io/logolink/reference/find_netlogo_console.md)
+  : Find NetLogo Executable File
 - [`find_netlogo_version()`](https://danielvartan.github.io/logolink/reference/find_netlogo_version.md)
   : Find NetLogo Version
 - [`inspect_experiment_file()`](https://danielvartan.github.io/logolink/reference/inspect_experiment_file.md)

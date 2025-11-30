@@ -9,15 +9,16 @@
 - **Aline Martins Carvalho**. Scientific advisor.
   [](https://orcid.org/0000-0002-4900-5609)
 
-- **Leandro Garcia**. Scientific advisor.
-  [](https://orcid.org/0000-0001-5947-2617)
+- **[Leandro Garcia](https://github.com/leandromtg/)**. Scientific
+  advisor. [](https://orcid.org/0000-0001-5947-2617)
 
-- **National Council for Scientific and Technological Development
-  (CNPq)**. Funder.
+- **[National Council for Scientific and Technological Development
+  (CNPq)](https://www.gov.br/cnpq/)**. Funder.
 
-- **University of Sao Paulo (USP)**. Funder.
+- **[University of Sao Paulo (USP)](https://www5.usp.br/)**. Funder.
 
-- **Sustentarea Research and Extension Center**. Funder.
+- **[Sustentarea Research and Extension
+  Center](https://www.fsp.usp.br/sustentarea/)**. Funder.
 
 ## Citation
 
