@@ -8,9 +8,9 @@
 - Added [`lifecycle`](https://lifecycle.r-lib.org/) as a dependency.
 - Deprecated the `netlogo_path` argument in
   [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md).
-  The NetLogo path must now be set using an environment variable named
-  `NETLOGO_HOME` (e.g.,
-  `Sys.setenv("NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.2"))`).
+  The package now tries to automatically detect the NetLogo installation
+  using helper functions. There is still an option to manually specify
+  the path to NetLogo, which is explained in the updated documentation.
 - Added the parameter `timeout` to
   [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
   to specify the maximum time (in seconds) to wait for an experiment to
@@ -18,8 +18,13 @@
 - Added support for non-tabular data in
   [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md).
   The function now print those outputs in the console.
-- Added heuristics to automatically detect NetLogo installation paths on
-  Windows, macOS, and Linux.
+- Added
+  [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md),
+  [`find_netlogo_console()`](https://danielvartan.github.io/logolink/reference/find_netlogo_console.md),
+  and
+  [`find_netlogo_version()`](https://danielvartan.github.io/logolink/reference/find_netlogo_version.md).
+  These functions use heuristics to automatically detect NetLogo
+  installations on Windows, macOS, and Linux.
 - Added new unit tests.
 - Improved the heuristics in
   [`parse_netlogo_list()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_list.md).

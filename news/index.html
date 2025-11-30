@@ -47,10 +47,10 @@
 <h2 class="pkg-version" data-toc-text="0.1.0.9000" id="logolink-0109000-development-version">logolink 0.1.0.9000 (development version)<a class="anchor" aria-label="anchor" href="#logolink-0109000-development-version"></a></h2>
 <ul><li>Added support for NetLogo 7.0.1 and above. This NetLogo patch release changed the XML structure of BehaviorSpace experiments; <code>logolink</code> now supports the new format.</li>
 <li>Added <a href="https://lifecycle.r-lib.org/" class="external-link"><code>lifecycle</code></a> as a dependency.</li>
-<li>Deprecated the <code>netlogo_path</code> argument in <code><a href="../reference/run_experiment.html">run_experiment()</a></code>. The NetLogo path must now be set using an environment variable named <code>NETLOGO_HOME</code> (e.g., <code>Sys.setenv("NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.2"))</code>).</li>
+<li>Deprecated the <code>netlogo_path</code> argument in <code><a href="../reference/run_experiment.html">run_experiment()</a></code>. The package now tries to automatically detect the NetLogo installation using helper functions. There is still an option to manually specify the path to NetLogo, which is explained in the updated documentation.</li>
 <li>Added the parameter <code>timeout</code> to <code><a href="../reference/run_experiment.html">run_experiment()</a></code> to specify the maximum time (in seconds) to wait for an experiment to complete before terminating it.</li>
 <li>Added support for non-tabular data in <code><a href="../reference/run_experiment.html">run_experiment()</a></code>. The function now print those outputs in the console.</li>
-<li>Added heuristics to automatically detect NetLogo installation paths on Windows, macOS, and Linux.</li>
+<li>Added <code><a href="../reference/find_netlogo_home.html">find_netlogo_home()</a></code>, <code><a href="../reference/find_netlogo_console.html">find_netlogo_console()</a></code>, and <code><a href="../reference/find_netlogo_version.html">find_netlogo_version()</a></code>. These functions use heuristics to automatically detect NetLogo installations on Windows, macOS, and Linux.</li>
 <li>Added new unit tests.</li>
 <li>Improved the heuristics in <code><a href="../reference/parse_netlogo_list.html">parse_netlogo_list()</a></code>.</li>
 <li>Improved the documentation.</li>

@@ -88,7 +88,7 @@
 <p>If you find this project useful, please consider giving it a star!   <a href="https://github.com/danielvartan/logolink/" class="external-link"><img src="https://img.shields.io/github/stars/danielvartan/logolink" alt="GitHub Repository Stars"></a></p>
 </blockquote>
 <blockquote>
-<p>The continuous development of <code>logolink</code> depends on community support. If you find this project useful, and can afford to do so, please consider becoming a sponsor.   <a href="https://github.com/sponsors/danielvartan" class="external-link"><img src="https://img.shields.io/static/v1?label=Sponsor&amp;message=%E2%9D%A4&amp;logo=GitHub&amp;color=%23fe8e86"></a></p>
+<p>The continuous development of <code>logolink</code> depends on community support. If you can afford to do so, please consider becoming a sponsor.   <a href="https://github.com/sponsors/danielvartan" class="external-link"><img src="https://img.shields.io/static/v1?label=Sponsor&amp;message=%E2%9D%A4&amp;logo=GitHub&amp;color=%23fe8e86"></a></p>
 </blockquote>
 </div>
 <div class="section level2">
@@ -119,10 +119,13 @@
 <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a>: Run a NetLogo BehaviorSpace experiment.</li>
 </ul>
 <p>Along with this package, you will also need NetLogo 7.0.1 or higher installed on your computer. You can download it from the <a href="https://www.netlogo.org" class="external-link">NetLogo website</a>.</p>
+<p>After installing NetLogo and <code>logolink</code>, start by loading the package with:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://danielvartan.github.io/logolink/">logolink</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="setting-the-netlogo-path">Setting the NetLogo Path<a class="anchor" aria-label="anchor" href="#setting-the-netlogo-path"></a>
 </h3>
-<p><code>logolink</code> will try to find out the path to the NetLogo installation automatically, but <strong>if it fails</strong>, you will need to set it manually. In the latter case, see the documentation of the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a> function for more details.</p>
+<p><code>logolink</code> will try to find out the path to the NetLogo installation automatically. This is usually successful, but <strong>if it fails</strong>, you will need to set it manually. In the latter case, see the documentation of the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a> function for more details.</p>
 </div>
 <div class="section level3">
 <h3 id="creating-an-experiment">Creating an Experiment<a class="anchor" aria-label="anchor" href="#creating-an-experiment"></a>
@@ -130,8 +133,6 @@
 <p>To start running your model from R you first need to setup an experiment. You can do this by setting a <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a> experiment with the <a href="https://danielvartan.github.io/logolink/reference/create_experiment.html"><code>create_experiment</code></a> function. This function will create a <a href="https://en.wikipedia.org/wiki/XML" class="external-link">XML</a> file that contains all the information about your experiment, including the parameters to vary, the metrics to collect, and the number of runs to perform.</p>
 <p>Alternatively, you can set up your experiment directly in NetLogo and save it as part of your model. In this case, you can skip the <a href="https://danielvartan.github.io/logolink/reference/create_experiment.html"><code>create_experiment</code></a> step and just provide the name of the experiment when running the model with <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a>.</p>
 <p>Example:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://danielvartan.github.io/logolink/">logolink</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/create_experiment.html">create_experiment</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="st">"Wolf Sheep Simple Model Analysis"</span>,</span>
@@ -159,6 +160,7 @@
 <span>    <span class="st">"energy-gain-from-sheep"</span> <span class="op">=</span> <span class="fl">5</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
+<p>If you want to inspect the created experiment file, you can use the <a href="https://danielvartan.github.io/logolink/reference/inspect_experiment_file.html"><code>inspect_experiment_file</code></a> function:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/inspect_experiment_file.html">inspect_experiment_file</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;experiments&gt;</span></span>
@@ -194,15 +196,17 @@
 <h3 id="running-an-experiment">Running an Experiment<a class="anchor" aria-label="anchor" href="#running-an-experiment"></a>
 </h3>
 <p>With the experiment file created, you can now run your model using the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a> function. This function will execute the NetLogo model with the specified parameters and return the results as a tidy data frame.</p>
+<p>First you need to specify the path to your NetLogo model. In this example, we will use the <em>Wolf Sheep Simple 5</em> model that comes with any NetLogo installation.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model_path</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"NETLOGO_HOME"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/find_netlogo_home.html">find_netlogo_home</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span>
 <span>    <span class="st">"models"</span>,</span>
 <span>    <span class="st">"IABM Textbook"</span>,</span>
 <span>    <span class="st">"chapter 4"</span>,</span>
 <span>    <span class="st">"Wolf Sheep Simple 5.nlogox"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
+<p>After specifying the model path, you can run the experiment with:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">model_path</span> <span class="op">|&gt;</span></span>
@@ -213,16 +217,16 @@
 <span><span class="va">results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 110,110</span></span>
 <span><span class="co">#&gt; Columns: 10</span></span>
-<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 5, 4, 4, 5, 4, 4, 9, 5, 3, 6, 7, 1, 4, 8, 4,…</span></span>
+<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 4, 3, 2, 1, 9, 7, 5, 6, 8, 4, 5, 6, 2, 1, 3,…</span></span>
 <span><span class="co">#&gt; $ number_of_sheep        &lt;dbl&gt; 500, 500, 500, 500, 500, 500, 500, 500, 500,…</span></span>
 <span><span class="co">#&gt; $ number_of_wolves       &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…</span></span>
 <span><span class="co">#&gt; $ movement_cost          &lt;dbl&gt; 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…</span></span>
 <span><span class="co">#&gt; $ grass_regrowth_rate    &lt;dbl&gt; 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3,…</span></span>
 <span><span class="co">#&gt; $ energy_gain_from_grass &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,…</span></span>
 <span><span class="co">#&gt; $ energy_gain_from_sheep &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…</span></span>
-<span><span class="co">#&gt; $ step                   &lt;dbl&gt; 0, 0, 1, 1, 2, 3, 0, 2, 0, 0, 0, 0, 4, 0, 5,…</span></span>
+<span><span class="co">#&gt; $ step                   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1,…</span></span>
 <span><span class="co">#&gt; $ count_wolves           &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…</span></span>
-<span><span class="co">#&gt; $ count_sheep            &lt;dbl&gt; 500, 500, 498, 498, 498, 495, 500, 497, 500,…</span></span></code></pre></div>
+<span><span class="co">#&gt; $ count_sheep            &lt;dbl&gt; 500, 500, 500, 500, 500, 500, 500, 500, 500,…</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="analyzing-the-data-bonus-section">Analyzing the Data (Bonus Section)<a class="anchor" aria-label="anchor" href="#analyzing-the-data-bonus-section"></a>
