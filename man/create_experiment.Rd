@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_experiment.R
 \name{create_experiment}
 \alias{create_experiment}
-\title{Create a NetLogo BehaviorSpace experiment XML file}
+\title{Create a NetLogo BehaviorSpace experiment}
 \usage{
 create_experiment(
   name = "",
@@ -18,59 +18,69 @@ create_experiment(
   exit_condition = NULL,
   metrics = c("count turtles", "count patches"),
   run_metrics_condition = NULL,
-  constants = NULL
+  constants = NULL,
+  file = tempfile(pattern = "experiment-", fileext = ".xml")
 )
 }
 \arguments{
-\item{name}{(optional) A string specifying the name of the experiment
-(default: \code{""}).}
+\item{name}{(optional) A \code{\link[base:character]{character}} string specifying the
+name of the experiment (default: \code{""}).}
 
 \item{repetitions}{(optional) An integer number specifying the number of
 times to repeat the experiment (default: \code{1}).}
 
-\item{sequential_run_order}{(optional) A \code{\link[=logical]{logical}} flag
+\item{sequential_run_order}{(optional) A \code{\link{logical}} flag
 indicating whether to run the experiments in sequential order
 (default: \code{TRUE}).}
 
-\item{run_metrics_every_step}{(optional) A \code{\link[=logical]{logical}} flag
+\item{run_metrics_every_step}{(optional) A \code{\link{logical}} flag
 indicating whether to record metrics at every step (default: \code{FALSE}).}
 
-\item{pre_experiment}{(optional) A string specifying the NetLogo command to
-run before the experiment starts (default: \code{NULL}).}
+\item{pre_experiment}{(optional) A \code{\link[base:character]{character}} string
+specifying the NetLogo command to run before the experiment starts
+(default: \code{NULL}).}
 
-\item{setup}{A string specifying the NetLogo command to set up the model
-(default: \code{"setup"}).}
+\item{setup}{(optional) A \code{\link[base:character]{character}} string specifying
+the NetLogo command to set up the model (default: \code{"setup"}).}
 
-\item{go}{A string specifying the NetLogo command to run the model
-(default: \code{"go"}).}
+\item{go}{(optional) A \code{\link[base:character]{character}} string specifying the
+NetLogo command to run the model (default: \code{"go"}).}
 
-\item{post_run}{(optional) A string specifying the NetLogo command to run
-after each run (default: \code{NULL}).}
+\item{post_run}{(optional) A \code{\link[base:character]{character}} string specifying
+the NetLogo command to run after each run (default: \code{NULL}).}
 
-\item{post_experiment}{(optional) A string specifying the NetLogo command
-to run after the experiment ends (default: \code{NULL}).}
+\item{post_experiment}{(optional) A \code{\link[base:character]{character}} string
+specifying the NetLogo command to run after the experiment ends (default:
+\code{NULL}).}
 
 \item{time_limit}{(optional) An integer number specifying the maximum number
 of steps to run for each repetition (default: \code{1}).}
 
-\item{exit_condition}{(optional) A string specifying the NetLogo command
-that defines the exit condition for the experiment (default: \code{NULL}).}
+\item{exit_condition}{(optional) A \code{\link[base:character]{character}} string
+specifying the NetLogo command that defines the exit condition for the
+experiment (default: \code{NULL}).}
 
-\item{metrics}{A \code{\link[=character]{character}} vector specifying the NetLogo
+\item{metrics}{A \code{\link[base:character]{character}} vector specifying the NetLogo
 commands to record as metrics
 (default: \code{c('count turtles', 'count patches')}).}
 
-\item{run_metrics_condition}{(optional) A string specifying the NetLogo
-command that defines the condition to record metrics (default: \code{NULL}).}
+\item{run_metrics_condition}{(optional) A \code{\link[base:character]{character}}
+string specifying the NetLogo command that defines the condition to record
+metrics (default: \code{NULL}).}
 
-\item{constants}{(optional) A named \code{\link[=list]{list}} specifying the constants
-to vary in the experiment. Each element can be either a single value (for
-enumerated values) or a \code{\link[=list]{list}} with \code{first}, \code{step}, and \code{last}
-elements (for stepped values). See the \emph{Details} and  \emph{Examples} sections
-to learn more (default: \code{NULL}).}
+\item{constants}{(optional) A named \code{\link[base:list]{list}} specifying the
+constants to vary in the experiment. Each element can be either a single
+value (for enumerated values) or a \code{\link[base:list]{list}} with \code{first},
+\code{step}, and \code{last} elements (for stepped values). See the \emph{Details} and
+\emph{Examples} sections to learn more (default: \code{NULL}).}
+
+\item{file}{(optional) A \code{\link[base:character]{character}} string specifying the
+path to save the created XML file
+(default: \code{tempfile(pattern = "experiment-", fileext = ".xml")}).}
 }
 \value{
-A string with the path to the created XML file.
+A \code{\link[base:character]{character}} string with the path to the created
+XML file.
 }
 \description{
 \code{create_experiment()} creates a NetLogo BehaviorSpace experiment XML in a
@@ -85,8 +95,8 @@ complete guidance on how to set and run experiments in NetLogo.
 \subsection{Constants}{
 
 The \code{constants} argument allows you to specify the parameters to vary in the
-experiment. It should be a named \code{\link[=list]{list}} where each name corresponds
-to a NetLogo variable. The value for each name can be either:
+experiment. It should be a named \code{\link[base:list]{list}} where each name
+corresponds to a NetLogo variable. The value for each name can be either:
 \itemize{
 \item A single value (for enumerated values). For example, to set the variable
 \code{initial-number-of-turtles} to \code{10}, you would use

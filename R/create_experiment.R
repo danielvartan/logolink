@@ -1,4 +1,4 @@
-#' Create a NetLogo BehaviorSpace experiment XML file
+#' Create a NetLogo BehaviorSpace experiment
 #'
 #' @description
 #'
@@ -15,8 +15,8 @@
 #' ## Constants
 #'
 #' The `constants` argument allows you to specify the parameters to vary in the
-#' experiment. It should be a named [`list`][list()] where each name corresponds
-#' to a NetLogo variable. The value for each name can be either:
+#' experiment. It should be a named [`list`][base::list] where each name
+#' corresponds to a NetLogo variable. The value for each name can be either:
 #'
 #' - A single value (for enumerated values). For example, to set the variable
 #'  `initial-number-of-turtles` to `10`, you would use
@@ -32,41 +32,49 @@
 #' Also, enclose commands with single quotes (e.g., `'n-values 10 ["N/A"]'`),
 #' since NetLogo only accepts double quotes for strings.
 #'
-#' @param name (optional) A string specifying the name of the experiment
-#'   (default: `""`).
+#' @param name (optional) A [`character`][base::character] string specifying the
+#'   name of the experiment (default: `""`).
 #' @param repetitions (optional) An integer number specifying the number of
 #'   times to repeat the experiment (default: `1`).
-#' @param sequential_run_order (optional) A [`logical`][logical()] flag
+#' @param sequential_run_order (optional) A [`logical`][logical] flag
 #'   indicating whether to run the experiments in sequential order
 #'   (default: `TRUE`).
-#' @param run_metrics_every_step (optional) A [`logical`][logical()] flag
+#' @param run_metrics_every_step (optional) A [`logical`][logical] flag
 #'   indicating whether to record metrics at every step (default: `FALSE`).
-#' @param pre_experiment (optional) A string specifying the NetLogo command to
-#'   run before the experiment starts (default: `NULL`).
-#' @param setup A string specifying the NetLogo command to set up the model
-#'   (default: `"setup"`).
-#' @param go A string specifying the NetLogo command to run the model
-#'   (default: `"go"`).
-#' @param post_run (optional) A string specifying the NetLogo command to run
-#'   after each run (default: `NULL`).
-#' @param post_experiment (optional) A string specifying the NetLogo command
-#'   to run after the experiment ends (default: `NULL`).
+#' @param pre_experiment (optional) A [`character`][base::character] string
+#'   specifying the NetLogo command to run before the experiment starts
+#'   (default: `NULL`).
+#' @param setup (optional) A [`character`][base::character] string specifying
+#'   the NetLogo command to set up the model (default: `"setup"`).
+#' @param go (optional) A [`character`][base::character] string specifying the
+#'   NetLogo command to run the model (default: `"go"`).
+#' @param post_run (optional) A [`character`][base::character] string specifying
+#'   the NetLogo command to run after each run (default: `NULL`).
+#' @param post_experiment (optional) A [`character`][base::character] string
+#'   specifying the NetLogo command to run after the experiment ends (default:
+#'   `NULL`).
 #' @param time_limit (optional) An integer number specifying the maximum number
 #'   of steps to run for each repetition (default: `1`).
-#' @param exit_condition (optional) A string specifying the NetLogo command
-#'   that defines the exit condition for the experiment (default: `NULL`).
-#' @param metrics A [`character`][character()] vector specifying the NetLogo
+#' @param exit_condition (optional) A [`character`][base::character] string
+#'   specifying the NetLogo command that defines the exit condition for the
+#'   experiment (default: `NULL`).
+#' @param metrics A [`character`][base::character] vector specifying the NetLogo
 #'   commands to record as metrics
 #'   (default: `c('count turtles', 'count patches')`).
-#' @param run_metrics_condition (optional) A string specifying the NetLogo
-#'   command that defines the condition to record metrics (default: `NULL`).
-#' @param constants (optional) A named [`list`][list()] specifying the constants
-#'   to vary in the experiment. Each element can be either a single value (for
-#'   enumerated values) or a [`list`][list()] with `first`, `step`, and `last`
-#'   elements (for stepped values). See the *Details* and  *Examples* sections
-#'   to learn more (default: `NULL`).
+#' @param run_metrics_condition (optional) A [`character`][base::character]
+#'   string specifying the NetLogo command that defines the condition to record
+#'   metrics (default: `NULL`).
+#' @param constants (optional) A named [`list`][base::list] specifying the
+#'   constants to vary in the experiment. Each element can be either a single
+#'   value (for enumerated values) or a [`list`][base::list] with `first`,
+#'   `step`, and `last` elements (for stepped values). See the *Details* and
+#'   *Examples* sections to learn more (default: `NULL`).
+#' @param file (optional) A [`character`][base::character] string specifying the
+#'   path to save the created XML file
+#'   (default: `tempfile(pattern = "experiment-", fileext = ".xml")`).
 #'
-#' @return A string with the path to the created XML file.
+#' @return A [`character`][base::character] string with the path to the created
+#'   XML file.
 #'
 #' @family NetLogo functions
 #' @export
@@ -116,7 +124,8 @@ create_experiment <- function(
   exit_condition = NULL,
   metrics = c('count turtles', 'count patches'),
   run_metrics_condition = NULL,
-  constants = NULL
+  constants = NULL,
+  file = tempfile(pattern = "experiment-", fileext = ".xml")
 ) {
   checkmate::assert_string(name)
   checkmate::assert_int(repetitions, lower = 1)
@@ -132,6 +141,7 @@ create_experiment <- function(
   checkmate::assert_character(metrics, min.len = 1)
   checkmate::assert_string(run_metrics_condition, null.ok = TRUE)
   checkmate::assert_list(constants, names = "named", null.ok = TRUE)
+  checkmate::assert_path_for_output(file, overwrite = TRUE, extension = "xml")
 
   root <- xml2::xml_new_root("experiments")
 
@@ -211,7 +221,6 @@ create_experiment <- function(
     }
   }
 
-  file <- tempfile(pattern = "experiment-", fileext = ".xml")
   root |> xml2::write_xml(file)
 
   file |>
