@@ -230,7 +230,7 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 2, 8, 7, 1, 5, 9, 6, 4, 3, 9, 4, 5, 2, 6, 7,…
+#> $ run_number             <dbl> 1, 5, 7, 9, 4, 8, 2, 3, 6, 1, 8, 7, 5, 9, 3,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…
@@ -369,7 +369,7 @@ a donation. Please mention `logolink` in your donation message.
       <br/>
       <p align="center">
         <a href="https://www.fsp.usp.br/sustentarea/">
-          <img src="/home/danielvartan/Git/logolink/man/figures/sustentarea-logo.svg" width="125"/>
+          <img src="man/figures/sustentarea-logo.svg" width="125"/>
         </a>
       </p>
       <br/>
@@ -390,7 +390,7 @@ a donation. Please mention `logolink` in your donation message.
       <br/>
       <p align="center">
         <a href="https://www.gov.br/cnpq/">
-          <img src="/home/danielvartan/Git/logolink/man/figures/cnpq-logo.svg" width="150"/>
+          <img src="man/figures/cnpq-logo.svg" width="150"/>
         </a>
       </p>
       <br/>

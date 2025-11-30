@@ -337,7 +337,7 @@ tags$table(
       tags$p(
         tags$a(
           tags$img(
-            src = here("man", "figures", "sustentarea-logo.svg"),
+            src = "man/figures/sustentarea-logo.svg", # Don't use `here()` here.
             width = 125
           ),
           href = "https://www.fsp.usp.br/sustentarea/"
@@ -375,7 +375,7 @@ tags$table(
       tags$p(
         tags$a(
           tags$img(
-            src = here("man", "figures", "cnpq-logo.svg"),
+            src = "man/figures/cnpq-logo.svg", # Don't use `here()` here.
             width = 150
           ),
           href = "https://www.gov.br/cnpq/"
