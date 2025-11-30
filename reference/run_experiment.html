@@ -85,6 +85,7 @@ please refer to the
 <span>  experiment <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  setup_file <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  other_arguments <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  netlogo_3d <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  parse <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  timeout <span class="op">=</span> <span class="cn">Inf</span>,</span>
 <span>  netlogo_home <span class="op">=</span> <span class="fu"><a href="find_netlogo_home.html">find_netlogo_home</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -118,6 +119,12 @@ NetLogo BehaviorSpace interface (default: <code>NULL</code>).</p></dd>
 specifying any additional command-line arguments to pass to the NetLogo
 executable. For example, you can use <code>c("--threads 4")</code> to specify the
 number of threads to use (default: <code>NULL</code>).</p></dd>
+
+
+<dt id="arg-netlogo-d">netlogo_3d<a class="anchor" aria-label="anchor" href="#arg-netlogo-d"></a></dt>
+<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></code> flag indicating whether
+the model is a 3D model. This is necessary for models with extensions
+<code>.nlogo3d</code> or <code>.nlogox3d</code> (default: <code>FALSE</code>).</p></dd>
 
 
 <dt id="arg-parse">parse<a class="anchor" aria-label="anchor" href="#arg-parse"></a></dt>
@@ -156,16 +163,35 @@ experiment.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>If <code>run_experiment()</code> cannot find the NetLogo installation, you will need to
+
+<div class="section">
+<h3 id="setting-the-netlogo-installation-path">Setting the NetLogo Installation Path<a class="anchor" aria-label="anchor" href="#setting-the-netlogo-installation-path"></a></h3>
+
+
+<p>If <code>run_experiment()</code> cannot find the NetLogo installation, you will need to
 set the path manually using the <code>NETLOGO_HOME</code> environment variable. On
 Windows, a typical path is something like <code>C:\Program Files\NetLogo 7.0.2</code>.
-You can set this variable temporarily in your R session with
-<code>Sys.setenv("NETLOGO_HOME" = "[PATH]")</code>, or permanently by adding it to your
+You can set this variable temporarily in your R session with:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"NETLOGO_HOME"</span> <span class="op">=</span> <span class="st">"PATH/TO/NETLOGO/INSTALLATION"</span><span class="op">)</span></span></code></pre><p></p></div>
+<p>or permanently by adding it to your
 <a href="https://rstats.wtf/r-startup.html#renviron" class="external-link"><code>.Renviron</code></a> file.</p>
 <p>If even after setting the <code>NETLOGO_HOME</code> variable you still encounter issues,
 please try to set a <code>NETLOGO_CONSOLE</code> environment variable with the path of
 the NetLogo executable or binary. On Windows, a typical path is something
 like <code>C:\Program Files\NetLogo 7.0.2\NetLogo.exe</code>.</p>
+</div>
+
+<div class="section">
+<h3 id="non-tabular-output">Non-Tabular Output<a class="anchor" aria-label="anchor" href="#non-tabular-output"></a></h3>
+
+
+<p>If the experiment generates any non-tabular output (e.g., prints, error
+messages, warnings), this output will be captured and displayed as an
+informational message after the results data frame is returned. This allows
+you to see any important messages generated during the experiment run.
+Keep in mind that excessive non-tabular output may clutter your R console.</p>
+</div>
+
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -280,7 +306,7 @@ like <code>C:\Program Files\NetLogo 7.0.2\NetLogo.exe</code>.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by <a href="https://github.com/danielvartan/" class="external-link">Daniel Vartanian</a>.</p>
+  <p>Developed by <a href="https://github.com/danielvartan/" class="external-link">Daniel Vartanian</a>, National Council for Scientific and Technological Development (CNPq), University of Sao Paulo (USP), Sustentarea Research and Extension Center.</p>
 </div>
 
 <div class="pkgdown-footer-right">

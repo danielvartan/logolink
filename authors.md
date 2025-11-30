@@ -6,6 +6,19 @@
   maintainer, conceptor, copyright holder.
   [](https://orcid.org/0000-0001-7782-759X)
 
+- **Aline Martins Carvalho**. Scientific advisor.
+  [](https://orcid.org/0000-0002-4900-5609)
+
+- **Leandro Garcia**. Scientific advisor.
+  [](https://orcid.org/0000-0001-5947-2617)
+
+- **National Council for Scientific and Technological Development
+  (CNPq)**. Funder.
+
+- **University of Sao Paulo (USP)**. Funder.
+
+- **Sustentarea Research and Extension Center**. Funder.
+
 ## Citation
 
 Source:

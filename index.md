@@ -207,7 +207,7 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 4, 3, 2, 1, 9, 7, 5, 6, 8, 4, 5, 6, 2, 1, 3,…
+#> $ run_number             <dbl> 2, 8, 7, 1, 5, 9, 6, 4, 3, 9, 4, 5, 2, 6, 7,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…
@@ -338,3 +338,7 @@ a donation. Please mention `logolink` in your donation message.
 
 `logolink` brand identity is based on the
 [NetLogo](https://www.netlogo.org/) brand identity.
+
+[TABLE]
+
+[TABLE]

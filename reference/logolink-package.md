@@ -20,3 +20,20 @@ Useful links:
 **Maintainer**: Daniel Vartanian <danielvartan@proton.me>
 ([ORCID](https://orcid.org/0000-0001-7782-759X)) \[conceptor, copyright
 holder\]
+
+Other contributors:
+
+- Aline Martins Carvalho <alinenutri@usp.br>
+  ([ORCID](https://orcid.org/0000-0002-4900-5609)) \[scientific
+  advisor\]
+
+- Leandro Garcia <l.garcia@qub.ac.uk>
+  ([ORCID](https://orcid.org/0000-0001-5947-2617)) \[scientific
+  advisor\]
+
+- National Council for Scientific and Technological Development (CNPq)
+  \[funder\]
+
+- University of Sao Paulo (USP) \[funder\]
+
+- Sustentarea Research and Extension Center \[funder\]
