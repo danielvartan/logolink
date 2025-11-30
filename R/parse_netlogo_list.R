@@ -4,14 +4,14 @@
 #'
 #' `parse_netlogo_list()` parses NetLogo-style lists represented as strings
 #' (e.g., `"[1 2 3]"`) into R lists. It automatically detects
-#' [`numeric`][numeric()], [`integer`][integer()], [`logical`][logical()],
-#' and [`character`][character()] types within the lists and converts them
-#' accordingly.
+#' [`numeric`][base::numeric], [`integer`][base::integer],
+#' [`logical`][base::logical], and [`character`][base::character] types within
+#' the lists and converts them accordingly.
 #'
-#' @param x An [`atomic`][checkmate::assert_atomic()] object potentially
+#' @param x An [`atomic`][checkmate::assert_atomic] object potentially
 #'   containing NetLogo-style lists.
 #'
-#' @return A [`list`][list()] of parsed elements if the input contains
+#' @return A [`list`][base::list] of parsed elements if the input contains
 #'   NetLogo-style lists; otherwise, returns the original vector.
 #'
 #' @family utility functions

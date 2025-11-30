@@ -34,7 +34,8 @@ testthat::test_that("`create_experiment()` | General test", {
       "energy-gain-from-sheep" = 5,
       "character-constant-test" = "a string constant",
       "logical-constant-test" = TRUE
-    )
+    ),
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     checkmate::expect_file_exists(extension = "xml")
 })
@@ -56,7 +57,8 @@ test_that("`create_experiment()` | Error test", {
     exit_condition = NULL,
     metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
-    constants = NULL
+    constants = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
 
@@ -76,7 +78,8 @@ test_that("`create_experiment()` | Error test", {
     exit_condition = NULL,
     metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
-    constants = NULL
+    constants = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
 
@@ -96,7 +99,8 @@ test_that("`create_experiment()` | Error test", {
     exit_condition = NULL,
     metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
-    constants = NULL
+    constants = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
 
@@ -116,7 +120,8 @@ test_that("`create_experiment()` | Error test", {
     exit_condition = NULL,
     metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
-    constants = NULL
+    constants = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
 
@@ -136,7 +141,8 @@ test_that("`create_experiment()` | Error test", {
     exit_condition = NULL,
     metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
-    constants = NULL
+    constants = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
 
@@ -156,7 +162,8 @@ test_that("`create_experiment()` | Error test", {
     exit_condition = NULL,
     metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
-    constants = NULL
+    constants = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
 
@@ -176,7 +183,8 @@ test_that("`create_experiment()` | Error test", {
     exit_condition = NULL,
     metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
-    constants = NULL
+    constants = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
 
@@ -196,7 +204,8 @@ test_that("`create_experiment()` | Error test", {
     exit_condition = NULL,
     metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
-    constants = NULL
+    constants = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
 
@@ -216,7 +225,8 @@ test_that("`create_experiment()` | Error test", {
     exit_condition = NULL,
     metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
-    constants = NULL
+    constants = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
 
@@ -236,7 +246,8 @@ test_that("`create_experiment()` | Error test", {
     exit_condition = NULL,
     metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
-    constants = NULL
+    constants = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
 
@@ -256,7 +267,8 @@ test_that("`create_experiment()` | Error test", {
     exit_condition = 1,
     metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
-    constants = NULL
+    constants = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
 
@@ -276,7 +288,8 @@ test_that("`create_experiment()` | Error test", {
     exit_condition = NULL,
     metrics = 1:2,
     run_metrics_condition = NULL,
-    constants = NULL
+    constants = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
 
@@ -296,7 +309,8 @@ test_that("`create_experiment()` | Error test", {
     exit_condition = NULL,
     metrics = c('count turtles', 'count patches'),
     run_metrics_condition = 1,
-    constants = NULL
+    constants = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
 
@@ -316,7 +330,30 @@ test_that("`create_experiment()` | Error test", {
     exit_condition = NULL,
     metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
-    constants = "a"
+    constants = "a",
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
+  ) |>
+    testthat::expect_error()
+
+  # checkmate::assert_path_for_output(file, overwrite = TRUE, extension = "xml")
+
+
+  create_experiment(
+    name = "",
+    repetitions = 1,
+    sequential_run_order = TRUE,
+    run_metrics_every_step = FALSE,
+    pre_experiment = NULL,
+    setup = "setup",
+    go = "go",
+    post_run = NULL,
+    post_experiment = NULL,
+    time_limit = 1,
+    exit_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
+    run_metrics_condition = NULL,
+    constants = NULL,
+    file = "experiment.txt"
   ) |>
     testthat::expect_error()
 })

@@ -33,7 +33,7 @@ testthat::test_that("`run_experiment()` | General test", {
   Sys.setenv("NETLOGO_HOME" = tempdir())
 
   testthat::local_mocked_bindings(
-    assert_netlogo_works = function(...) NULL,
+    assert_netlogo_console = function(...) NULL,
     system_2 = function(...) "Test",
     temp_file = function(...) table_file
   )
@@ -78,7 +78,7 @@ testthat::test_that("`run_experiment()` | Messages & Warnings test", {
   Sys.setenv("NETLOGO_HOME" = tempdir())
 
   testthat::local_mocked_bindings(
-    assert_netlogo_works = function(...) NULL,
+    assert_netlogo_console = function(...) NULL,
     system_2 = function(...) "Test",
     temp_file = function(...) table_file_2
   )
@@ -108,7 +108,7 @@ testthat::test_that("`run_experiment()` | Messages & Warnings test", {
   Sys.setenv("NETLOGO_HOME" = tempdir())
 
   testthat::local_mocked_bindings(
-    assert_netlogo_works = function(...) NULL,
+    assert_netlogo_console = function(...) NULL,
     system_2 = function(...) "Test",
     temp_file = function(...) table_file_1
   )
@@ -138,7 +138,7 @@ testthat::test_that("`run_experiment()` | Messages & Warnings test", {
   Sys.setenv("NETLOGO_HOME" = tempdir())
 
   testthat::local_mocked_bindings(
-    assert_netlogo_works = function(...) NULL,
+    assert_netlogo_console = function(...) NULL,
     system_2 = function(...) `attributes<-`(NULL, list(status = 124)),
     temp_file = function(...) table_file_1
   )
@@ -337,7 +337,7 @@ testthat::test_that("`run_experiment()` | Error test", {
   # if (lifecycle::is_present(netlogo_path)) { [...]
 
   testthat::local_mocked_bindings(
-    assert_netlogo_works = function(...) NULL,
+    assert_netlogo_console = function(...) NULL,
     system_2 = function(...) "Test",
     temp_file = function(...) table_file_1
   )
@@ -356,26 +356,6 @@ testthat::test_that("`run_experiment()` | Error test", {
     suppressMessages() |>
     suppressWarnings()
 
-  # if (identical(netlogo_path, Sys.getenv("NETLOGO_HOME")) && [...]
-
-  netlogo_home <- Sys.getenv("NETLOGO_HOME")
-
-  Sys.setenv("NETLOGO_HOME" = "")
-
-  run_experiment(
-    model_path = model_path_1,
-    experiment = NULL,
-    setup_file = setup_file,
-    other_arguments = NULL,
-    parse = FALSE,
-    timeout = Inf,
-    netlogo_home = Sys.getenv("NETLOGO_HOME"),
-    netlogo_path = lifecycle::deprecated()
-  ) |>
-    testthat::expect_error()
-
-  Sys.setenv("NETLOGO_HOME" = netlogo_home)
-
   # if (!is.null(status)) { [...] } else {
 
   netlogo_home <- Sys.getenv("NETLOGO_HOME")
@@ -383,7 +363,7 @@ testthat::test_that("`run_experiment()` | Error test", {
   Sys.setenv("NETLOGO_HOME" = tempdir())
 
   testthat::local_mocked_bindings(
-    assert_netlogo_works = function(...) NULL,
+    assert_netlogo_console = function(...) NULL,
     system_2 = function(...) `attributes<-`("Test", list(status = 5)),
     temp_file = function(...) table_file_1
   )

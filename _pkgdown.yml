@@ -40,7 +40,7 @@ reference:
 
 - title: Utilities
   desc: >
-    Utility functions to help with parsing and data manipulation.
+    Utility functions to help with NetLogo integration.
   contents:
   - find_netlogo_home
   - find_netlogo_console
@@ -55,12 +55,12 @@ authors:
     href: https://github.com/alinenutri/
   Leandro Garcia:
     href: https://github.com/leandromtg/
-  National Council for Scientific and Technological Development (CNPq):
-    href: https://www.gov.br/cnpq/
-  University of Sao Paulo (USP):
-    href: https://www5.usp.br/
   Sustentarea Research and Extension Center:
     href: https://www.fsp.usp.br/sustentarea/
+  University of Sao Paulo (USP):
+    href: https://www5.usp.br/
+  National Council for Scientific and Technological Development (CNPq):
+    href: https://www.gov.br/cnpq/
 
 development:
   mode: release

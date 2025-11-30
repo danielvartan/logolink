@@ -42,7 +42,7 @@
   "funder": [
     {
       "@type": "Organization",
-      "name": "National Council for Scientific and Technological Development (CNPq)"
+      "name": "Sustentarea Research and Extension Center"
     },
     {
       "@type": "Organization",
@@ -50,7 +50,7 @@
     },
     {
       "@type": "Organization",
-      "name": "Sustentarea Research and Extension Center"
+      "name": "National Council for Scientific and Technological Development (CNPq)"
     }
   ],
   "maintainer": [
@@ -307,7 +307,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "331.235KB",
+  "fileSize": "335.536KB",
   "citation": [
     {
       "@type": "CreativeWork",

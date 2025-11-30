@@ -10,8 +10,8 @@ find_netlogo_version(netlogo_home = find_netlogo_home())
 \item{netlogo_home}{(optional) A \code{\link[base:character]{character}} string
 specifying the path to the NetLogo installation directory. If not provided,
 the function will try to find it automatically using
-\code{\link[=find_netlogo_home]{find_netlogo_home()}}. (default:
-\code{\link[=find_netlogo_home]{find_netlogo_home()}}).}
+\code{\link[=find_netlogo_home]{find_netlogo_home()}}
+(default: \code{find_netlogo_home()}).}
 }
 \value{
 A \code{\link[base:character]{character}} string specifying the NetLogo

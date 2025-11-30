@@ -1,23 +1,25 @@
-assert_netlogo_works <- function(
-  netlogo_home = find_netlogo_home()
+assert_netlogo_console <- function(
+  netlogo_console = find_netlogo_console()
 ) {
-  executable <- find_netlogo_console(netlogo_home)
+  checkmate::assert_string(netlogo_console)
 
-  if (executable == "") {
+  netlogo_console <- fs::path_expand(netlogo_console)
+
+  if ((netlogo_console == "") || !file.exists(netlogo_console)) {
     cli::cli_abort(
       paste0(
-        "Could not find the NetLogo executable. ",
-        "Please make sure NetLogo is installed and ",
-        "the {.strong {cli::col_red('NETLOGO_HOME')}} ",
-        "environment variable is correctly set. ",
-        "You can set it using ",
-        '`Sys.setenv(NETLOGO_HOME = "[PATH]")`).'
+        "Could not find the NetLogo console. ",
+        "See the ",
+        "{.strong {cli::col_red('run_experiment()')}} ",
+        "documentation ({.code ?run_experiment}) for more information ",
+        "on setting the NetLogo installation path."
       )
     )
   }
 
   test <-
-    executable |>
+    netlogo_console |>
+    stringr::str_remove("\\.exe$") |>
     system2(args = c("--version"), stdout = TRUE, stderr = TRUE) |>
     try(silent = TRUE) |>
     suppressMessages() |>
@@ -26,13 +28,79 @@ assert_netlogo_works <- function(
   if (inherits(test, "try-error")) {
     cli::cli_abort(
       paste0(
-        "Failed to run the NetLogo executable at ",
-        "{.strong {cli::col_yellow(executable)}}. ",
-        "Please make sure NetLogo is installed and ",
-        "the {.strong {cli::col_red('NETLOGO_HOME')}} ",
-        "environment variable is correctly set. ",
-        "You can set it using ",
-        '`Sys.setenv(NETLOGO_HOME = "[PATH]")`).'
+        "Failed to run the NetLogo console at ",
+        "{.strong {cli::col_yellow(netlogo_console)}}. ",
+        "See the ",
+        "{.strong {cli::col_red('run_experiment()')}} ",
+        "documentation ({.code ?run_experiment}) for more information ",
+        "on setting the NetLogo installation path."
+      )
+    )
+  } else {
+    TRUE
+  }
+}
+
+assert_other_arguments <- function(
+  other_arguments,
+  reserved_arguments,
+  null_ok = FALSE
+) {
+  # R CMD Check variable bindings fix.
+  # nolint start
+  . <- NULL
+  # nolint end
+
+  if (isTRUE(null_ok) && is.null(other_arguments)) {
+    TRUE
+  } else {
+    checkmate::assert_character(other_arguments)
+    checkmate::assert_character(reserved_arguments)
+
+    conflict <-
+      other_arguments |>
+      magrittr::extract(other_arguments %in% reserved_arguments)
+
+    if (length(conflict) > 0) {
+      cli::cli_abort(
+        c(
+          paste0(
+            "The following command-line arguments are reserved ",
+            "and cannot be modified via the ",
+            "{.strong {cli::col_red('other_arguments')}} ",
+            "parameter:"
+          ),
+          "",
+          paste0(
+            "{.strong {cli::col_blue('",
+            conflict,
+            "')}}"
+          ) %>%
+            magrittr::set_names(rep(" ", length(.)))
+        )
+      )
+    } else {
+      TRUE
+    }
+  }
+}
+
+assert_pick_one <- function(x, y) {
+  name_x <- deparse(substitute(x)) #nolint
+  name_y <- deparse(substitute(y)) #nolint
+
+  if (is.null(x) && is.null(y)) {
+    cli::cli_abort(
+      paste0(
+        "One of {.strong {cli::col_blue(name_x)}} or ",
+        "{.strong {cli::col_red(name_y)}} must be provided."
+      )
+    )
+  } else if (!is.null(x) && !is.null(y)) {
+    cli::cli_abort(
+      paste0(
+        "Only one of {.strong {cli::col_blue(name_x)}} or ",
+        "{.strong {cli::col_red(name_y)}} can be provided."
       )
     )
   } else {

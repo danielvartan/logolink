@@ -4,7 +4,7 @@
 #'
 #' `run_experiment()` runs a NetLogo BehaviorSpace experiment in headless mode
 #' and returns the results as a tidy data frame. It can be used with
-#' [`create_experiment()`][create_experiment()] to create the experiment XML
+#' [`create_experiment()`][create_experiment] to create the experiment XML
 #' file on the fly, or with an existing experiment stored in the NetLogo model
 #' file.
 #'
@@ -37,6 +37,43 @@
 #' the NetLogo executable or binary. On Windows, a typical path is something
 #' like `C:\Program Files\NetLogo 7.0.2\NetLogo.exe`.
 #'
+#' ## Additional Command-Line Arguments
+#'
+#' You can pass additional command-line arguments to the NetLogo executable
+#' using the `other_arguments` parameter. This can be useful for specifying
+#' options such as the number of threads to use or other NetLogo-specific flags.
+#'
+#' For example, to specify the number of threads, you can use:
+#'
+#' ```r
+#' run_experiment(
+#'  model_path = "path/to/model.nlogox",
+#'  setup_file = "path/to/experiment.xml",
+#'  other_arguments = c("--threads 4")
+#' )
+#' ```
+#'
+#' There are a variety of command-line options available, but some are reserved
+#' for internal use by `run_experiment()` and cannot not be modified. These
+#' are:
+#'
+#' - `--headless`: Ensures NetLogo runs in headless mode.
+#' - `--3D`: Specifies if the model is a 3D model (automatically set based on
+#' file extension).
+#' - `--model`: Specifies the path to the NetLogo model file.
+#' - `--setup-file`: Specifies the path to the experiment XML file.
+#' - `--experiment`: Specifies the name of the experiment defined in the model.
+#' - `--table`: Specifies the output file for the results table.
+#'
+#' For a complete list of these options, please refer to the
+#' [BehaviorSpace Guide](https://docs.netlogo.org/behaviorspace.html).
+#'
+#' ## NetLogo 3D
+#'
+#' The function automatically detects whether the provided model is a 3D model
+#' (based on the file extension) and adjusts the command-line arguments
+#' accordingly. Therefore, you do not need to set the `--3D` flag manually.
+#'
 #' ## Non-Tabular Output
 #'
 #' If the experiment generates any non-tabular output (e.g., prints, error
@@ -47,33 +84,31 @@
 #'
 #' @param model_path A string specifying the path to the NetLogo model file
 #'   (with extension `.nlogo`, `.nlogo3d`, `.nlogox`, or `.nlogox3d`).
-#' @param experiment (optional) A string specifying the name of the experiment
-#'   defined in the NetLogo model file (default: `NULL`).
 #' @param setup_file (optional) A string specifying the path to an XML file
 #'   containing the experiment definition. This file can be created using
-#'  [`create_experiment()`][create_experiment()] or exported from the
+#'  [`create_experiment()`][create_experiment] or exported from the
 #'  NetLogo BehaviorSpace interface (default: `NULL`).
-#' @param other_arguments (optional) A [`character`][character()] vector
+#' @param experiment (optional) A string specifying the name of the experiment
+#'   defined in the NetLogo model file (default: `NULL`).
+#' @param other_arguments (optional) A [`character`][base::character] vector
 #'   specifying any additional command-line arguments to pass to the NetLogo
 #'   executable. For example, you can use `c("--threads 4")` to specify the
-#'   number of threads to use (default: `NULL`).
-#' @param netlogo_3d (optional) A [`logical`][logical()] flag indicating whether
-#'   the model is a 3D model. This is necessary for models with extensions
-#'   `.nlogo3d` or `.nlogox3d` (default: `FALSE`).
-#' @param parse (optional) A [`logical`][logical()] flag indicating whether to
-#'   parse NetLogo lists in the output data frame. If `TRUE`, columns containing
-#'   NetLogo lists (e.g., `[1 2 3]`) will be converted to R lists. If `FALSE`,
-#'   the columns will remain as [`character`][character()] strings
+#'   number of threads to use. See the *Details* section for more information.
+#'   (default: `NULL`).
+#' @param parse (optional) A [`logical`][base::logical] flag indicating whether
+#'   to parse NetLogo lists in the output data frame. If `TRUE`, columns
+#'   containing NetLogo lists (e.g., `[1 2 3]`) will be converted to R lists. If
+#'   `FALSE`, the columns will remain as [`character`][base::character] strings
 #'   (default: `TRUE`).
-#' @param timeout (optional) A [`numeric`][numeric()] value specifying the
+#' @param timeout (optional) A [`numeric`][base::numeric] value specifying the
 #'   maximum time (in seconds) to wait for the NetLogo process to complete. If
 #'   the process exceeds this time limit, it will be terminated, and the
-#'   function will return the available output up to that point. Use `Inf`
-#'   for no time limit (default: `Inf`).
+#'   function will return the available output up to that point. Use `Inf` for
+#'   no time limit (default: `Inf`).
 #' @param netlogo_path `r lifecycle::badge("deprecated")` This argument is no
 #'   longer supported. See the *Details* section for more information.
 #'
-#' @return A [`tibble`][dplyr::as_tibble()] containing the results of the
+#' @return A [`tibble`][dplyr::as_tibble] containing the results of the
 #'   experiment.
 #'
 #' @template params-netlogo-home
@@ -84,15 +119,13 @@
 #' # Set the Environment -----
 #'
 #' \dontrun{
-#'   ## Change the path below to point to your NetLogo installation folder.
-#'   Sys.setenv(
-#'     "NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.2")
-#'   )
-#'
 #'   model_path <-
-#'     Sys.getenv("NETLOGO_HOME") |>
+#'     find_netlogo_home() |>
 #'     file.path(
-#'       "models", "IABM Textbook", "chapter 4", "Wolf Sheep Simple 5.nlogox"
+#'       "models",
+#'       "IABM Textbook",
+#'       "chapter 4",
+#'       "Wolf Sheep Simple 5.nlogox"
 #'     )
 #' }
 #'
@@ -126,10 +159,7 @@
 #'     )
 #'   )
 #'
-#'   run_experiment(
-#'     model_path = model_path,
-#'     setup_file = setup_file
-#'   )
+#'   model_path |> run_experiment(setup_file = setup_file)
 #'   ## Expected output:
 #'   #> # A tibble: 110,110 × 10
 #'   #>   run_number number_of_sheep number_of_wolves movement_cost
@@ -154,10 +184,10 @@
 #' # Using an Experiment Defined in the NetLogo Model File -----
 #'
 #' \dontrun{
-#'   run_experiment(
-#'     model_path = model_path,
-#'     experiment = "Wolf Sheep Simple model analysis"
-#'   )
+#'   model_path |>
+#'     run_experiment(
+#'       experiment = "Wolf Sheep Simple model analysis"
+#'     )
 #'   ## Expected output:
 #'   #> # A tibble: 110 × 11
 #'   #>    run_number energy_gain_from_grass number_of_wolves movement_cost
@@ -181,10 +211,9 @@
 #' }
 run_experiment <- function(
   model_path,
-  experiment = NULL,
   setup_file = NULL,
+  experiment = NULL,
   other_arguments = NULL,
-  netlogo_3d = FALSE,
   parse = TRUE,
   timeout = Inf,
   netlogo_home = find_netlogo_home(),
@@ -192,36 +221,29 @@ run_experiment <- function(
 ) {
   model_path_choices <- c("nlogo", "nlogo3d", "nlogox", "nlogox3d")
 
+  reserved_arguments <- c(
+    "--headless",
+    "--3D",
+    "--model",
+    "--setup-file",
+    "--experiment",
+    "--table"
+  )
+
   checkmate::assert_string(model_path)
   checkmate::assert_file_exists(model_path)
   checkmate::assert_choice(fs::path_ext(model_path), model_path_choices)
-  checkmate::assert_string(experiment, null.ok = TRUE)
   checkmate::assert_string(setup_file, null.ok = TRUE)
+  checkmate::assert_string(experiment, null.ok = TRUE)
+  assert_pick_one(setup_file, experiment)
   checkmate::assert_character(other_arguments, null.ok = TRUE)
-  checkmate::assert_flag(netlogo_3d)
+  assert_other_arguments(other_arguments, reserved_arguments, null_ok = TRUE)
   checkmate::assert_flag(parse)
   checkmate::assert_number(timeout, lower = 0)
+  checkmate::assert_string(netlogo_home)
 
   if (!is.null(setup_file)) {
     checkmate::assert_file_exists(setup_file, extension = "xml")
-  }
-
-  if (is.null(experiment) && is.null(setup_file)) {
-    cli::cli_abort(
-      paste0(
-        "One of {.strong {cli::col_blue('experiment')}} or ",
-        "{.strong {cli::col_red('setup_file')}} must be provided."
-      )
-    )
-  }
-
-  if (!is.null(experiment) && !is.null(setup_file)) {
-    cli::cli_abort(
-      paste0(
-        "Only one of {.strong {cli::col_blue('experiment')}} or ",
-        "{.strong {cli::col_red('setup_file')}} can be provided."
-      )
-    )
   }
 
   if (lifecycle::is_present(netlogo_path)) {
@@ -230,62 +252,21 @@ run_experiment <- function(
       what = "run_experiment(netlogo_path)",
       details = paste0(
         "Specifying the NetLogo path via the `netlogo_path` argument ",
-        "is deprecated. Please set the NetLogo home directory using the ",
-        "`NETLOGO_HOME` environment variable instead ",
-        '(e.g., `Sys.setenv("NETLOGO_HOME" = "path")`).'
+        "is deprecated. See the `run_experiment()` documentation ",
+        "(`?run_experiment`) for more information on setting the NetLogo ",
+        "installation path."
       )
     )
-
-    if (isTRUE(netlogo_3d)) {
-      model_path_choices <- c("nlogo3d", "nlogox3d")
-
-      if (!fs::path_ext(model_path) %in% model_path_choices) {
-        cli::cli_abort(
-          paste0(
-            "The provided model file is not a 3D model. ",
-            "When {.strong {cli::col_blue('netlogo_3d')}} is set to ",
-            "{.strong TRUE}, the model file must have one of the following ",
-            "extensions: ",
-            paste0(
-              "{.strong {cli::col_red('",
-              model_path_choices,
-              "')}}",
-              collapse = ' or '
-            ),
-            "."
-          )
-        )
-      }
-    }
 
     checkmate::assert_string(netlogo_path)
     checkmate::assert_file_exists(netlogo_path)
 
-    netlogo_executable <- stringr::str_remove(netlogo_path, "\\.exe$")
+    netlogo_console <- netlogo_path
   } else {
-    if (
-      identical(netlogo_home, Sys.getenv("NETLOGO_HOME")) &&
-        (Sys.getenv("NETLOGO_HOME") == "")
-    ) {
-      cli::cli_abort(
-        paste0(
-          "The NetLogo installation directory is not set. ",
-          "Please set it using the ",
-          "{.strong {cli::col_red('NETLOGO_HOME')}} environment variable ",
-          '(e.g., `Sys.setenv("NETLOGO_HOME" = "[PATH]")`).'
-        )
-      )
-    }
-
-    checkmate::assert_string(netlogo_home)
-    checkmate::assert_directory_exists(netlogo_home)
-
-    netlogo_executable <-
-      netlogo_home |>
-      find_netlogo_console()
+    netlogo_console <- find_netlogo_console(netlogo_home)
   }
 
-  assert_netlogo_works(netlogo_home)
+  assert_netlogo_console(netlogo_console)
 
   file <- temp_file(pattern = "table-", fileext = ".csv")
   model_path <- fs::path_expand(model_path)
@@ -294,35 +275,36 @@ run_experiment <- function(
   args <- c(
     "--headless ",
     ifelse(
-      isTRUE(netlogo_3d),
+      fs::path_ext(model_path) %in% c("nlogo3d", "nlogox3d"),
       "--3D",
       ""
     ),
     glue::glue("--model {glue::double_quote(model_path)}"),
     ifelse(
-      !is.null(experiment),
-      glue::glue("--experiment {glue::double_quote(experiment)}"),
-      ""
-    ),
-    ifelse(
       !is.null(setup_file),
       glue::glue("--setup-file {glue::double_quote(setup_file)}"),
       ""
     ),
-    # "--table -",
+    ifelse(
+      !is.null(experiment),
+      glue::glue("--experiment {glue::double_quote(experiment)}"),
+      ""
+    ),
     glue::glue("--table {glue::double_quote(file)}"),
     other_arguments
   )
 
-  command <- glue::glue( #nolint
-    "{netlogo_executable} {paste0(args, collapse = ' ')}"
-  )
+  # "{netlogo_console} {paste0(args, collapse = ' ')}" |>
+  #   glue::glue() |>
+  #   print()
 
   cli::cli_progress_step("Running model")
 
   system2_output <-
+    netlogo_console |>
+    fs::path_expand() |>
+    stringr::str_remove("\\.exe$") |>
     system_2(
-      command = glue::glue("{netlogo_executable}"),
       args = args,
       stdout = TRUE,
       stderr = TRUE,
@@ -332,8 +314,6 @@ run_experiment <- function(
     suppressWarnings()
 
   cli::cli_progress_done()
-
-  # print(command)
 
   status <-
     system2_output |>

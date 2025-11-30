@@ -11,15 +11,15 @@ parse_netlogo_list(x)
 containing NetLogo-style lists.}
 }
 \value{
-A \code{\link[=list]{list}} of parsed elements if the input contains
+A \code{\link[base:list]{list}} of parsed elements if the input contains
 NetLogo-style lists; otherwise, returns the original vector.
 }
 \description{
 \code{parse_netlogo_list()} parses NetLogo-style lists represented as strings
 (e.g., \code{"[1 2 3]"}) into R lists. It automatically detects
-\code{\link[=numeric]{numeric}}, \code{\link[=integer]{integer}}, \code{\link[=logical]{logical}},
-and \code{\link[=character]{character}} types within the lists and converts them
-accordingly.
+\code{\link[base:numeric]{numeric}}, \code{\link[base:integer]{integer}},
+\code{\link[base:logical]{logical}}, and \code{\link[base:character]{character}} types within
+the lists and converts them accordingly.
 }
 \examples{
 # Scalar Examples -----

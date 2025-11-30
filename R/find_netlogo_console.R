@@ -9,10 +9,6 @@
 #' is not set or the file does not exist, it constructs the path to the
 #' executable based on the provided `netlogo_home` directory.
 #'
-#' @param remove_exe_ext (optional) A [`logical`][base::logical] flag indicating
-#'   whether to remove the `.exe` extension from the returned path on Windows
-#'   systems (default: `TRUE`).
-#'
 #' @return A [`character`][base::character] string specifying the path to the
 #'   NetLogo executable file. If the file cannot be found, an empty string is
 #'   returned.
@@ -26,11 +22,9 @@
 #'   find_netlogo_console()
 #' }
 find_netlogo_console <- function(
-  netlogo_home = find_netlogo_home(),
-  remove_exe_ext = TRUE
+  netlogo_home = find_netlogo_home()
 ) {
   checkmate::assert_string(netlogo_home)
-  checkmate::assert_flag(remove_exe_ext)
 
   netlogo_home <- fs::path_expand(netlogo_home)
 
@@ -42,7 +36,7 @@ find_netlogo_console <- function(
       normalizePath(mustWork = FALSE)
   }
 
-  if (!netlogo_home == "" && !file.exists(out)) {
+  if ((!netlogo_home == "") && !file.exists(out)) {
     if (.Platform$OS.type == "windows") {
       out <- fs::path(netlogo_home, "NetLogo_Console.exe")
     } else if (Sys.info()["sysname"] == "Darwin") {
@@ -53,15 +47,8 @@ find_netlogo_console <- function(
   }
 
   if (file.exists(out)) {
-    if (
-      isTRUE(remove_exe_ext) &&
-        stringr::str_detect(out, "\\.exe$")
-    ) {
-      out <- stringr::str_remove(out, "\\.exe$")
-    }
-
     out |>
-      normalizePath(mustWork = FALSE) |>
+      normalizePath(mustWork = TRUE) |>
       fs::path_expand()
   } else {
     ""

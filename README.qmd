@@ -248,14 +248,14 @@ data |>
     )
   ) +
     labs(
-      x = "Time step",
-      y = "Average number of sheep",
+      x = "Time Step",
+      y = "Average Number of Sheep",
       color = "Wolves"
     ) +
   geom_line()
 ```
 
-Please refer to the [BehaviorSpace Guide](https://docs.netlogo.org/behaviorspace.html) for complete guidance on how to set and run experiments in NetLogo. To gain a better understand of the mechanics behind R and NetLogo communication, see the [Running from the Command Line](https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line) section.
+Please refer to the [BehaviorSpace Guide](https://docs.netlogo.org/behaviorspace.html) for complete guidance on how to set and run experiments in NetLogo.
 
 Click [here](https://danielvartan.github.io/logolink/reference/) to see `logolink` full list of functions.
 

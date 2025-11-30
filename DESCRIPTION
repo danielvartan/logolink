@@ -24,10 +24,7 @@ Authors@R: c(
             comment = c(ORCID = "0000-0001-5947-2617")
         ),
         person(
-            given = paste0(
-                "National Council for Scientific and ",
-                "Technological Development (CNPq)"
-            ),
+            given = "Sustentarea Research and Extension Center",
             role = c("fnd")
         ),
         person(
@@ -35,7 +32,10 @@ Authors@R: c(
             role = c("fnd")
         ),
         person(
-            given = "Sustentarea Research and Extension Center",
+            given = paste0(
+                "National Council for Scientific and ",
+                "Technological Development (CNPq)"
+            ),
             role = c("fnd")
         )
     )

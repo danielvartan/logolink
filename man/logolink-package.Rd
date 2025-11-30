@@ -26,9 +26,9 @@ Other contributors:
 \itemize{
   \item Aline Martins Carvalho \email{alinenutri@usp.br} (\href{https://orcid.org/0000-0002-4900-5609}{ORCID}) [scientific advisor]
   \item Leandro Garcia \email{l.garcia@qub.ac.uk} (\href{https://orcid.org/0000-0001-5947-2617}{ORCID}) [scientific advisor]
-  \item National Council for Scientific and Technological Development (CNPq) [funder]
-  \item University of Sao Paulo (USP) [funder]
   \item Sustentarea Research and Extension Center [funder]
+  \item University of Sao Paulo (USP) [funder]
+  \item National Council for Scientific and Technological Development (CNPq) [funder]
 }
 
 }
