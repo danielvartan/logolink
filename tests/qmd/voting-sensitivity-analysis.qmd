@@ -1,0 +1,55 @@
+```{r}
+#| label: setup
+#| include: false
+
+library(here)
+
+source(here("R", ".setup.R"))
+```
+
+## Overview
+
+This document tests `logolink` under the different experiments set in the *Voting Sensitivity Analysis* model, included in NetLogo along with the [IABM Textbook](https://mitpress.mit.edu/9780262731898/an-introduction-to-agent-based-modeling/) library.
+
+## Set the Environment
+
+### Load Packages
+
+```{r}
+library(logolink)
+```
+
+```{r}
+library(dplyr)
+```
+
+### Set Model Path
+
+```{r}
+model_path <-
+  find_netlogo_home() |>
+  file.path(
+    "models",
+    "IABM Textbook",
+    "chapter 7",
+    "Voting Sensitivity Analysis.nlogox"
+  )
+```
+
+## Sensitivity Experiment
+
+```{r}
+experiment <- "sensitivity-experiment"
+```
+
+```{r}
+results <-
+  model_path |>
+  run_experiment(
+    experiment = experiment
+  )
+```
+
+```{r}
+results |> glimpse()
+```

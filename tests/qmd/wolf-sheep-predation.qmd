@@ -9,7 +9,7 @@ source(here("R", ".setup.R"))
 
 ## Overview
 
-This document tests `logolink` under the different experiments set in the *Wolf Sheep Predation* model included in NetLogo.
+This document tests `logolink` under the different experiments set in the *Wolf Sheep Predation* model, included in NetLogo along with the *Sample Models* library.
 
 ## Set the Environment
 
