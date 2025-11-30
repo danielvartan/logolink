@@ -9,6 +9,7 @@ run_experiment(
   experiment = NULL,
   setup_file = NULL,
   other_arguments = NULL,
+  netlogo_3d = FALSE,
   parse = TRUE,
   timeout = Inf,
   netlogo_home = find_netlogo_home(),
@@ -31,6 +32,10 @@ NetLogo BehaviorSpace interface (default: \code{NULL}).}
 specifying any additional command-line arguments to pass to the NetLogo
 executable. For example, you can use \code{c("--threads 4")} to specify the
 number of threads to use (default: \code{NULL}).}
+
+\item{netlogo_3d}{(optional) A \code{\link[=logical]{logical}} flag indicating whether
+the model is a 3D model. This is necessary for models with extensions
+\code{.nlogo3d} or \code{.nlogox3d} (default: \code{FALSE}).}
 
 \item{parse}{(optional) A \code{\link[=logical]{logical}} flag indicating whether to
 parse NetLogo lists in the output data frame. If \code{TRUE}, columns containing
@@ -73,17 +78,33 @@ please refer to the
 \href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace Guide}.
 }
 \details{
+\subsection{Setting the NetLogo Installation Path}{
+
 If \code{run_experiment()} cannot find the NetLogo installation, you will need to
 set the path manually using the \code{NETLOGO_HOME} environment variable. On
 Windows, a typical path is something like \verb{C:\\Program Files\\NetLogo 7.0.2}.
-You can set this variable temporarily in your R session with
-\code{Sys.setenv("NETLOGO_HOME" = "[PATH]")}, or permanently by adding it to your
+You can set this variable temporarily in your R session with:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{Sys.setenv("NETLOGO_HOME" = "PATH/TO/NETLOGO/INSTALLATION")
+}\if{html}{\out{</div>}}
+
+or permanently by adding it to your
 \href{https://rstats.wtf/r-startup.html#renviron}{\code{.Renviron}} file.
 
 If even after setting the \code{NETLOGO_HOME} variable you still encounter issues,
 please try to set a \code{NETLOGO_CONSOLE} environment variable with the path of
 the NetLogo executable or binary. On Windows, a typical path is something
 like \verb{C:\\Program Files\\NetLogo 7.0.2\\NetLogo.exe}.
+}
+
+\subsection{Non-Tabular Output}{
+
+If the experiment generates any non-tabular output (e.g., prints, error
+messages, warnings), this output will be captured and displayed as an
+informational message after the results data frame is returned. This allows
+you to see any important messages generated during the experiment run.
+Keep in mind that excessive non-tabular output may clutter your R console.
+}
 }
 \examples{
 # Set the Environment -----

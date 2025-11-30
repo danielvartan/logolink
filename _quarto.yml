@@ -6,4 +6,5 @@ project:
 
 format:
   gfm:
+    html-table-processing: none
     default-image-extension: ""

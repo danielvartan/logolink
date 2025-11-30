@@ -18,17 +18,32 @@
 #'
 #' @details
 #'
+#' ## Setting the NetLogo Installation Path
+#'
 #' If `run_experiment()` cannot find the NetLogo installation, you will need to
 #' set the path manually using the `NETLOGO_HOME` environment variable. On
 #' Windows, a typical path is something like `C:\Program Files\NetLogo 7.0.2`.
-#' You can set this variable temporarily in your R session with
-#' `Sys.setenv("NETLOGO_HOME" = "[PATH]")`, or permanently by adding it to your
+#' You can set this variable temporarily in your R session with:
+#'
+#' ```r
+#' Sys.setenv("NETLOGO_HOME" = "PATH/TO/NETLOGO/INSTALLATION")
+#' ```
+#'
+#' or permanently by adding it to your
 #' [`.Renviron`](https://rstats.wtf/r-startup.html#renviron) file.
 #'
 #' If even after setting the `NETLOGO_HOME` variable you still encounter issues,
 #' please try to set a `NETLOGO_CONSOLE` environment variable with the path of
 #' the NetLogo executable or binary. On Windows, a typical path is something
 #' like `C:\Program Files\NetLogo 7.0.2\NetLogo.exe`.
+#'
+#' ## Non-Tabular Output
+#'
+#' If the experiment generates any non-tabular output (e.g., prints, error
+#' messages, warnings), this output will be captured and displayed as an
+#' informational message after the results data frame is returned. This allows
+#' you to see any important messages generated during the experiment run.
+#' Keep in mind that excessive non-tabular output may clutter your R console.
 #'
 #' @param model_path A string specifying the path to the NetLogo model file
 #'   (with extension `.nlogo`, `.nlogo3d`, `.nlogox`, or `.nlogox3d`).
@@ -42,6 +57,9 @@
 #'   specifying any additional command-line arguments to pass to the NetLogo
 #'   executable. For example, you can use `c("--threads 4")` to specify the
 #'   number of threads to use (default: `NULL`).
+#' @param netlogo_3d (optional) A [`logical`][logical()] flag indicating whether
+#'   the model is a 3D model. This is necessary for models with extensions
+#'   `.nlogo3d` or `.nlogox3d` (default: `FALSE`).
 #' @param parse (optional) A [`logical`][logical()] flag indicating whether to
 #'   parse NetLogo lists in the output data frame. If `TRUE`, columns containing
 #'   NetLogo lists (e.g., `[1 2 3]`) will be converted to R lists. If `FALSE`,
@@ -166,6 +184,7 @@ run_experiment <- function(
   experiment = NULL,
   setup_file = NULL,
   other_arguments = NULL,
+  netlogo_3d = FALSE,
   parse = TRUE,
   timeout = Inf,
   netlogo_home = find_netlogo_home(),
@@ -179,6 +198,7 @@ run_experiment <- function(
   checkmate::assert_string(experiment, null.ok = TRUE)
   checkmate::assert_string(setup_file, null.ok = TRUE)
   checkmate::assert_character(other_arguments, null.ok = TRUE)
+  checkmate::assert_flag(netlogo_3d)
   checkmate::assert_flag(parse)
   checkmate::assert_number(timeout, lower = 0)
 
@@ -216,6 +236,28 @@ run_experiment <- function(
       )
     )
 
+    if (isTRUE(netlogo_3d)) {
+      model_path_choices <- c("nlogo3d", "nlogox3d")
+
+      if (!fs::path_ext(model_path) %in% model_path_choices) {
+        cli::cli_abort(
+          paste0(
+            "The provided model file is not a 3D model. ",
+            "When {.strong {cli::col_blue('netlogo_3d')}} is set to ",
+            "{.strong TRUE}, the model file must have one of the following ",
+            "extensions: ",
+            paste0(
+              "{.strong {cli::col_red('",
+              model_path_choices,
+              "')}}",
+              collapse = ' or '
+            ),
+            "."
+          )
+        )
+      }
+    }
+
     checkmate::assert_string(netlogo_path)
     checkmate::assert_file_exists(netlogo_path)
 
@@ -251,6 +293,11 @@ run_experiment <- function(
 
   args <- c(
     "--headless ",
+    ifelse(
+      isTRUE(netlogo_3d),
+      "--3D",
+      ""
+    ),
     glue::glue("--model {glue::double_quote(model_path)}"),
     ifelse(
       !is.null(experiment),

@@ -230,7 +230,7 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 4, 3, 2, 1, 9, 7, 5, 6, 8, 4, 5, 6, 2, 1, 3,…
+#> $ run_number             <dbl> 2, 8, 7, 1, 5, 9, 6, 4, 3, 9, 4, 5, 2, 6, 7,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…
@@ -361,3 +361,48 @@ a donation. Please mention `logolink` in your donation message.
 
 `logolink` brand identity is based on the
 [NetLogo](https://www.netlogo.org/) brand identity.
+
+<table>
+  <tr>
+    <td width="30%">
+      <br/>
+      <br/>
+      <p align="center">
+        <a href="https://www.fsp.usp.br/sustentarea/">
+          <img src="/home/danielvartan/Git/logolink/man/figures/sustentarea-logo.svg" width="125"/>
+        </a>
+      </p>
+      <br/>
+    </td>
+    <td width="70%">
+      <p>
+        This work was developed with support from the 
+        <a href="https://www.fsp.usp.br/sustentarea/">Sustentarea</a>
+         Research and Extension Center at the University of São Paulo (<a href="https://www5.usp.br/">USP</a>).
+      </p>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td width="30%">
+      <br/>
+      <p align="center">
+        <a href="https://www.gov.br/cnpq/">
+          <img src="/home/danielvartan/Git/logolink/man/figures/cnpq-logo.svg" width="150"/>
+        </a>
+      </p>
+      <br/>
+    </td>
+    <td width="70%">
+      <p>
+        This work was supported by the Department of Science and 
+        Technology of the Secretariat of Science, Technology, and Innovation 
+        and of the Health Economic-Industrial Complex (<a href="https://www.gov.br/saude/pt-br/composicao/sectics/">SECTICS</a>)  of the <a href="https://www.gov.br/saude/pt-br/composicao/sectics/">Ministry of Health</a> 
+        of Brazil, and the National Council for Scientific and 
+        Technological Development (<a href="https://www.gov.br/cnpq/">CNPq</a>) (grant no. 444588/2023-0).
+      </p>
+    </td>
+  </tr>
+</table>

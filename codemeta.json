@@ -39,6 +39,20 @@
       "@id": "https://orcid.org/0000-0001-7782-759X"
     }
   ],
+  "funder": [
+    {
+      "@type": "Organization",
+      "name": "National Council for Scientific and Technological Development (CNPq)"
+    },
+    {
+      "@type": "Organization",
+      "name": "University of Sao Paulo (USP)"
+    },
+    {
+      "@type": "Organization",
+      "name": "Sustentarea Research and Extension Center"
+    }
+  ],
   "maintainer": [
     {
       "@type": "Person",
@@ -293,7 +307,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "306.062KB",
+  "fileSize": "331.637KB",
   "citation": [
     {
       "@type": "CreativeWork",

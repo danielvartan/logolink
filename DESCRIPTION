@@ -8,6 +8,35 @@ Authors@R: c(
             role = c("aut", "cre", "ccp", "cph"),
             email = "danielvartan@proton.me",
             comment = c(ORCID = "0000-0001-7782-759X")
+        ),
+        person(
+            given = "Aline Martins",
+            family = "Carvalho",
+            role = c("sad"),
+            email = "alinenutri@usp.br",
+            comment = c(ORCID = "0000-0002-4900-5609")
+        ),
+        person(
+            given = "Leandro",
+            family = "Garcia",
+            role = c("sad"),
+            email = "l.garcia@qub.ac.uk",
+            comment = c(ORCID = "0000-0001-5947-2617")
+        ),
+        person(
+            given = paste0(
+                "National Council for Scientific and ",
+                "Technological Development (CNPq)"
+            ),
+            role = c("fnd")
+        ),
+        person(
+            given = "University of Sao Paulo (USP)",
+            role = c("fnd")
+        ),
+        person(
+            given = "Sustentarea Research and Extension Center",
+            role = c("fnd")
         )
     )
 Description: An interface for 'NetLogo' <https://www.netlogo.org> that enables

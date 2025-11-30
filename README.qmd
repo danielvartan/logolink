@@ -15,6 +15,8 @@ library(brandr)
 library(dplyr)
 library(ggplot2)
 library(here)
+library(htmltools)
+library(knitr)
 library(readr)
 library(rutils) # https://github.com/danielvartan/rutils
 
@@ -322,3 +324,95 @@ You can also support the development of `logolink` by becoming a sponsor. Click 
 ## Acknowledgments
 
 `logolink` brand identity is based on the [NetLogo](https://www.netlogo.org/) brand identity.
+
+```{r}
+#| echo: false
+#| output: asis
+
+tags$table(
+  tags$tr(
+    tags$td(
+      tags$br(),
+      tags$br(),
+      tags$p(
+        tags$a(
+          tags$img(
+            src = here("man", "figures", "sustentarea-logo.svg"),
+            width = 125
+          ),
+          href = "https://www.fsp.usp.br/sustentarea/"
+        ),
+        align = "center"
+      ),
+      tags$br(),
+      width = "30%"
+    ),
+    tags$td(
+      tags$p(
+        "This work was developed with support from the ",
+        tags$a(
+          "Sustentarea",
+          href = "https://www.fsp.usp.br/sustentarea/"
+        ),
+        " Research and Extension Center at the University of São Paulo (",
+        tags$a(
+          "USP",
+          href = "https://www5.usp.br/",
+          .noWS = "outside"
+        ),
+        ")."
+      ),
+      width = "70%"
+    )
+  )
+) |>
+  raw_html()
+
+tags$table(
+  tags$tr(
+    tags$td(
+      tags$br(),
+      tags$p(
+        tags$a(
+          tags$img(
+            src = here("man", "figures", "cnpq-logo.svg"),
+            width = 150
+          ),
+          href = "https://www.gov.br/cnpq/"
+        ),
+        align = "center"
+      ),
+      tags$br(),
+      width = "30%"
+    ),
+    tags$td(
+      tags$p(
+        "This work was supported by the Department of Science and ",
+        "Technology of the Secretariat of Science, Technology, and Innovation ",
+        "and of the Health Economic-Industrial Complex (",
+        tags$a(
+          "SECTICS",
+          href = "https://www.gov.br/saude/pt-br/composicao/sectics/",
+          .noWS = "outside"
+        ),
+        ")  of the ",
+        tags$a(
+          "Ministry of Health",
+          href = "https://www.gov.br/saude/pt-br/composicao/sectics/",
+          .noWS = "outside"
+        ), " ",
+        "of Brazil, and the National Council for Scientific and ",
+        "Technological Development (",
+        tags$a(
+          "CNPq",
+          href = "https://www.gov.br/cnpq/",
+          .noWS = "outside"
+        ),
+        ") (grant no. 444588/2023-0)."
+      ),
+      width = "70%"
+    )
+  )
+) |>
+  raw_html()
+```
