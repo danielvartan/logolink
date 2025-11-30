@@ -174,7 +174,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpeEWO0y/experiment-19214a9dca6a.xml"
+#> [1] "/tmp/RtmpLpdG2T/experiment-191a36193ac6.xml"
 
 setup_file |> inspect_experiment_file()
 #> <experiments>
