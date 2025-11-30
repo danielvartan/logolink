@@ -42,6 +42,9 @@ reference:
   desc: >
     Utility functions to help with parsing and data manipulation.
   contents:
+  - find_netlogo_console
+  - find_netlogo_home
+  - find_netlogo_version
   - inspect_experiment_file
   - parse_netlogo_list
 

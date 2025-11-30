@@ -91,7 +91,7 @@ The package is designed to work with NetLogo **7.0.1 and above**. If you need su
 
 > If you find this project useful, please consider giving it a star! &nbsp; [![GitHub Repository Stars](https://img.shields.io/github/stars/danielvartan/logolink)](https://github.com/danielvartan/logolink/)
 
-> The continuous development of `logolink` depends on community support. If you find this project useful, and can afford to do so, please consider becoming a sponsor. &nbsp; [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/danielvartan)
+> The continuous development of `logolink` depends on community support. If you can afford to do so, please consider becoming a sponsor. &nbsp; [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/danielvartan)
 
 ## Another R Package for NetLogo?
 
@@ -123,9 +123,15 @@ remotes::install_github("danielvartan/logolink")
 
 Along with this package, you will also need NetLogo 7.0.1 or higher installed on your computer. You can download it from the [NetLogo website](https://www.netlogo.org).
 
+After installing NetLogo and `logolink`, start by loading the package with:
+
+```{r}
+library(logolink)
+```
+
 ### Setting the NetLogo Path
 
-`logolink` will try to find out the path to the NetLogo installation automatically, but **if it fails**, you will need to set it manually. In the latter case, see the documentation of the [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html) function for more details.
+`logolink` will try to find out the path to the NetLogo installation automatically. This is usually successful, but **if it fails**, you will need to set it manually. In the latter case, see the documentation of the [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html) function for more details.
 
 ### Creating an Experiment
 
@@ -134,10 +140,6 @@ To start running your model from R you first need to setup an experiment. You ca
 Alternatively, you can set up your experiment directly in NetLogo and save it as part of your model. In this case, you can skip the [`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html) step and just provide the name of the experiment when running the model with [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html).
 
 Example:
-
-```{r}
-library(logolink)
-```
 
 ```{r}
 #| label: setup_file
@@ -170,6 +172,8 @@ setup_file <- create_experiment(
 )
 ```
 
+If you want to inspect the created experiment file, you can use the [`inspect_experiment_file`](https://danielvartan.github.io/logolink/reference/inspect_experiment_file.html) function:
+
 ```{r}
 setup_file |> inspect_experiment_file()
 ```
@@ -178,9 +182,11 @@ setup_file |> inspect_experiment_file()
 
 With the experiment file created, you can now run your model using the [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html) function. This function will execute the NetLogo model with the specified parameters and return the results as a tidy data frame.
 
+First you need to specify the path to your NetLogo model. In this example, we will use the *Wolf Sheep Simple 5* model that comes with any NetLogo installation.
+
 ```{r}
 model_path <-
-  Sys.getenv("NETLOGO_HOME") |>
+  find_netlogo_home() |>
   file.path(
     "models",
     "IABM Textbook",
@@ -188,6 +194,8 @@ model_path <-
     "Wolf Sheep Simple 5.nlogox"
   )
 ```
+
+After specifying the model path, you can run the experiment with:
 
 ```{r}
 #| label: run_experiment

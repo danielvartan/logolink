@@ -1,7 +1,7 @@
 assert_netlogo_works <- function(
   netlogo_home = find_netlogo_home()
 ) {
-  executable <- find_netlogo_executable(netlogo_home)
+  executable <- find_netlogo_console(netlogo_home)
 
   if (executable == "") {
     cli::cli_abort(

@@ -60,6 +60,9 @@ c('["a" "b" "c" [1 2] true ["d" "c"]]') |> parse_netlogo_list()
 }
 \seealso{
 Other utility functions: 
+\code{\link{find_netlogo_console}()},
+\code{\link{find_netlogo_home}()},
+\code{\link{find_netlogo_version}()},
 \code{\link{inspect_experiment_file}()}
 }
 \concept{utility functions}

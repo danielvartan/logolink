@@ -9,9 +9,8 @@
 #' file.
 #'
 #' The function tries to locate the NetLogo installation automatically.
-#' If it fails, you must set the path manually by defining the
-#' `NETLOGO_HOME` environment variable and pointing it to the NetLogo
-#' installation directory. See the *Details* section for more information.
+#' This is usually successful, but **if it fails**, you will need to set it
+#' manually. In the latter case, see *Details* section for more information.
 #'
 #' For complete guidance on setting up and running experiments in NetLogo,
 #' please refer to the
@@ -19,17 +18,17 @@
 #'
 #' @details
 #'
-#' If `run_experiment()` cannot find the NetLogo installation,
-#' you will need to set the path manually using the `NETLOGO_HOME` environment
-#' variable. On Windows, a typical path is `C:\Program Files\NetLogo 7.0.2`.
+#' If `run_experiment()` cannot find the NetLogo installation, you will need to
+#' set the path manually using the `NETLOGO_HOME` environment variable. On
+#' Windows, a typical path is something like `C:\Program Files\NetLogo 7.0.2`.
 #' You can set this variable temporarily in your R session with
 #' `Sys.setenv("NETLOGO_HOME" = "[PATH]")`, or permanently by adding it to your
 #' [`.Renviron`](https://rstats.wtf/r-startup.html#renviron) file.
 #'
-#' If even after setting the `NETLOGO_HOME` environment variable you still
-#' encounter issues, please try to set a `NETLOGO_EXE` environment variable to
-#' the path of the NetLogo executable. On Windows, this would be the full path
-#' to `NetLogo.exe` (e.g., `C:\Program Files\NetLogo 7.0.2\NetLogo.exe`).
+#' If even after setting the `NETLOGO_HOME` variable you still encounter issues,
+#' please try to set a `NETLOGO_CONSOLE` environment variable with the path of
+#' the NetLogo executable or binary. On Windows, a typical path is something
+#' like `C:\Program Files\NetLogo 7.0.2\NetLogo.exe`.
 #'
 #' @param model_path A string specifying the path to the NetLogo model file
 #'   (with extension `.nlogo`, `.nlogo3d`, `.nlogox`, or `.nlogox3d`).
@@ -53,17 +52,13 @@
 #'   the process exceeds this time limit, it will be terminated, and the
 #'   function will return the available output up to that point. Use `Inf`
 #'   for no time limit (default: `Inf`).
-#' @param netlogo_home (optional) A string specifying the path to the NetLogo
-#'   installation directory. If not provided, the function will use the value of
-#'   the `NETLOGO_HOME` environment variable. This argument is useful if you
-#'   want to override the environment variable for a specific function call
-#'   (default: `logolink:::find_netlogo_home()`).
 #' @param netlogo_path `r lifecycle::badge("deprecated")` This argument is no
 #'   longer supported. See the *Details* section for more information.
 #'
 #' @return A [`tibble`][dplyr::as_tibble()] containing the results of the
 #'   experiment.
 #'
+#' @template params-netlogo-home
 #' @family NetLogo functions
 #' @export
 #'
@@ -245,7 +240,7 @@ run_experiment <- function(
 
     netlogo_executable <-
       netlogo_home |>
-      find_netlogo_executable()
+      find_netlogo_console()
   }
 
   assert_netlogo_works(netlogo_home)

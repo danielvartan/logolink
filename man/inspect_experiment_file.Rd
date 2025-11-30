@@ -26,6 +26,9 @@ file |> inspect_experiment_file()
 }
 \seealso{
 Other utility functions: 
+\code{\link{find_netlogo_console}()},
+\code{\link{find_netlogo_home}()},
+\code{\link{find_netlogo_version}()},
 \code{\link{parse_netlogo_list}()}
 }
 \concept{utility functions}

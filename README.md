@@ -42,8 +42,7 @@ version of this package.
 > Stars](https://img.shields.io/github/stars/danielvartan/logolink)](https://github.com/danielvartan/logolink/)
 
 > The continuous development of `logolink` depends on community support.
-> If you find this project useful, and can afford to do so, please
-> consider becoming a sponsor.  
+> If you can afford to do so, please consider becoming a sponsor.  
 > [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/danielvartan)
 
 ## Another R Package for NetLogo?
@@ -93,11 +92,19 @@ Along with this package, you will also need NetLogo 7.0.1 or higher
 installed on your computer. You can download it from the [NetLogo
 website](https://www.netlogo.org).
 
+After installing NetLogo and `logolink`, start by loading the package
+with:
+
+``` r
+library(logolink)
+```
+
 ### Setting the NetLogo Path
 
 `logolink` will try to find out the path to the NetLogo installation
-automatically, but **if it fails**, you will need to set it manually. In
-the latter case, see the documentation of the
+automatically. This is usually successful, but **if it fails**, you will
+need to set it manually. In the latter case, see the documentation of
+the
 [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html)
 function for more details.
 
@@ -121,10 +128,6 @@ with
 [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html).
 
 Example:
-
-``` r
-library(logolink)
-```
 
 ``` r
 setup_file <- create_experiment(
@@ -154,6 +157,10 @@ setup_file <- create_experiment(
   )
 )
 ```
+
+If you want to inspect the created experiment file, you can use the
+[`inspect_experiment_file`](https://danielvartan.github.io/logolink/reference/inspect_experiment_file.html)
+function:
 
 ``` r
 setup_file |> inspect_experiment_file()
@@ -194,9 +201,13 @@ With the experiment file created, you can now run your model using the
 function. This function will execute the NetLogo model with the
 specified parameters and return the results as a tidy data frame.
 
+First you need to specify the path to your NetLogo model. In this
+example, we will use the *Wolf Sheep Simple 5* model that comes with any
+NetLogo installation.
+
 ``` r
 model_path <-
-  Sys.getenv("NETLOGO_HOME") |>
+  find_netlogo_home() |>
   file.path(
     "models",
     "IABM Textbook",
@@ -204,6 +215,8 @@ model_path <-
     "Wolf Sheep Simple 5.nlogox"
   )
 ```
+
+After specifying the model path, you can run the experiment with:
 
 ``` r
 results <-
@@ -217,16 +230,16 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 5, 4, 4, 5, 4, 4, 9, 5, 3, 6, 7, 1, 4, 8, 4,…
+#> $ run_number             <dbl> 4, 3, 2, 1, 9, 7, 5, 6, 8, 4, 5, 6, 2, 1, 3,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…
 #> $ grass_regrowth_rate    <dbl> 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3,…
 #> $ energy_gain_from_grass <dbl> 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,…
 #> $ energy_gain_from_sheep <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
-#> $ step                   <dbl> 0, 0, 1, 1, 2, 3, 0, 2, 0, 0, 0, 0, 4, 0, 5,…
+#> $ step                   <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1,…
 #> $ count_wolves           <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
-#> $ count_sheep            <dbl> 500, 500, 498, 498, 498, 495, 500, 497, 500,…
+#> $ count_sheep            <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 ```
 
 ### Analyzing the Data (Bonus Section)

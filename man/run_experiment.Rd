@@ -44,11 +44,11 @@ the process exceeds this time limit, it will be terminated, and the
 function will return the available output up to that point. Use \code{Inf}
 for no time limit (default: \code{Inf}).}
 
-\item{netlogo_home}{(optional) A string specifying the path to the NetLogo
-installation directory. If not provided, the function will use the value of
-the \code{NETLOGO_HOME} environment variable. This argument is useful if you
-want to override the environment variable for a specific function call
-(default: \code{logolink:::find_netlogo_home()}).}
+\item{netlogo_home}{(optional) A \code{\link[base:character]{character}} string
+specifying the path to the NetLogo installation directory. If not provided,
+the function will try to find it automatically using
+\code{\link[=find_netlogo_home]{find_netlogo_home()}}. (default:
+\code{\link[=find_netlogo_home]{find_netlogo_home()}}).}
 
 \item{netlogo_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is no
 longer supported. See the \emph{Details} section for more information.}
@@ -65,26 +65,25 @@ file on the fly, or with an existing experiment stored in the NetLogo model
 file.
 
 The function tries to locate the NetLogo installation automatically.
-If it fails, you must set the path manually by defining the
-\code{NETLOGO_HOME} environment variable and pointing it to the NetLogo
-installation directory. See the \emph{Details} section for more information.
+This is usually successful, but \strong{if it fails}, you will need to set it
+manually. In the latter case, see \emph{Details} section for more information.
 
 For complete guidance on setting up and running experiments in NetLogo,
 please refer to the
 \href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace Guide}.
 }
 \details{
-If \code{run_experiment()} cannot find the NetLogo installation,
-you will need to set the path manually using the \code{NETLOGO_HOME} environment
-variable. On Windows, a typical path is \verb{C:\\Program Files\\NetLogo 7.0.2}.
+If \code{run_experiment()} cannot find the NetLogo installation, you will need to
+set the path manually using the \code{NETLOGO_HOME} environment variable. On
+Windows, a typical path is something like \verb{C:\\Program Files\\NetLogo 7.0.2}.
 You can set this variable temporarily in your R session with
 \code{Sys.setenv("NETLOGO_HOME" = "[PATH]")}, or permanently by adding it to your
 \href{https://rstats.wtf/r-startup.html#renviron}{\code{.Renviron}} file.
 
-If even after setting the \code{NETLOGO_HOME} environment variable you still
-encounter issues, please try to set a \code{NETLOGO_EXE} environment variable to
-the path of the NetLogo executable. On Windows, this would be the full path
-to \code{NetLogo.exe} (e.g., \verb{C:\\Program Files\\NetLogo 7.0.2\\NetLogo.exe}).
+If even after setting the \code{NETLOGO_HOME} variable you still encounter issues,
+please try to set a \code{NETLOGO_CONSOLE} environment variable with the path of
+the NetLogo executable or binary. On Windows, a typical path is something
+like \verb{C:\\Program Files\\NetLogo 7.0.2\\NetLogo.exe}.
 }
 \examples{
 # Set the Environment -----
