@@ -5,13 +5,13 @@
 Functions to setup and execute NetLogo.
 
 - [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md)
-  : Create a NetLogo BehaviorSpace experiment XML file
+  : Create a NetLogo BehaviorSpace experiment
 - [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
   : Run a NetLogo BehaviorSpace experiment
 
 ## Utilities
 
-Utility functions to help with parsing and data manipulation.
+Utility functions to help with NetLogo integration.
 
 - [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)
   : Find NetLogo Installation Directory

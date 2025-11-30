@@ -21,7 +21,7 @@ find_netlogo_version(netlogo_home = find_netlogo_home())
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
   string specifying the path to the NetLogo installation directory. If
   not provided, the function will try to find it automatically using
-  [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md).
+  [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)
   (default:
   [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)).
 

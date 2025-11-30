@@ -1,4 +1,4 @@
-# Create a NetLogo BehaviorSpace experiment XML file
+# Create a NetLogo BehaviorSpace experiment
 
 `create_experiment()` creates a NetLogo BehaviorSpace experiment XML in
 a temporary file that can be used to run headless experiments with the
@@ -26,7 +26,8 @@ create_experiment(
   exit_condition = NULL,
   metrics = c("count turtles", "count patches"),
   run_metrics_condition = NULL,
-  constants = NULL
+  constants = NULL,
+  file = tempfile(pattern = "experiment-", fileext = ".xml")
 )
 ```
 
@@ -34,8 +35,8 @@ create_experiment(
 
 - name:
 
-  (optional) A string specifying the name of the experiment (default:
-  `""`).
+  (optional) A [`character`](https://rdrr.io/r/base/character.html)
+  string specifying the name of the experiment (default: `""`).
 
 - repetitions:
 
@@ -55,28 +56,33 @@ create_experiment(
 
 - pre_experiment:
 
-  (optional) A string specifying the NetLogo command to run before the
-  experiment starts (default: `NULL`).
+  (optional) A [`character`](https://rdrr.io/r/base/character.html)
+  string specifying the NetLogo command to run before the experiment
+  starts (default: `NULL`).
 
 - setup:
 
-  A string specifying the NetLogo command to set up the model (default:
+  (optional) A [`character`](https://rdrr.io/r/base/character.html)
+  string specifying the NetLogo command to set up the model (default:
   `"setup"`).
 
 - go:
 
-  A string specifying the NetLogo command to run the model (default:
+  (optional) A [`character`](https://rdrr.io/r/base/character.html)
+  string specifying the NetLogo command to run the model (default:
   `"go"`).
 
 - post_run:
 
-  (optional) A string specifying the NetLogo command to run after each
-  run (default: `NULL`).
+  (optional) A [`character`](https://rdrr.io/r/base/character.html)
+  string specifying the NetLogo command to run after each run (default:
+  `NULL`).
 
 - post_experiment:
 
-  (optional) A string specifying the NetLogo command to run after the
-  experiment ends (default: `NULL`).
+  (optional) A [`character`](https://rdrr.io/r/base/character.html)
+  string specifying the NetLogo command to run after the experiment ends
+  (default: `NULL`).
 
 - time_limit:
 
@@ -85,8 +91,9 @@ create_experiment(
 
 - exit_condition:
 
-  (optional) A string specifying the NetLogo command that defines the
-  exit condition for the experiment (default: `NULL`).
+  (optional) A [`character`](https://rdrr.io/r/base/character.html)
+  string specifying the NetLogo command that defines the exit condition
+  for the experiment (default: `NULL`).
 
 - metrics:
 
@@ -96,8 +103,9 @@ create_experiment(
 
 - run_metrics_condition:
 
-  (optional) A string specifying the NetLogo command that defines the
-  condition to record metrics (default: `NULL`).
+  (optional) A [`character`](https://rdrr.io/r/base/character.html)
+  string specifying the NetLogo command that defines the condition to
+  record metrics (default: `NULL`).
 
 - constants:
 
@@ -108,9 +116,16 @@ create_experiment(
   `last` elements (for stepped values). See the *Details* and *Examples*
   sections to learn more (default: `NULL`).
 
+- file:
+
+  (optional) A [`character`](https://rdrr.io/r/base/character.html)
+  string specifying the path to save the created XML file (default:
+  `tempfile(pattern = "experiment-", fileext = ".xml")`).
+
 ## Value
 
-A string with the path to the created XML file.
+A [`character`](https://rdrr.io/r/base/character.html) string with the
+path to the created XML file.
 
 ## Details
 
@@ -174,7 +189,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpBKqPJW/experiment-19651280872e.xml"
+#> [1] "/tmp/RtmpxgDXhy/experiment-191e3d5cf82a.xml"
 
 setup_file |> inspect_experiment_file()
 #> <experiments>

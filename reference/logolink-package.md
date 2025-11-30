@@ -31,9 +31,9 @@ Other contributors:
   ([ORCID](https://orcid.org/0000-0001-5947-2617)) \[scientific
   advisor\]
 
-- National Council for Scientific and Technological Development (CNPq)
-  \[funder\]
+- Sustentarea Research and Extension Center \[funder\]
 
 - University of Sao Paulo (USP) \[funder\]
 
-- Sustentarea Research and Extension Center \[funder\]
+- National Council for Scientific and Technological Development (CNPq)
+  \[funder\]

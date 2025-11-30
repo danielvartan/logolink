@@ -20,10 +20,9 @@ Guide](https://docs.netlogo.org/behaviorspace.html).
 ``` r
 run_experiment(
   model_path,
-  experiment = NULL,
   setup_file = NULL,
+  experiment = NULL,
   other_arguments = NULL,
-  netlogo_3d = FALSE,
   parse = TRUE,
   timeout = Inf,
   netlogo_home = find_netlogo_home(),
@@ -38,11 +37,6 @@ run_experiment(
   A string specifying the path to the NetLogo model file (with extension
   `.nlogo`, `.nlogo3d`, `.nlogox`, or `.nlogox3d`).
 
-- experiment:
-
-  (optional) A string specifying the name of the experiment defined in
-  the NetLogo model file (default: `NULL`).
-
 - setup_file:
 
   (optional) A string specifying the path to an XML file containing the
@@ -51,18 +45,18 @@ run_experiment(
   or exported from the NetLogo BehaviorSpace interface (default:
   `NULL`).
 
+- experiment:
+
+  (optional) A string specifying the name of the experiment defined in
+  the NetLogo model file (default: `NULL`).
+
 - other_arguments:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
   vector specifying any additional command-line arguments to pass to the
   NetLogo executable. For example, you can use `c("--threads 4")` to
-  specify the number of threads to use (default: `NULL`).
-
-- netlogo_3d:
-
-  (optional) A [`logical`](https://rdrr.io/r/base/logical.html) flag
-  indicating whether the model is a 3D model. This is necessary for
-  models with extensions `.nlogo3d` or `.nlogox3d` (default: `FALSE`).
+  specify the number of threads to use. See the *Details* section for
+  more information. (default: `NULL`).
 
 - parse:
 
@@ -86,7 +80,7 @@ run_experiment(
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
   string specifying the path to the NetLogo installation directory. If
   not provided, the function will try to find it automatically using
-  [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md).
+  [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)
   (default:
   [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)).
 
@@ -120,6 +114,49 @@ issues, please try to set a `NETLOGO_CONSOLE` environment variable with
 the path of the NetLogo executable or binary. On Windows, a typical path
 is something like `C:\Program Files\NetLogo 7.0.2\NetLogo.exe`.
 
+### Additional Command-Line Arguments
+
+You can pass additional command-line arguments to the NetLogo executable
+using the `other_arguments` parameter. This can be useful for specifying
+options such as the number of threads to use or other NetLogo-specific
+flags.
+
+For example, to specify the number of threads, you can use:
+
+    run_experiment(
+     model_path = "path/to/model.nlogox",
+     setup_file = "path/to/experiment.xml",
+     other_arguments = c("--threads 4")
+    )
+
+There are a variety of command-line options available, but some are
+reserved for internal use by `run_experiment()` and cannot not be
+modified. These are:
+
+- `--headless`: Ensures NetLogo runs in headless mode.
+
+- `--3D`: Specifies if the model is a 3D model (automatically set based
+  on file extension).
+
+- `--model`: Specifies the path to the NetLogo model file.
+
+- `--setup-file`: Specifies the path to the experiment XML file.
+
+- `--experiment`: Specifies the name of the experiment defined in the
+  model.
+
+- `--table`: Specifies the output file for the results table.
+
+For a complete list of these options, please refer to the [BehaviorSpace
+Guide](https://docs.netlogo.org/behaviorspace.html).
+
+### NetLogo 3D
+
+The function automatically detects whether the provided model is a 3D
+model (based on the file extension) and adjusts the command-line
+arguments accordingly. Therefore, you do not need to set the `--3D` flag
+manually.
+
 ### Non-Tabular Output
 
 If the experiment generates any non-tabular output (e.g., prints, error
@@ -140,15 +177,13 @@ Other NetLogo functions:
 # Set the Environment -----
 
 if (FALSE) { # \dontrun{
-  ## Change the path below to point to your NetLogo installation folder.
-  Sys.setenv(
-    "NETLOGO_HOME" = file.path("C:", "Program Files", "NetLogo 7.0.2")
-  )
-
   model_path <-
-    Sys.getenv("NETLOGO_HOME") |>
+    find_netlogo_home() |>
     file.path(
-      "models", "IABM Textbook", "chapter 4", "Wolf Sheep Simple 5.nlogox"
+      "models",
+      "IABM Textbook",
+      "chapter 4",
+      "Wolf Sheep Simple 5.nlogox"
     )
 } # }
 
@@ -182,10 +217,7 @@ if (FALSE) { # \dontrun{
     )
   )
 
-  run_experiment(
-    model_path = model_path,
-    setup_file = setup_file
-  )
+  model_path |> run_experiment(setup_file = setup_file)
   ## Expected output:
   #> # A tibble: 110,110 × 10
   #>   run_number number_of_sheep number_of_wolves movement_cost
@@ -210,10 +242,10 @@ if (FALSE) { # \dontrun{
 # Using an Experiment Defined in the NetLogo Model File -----
 
 if (FALSE) { # \dontrun{
-  run_experiment(
-    model_path = model_path,
-    experiment = "Wolf Sheep Simple model analysis"
-  )
+  model_path |>
+    run_experiment(
+      experiment = "Wolf Sheep Simple model analysis"
+    )
   ## Expected output:
   #> # A tibble: 110 × 11
   #>    run_number energy_gain_from_grass number_of_wolves movement_cost

@@ -207,7 +207,7 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 4, 3, 9, 1, 2, 7, 6, 8, 5, 5, 3, 8, 7, 9, 2,…
+#> $ run_number             <dbl> 5, 3, 8, 6, 4, 7, 1, 2, 9, 5, 9, 2, 4, 7, 8,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…
@@ -250,8 +250,8 @@ data |>
     )
   ) +
     labs(
-      x = "Time step",
-      y = "Average number of sheep",
+      x = "Time Step",
+      y = "Average Number of Sheep",
       color = "Wolves"
     ) +
   geom_line()
@@ -261,11 +261,7 @@ data |>
 
 Please refer to the [BehaviorSpace
 Guide](https://docs.netlogo.org/behaviorspace.html) for complete
-guidance on how to set and run experiments in NetLogo. To gain a better
-understand of the mechanics behind R and NetLogo communication, see the
-[Running from the Command
-Line](https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line)
-section.
+guidance on how to set and run experiments in NetLogo.
 
 Click [here](https://danielvartan.github.io/logolink/reference/) to see
 `logolink` full list of functions.
@@ -350,13 +346,13 @@ a donation. Please mention `logolink` in your donation message.
 Functions to setup and execute NetLogo.
 
 - [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md)
-  : Create a NetLogo BehaviorSpace experiment XML file
+  : Create a NetLogo BehaviorSpace experiment
 - [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
   : Run a NetLogo BehaviorSpace experiment
 
 ## Utilities
 
-Utility functions to help with parsing and data manipulation.
+Utility functions to help with NetLogo integration.
 
 - [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)
   : Find NetLogo Installation Directory
