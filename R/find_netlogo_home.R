@@ -35,19 +35,52 @@ find_netlogo_home <- function() {
   if ((!netlogo_home == "") && dir.exists(netlogo_home)) {
     normalizePath(netlogo_home)
   } else {
-    common_paths <- c(
-      "~/",
-      "~/.opt/",
-      "/opt/",
-      "/Applications",
-      "C:/Program Files",
-      "C:/Program Files (x86)"
+    common_paths <- list(
+      windows = c(
+        "~/",
+        "C:/Program Files",
+        "C:/Program Files (x86)"
+      ),
+      macos = c(
+        "~/",
+        "/Applications/"
+      ),
+      linux = c(
+        "~/",
+        "~/.opt/",
+        "~/Applications/",
+        "/opt/"
+      )
     ) |>
-      normalizePath(mustWork = FALSE)
+      purrr::map(fs::path_expand) |>
+      purrr::map(normalizePath, mustWork = FALSE)
+
+    system_name <-
+      Sys.info() |>
+      magrittr::extract("sysname") |>
+      unname() |>
+      tolower()
+
+    if (system_name == "darwin") {
+      system_name <- "macos"
+    }
+
+    if (system_name == "windows") {
+      paths_to_search <- common_paths$windows
+    } else if (system_name == "linux") {
+      paths_to_search <- common_paths$linux
+    } else if (system_name == "macos") {
+      paths_to_search <- common_paths$mac
+    } else {
+      paths_to_search <-
+        common_paths |>
+        unlist() |>
+        unname()
+    }
 
     out <- ""
 
-    for (i in common_paths) {
+    for (i in paths_to_search) {
       netlogo_dir <-
         i |>
         list.dirs(full.names = FALSE, recursive = FALSE) |>
@@ -64,6 +97,6 @@ find_netlogo_home <- function() {
       }
     }
 
-    fs::path_expand(out)
+    out
   }
 }
