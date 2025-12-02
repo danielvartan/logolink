@@ -1,11 +1,7 @@
-# Find NetLogo Installation Directory
+# Find NetLogo installation directory
 
 `find_netlogo_home()` attempts to locate the installation directory of
 NetLogo on the user's system.
-
-It first checks the `NETLOGO_HOME` environment variable. If this
-variable is not set or the directory does not exist, it searches through
-a list of common installation paths for NetLogo.
 
 ## Usage
 
@@ -16,8 +12,22 @@ find_netlogo_home()
 ## Value
 
 A [`character`](https://rdrr.io/r/base/character.html) string specifying
-the path to the NetLogo installation directory. If the directory cannot
-be found, an empty string is returned.
+the path to the NetLogo installation directory. Returns an empty string
+(`""`) if no installation can be found.
+
+## Details
+
+The function uses the following search order:
+
+1.  Checks the `NETLOGO_HOME` environment variable. If set and the
+    directory exists, returns that path.
+
+2.  If the environment variable is not set or the directory does not
+    exist, searches through common installation paths for directories
+    containing "NetLogo" (case-insensitive) in their name.
+
+If multiple NetLogo installations are found in the same directory, the
+last one (alphabetically) is returned.
 
 ## See also
 

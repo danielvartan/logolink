@@ -89,8 +89,8 @@ complete guidance on how to set and run experiments in NetLogo.</p>
 
 
 <dl><dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
-<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string specifying the
-name of the experiment (default: <code>""</code>).</p></dd>
+<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string specifying
+the name of the experiment (default: <code>""</code>).</p></dd>
 
 
 <dt id="arg-repetitions">repetitions<a class="anchor" aria-label="anchor" href="#arg-repetitions"></a></dt>
@@ -126,14 +126,14 @@ NetLogo command to run the model (default: <code>"go"</code>).</p></dd>
 
 
 <dt id="arg-post-run">post_run<a class="anchor" aria-label="anchor" href="#arg-post-run"></a></dt>
-<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string specifying
-the NetLogo command to run after each run (default: <code>NULL</code>).</p></dd>
+<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string
+specifying the NetLogo command to run after each run (default: <code>NULL</code>).</p></dd>
 
 
 <dt id="arg-post-experiment">post_experiment<a class="anchor" aria-label="anchor" href="#arg-post-experiment"></a></dt>
 <dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string
-specifying the NetLogo command to run after the experiment ends (default:
-<code>NULL</code>).</p></dd>
+specifying the NetLogo command to run after the experiment ends
+(default: <code>NULL</code>).</p></dd>
 
 
 <dt id="arg-time-limit">time_limit<a class="anchor" aria-label="anchor" href="#arg-time-limit"></a></dt>
@@ -148,8 +148,8 @@ experiment (default: <code>NULL</code>).</p></dd>
 
 
 <dt id="arg-metrics">metrics<a class="anchor" aria-label="anchor" href="#arg-metrics"></a></dt>
-<dd><p>A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector specifying the NetLogo
-commands to record as metrics
+<dd><p>A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector specifying the
+NetLogo commands to record as metrics
 (default: <code>c('count turtles', 'count patches')</code>).</p></dd>
 
 
@@ -161,43 +161,48 @@ metrics (default: <code>NULL</code>).</p></dd>
 
 <dt id="arg-constants">constants<a class="anchor" aria-label="anchor" href="#arg-constants"></a></dt>
 <dd><p>(optional) A named <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> specifying the
-constants to vary in the experiment. Each element can be either a single
-value (for enumerated values) or a <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> with <code>first</code>,
-<code>step</code>, and <code>last</code> elements (for stepped values). See the <em>Details</em> and
-<em>Examples</em> sections to learn more (default: <code>NULL</code>).</p></dd>
+parameters for the experiment. Each element can be either a single value
+(for fixed/enumerated values) or a <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> with <code>first</code>,
+<code>step</code>, and <code>last</code> elements (for stepped/varying values). See the <em>Details</em>
+and <em>Examples</em> sections to learn more (default: <code>NULL</code>).</p></dd>
 
 
 <dt id="arg-file">file<a class="anchor" aria-label="anchor" href="#arg-file"></a></dt>
-<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string specifying the
-path to save the created XML file
+<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string specifying
+the path to save the created XML file
 (default: <code>tempfile(pattern = "experiment-", fileext = ".xml")</code>).</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string with the path to the created
-XML file.</p>
+    <p>A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string with the path to the
+created XML file.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
 
 <div class="section">
-<h3 id="constants">Constants<a class="anchor" aria-label="anchor" href="#constants"></a></h3>
+<h3 id="constants-argument"><code>constants</code> Argument<a class="anchor" aria-label="anchor" href="#constants-argument"></a></h3>
 
 
 <p>The <code>constants</code> argument allows you to specify the parameters to vary in the
 experiment. It should be a named <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> where each name
-corresponds to a NetLogo variable. The value for each name can be either:</p><ul><li><p>A single value (for enumerated values). For example, to set the variable
+corresponds to a NetLogo global variable. The value for each name can be
+either:</p><ul><li><p>A single value (for enumerated values). For example, to set the variable
 <code>initial-number-of-turtles</code> to <code>10</code>, you would use
 <code>list("initial-number-of-turtles" = 10)</code>.</p></li>
-<li><p>A <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> with <code>first</code>, <code>step</code>, and <code>last</code> elements (for stepped
-values). For example, to vary the variable <code>initial-number-of-turtles</code> from
-<code>10</code> to <code>50</code> in steps of <code>10</code>, you would use
+<li><p>A <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> with <code>first</code>, <code>step</code>, and <code>last</code> elements (for
+stepped values). For example, to vary the variable
+<code>initial-number-of-turtles</code> from <code>10</code> to <code>50</code> in steps of <code>10</code>, you would
+use
 <code>list("initial-number-of-turtles" = list(first = 10, step = 10, last = 50))</code>.</p></li>
-</ul><p>Please note that any mistake in the constants names will cause the experiment
-to return an empty result set. Be careful when changing them.</p>
-<p>Also, enclose commands with single quotes (e.g., <code>'n-values 10 ["N/A"]'</code>),
-since NetLogo only accepts double quotes for strings.</p>
+</ul><p>Note that <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> strings should be passed as is,
+without adding quotes to them. For example, to set the variable
+<code>scenario</code> to <code>"SSP-585"</code>, you should use <code>list("scenario" = "SSP-585")</code>,
+not <code>list("scenario" = '"SSP-585"')</code>.</p>
+<p>Insert quotes only if the command requires them. For example:
+<code>'n-values 10 ["N/A"]'</code>. Since NetLogo only accepts double quotes for
+strings inside commands, single quotes are used here to define the R string.</p>
 </div>
 
     </div>
@@ -209,7 +214,9 @@ since NetLogo only accepts double quotes for strings.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu">create_experiment</span><span class="op">(</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Example for the *Wolf Sheep Predation* Model ----</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu">create_experiment</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  name <span class="op">=</span> <span class="st">"Wolf Sheep Simple Model Analysis"</span>,</span></span>
 <span class="r-in"><span>  repetitions <span class="op">=</span> <span class="fl">10</span>,</span></span>
 <span class="r-in"><span>  sequential_run_order <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
@@ -237,7 +244,7 @@ since NetLogo only accepts double quotes for strings.</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpxgDXhy/experiment-191e3d5cf82a.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpYOmpZn/experiment-19562a45c453.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment_file.html">inspect_experiment_file</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
@@ -264,6 +271,65 @@ since NetLogo only accepts double quotes for strings.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="energy-gain-from-sheep"&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="5"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/constants&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/experiment&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/experiments&gt;</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Example for the *Spread of Disease* Model ----</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu">create_experiment</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  name <span class="op">=</span> <span class="st">"Population Density"</span>,</span></span>
+<span class="r-in"><span>  repetitions <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>  sequential_run_order <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  run_metrics_every_step <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  setup <span class="op">=</span> <span class="st">"setup"</span>,</span></span>
+<span class="r-in"><span>  go <span class="op">=</span> <span class="st">"go"</span>,</span></span>
+<span class="r-in"><span>  post_run <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
+<span class="r-in"><span>  post_experiment <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
+<span class="r-in"><span>  time_limit <span class="op">=</span> <span class="fl">1000</span>,</span></span>
+<span class="r-in"><span>  exit_condition <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
+<span class="r-in"><span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">'count turtles with [infected?]'</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  run_metrics_condition <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
+<span class="r-in"><span>  constants <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"variant"</span> <span class="op">=</span> <span class="st">"mobile"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"num-people"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      first <span class="op">=</span> <span class="fl">50</span>,</span></span>
+<span class="r-in"><span>      step <span class="op">=</span> <span class="fl">50</span>,</span></span>
+<span class="r-in"><span>      last <span class="op">=</span> <span class="fl">200</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"connections-per-node"</span> <span class="op">=</span> <span class="fl">4.1</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"num-infected"</span> <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"disease-decay"</span> <span class="op">=</span> <span class="fl">0</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">setup_file</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpYOmpZn/experiment-195654178861.xml"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment_file.html">inspect_experiment_file</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;experiment name="Population Density" repetitions="1" sequentialRunOrder="true" runMetricsEveryStep="true" timeLimit="1000"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;setup&gt;setup&lt;/setup&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;go&gt;go&lt;/go&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;metrics&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;metric&gt;count turtles with [infected?]&lt;/metric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/metrics&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;constants&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="variant"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="&amp;quot;mobile&amp;quot;"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;steppedValueSet variable="num-people" first="50" step="50" last="200"&gt;&lt;/steppedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="connections-per-node"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="4.1"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="num-infected"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="1"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="disease-decay"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="0"&gt;&lt;/value&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/constants&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/experiment&gt;</span>

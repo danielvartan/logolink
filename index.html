@@ -94,7 +94,7 @@
 <div class="section level2">
 <h2 id="another-r-package-for-netlogo">Another R Package for NetLogo?<a class="anchor" aria-label="anchor" href="#another-r-package-for-netlogo"></a>
 </h2>
-<p>While other R packages connect R and NetLogo, <code>logolink</code> is currently the only one that fully supports the latest NetLogo release. It is actively maintained, follows tidyverse conventions, and is designed to be simple and straightforward to use.</p>
+<p>While other R packages connect R to NetLogo, <code>logolink</code> is currently the only one that fully supports the latest NetLogo release. It is actively maintained, follows tidyverse conventions, and is designed to be simple and straightforward to use.</p>
 <p>For context, <a href="https://CRAN.R-project.org/package=RNetLogo" class="external-link"><code>RNetLogo</code></a> works only with older versions (up to version 6.0.0, released in December 2016) and has not been updated since June 2017. <a href="https://CRAN.R-project.org/package=nlrx" class="external-link"><code>nlrx</code></a> provides a powerful framework for managing experiments and results, but <a href="https://docs.ropensci.org/nlrx/reference/supported_netlogo_versions.html" class="external-link">supports</a> only up to NetLogo 6.3.0 (released in September 2022) and has <a href="https://github.com/ropensci/nlrx/issues" class="external-link">many unresolved issues</a>. <code>logolink</code> complements these packages by focusing on simplicity, full compatibility with NetLogo 7, and seamless integration into modern R workflows.</p>
 </div>
 <div class="section level2">
@@ -125,13 +125,13 @@
 <div class="section level3">
 <h3 id="setting-the-netlogo-path">Setting the NetLogo Path<a class="anchor" aria-label="anchor" href="#setting-the-netlogo-path"></a>
 </h3>
-<p><code>logolink</code> will try to find out the path to the NetLogo installation automatically. This is usually successful, but if it fails, you will need to set it manually. In the latter case, see the documentation of the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a> function for more details.</p>
+<p><code>logolink</code> will try to find out the path to the NetLogo installation automatically. This is usually successful, but if it fails, you will need to set it manually. In that case, see the documentation for the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a> function for more details.</p>
 </div>
 <div class="section level3">
 <h3 id="creating-an-experiment">Creating an Experiment<a class="anchor" aria-label="anchor" href="#creating-an-experiment"></a>
 </h3>
 <p>To start running your model from R you first need to setup an experiment. You can do this by setting a <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a> experiment with the <a href="https://danielvartan.github.io/logolink/reference/create_experiment.html"><code>create_experiment</code></a> function. This function will create a <a href="https://en.wikipedia.org/wiki/XML" class="external-link">XML</a> file that contains all the information about your experiment, including the parameters to vary, the metrics to collect, and the number of runs to perform.</p>
-<p>Alternatively, you can set up your experiment directly in NetLogo and save it as part of your model. In this case, you can skip the <a href="https://danielvartan.github.io/logolink/reference/create_experiment.html"><code>create_experiment</code></a> step and just provide the name of the experiment when running the model with <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a>.</p>
+<p>Alternatively, you can set up your experiment <a href="https://docs.netlogo.org/behaviorspace.html#how-it-works" class="external-link">directly in NetLogo</a> and save it as part of your model. In this case, you can skip the <a href="https://danielvartan.github.io/logolink/reference/create_experiment.html"><code>create_experiment</code></a> step and just provide the name of the experiment when running the model with <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a>.</p>
 <p>Example:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/create_experiment.html">create_experiment</a></span><span class="op">(</span></span>
@@ -195,8 +195,8 @@
 <div class="section level3">
 <h3 id="running-an-experiment">Running an Experiment<a class="anchor" aria-label="anchor" href="#running-an-experiment"></a>
 </h3>
-<p>With the experiment file created, you can now run your model using the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a> function. This function will execute the NetLogo model with the specified parameters and return the results as a tidy data frame.</p>
-<p>First you need to specify the path to your NetLogo model. In this example, we will use the <em>Wolf Sheep Simple 5</em> model that comes with any NetLogo installation.</p>
+<p>With the experiment file created, you can now run your model using the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a> function. This function will execute the NetLogo model with the specified parameters and return the results as a <a href="https://tibble.tidyverse.org/" class="external-link">tidy data frame</a>.</p>
+<p>First, you need to specify the path to your NetLogo model. In this example, we will use the <em>Wolf Sheep Simple 5</em> model that comes with any NetLogo installation.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model_path</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="reference/find_netlogo_home.html">find_netlogo_home</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -217,7 +217,7 @@
 <span><span class="va">results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 110,110</span></span>
 <span><span class="co">#&gt; Columns: 10</span></span>
-<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 5, 3, 8, 6, 4, 7, 1, 2, 9, 5, 9, 2, 4, 7, 8,…</span></span>
+<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 3, 4, 6, 5, 8, 9, 7, 2, 1, 8, 5, 3, 4, 2, 6,…</span></span>
 <span><span class="co">#&gt; $ number_of_sheep        &lt;dbl&gt; 500, 500, 500, 500, 500, 500, 500, 500, 500,…</span></span>
 <span><span class="co">#&gt; $ number_of_wolves       &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…</span></span>
 <span><span class="co">#&gt; $ movement_cost          &lt;dbl&gt; 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…</span></span>
@@ -261,9 +261,9 @@
 <span>      color <span class="op">=</span> <span class="st">"Wolves"</span></span>
 <span>    <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/readme-wolf-sheep-model-plot-1.png"></p>
-<p>Please refer to the <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace Guide</a> for complete guidance on how to set and run experiments in NetLogo.</p>
-<p>Click <a href="https://danielvartan.github.io/logolink/reference/">here</a> to see <code>logolink</code> full list of functions.</p>
+<p><img src="reference/figures/readme-wolf-sheep-model-plot-1.png" data-fig-alt="Line plot showing the average number of sheep over time for different initial numbers of wolves."></p>
+<p>Please refer to the <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace Guide</a> for complete instructions on how to set up and run experiments in NetLogo.</p>
+<p>Click <a href="https://danielvartan.github.io/logolink/reference/">here</a> to see the full list of <code>logolink</code> functions.</p>
 </div>
 </div>
 <div class="section level2">
@@ -310,18 +310,20 @@ this program. If not, see &lt;https://www.gnu.org/licenses/&gt;.</code></pre>
 <h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
 </h2>
 <p><a href="https://www.contributor-covenant.org/version/3/0/code_of_conduct/" class="external-link"><img src="https://img.shields.io/badge/Contributor%20Covenant-3.0-4baaaa.svg"></a></p>
-<p>Contributions are always welcome! Whether you want to report bugs, suggest new features, or help improve the code or documentation, your input makes a difference. Before opening a new issue, please take a moment to review our <a href="https://danielvartan.github.io/logolink/CONTRIBUTING.html">Guidelines for Contributing</a> and check the <a href="https://github.com/danielvartan/logolink/issues" class="external-link">issues tab</a> to see if your topic has already been reported.</p>
+<p>Contributions are always welcome! Whether you want to report bugs, suggest new features, or help improve the code or documentation, your input makes a difference.</p>
+<p>Before opening a new issue, please take a moment to review our <a href="https://danielvartan.github.io/logolink/CONTRIBUTING.html">Guidelines for Contributing</a> and check the <a href="https://github.com/danielvartan/logolink/issues" class="external-link">issues tab</a> to see if your topic has already been reported.</p>
 <p><a href="https://github.com/sponsors/danielvartan" class="external-link"><img src="https://img.shields.io/static/v1?label=Sponsor&amp;message=%E2%9D%A4&amp;logo=GitHub&amp;color=%23fe8e86"></a></p>
-<p>You can also support the development of <code>logolink</code> by becoming a sponsor. Click <a href="https://github.com/sponsors/danielvartan" class="external-link">here</a> to make a donation. Please mention <code>logolink</code> in your donation message.</p>
+<p>You can also support the development of <code>logolink</code> by becoming a sponsor.</p>
+<p>Click <a href="https://github.com/sponsors/danielvartan" class="external-link">here</a> to make a donation. Please mention <code>logolink</code> in your donation message.</p>
 </div>
 <div class="section level2">
 <h2 id="acknowledgments">Acknowledgments<a class="anchor" aria-label="anchor" href="#acknowledgments"></a>
 </h2>
-<p><code>logolink</code> brand identity is based on the <a href="https://www.netlogo.org/" class="external-link">NetLogo</a> brand identity.</p>
+<p><code>logolink</code> brand identity is based on the <a href="https://www.netlogo.org/" class="external-link">NetLogo 7</a> brand identity.</p>
 <table class="table"><tr>
 <td width="30%" valign="middle">
 <br><br><p align="center">
-<a href="https://www.fsp.usp.br/sustentarea/" class="external-link"> <img src="reference/figures/sustentarea-logo.svg" width="115"></a>
+<a href="https://www.fsp.usp.br/sustentarea/" class="external-link"> <img src="reference/figures/sustentarea-logo.svg" width="115" alt="Sustentarea Logo"></a>
 </p>
 <br><br>
 </td>
@@ -334,7 +336,7 @@ This work was developed with support from the <a href="https://www.fsp.usp.br/su
 <table class="table"><tr>
 <td width="30%" valign="middle">
 <br><br><p align="center">
-<a href="https://www.gov.br/cnpq/" class="external-link"> <img src="reference/figures/cnpq-logo.svg" width="150"></a>
+<a href="https://www.gov.br/cnpq/" class="external-link"> <img src="reference/figures/cnpq-logo.svg" width="150" alt="CNPq Logo"></a>
 </p>
 <br><br>
 </td>

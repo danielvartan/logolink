@@ -24,10 +24,10 @@ version of this package.
 
 ## Another R Package for NetLogo?
 
-While other R packages connect R and NetLogo, `logolink` is currently
-the only one that fully supports the latest NetLogo release. It is
-actively maintained, follows tidyverse conventions, and is designed to
-be simple and straightforward to use.
+While other R packages connect R to NetLogo, `logolink` is currently the
+only one that fully supports the latest NetLogo release. It is actively
+maintained, follows tidyverse conventions, and is designed to be simple
+and straightforward to use.
 
 For context, [`RNetLogo`](https://CRAN.R-project.org/package=RNetLogo)
 works only with older versions (up to version 6.0.0, released in
@@ -80,8 +80,7 @@ library(logolink)
 
 `logolink` will try to find out the path to the NetLogo installation
 automatically. This is usually successful, but if it fails, you will
-need to set it manually. In the latter case, see the documentation of
-the
+need to set it manually. In that case, see the documentation for the
 [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html)
 function for more details.
 
@@ -97,7 +96,8 @@ function. This function will create a
 information about your experiment, including the parameters to vary, the
 metrics to collect, and the number of runs to perform.
 
-Alternatively, you can set up your experiment directly in NetLogo and
+Alternatively, you can set up your experiment [directly in
+NetLogo](https://docs.netlogo.org/behaviorspace.html#how-it-works) and
 save it as part of your model. In this case, you can skip the
 [`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html)
 step and just provide the name of the experiment when running the model
@@ -176,9 +176,10 @@ setup_file |> inspect_experiment_file()
 With the experiment file created, you can now run your model using the
 [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html)
 function. This function will execute the NetLogo model with the
-specified parameters and return the results as a tidy data frame.
+specified parameters and return the results as a [tidy data
+frame](https://tibble.tidyverse.org/).
 
-First you need to specify the path to your NetLogo model. In this
+First, you need to specify the path to your NetLogo model. In this
 example, we will use the *Wolf Sheep Simple 5* model that comes with any
 NetLogo installation.
 
@@ -207,7 +208,7 @@ library(dplyr)
 results |> glimpse()
 #> Rows: 110,110
 #> Columns: 10
-#> $ run_number             <dbl> 5, 3, 8, 6, 4, 7, 1, 2, 9, 5, 9, 2, 4, 7, 8,…
+#> $ run_number             <dbl> 3, 4, 6, 5, 8, 9, 7, 2, 1, 8, 5, 3, 4, 2, 6,…
 #> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
 #> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
 #> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…
@@ -261,10 +262,10 @@ data |>
 
 Please refer to the [BehaviorSpace
 Guide](https://docs.netlogo.org/behaviorspace.html) for complete
-guidance on how to set and run experiments in NetLogo.
+instructions on how to set up and run experiments in NetLogo.
 
 Click [here](https://danielvartan.github.io/logolink/reference/) to see
-`logolink` full list of functions.
+the full list of `logolink` functions.
 
 ## Citation
 
@@ -317,8 +318,10 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 
 Contributions are always welcome! Whether you want to report bugs,
 suggest new features, or help improve the code or documentation, your
-input makes a difference. Before opening a new issue, please take a
-moment to review our [Guidelines for
+input makes a difference.
+
+Before opening a new issue, please take a moment to review our
+[Guidelines for
 Contributing](https://danielvartan.github.io/logolink/CONTRIBUTING.html)
 and check the [issues
 tab](https://github.com/danielvartan/logolink/issues) to see if your
@@ -327,13 +330,15 @@ topic has already been reported.
 [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/danielvartan)
 
 You can also support the development of `logolink` by becoming a
-sponsor. Click [here](https://github.com/sponsors/danielvartan) to make
-a donation. Please mention `logolink` in your donation message.
+sponsor.
+
+Click [here](https://github.com/sponsors/danielvartan) to make a
+donation. Please mention `logolink` in your donation message.
 
 ## Acknowledgments
 
-`logolink` brand identity is based on the
-[NetLogo](https://www.netlogo.org/) brand identity.
+`logolink` brand identity is based on the [NetLogo
+7](https://www.netlogo.org/) brand identity.
 
 [TABLE]
 

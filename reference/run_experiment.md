@@ -1,15 +1,16 @@
 # Run a NetLogo BehaviorSpace experiment
 
 `run_experiment()` runs a NetLogo BehaviorSpace experiment in headless
-mode and returns the results as a tidy data frame. It can be used with
+mode and returns the results as a [tidy data
+frame](https://dplyr.tidyverse.org/reference/reexports.html). It can be
+used with
 [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md)
 to create the experiment XML file on the fly, or with an existing
 experiment stored in the NetLogo model file.
 
 The function tries to locate the NetLogo installation automatically.
 This is usually successful, but if it fails, you will need to set it
-manually. In the latter case, see *Details* section for more
-information.
+manually. See the *Details* section for more information.
 
 For complete guidance on setting up and running experiments in NetLogo,
 please refer to the [BehaviorSpace
@@ -34,36 +35,41 @@ run_experiment(
 
 - model_path:
 
-  A string specifying the path to the NetLogo model file (with extension
+  A [`character`](https://rdrr.io/r/base/character.html) string
+  specifying the path to the NetLogo model file (with extension
   `.nlogo`, `.nlogo3d`, `.nlogox`, or `.nlogox3d`).
 
 - setup_file:
 
-  (optional) A string specifying the path to an XML file containing the
-  experiment definition. This file can be created using
+  (optional) A [`character`](https://rdrr.io/r/base/character.html)
+  string specifying the path to an XML file containing the experiment
+  definition. This file can be created using
   [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md)
   or exported from the NetLogo BehaviorSpace interface (default:
   `NULL`).
 
 - experiment:
 
-  (optional) A string specifying the name of the experiment defined in
-  the NetLogo model file (default: `NULL`).
+  (optional) A [`character`](https://rdrr.io/r/base/character.html)
+  string specifying the name of the experiment defined in the NetLogo
+  model file (default: `NULL`).
 
 - other_arguments:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
   vector specifying any additional command-line arguments to pass to the
   NetLogo executable. For example, you can use `c("--threads 4")` to
-  specify the number of threads to use. See the *Details* section for
-  more information. (default: `NULL`).
+  specify the number of threads. See the *Details* section for more
+  information (default: `NULL`).
 
 - parse:
 
   (optional) A [`logical`](https://rdrr.io/r/base/logical.html) flag
   indicating whether to parse NetLogo lists in the output data frame. If
   `TRUE`, columns containing NetLogo lists (e.g., `[1 2 3]`) will be
-  converted to R lists. If `FALSE`, the columns will remain as
+  converted to R lists using
+  [`parse_netlogo_list()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_list.md).
+  If `FALSE`, columns remain as
   [`character`](https://rdrr.io/r/base/character.html) strings (default:
   `TRUE`).
 
@@ -86,13 +92,19 @@ run_experiment(
 
 - netlogo_path:
 
-  **\[deprecated\]** This argument is no longer supported. See the
-  *Details* section for more information.
+  **\[deprecated\]** Use the `NETLOGO_HOME` or `NETLOGO_CONSOLE`
+  environment variables instead. See the *Details* section for more
+  information.
 
 ## Value
 
-A [`tibble`](https://dplyr.tidyverse.org/reference/reexports.html)
-containing the results of the experiment.
+A [`tibble`](https://tibble.tidyverse.org/reference/tibble.html)
+containing the results of the experiment. Column names are cleaned using
+[`clean_names()`](https://sfirke.github.io/janitor/reference/clean_names.html).
+If `parse = TRUE`, columns containing NetLogo lists are converted to R
+list-columns. Returns a
+[`tibble`](https://tibble.tidyverse.org/reference/tibble.html) with zero
+rows if the experiment produced no results (with a warning).
 
 ## Details
 
@@ -110,9 +122,9 @@ or permanently by adding it to your
 [`.Renviron`](https://rstats.wtf/r-startup.html#renviron) file.
 
 If even after setting the `NETLOGO_HOME` variable you still encounter
-issues, please try to set a `NETLOGO_CONSOLE` environment variable with
-the path of the NetLogo executable or binary. On Windows, a typical path
-is something like `C:\Program Files\NetLogo 7.0.2\NetLogo.exe`.
+issues, try setting a `NETLOGO_CONSOLE` environment variable with the
+path to the NetLogo executable or binary. On Windows, a typical path is
+something like `C:\Program Files\NetLogo 7.0.2\NetLogo.exe`.
 
 ### Additional Command-Line Arguments
 
@@ -124,14 +136,14 @@ flags.
 For example, to specify the number of threads, you can use:
 
     run_experiment(
-     model_path = "path/to/model.nlogox",
-     setup_file = "path/to/experiment.xml",
-     other_arguments = c("--threads 4")
+      model_path = "path/to/model.nlogox",
+      setup_file = "path/to/experiment.xml",
+      other_arguments = c("--threads 4")
     )
 
 There are a variety of command-line options available, but some are
-reserved for internal use by `run_experiment()` and cannot not be
-modified. These are:
+reserved for internal use by `run_experiment()` and cannot be modified.
+These are:
 
 - `--headless`: Ensures NetLogo runs in headless mode.
 
@@ -147,15 +159,15 @@ modified. These are:
 
 - `--table`: Specifies the output file for the results table.
 
-For a complete list of these options, please refer to the [BehaviorSpace
-Guide](https://docs.netlogo.org/behaviorspace.html).
+For a complete list of available options, please refer to the
+[BehaviorSpace
+Guide](https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line).
 
 ### NetLogo 3D
 
 The function automatically detects whether the provided model is a 3D
 model (based on the file extension) and adjusts the command-line
-arguments accordingly. Therefore, you do not need to set the `--3D` flag
-manually.
+arguments accordingly. You do not need to set the `--3D` flag manually.
 
 ### Non-Tabular Output
 
@@ -174,10 +186,10 @@ Other NetLogo functions:
 ## Examples
 
 ``` r
-# Set the Environment -----
+# Defining the Model -----
 
 if (FALSE) { # \dontrun{
-  model_path <-
+  model_path <- # This model is included with NetLogo installations.
     find_netlogo_home() |>
     file.path(
       "models",
@@ -187,7 +199,7 @@ if (FALSE) { # \dontrun{
     )
 } # }
 
-# Using `create_experiment()` to Create the Experiment XML File -----
+# Using `create_experiment()` to Create an Experiment -----
 
 if (FALSE) { # \dontrun{
   setup_file <- create_experiment(
@@ -216,7 +228,11 @@ if (FALSE) { # \dontrun{
       "energy-gain-from-sheep" = 5
     )
   )
+} # }
 
+# Running the Experiment -----
+
+if (FALSE) { # \dontrun{
   model_path |> run_experiment(setup_file = setup_file)
   ## Expected output:
   #> # A tibble: 110,110 × 10
@@ -239,7 +255,7 @@ if (FALSE) { # \dontrun{
   #>  # Use `print(n = ...)` to see more rows
 } # }
 
-# Using an Experiment Defined in the NetLogo Model File -----
+# Running an Experiment Defined in the NetLogo Model File -----
 
 if (FALSE) { # \dontrun{
   model_path |>

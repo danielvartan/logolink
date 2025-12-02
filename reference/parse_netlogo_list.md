@@ -20,13 +20,41 @@ parse_netlogo_list(x)
 
   An
   [`atomic`](https://mllg.github.io/checkmate/reference/checkAtomic.html)
-  object potentially containing NetLogo-style lists.
+  vector potentially containing NetLogo-style list strings.
 
 ## Value
 
-A [`list`](https://rdrr.io/r/base/list.html) of parsed elements if the
-input contains NetLogo-style lists; otherwise, returns the original
-vector.
+The return value will depend on the input:
+
+- If `x` does not contain NetLogo-style lists, returns the original
+  vector unchanged.
+
+- If `x` contains NetLogo-style lists, returns a
+  [`list`](https://rdrr.io/r/base/list.html) where each element is the
+  parsed result of the corresponding input element. Parsed elements may
+  be atomic vectors (for homogeneous lists) or nested lists (for
+  mixed-type or nested lists).
+
+## Details
+
+The function handles the following cases:
+
+- **Homogeneous lists**: Lists containing elements of the same type are
+  returned as atomic vectors (e.g., `"[1 2 3]"` becomes
+  `c(1L, 2L, 3L)`).
+
+- **Mixed-type lists**: Lists containing elements of different types are
+  returned as R lists (e.g., `'[1.1 "a" true]'` becomes
+  `list(1.1, "a", TRUE)`).
+
+- **Nested lists**: Lists containing other lists are returned as nested
+  R lists (e.g., `'["a" "b" [1 2]]'` becomes
+  `list(c("a", "b"), c(1L, 2L))`).
+
+NetLogo boolean values (`true`/`false`) are converted to R
+[`logical`](https://rdrr.io/r/base/logical.html) values
+(`TRUE`/`FALSE`). NetLogo [`NaN`](https://rdrr.io/r/base/is.finite.html)
+values are preserved as character strings.
 
 ## See also
 

@@ -1,11 +1,7 @@
-# Find NetLogo Executable File
+# Find NetLogo executable file
 
 `find_netlogo_console()` attempts to locate the NetLogo executable file
 on the user's system.
-
-It first checks the `NETLOGO_CONSOLE` environment variable. If this
-variable is not set or the file does not exist, it constructs the path
-to the executable based on the provided `netlogo_home` directory.
 
 ## Usage
 
@@ -27,8 +23,20 @@ find_netlogo_console(netlogo_home = find_netlogo_home())
 ## Value
 
 A [`character`](https://rdrr.io/r/base/character.html) string specifying
-the path to the NetLogo executable file. If the file cannot be found, an
-empty string is returned.
+the path to the NetLogo executable file. Returns an empty string (`""`)
+if the executable cannot be found at any location.
+
+## Details
+
+The function uses the following search order:
+
+1.  Checks the `NETLOGO_CONSOLE` environment variable. If set and the
+    file exists, returns that path.
+
+2.  If the environment variable is not set or the file does not exist,
+    constructs the path based on `netlogo_home` (e.g.,
+    `<netlogo_home>/NetLogo_Console` on Linux/macOS or
+    `<netlogo_home>/NetLogo_Console.exe` on Windows).
 
 ## See also
 

@@ -6,23 +6,23 @@
     }
   };
 </script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Inter-0.4.10/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Run a NetLogo BehaviorSpace experiment — run_experiment"><meta name="description" content="run_experiment() runs a NetLogo BehaviorSpace experiment in headless mode
-and returns the results as a tidy data frame. It can be used with
-create_experiment() to create the experiment XML
-file on the fly, or with an existing experiment stored in the NetLogo model
-file.
+and returns the results as a tidy data frame. It can be
+used with create_experiment() to create the
+experiment XML file on the fly, or with an existing experiment stored in the
+NetLogo model file.
 The function tries to locate the NetLogo installation automatically.
 This is usually successful, but if it fails, you will need to set it
-manually. In the latter case, see Details section for more information.
+manually. See the Details section for more information.
 For complete guidance on setting up and running experiments in NetLogo,
 please refer to the
 BehaviorSpace Guide."><meta property="og:description" content="run_experiment() runs a NetLogo BehaviorSpace experiment in headless mode
-and returns the results as a tidy data frame. It can be used with
-create_experiment() to create the experiment XML
-file on the fly, or with an existing experiment stored in the NetLogo model
-file.
+and returns the results as a tidy data frame. It can be
+used with create_experiment() to create the
+experiment XML file on the fly, or with an existing experiment stored in the
+NetLogo model file.
 The function tries to locate the NetLogo installation automatically.
 This is usually successful, but if it fails, you will need to set it
-manually. In the latter case, see Details section for more information.
+manually. See the Details section for more information.
 For complete guidance on setting up and running experiments in NetLogo,
 please refer to the
 BehaviorSpace Guide."><meta property="og:image" content="https://danielvartan.github.io/logolink/reference/figures/og-image.png"><meta property="og:image:alt" content="logolink"></head><body>
@@ -66,13 +66,13 @@ BehaviorSpace Guide."><meta property="og:image" content="https://danielvartan.gi
 
     <div class="ref-description section level2">
     <p><code>run_experiment()</code> runs a NetLogo BehaviorSpace experiment in headless mode
-and returns the results as a tidy data frame. It can be used with
-<code><a href="create_experiment.html">create_experiment()</a></code> to create the experiment XML
-file on the fly, or with an existing experiment stored in the NetLogo model
-file.</p>
+and returns the results as a <a href="https://dplyr.tidyverse.org/reference/reexports.html" class="external-link">tidy data frame</a>. It can be
+used with <code><a href="create_experiment.html">create_experiment()</a></code> to create the
+experiment XML file on the fly, or with an existing experiment stored in the
+NetLogo model file.</p>
 <p>The function tries to locate the NetLogo installation automatically.
 This is usually successful, but if it fails, you will need to set it
-manually. In the latter case, see <em>Details</em> section for more information.</p>
+manually. See the <em>Details</em> section for more information.</p>
 <p>For complete guidance on setting up and running experiments in NetLogo,
 please refer to the
 <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace Guide</a>.</p>
@@ -97,36 +97,39 @@ please refer to the
 
 
 <dl><dt id="arg-model-path">model_path<a class="anchor" aria-label="anchor" href="#arg-model-path"></a></dt>
-<dd><p>A string specifying the path to the NetLogo model file
-(with extension <code>.nlogo</code>, <code>.nlogo3d</code>, <code>.nlogox</code>, or <code>.nlogox3d</code>).</p></dd>
+<dd><p>A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string specifying the
+path to the NetLogo model file (with extension <code>.nlogo</code>, <code>.nlogo3d</code>,
+<code>.nlogox</code>, or <code>.nlogox3d</code>).</p></dd>
 
 
 <dt id="arg-setup-file">setup_file<a class="anchor" aria-label="anchor" href="#arg-setup-file"></a></dt>
-<dd><p>(optional) A string specifying the path to an XML file
-containing the experiment definition. This file can be created using
-<code><a href="create_experiment.html">create_experiment()</a></code> or exported from the
-NetLogo BehaviorSpace interface (default: <code>NULL</code>).</p></dd>
+<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string
+specifying the path to an XML file containing the experiment definition.
+This file can be created using
+<code><a href="create_experiment.html">create_experiment()</a></code> or exported from the NetLogo
+BehaviorSpace interface (default: <code>NULL</code>).</p></dd>
 
 
 <dt id="arg-experiment">experiment<a class="anchor" aria-label="anchor" href="#arg-experiment"></a></dt>
-<dd><p>(optional) A string specifying the name of the experiment
-defined in the NetLogo model file (default: <code>NULL</code>).</p></dd>
+<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string
+specifying the name of the experiment defined in the NetLogo model file
+(default: <code>NULL</code>).</p></dd>
 
 
 <dt id="arg-other-arguments">other_arguments<a class="anchor" aria-label="anchor" href="#arg-other-arguments"></a></dt>
 <dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector
 specifying any additional command-line arguments to pass to the NetLogo
 executable. For example, you can use <code>c("--threads 4")</code> to specify the
-number of threads to use. See the <em>Details</em> section for more information.
+number of threads. See the <em>Details</em> section for more information
 (default: <code>NULL</code>).</p></dd>
 
 
 <dt id="arg-parse">parse<a class="anchor" aria-label="anchor" href="#arg-parse"></a></dt>
-<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></code> flag indicating whether
-to parse NetLogo lists in the output data frame. If <code>TRUE</code>, columns
-containing NetLogo lists (e.g., <code>[1 2 3]</code>) will be converted to R lists. If
-<code>FALSE</code>, the columns will remain as <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> strings
-(default: <code>TRUE</code>).</p></dd>
+<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></code> flag indicating
+whether to parse NetLogo lists in the output data frame. If <code>TRUE</code>, columns
+containing NetLogo lists (e.g., <code>[1 2 3]</code>) will be converted to R lists
+using <code><a href="parse_netlogo_list.html">parse_netlogo_list()</a></code>. If <code>FALSE</code>, columns
+remain as <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> strings (default: <code>TRUE</code>).</p></dd>
 
 
 <dt id="arg-timeout">timeout<a class="anchor" aria-label="anchor" href="#arg-timeout"></a></dt>
@@ -146,14 +149,19 @@ the function will try to find it automatically using
 
 
 <dt id="arg-netlogo-path">netlogo_path<a class="anchor" aria-label="anchor" href="#arg-netlogo-path"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> This argument is no
-longer supported. See the <em>Details</em> section for more information.</p></dd>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> Use the
+<code>NETLOGO_HOME</code> or <code>NETLOGO_CONSOLE</code> environment variables instead. See
+the <em>Details</em> section for more information.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code><a href="https://dplyr.tidyverse.org/reference/reexports.html" class="external-link">tibble</a></code> containing the results of the
-experiment.</p>
+    <p>A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></code> containing the results of the
+experiment. Column names are cleaned using
+<code><a href="https://sfirke.github.io/janitor/reference/clean_names.html" class="external-link">clean_names()</a></code>. If <code>parse = TRUE</code>,
+columns containing NetLogo lists are converted to R list-columns.
+Returns a <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></code> with zero rows if the experiment
+produced no results (with a warning).</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -170,7 +178,7 @@ You can set this variable temporarily in your R session with:</p>
 <p>or permanently by adding it to your
 <a href="https://rstats.wtf/r-startup.html#renviron" class="external-link"><code>.Renviron</code></a> file.</p>
 <p>If even after setting the <code>NETLOGO_HOME</code> variable you still encounter issues,
-please try to set a <code>NETLOGO_CONSOLE</code> environment variable with the path of
+try setting a <code>NETLOGO_CONSOLE</code> environment variable with the path to
 the NetLogo executable or binary. On Windows, a typical path is something
 like <code>C:\Program Files\NetLogo 7.0.2\NetLogo.exe</code>.</p>
 </div>
@@ -184,21 +192,20 @@ using the <code>other_arguments</code> parameter. This can be useful for specify
 options such as the number of threads to use or other NetLogo-specific flags.</p>
 <p>For example, to specify the number of threads, you can use:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/run_experiment.html">run_experiment</a></span><span class="op">(</span></span>
-<span> model_path <span class="op">=</span> <span class="st">"path/to/model.nlogox"</span>,</span>
-<span> setup_file <span class="op">=</span> <span class="st">"path/to/experiment.xml"</span>,</span>
-<span> other_arguments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"--threads 4"</span><span class="op">)</span></span>
+<span>  model_path <span class="op">=</span> <span class="st">"path/to/model.nlogox"</span>,</span>
+<span>  setup_file <span class="op">=</span> <span class="st">"path/to/experiment.xml"</span>,</span>
+<span>  other_arguments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"--threads 4"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
 <p>There are a variety of command-line options available, but some are reserved
-for internal use by <code>run_experiment()</code> and cannot not be modified. These
-are:</p><ul><li><p><code>--headless</code>: Ensures NetLogo runs in headless mode.</p></li>
+for internal use by <code>run_experiment()</code> and cannot be modified. These are:</p><ul><li><p><code>--headless</code>: Ensures NetLogo runs in headless mode.</p></li>
 <li><p><code>--3D</code>: Specifies if the model is a 3D model (automatically set based on
 file extension).</p></li>
 <li><p><code>--model</code>: Specifies the path to the NetLogo model file.</p></li>
 <li><p><code>--setup-file</code>: Specifies the path to the experiment XML file.</p></li>
 <li><p><code>--experiment</code>: Specifies the name of the experiment defined in the model.</p></li>
 <li><p><code>--table</code>: Specifies the output file for the results table.</p></li>
-</ul><p>For a complete list of these options, please refer to the
-<a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace Guide</a>.</p>
+</ul><p>For a complete list of available options, please refer to the
+<a href="https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line" class="external-link">BehaviorSpace Guide</a>.</p>
 </div>
 
 <div class="section">
@@ -207,7 +214,7 @@ file extension).</p></li>
 
 <p>The function automatically detects whether the provided model is a 3D model
 (based on the file extension) and adjusts the command-line arguments
-accordingly. Therefore, you do not need to set the <code>--3D</code> flag manually.</p>
+accordingly. You do not need to set the <code>--3D</code> flag manually.</p>
 </div>
 
 <div class="section">
@@ -230,10 +237,10 @@ Keep in mind that excessive non-tabular output may clutter your R console.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Set the Environment -----</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Defining the Model -----</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span>  <span class="va">model_path</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="va">model_path</span> <span class="op">&lt;-</span> <span class="co"># This model is included with NetLogo installations.</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="find_netlogo_home.html">find_netlogo_home</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>      <span class="st">"models"</span>,</span></span>
@@ -243,7 +250,7 @@ Keep in mind that excessive non-tabular output may clutter your R console.</p>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Using `create_experiment()` to Create the Experiment XML File -----</span></span></span>
+<span class="r-in"><span><span class="co"># Using `create_experiment()` to Create an Experiment -----</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span>  <span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_experiment.html">create_experiment</a></span><span class="op">(</span></span></span>
@@ -272,7 +279,11 @@ Keep in mind that excessive non-tabular output may clutter your R console.</p>
 <span class="r-in"><span>      <span class="st">"energy-gain-from-sheep"</span> <span class="op">=</span> <span class="fl">5</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Running the Experiment -----</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span>  <span class="va">model_path</span> <span class="op">|&gt;</span> <span class="fu">run_experiment</span><span class="op">(</span>setup_file <span class="op">=</span> <span class="va">setup_file</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="co">## Expected output:</span></span></span>
 <span class="r-in"><span>  <span class="co">#&gt; # A tibble: 110,110 × 10</span></span></span>
@@ -295,7 +306,7 @@ Keep in mind that excessive non-tabular output may clutter your R console.</p>
 <span class="r-in"><span>  <span class="co">#&gt;  # Use `print(n = ...)` to see more rows</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Using an Experiment Defined in the NetLogo Model File -----</span></span></span>
+<span class="r-in"><span><span class="co"># Running an Experiment Defined in the NetLogo Model File -----</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span>  <span class="va">model_path</span> <span class="op">|&gt;</span></span></span>

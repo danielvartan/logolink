@@ -1,8 +1,9 @@
 # Inspect a BehaviorSpace experiment XML file
 
 `inspect_experiment_file()` reads and prints the content of a
-BehaviorSpace experiment XML file. This is useful for debugging and
-understanding the structure of the experiment file.
+BehaviorSpace experiment XML file to the console. This is useful for
+debugging and verifying the structure of experiment files created by
+[`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md).
 
 ## Usage
 
@@ -20,7 +21,8 @@ inspect_experiment_file(file)
 ## Value
 
 An [invisible](https://rdrr.io/r/base/invisible.html) `NULL`. This
-function is used for its side effect.
+function is called for its side effect of printing the XML content to
+the console.
 
 ## See also
 

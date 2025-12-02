@@ -8,12 +8,12 @@
 </script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Inter-0.4.10/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Parse NetLogo lists — parse_netlogo_list"><meta name="description" content='parse_netlogo_list() parses NetLogo-style lists represented as strings
 (e.g., "[1 2 3]") into R lists. It automatically detects
 numeric, integer,
-logical, and character types within
-the lists and converts them accordingly.'><meta property="og:description" content='parse_netlogo_list() parses NetLogo-style lists represented as strings
+logical, and character types
+within the lists and converts them accordingly.'><meta property="og:description" content='parse_netlogo_list() parses NetLogo-style lists represented as strings
 (e.g., "[1 2 3]") into R lists. It automatically detects
 numeric, integer,
-logical, and character types within
-the lists and converts them accordingly.'><meta property="og:image" content="https://danielvartan.github.io/logolink/reference/figures/og-image.png"><meta property="og:image:alt" content="logolink"></head><body>
+logical, and character types
+within the lists and converts them accordingly.'><meta property="og:image" content="https://danielvartan.github.io/logolink/reference/figures/og-image.png"><meta property="og:image:alt" content="logolink"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -56,8 +56,8 @@ the lists and converts them accordingly.'><meta property="og:image" content="htt
     <p><code>parse_netlogo_list()</code> parses NetLogo-style lists represented as strings
 (e.g., <code>"[1 2 3]"</code>) into R lists. It automatically detects
 <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a></code>, <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></code>,
-<code><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></code>, and <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> types within
-the lists and converts them accordingly.</p>
+<code><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></code>, and <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> types
+within the lists and converts them accordingly.</p>
     </div>
 
     <div class="section level2">
@@ -70,14 +70,32 @@ the lists and converts them accordingly.</p>
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>An <code><a href="https://mllg.github.io/checkmate/reference/checkAtomic.html" class="external-link">atomic</a></code> object potentially
-containing NetLogo-style lists.</p></dd>
+<dd><p>An <code><a href="https://mllg.github.io/checkmate/reference/checkAtomic.html" class="external-link">atomic</a></code> vector potentially
+containing NetLogo-style list strings.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> of parsed elements if the input contains
-NetLogo-style lists; otherwise, returns the original vector.</p>
+    <p>The return value will depend on the input:</p><ul><li><p>If <code>x</code> does not contain NetLogo-style lists, returns the original vector
+unchanged.</p></li>
+<li><p>If <code>x</code> contains NetLogo-style lists, returns a <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code>
+where each element is the parsed result of the corresponding input
+element. Parsed elements may be atomic vectors (for homogeneous lists) or
+nested lists (for mixed-type or nested lists).</p></li>
+</ul></div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>The function handles the following cases:</p><ul><li><p><strong>Homogeneous lists</strong>: Lists containing elements of the same type are
+returned as atomic vectors (e.g., <code>"[1 2 3]"</code> becomes <code>c(1L, 2L, 3L)</code>).</p></li>
+<li><p><strong>Mixed-type lists</strong>: Lists containing elements of different types are
+returned as R lists (e.g., <code>'[1.1 "a" true]'</code> becomes
+<code>list(1.1, "a", TRUE)</code>).</p></li>
+<li><p><strong>Nested lists</strong>: Lists containing other lists are returned as nested R
+lists (e.g., <code>'["a" "b" [1 2]]'</code> becomes
+<code>list(c("a", "b"), c(1L, 2L))</code>).</p></li>
+</ul><p>NetLogo boolean values (<code>true</code>/<code>false</code>) are converted to R
+<code><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></code> values (<code>TRUE</code>/<code>FALSE</code>). NetLogo
+<code><a href="https://rdrr.io/r/base/is.finite.html" class="external-link">NaN</a></code> values are preserved as character strings.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

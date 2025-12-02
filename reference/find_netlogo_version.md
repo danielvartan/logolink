@@ -1,12 +1,7 @@
-# Find NetLogo Version
+# Find NetLogo version
 
-`find_netlogo_version()` attempts to locate the NetLogo version
+`find_netlogo_version()` attempts to determine the NetLogo version
 installed on the user's system.
-
-It first tries to execute the NetLogo console with the `--version`
-argument to retrieve the version information. If the executable is not
-found, it attempts to extract the version number from the installation
-directory name.
 
 ## Usage
 
@@ -28,8 +23,24 @@ find_netlogo_version(netlogo_home = find_netlogo_home())
 ## Value
 
 A [`character`](https://rdrr.io/r/base/character.html) string specifying
-the NetLogo version installed on the user's system. If the version
-cannot be determined, an empty string is returned.
+the NetLogo version (e.g., `"7.0.2"`). Returns an empty string (`""`) if
+the version cannot be determined.
+
+## Details
+
+The function uses the following detection methods in order:
+
+1.  **Console execution**: If the NetLogo console executable is found,
+    it runs `NetLogo_Console --version` to retrieve the version
+    information. This is the most reliable method.
+
+2.  **Directory name extraction**: If the executable is not found, it
+    attempts to extract the version number from the installation
+    directory name (e.g., `netlogo-7.0.2` yields `"7.0.2"`).
+
+Note that the directory name fallback may produce slightly different
+results if the directory was renamed or uses a non-standard naming
+convention.
 
 ## See also
 

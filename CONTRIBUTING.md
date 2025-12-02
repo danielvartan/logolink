@@ -1,8 +1,8 @@
 # Contributing to logolink
 
 First of all, thank you for considering a contribution to `logolink`!
-Your interest and involvement are what make it rewarding for us—the
-project maintainers—to continue developing and improving `logolink`.
+Your interest and involvement are what make it rewarding for us (the
+project maintainers) to continue developing and improving the package.
 
 `logolink` is an open source project, maintained by people who care. We
 are not directly funded to do so.
@@ -24,18 +24,18 @@ on GitHub. It helps others discover the project and shows your support!
 
 ### Share `logolink` with Others 📣
 
-Think `logolink` is useful? Let others discover it, by telling them in
-person, via Twitter or a blog post.
+Think `logolink` is useful? Let others discover it by telling them in
+person or via social media.
 
 ### Sponsor `logolink` 💖
 
 [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/danielvartan)
 
-If you want to support `logolink` and its development, consider
-[sponsoring the project](https://github.com/sponsors/danielvartan). Your
-support helps us maintain and improve the project, and it allows us to
-dedicate more time to its development. Don’t forget to mention
-`logolink` in your sponsorship message.
+If you can, consider [sponsoring the
+project](https://github.com/sponsors/danielvartan). Your support helps
+us maintain and improve the package, and it allows us to dedicate more
+time to its development. Don’t forget to mention `logolink` in your
+sponsorship message.
 
 ### Cite `logolink` in Your Work 📝
 
@@ -51,7 +51,7 @@ Have an idea for a new `logolink` feature? Take a look at the
 list](https://github.com/danielvartan/logolink/issues) to see if it
 isn’t included or suggested yet. If not, suggest your idea as an [issue
 on GitHub](https://github.com/danielvartan/logolink/issues). While we
-can’t promise to implement your idea, it helps to:
+can’t promise to implement your idea, it helps if you:
 
 - Explain in detail how it would work.
 - Keep the scope as narrow as possible.
@@ -63,20 +63,20 @@ See below if you want to contribute code for your idea as well.
 Using `logolink` and discovered a bug? That’s annoying! Don’t let others
 have the same experience and report it as an [issue on
 GitHub](https://github.com/danielvartan/logolink/issues/new) so we can
-fix it. A good bug report makes it easier for us to do so, so please
+fix it. A good bug report makes it easier for us to do so. Please
 include:
 
 - The content of
   [`utils::sessionInfo()`](https://rdrr.io/r/utils/sessionInfo.html).
 - Any details about your local setup that might be helpful in
   troubleshooting.
-- Detailed steps to reproduce the bug (Tip: Use the
+- Detailed steps to reproduce the bug (tip: Use the
   [reprex](https://reprex.tidyverse.org/) package).
 
 ### Improve the Documentation 📖
 
 Noticed a typo on the website? Think a function could use a better
-example? Good documentation makes all the difference, so your help to
+example? Good documentation makes all the difference. Your help to
 improve it is very welcome!
 
 #### The Website

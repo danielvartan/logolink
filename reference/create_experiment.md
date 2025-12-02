@@ -110,11 +110,11 @@ create_experiment(
 - constants:
 
   (optional) A named [`list`](https://rdrr.io/r/base/list.html)
-  specifying the constants to vary in the experiment. Each element can
-  be either a single value (for enumerated values) or a
+  specifying the parameters for the experiment. Each element can be
+  either a single value (for fixed/enumerated values) or a
   [`list`](https://rdrr.io/r/base/list.html) with `first`, `step`, and
-  `last` elements (for stepped values). See the *Details* and *Examples*
-  sections to learn more (default: `NULL`).
+  `last` elements (for stepped/varying values). See the *Details* and
+  *Examples* sections to learn more (default: `NULL`).
 
 - file:
 
@@ -129,12 +129,12 @@ path to the created XML file.
 
 ## Details
 
-### Constants
+### `constants` Argument
 
 The `constants` argument allows you to specify the parameters to vary in
 the experiment. It should be a named
 [`list`](https://rdrr.io/r/base/list.html) where each name corresponds
-to a NetLogo variable. The value for each name can be either:
+to a NetLogo global variable. The value for each name can be either:
 
 - A single value (for enumerated values). For example, to set the
   variable `initial-number-of-turtles` to `10`, you would use
@@ -146,12 +146,15 @@ to a NetLogo variable. The value for each name can be either:
   `10`, you would use
   `list("initial-number-of-turtles" = list(first = 10, step = 10, last = 50))`.
 
-Please note that any mistake in the constants names will cause the
-experiment to return an empty result set. Be careful when changing them.
+Note that [`character`](https://rdrr.io/r/base/character.html) strings
+should be passed as is, without adding quotes to them. For example, to
+set the variable `scenario` to `"SSP-585"`, you should use
+`list("scenario" = "SSP-585")`, not `list("scenario" = '"SSP-585"')`.
 
-Also, enclose commands with single quotes (e.g.,
-`'n-values 10 ["N/A"]'`), since NetLogo only accepts double quotes for
-strings.
+Insert quotes only if the command requires them. For example:
+`'n-values 10 ["N/A"]'`. Since NetLogo only accepts double quotes for
+strings inside commands, single quotes are used here to define the R
+string.
 
 ## See also
 
@@ -161,6 +164,8 @@ Other NetLogo functions:
 ## Examples
 
 ``` r
+## Example for the *Wolf Sheep Predation* Model ----
+
 setup_file <- create_experiment(
   name = "Wolf Sheep Simple Model Analysis",
   repetitions = 10,
@@ -189,7 +194,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpxgDXhy/experiment-191e3d5cf82a.xml"
+#> [1] "/tmp/RtmpYOmpZn/experiment-19562a45c453.xml"
 
 setup_file |> inspect_experiment_file()
 #> <experiments>
@@ -216,6 +221,65 @@ setup_file |> inspect_experiment_file()
 #>       </enumeratedValueSet>
 #>       <enumeratedValueSet variable="energy-gain-from-sheep">
 #>         <value value="5"></value>
+#>       </enumeratedValueSet>
+#>     </constants>
+#>   </experiment>
+#> </experiments>
+
+## Example for the *Spread of Disease* Model ----
+
+setup_file <- create_experiment(
+  name = "Population Density",
+  repetitions = 1,
+  sequential_run_order = TRUE,
+  run_metrics_every_step = TRUE,
+  setup = "setup",
+  go = "go",
+  post_run = NULL,
+  post_experiment = NULL,
+  time_limit = 1000,
+  exit_condition = NULL,
+  metrics = c(
+    'count turtles with [infected?]'
+  ),
+  run_metrics_condition = NULL,
+  constants = list(
+    "variant" = "mobile",
+    "num-people" = list(
+      first = 50,
+      step = 50,
+      last = 200
+    ),
+    "connections-per-node" = 4.1,
+    "num-infected" = 1,
+    "disease-decay" = 0
+  )
+)
+
+setup_file
+#> [1] "/tmp/RtmpYOmpZn/experiment-195654178861.xml"
+
+setup_file |> inspect_experiment_file()
+#> <experiments>
+#>   <experiment name="Population Density" repetitions="1" sequentialRunOrder="true" runMetricsEveryStep="true" timeLimit="1000">
+#>     <setup>setup</setup>
+#>     <go>go</go>
+#>     <metrics>
+#>       <metric>count turtles with [infected?]</metric>
+#>     </metrics>
+#>     <constants>
+#>       <enumeratedValueSet variable="variant">
+#>         <value value="&quot;mobile&quot;"></value>
+#>       </enumeratedValueSet>
+#>       <steppedValueSet variable="num-people" first="50" step="50" last="200"></steppedValueSet>
+#>       <enumeratedValueSet variable="connections-per-node">
+#>         <value value="4.1"></value>
+#>       </enumeratedValueSet>
+#>       <enumeratedValueSet variable="num-infected">
+#>         <value value="1"></value>
+#>       </enumeratedValueSet>
+#>       <enumeratedValueSet variable="disease-decay">
+#>         <value value="0"></value>
 #>       </enumeratedValueSet>
 #>     </constants>
 #>   </experiment>
