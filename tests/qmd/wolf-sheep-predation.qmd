@@ -1,5 +1,5 @@
 ```{r}
-#| label: setup
+#| label: Setup
 #| include: false
 
 library(here)
@@ -9,18 +9,18 @@ source(here("R", ".setup.R"))
 
 ## Overview
 
-This document tests `logolink` under the different experiments set in the *Wolf Sheep Predation* model, included in NetLogo along with the *Sample Models* library.
+This document tests `logolink` under the different experiments using the *Wolf Sheep Predation* model, included in NetLogo along with the *Sample Models* library.
 
 ## Set the Environment
 
 ### Load Packages
 
 ```{r}
-library(logolink)
-```
+#| label: Set the Environment
+#| output: false
 
-```{r}
 library(dplyr)
+library(logolink)
 ```
 
 ### Set Model Path
@@ -36,9 +36,65 @@ model_path <-
   )
 ```
 
-## BehaviorSpace Combinatorial
+## Custom Experiments
+
+### Wolf Sheep Simple Model Analysis
+
+#### Create Experiment
 
 ```{r}
+#| label: Wolf Sheep Simple Model Analysis
+
+setup_file <- create_experiment(
+  name = "Wolf Sheep Simple Model Analysis",
+  repetitions = 10,
+  sequential_run_order = TRUE,
+  run_metrics_every_step = TRUE,
+  setup = "setup",
+  go = "go",
+  time_limit = 1000,
+  metrics = c(
+    'count wolves',
+    'count sheep'
+  ),
+  run_metrics_condition = NULL,
+  constants = list(
+    "model-version" = "sheep-wolves-grass",
+    "initial-number-sheep" = 500,
+    "sheep-gain-from-food" = 2,
+    "initial-number-wolves" = list(
+      first = 5,
+      step = 1,
+      last = 15
+    ),
+    "wolf-gain-from-food" = 5,
+    "wolf-reproduce" = 5,
+    "grass-regrowth-time" = 30
+  )
+)
+```
+
+#### Run Experiment
+
+```{r}
+#| output: false
+
+results <-
+  model_path |>
+  run_experiment(setup_file = setup_file)
+```
+
+```{r}
+results |> glimpse()
+```
+
+## Predefined Experiments
+
+### BehaviorSpace Combinatorial
+
+```{r}
+#| label: BehaviorSpace Combinatorial
+
 experiment <- "BehaviorSpace combinatorial"
 ```
 
@@ -55,9 +111,11 @@ results <-
 results |> glimpse()
 ```
 
-## Behaviorspace Run 3 Experiments
+### Behaviorspace Run 3 Experiments
 
 ```{r}
+#| label: Behaviorspace Run 3 Experiments
+
 experiment <- "BehaviorSpace run 3 experiments"
 ```
 
@@ -73,9 +131,11 @@ results <-
 results |> glimpse()
 ```
 
-## BehaviorSpace run 3 variable values per experiments
+### BehaviorSpace Run 3 Variable Values Per Experiments
 
 ```{r}
+#| label: BehaviorSpace Run 3 Variable Values Per Experiments
+
 experiment <- "BehaviorSpace run 3 variable values per experiments"
 ```
 
@@ -91,9 +151,11 @@ results <-
 results |> glimpse()
 ```
 
-## BehaviorSpace Subset
+### BehaviorSpace Subset
 
 ```{r}
+#| label: BehaviorSpace Subset
+
 experiment <- "BehaviorSpace subset"
 ```
 
@@ -109,9 +171,11 @@ results <-
 results |> glimpse()
 ```
 
-## New BehaviorSpace Features
+### New BehaviorSpace Features
 
 ```{r}
+#| label: New BehaviorSpace Features
+
 experiment <- "New BehaviorSpace Features"
 ```
 
@@ -127,9 +191,11 @@ results <-
 results |> glimpse()
 ```
 
-## New BehaviorSpace Features Reproducible
+### New BehaviorSpace Features Reproducible
 
 ```{r}
+#| label: New BehaviorSpace Features Reproducible
+
 experiment <- "New BehaviorSpace Features reproducible"
 ```
 
@@ -145,9 +211,11 @@ results <-
 results |> glimpse()
 ```
 
-## Wolf Sheep Crossing
+### Wolf Sheep Crossing
 
 ```{r}
+#| label: Wolf Sheep Crossing
+
 experiment <- "Wolf Sheep Crossing"
 ```
 

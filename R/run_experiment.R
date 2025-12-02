@@ -3,14 +3,14 @@
 #' @description
 #'
 #' `run_experiment()` runs a NetLogo BehaviorSpace experiment in headless mode
-#' and returns the results as a tidy data frame. It can be used with
-#' [`create_experiment()`][create_experiment] to create the experiment XML
-#' file on the fly, or with an existing experiment stored in the NetLogo model
-#' file.
+#' and returns the results as a [tidy data frame][dplyr::tibble()]. It can be
+#' used with [`create_experiment()`][create_experiment()] to create the
+#' experiment XML file on the fly, or with an existing experiment stored in the
+#' NetLogo model file.
 #'
 #' The function tries to locate the NetLogo installation automatically.
 #' This is usually successful, but if it fails, you will need to set it
-#' manually. In the latter case, see *Details* section for more information.
+#' manually. See the *Details* section for more information.
 #'
 #' For complete guidance on setting up and running experiments in NetLogo,
 #' please refer to the
@@ -33,7 +33,7 @@
 #' [`.Renviron`](https://rstats.wtf/r-startup.html#renviron) file.
 #'
 #' If even after setting the `NETLOGO_HOME` variable you still encounter issues,
-#' please try to set a `NETLOGO_CONSOLE` environment variable with the path of
+#' try setting a `NETLOGO_CONSOLE` environment variable with the path to
 #' the NetLogo executable or binary. On Windows, a typical path is something
 #' like `C:\Program Files\NetLogo 7.0.2\NetLogo.exe`.
 #'
@@ -47,32 +47,33 @@
 #'
 #' ```r
 #' run_experiment(
-#'  model_path = "path/to/model.nlogox",
-#'  setup_file = "path/to/experiment.xml",
-#'  other_arguments = c("--threads 4")
+#'   model_path = "path/to/model.nlogox",
+#'   setup_file = "path/to/experiment.xml",
+#'   other_arguments = c("--threads 4")
 #' )
 #' ```
 #'
 #' There are a variety of command-line options available, but some are reserved
-#' for internal use by `run_experiment()` and cannot not be modified. These
-#' are:
+#' for internal use by `run_experiment()` and cannot be modified. These are:
 #'
 #' - `--headless`: Ensures NetLogo runs in headless mode.
 #' - `--3D`: Specifies if the model is a 3D model (automatically set based on
-#' file extension).
+#'   file extension).
 #' - `--model`: Specifies the path to the NetLogo model file.
 #' - `--setup-file`: Specifies the path to the experiment XML file.
 #' - `--experiment`: Specifies the name of the experiment defined in the model.
 #' - `--table`: Specifies the output file for the results table.
 #'
-#' For a complete list of these options, please refer to the
-#' [BehaviorSpace Guide](https://docs.netlogo.org/behaviorspace.html).
+#' For a complete list of available options, please refer to the
+#' [BehaviorSpace Guide](
+#' https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line
+#' ).
 #'
 #' ## NetLogo 3D
 #'
 #' The function automatically detects whether the provided model is a 3D model
 #' (based on the file extension) and adjusts the command-line arguments
-#' accordingly. Therefore, you do not need to set the `--3D` flag manually.
+#' accordingly. You do not need to set the `--3D` flag manually.
 #'
 #' ## Non-Tabular Output
 #'
@@ -82,44 +83,52 @@
 #' you to see any important messages generated during the experiment run.
 #' Keep in mind that excessive non-tabular output may clutter your R console.
 #'
-#' @param model_path A string specifying the path to the NetLogo model file
-#'   (with extension `.nlogo`, `.nlogo3d`, `.nlogox`, or `.nlogox3d`).
-#' @param setup_file (optional) A string specifying the path to an XML file
-#'   containing the experiment definition. This file can be created using
-#'  [`create_experiment()`][create_experiment] or exported from the
-#'  NetLogo BehaviorSpace interface (default: `NULL`).
-#' @param experiment (optional) A string specifying the name of the experiment
-#'   defined in the NetLogo model file (default: `NULL`).
-#' @param other_arguments (optional) A [`character`][base::character] vector
+#' @param model_path A [`character`][base::character()] string specifying the
+#'   path to the NetLogo model file (with extension `.nlogo`, `.nlogo3d`,
+#'   `.nlogox`, or `.nlogox3d`).
+#' @param setup_file (optional) A [`character`][base::character()] string
+#'   specifying the path to an XML file containing the experiment definition.
+#'   This file can be created using
+#'   [`create_experiment()`][create_experiment()] or exported from the NetLogo
+#'   BehaviorSpace interface (default: `NULL`).
+#' @param experiment (optional) A [`character`][base::character()] string
+#'   specifying the name of the experiment defined in the NetLogo model file
+#'   (default: `NULL`).
+#' @param other_arguments (optional) A [`character`][base::character()] vector
 #'   specifying any additional command-line arguments to pass to the NetLogo
 #'   executable. For example, you can use `c("--threads 4")` to specify the
-#'   number of threads to use. See the *Details* section for more information.
+#'   number of threads. See the *Details* section for more information
 #'   (default: `NULL`).
-#' @param parse (optional) A [`logical`][base::logical] flag indicating whether
-#'   to parse NetLogo lists in the output data frame. If `TRUE`, columns
-#'   containing NetLogo lists (e.g., `[1 2 3]`) will be converted to R lists. If
-#'   `FALSE`, the columns will remain as [`character`][base::character] strings
-#'   (default: `TRUE`).
-#' @param timeout (optional) A [`numeric`][base::numeric] value specifying the
+#' @param parse (optional) A [`logical`][base::logical()] flag indicating
+#'   whether to parse NetLogo lists in the output data frame. If `TRUE`, columns
+#'   containing NetLogo lists (e.g., `[1 2 3]`) will be converted to R lists
+#'   using [`parse_netlogo_list()`][parse_netlogo_list()]. If `FALSE`, columns
+#'   remain as [`character`][base::character()] strings (default: `TRUE`).
+#' @param timeout (optional) A [`numeric`][base::numeric()] value specifying the
 #'   maximum time (in seconds) to wait for the NetLogo process to complete. If
 #'   the process exceeds this time limit, it will be terminated, and the
 #'   function will return the available output up to that point. Use `Inf` for
 #'   no time limit (default: `Inf`).
-#' @param netlogo_path `r lifecycle::badge("deprecated")` This argument is no
-#'   longer supported. See the *Details* section for more information.
-#'
-#' @return A [`tibble`][dplyr::as_tibble] containing the results of the
-#'   experiment.
-#'
 #' @template params-netlogo-home
+#' @param netlogo_path `r lifecycle::badge("deprecated")` Use the
+#'   `NETLOGO_HOME` or `NETLOGO_CONSOLE` environment variables instead. See
+#'   the *Details* section for more information.
+#'
+#' @return A [`tibble`][tibble::tibble()] containing the results of the
+#'   experiment. Column names are cleaned using
+#'   [`clean_names()`][janitor::clean_names()]. If `parse = TRUE`,
+#'   columns containing NetLogo lists are converted to R list-columns.
+#'   Returns a [`tibble`][tibble::tibble()] with zero rows if the experiment
+#'   produced no results (with a warning).
+#'
 #' @family NetLogo functions
 #' @export
 #'
 #' @examples
-#' # Set the Environment -----
+#' # Defining the Model -----
 #'
 #' \dontrun{
-#'   model_path <-
+#'   model_path <- # This model is included with NetLogo installations.
 #'     find_netlogo_home() |>
 #'     file.path(
 #'       "models",
@@ -129,7 +138,7 @@
 #'     )
 #' }
 #'
-#' # Using `create_experiment()` to Create the Experiment XML File -----
+#' # Using `create_experiment()` to Create an Experiment -----
 #'
 #' \dontrun{
 #'   setup_file <- create_experiment(
@@ -158,7 +167,11 @@
 #'       "energy-gain-from-sheep" = 5
 #'     )
 #'   )
+#' }
 #'
+#' # Running the Experiment -----
+#'
+#' \dontrun{
 #'   model_path |> run_experiment(setup_file = setup_file)
 #'   ## Expected output:
 #'   #> # A tibble: 110,110 × 10
@@ -181,7 +194,7 @@
 #'   #>  # Use `print(n = ...)` to see more rows
 #' }
 #'
-#' # Using an Experiment Defined in the NetLogo Model File -----
+#' # Running an Experiment Defined in the NetLogo Model File -----
 #'
 #' \dontrun{
 #'   model_path |>
@@ -331,10 +344,10 @@ run_experiment <- function(
       )
     } else {
       cli::cli_abort(
-        paste0(
+        c(
           "NetLogo produced the following error during the experiment run:",
-          "\n\n",
-          paste(system2_output, collapse = "\n")
+          "",
+          paste(system2_output)
         )
       )
     }

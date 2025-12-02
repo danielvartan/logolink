@@ -30,7 +30,7 @@ options(
 
 set.seed(2025)
 
-# Set `knitr`` -----
+# Set `knitr` -----
 
 clean_cache()
 

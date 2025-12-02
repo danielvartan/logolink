@@ -20,7 +20,7 @@ assert_netlogo_console <- function(
   test <-
     netlogo_console |>
     stringr::str_remove("\\.exe$") |>
-    system2(args = c("--version"), stdout = TRUE, stderr = TRUE) |>
+    system2(args = c("--help"), stdout = TRUE, stderr = TRUE) |>
     try(silent = TRUE) |>
     suppressMessages() |>
     suppressWarnings()
@@ -130,7 +130,8 @@ test_same_class <- function(x) {
   x |>
     purrr::map_chr(\(x) class(x)[1]) |>
     unique() |>
-    length() == 1
+    length() ==
+    1
 }
 
 test_unitary_list <- function(x) {

@@ -16,28 +16,31 @@ run_experiment(
 )
 }
 \arguments{
-\item{model_path}{A string specifying the path to the NetLogo model file
-(with extension \code{.nlogo}, \code{.nlogo3d}, \code{.nlogox}, or \code{.nlogox3d}).}
+\item{model_path}{A \code{\link[base:character]{character}} string specifying the
+path to the NetLogo model file (with extension \code{.nlogo}, \code{.nlogo3d},
+\code{.nlogox}, or \code{.nlogox3d}).}
 
-\item{setup_file}{(optional) A string specifying the path to an XML file
-containing the experiment definition. This file can be created using
-\code{\link[=create_experiment]{create_experiment()}} or exported from the
-NetLogo BehaviorSpace interface (default: \code{NULL}).}
+\item{setup_file}{(optional) A \code{\link[base:character]{character}} string
+specifying the path to an XML file containing the experiment definition.
+This file can be created using
+\code{\link[=create_experiment]{create_experiment()}} or exported from the NetLogo
+BehaviorSpace interface (default: \code{NULL}).}
 
-\item{experiment}{(optional) A string specifying the name of the experiment
-defined in the NetLogo model file (default: \code{NULL}).}
+\item{experiment}{(optional) A \code{\link[base:character]{character}} string
+specifying the name of the experiment defined in the NetLogo model file
+(default: \code{NULL}).}
 
 \item{other_arguments}{(optional) A \code{\link[base:character]{character}} vector
 specifying any additional command-line arguments to pass to the NetLogo
 executable. For example, you can use \code{c("--threads 4")} to specify the
-number of threads to use. See the \emph{Details} section for more information.
+number of threads. See the \emph{Details} section for more information
 (default: \code{NULL}).}
 
-\item{parse}{(optional) A \code{\link[base:logical]{logical}} flag indicating whether
-to parse NetLogo lists in the output data frame. If \code{TRUE}, columns
-containing NetLogo lists (e.g., \verb{[1 2 3]}) will be converted to R lists. If
-\code{FALSE}, the columns will remain as \code{\link[base:character]{character}} strings
-(default: \code{TRUE}).}
+\item{parse}{(optional) A \code{\link[base:logical]{logical}} flag indicating
+whether to parse NetLogo lists in the output data frame. If \code{TRUE}, columns
+containing NetLogo lists (e.g., \verb{[1 2 3]}) will be converted to R lists
+using \code{\link[=parse_netlogo_list]{parse_netlogo_list()}}. If \code{FALSE}, columns
+remain as \code{\link[base:character]{character}} strings (default: \code{TRUE}).}
 
 \item{timeout}{(optional) A \code{\link[base:numeric]{numeric}} value specifying the
 maximum time (in seconds) to wait for the NetLogo process to complete. If
@@ -51,23 +54,28 @@ the function will try to find it automatically using
 \code{\link[=find_netlogo_home]{find_netlogo_home()}}
 (default: \code{find_netlogo_home()}).}
 
-\item{netlogo_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument is no
-longer supported. See the \emph{Details} section for more information.}
+\item{netlogo_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use the
+\code{NETLOGO_HOME} or \code{NETLOGO_CONSOLE} environment variables instead. See
+the \emph{Details} section for more information.}
 }
 \value{
-A \code{\link[dplyr:reexports]{tibble}} containing the results of the
-experiment.
+A \code{\link[tibble:tibble]{tibble}} containing the results of the
+experiment. Column names are cleaned using
+\code{\link[janitor:clean_names]{clean_names()}}. If \code{parse = TRUE},
+columns containing NetLogo lists are converted to R list-columns.
+Returns a \code{\link[tibble:tibble]{tibble}} with zero rows if the experiment
+produced no results (with a warning).
 }
 \description{
 \code{run_experiment()} runs a NetLogo BehaviorSpace experiment in headless mode
-and returns the results as a tidy data frame. It can be used with
-\code{\link[=create_experiment]{create_experiment()}} to create the experiment XML
-file on the fly, or with an existing experiment stored in the NetLogo model
-file.
+and returns the results as a \link[dplyr:reexports]{tidy data frame}. It can be
+used with \code{\link[=create_experiment]{create_experiment()}} to create the
+experiment XML file on the fly, or with an existing experiment stored in the
+NetLogo model file.
 
 The function tries to locate the NetLogo installation automatically.
 This is usually successful, but if it fails, you will need to set it
-manually. In the latter case, see \emph{Details} section for more information.
+manually. See the \emph{Details} section for more information.
 
 For complete guidance on setting up and running experiments in NetLogo,
 please refer to the
@@ -88,7 +96,7 @@ or permanently by adding it to your
 \href{https://rstats.wtf/r-startup.html#renviron}{\code{.Renviron}} file.
 
 If even after setting the \code{NETLOGO_HOME} variable you still encounter issues,
-please try to set a \code{NETLOGO_CONSOLE} environment variable with the path of
+try setting a \code{NETLOGO_CONSOLE} environment variable with the path to
 the NetLogo executable or binary. On Windows, a typical path is something
 like \verb{C:\\Program Files\\NetLogo 7.0.2\\NetLogo.exe}.
 }
@@ -102,15 +110,14 @@ options such as the number of threads to use or other NetLogo-specific flags.
 For example, to specify the number of threads, you can use:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{run_experiment(
- model_path = "path/to/model.nlogox",
- setup_file = "path/to/experiment.xml",
- other_arguments = c("--threads 4")
+  model_path = "path/to/model.nlogox",
+  setup_file = "path/to/experiment.xml",
+  other_arguments = c("--threads 4")
 )
 }\if{html}{\out{</div>}}
 
 There are a variety of command-line options available, but some are reserved
-for internal use by \code{run_experiment()} and cannot not be modified. These
-are:
+for internal use by \code{run_experiment()} and cannot be modified. These are:
 \itemize{
 \item \code{--headless}: Ensures NetLogo runs in headless mode.
 \item \verb{--3D}: Specifies if the model is a 3D model (automatically set based on
@@ -121,15 +128,15 @@ file extension).
 \item \code{--table}: Specifies the output file for the results table.
 }
 
-For a complete list of these options, please refer to the
-\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace Guide}.
+For a complete list of available options, please refer to the
+\href{https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line}{BehaviorSpace Guide}.
 }
 
 \subsection{NetLogo 3D}{
 
 The function automatically detects whether the provided model is a 3D model
 (based on the file extension) and adjusts the command-line arguments
-accordingly. Therefore, you do not need to set the \verb{--3D} flag manually.
+accordingly. You do not need to set the \verb{--3D} flag manually.
 }
 
 \subsection{Non-Tabular Output}{
@@ -142,10 +149,10 @@ Keep in mind that excessive non-tabular output may clutter your R console.
 }
 }
 \examples{
-# Set the Environment -----
+# Defining the Model -----
 
 \dontrun{
-  model_path <-
+  model_path <- # This model is included with NetLogo installations.
     find_netlogo_home() |>
     file.path(
       "models",
@@ -155,7 +162,7 @@ Keep in mind that excessive non-tabular output may clutter your R console.
     )
 }
 
-# Using `create_experiment()` to Create the Experiment XML File -----
+# Using `create_experiment()` to Create an Experiment -----
 
 \dontrun{
   setup_file <- create_experiment(
@@ -184,7 +191,11 @@ Keep in mind that excessive non-tabular output may clutter your R console.
       "energy-gain-from-sheep" = 5
     )
   )
+}
 
+# Running the Experiment -----
+
+\dontrun{
   model_path |> run_experiment(setup_file = setup_file)
   ## Expected output:
   #> # A tibble: 110,110 × 10
@@ -207,7 +218,7 @@ Keep in mind that excessive non-tabular output may clutter your R console.
   #>  # Use `print(n = ...)` to see more rows
 }
 
-# Using an Experiment Defined in the NetLogo Model File -----
+# Running an Experiment Defined in the NetLogo Model File -----
 
 \dontrun{
   model_path |>

@@ -3,14 +3,15 @@
 #' @description
 #'
 #' `inspect_experiment_file()` reads and prints the content of a
-#' BehaviorSpace experiment XML file. This is useful for debugging and
-#' understanding the structure of the experiment file.
+#' BehaviorSpace experiment XML file to the console. This is useful for
+#' debugging and verifying the structure of experiment files created by
+#' [`create_experiment()`][create_experiment()].
 #'
-#' @param file A [`character`][base::character] string specifying the path to
+#' @param file A [`character`][base::character()] string specifying the path to
 #'   the BehaviorSpace experiment XML file.
 #'
-#' @return An [invisible][base::invisible] `NULL`. This function is used for its
-#' side effect.
+#' @return An [invisible][base::invisible()] `NULL`. This function is called for
+#'   its side effect of printing the XML content to the console.
 #'
 #' @family utility functions
 #' @export

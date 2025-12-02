@@ -1,5 +1,5 @@
 ```{r}
-#| label: setup
+#| label: Setup
 #| include: false
 
 library(here)
@@ -9,21 +9,18 @@ source(here("R", ".setup.R"))
 
 ## Overview
 
-This document tests `logolink` under the different experiments set in the *Spread of Disease* model, included in NetLogo along with the [IABM Textbook](https://mitpress.mit.edu/9780262731898/an-introduction-to-agent-based-modeling/) library.
-
-<!-- See: https://danielvartan.github.io/voting-dynamics/web/qmd/appendix-4.html -->
+This document tests `logolink` under the different experiments using the *Spread of Disease* model, included in NetLogo along with the [IABM Textbook](https://mitpress.mit.edu/9780262731898/an-introduction-to-agent-based-modeling/) library.
 
 ## Set the Environment
 
 ### Load Packages
 
 ```{r}
-library(logolink)
-```
+#| label: Set the Environment
+#| output: false
 
-```{r}
 library(dplyr)
-library(ggplot2)
+library(logolink)
 ```
 
 ### Set Model Path
@@ -39,137 +36,15 @@ model_path <-
   )
 ```
 
-## Population Density
+## Custom Experiments
 
-### Run Experiment
+### Population Density (Runtime)
 
-```{r}
-experiment <- "population-density"
-```
+#### Create Experiment
 
 ```{r}
-results <-
-  model_path |>
-  run_experiment(
-    experiment = experiment,
-  )
-```
+#| label: Population Density (Runtime)
 
-```{r}
-results |> glimpse()
-```
-
-### Tidy Data
-
-```{r}
-data <-
-  results |>
-  mutate(variant = as.factor(variant)) |>
-  arrange(run_number, num_infected, step)
-```
-
-```{r}
-data |> glimpse()
-```
-
-### Explore Data
-
-```{r}
-data |>
-  summarize(
-    n_sim = n(),
-    .by = num_people
-  )
-```
-
-### Summarize Data
-
-```{r}
-summarized_data <-
-  data |>
-  select(num_people, ticks) |>
-  summarize(
-    mean = mean(ticks, na.rm = TRUE),
-    sd = stats::sd(ticks, na.rm = TRUE),
-    .by = num_people
-  ) |>
-  arrange(num_people)
-```
-
-```{r}
-summarized_data
-```
-
-### Plot Data
-
-```{r}
-data |>
-  ggplot(aes(x = num_people, y = ticks)) +
-  geom_point(shape = 1, size = 2.5, stroke = 1) +
-  labs(
-    x = "Initial Number of People",
-    y = "Time to 100% Infection",
-    title = "Time to 100% Infection vs. Initial Population"
-  )
-```
-
-### Plot Summarized Data with SD Error Bars
-
-```{r}
-summarized_data |>
-  ggplot(aes(x = num_people, y = mean)) +
-  geom_point(size = 2) +
-  geom_errorbar(
-    aes(ymin = mean + sd, ymax = mean - sd),
-    width = 5
-  ) +
-  geom_line() +
-  labs(
-    x = "Initial Number of People",
-    y = "Time to 100% Infection",
-    title = "Time to 100% Infection vs. Initial Number of People"
-  ) +
-  scale_x_continuous(breaks = seq(50, 200, 50))
-```
-
-### Plot Summarized Data with SE Error Bars
-
-```{r}
-n_runs <- nrow(data) - nrow(summarized_data)
-```
-
-```{r}
-summarized_data <-
-  summarized_data |>
-  mutate(
-    se = sd / sqrt(n_runs)
-  )
-```
-
-```{r}
-summarized_data |>
-  ggplot(aes(x = num_people, y = mean)) +
-  geom_point(size = 2) +
-  geom_errorbar(
-    aes(ymin = mean + se, ymax = mean - se),
-    width = 5
-  ) +
-  geom_line() +
-  labs(
-    x = "Initial number of people",
-    y = "Time to 100% infection",
-    title = paste0(
-      "Time to 100% infection vs. Initial number of people\nErrorbars are 1 SE"
-    )
-  ) +
-  scale_x_continuous(breaks = seq(50, 200, 50))
-```
-
-## Population Density (Runtime)
-
-### Create Experiment
-
-```{r}
 setup_file <- create_experiment(
   name = "Population Density (Runtime)",
   repetitions = 10,
@@ -203,7 +78,7 @@ setup_file <- create_experiment(
 setup_file |> inspect_experiment_file()
 ```
 
-### Run Experiment
+#### Run Experiment
 
 ```{r}
 results <-
@@ -217,177 +92,13 @@ results <-
 results |> glimpse()
 ```
 
-### Tidy Data
+## Predefined Experiments
+
+### Degree
 
 ```{r}
-data <-
-  results |>
-  rename(infected = count_turtles_with_infected) |>
-  mutate(
-    variant = as.factor(variant),
-    frac_infected = infected / num_people
-  ) |>
-  arrange(run_number, num_infected, step)
-```
+#| label: Degree
 
-```{r}
-data |> glimpse()
-```
-
-### Plot Data
-
-```{r}
-data |>
-   mutate(num_people = as.factor(num_people)) |>
-   ggplot(
-    aes(
-       x = step,
-       y = frac_infected, # infected
-       color = num_people
-     )
-   ) +
-   geom_point(
-     aes(shape = num_people),
-     size = 1,
-     alpha = 0.75
-   ) +
-   labs(
-     x = "Steps",
-     y = "Fraction of Infected",
-     title = "Infected Over Time",
-     color = "People",
-     shape = "People"
-   ) +
-  scale_x_continuous(breaks = seq(0, max(data$step), 100))
-```
-
-```{r}
-plot <-
-  data |>
-  ggplot(
-    aes(
-      x = step,
-      y = frac_infected, # infected
-      color = as.factor(num_people)
-    )
-  ) +
-  labs(
-    x = "Steps",
-    y = "Fraction of Infected",
-    title = "Infected Over Time",
-    color = "People"
-  ) +
-  scale_x_continuous(
-    breaks = seq(0, max(data$step), 100)
-  )
-
-data_i <-
-  data |>
-  group_by(num_people, run_number) |>
-  group_split()
-
-  for (i in data_i) {
-    plot <-
-      plot +
-      geom_line(
-        data = i,
-        aes(x = step, y = frac_infected), # y = infected
-        linewidth = 1,
-        alpha = 0.75
-      )
-  }
-
-plot
-```
-
-### Summarize Data
-
-```{r}
-summarized_data <-
-  data |>
-    select(num_people, step, infected, frac_infected) |>
-    summarize(
-      mean = mean(frac_infected, na.rm = TRUE),
-      sd = sd(frac_infected, na.rm = TRUE),
-      .by = c(num_people, step)
-    ) |>
-    arrange(num_people, step)
-```
-
-```{r}
-summarized_data
-```
-
-### Plot Summarized Data with SD Error Bars
-
-```{r}
-summarized_data |>
-  filter(step %% 10 == 0) |>
-  ggplot(
-    aes(
-      x = step,
-      y = mean,
-      color = as.factor(num_people)
-    )
-  ) +
-  geom_point(
-    aes(shape = as.factor(num_people)),
-    size = 1,
-    alpha = 0.75
-  ) +
-  geom_errorbar(
-    aes(ymin = mean + sd, ymax = mean - sd),
-    width = 5
-  ) +
-  geom_line() +
-  labs(
-    x = "Steps",
-    y = "Fraction of Infected",
-    title = "Infected Over Time",
-    color = "People",
-    shape = "People"
-  ) +
-  scale_x_continuous(
-    breaks = seq(0, max(summarized_data$step), 100)
-  )
-```
-
-### Plot Summarized Data with SE Error Bars
-
-```{r}
-summarized_data |>
-  filter(step %% 10 == 0) |>
-  mutate(se = sd / sqrt(10)) |>
-  ggplot(aes(
-    x = step,
-    y = mean,
-    color = as.factor(num_people))
-  ) +
-  geom_point(
-    aes(shape = as.factor(num_people)),
-    size = 1,
-    alpha = 0.75
-  ) +
-  geom_errorbar(
-    aes(ymin = mean + se, ymax = mean - se),
-    width = 5
-  ) +
-  geom_line() +
-  labs(
-    x = "Steps",
-    y = "Fraction of Infected",
-    title = "Infected Over Time",
-    color = "People",
-    shape = "People"
-  ) +
-  scale_x_continuous(
-    breaks = seq(0, max(summarized_data$step), 100)
-  )
-```
-
-## Degree
-
-```{r}
 experiment <- "degree"
 ```
 
@@ -403,9 +114,11 @@ results <-
 results |> glimpse()
 ```
 
-## Environmental
+### Environmental
 
 ```{r}
+#| label: Environmental
+
 experiment <- "environmental"
 ```
 
@@ -421,9 +134,11 @@ results <-
 results |> glimpse()
 ```
 
-## Density and Decay
+### Density and Decay
 
 ```{r}
+#| label: Density and Decay
+
 experiment <- "density-and-decay"
 ```
 

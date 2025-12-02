@@ -23,17 +23,17 @@ create_experiment(
 )
 }
 \arguments{
-\item{name}{(optional) A \code{\link[base:character]{character}} string specifying the
-name of the experiment (default: \code{""}).}
+\item{name}{(optional) A \code{\link[base:character]{character}} string specifying
+the name of the experiment (default: \code{""}).}
 
 \item{repetitions}{(optional) An integer number specifying the number of
 times to repeat the experiment (default: \code{1}).}
 
-\item{sequential_run_order}{(optional) A \code{\link{logical}} flag
+\item{sequential_run_order}{(optional) A \code{\link[base:logical]{logical}} flag
 indicating whether to run the experiments in sequential order
 (default: \code{TRUE}).}
 
-\item{run_metrics_every_step}{(optional) A \code{\link{logical}} flag
+\item{run_metrics_every_step}{(optional) A \code{\link[base:logical]{logical}} flag
 indicating whether to record metrics at every step (default: \code{FALSE}).}
 
 \item{pre_experiment}{(optional) A \code{\link[base:character]{character}} string
@@ -46,12 +46,12 @@ the NetLogo command to set up the model (default: \code{"setup"}).}
 \item{go}{(optional) A \code{\link[base:character]{character}} string specifying the
 NetLogo command to run the model (default: \code{"go"}).}
 
-\item{post_run}{(optional) A \code{\link[base:character]{character}} string specifying
-the NetLogo command to run after each run (default: \code{NULL}).}
+\item{post_run}{(optional) A \code{\link[base:character]{character}} string
+specifying the NetLogo command to run after each run (default: \code{NULL}).}
 
 \item{post_experiment}{(optional) A \code{\link[base:character]{character}} string
-specifying the NetLogo command to run after the experiment ends (default:
-\code{NULL}).}
+specifying the NetLogo command to run after the experiment ends
+(default: \code{NULL}).}
 
 \item{time_limit}{(optional) An integer number specifying the maximum number
 of steps to run for each repetition (default: \code{1}).}
@@ -60,8 +60,8 @@ of steps to run for each repetition (default: \code{1}).}
 specifying the NetLogo command that defines the exit condition for the
 experiment (default: \code{NULL}).}
 
-\item{metrics}{A \code{\link[base:character]{character}} vector specifying the NetLogo
-commands to record as metrics
+\item{metrics}{A \code{\link[base:character]{character}} vector specifying the
+NetLogo commands to record as metrics
 (default: \code{c('count turtles', 'count patches')}).}
 
 \item{run_metrics_condition}{(optional) A \code{\link[base:character]{character}}
@@ -69,18 +69,18 @@ string specifying the NetLogo command that defines the condition to record
 metrics (default: \code{NULL}).}
 
 \item{constants}{(optional) A named \code{\link[base:list]{list}} specifying the
-constants to vary in the experiment. Each element can be either a single
-value (for enumerated values) or a \code{\link[base:list]{list}} with \code{first},
-\code{step}, and \code{last} elements (for stepped values). See the \emph{Details} and
-\emph{Examples} sections to learn more (default: \code{NULL}).}
+parameters for the experiment. Each element can be either a single value
+(for fixed/enumerated values) or a \code{\link[base:list]{list}} with \code{first},
+\code{step}, and \code{last} elements (for stepped/varying values). See the \emph{Details}
+and \emph{Examples} sections to learn more (default: \code{NULL}).}
 
-\item{file}{(optional) A \code{\link[base:character]{character}} string specifying the
-path to save the created XML file
+\item{file}{(optional) A \code{\link[base:character]{character}} string specifying
+the path to save the created XML file
 (default: \code{tempfile(pattern = "experiment-", fileext = ".xml")}).}
 }
 \value{
-A \code{\link[base:character]{character}} string with the path to the created
-XML file.
+A \code{\link[base:character]{character}} string with the path to the
+created XML file.
 }
 \description{
 \code{create_experiment()} creates a NetLogo BehaviorSpace experiment XML in a
@@ -92,29 +92,36 @@ Please refer to the
 complete guidance on how to set and run experiments in NetLogo.
 }
 \details{
-\subsection{Constants}{
+\subsection{\code{constants} Argument}{
 
 The \code{constants} argument allows you to specify the parameters to vary in the
 experiment. It should be a named \code{\link[base:list]{list}} where each name
-corresponds to a NetLogo variable. The value for each name can be either:
+corresponds to a NetLogo global variable. The value for each name can be
+either:
 \itemize{
 \item A single value (for enumerated values). For example, to set the variable
 \code{initial-number-of-turtles} to \code{10}, you would use
 \code{list("initial-number-of-turtles" = 10)}.
-\item A \code{\link[=list]{list}} with \code{first}, \code{step}, and \code{last} elements (for stepped
-values). For example, to vary the variable \code{initial-number-of-turtles} from
-\code{10} to \code{50} in steps of \code{10}, you would use
+\item A \code{\link[base:list]{list}} with \code{first}, \code{step}, and \code{last} elements (for
+stepped values). For example, to vary the variable
+\code{initial-number-of-turtles} from \code{10} to \code{50} in steps of \code{10}, you would
+use
 \code{list("initial-number-of-turtles" = list(first = 10, step = 10, last = 50))}.
 }
 
-Please note that any mistake in the constants names will cause the experiment
-to return an empty result set. Be careful when changing them.
+Note that \code{\link[base:character]{character}} strings should be passed as is,
+without adding quotes to them. For example, to set the variable
+\code{scenario} to \code{"SSP-585"}, you should use \code{list("scenario" = "SSP-585")},
+not \code{list("scenario" = '"SSP-585"')}.
 
-Also, enclose commands with single quotes (e.g., \code{'n-values 10 ["N/A"]'}),
-since NetLogo only accepts double quotes for strings.
+Insert quotes only if the command requires them. For example:
+\code{'n-values 10 ["N/A"]'}. Since NetLogo only accepts double quotes for
+strings inside commands, single quotes are used here to define the R string.
 }
 }
 \examples{
+## Example for the *Wolf Sheep Predation* Model ----
+
 setup_file <- create_experiment(
   name = "Wolf Sheep Simple Model Analysis",
   repetitions = 10,
@@ -139,6 +146,40 @@ setup_file <- create_experiment(
     "grass-regrowth-rate" = 0.3,
     "energy-gain-from-grass" = 2,
     "energy-gain-from-sheep" = 5
+  )
+)
+
+setup_file
+
+setup_file |> inspect_experiment_file()
+
+## Example for the *Spread of Disease* Model ----
+
+setup_file <- create_experiment(
+  name = "Population Density",
+  repetitions = 1,
+  sequential_run_order = TRUE,
+  run_metrics_every_step = TRUE,
+  setup = "setup",
+  go = "go",
+  post_run = NULL,
+  post_experiment = NULL,
+  time_limit = 1000,
+  exit_condition = NULL,
+  metrics = c(
+    'count turtles with [infected?]'
+  ),
+  run_metrics_condition = NULL,
+  constants = list(
+    "variant" = "mobile",
+    "num-people" = list(
+      first = 50,
+      step = 50,
+      last = 200
+    ),
+    "connections-per-node" = 4.1,
+    "num-infected" = 1,
+    "disease-decay" = 0
   )
 )
 

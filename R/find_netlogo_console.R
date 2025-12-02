@@ -1,19 +1,27 @@
-#' Find NetLogo Executable File
+#' Find NetLogo executable file
 #'
 #' @description
 #'
 #' `find_netlogo_console()` attempts to locate the NetLogo executable file on
 #' the user's system.
 #'
-#' It first checks the `NETLOGO_CONSOLE` environment variable. If this variable
-#' is not set or the file does not exist, it constructs the path to the
-#' executable based on the provided `netlogo_home` directory.
+#' @details
 #'
-#' @return A [`character`][base::character] string specifying the path to the
-#'   NetLogo executable file. If the file cannot be found, an empty string is
-#'   returned.
+#' The function uses the following search order:
+#'
+#' 1. Checks the `NETLOGO_CONSOLE` environment variable. If set and the file
+#'    exists, returns that path.
+#' 2. If the environment variable is not set or the file does not exist,
+#'    constructs the path based on `netlogo_home` (e.g.,
+#'    `<netlogo_home>/NetLogo_Console` on Linux/macOS or
+#'    `<netlogo_home>/NetLogo_Console.exe` on Windows).
 #'
 #' @template params-netlogo-home
+#'
+#' @return A [`character`][base::character()] string specifying the path to the
+#'   NetLogo executable file. Returns an empty string (`""`) if the executable
+#'   cannot be found at any location.
+#'
 #' @family utility functions
 #' @export
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/find_netlogo_console.R
 \name{find_netlogo_console}
 \alias{find_netlogo_console}
-\title{Find NetLogo Executable File}
+\title{Find NetLogo executable file}
 \usage{
 find_netlogo_console(netlogo_home = find_netlogo_home())
 }
@@ -15,16 +15,23 @@ the function will try to find it automatically using
 }
 \value{
 A \code{\link[base:character]{character}} string specifying the path to the
-NetLogo executable file. If the file cannot be found, an empty string is
-returned.
+NetLogo executable file. Returns an empty string (\code{""}) if the executable
+cannot be found at any location.
 }
 \description{
 \code{find_netlogo_console()} attempts to locate the NetLogo executable file on
 the user's system.
-
-It first checks the \code{NETLOGO_CONSOLE} environment variable. If this variable
-is not set or the file does not exist, it constructs the path to the
-executable based on the provided \code{netlogo_home} directory.
+}
+\details{
+The function uses the following search order:
+\enumerate{
+\item Checks the \code{NETLOGO_CONSOLE} environment variable. If set and the file
+exists, returns that path.
+\item If the environment variable is not set or the file does not exist,
+constructs the path based on \code{netlogo_home} (e.g.,
+\verb{<netlogo_home>/NetLogo_Console} on Linux/macOS or
+\verb{<netlogo_home>/NetLogo_Console.exe} on Windows).
+}
 }
 \examples{
 \dontrun{

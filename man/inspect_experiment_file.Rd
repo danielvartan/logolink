@@ -11,13 +11,14 @@ inspect_experiment_file(file)
 the BehaviorSpace experiment XML file.}
 }
 \value{
-An \link[base:invisible]{invisible} \code{NULL}. This function is used for its
-side effect.
+An \link[base:invisible]{invisible} \code{NULL}. This function is called for
+its side effect of printing the XML content to the console.
 }
 \description{
 \code{inspect_experiment_file()} reads and prints the content of a
-BehaviorSpace experiment XML file. This is useful for debugging and
-understanding the structure of the experiment file.
+BehaviorSpace experiment XML file to the console. This is useful for
+debugging and verifying the structure of experiment files created by
+\code{\link[=create_experiment]{create_experiment()}}.
 }
 \examples{
 file <- create_experiment(name = "My Experiment")

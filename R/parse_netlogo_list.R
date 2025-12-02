@@ -4,15 +4,37 @@
 #'
 #' `parse_netlogo_list()` parses NetLogo-style lists represented as strings
 #' (e.g., `"[1 2 3]"`) into R lists. It automatically detects
-#' [`numeric`][base::numeric], [`integer`][base::integer],
-#' [`logical`][base::logical], and [`character`][base::character] types within
-#' the lists and converts them accordingly.
+#' [`numeric`][base::numeric()], [`integer`][base::integer()],
+#' [`logical`][base::logical()], and [`character`][base::character()] types
+#' within the lists and converts them accordingly.
 #'
-#' @param x An [`atomic`][checkmate::assert_atomic] object potentially
-#'   containing NetLogo-style lists.
+#' @details
 #'
-#' @return A [`list`][base::list] of parsed elements if the input contains
-#'   NetLogo-style lists; otherwise, returns the original vector.
+#' The function handles the following cases:
+#'
+#' - **Homogeneous lists**: Lists containing elements of the same type are
+#'   returned as atomic vectors (e.g., `"[1 2 3]"` becomes `c(1L, 2L, 3L)`).
+#' - **Mixed-type lists**: Lists containing elements of different types are
+#'   returned as R lists (e.g., `'[1.1 "a" true]'` becomes
+#'   `list(1.1, "a", TRUE)`).
+#' - **Nested lists**: Lists containing other lists are returned as nested R
+#'   lists (e.g., `'["a" "b" [1 2]]'` becomes
+#'   `list(c("a", "b"), c(1L, 2L))`).
+#'
+#' NetLogo boolean values (`true`/`false`) are converted to R
+#' [`logical`][base::logical()] values (`TRUE`/`FALSE`). NetLogo
+#' [`NaN`][base::is.nan()] values are preserved as character strings.
+#'
+#' @param x An [`atomic`][checkmate::assert_atomic] vector potentially
+#'   containing NetLogo-style list strings.
+#'
+#' @return The return value will depend on the input:
+#'   - If `x` does not contain NetLogo-style lists, returns the original vector
+#'     unchanged.
+#'   - If `x` contains NetLogo-style lists, returns a [`list`][base::list()]
+#'     where each element is the parsed result of the corresponding input
+#'     element. Parsed elements may be atomic vectors (for homogeneous lists) or
+#'     nested lists (for mixed-type or nested lists).
 #'
 #' @family utility functions
 #' @export
@@ -70,6 +92,7 @@ parse_netlogo_list <- function(x) {
   }
 }
 
+# fmt: skip
 parse_netlogo_list.scalar <- function(x) { #nolint
   checkmate::assert_atomic(x)
 

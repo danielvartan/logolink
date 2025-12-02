@@ -2,7 +2,7 @@
 % Please edit documentation in R/find_netlogo_version.R
 \name{find_netlogo_version}
 \alias{find_netlogo_version}
-\title{Find NetLogo Version}
+\title{Find NetLogo version}
 \usage{
 find_netlogo_version(netlogo_home = find_netlogo_home())
 }
@@ -15,16 +15,27 @@ the function will try to find it automatically using
 }
 \value{
 A \code{\link[base:character]{character}} string specifying the NetLogo
-version installed on the user's system. If the version cannot be
-determined, an empty string is returned.
+version (e.g., \code{"7.0.2"}). Returns an empty string (\code{""}) if the version
+cannot be determined.
 }
 \description{
-\code{find_netlogo_version()} attempts to locate the NetLogo version installed on
-the user's system.
+\code{find_netlogo_version()} attempts to determine the NetLogo version installed
+on the user's system.
+}
+\details{
+The function uses the following detection methods in order:
+\enumerate{
+\item \strong{Console execution}: If the NetLogo console executable is found, it
+runs \code{NetLogo_Console --version} to retrieve the version information.
+This is the most reliable method.
+\item \strong{Directory name extraction}: If the executable is not found, it
+attempts to extract the version number from the installation directory
+name (e.g., \verb{netlogo-7.0.2} yields \code{"7.0.2"}).
+}
 
-It first tries to execute the NetLogo console with the \code{--version} argument
-to retrieve the version information. If the executable is not found, it
-attempts to extract the version number from the installation directory name.
+Note that the directory name fallback may produce slightly different
+results if the directory was renamed or uses a non-standard naming
+convention.
 }
 \examples{
 \dontrun{

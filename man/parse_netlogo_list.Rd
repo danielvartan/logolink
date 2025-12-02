@@ -7,19 +7,43 @@
 parse_netlogo_list(x)
 }
 \arguments{
-\item{x}{An \code{\link[checkmate:checkAtomic]{atomic}} object potentially
-containing NetLogo-style lists.}
+\item{x}{An \code{\link[checkmate:checkAtomic]{atomic}} vector potentially
+containing NetLogo-style list strings.}
 }
 \value{
-A \code{\link[base:list]{list}} of parsed elements if the input contains
-NetLogo-style lists; otherwise, returns the original vector.
+The return value will depend on the input:
+\itemize{
+\item If \code{x} does not contain NetLogo-style lists, returns the original vector
+unchanged.
+\item If \code{x} contains NetLogo-style lists, returns a \code{\link[base:list]{list}}
+where each element is the parsed result of the corresponding input
+element. Parsed elements may be atomic vectors (for homogeneous lists) or
+nested lists (for mixed-type or nested lists).
+}
 }
 \description{
 \code{parse_netlogo_list()} parses NetLogo-style lists represented as strings
 (e.g., \code{"[1 2 3]"}) into R lists. It automatically detects
 \code{\link[base:numeric]{numeric}}, \code{\link[base:integer]{integer}},
-\code{\link[base:logical]{logical}}, and \code{\link[base:character]{character}} types within
-the lists and converts them accordingly.
+\code{\link[base:logical]{logical}}, and \code{\link[base:character]{character}} types
+within the lists and converts them accordingly.
+}
+\details{
+The function handles the following cases:
+\itemize{
+\item \strong{Homogeneous lists}: Lists containing elements of the same type are
+returned as atomic vectors (e.g., \code{"[1 2 3]"} becomes \code{c(1L, 2L, 3L)}).
+\item \strong{Mixed-type lists}: Lists containing elements of different types are
+returned as R lists (e.g., \code{'[1.1 "a" true]'} becomes
+\code{list(1.1, "a", TRUE)}).
+\item \strong{Nested lists}: Lists containing other lists are returned as nested R
+lists (e.g., \code{'["a" "b" [1 2]]'} becomes
+\code{list(c("a", "b"), c(1L, 2L))}).
+}
+
+NetLogo boolean values (\code{true}/\code{false}) are converted to R
+\code{\link[base:logical]{logical}} values (\code{TRUE}/\code{FALSE}). NetLogo
+\code{\link[base:is.finite]{NaN}} values are preserved as character strings.
 }
 \examples{
 # Scalar Examples -----

@@ -2,22 +2,31 @@
 % Please edit documentation in R/find_netlogo_home.R
 \name{find_netlogo_home}
 \alias{find_netlogo_home}
-\title{Find NetLogo Installation Directory}
+\title{Find NetLogo installation directory}
 \usage{
 find_netlogo_home()
 }
 \value{
 A \code{\link[base:character]{character}} string specifying the path to the
-NetLogo installation directory. If the directory cannot be found,
-an empty string is returned.
+NetLogo installation directory. Returns an empty string (\code{""}) if no
+installation can be found.
 }
 \description{
 \code{find_netlogo_home()} attempts to locate the installation directory of
 NetLogo on the user's system.
+}
+\details{
+The function uses the following search order:
+\enumerate{
+\item Checks the \code{NETLOGO_HOME} environment variable. If set and the directory
+exists, returns that path.
+\item If the environment variable is not set or the directory does not exist,
+searches through common installation paths for directories containing
+"NetLogo" (case-insensitive) in their name.
+}
 
-It first checks the \code{NETLOGO_HOME} environment variable. If this variable is
-not set or the directory does not exist, it searches through a list of common
-installation paths for NetLogo.
+If multiple NetLogo installations are found in the same directory, the
+last one (alphabetically) is returned.
 }
 \examples{
 \dontrun{

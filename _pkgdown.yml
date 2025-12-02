@@ -33,14 +33,14 @@ navbar:
 reference:
 - title: NetLogo
   desc: >
-    Functions to setup and execute NetLogo.
+    Functions to set up and run NetLogo experiments.
   contents:
   - create_experiment
   - run_experiment
 
 - title: Utilities
   desc: >
-    Utility functions to help with NetLogo integration.
+    Helper functions for NetLogo integration.
   contents:
   - find_netlogo_home
   - find_netlogo_console

@@ -11,7 +11,8 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
+
       - name: Release on GitHub
         uses: softprops/action-gh-release@v2
