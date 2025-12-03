@@ -2,6 +2,14 @@
 
 ## Overview
 
+> **Note**: The CRAN release of `logolink` breaks with the recent
+> NetLogo patch updates because the BehaviorSpace XML format changed.
+> The details are in this [GitHub
+> issue](https://github.com/NetLogo/NetLogo/issues/2560). If your
+> experiments fail to run, install the development version of `logolink`
+> from GitHub as shown in the Installation section below. An updated
+> CRAN release will be submitted soon.
+
 `logolink` is an [R](https://www.r-project.org/) package that simplifies
 setting up and running [NetLogo](https://www.netlogo.org/) simulations
 directly from R. It offers a modern, streamlined interface for running
@@ -276,13 +284,13 @@ support its continued improvement.
 ``` r
 citation("logolink")
 #> To cite logolink in publications use:
-#> 
+#>
 #>   Vartanian, D. (2025). logolink: An interface for running NetLogo
 #>   simulations from R [Computer software]. CRAN.
 #>   https://doi.org/10.32614/CRAN.package.logolink
-#> 
+#>
 #> A BibTeX entry for LaTeX users is
-#> 
+#>
 #>   @Misc{,
 #>     title = {logolink: An interface for running NetLogo simulations from R},
 #>     author = {Daniel Vartanian},
