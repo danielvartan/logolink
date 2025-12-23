@@ -19,7 +19,7 @@
 - `parse_netlogo_list()` now have better heuristics.
 - `parse_netlogo_color()` was introduced to parse NetLogo color strings into approximate hex color codes.
 - `plot_patches()` was introduced to visualize NetLogo patches data as a grid and
-serve as a foundation for NetLog world visualizations.
+serve as a foundation for NetLogo world visualizations.
 - New unit tests were implemented.
 - The documentation was updated to reflect the changes in the package.
 

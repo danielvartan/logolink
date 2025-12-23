@@ -7,7 +7,6 @@ library(here)
 library(knitr)
 library(magrittr)
 library(ragg)
-library(rutils) # https://github.com/danielvartan/rutils
 library(showtext)
 library(sysfonts)
 library(xml2)
@@ -32,7 +31,7 @@ set.seed(2025)
 
 # Set `knitr` -----
 
-clean_cache()
+clean_cache() |> suppressWarnings()
 
 opts_chunk$set(
   comment = "#>",
@@ -59,7 +58,7 @@ font_add(
   symbol = NULL
 )
 
-showtext::showtext_auto()
+showtext_auto()
 
 # Set `ggplot2` Theme -----
 
@@ -67,7 +66,7 @@ theme_set(
   theme_bw() +
     theme(
       text = element_text(
-        color = brandr::get_brand_color("black"),
+        color = get_brand_color("black"),
         family = "inter",
         face = "plain"
       ),

@@ -1,6 +1,8 @@
 ^_brand\.yml$
 ^_pkgdown\.yml$
 ^_quarto\.yml$
+^_quarto-gfm\.yml$
+^_quarto-html\.yml$
 ^.quarto$
 ^.vscode$
 ^\.github$
@@ -24,5 +26,6 @@
 ^R/\.post-render\.R$
 ^R/\.setup\.R$
 ^README\.qmd$
+^README\.rmarkdow$
 ^tests/qmd$
 ^ttf$

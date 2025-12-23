@@ -11,7 +11,7 @@ jobs:
   test-coverage:
     runs-on: ubuntu-latest
     env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_PAT: ${{secrets.GITHUB_TOKEN}}
 
     steps:
       - name: Checkout Code
@@ -33,8 +33,12 @@ jobs:
           cov <- covr::package_coverage(
             quiet = FALSE,
             clean = FALSE,
-            install_path = file.path(normalizePath(Sys.getenv("RUNNER_TEMP"), winslash = "/"), "package")
+            install_path = file.path(
+              normalizePath(Sys.getenv("RUNNER_TEMP"), winslash = "/"),
+              "package"
+            )
           )
+
           print(cov)
           covr::to_cobertura(cov)
         shell: Rscript {0}
@@ -53,7 +57,7 @@ jobs:
         if: always()
         run: |
           ## --------------------------------------------------------------------
-          find '${{ runner.temp }}/package' -name 'testthat.Rout*' -exec cat '{}' \; || true
+          find '${{runner.temp}}/package' -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
 
       - name: Upload Test Results
@@ -61,4 +65,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage-test-failures
-          path: ${{ runner.temp }}/package
+          path: ${{runner.temp}}/package

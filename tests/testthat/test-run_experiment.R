@@ -28,31 +28,17 @@ testthat::test_that("`run_experiment()` | General test", {
   ) |>
     readr::write_lines(table_file)
 
-  netlogo_home <- Sys.getenv("NETLOGO_HOME")
-
-  Sys.setenv("NETLOGO_HOME" = tempdir())
-
   testthat::local_mocked_bindings(
     assert_netlogo_console = function(...) NULL,
     system_2 = function(...) "Test",
-    temp_file = function(...) table_file
+    run_experiment.gather_outputs = function(...) list(table_file)
   )
 
   run_experiment(
     model_path = model_path,
     setup_file = setup_file,
-    parse = TRUE
   ) |>
-    checkmate::expect_tibble(ncols = 10)
-
-  run_experiment(
-    model_path = model_path,
-    setup_file = setup_file,
-    parse = FALSE
-  ) |>
-    checkmate::expect_tibble(ncols = 10)
-
-  Sys.setenv("NETLOGO_HOME" = netlogo_home)
+    checkmate::expect_list()
 })
 
 testthat::test_that("`run_experiment()` | Messages & Warnings test", {
@@ -71,95 +57,42 @@ testthat::test_that("`run_experiment()` | Messages & Warnings test", {
   dplyr::tibble(a = character(), b = character()) |>
     readr::write_csv(table_file_2)
 
-  # if (nrow(out) == 0) {
-
-  netlogo_home <- Sys.getenv("NETLOGO_HOME")
-
-  Sys.setenv("NETLOGO_HOME" = tempdir())
-
-  testthat::local_mocked_bindings(
-    assert_netlogo_console = function(...) NULL,
-    system_2 = function(...) "Test",
-    temp_file = function(...) table_file_2
-  )
-
-  run_experiment(
-    model_path = model_path,
-    experiment = NULL,
-    setup_file = setup_file,
-    other_arguments = NULL,
-    parse = TRUE,
-    timeout = Inf,
-    netlogo_home = Sys.getenv("NETLOGO_HOME"),
-    netlogo_path = lifecycle::deprecated()
-  ) |>
-    testthat::expect_message(
-      regexp = "The experiment run did not return any results."
-    ) |>
-    suppressMessages() |>
-    suppressWarnings()
-
-  Sys.setenv("NETLOGO_HOME" = netlogo_home)
-
   # if (!length(system2_output) == 0) {
 
-  netlogo_home <- Sys.getenv("NETLOGO_HOME")
-
-  Sys.setenv("NETLOGO_HOME" = tempdir())
-
   testthat::local_mocked_bindings(
     assert_netlogo_console = function(...) NULL,
     system_2 = function(...) "Test",
-    temp_file = function(...) table_file_1
+    run_experiment.gather_outputs = function(...) list()
   )
 
   run_experiment(
     model_path = model_path,
-    experiment = NULL,
-    setup_file = setup_file,
-    other_arguments = NULL,
-    parse = TRUE,
-    timeout = Inf,
-    netlogo_home = Sys.getenv("NETLOGO_HOME"),
-    netlogo_path = lifecycle::deprecated()
+    setup_file = setup_file
   ) |>
     testthat::expect_message(
-      regexp = "The experiment run generated the following non-tabular output."
+      regexp = "The experiment run produced the following messages"
     ) |>
     suppressMessages() |>
     suppressWarnings()
 
-  Sys.setenv("NETLOGO_HOME" = netlogo_home)
-
   # if (status == 124) {
-
-  netlogo_home <- Sys.getenv("NETLOGO_HOME")
-
-  Sys.setenv("NETLOGO_HOME" = tempdir())
 
   testthat::local_mocked_bindings(
     assert_netlogo_console = function(...) NULL,
     system_2 = function(...) `attributes<-`(NULL, list(status = 124)),
-    temp_file = function(...) table_file_1
+    run_experiment.gather_outputs = function(...) list()
   )
 
   run_experiment(
     model_path = model_path,
-    experiment = NULL,
     setup_file = setup_file,
-    other_arguments = NULL,
-    parse = TRUE,
-    timeout = 1,
-    netlogo_home = Sys.getenv("NETLOGO_HOME"),
-    netlogo_path = lifecycle::deprecated()
+    timeout = 1
   ) |>
     testthat::expect_message(
       regexp = "The experiment timed out after."
     ) |>
     suppressMessages() |>
     suppressWarnings()
-
-  Sys.setenv("NETLOGO_HOME" = netlogo_home)
 })
 
 testthat::test_that("`run_experiment()` | Error test", {
@@ -189,8 +122,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE,
     timeout = Inf,
+    tidy_outputs = TRUE,
     netlogo_home = Sys.getenv("NETLOGO_HOME"),
-    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
 
@@ -203,8 +136,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE,
     timeout = Inf,
+    tidy_outputs = TRUE,
     netlogo_home = Sys.getenv("NETLOGO_HOME"),
-    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
 
@@ -217,8 +150,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE,
     timeout = Inf,
+    tidy_outputs = TRUE,
     netlogo_home = Sys.getenv("NETLOGO_HOME"),
-    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
 
@@ -231,8 +164,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE,
     timeout = Inf,
+    tidy_outputs = TRUE,
     netlogo_home = Sys.getenv("NETLOGO_HOME"),
-    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
 
@@ -245,8 +178,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE,
     timeout = Inf,
+    tidy_outputs = TRUE,
     netlogo_home = Sys.getenv("NETLOGO_HOME"),
-    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
 
@@ -259,8 +192,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE,
     timeout = Inf,
+    tidy_outputs = TRUE,
     netlogo_home = Sys.getenv("NETLOGO_HOME"),
-    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
 
@@ -273,8 +206,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = 1,
     parse = FALSE,
     timeout = Inf,
+    tidy_outputs = TRUE,
     netlogo_home = Sys.getenv("NETLOGO_HOME"),
-    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
 
@@ -287,8 +220,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = "",
     timeout = Inf,
+    tidy_outputs = TRUE,
     netlogo_home = Sys.getenv("NETLOGO_HOME"),
-    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
 
@@ -301,8 +234,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = TRUE,
     timeout = "a",
+    tidy_outputs = TRUE,
     netlogo_home = Sys.getenv("NETLOGO_HOME"),
-    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
 
@@ -315,8 +248,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE,
     timeout = Inf,
+    tidy_outputs = TRUE,
     netlogo_home = Sys.getenv("NETLOGO_HOME"),
-    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
 
@@ -329,38 +262,12 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE,
     timeout = Inf,
+    tidy_outputs = TRUE,
     netlogo_home = Sys.getenv("NETLOGO_HOME"),
-    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error()
 
-  # if (lifecycle::is_present(netlogo_path)) { [...]
-
-  testthat::local_mocked_bindings(
-    assert_netlogo_console = function(...) NULL,
-    system_2 = function(...) "Test",
-    temp_file = function(...) table_file_1
-  )
-
-  run_experiment(
-    model_path = model_path_1,
-    experiment = NULL,
-    setup_file = setup_file,
-    other_arguments = NULL,
-    parse = FALSE,
-    timeout = Inf,
-    netlogo_home = Sys.getenv("NETLOGO_HOME"),
-    netlogo_path = model_path_1
-  ) |>
-    testthat::expect_message() |>
-    suppressMessages() |>
-    suppressWarnings()
-
   # if (!is.null(status)) { [...] } else {
-
-  netlogo_home <- Sys.getenv("NETLOGO_HOME")
-
-  Sys.setenv("NETLOGO_HOME" = tempdir())
 
   testthat::local_mocked_bindings(
     assert_netlogo_console = function(...) NULL,
@@ -375,12 +282,10 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = TRUE,
     timeout = Inf,
+    tidy_outputs = TRUE,
     netlogo_home = Sys.getenv("NETLOGO_HOME"),
-    netlogo_path = lifecycle::deprecated()
   ) |>
     testthat::expect_error() |>
     suppressMessages() |>
     suppressWarnings()
-
-  Sys.setenv("NETLOGO_HOME" = netlogo_home)
 })

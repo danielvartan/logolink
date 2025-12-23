@@ -37,7 +37,7 @@ assert_netlogo_console <- function(
       )
     )
   } else {
-    TRUE
+    invisible(TRUE)
   }
 }
 
@@ -52,7 +52,7 @@ assert_other_arguments <- function(
   # nolint end
 
   if (isTRUE(null_ok) && is.null(other_arguments)) {
-    TRUE
+    invisible(TRUE)
   } else {
     checkmate::assert_character(other_arguments)
     checkmate::assert_character(reserved_arguments)
@@ -80,7 +80,7 @@ assert_other_arguments <- function(
         )
       )
     } else {
-      TRUE
+      invisible(TRUE)
     }
   }
 }
@@ -104,7 +104,7 @@ assert_pick_one <- function(x, y) {
       )
     )
   } else {
-    TRUE
+    invisible(TRUE)
   }
 }
 

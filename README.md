@@ -1,4 +1,4 @@
-# logolink <a href = "https://danielvartan.github.io/brandr/"><img src = "man/figures/logo.svg" align="right" width="120" /></a>
+# logolink <a href = "https://danielvartan.github.io/logolink/"><img src = "man/figures/logo.svg" align="right" width="120" /></a>
 
 <!-- quarto render -->
 
@@ -25,7 +25,13 @@ Conduct](https://img.shields.io/badge/Contributor%20Covenant-3.0-4baaaa.svg)](ht
 
 ## Overview
 
-> **Note**: The CRAN release of `logolink` breaks with the recent NetLogo patch updates because the BehaviorSpace XML format changed. The details are in this [GitHub issue](https://github.com/NetLogo/NetLogo/issues/2560). If your experiments fail to run, install the development version of `logolink` from GitHub as shown in the Installation section below. An updated CRAN release will be submitted soon.
+> **Note**: The CRAN release of `logolink` breaks with the recent
+> NetLogo patch updates because the BehaviorSpace XML format changed.
+> The details are in this [GitHub
+> issue](https://github.com/NetLogo/NetLogo/issues/2560). If your
+> experiments fail to run, install the development version of `logolink`
+> from GitHub as shown in the Installation section below. An updated
+> CRAN release will be submitted soon.
 
 `logolink` is an [R](https://www.r-project.org/) package that simplifies
 setting up and running [NetLogo](https://www.netlogo.org/) simulations
@@ -37,7 +43,7 @@ ecosystem](https://tidyverse.org/).
 
 The package is designed to work with NetLogo **7.0.1 and above**. If you
 need support for earlier NetLogo releases (up to 7.0.0), use an older
-version of this package.
+version of the package.
 
 > If you find this project useful, please consider giving it a star!  
 > [![GitHub Repository
@@ -202,11 +208,11 @@ With the experiment file created, you can now run your model using the
 [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html)
 function. This function will execute the NetLogo model with the
 specified parameters and return the results as a [tidy data
-frame](https://tibble.tidyverse.org/).
+frames](https://r4ds.hadley.nz/data-tidy.html).
 
 First, you need to specify the path to your NetLogo model. In this
-example, we will use the *Wolf Sheep Simple 5* model that comes with any
-NetLogo installation.
+example, we will use the *Wolf Sheep Predation* model that comes with
+any NetLogo installation.
 
 ``` r
 model_path <-
@@ -231,18 +237,51 @@ results <-
 library(dplyr)
 
 results |> glimpse()
-#> Rows: 110,110
-#> Columns: 10
-#> $ run_number             <dbl> 3, 4, 6, 5, 8, 9, 7, 2, 1, 8, 5, 3, 4, 2, 6,…
-#> $ number_of_sheep        <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
-#> $ number_of_wolves       <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
-#> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…
-#> $ grass_regrowth_rate    <dbl> 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3,…
-#> $ energy_gain_from_grass <dbl> 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,…
-#> $ energy_gain_from_sheep <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
-#> $ step                   <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1,…
-#> $ count_wolves           <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
-#> $ count_sheep            <dbl> 500, 500, 500, 500, 500, 500, 500, 500, 500,…
+#> List of 5
+#>  $ metadata   :List of 5
+#>   ..$ timestamp       : POSIXct[1:1], format: "2025-12-23 19:57:38"
+#>   ..$ netlogo_version : chr "7.0.3"
+#>   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"
+#>   ..$ experiment_name : chr "Wolf Sheep Simple Model Analysis"
+#>   ..$ world_dimensions: Named int [1:4] -17 17 -17 17
+#>   .. ..- attr(*, "names")= chr [1:4] "min-pxcor" "max-pxcor" "min-pycor" "max-pycor"
+#>  $ table      : tibble [110,110 × 10] (S3: tbl_df/tbl/data.frame)
+#>   ..$ run_number            : num [1:110110] 1 1 1 1 1 1 1 1 1 1 ...
+#>   ..$ number_of_sheep       : num [1:110110] 500 500 500 500 500 500 500 500 500 500 ...
+#>   ..$ number_of_wolves      : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
+#>   ..$ movement_cost         : num [1:110110] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 ...
+#>   ..$ grass_regrowth_rate   : num [1:110110] 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 ...
+#>   ..$ energy_gain_from_grass: num [1:110110] 2 2 2 2 2 2 2 2 2 2 ...
+#>   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
+#>   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...
+#>   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
+#>   ..$ count_sheep           : num [1:110110] 500 500 500 498 498 497 497 496 495 494 ...
+#>  $ spreadsheet:List of 2
+#>   ..$ statistics: tibble [330 × 13] (S3: tbl_df/tbl/data.frame)
+#>   ..$ measures  : tibble [330,330 × 4] (S3: tbl_df/tbl/data.frame)
+#>  $ lists      : tibble [0 × 9] (S3: tbl_df/tbl/data.frame)
+#>   ..$ reporter              : chr(0) 
+#>   ..$ run_number            : chr(0) 
+#>   ..$ number_of_sheep       : chr(0) 
+#>   ..$ number_of_wolves      : chr(0) 
+#>   ..$ movement_cost         : chr(0) 
+#>   ..$ grass_regrowth_rate   : chr(0) 
+#>   ..$ energy_gain_from_grass: chr(0) 
+#>   ..$ energy_gain_from_sheep: chr(0) 
+#>   ..$ step                  : chr(0) 
+#>  $ statistics : tibble [11,011 × 12] (S3: tbl_df/tbl/data.frame)
+#>   ..$ scenario              : int [1:11011] 1 2 3 4 5 6 7 8 9 10 ...
+#>   ..$ number_of_sheep       : num [1:11011] 500 500 500 500 500 500 500 500 500 500 ...
+#>   ..$ number_of_wolves      : num [1:11011] 5 5 5 5 5 5 5 5 5 5 ...
+#>   ..$ movement_cost         : num [1:11011] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 ...
+#>   ..$ grass_regrowth_rate   : num [1:11011] 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 ...
+#>   ..$ energy_gain_from_grass: num [1:11011] 2 2 2 2 2 2 2 2 2 2 ...
+#>   ..$ energy_gain_from_sheep: num [1:11011] 5 5 5 5 5 5 5 5 5 5 ...
+#>   ..$ step                  : num [1:11011] 0 1 2 3 4 5 6 7 8 9 ...
+#>   ..$ mean_count_wolves     : num [1:11011] 5 5 5 5 5 5 5 5 5 5 ...
+#>   ..$ std_count_wolves      : num [1:11011] 0 0 0 0 0 0 0 0 0 0 ...
+#>   ..$ mean_count_sheep      : num [1:11011] 500 498 498 496 494 ...
+#>   ..$ std_count_sheep       : num [1:11011] 0 0.831 1.432 1.446 1.625 ...
 ```
 
 ### Analyzing the Data (Bonus Section)
@@ -252,9 +291,12 @@ Below is a simple example of how to visualize the results using
 
 ``` r
 library(dplyr)
+library(magrittr)
 
 data <-
   results |>
+  extract2("table") |>
+  select(where(is.numeric)) |>
   summarize(
     across(everything(), ~ mean(.x, na.rm = TRUE)),
     .by = c(step, number_of_wolves)
@@ -284,8 +326,107 @@ data |>
 ```
 
 <img
-src="man/figures/readme-wolf-sheep-model-plot-1.png"
+src="man/figures/readme-wolf-sheep-model-plot-1-1.png"
 data-fig-alt="Line plot showing the average number of sheep over time for different initial numbers of wolves." />
+
+### Visualizing the NetLogo World (Bonus Section)
+
+`logolink` also provides functions to capture screenshots of the NetLogo
+world during the simulation. This is useful for capturing special states
+and for preparing materials for publication.
+
+``` r
+setup_file <- create_experiment(
+  name = "Wolf Sheep Simple Model Analysis",
+  repetitions = 1,
+  sequential_run_order = TRUE,
+  run_metrics_every_step = FALSE,
+  setup = "setup",
+  go = "go",
+  time_limit = 500,
+  run_metrics_condition = 'ticks mod 100 = 0',
+  metrics = c(
+    '[xcor] of sheep',
+    '[ycor] of sheep',
+    '[xcor] of wolves',
+    '[ycor] of wolves',
+    '[pxcor] of patches',
+    '[pycor] of patches',
+    '[pcolor] of patches'
+  ),
+  constants = list(
+    "number-of-sheep" = 500,
+    "number-of-wolves" = 15,
+    "movement-cost" = 0.5,
+    "grass-regrowth-rate" = 0.3,
+    "energy-gain-from-grass" = 2,
+    "energy-gain-from-sheep" = 5
+  )
+)
+```
+
+``` r
+results <-
+  model_path |>
+  run_experiment(setup_file = setup_file)
+```
+
+``` r
+turtle_shapes <-
+  system.file("extdata", package = "logolink") |>
+  list.files(full.names = TRUE)
+```
+
+``` r
+plot_data <-
+  results |>
+  extract2("lists") |>
+  dplyr::filter(run_number == 1, step == 500)
+```
+
+``` r
+library(dplyr)
+library(ggplot2)
+library(ggimage)
+library(magrittr)
+library(stringr)
+library(tidyr)
+#> 
+#> Attaching package: 'tidyr'
+#> The following object is masked from 'package:magrittr':
+#> 
+#>     extract
+
+plot_data |>
+  plot_patches() +
+  geom_image(
+    data = plot_data |>
+      drop_na(xcor_of_sheep),
+    mapping = aes(
+      x = xcor_of_sheep,
+      y = ycor_of_sheep,
+      image = turtle_shapes |>
+        str_subset("sheep") |>
+        head(1)
+    ),
+    size = 0.03
+  ) +
+  geom_image(
+    data = plot_data |>
+      drop_na(xcor_of_wolves),
+    mapping = aes(
+      x = xcor_of_wolves,
+      y = ycor_of_wolves,
+      image = turtle_shapes |>
+        str_subset("wolf") |>
+        head(1)
+    ),
+    size = 0.05,
+    color = parse_netlogo_color(31)
+  )
+```
+
+![](man/figures/readme-wolf-sheep-model-plot-2-1.png)
 
 Please refer to the [BehaviorSpace
 Guide](https://docs.netlogo.org/behaviorspace.html) for complete
@@ -303,13 +444,13 @@ support its continued improvement.
 ``` r
 citation("logolink")
 #> To cite logolink in publications use:
-#>
+#> 
 #>   Vartanian, D. (2025). logolink: An interface for running NetLogo
 #>   simulations from R [Computer software]. CRAN.
 #>   https://doi.org/10.32614/CRAN.package.logolink
-#>
+#> 
 #> A BibTeX entry for LaTeX users is
-#>
+#> 
 #>   @Misc{,
 #>     title = {logolink: An interface for running NetLogo simulations from R},
 #>     author = {Daniel Vartanian},
@@ -347,10 +488,7 @@ Contributions are always welcome! Whether you want to report bugs,
 suggest new features, or help improve the code or documentation, your
 input makes a difference.
 
-Before opening a new issue, please take a moment to review our
-[Guidelines for
-Contributing](https://danielvartan.github.io/logolink/CONTRIBUTING.html)
-and check the [issues
+Before opening a new issue, please check the [issues
 tab](https://github.com/danielvartan/logolink/issues) to see if your
 topic has already been reported.
 
@@ -382,7 +520,7 @@ donation. Please mention `logolink` in your donation message.
     </td>
     <td width="70%" valign="middle">
       <p>
-        This work was developed with support from the
+        This work was developed with support from the 
         <a href="https://www.fsp.usp.br/sustentarea/">Sustentarea</a>
          Research and Extension Center at the University of São Paulo (<a href="https://www5.usp.br/">USP</a>).
       </p>
@@ -405,10 +543,10 @@ donation. Please mention `logolink` in your donation message.
     </td>
     <td width="70%" valign="middle">
       <p>
-        This work was supported by the Department of Science and
-        Technology of the Secretariat of Science, Technology, and Innovation
-        and of the Health Economic-Industrial Complex (<a href="https://www.gov.br/saude/pt-br/composicao/sectics/">SECTICS</a>)  of the <a href="https://www.gov.br/saude/pt-br/composicao/sectics/">Ministry of Health</a>
-        of Brazil, and the National Council for Scientific and
+        This work was supported by the Department of Science and 
+        Technology of the Secretariat of Science, Technology, and Innovation 
+        and of the Health Economic-Industrial Complex (<a href="https://www.gov.br/saude/pt-br/composicao/sectics/">SECTICS</a>)  of the <a href="https://www.gov.br/saude/pt-br/composicao/sectics/">Ministry of Health</a> 
+        of Brazil, and the National Council for Scientific and 
         Technological Development (<a href="https://www.gov.br/cnpq/">CNPq</a>) (grant no. 444588/2023-0).
       </p>
     </td>

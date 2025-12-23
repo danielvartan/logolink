@@ -100,7 +100,7 @@ parse_netlogo_list <- function(x) {
 }
 
 # fmt: skip
-parse_netlogo_list.scalar <- function(x) { #nolint
+parse_netlogo_list.scalar <- function(x) {
   checkmate::assert_atomic(x)
 
   # R CMD Check variable bindings fix.

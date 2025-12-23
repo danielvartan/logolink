@@ -9,9 +9,9 @@ permissions: read-all
 
 jobs:
   R-CMD-check:
-    runs-on: ${{ matrix.config.os }}
+    runs-on: ${{matrix.config.os}}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    name: ${{matrix.config.os}} (${{matrix.config.r}})
 
     strategy:
       fail-fast: false
@@ -24,11 +24,11 @@ jobs:
           - {os: ubuntu-latest,   r: 'oldrel-1'}
 
     env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_PAT: ${{secrets.GITHUB_TOKEN}}
       R_KEEP_PKG_SOURCE: yes
 
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Pandoc
@@ -37,15 +37,16 @@ jobs:
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
         with:
-          r-version: ${{ matrix.config.r }}
-          http-user-agent: ${{ matrix.config.http-user-agent }}
+          r-version: ${{matrix.config.r}}
+          http-user-agent: ${{matrix.config.http-user-agent}}
           use-public-rspm: true
 
-      - name: Install R Dependencies
+      - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck, local::.
           needs: check
+          upgrade: 'TRUE'
 
       - name: Run R CMD check
         uses: r-lib/actions/check-r-package@v2

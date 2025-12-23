@@ -65,6 +65,11 @@ parse_netlogo_color <- function(x, bias = 0.1) {
   checkmate::assert_numeric(x, lower = 0, upper = 140)
   checkmate::assert_number(bias, lower = -1, upper = 1)
 
+  # R CMD Check variable bindings fix.
+  # nolint start
+  base_color <- NULL
+  # nolint end
+
   x |>
     dplyr::as_tibble() |>
     dplyr::mutate(
@@ -108,26 +113,42 @@ parse_netlogo_color <- function(x, bias = 0.1) {
       ),
       color = dplyr::case_when(
         shade == "normal" ~ netlogo_color,
-        shade == "lighter" ~
-          colorspace::lighten(
-            netlogo_color,
-            amount = value |>
-              magrittr::mod(10) %>%
-              magrittr::subtract(5, .) |>
-              abs() |>
-              magrittr::multiply_by(1 + bias) |>
-              scales::rescale(to = c(0, 1), from = c(0, 5))
-          ),
-        shade == "darker" ~
-          colorspace::darken(
-            netlogo_color,
-            amount = value |>
-              magrittr::mod(10) %>%
-              magrittr::subtract(5) |>
-              abs() |>
-              magrittr::multiply_by(1 + bias) |>
-              scales::rescale(to = c(0, 1), from = c(0, 5))
-          )
+        shade == "lighter" ~ {
+          amount <-
+            value |>
+            magrittr::mod(10) %>%
+            magrittr::subtract(5, .) |>
+            abs() |>
+            magrittr::multiply_by(1 + bias) |>
+            scales::rescale(to = c(0, 1), from = c(0, 5))
+
+          rep(NA_character_, length(netlogo_color)) |>
+            magrittr::inset(
+              !is.na(netlogo_color),
+              colorspace::lighten(
+                netlogo_color[!is.na(netlogo_color)],
+                amount = amount[!is.na(netlogo_color)]
+              )
+            )
+        },
+        shade == "darker" ~ {
+          amount <-
+            value |>
+            magrittr::mod(10) %>%
+            magrittr::subtract(5) |>
+            abs() |>
+            magrittr::multiply_by(1 + bias) |>
+            scales::rescale(to = c(0, 1), from = c(0, 5))
+
+          rep(NA_character_, length(netlogo_color)) |>
+            magrittr::inset(
+              !is.na(netlogo_color),
+              colorspace::darken(
+                netlogo_color[!is.na(netlogo_color)],
+                amount = amount[!is.na(netlogo_color)]
+              )
+            )
+        }
       )
     ) |>
     dplyr::pull("color")

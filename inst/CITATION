@@ -2,7 +2,8 @@ utils::bibentry(
   header = "To cite logolink in publications use:",
   bibtype = "Misc",
   title = paste0(
-    "logolink:", " ",
+    "logolink",
+    ": ",
     "An interface for running NetLogo simulations from R"
   ),
   author = c(

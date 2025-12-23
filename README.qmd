@@ -1,4 +1,4 @@
-# logolink <a href = "https://danielvartan.github.io/brandr/"><img src = "man/figures/logo.svg" align="right" width="120" /></a>
+# logolink <a href = "https://danielvartan.github.io/logolink/"><img src = "man/figures/logo.svg" align="right" width="120" /></a>
 
 <!-- quarto render -->
 
@@ -17,8 +17,6 @@ library(ggplot2)
 library(here)
 library(htmltools)
 library(knitr)
-library(readr)
-library(rutils) # https://github.com/danielvartan/rutils
 
 badge_codecov() |> invisible() # To avoid unnecessary messages.
 
@@ -88,9 +86,11 @@ cat(
 
 ## Overview
 
+> **Note**: The CRAN release of `logolink` breaks with the recent NetLogo patch updates because the BehaviorSpace XML format changed. The details are in this [GitHub issue](https://github.com/NetLogo/NetLogo/issues/2560). If your experiments fail to run, install the development version of `logolink` from GitHub as shown in the Installation section below. An updated CRAN release will be submitted soon.
+
 `logolink` is an [R](https://www.r-project.org/) package that simplifies setting up and running [NetLogo](https://www.netlogo.org/) simulations directly from R. It offers a modern, streamlined interface for running models, following the [tidyverse principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and integrating seamlessly with the broader [tidyverse ecosystem](https://tidyverse.org/).
 
-The package is designed to work with NetLogo **7.0.1 and above**. If you need support for earlier NetLogo releases (up to 7.0.0), use an older version of this package.
+The package is designed to work with NetLogo **7.0.1 and above**. If you need support for earlier NetLogo releases (up to 7.0.0), use an older version of the package.
 
 > If you find this project useful, please consider giving it a star! &nbsp; [![GitHub Repository Stars](https://img.shields.io/github/stars/danielvartan/logolink)](https://github.com/danielvartan/logolink/)
 
@@ -145,8 +145,6 @@ Alternatively, you can set up your experiment [directly in NetLogo](https://docs
 Example:
 
 ```{r}
-#| label: setup_file
-
 setup_file <- create_experiment(
   name = "Wolf Sheep Simple Model Analysis",
   repetitions = 10,
@@ -183,9 +181,9 @@ setup_file |> inspect_experiment_file()
 
 ### Running an Experiment
 
-With the experiment file created, you can now run your model using the [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html) function. This function will execute the NetLogo model with the specified parameters and return the results as a [tidy data frame](https://tibble.tidyverse.org/).
+With the experiment file created, you can now run your model using the [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html) function. This function will execute the NetLogo model with the specified parameters and return the results as a [tidy data frames](https://r4ds.hadley.nz/data-tidy.html).
 
-First, you need to specify the path to your NetLogo model. In this example, we will use the *Wolf Sheep Simple 5* model that comes with any NetLogo installation.
+First, you need to specify the path to your NetLogo model. In this example, we will use the *Wolf Sheep Predation* model that comes with any NetLogo installation.
 
 ```{r}
 model_path <-
@@ -223,9 +221,12 @@ Below is a simple example of how to visualize the results using [`ggplot2`](http
 #| output: false
 
 library(dplyr)
+library(magrittr)
 
 data <-
   results |>
+  extract2("table") |>
+  select(where(is.numeric)) |>
   summarize(
     across(everything(), ~ mean(.x, na.rm = TRUE)),
     .by = c(step, number_of_wolves)
@@ -234,7 +235,7 @@ data <-
 ```
 
 ```{r}
-#| label: readme-wolf-sheep-model-plot
+#| label: readme-wolf-sheep-model-plot-1
 #| fig-alt: Line plot showing the average number of sheep over time for different initial numbers of wolves.
 
 library(ggplot2)
@@ -255,6 +256,102 @@ data |>
       color = "Wolves"
     ) +
   geom_line()
+```
+
+### Visualizing the NetLogo World (Bonus Section)
+
+`logolink` also provides functions to capture screenshots of the NetLogo world during the simulation. This is useful for capturing special states and for preparing materials for publication.
+
+```{r}
+setup_file <- create_experiment(
+  name = "Wolf Sheep Simple Model Analysis",
+  repetitions = 1,
+  sequential_run_order = TRUE,
+  run_metrics_every_step = FALSE,
+  setup = "setup",
+  go = "go",
+  time_limit = 500,
+  run_metrics_condition = 'ticks mod 100 = 0',
+  metrics = c(
+    '[xcor] of sheep',
+    '[ycor] of sheep',
+    '[xcor] of wolves',
+    '[ycor] of wolves',
+    '[pxcor] of patches',
+    '[pycor] of patches',
+    '[pcolor] of patches'
+  ),
+  constants = list(
+    "number-of-sheep" = 500,
+    "number-of-wolves" = 15,
+    "movement-cost" = 0.5,
+    "grass-regrowth-rate" = 0.3,
+    "energy-gain-from-grass" = 2,
+    "energy-gain-from-sheep" = 5
+  )
+)
+```
+
+```{r}
+#| output: false
+
+results <-
+  model_path |>
+  run_experiment(setup_file = setup_file)
+```
+
+```{r}
+turtle_shapes <-
+  system.file("extdata", package = "logolink") |>
+  list.files(full.names = TRUE)
+```
+
+```{r}
+plot_data <-
+  results |>
+  extract2("lists") |>
+  dplyr::filter(run_number == 1, step == 500)
+
+```
+
+```{r}
+#| label: readme-wolf-sheep-model-plot-2
+#| #| fig-alt: Line plot showing the average number of sheep over time for different initial numbers of wolves.
+
+library(dplyr)
+library(ggplot2)
+library(ggimage)
+library(magrittr)
+library(stringr)
+library(tidyr)
+
+plot_data |>
+  plot_patches() +
+  geom_image(
+    data = plot_data |>
+      drop_na(xcor_of_sheep),
+    mapping = aes(
+      x = xcor_of_sheep,
+      y = ycor_of_sheep,
+      image = turtle_shapes |>
+        str_subset("sheep") |>
+        head(1)
+    ),
+    size = 0.03
+  ) +
+  geom_image(
+    data = plot_data |>
+      drop_na(xcor_of_wolves),
+    mapping = aes(
+      x = xcor_of_wolves,
+      y = ycor_of_wolves,
+      image = turtle_shapes |>
+        str_subset("wolf") |>
+        head(1)
+    ),
+    size = 0.05,
+    color = parse_netlogo_color(31)
+  )
 ```
 
 Please refer to the [BehaviorSpace Guide](https://docs.netlogo.org/behaviorspace.html) for complete instructions on how to set up and run experiments in NetLogo.
@@ -320,7 +417,7 @@ cat(
 
 Contributions are always welcome! Whether you want to report bugs, suggest new features, or help improve the code or documentation, your input makes a difference.
 
-Before opening a new issue, please take a moment to review our [Guidelines for Contributing](https://danielvartan.github.io/logolink/CONTRIBUTING.html) and check the [issues tab](https://github.com/danielvartan/logolink/issues) to see if your topic has already been reported.
+Before opening a new issue, please check the [issues tab](https://github.com/danielvartan/logolink/issues) to see if your topic has already been reported.
 
 [![GitHub Sponsors Badge](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/danielvartan)
 
