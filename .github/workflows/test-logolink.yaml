@@ -67,4 +67,6 @@ jobs:
       - name: Render Quarto
         run: |
           # Render Quarto
+          cd test/qmd
+
           quarto render
