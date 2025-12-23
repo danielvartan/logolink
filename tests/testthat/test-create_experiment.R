@@ -48,16 +48,17 @@ test_that("`create_experiment()` | Error test", {
     repetitions = 1,
     sequential_run_order = TRUE,
     run_metrics_every_step = FALSE,
+    time_limit = 1,
     pre_experiment = NULL,
     setup = "setup",
     go = "go",
     post_run = NULL,
     post_experiment = NULL,
-    time_limit = 1,
     exit_condition = NULL,
-    metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
     constants = NULL,
+    sub_experiments = NULL,
     file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
@@ -69,16 +70,17 @@ test_that("`create_experiment()` | Error test", {
     repetitions = 0,
     sequential_run_order = TRUE,
     run_metrics_every_step = FALSE,
+    time_limit = 1,
     pre_experiment = NULL,
     setup = "setup",
     go = "go",
     post_run = NULL,
     post_experiment = NULL,
-    time_limit = 1,
     exit_condition = NULL,
-    metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
     constants = NULL,
+    sub_experiments = NULL,
     file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
@@ -90,16 +92,17 @@ test_that("`create_experiment()` | Error test", {
     repetitions = 1,
     sequential_run_order = "a",
     run_metrics_every_step = FALSE,
+    time_limit = 1,
     pre_experiment = NULL,
     setup = "setup",
     go = "go",
     post_run = NULL,
     post_experiment = NULL,
-    time_limit = 1,
     exit_condition = NULL,
-    metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
     constants = NULL,
+    sub_experiments = NULL,
     file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
@@ -111,16 +114,17 @@ test_that("`create_experiment()` | Error test", {
     repetitions = 1,
     sequential_run_order = TRUE,
     run_metrics_every_step = "a",
+    time_limit = 1,
     pre_experiment = NULL,
     setup = "setup",
     go = "go",
     post_run = NULL,
     post_experiment = NULL,
-    time_limit = 1,
     exit_condition = NULL,
-    metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
     constants = NULL,
+    sub_experiments = NULL,
     file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
@@ -132,16 +136,17 @@ test_that("`create_experiment()` | Error test", {
     repetitions = 1,
     sequential_run_order = TRUE,
     run_metrics_every_step = FALSE,
+    time_limit = 1,
     pre_experiment = 1,
     setup = "setup",
     go = "go",
     post_run = NULL,
     post_experiment = NULL,
-    time_limit = 1,
     exit_condition = NULL,
-    metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
     constants = NULL,
+    sub_experiments = NULL,
     file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
@@ -153,16 +158,17 @@ test_that("`create_experiment()` | Error test", {
     repetitions = 1,
     sequential_run_order = TRUE,
     run_metrics_every_step = FALSE,
+    time_limit = 1,
     pre_experiment = NULL,
     setup = 1,
     go = "go",
     post_run = NULL,
     post_experiment = NULL,
-    time_limit = 1,
     exit_condition = NULL,
-    metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
     constants = NULL,
+    sub_experiments = NULL,
     file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
@@ -174,16 +180,17 @@ test_that("`create_experiment()` | Error test", {
     repetitions = 1,
     sequential_run_order = TRUE,
     run_metrics_every_step = FALSE,
+    time_limit = 1,
     pre_experiment = NULL,
     setup = "setup",
     go = 1,
     post_run = NULL,
     post_experiment = NULL,
-    time_limit = 1,
     exit_condition = NULL,
-    metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
     constants = NULL,
+    sub_experiments = NULL,
     file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
@@ -195,16 +202,17 @@ test_that("`create_experiment()` | Error test", {
     repetitions = 1,
     sequential_run_order = TRUE,
     run_metrics_every_step = FALSE,
+    time_limit = 1,
     pre_experiment = NULL,
     setup = "setup",
     go = "go",
     post_run = 1,
     post_experiment = NULL,
-    time_limit = 1,
     exit_condition = NULL,
-    metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
     constants = NULL,
+    sub_experiments = NULL,
     file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
@@ -216,16 +224,17 @@ test_that("`create_experiment()` | Error test", {
     repetitions = 1,
     sequential_run_order = TRUE,
     run_metrics_every_step = FALSE,
+    time_limit = 1,
     pre_experiment = NULL,
     setup = "setup",
     go = "go",
     post_run = NULL,
     post_experiment = 1,
-    time_limit = 1,
     exit_condition = NULL,
-    metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
     constants = NULL,
+    .sub_experiments = NULL,
     file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
@@ -237,16 +246,17 @@ test_that("`create_experiment()` | Error test", {
     repetitions = 1,
     sequential_run_order = TRUE,
     run_metrics_every_step = FALSE,
+    time_limit = -1,
     pre_experiment = NULL,
     setup = "setup",
     go = "go",
     post_run = NULL,
     post_experiment = NULL,
-    time_limit = NULL,
     exit_condition = NULL,
-    metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
     constants = NULL,
+    sub_experiments = NULL,
     file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
@@ -258,16 +268,17 @@ test_that("`create_experiment()` | Error test", {
     repetitions = 1,
     sequential_run_order = TRUE,
     run_metrics_every_step = FALSE,
+    time_limit = 1,
     pre_experiment = NULL,
     setup = "setup",
     go = "go",
     post_run = NULL,
     post_experiment = NULL,
-    time_limit = 1,
     exit_condition = 1,
-    metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
     constants = NULL,
+    sub_experiments = NULL,
     file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
@@ -279,16 +290,17 @@ test_that("`create_experiment()` | Error test", {
     repetitions = 1,
     sequential_run_order = TRUE,
     run_metrics_every_step = FALSE,
+    time_limit = 1,
     pre_experiment = NULL,
     setup = "setup",
     go = "go",
     post_run = NULL,
     post_experiment = NULL,
-    time_limit = 1,
     exit_condition = NULL,
-    metrics = 1:2,
     run_metrics_condition = NULL,
+    metrics = 1:2,
     constants = NULL,
+    sub_experiments = NULL,
     file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
@@ -300,16 +312,17 @@ test_that("`create_experiment()` | Error test", {
     repetitions = 1,
     sequential_run_order = TRUE,
     run_metrics_every_step = FALSE,
+    time_limit = 1,
     pre_experiment = NULL,
     setup = "setup",
     go = "go",
     post_run = NULL,
     post_experiment = NULL,
-    time_limit = 1,
     exit_condition = NULL,
-    metrics = c('count turtles', 'count patches'),
     run_metrics_condition = 1,
+    metrics = c('count turtles', 'count patches'),
     constants = NULL,
+    sub_experiments = NULL,
     file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
@@ -321,38 +334,39 @@ test_that("`create_experiment()` | Error test", {
     repetitions = 1,
     sequential_run_order = TRUE,
     run_metrics_every_step = FALSE,
+    time_limit = 1,
     pre_experiment = NULL,
     setup = "setup",
     go = "go",
     post_run = NULL,
     post_experiment = NULL,
-    time_limit = 1,
     exit_condition = NULL,
-    metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
     constants = "a",
+    sub_experiments = NULL,
     file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
 
   # checkmate::assert_path_for_output(file, overwrite = TRUE, extension = "xml")
 
-
   create_experiment(
     name = "",
     repetitions = 1,
     sequential_run_order = TRUE,
     run_metrics_every_step = FALSE,
+    time_limit = 1,
     pre_experiment = NULL,
     setup = "setup",
     go = "go",
     post_run = NULL,
     post_experiment = NULL,
-    time_limit = 1,
     exit_condition = NULL,
-    metrics = c('count turtles', 'count patches'),
     run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
     constants = NULL,
+    sub_experiments = NULL,
     file = "experiment.txt"
   ) |>
     testthat::expect_error()
