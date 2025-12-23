@@ -23,7 +23,7 @@ complete guidance on how to set and run experiments in NetLogo."><meta property=
 
     <a class="navbar-brand me-2" href="../index.html">logolink</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.1.9000</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,16 +70,17 @@ complete guidance on how to set and run experiments in NetLogo.</p>
 <span>  repetitions <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  sequential_run_order <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  run_metrics_every_step <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  time_limit <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  pre_experiment <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  setup <span class="op">=</span> <span class="st">"setup"</span>,</span>
 <span>  go <span class="op">=</span> <span class="st">"go"</span>,</span>
 <span>  post_run <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  post_experiment <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  time_limit <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  exit_condition <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"count turtles"</span>, <span class="st">"count patches"</span><span class="op">)</span>,</span>
 <span>  run_metrics_condition <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"count turtles"</span>, <span class="st">"count patches"</span><span class="op">)</span>,</span>
 <span>  constants <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  sub_experiments <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"experiment-"</span>, fileext <span class="op">=</span> <span class="st">".xml"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -109,36 +110,46 @@ indicating whether to run the experiments in sequential order
 indicating whether to record metrics at every step (default: <code>FALSE</code>).</p></dd>
 
 
+<dt id="arg-time-limit">time_limit<a class="anchor" aria-label="anchor" href="#arg-time-limit"></a></dt>
+<dd><p>(optional) An integer number specifying the maximum number
+of steps to run for each repetition. Set to <code>0</code> or <code>NULL</code> to have no time
+limit (default: <code>1</code>).</p></dd>
+
+
 <dt id="arg-pre-experiment">pre_experiment<a class="anchor" aria-label="anchor" href="#arg-pre-experiment"></a></dt>
 <dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string
-specifying the NetLogo command to run before the experiment starts
-(default: <code>NULL</code>).</p></dd>
+specifying the NetLogo command(s) to run before the experiment starts. This
+can be a single command or multiple commands provided as a
+<code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector; see the <em>Details &gt; Multiple
+Commands</em> section for usage (default: <code>NULL</code>).</p></dd>
 
 
 <dt id="arg-setup">setup<a class="anchor" aria-label="anchor" href="#arg-setup"></a></dt>
-<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string specifying
-the NetLogo command to set up the model (default: <code>"setup"</code>).</p></dd>
+<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector specifying
+the NetLogo command(s) to set up the model. This can be a single command or
+multiple commands provided as a <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector
+(default: <code>'setup'</code>).</p></dd>
 
 
 <dt id="arg-go">go<a class="anchor" aria-label="anchor" href="#arg-go"></a></dt>
-<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string specifying the
-NetLogo command to run the model (default: <code>"go"</code>).</p></dd>
+<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector specifying the
+NetLogo command(s) to run the model. This can be a single command or
+multiple commands provided as a <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector
+(default: <code>'go'</code>).</p></dd>
 
 
 <dt id="arg-post-run">post_run<a class="anchor" aria-label="anchor" href="#arg-post-run"></a></dt>
 <dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string
-specifying the NetLogo command to run after each run (default: <code>NULL</code>).</p></dd>
+specifying the NetLogo command(s) to run after each run. This can be a
+single command or multiple commands provided as a
+<code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector (default: <code>NULL</code>).</p></dd>
 
 
 <dt id="arg-post-experiment">post_experiment<a class="anchor" aria-label="anchor" href="#arg-post-experiment"></a></dt>
 <dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string
-specifying the NetLogo command to run after the experiment ends
-(default: <code>NULL</code>).</p></dd>
-
-
-<dt id="arg-time-limit">time_limit<a class="anchor" aria-label="anchor" href="#arg-time-limit"></a></dt>
-<dd><p>(optional) An integer number specifying the maximum number
-of steps to run for each repetition (default: <code>1</code>).</p></dd>
+specifying the NetLogo command(s) to run after the experiment ends. This
+can be a single command or multiple commands provided as a
+<code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector (default: <code>NULL</code>).</p></dd>
 
 
 <dt id="arg-exit-condition">exit_condition<a class="anchor" aria-label="anchor" href="#arg-exit-condition"></a></dt>
@@ -147,24 +158,32 @@ specifying the NetLogo command that defines the exit condition for the
 experiment (default: <code>NULL</code>).</p></dd>
 
 
-<dt id="arg-metrics">metrics<a class="anchor" aria-label="anchor" href="#arg-metrics"></a></dt>
-<dd><p>A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector specifying the
-NetLogo commands to record as metrics
-(default: <code>c('count turtles', 'count patches')</code>).</p></dd>
-
-
 <dt id="arg-run-metrics-condition">run_metrics_condition<a class="anchor" aria-label="anchor" href="#arg-run-metrics-condition"></a></dt>
 <dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code>
 string specifying the NetLogo command that defines the condition to record
 metrics (default: <code>NULL</code>).</p></dd>
 
 
+<dt id="arg-metrics">metrics<a class="anchor" aria-label="anchor" href="#arg-metrics"></a></dt>
+<dd><p>A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector specifying the
+NetLogo commands to record as metrics
+(default: <code>c('count turtles', 'count patches')</code>).</p></dd>
+
+
 <dt id="arg-constants">constants<a class="anchor" aria-label="anchor" href="#arg-constants"></a></dt>
 <dd><p>(optional) A named <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> specifying the
-parameters for the experiment. Each element can be either a single value
-(for fixed/enumerated values) or a <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> with <code>first</code>,
-<code>step</code>, and <code>last</code> elements (for stepped/varying values). See the <em>Details</em>
-and <em>Examples</em> sections to learn more (default: <code>NULL</code>).</p></dd>
+parameters for the experiment. Each element can be either a scalar,
+vector (for fixed/enumerated values), or a <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> with
+<code>first</code>, <code>step</code>, and <code>last</code> elements (for stepped/varying values). See the
+<em>Details</em> and <em>Examples</em> sections to learn more (default: <code>NULL</code>).</p></dd>
+
+
+<dt id="arg-sub-experiments">sub_experiments<a class="anchor" aria-label="anchor" href="#arg-sub-experiments"></a></dt>
+<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> where each element
+is a named <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> specifying the constants for a
+sub-experiment. Each sub-experiment uses the same structure as the
+<code>constants</code> argument. See the <code>constants</code> argument documentation for
+details on how to specify parameter values (default: <code>NULL</code>).</p></dd>
 
 
 <dt id="arg-file">file<a class="anchor" aria-label="anchor" href="#arg-file"></a></dt>
@@ -182,28 +201,54 @@ created XML file.</p>
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
 
 <div class="section">
+<h3 id="enclosing">Enclosing<a class="anchor" aria-label="anchor" href="#enclosing"></a></h3>
+
+
+<p>Since NetLogo only accepts double quotes for strings inside commands, we
+recommend always using single quotes when writing commands in R. For example,
+to run the <code>setup</code> command, use <code>'setup'</code>, not <code>"setup"</code>.</p>
+</div>
+
+<div class="section">
+<h3 id="character-strings"><code>character</code> strings<a class="anchor" aria-label="anchor" href="#character-strings"></a></h3>
+
+
+<p><code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> strings should be passed as is, without
+adding quotes to them. For example, to set the variable <code>scenario</code> to
+<code>"SSP-585"</code>, you should use <code>list("scenario" = "SSP-585")</code>, not
+<code>list("scenario" = '"SSP-585"')</code>.</p>
+<p>Insert quotes only if the command requires them. For example:
+<code>'n-values 10 ["N/A"]'</code>.</p>
+</div>
+
+<div class="section">
+<h3 id="multiple-commands">Multiple Commands<a class="anchor" aria-label="anchor" href="#multiple-commands"></a></h3>
+
+
+<p>Some arguments accept multiple NetLogo commands to be run in sequence. In
+such cases, you can provide a <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector with
+each command as a separate element.</p>
+<p>For example, to run two commands in sequence for the <code>go</code> argument,
+you can provide:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">go</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"command-1"</span>, <span class="st">"command-2"</span><span class="op">)</span></span></code></pre><p></p></div>
+</div>
+
+<div class="section">
 <h3 id="constants-argument"><code>constants</code> Argument<a class="anchor" aria-label="anchor" href="#constants-argument"></a></h3>
 
 
 <p>The <code>constants</code> argument allows you to specify the parameters to vary in the
 experiment. It should be a named <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> where each name
 corresponds to a NetLogo global variable. The value for each name can be
-either:</p><ul><li><p>A single value (for enumerated values). For example, to set the variable
-<code>initial-number-of-turtles</code> to <code>10</code>, you would use
+either:</p><ul><li><p>A scalar or vector (for enumerated values). For example, to set the
+variable <code>initial-number-of-turtles</code> to <code>10</code>, you would use
 <code>list("initial-number-of-turtles" = 10)</code>.</p></li>
 <li><p>A <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> with <code>first</code>, <code>step</code>, and <code>last</code> elements (for
 stepped values). For example, to vary the variable
 <code>initial-number-of-turtles</code> from <code>10</code> to <code>50</code> in steps of <code>10</code>, you would
 use
 <code>list("initial-number-of-turtles" = list(first = 10, step = 10, last = 50))</code>.</p></li>
-</ul><p>Note that <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> strings should be passed as is,
-without adding quotes to them. For example, to set the variable
-<code>scenario</code> to <code>"SSP-585"</code>, you should use <code>list("scenario" = "SSP-585")</code>,
-not <code>list("scenario" = '"SSP-585"')</code>.</p>
-<p>Insert quotes only if the command requires them. For example:
-<code>'n-values 10 ["N/A"]'</code>. Since NetLogo only accepts double quotes for
-strings inside commands, single quotes are used here to define the R string.</p>
-</div>
+</ul></div>
 
     </div>
     <div class="section level2">
@@ -214,122 +259,476 @@ strings inside commands, single quotes are used here to define the R string.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Example for the *Wolf Sheep Predation* Model ----</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># The examples below reproduce experiments from the NetLogo Models Library.</span></span></span>
+<span class="r-in"><span><span class="co"># Try exporting these experiments from NetLogo and compare the XML files.</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Examples from the *Wolf Sheep Predation* Model (Sample Models) ----</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">### BehaviorSpace Combinatorial</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu">create_experiment</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  name <span class="op">=</span> <span class="st">"Wolf Sheep Simple Model Analysis"</span>,</span></span>
-<span class="r-in"><span>  repetitions <span class="op">=</span> <span class="fl">10</span>,</span></span>
+<span class="r-in"><span>  name <span class="op">=</span> <span class="st">"BehaviorSpace Combinatorial"</span>,</span></span>
+<span class="r-in"><span>  repetitions <span class="op">=</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>  sequential_run_order <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
-<span class="r-in"><span>  run_metrics_every_step <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
-<span class="r-in"><span>  setup <span class="op">=</span> <span class="st">"setup"</span>,</span></span>
-<span class="r-in"><span>  go <span class="op">=</span> <span class="st">"go"</span>,</span></span>
-<span class="r-in"><span>  time_limit <span class="op">=</span> <span class="fl">1000</span>,</span></span>
+<span class="r-in"><span>  run_metrics_every_step <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>  time_limit <span class="op">=</span> <span class="fl">1500</span>,</span></span>
+<span class="r-in"><span>  setup <span class="op">=</span> <span class="st">'setup'</span>,</span></span>
+<span class="r-in"><span>  go <span class="op">=</span> <span class="st">'go'</span>,</span></span>
+<span class="r-in"><span>  post_run <span class="op">=</span> <span class="st">'wait .5'</span>,</span></span>
+<span class="r-in"><span>  run_metrics_condition <span class="op">=</span> <span class="st">'ticks mod 10 = 0'</span>,</span></span>
 <span class="r-in"><span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">'count sheep'</span>,</span></span>
 <span class="r-in"><span>    <span class="st">'count wolves'</span>,</span></span>
-<span class="r-in"><span>    <span class="st">'count sheep'</span></span></span>
+<span class="r-in"><span>    <span class="st">'count grass'</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span>,</span></span>
-<span class="r-in"><span>  run_metrics_condition <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
 <span class="r-in"><span>  constants <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="st">"number-of-sheep"</span> <span class="op">=</span> <span class="fl">500</span>,</span></span>
-<span class="r-in"><span>    <span class="st">"number-of-wolves"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>      first <span class="op">=</span> <span class="fl">5</span>,</span></span>
-<span class="r-in"><span>      step <span class="op">=</span> <span class="fl">1</span>,</span></span>
-<span class="r-in"><span>      last <span class="op">=</span> <span class="fl">15</span></span></span>
-<span class="r-in"><span>    <span class="op">)</span>,</span></span>
-<span class="r-in"><span>    <span class="st">"movement-cost"</span> <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
-<span class="r-in"><span>    <span class="st">"grass-regrowth-rate"</span> <span class="op">=</span> <span class="fl">0.3</span>,</span></span>
-<span class="r-in"><span>    <span class="st">"energy-gain-from-grass"</span> <span class="op">=</span> <span class="fl">2</span>,</span></span>
-<span class="r-in"><span>    <span class="st">"energy-gain-from-sheep"</span> <span class="op">=</span> <span class="fl">5</span></span></span>
+<span class="r-in"><span>    <span class="st">"model-version"</span> <span class="op">=</span> <span class="st">"sheep-wolves-grass"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"wolf-reproduce"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">15</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"wolf-gain-from-food"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">15</span>, <span class="fl">30</span>, <span class="fl">40</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpL0hUrt/experiment-19635045d47.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp8c5ige/experiment-1eb742253152.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment_file.html">inspect_experiment_file</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;experiment name="Wolf Sheep Simple Model Analysis" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="true" timeLimit="1000"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;experiment name="BehaviorSpace Combinatorial" repetitions="1" sequentialRunOrder="true" runMetricsEveryStep="false" timeLimit="1500"&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;setup&gt;setup&lt;/setup&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;go&gt;go&lt;/go&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;postRun&gt;wait .5&lt;/postRun&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;runMetricsCondition&gt;ticks mod 10 = 0&lt;/runMetricsCondition&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;metrics&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;metric&gt;count wolves&lt;/metric&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;metric&gt;count sheep&lt;/metric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;metric&gt;count wolves&lt;/metric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;metric&gt;count grass&lt;/metric&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/metrics&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;constants&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="number-of-sheep"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="500"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="model-version"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="&amp;quot;sheep-wolves-grass&amp;quot;"&gt;&lt;/value&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;steppedValueSet variable="number-of-wolves" first="5" step="1" last="15"&gt;&lt;/steppedValueSet&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="movement-cost"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="0.5"&gt;&lt;/value&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="grass-regrowth-rate"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="0.3"&gt;&lt;/value&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="energy-gain-from-grass"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="2"&gt;&lt;/value&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="energy-gain-from-sheep"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="wolf-reproduce"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="3"&gt;&lt;/value&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="5"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="10"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="15"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="wolf-gain-from-food"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="10"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="15"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="30"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="40"&gt;&lt;/value&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/constants&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/experiment&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/experiments&gt;</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## Example for the *Spread of Disease* Model ----</span></span></span>
+<span class="r-in"><span><span class="co">### Behaviorspace Run 3 Experiments</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu">create_experiment</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  name <span class="op">=</span> <span class="st">"Behaviorspace Run 3 Experiments"</span>,</span></span>
+<span class="r-in"><span>  repetitions <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>  sequential_run_order <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  run_metrics_every_step <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>  time_limit <span class="op">=</span> <span class="fl">1500</span>,</span></span>
+<span class="r-in"><span>  setup <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">'setup'</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">'print (word "sheep-reproduce: " sheep-reproduce ", wolf-reproduce: '</span>,</span></span>
+<span class="r-in"><span>      <span class="st">'" wolf-reproduce)'</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">'print (word "sheep-gain-from-food: " sheep-gain-from-food ", '</span>,</span></span>
+<span class="r-in"><span>      <span class="st">'wolf-gain-from-food: " wolf-gain-from-food)'</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  go <span class="op">=</span> <span class="st">'go'</span>,</span></span>
+<span class="r-in"><span>  post_run <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">'print (word "sheep: " count sheep ", wolves: " count wolves)'</span>,</span></span>
+<span class="r-in"><span>    <span class="st">'print ""'</span>,</span></span>
+<span class="r-in"><span>    <span class="st">'wait 1'</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  run_metrics_condition <span class="op">=</span> <span class="st">'ticks mod 10 = 0'</span>,</span></span>
+<span class="r-in"><span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">'count sheep'</span>,</span></span>
+<span class="r-in"><span>    <span class="st">'count wolves'</span>,</span></span>
+<span class="r-in"><span>    <span class="st">'count grass'</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  constants <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"model-version"</span> <span class="op">=</span> <span class="st">"sheep-wolves-grass"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  sub_experiments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">"sheep-reproduce"</span> <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"sheep-gain-from-food"</span> <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"wolf-reproduce"</span> <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"wolf-gain-from-food"</span> <span class="op">=</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">"sheep-reproduce"</span> <span class="op">=</span> <span class="fl">6</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"sheep-gain-from-food"</span> <span class="op">=</span> <span class="fl">8</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"wolf-reproduce"</span> <span class="op">=</span> <span class="fl">5</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"wolf-gain-from-food"</span> <span class="op">=</span> <span class="fl">20</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">"sheep-reproduce"</span> <span class="op">=</span> <span class="fl">20</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"sheep-gain-from-food"</span> <span class="op">=</span> <span class="fl">15</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"wolf-reproduce"</span> <span class="op">=</span> <span class="fl">15</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"wolf-gain-from-food"</span> <span class="op">=</span> <span class="fl">30</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">setup_file</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp8c5ige/experiment-1eb75d994fc3.xml"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment_file.html">inspect_experiment_file</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;experiment name="Behaviorspace Run 3 Experiments" repetitions="1" sequentialRunOrder="true" runMetricsEveryStep="false" timeLimit="1500"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;setup&gt;setup</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> print (word "sheep-reproduce: " sheep-reproduce ", wolf-reproduce: " wolf-reproduce)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> print (word "sheep-gain-from-food: " sheep-gain-from-food ", wolf-gain-from-food: " wolf-gain-from-food)&lt;/setup&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;go&gt;go&lt;/go&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;postRun&gt;print (word "sheep: " count sheep ", wolves: " count wolves)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> print ""</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> wait 1&lt;/postRun&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;runMetricsCondition&gt;ticks mod 10 = 0&lt;/runMetricsCondition&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;metrics&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;metric&gt;count sheep&lt;/metric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;metric&gt;count wolves&lt;/metric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;metric&gt;count grass&lt;/metric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/metrics&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;constants&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="model-version"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="&amp;quot;sheep-wolves-grass&amp;quot;"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/constants&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;subExperiments&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;subExperiment&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;enumeratedValueSet variable="sheep-reproduce"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="1"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;enumeratedValueSet variable="sheep-gain-from-food"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="1"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;enumeratedValueSet variable="wolf-reproduce"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="2"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;enumeratedValueSet variable="wolf-gain-from-food"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="10"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/subExperiment&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;subExperiment&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;enumeratedValueSet variable="sheep-reproduce"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="6"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;enumeratedValueSet variable="sheep-gain-from-food"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="8"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;enumeratedValueSet variable="wolf-reproduce"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="5"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;enumeratedValueSet variable="wolf-gain-from-food"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="20"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/subExperiment&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;subExperiment&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;enumeratedValueSet variable="sheep-reproduce"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="20"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;enumeratedValueSet variable="sheep-gain-from-food"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="15"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;enumeratedValueSet variable="wolf-reproduce"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="15"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;enumeratedValueSet variable="wolf-gain-from-food"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="30"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/subExperiment&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/subExperiments&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/experiment&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/experiments&gt;</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">### BehaviorSpace Run 3 Variable Values Per Experiments</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu">create_experiment</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  name <span class="op">=</span> <span class="st">"BehaviorSpace Run 3 Variable Values Per Experiments"</span>,</span></span>
+<span class="r-in"><span>  repetitions <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>  sequential_run_order <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  run_metrics_every_step <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>  time_limit <span class="op">=</span> <span class="fl">1500</span>,</span></span>
+<span class="r-in"><span>  setup <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">'setup'</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">'print (word "sheep-reproduce: " sheep-reproduce ", '</span>,</span></span>
+<span class="r-in"><span>      <span class="st">'wolf-reproduce: " wolf-reproduce)'</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">'print (word "sheep-gain-from-food: " sheep-gain-from-food ", '</span>,</span></span>
+<span class="r-in"><span>      <span class="st">'wolf-gain-from-food: " wolf-gain-from-food)'</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  go <span class="op">=</span> <span class="st">'go'</span>,</span></span>
+<span class="r-in"><span>  post_run <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">'print (word "sheep: " count sheep ", wolves: " count wolves)'</span>,</span></span>
+<span class="r-in"><span>    <span class="st">'print ""'</span>,</span></span>
+<span class="r-in"><span>    <span class="st">'wait 1'</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  run_metrics_condition <span class="op">=</span> <span class="st">'ticks mod 10 = 0'</span>,</span></span>
+<span class="r-in"><span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">'count sheep'</span>,</span></span>
+<span class="r-in"><span>    <span class="st">'count wolves'</span>,</span></span>
+<span class="r-in"><span>    <span class="st">'count grass'</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  constants <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"model-version"</span> <span class="op">=</span> <span class="st">"sheep-wolves-grass"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"sheep-reproduce"</span> <span class="op">=</span> <span class="fl">4</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"wolf-reproduce"</span> <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"sheep-gain-from-food"</span> <span class="op">=</span> <span class="fl">4</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"wolf-gain-from-food"</span> <span class="op">=</span> <span class="fl">20</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  sub_experiments <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">"sheep-reproduce"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">6</span>, <span class="fl">20</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">"wolf-reproduce"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">7</span>, <span class="fl">15</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">"sheep-gain-from-food"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span>, <span class="fl">15</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">"wolf-gain-from-food"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">setup_file</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp8c5ige/experiment-1eb73c448547.xml"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment_file.html">inspect_experiment_file</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;experiment name="BehaviorSpace Run 3 Variable Values Per Experiments" repetitions="1" sequentialRunOrder="true" runMetricsEveryStep="false" timeLimit="1500"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;setup&gt;setup</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> print (word "sheep-reproduce: " sheep-reproduce ", wolf-reproduce: " wolf-reproduce)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> print (word "sheep-gain-from-food: " sheep-gain-from-food ", wolf-gain-from-food: " wolf-gain-from-food)&lt;/setup&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;go&gt;go&lt;/go&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;postRun&gt;print (word "sheep: " count sheep ", wolves: " count wolves)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> print ""</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> wait 1&lt;/postRun&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;runMetricsCondition&gt;ticks mod 10 = 0&lt;/runMetricsCondition&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;metrics&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;metric&gt;count sheep&lt;/metric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;metric&gt;count wolves&lt;/metric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;metric&gt;count grass&lt;/metric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/metrics&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;constants&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="model-version"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="&amp;quot;sheep-wolves-grass&amp;quot;"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="sheep-reproduce"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="4"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="wolf-reproduce"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="2"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="sheep-gain-from-food"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="4"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="wolf-gain-from-food"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="20"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/constants&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;subExperiments&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;subExperiment&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;enumeratedValueSet variable="sheep-reproduce"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="1"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="6"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="20"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/subExperiment&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;subExperiment&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;enumeratedValueSet variable="wolf-reproduce"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="2"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="7"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="15"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/subExperiment&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;subExperiment&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;enumeratedValueSet variable="sheep-gain-from-food"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="1"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="8"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="15"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/subExperiment&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;subExperiment&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;enumeratedValueSet variable="wolf-gain-from-food"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="10"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="20"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           &lt;value value="30"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/subExperiment&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/subExperiments&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/experiment&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/experiments&gt;</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Examples from the *Spread of Disease* Model (IABM Textbook) ----</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">### Population Density</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu">create_experiment</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  name <span class="op">=</span> <span class="st">"Population Density"</span>,</span></span>
-<span class="r-in"><span>  repetitions <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>  repetitions <span class="op">=</span> <span class="fl">10</span>,</span></span>
 <span class="r-in"><span>  sequential_run_order <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
-<span class="r-in"><span>  run_metrics_every_step <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
-<span class="r-in"><span>  setup <span class="op">=</span> <span class="st">"setup"</span>,</span></span>
-<span class="r-in"><span>  go <span class="op">=</span> <span class="st">"go"</span>,</span></span>
-<span class="r-in"><span>  post_run <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
-<span class="r-in"><span>  post_experiment <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
-<span class="r-in"><span>  time_limit <span class="op">=</span> <span class="fl">1000</span>,</span></span>
-<span class="r-in"><span>  exit_condition <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
-<span class="r-in"><span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="st">'count turtles with [infected?]'</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span>,</span></span>
-<span class="r-in"><span>  run_metrics_condition <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
+<span class="r-in"><span>  run_metrics_every_step <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>  time_limit <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
+<span class="r-in"><span>  setup <span class="op">=</span> <span class="st">'setup'</span>,</span></span>
+<span class="r-in"><span>  go <span class="op">=</span> <span class="st">'go'</span>,</span></span>
+<span class="r-in"><span>  metrics <span class="op">=</span> <span class="st">'ticks'</span>,</span></span>
 <span class="r-in"><span>  constants <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="st">"variant"</span> <span class="op">=</span> <span class="st">"mobile"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"connections-per-node"</span> <span class="op">=</span> <span class="fl">4.1</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"num-people"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>      first <span class="op">=</span> <span class="fl">50</span>,</span></span>
 <span class="r-in"><span>      step <span class="op">=</span> <span class="fl">50</span>,</span></span>
 <span class="r-in"><span>      last <span class="op">=</span> <span class="fl">200</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span>,</span></span>
-<span class="r-in"><span>    <span class="st">"connections-per-node"</span> <span class="op">=</span> <span class="fl">4.1</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"num-infected"</span> <span class="op">=</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"disease-decay"</span> <span class="op">=</span> <span class="fl">0</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpL0hUrt/experiment-19634bc81d0c.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp8c5ige/experiment-1eb74f1f19be.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment_file.html">inspect_experiment_file</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;experiment name="Population Density" repetitions="1" sequentialRunOrder="true" runMetricsEveryStep="true" timeLimit="1000"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;experiment name="Population Density" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="false"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;setup&gt;setup&lt;/setup&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;go&gt;go&lt;/go&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;metrics&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;metric&gt;ticks&lt;/metric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/metrics&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;constants&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="variant"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="&amp;quot;mobile&amp;quot;"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="connections-per-node"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="4.1"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;steppedValueSet variable="num-people" first="50" step="50" last="200"&gt;&lt;/steppedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="num-infected"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="1"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="disease-decay"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="0"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/constants&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/experiment&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/experiments&gt;</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">### Degree</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu">create_experiment</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  name <span class="op">=</span> <span class="st">"Degree"</span>,</span></span>
+<span class="r-in"><span>  repetitions <span class="op">=</span> <span class="fl">10</span>,</span></span>
+<span class="r-in"><span>  sequential_run_order <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  run_metrics_every_step <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>  time_limit <span class="op">=</span> <span class="fl">50</span>,</span></span>
+<span class="r-in"><span>  setup <span class="op">=</span> <span class="st">'setup'</span>,</span></span>
+<span class="r-in"><span>  go <span class="op">=</span> <span class="st">'go'</span>,</span></span>
+<span class="r-in"><span>  metrics <span class="op">=</span> <span class="st">'count turtles with [infected?]'</span>,</span></span>
+<span class="r-in"><span>  constants <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"num-people"</span> <span class="op">=</span> <span class="fl">200</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"connections-per-node"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      first <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
+<span class="r-in"><span>      step <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
+<span class="r-in"><span>      last <span class="op">=</span> <span class="fl">4</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"disease-decay"</span> <span class="op">=</span> <span class="fl">10</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"variant"</span> <span class="op">=</span> <span class="st">"network"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"num-infected"</span> <span class="op">=</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">setup_file</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp8c5ige/experiment-1eb786b163.xml"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment_file.html">inspect_experiment_file</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;experiment name="Degree" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="false" timeLimit="50"&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;setup&gt;setup&lt;/setup&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;go&gt;go&lt;/go&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;metrics&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;metric&gt;count turtles with [infected?]&lt;/metric&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/metrics&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;constants&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="variant"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="&amp;quot;mobile&amp;quot;"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="num-people"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="200"&gt;&lt;/value&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;steppedValueSet variable="num-people" first="50" step="50" last="200"&gt;&lt;/steppedValueSet&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="connections-per-node"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="4.1"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;steppedValueSet variable="connections-per-node" first="0.5" step="0.5" last="4"&gt;&lt;/steppedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="disease-decay"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="10"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="variant"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="&amp;quot;network&amp;quot;"&gt;&lt;/value&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="num-infected"&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="1"&gt;&lt;/value&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="disease-decay"&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="0"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/constants&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/experiment&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/experiments&gt;</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">### Environmental</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu">create_experiment</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  name <span class="op">=</span> <span class="st">"Environmental"</span>,</span></span>
+<span class="r-in"><span>  repetitions <span class="op">=</span> <span class="fl">10</span>,</span></span>
+<span class="r-in"><span>  sequential_run_order <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  run_metrics_every_step <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>  time_limit <span class="op">=</span> <span class="cn">NULL</span>,</span></span>
+<span class="r-in"><span>  setup <span class="op">=</span> <span class="st">'setup'</span>,</span></span>
+<span class="r-in"><span>  go <span class="op">=</span> <span class="st">'go'</span>,</span></span>
+<span class="r-in"><span>  metrics <span class="op">=</span> <span class="st">'ticks'</span>,</span></span>
+<span class="r-in"><span>  constants <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"num-people"</span> <span class="op">=</span> <span class="fl">200</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"connections-per-node"</span> <span class="op">=</span> <span class="fl">4</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"disease-decay"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      first <span class="op">=</span> <span class="fl">0</span>,</span></span>
+<span class="r-in"><span>      step <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>      last <span class="op">=</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"variant"</span> <span class="op">=</span> <span class="st">"environmental"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"num-infected"</span> <span class="op">=</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">setup_file</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp8c5ige/experiment-1eb7463cd627.xml"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment_file.html">inspect_experiment_file</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;experiment name="Environmental" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="false"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;setup&gt;setup&lt;/setup&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;go&gt;go&lt;/go&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;metrics&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;metric&gt;ticks&lt;/metric&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/metrics&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;constants&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="num-people"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="200"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="connections-per-node"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="4"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;steppedValueSet variable="disease-decay" first="0" step="1" last="10"&gt;&lt;/steppedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="variant"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="&amp;quot;environmental&amp;quot;"&gt;&lt;/value&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;enumeratedValueSet variable="num-infected"&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         &lt;value value="1"&gt;&lt;/value&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;/enumeratedValueSet&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/constants&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/experiment&gt;</span>

@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">logolink</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.1.9000</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,22 +44,42 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.1.0.9000" id="logolink-0109000-development-version">logolink 0.1.0.9000 (development version)<a class="anchor" aria-label="anchor" href="#logolink-0109000-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.0.0.9000" id="logolink-1009000-development-version">logolink 1.0.0.9000 (development version)<a class="anchor" aria-label="anchor" href="#logolink-1009000-development-version"></a></h2>
 <div class="section level4">
-<h4 id="breaking-changes-0-1-0-9000">Breaking Changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-1-0-9000"></a></h4>
-<ul><li>Added support for NetLogo 7.0.1 and above. This NetLogo patch release changed the XML structure of BehaviorSpace experiments; <code>logolink</code> now supports the new format. See this <a href="https://github.com/NetLogo/NetLogo/issues/2560" class="external-link">GitHub issue</a> to learn more.</li>
+<h4 id="breaking-changes-1-0-0-9000">Breaking Changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-0-0-9000"></a></h4>
+<ul><li>
+<code>logolink</code> now works only with NetLogo 7.0.1 and above. This NetLogo patch release changed the XML structure of BehaviorSpace experiments; See this <a href="https://github.com/NetLogo/NetLogo/issues/2560" class="external-link">GitHub issue</a> to learn more.</li>
+<li>
+<code><a href="../reference/run_experiment.html">run_experiment()</a></code> had the <code>parse</code> argument removed. The function now offer an option to return a <a href="https://docs.netlogo.org/behaviorspace.html#lists-output" class="external-link">lists output</a> via the new <code>output</code> parameter. Results containing data in NetLogo’s lists format are returned as <code>character</code> vectors. See <code><a href="../reference/run_experiment.html">run_experiment()</a></code> documentation for details.</li>
+<li>
+<code><a href="../reference/run_experiment.html">run_experiment()</a></code> had the <code>netlogo_path</code> argument removed. The package now tries to automatically detect the NetLogo installation using helper functions. Users can still manually specify the path to NetLogo. See the updated documentation for details.</li>
 </ul></div>
 <div class="section level4">
-<h4 id="new-features-and-improvements-0-1-0-9000">New Features and Improvements<a class="anchor" aria-label="anchor" href="#new-features-and-improvements-0-1-0-9000"></a></h4>
-<ul><li>Added <a href="https://lifecycle.r-lib.org/" class="external-link"><code>lifecycle</code></a> as a dependency.</li>
-<li>Added the parameter <code>timeout</code> to <code><a href="../reference/run_experiment.html">run_experiment()</a></code> to specify the maximum time (in seconds) to wait for an experiment to complete before terminating it.</li>
-<li>Added support for non-tabular data in <code><a href="../reference/run_experiment.html">run_experiment()</a></code>. The function now prints those outputs to the console.</li>
-<li>Added <code><a href="../reference/find_netlogo_home.html">find_netlogo_home()</a></code>, <code><a href="../reference/find_netlogo_console.html">find_netlogo_console()</a></code>, and <code><a href="../reference/find_netlogo_version.html">find_netlogo_version()</a></code>. These functions use heuristics to automatically detect NetLogo installations on Windows, macOS, and Linux.</li>
-<li>Added the parameter <code>file</code> to <code><a href="../reference/create_experiment.html">create_experiment()</a></code>, allowing the user to specify the output file path for the generated BehaviorSpace experiment XML file.</li>
-<li>Added new unit tests.</li>
-<li>Deprecated the <code>netlogo_path</code> argument in <code><a href="../reference/run_experiment.html">run_experiment()</a></code>. The package now tries to automatically detect the NetLogo installation using helper functions. Users can still manually specify the path to NetLogo; see the updated documentation for details.</li>
-<li>Improved the heuristics in <code><a href="../reference/parse_netlogo_list.html">parse_netlogo_list()</a></code>.</li>
-<li>Improved the documentation.</li>
+<h4 id="new-features-and-improvements-1-0-0-9000">New Features and Improvements<a class="anchor" aria-label="anchor" href="#new-features-and-improvements-1-0-0-9000"></a></h4>
+<ul><li>
+<code><a href="../reference/run_experiment.html">run_experiment()</a></code> now have a <code>timeout</code> parameter to specify the maximum time (in seconds) to wait for an experiment to complete before terminating it.</li>
+<li>
+<code><a href="../reference/run_experiment.html">run_experiment()</a></code> now prints to the R console any messages returned by NetLogo while running the simulation.</li>
+<li>
+<code><a href="../reference/find_netlogo_home.html">find_netlogo_home()</a></code>, <code><a href="../reference/find_netlogo_console.html">find_netlogo_console()</a></code>, and <code><a href="../reference/find_netlogo_version.html">find_netlogo_version()</a></code> were introduced to the package. These functions use heuristics to automatically detect NetLogo installations on Windows, macOS, and Linux.</li>
+<li>
+<code><a href="../reference/create_experiment.html">create_experiment()</a></code> now have a <code>file</code> parameter, allowing the user to specify the output file path for the generated BehaviorSpace experiment XML file.</li>
+<li>
+<code><a href="../reference/create_experiment.html">create_experiment()</a></code> now supports multiple commands in arguments like <code>setup</code> and <code>go</code> as character vectors.</li>
+<li>
+<code><a href="../reference/create_experiment.html">create_experiment()</a></code> now supports vectors in <code>constants</code> for enumerated value sets.</li>
+<li>
+<code><a href="../reference/create_experiment.html">create_experiment()</a></code> now supports <a href="https://docs.netlogo.org/behaviorspace.html#subexperiment-syntax" class="external-link">subexperiments</a>.</li>
+<li>
+<code><a href="../reference/create_experiment.html">create_experiment()</a></code> is now feature complete. It attends all the functionalities described in the <a href="https://github.com/NetLogo/NetLogo/wiki/XML-File-Format#behaviorspace-experiments" class="external-link">XML File Format</a> documentation.</li>
+<li>
+<code><a href="../reference/parse_netlogo_list.html">parse_netlogo_list()</a></code> now have better heuristics.</li>
+<li>
+<code><a href="../reference/parse_netlogo_color.html">parse_netlogo_color()</a></code> was introduced to parse NetLogo color strings into approximate hex color codes.</li>
+<li>
+<code><a href="../reference/plot_patches.html">plot_patches()</a></code> was introduced to visualize NetLogo patches data as a grid and serve as a foundation for NetLogo world visualizations.</li>
+<li>New unit tests were implemented.</li>
+<li>The documentation was updated to reflect the changes in the package.</li>
 </ul></div>
 </div>
     <div class="section level2">

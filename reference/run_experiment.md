@@ -1,12 +1,18 @@
 # Run a NetLogo BehaviorSpace experiment
 
 `run_experiment()` runs a NetLogo BehaviorSpace experiment in headless
-mode and returns the results as a [tidy data
-frame](https://dplyr.tidyverse.org/reference/reexports.html). It can be
-used with
+mode and returns a list with results as a [tidy data
+frames](https://r4ds.hadley.nz/data-tidy.html). It can be used with
 [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md)
 to create the experiment XML file on the fly, or with an existing
 experiment stored in the NetLogo model file.
+
+To avoid issues with list parsing, `run_experiment()` includes support
+for the special *lists* output format. If your experiment includes
+metrics that return NetLogo lists, include `"lists"` in the `outputs`
+argument to capture this output. Columns containing NetLogo lists are
+returned as [`character`](https://rdrr.io/r/base/character.html)
+vectors.
 
 The function tries to locate the NetLogo installation automatically.
 This is usually successful, but if it fails, you will need to set it
@@ -23,11 +29,11 @@ run_experiment(
   model_path,
   setup_file = NULL,
   experiment = NULL,
+  outputs = c("table", "spreadsheet", "lists", "statistics"),
   other_arguments = NULL,
-  parse = TRUE,
   timeout = Inf,
-  netlogo_home = find_netlogo_home(),
-  netlogo_path = lifecycle::deprecated()
+  tidy_outputs = TRUE,
+  netlogo_home = find_netlogo_home()
 )
 ```
 
@@ -54,6 +60,17 @@ run_experiment(
   string specifying the name of the experiment defined in the NetLogo
   model file (default: `NULL`).
 
+- outputs:
+
+  (optional) A [`character`](https://rdrr.io/r/base/character.html)
+  vector specifying which output types to generate from the experiment.
+  Valid options are: `"table"`, `"spreadsheet"`, `"lists"`, and
+  `"statistics"`. At least one of `"table"` or `"spreadsheet"` must be
+  included. See the BehaviorSpace documentation on
+  [formats](https://docs.netlogo.org/behaviorspace.html#run-options-formats)
+  for details about each output type. (default:
+  `c("table", "spreadsheet", "lists", "statistics")`).
+
 - other_arguments:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
@@ -62,17 +79,6 @@ run_experiment(
   specify the number of threads. See the *Details* section for more
   information (default: `NULL`).
 
-- parse:
-
-  (optional) A [`logical`](https://rdrr.io/r/base/logical.html) flag
-  indicating whether to parse NetLogo lists in the output data frame. If
-  `TRUE`, columns containing NetLogo lists (e.g., `[1 2 3]`) will be
-  converted to R lists using
-  [`parse_netlogo_list()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_list.md).
-  If `FALSE`, columns remain as
-  [`character`](https://rdrr.io/r/base/character.html) strings (default:
-  `TRUE`).
-
 - timeout:
 
   (optional) A [`numeric`](https://rdrr.io/r/base/numeric.html) value
@@ -80,6 +86,13 @@ run_experiment(
   process to complete. If the process exceeds this time limit, it will
   be terminated, and the function will return the available output up to
   that point. Use `Inf` for no time limit (default: `Inf`).
+
+- tidy_outputs:
+
+  (optional) A [`logical`](https://rdrr.io/r/base/logical.html) flag
+  indicating whether to tidy the output data frames. If `TRUE`, output
+  data frames are arranged according to [tidy data
+  principles](https://r4ds.hadley.nz/data-tidy.html) (default: `TRUE`).
 
 - netlogo_home:
 
@@ -90,21 +103,15 @@ run_experiment(
   (default:
   [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)).
 
-- netlogo_path:
-
-  **\[deprecated\]** Use the `NETLOGO_HOME` or `NETLOGO_CONSOLE`
-  environment variables instead. See the *Details* section for more
-  information.
-
 ## Value
 
-A [`tibble`](https://tibble.tidyverse.org/reference/tibble.html)
+A [`tibble`](https://dplyr.tidyverse.org/reference/reexports.html)
 containing the results of the experiment. Column names are cleaned using
 [`clean_names()`](https://sfirke.github.io/janitor/reference/clean_names.html).
-If `parse = TRUE`, columns containing NetLogo lists are converted to R
-list-columns. Returns a
-[`tibble`](https://tibble.tidyverse.org/reference/tibble.html) with zero
-rows if the experiment produced no results (with a warning).
+If `parse_lists = TRUE`, columns containing NetLogo lists are converted
+to R list-columns. Returns a
+[`tibble`](https://dplyr.tidyverse.org/reference/reexports.html) with
+zero rows if the experiment produced no results (with a warning).
 
 ## Details
 
@@ -125,6 +132,23 @@ If even after setting the `NETLOGO_HOME` variable you still encounter
 issues, try setting a `NETLOGO_CONSOLE` environment variable with the
 path to the NetLogo executable or binary. On Windows, a typical path is
 something like `C:\Program Files\NetLogo 7.0.2\NetLogo.exe`.
+
+### Handling NetLogo Lists
+
+NetLogo uses a specific syntax for lists (e.g., `"[1 2 3]"`) that is
+incompatible with standard CSV formats. To address this, NetLogo
+provides a special output format called *lists* that exports list
+metrics in a tabular structure. If your experiment includes metrics that
+return NetLogo lists, include `"lists"` in the `outputs` argument to
+capture this output. Columns containing NetLogo lists are returned as
+[`character`](https://rdrr.io/r/base/character.html) vectors.
+
+The
+[`parse_netlogo_list()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_list.md)
+function is available for parsing list values embedded in other outputs.
+However, we recommend using it only when necessary, as it can be
+computationally intensive for large datasets and may not handle all edge
+cases.
 
 ### Additional Command-Line Arguments
 
@@ -159,6 +183,13 @@ These are:
 
 - `--table`: Specifies the output file for the results table.
 
+- `--spreadsheet`: Specifies the output file for the spreadsheet
+  results.
+
+- `--lists`: Specifies the output file for the lists results.
+
+- `--stats`: Specifies the output file for the statistics results.
+
 For a complete list of available options, please refer to the
 [BehaviorSpace
 Guide](https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line).
@@ -188,7 +219,7 @@ Other NetLogo functions:
 ``` r
 # Defining the Model -----
 
-if (FALSE) { # \dontrun{
+# \dontrun{
   model_path <- # This model is included with NetLogo installations.
     find_netlogo_home() |>
     file.path(
@@ -197,11 +228,11 @@ if (FALSE) { # \dontrun{
       "chapter 4",
       "Wolf Sheep Simple 5.nlogox"
     )
-} # }
+# }
 
-# Using `create_experiment()` to Create an Experiment -----
+# Creating an Experiment -----
 
-if (FALSE) { # \dontrun{
+# \dontrun{
   setup_file <- create_experiment(
     name = "Wolf Sheep Simple Model Analysis",
     repetitions = 10,
@@ -228,59 +259,260 @@ if (FALSE) { # \dontrun{
       "energy-gain-from-sheep" = 5
     )
   )
-} # }
+# }
 
 # Running the Experiment -----
 
-if (FALSE) { # \dontrun{
+# \dontrun{
   model_path |> run_experiment(setup_file = setup_file)
-  ## Expected output:
-  #> # A tibble: 110,110 × 10
-  #>   run_number number_of_sheep number_of_wolves movement_cost
-  #>         <dbl>           <dbl>            <dbl>         <dbl>
-  #>  1          3             500                5           0.5
-  #>  2          9             500                5           0.5
-  #>  3          4             500                5           0.5
-  #>  4          1             500                5           0.5
-  #>  5          6             500                5           0.5
-  #>  6          8             500                5           0.5
-  #>  7          7             500                5           0.5
-  #>  8          2             500                5           0.5
-  #>  9          5             500                5           0.5
-  #> 10          2             500                5           0.5
-  #>  # 110,100 more rows
-  #>  # 6 more variables: grass_regrowth_rate <dbl>,
-  #>  # energy_gain_from_grass <dbl>, energy_gain_from_sheep <dbl>,
-  #>  # step <dbl>, count_wolves <dbl>, count_sheep <dbl>
-  #>  # Use `print(n = ...)` to see more rows
-} # }
+#> ℹ Running model
+#> ✔ Running model [21.3s]
+#> 
+#> ℹ Gathering metadata
+#> ✔ Gathering metadata [10ms]
+#> 
+#> ℹ Processing table output
+#> ✔ Processing table output [97ms]
+#> 
+#> ℹ Processing spreadsheet output
+#> ✔ Processing spreadsheet output [766ms]
+#> 
+#> ℹ Processing list output
+#> ! The experiment produced no lists results.
+#> ℹ Processing list output
+#> ✔ Processing list output [30ms]
+#> 
+#> ℹ Processing statistics output
+#> ✔ Processing statistics output [14ms]
+#> 
+#> $metadata
+#> $metadata$timestamp
+#> [1] "2025-12-23 23:09:23 GMT"
+#> 
+#> $metadata$netlogo_version
+#> [1] "7.0.3"
+#> 
+#> $metadata$model_file
+#> [1] "Wolf Sheep Simple 5.nlogox"
+#> 
+#> $metadata$experiment_name
+#> [1] "Wolf Sheep Simple Model Analysis"
+#> 
+#> $metadata$world_dimensions
+#> min-pxcor max-pxcor min-pycor max-pycor 
+#>       -17        17       -17        17 
+#> 
+#> 
+#> $table
+#> # A tibble: 110,110 × 10
+#>    run_number number_of_sheep number_of_wolves movement_cost grass_regrowth_rate
+#>         <dbl>           <dbl>            <dbl>         <dbl>               <dbl>
+#>  1          1             500                5           0.5                 0.3
+#>  2          1             500                5           0.5                 0.3
+#>  3          1             500                5           0.5                 0.3
+#>  4          1             500                5           0.5                 0.3
+#>  5          1             500                5           0.5                 0.3
+#>  6          1             500                5           0.5                 0.3
+#>  7          1             500                5           0.5                 0.3
+#>  8          1             500                5           0.5                 0.3
+#>  9          1             500                5           0.5                 0.3
+#> 10          1             500                5           0.5                 0.3
+#> # ℹ 110,100 more rows
+#> # ℹ 5 more variables: energy_gain_from_grass <dbl>,
+#> #   energy_gain_from_sheep <dbl>, step <dbl>, count_wolves <dbl>,
+#> #   count_sheep <dbl>
+#> 
+#> $spreadsheet
+#> $spreadsheet$statistics
+#> # A tibble: 330 × 13
+#>    run_number number_of_sheep number_of_wolves movement_cost grass_regrowth_rate
+#>    <chr>      <chr>           <chr>            <chr>         <chr>              
+#>  1 1          500             5                0.5           0.3                
+#>  2 1          500             5                0.5           0.3                
+#>  3 1          500             5                0.5           0.3                
+#>  4 2          500             5                0.5           0.3                
+#>  5 2          500             5                0.5           0.3                
+#>  6 2          500             5                0.5           0.3                
+#>  7 3          500             5                0.5           0.3                
+#>  8 3          500             5                0.5           0.3                
+#>  9 3          500             5                0.5           0.3                
+#> 10 4          500             5                0.5           0.3                
+#> # ℹ 320 more rows
+#> # ℹ 8 more variables: energy_gain_from_grass <chr>,
+#> #   energy_gain_from_sheep <chr>, reporter <chr>, final <chr>, min <chr>,
+#> #   max <chr>, mean <chr>, total_steps <chr>
+#> 
+#> $spreadsheet$measures
+#> # A tibble: 330,330 × 4
+#>    run_number reporter measure value
+#>         <dbl> <chr>      <dbl> <dbl>
+#>  1          1 [step]         1     0
+#>  2          1 [step]         2     1
+#>  3          1 [step]         3     2
+#>  4          1 [step]         4     3
+#>  5          1 [step]         5     4
+#>  6          1 [step]         6     5
+#>  7          1 [step]         7     6
+#>  8          1 [step]         8     7
+#>  9          1 [step]         9     8
+#> 10          1 [step]        10     9
+#> # ℹ 330,320 more rows
+#> 
+#> 
+#> $lists
+#> # A tibble: 0 × 9
+#> # ℹ 9 variables: reporter <chr>, run_number <chr>, number_of_sheep <chr>,
+#> #   number_of_wolves <chr>, movement_cost <chr>, grass_regrowth_rate <chr>,
+#> #   energy_gain_from_grass <chr>, energy_gain_from_sheep <chr>, step <chr>
+#> 
+#> $statistics
+#> # A tibble: 11,011 × 12
+#>    scenario number_of_sheep number_of_wolves movement_cost grass_regrowth_rate
+#>       <int>           <dbl>            <dbl>         <dbl>               <dbl>
+#>  1        1             500                5           0.5                 0.3
+#>  2        2             500                5           0.5                 0.3
+#>  3        3             500                5           0.5                 0.3
+#>  4        4             500                5           0.5                 0.3
+#>  5        5             500                5           0.5                 0.3
+#>  6        6             500                5           0.5                 0.3
+#>  7        7             500                5           0.5                 0.3
+#>  8        8             500                5           0.5                 0.3
+#>  9        9             500                5           0.5                 0.3
+#> 10       10             500                5           0.5                 0.3
+#> # ℹ 11,001 more rows
+#> # ℹ 7 more variables: energy_gain_from_grass <dbl>,
+#> #   energy_gain_from_sheep <dbl>, step <dbl>, mean_count_wolves <dbl>,
+#> #   std_count_wolves <dbl>, mean_count_sheep <dbl>, std_count_sheep <dbl>
+#> 
+# }
 
 # Running an Experiment Defined in the NetLogo Model File -----
 
-if (FALSE) { # \dontrun{
+# \dontrun{
   model_path |>
     run_experiment(
       experiment = "Wolf Sheep Simple model analysis"
     )
-  ## Expected output:
-  #> # A tibble: 110 × 11
-  #>    run_number energy_gain_from_grass number_of_wolves movement_cost
-  #>         <dbl>                  <dbl>            <dbl>         <dbl>
-  #>  1          4                      2                5           0.5
-  #>  2          8                      2                5           0.5
-  #>  3          2                      2                5           0.5
-  #>  4          9                      2                5           0.5
-  #>  5          1                      2                5           0.5
-  #>  6          5                      2                5           0.5
-  #>  7          7                      2                5           0.5
-  #>  8          3                      2                5           0.5
-  #>  9          6                      2                5           0.5
-  #> 10         12                      2                6           0.5
-  #> # 100 more rows
-  #> # 7 more variables: energy_gain_from_sheep <dbl>,
-  #> # number_of_sheep <dbl>, grass_regrowth_rate <dbl>, step <dbl>,
-  #> # count_wolves <dbl>, count_sheep <dbl>,
-  #> # sum_grass_amount_of_patches <dbl>
-  #> # Use `print(n = ...)` to see more rows
-} # }
+#> ℹ Running model
+#> ✔ Running model [17.7s]
+#> 
+#> ℹ Gathering metadata
+#> ✔ Gathering metadata [9ms]
+#> 
+#> ℹ Processing table output
+#> ✔ Processing table output [34ms]
+#> 
+#> ℹ Processing spreadsheet output
+#> ✔ Processing spreadsheet output [67ms]
+#> 
+#> ℹ Processing list output
+#> ! The experiment produced no lists results.
+#> ℹ Processing list output
+#> ✔ Processing list output [36ms]
+#> 
+#> ℹ Processing statistics output
+#> ✔ Processing statistics output [8ms]
+#> 
+#> $metadata
+#> $metadata$timestamp
+#> [1] "2025-12-23 23:09:46 GMT"
+#> 
+#> $metadata$netlogo_version
+#> [1] "7.0.3"
+#> 
+#> $metadata$model_file
+#> [1] "Wolf Sheep Simple 5.nlogox"
+#> 
+#> $metadata$experiment_name
+#> [1] "Wolf Sheep Simple model analysis"
+#> 
+#> $metadata$world_dimensions
+#> min-pxcor max-pxcor min-pycor max-pycor 
+#>       -17        17       -17        17 
+#> 
+#> 
+#> $table
+#> # A tibble: 110 × 11
+#>    run_number energy_gain_from_grass number_of_wolves movement_cost
+#>         <dbl>                  <dbl>            <dbl>         <dbl>
+#>  1          1                      2                5           0.5
+#>  2          2                      2                5           0.5
+#>  3          3                      2                5           0.5
+#>  4          4                      2                5           0.5
+#>  5          5                      2                5           0.5
+#>  6          6                      2                5           0.5
+#>  7          7                      2                5           0.5
+#>  8          8                      2                5           0.5
+#>  9          9                      2                5           0.5
+#> 10         10                      2                5           0.5
+#> # ℹ 100 more rows
+#> # ℹ 7 more variables: energy_gain_from_sheep <dbl>, number_of_sheep <dbl>,
+#> #   grass_regrowth_rate <dbl>, step <dbl>, count_wolves <dbl>,
+#> #   count_sheep <dbl>, sum_grass_amount_of_patches <dbl>
+#> 
+#> $spreadsheet
+#> $spreadsheet$statistics
+#> # A tibble: 440 × 8
+#>    run_number energy_gain_from_grass number_of_wolves movement_cost
+#>    <chr>      <chr>                  <chr>            <chr>        
+#>  1 1          2                      5                0.5          
+#>  2 1          2                      5                0.5          
+#>  3 1          2                      5                0.5          
+#>  4 1          2                      5                0.5          
+#>  5 2          2                      5                0.5          
+#>  6 2          2                      5                0.5          
+#>  7 2          2                      5                0.5          
+#>  8 2          2                      5                0.5          
+#>  9 3          2                      5                0.5          
+#> 10 3          2                      5                0.5          
+#> # ℹ 430 more rows
+#> # ℹ 4 more variables: energy_gain_from_sheep <chr>, number_of_sheep <chr>,
+#> #   grass_regrowth_rate <chr>, total_steps <chr>
+#> 
+#> $spreadsheet$measures
+#> # A tibble: 440 × 4
+#>    run_number reporter                      measure  value
+#>         <dbl> <chr>                           <dbl>  <dbl>
+#>  1          1 [step]                              1  1000 
+#>  2          1 count wolves                        1    17 
+#>  3          1 count sheep                         1    90 
+#>  4          1 sum [grass-amount] of patches       1 11252.
+#>  5          2 [step]                              1  1000 
+#>  6          2 count wolves                        1    18 
+#>  7          2 count sheep                         1    74 
+#>  8          2 sum [grass-amount] of patches       1 11383.
+#>  9          3 [step]                              1  1000 
+#> 10          3 count wolves                        1    10 
+#> # ℹ 430 more rows
+#> 
+#> 
+#> $lists
+#> # A tibble: 0 × 9
+#> # ℹ 9 variables: reporter <chr>, run_number <chr>,
+#> #   energy_gain_from_grass <chr>, number_of_wolves <chr>, movement_cost <chr>,
+#> #   energy_gain_from_sheep <chr>, number_of_sheep <chr>,
+#> #   grass_regrowth_rate <chr>, step <chr>
+#> 
+#> $statistics
+#> # A tibble: 11 × 14
+#>    scenario energy_gain_from_grass number_of_wolves movement_cost
+#>       <int>                  <dbl>            <dbl>         <dbl>
+#>  1        1                      2                5           0.5
+#>  2        2                      2                6           0.5
+#>  3        3                      2                7           0.5
+#>  4        4                      2                8           0.5
+#>  5        5                      2                9           0.5
+#>  6        6                      2               10           0.5
+#>  7        7                      2               11           0.5
+#>  8        8                      2               12           0.5
+#>  9        9                      2               13           0.5
+#> 10       10                      2               14           0.5
+#> 11       11                      2               15           0.5
+#> # ℹ 10 more variables: energy_gain_from_sheep <dbl>, number_of_sheep <dbl>,
+#> #   grass_regrowth_rate <dbl>, step <dbl>, mean_count_wolves <dbl>,
+#> #   std_count_wolves <dbl>, mean_count_sheep <dbl>, std_count_sheep <dbl>,
+#> #   mean_sum_grass_amount_of_patches <dbl>,
+#> #   std_sum_grass_amount_of_patches <dbl>
+#> 
+# }
 ```

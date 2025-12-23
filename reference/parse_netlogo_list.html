@@ -5,11 +5,23 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Inter-0.4.10/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Parse NetLogo lists — parse_netlogo_list"><meta name="description" content='parse_netlogo_list() parses NetLogo-style lists represented as strings
+</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Inter-0.4.10/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Parse NetLogo lists — parse_netlogo_list"><meta name="description" content='Note: We recommend using this function only when necessary, as it can
+be computationally intensive for large datasets and may not handle all edge
+cases. NetLogo provides a special output format called lists that exports
+list metrics in a tabular structure. If your experiment includes metrics that
+return NetLogo lists, include "lists" in the outputs argument of
+run_experiment() to capture this output.
+parse_netlogo_list() parses NetLogo-style lists represented as strings
 (e.g., "[1 2 3]") into R lists. It automatically detects
 numeric, integer,
 logical, and character types
-within the lists and converts them accordingly.'><meta property="og:description" content='parse_netlogo_list() parses NetLogo-style lists represented as strings
+within the lists and converts them accordingly.'><meta property="og:description" content='Note: We recommend using this function only when necessary, as it can
+be computationally intensive for large datasets and may not handle all edge
+cases. NetLogo provides a special output format called lists that exports
+list metrics in a tabular structure. If your experiment includes metrics that
+return NetLogo lists, include "lists" in the outputs argument of
+run_experiment() to capture this output.
+parse_netlogo_list() parses NetLogo-style lists represented as strings
 (e.g., "[1 2 3]") into R lists. It automatically detects
 numeric, integer,
 logical, and character types
@@ -21,7 +33,7 @@ within the lists and converts them accordingly.'><meta property="og:image" conte
 
     <a class="navbar-brand me-2" href="../index.html">logolink</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.1.9000</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +65,13 @@ within the lists and converts them accordingly.'><meta property="og:image" conte
     </div>
 
     <div class="ref-description section level2">
-    <p><code>parse_netlogo_list()</code> parses NetLogo-style lists represented as strings
+    <p><strong>Note</strong>: We recommend using this function <strong>only when necessary</strong>, as it can
+be computationally intensive for large datasets and may not handle all edge
+cases. NetLogo provides a special output format called <em>lists</em> that exports
+list metrics in a tabular structure. If your experiment includes metrics that
+return NetLogo lists, include <code>"lists"</code> in the <code>outputs</code> argument of
+<code><a href="run_experiment.html">run_experiment()</a></code> to capture this output.</p>
+<p><code>parse_netlogo_list()</code> parses NetLogo-style lists represented as strings
 (e.g., <code>"[1 2 3]"</code>) into R lists. It automatically detects
 <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a></code>, <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></code>,
 <code><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></code>, and <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> types
@@ -103,7 +121,8 @@ lists (e.g., <code>'["a" "b" [1 2]]'</code> becomes
 <code><a href="find_netlogo_console.html">find_netlogo_console()</a></code>,
 <code><a href="find_netlogo_home.html">find_netlogo_home()</a></code>,
 <code><a href="find_netlogo_version.html">find_netlogo_version()</a></code>,
-<code><a href="inspect_experiment_file.html">inspect_experiment_file()</a></code></p></div>
+<code><a href="inspect_experiment_file.html">inspect_experiment_file()</a></code>,
+<code><a href="parse_netlogo_color.html">parse_netlogo_color()</a></code></p></div>
     </div>
 
     <div class="section level2">

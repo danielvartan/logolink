@@ -17,16 +17,17 @@ create_experiment(
   repetitions = 1,
   sequential_run_order = TRUE,
   run_metrics_every_step = FALSE,
+  time_limit = 1,
   pre_experiment = NULL,
   setup = "setup",
   go = "go",
   post_run = NULL,
   post_experiment = NULL,
-  time_limit = 1,
   exit_condition = NULL,
-  metrics = c("count turtles", "count patches"),
   run_metrics_condition = NULL,
+  metrics = c("count turtles", "count patches"),
   constants = NULL,
+  sub_experiments = NULL,
   file = tempfile(pattern = "experiment-", fileext = ".xml")
 )
 ```
@@ -54,40 +55,51 @@ create_experiment(
   (optional) A [`logical`](https://rdrr.io/r/base/logical.html) flag
   indicating whether to record metrics at every step (default: `FALSE`).
 
+- time_limit:
+
+  (optional) An integer number specifying the maximum number of steps to
+  run for each repetition. Set to `0` or `NULL` to have no time limit
+  (default: `1`).
+
 - pre_experiment:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
-  string specifying the NetLogo command to run before the experiment
-  starts (default: `NULL`).
+  string specifying the NetLogo command(s) to run before the experiment
+  starts. This can be a single command or multiple commands provided as
+  a [`character`](https://rdrr.io/r/base/character.html) vector; see the
+  *Details \> Multiple Commands* section for usage (default: `NULL`).
 
 - setup:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
-  string specifying the NetLogo command to set up the model (default:
-  `"setup"`).
+  vector specifying the NetLogo command(s) to set up the model. This can
+  be a single command or multiple commands provided as a
+  [`character`](https://rdrr.io/r/base/character.html) vector (default:
+  `'setup'`).
 
 - go:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
-  string specifying the NetLogo command to run the model (default:
-  `"go"`).
+  vector specifying the NetLogo command(s) to run the model. This can be
+  a single command or multiple commands provided as a
+  [`character`](https://rdrr.io/r/base/character.html) vector (default:
+  `'go'`).
 
 - post_run:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
-  string specifying the NetLogo command to run after each run (default:
+  string specifying the NetLogo command(s) to run after each run. This
+  can be a single command or multiple commands provided as a
+  [`character`](https://rdrr.io/r/base/character.html) vector (default:
   `NULL`).
 
 - post_experiment:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
-  string specifying the NetLogo command to run after the experiment ends
-  (default: `NULL`).
-
-- time_limit:
-
-  (optional) An integer number specifying the maximum number of steps to
-  run for each repetition (default: `1`).
+  string specifying the NetLogo command(s) to run after the experiment
+  ends. This can be a single command or multiple commands provided as a
+  [`character`](https://rdrr.io/r/base/character.html) vector (default:
+  `NULL`).
 
 - exit_condition:
 
@@ -95,26 +107,35 @@ create_experiment(
   string specifying the NetLogo command that defines the exit condition
   for the experiment (default: `NULL`).
 
-- metrics:
-
-  A [`character`](https://rdrr.io/r/base/character.html) vector
-  specifying the NetLogo commands to record as metrics (default:
-  `c('count turtles', 'count patches')`).
-
 - run_metrics_condition:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
   string specifying the NetLogo command that defines the condition to
   record metrics (default: `NULL`).
 
+- metrics:
+
+  A [`character`](https://rdrr.io/r/base/character.html) vector
+  specifying the NetLogo commands to record as metrics (default:
+  `c('count turtles', 'count patches')`).
+
 - constants:
 
   (optional) A named [`list`](https://rdrr.io/r/base/list.html)
   specifying the parameters for the experiment. Each element can be
-  either a single value (for fixed/enumerated values) or a
+  either a scalar, vector (for fixed/enumerated values), or a
   [`list`](https://rdrr.io/r/base/list.html) with `first`, `step`, and
   `last` elements (for stepped/varying values). See the *Details* and
   *Examples* sections to learn more (default: `NULL`).
+
+- sub_experiments:
+
+  (optional) A [`list`](https://rdrr.io/r/base/list.html) where each
+  element is a named [`list`](https://rdrr.io/r/base/list.html)
+  specifying the constants for a sub-experiment. Each sub-experiment
+  uses the same structure as the `constants` argument. See the
+  `constants` argument documentation for details on how to specify
+  parameter values (default: `NULL`).
 
 - file:
 
@@ -129,6 +150,34 @@ path to the created XML file.
 
 ## Details
 
+### Enclosing
+
+Since NetLogo only accepts double quotes for strings inside commands, we
+recommend always using single quotes when writing commands in R. For
+example, to run the `setup` command, use `'setup'`, not `"setup"`.
+
+### `character` strings
+
+[`character`](https://rdrr.io/r/base/character.html) strings should be
+passed as is, without adding quotes to them. For example, to set the
+variable `scenario` to `"SSP-585"`, you should use
+`list("scenario" = "SSP-585")`, not `list("scenario" = '"SSP-585"')`.
+
+Insert quotes only if the command requires them. For example:
+`'n-values 10 ["N/A"]'`.
+
+### Multiple Commands
+
+Some arguments accept multiple NetLogo commands to be run in sequence.
+In such cases, you can provide a
+[`character`](https://rdrr.io/r/base/character.html) vector with each
+command as a separate element.
+
+For example, to run two commands in sequence for the `go` argument, you
+can provide:
+
+    go = c("command-1", "command-2")
+
 ### `constants` Argument
 
 The `constants` argument allows you to specify the parameters to vary in
@@ -136,7 +185,7 @@ the experiment. It should be a named
 [`list`](https://rdrr.io/r/base/list.html) where each name corresponds
 to a NetLogo global variable. The value for each name can be either:
 
-- A single value (for enumerated values). For example, to set the
+- A scalar or vector (for enumerated values). For example, to set the
   variable `initial-number-of-turtles` to `10`, you would use
   `list("initial-number-of-turtles" = 10)`.
 
@@ -146,16 +195,6 @@ to a NetLogo global variable. The value for each name can be either:
   `10`, you would use
   `list("initial-number-of-turtles" = list(first = 10, step = 10, last = 50))`.
 
-Note that [`character`](https://rdrr.io/r/base/character.html) strings
-should be passed as is, without adding quotes to them. For example, to
-set the variable `scenario` to `"SSP-585"`, you should use
-`list("scenario" = "SSP-585")`, not `list("scenario" = '"SSP-585"')`.
-
-Insert quotes only if the command requires them. For example:
-`'n-values 10 ["N/A"]'`. Since NetLogo only accepts double quotes for
-strings inside commands, single quotes are used here to define the R
-string.
-
 ## See also
 
 Other NetLogo functions:
@@ -164,122 +203,476 @@ Other NetLogo functions:
 ## Examples
 
 ``` r
-## Example for the *Wolf Sheep Predation* Model ----
+# The examples below reproduce experiments from the NetLogo Models Library.
+# Try exporting these experiments from NetLogo and compare the XML files.
+
+## Examples from the *Wolf Sheep Predation* Model (Sample Models) ----
+
+### BehaviorSpace Combinatorial
 
 setup_file <- create_experiment(
-  name = "Wolf Sheep Simple Model Analysis",
-  repetitions = 10,
+  name = "BehaviorSpace Combinatorial",
+  repetitions = 1,
   sequential_run_order = TRUE,
-  run_metrics_every_step = TRUE,
-  setup = "setup",
-  go = "go",
-  time_limit = 1000,
+  run_metrics_every_step = FALSE,
+  time_limit = 1500,
+  setup = 'setup',
+  go = 'go',
+  post_run = 'wait .5',
+  run_metrics_condition = 'ticks mod 10 = 0',
   metrics = c(
+    'count sheep',
     'count wolves',
-    'count sheep'
+    'count grass'
   ),
-  run_metrics_condition = NULL,
   constants = list(
-    "number-of-sheep" = 500,
-    "number-of-wolves" = list(
-      first = 5,
-      step = 1,
-      last = 15
-    ),
-    "movement-cost" = 0.5,
-    "grass-regrowth-rate" = 0.3,
-    "energy-gain-from-grass" = 2,
-    "energy-gain-from-sheep" = 5
+    "model-version" = "sheep-wolves-grass",
+    "wolf-reproduce" = c(3, 5, 10, 15),
+    "wolf-gain-from-food" = c(10, 15, 30, 40)
   )
 )
 
 setup_file
-#> [1] "/tmp/RtmpL0hUrt/experiment-19635045d47.xml"
+#> [1] "/tmp/Rtmp8c5ige/experiment-1eb742253152.xml"
 
 setup_file |> inspect_experiment_file()
 #> <experiments>
-#>   <experiment name="Wolf Sheep Simple Model Analysis" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="true" timeLimit="1000">
+#>   <experiment name="BehaviorSpace Combinatorial" repetitions="1" sequentialRunOrder="true" runMetricsEveryStep="false" timeLimit="1500">
 #>     <setup>setup</setup>
 #>     <go>go</go>
+#>     <postRun>wait .5</postRun>
+#>     <runMetricsCondition>ticks mod 10 = 0</runMetricsCondition>
 #>     <metrics>
-#>       <metric>count wolves</metric>
 #>       <metric>count sheep</metric>
+#>       <metric>count wolves</metric>
+#>       <metric>count grass</metric>
 #>     </metrics>
 #>     <constants>
-#>       <enumeratedValueSet variable="number-of-sheep">
-#>         <value value="500"></value>
+#>       <enumeratedValueSet variable="model-version">
+#>         <value value="&quot;sheep-wolves-grass&quot;"></value>
 #>       </enumeratedValueSet>
-#>       <steppedValueSet variable="number-of-wolves" first="5" step="1" last="15"></steppedValueSet>
-#>       <enumeratedValueSet variable="movement-cost">
-#>         <value value="0.5"></value>
-#>       </enumeratedValueSet>
-#>       <enumeratedValueSet variable="grass-regrowth-rate">
-#>         <value value="0.3"></value>
-#>       </enumeratedValueSet>
-#>       <enumeratedValueSet variable="energy-gain-from-grass">
-#>         <value value="2"></value>
-#>       </enumeratedValueSet>
-#>       <enumeratedValueSet variable="energy-gain-from-sheep">
+#>       <enumeratedValueSet variable="wolf-reproduce">
+#>         <value value="3"></value>
 #>         <value value="5"></value>
+#>         <value value="10"></value>
+#>         <value value="15"></value>
+#>       </enumeratedValueSet>
+#>       <enumeratedValueSet variable="wolf-gain-from-food">
+#>         <value value="10"></value>
+#>         <value value="15"></value>
+#>         <value value="30"></value>
+#>         <value value="40"></value>
 #>       </enumeratedValueSet>
 #>     </constants>
 #>   </experiment>
 #> </experiments>
 
-## Example for the *Spread of Disease* Model ----
+### Behaviorspace Run 3 Experiments
+
+setup_file <- create_experiment(
+  name = "Behaviorspace Run 3 Experiments",
+  repetitions = 1,
+  sequential_run_order = TRUE,
+  run_metrics_every_step = FALSE,
+  time_limit = 1500,
+  setup = c(
+    'setup',
+    paste0(
+      'print (word "sheep-reproduce: " sheep-reproduce ", wolf-reproduce: ',
+      '" wolf-reproduce)'
+    ),
+    paste0(
+      'print (word "sheep-gain-from-food: " sheep-gain-from-food ", ',
+      'wolf-gain-from-food: " wolf-gain-from-food)'
+    )
+  ),
+  go = 'go',
+  post_run = c(
+    'print (word "sheep: " count sheep ", wolves: " count wolves)',
+    'print ""',
+    'wait 1'
+  ),
+  run_metrics_condition = 'ticks mod 10 = 0',
+  metrics = c(
+    'count sheep',
+    'count wolves',
+    'count grass'
+  ),
+  constants = list(
+    "model-version" = "sheep-wolves-grass"
+  ),
+  sub_experiments = list(
+    list(
+      "sheep-reproduce" = 1,
+      "sheep-gain-from-food" = 1,
+      "wolf-reproduce" = 2,
+      "wolf-gain-from-food" = 10
+    ),
+    list(
+      "sheep-reproduce" = 6,
+      "sheep-gain-from-food" = 8,
+      "wolf-reproduce" = 5,
+      "wolf-gain-from-food" = 20
+    ),
+    list(
+      "sheep-reproduce" = 20,
+      "sheep-gain-from-food" = 15,
+      "wolf-reproduce" = 15,
+      "wolf-gain-from-food" = 30
+    )
+  )
+)
+
+setup_file
+#> [1] "/tmp/Rtmp8c5ige/experiment-1eb75d994fc3.xml"
+
+setup_file |> inspect_experiment_file()
+#> <experiments>
+#>   <experiment name="Behaviorspace Run 3 Experiments" repetitions="1" sequentialRunOrder="true" runMetricsEveryStep="false" timeLimit="1500">
+#>     <setup>setup
+#> print (word "sheep-reproduce: " sheep-reproduce ", wolf-reproduce: " wolf-reproduce)
+#> print (word "sheep-gain-from-food: " sheep-gain-from-food ", wolf-gain-from-food: " wolf-gain-from-food)</setup>
+#>     <go>go</go>
+#>     <postRun>print (word "sheep: " count sheep ", wolves: " count wolves)
+#> print ""
+#> wait 1</postRun>
+#>     <runMetricsCondition>ticks mod 10 = 0</runMetricsCondition>
+#>     <metrics>
+#>       <metric>count sheep</metric>
+#>       <metric>count wolves</metric>
+#>       <metric>count grass</metric>
+#>     </metrics>
+#>     <constants>
+#>       <enumeratedValueSet variable="model-version">
+#>         <value value="&quot;sheep-wolves-grass&quot;"></value>
+#>       </enumeratedValueSet>
+#>     </constants>
+#>     <subExperiments>
+#>       <subExperiment>
+#>         <enumeratedValueSet variable="sheep-reproduce">
+#>           <value value="1"></value>
+#>         </enumeratedValueSet>
+#>         <enumeratedValueSet variable="sheep-gain-from-food">
+#>           <value value="1"></value>
+#>         </enumeratedValueSet>
+#>         <enumeratedValueSet variable="wolf-reproduce">
+#>           <value value="2"></value>
+#>         </enumeratedValueSet>
+#>         <enumeratedValueSet variable="wolf-gain-from-food">
+#>           <value value="10"></value>
+#>         </enumeratedValueSet>
+#>       </subExperiment>
+#>       <subExperiment>
+#>         <enumeratedValueSet variable="sheep-reproduce">
+#>           <value value="6"></value>
+#>         </enumeratedValueSet>
+#>         <enumeratedValueSet variable="sheep-gain-from-food">
+#>           <value value="8"></value>
+#>         </enumeratedValueSet>
+#>         <enumeratedValueSet variable="wolf-reproduce">
+#>           <value value="5"></value>
+#>         </enumeratedValueSet>
+#>         <enumeratedValueSet variable="wolf-gain-from-food">
+#>           <value value="20"></value>
+#>         </enumeratedValueSet>
+#>       </subExperiment>
+#>       <subExperiment>
+#>         <enumeratedValueSet variable="sheep-reproduce">
+#>           <value value="20"></value>
+#>         </enumeratedValueSet>
+#>         <enumeratedValueSet variable="sheep-gain-from-food">
+#>           <value value="15"></value>
+#>         </enumeratedValueSet>
+#>         <enumeratedValueSet variable="wolf-reproduce">
+#>           <value value="15"></value>
+#>         </enumeratedValueSet>
+#>         <enumeratedValueSet variable="wolf-gain-from-food">
+#>           <value value="30"></value>
+#>         </enumeratedValueSet>
+#>       </subExperiment>
+#>     </subExperiments>
+#>   </experiment>
+#> </experiments>
+
+### BehaviorSpace Run 3 Variable Values Per Experiments
+
+setup_file <- create_experiment(
+  name = "BehaviorSpace Run 3 Variable Values Per Experiments",
+  repetitions = 1,
+  sequential_run_order = TRUE,
+  run_metrics_every_step = FALSE,
+  time_limit = 1500,
+  setup = c(
+    'setup',
+    paste0(
+      'print (word "sheep-reproduce: " sheep-reproduce ", ',
+      'wolf-reproduce: " wolf-reproduce)'
+    ),
+    paste0(
+      'print (word "sheep-gain-from-food: " sheep-gain-from-food ", ',
+      'wolf-gain-from-food: " wolf-gain-from-food)'
+    )
+  ),
+  go = 'go',
+  post_run = c(
+    'print (word "sheep: " count sheep ", wolves: " count wolves)',
+    'print ""',
+    'wait 1'
+  ),
+  run_metrics_condition = 'ticks mod 10 = 0',
+  metrics = c(
+    'count sheep',
+    'count wolves',
+    'count grass'
+  ),
+  constants = list(
+    "model-version" = "sheep-wolves-grass",
+    "sheep-reproduce" = 4,
+    "wolf-reproduce" = 2,
+    "sheep-gain-from-food" = 4,
+    "wolf-gain-from-food" = 20
+  ),
+  sub_experiments = list(
+    list(
+      "sheep-reproduce" = c(1, 6, 20)
+    ),
+    list(
+      "wolf-reproduce" = c(2, 7, 15)
+    ),
+    list(
+      "sheep-gain-from-food" = c(1, 8, 15)
+    ),
+    list(
+      "wolf-gain-from-food" = c(10, 20, 30)
+    )
+  )
+)
+
+setup_file
+#> [1] "/tmp/Rtmp8c5ige/experiment-1eb73c448547.xml"
+
+setup_file |> inspect_experiment_file()
+#> <experiments>
+#>   <experiment name="BehaviorSpace Run 3 Variable Values Per Experiments" repetitions="1" sequentialRunOrder="true" runMetricsEveryStep="false" timeLimit="1500">
+#>     <setup>setup
+#> print (word "sheep-reproduce: " sheep-reproduce ", wolf-reproduce: " wolf-reproduce)
+#> print (word "sheep-gain-from-food: " sheep-gain-from-food ", wolf-gain-from-food: " wolf-gain-from-food)</setup>
+#>     <go>go</go>
+#>     <postRun>print (word "sheep: " count sheep ", wolves: " count wolves)
+#> print ""
+#> wait 1</postRun>
+#>     <runMetricsCondition>ticks mod 10 = 0</runMetricsCondition>
+#>     <metrics>
+#>       <metric>count sheep</metric>
+#>       <metric>count wolves</metric>
+#>       <metric>count grass</metric>
+#>     </metrics>
+#>     <constants>
+#>       <enumeratedValueSet variable="model-version">
+#>         <value value="&quot;sheep-wolves-grass&quot;"></value>
+#>       </enumeratedValueSet>
+#>       <enumeratedValueSet variable="sheep-reproduce">
+#>         <value value="4"></value>
+#>       </enumeratedValueSet>
+#>       <enumeratedValueSet variable="wolf-reproduce">
+#>         <value value="2"></value>
+#>       </enumeratedValueSet>
+#>       <enumeratedValueSet variable="sheep-gain-from-food">
+#>         <value value="4"></value>
+#>       </enumeratedValueSet>
+#>       <enumeratedValueSet variable="wolf-gain-from-food">
+#>         <value value="20"></value>
+#>       </enumeratedValueSet>
+#>     </constants>
+#>     <subExperiments>
+#>       <subExperiment>
+#>         <enumeratedValueSet variable="sheep-reproduce">
+#>           <value value="1"></value>
+#>           <value value="6"></value>
+#>           <value value="20"></value>
+#>         </enumeratedValueSet>
+#>       </subExperiment>
+#>       <subExperiment>
+#>         <enumeratedValueSet variable="wolf-reproduce">
+#>           <value value="2"></value>
+#>           <value value="7"></value>
+#>           <value value="15"></value>
+#>         </enumeratedValueSet>
+#>       </subExperiment>
+#>       <subExperiment>
+#>         <enumeratedValueSet variable="sheep-gain-from-food">
+#>           <value value="1"></value>
+#>           <value value="8"></value>
+#>           <value value="15"></value>
+#>         </enumeratedValueSet>
+#>       </subExperiment>
+#>       <subExperiment>
+#>         <enumeratedValueSet variable="wolf-gain-from-food">
+#>           <value value="10"></value>
+#>           <value value="20"></value>
+#>           <value value="30"></value>
+#>         </enumeratedValueSet>
+#>       </subExperiment>
+#>     </subExperiments>
+#>   </experiment>
+#> </experiments>
+
+## Examples from the *Spread of Disease* Model (IABM Textbook) ----
+
+### Population Density
 
 setup_file <- create_experiment(
   name = "Population Density",
-  repetitions = 1,
+  repetitions = 10,
   sequential_run_order = TRUE,
-  run_metrics_every_step = TRUE,
-  setup = "setup",
-  go = "go",
-  post_run = NULL,
-  post_experiment = NULL,
-  time_limit = 1000,
-  exit_condition = NULL,
-  metrics = c(
-    'count turtles with [infected?]'
-  ),
-  run_metrics_condition = NULL,
+  run_metrics_every_step = FALSE,
+  time_limit = NULL,
+  setup = 'setup',
+  go = 'go',
+  metrics = 'ticks',
   constants = list(
     "variant" = "mobile",
+    "connections-per-node" = 4.1,
     "num-people" = list(
       first = 50,
       step = 50,
       last = 200
     ),
-    "connections-per-node" = 4.1,
     "num-infected" = 1,
     "disease-decay" = 0
   )
 )
 
 setup_file
-#> [1] "/tmp/RtmpL0hUrt/experiment-19634bc81d0c.xml"
+#> [1] "/tmp/Rtmp8c5ige/experiment-1eb74f1f19be.xml"
 
 setup_file |> inspect_experiment_file()
 #> <experiments>
-#>   <experiment name="Population Density" repetitions="1" sequentialRunOrder="true" runMetricsEveryStep="true" timeLimit="1000">
+#>   <experiment name="Population Density" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="false">
+#>     <setup>setup</setup>
+#>     <go>go</go>
+#>     <metrics>
+#>       <metric>ticks</metric>
+#>     </metrics>
+#>     <constants>
+#>       <enumeratedValueSet variable="variant">
+#>         <value value="&quot;mobile&quot;"></value>
+#>       </enumeratedValueSet>
+#>       <enumeratedValueSet variable="connections-per-node">
+#>         <value value="4.1"></value>
+#>       </enumeratedValueSet>
+#>       <steppedValueSet variable="num-people" first="50" step="50" last="200"></steppedValueSet>
+#>       <enumeratedValueSet variable="num-infected">
+#>         <value value="1"></value>
+#>       </enumeratedValueSet>
+#>       <enumeratedValueSet variable="disease-decay">
+#>         <value value="0"></value>
+#>       </enumeratedValueSet>
+#>     </constants>
+#>   </experiment>
+#> </experiments>
+
+### Degree
+
+setup_file <- create_experiment(
+  name = "Degree",
+  repetitions = 10,
+  sequential_run_order = TRUE,
+  run_metrics_every_step = FALSE,
+  time_limit = 50,
+  setup = 'setup',
+  go = 'go',
+  metrics = 'count turtles with [infected?]',
+  constants = list(
+    "num-people" = 200,
+    "connections-per-node" = list(
+      first = 0.5,
+      step = 0.5,
+      last = 4
+    ),
+    "disease-decay" = 10,
+    "variant" = "network",
+    "num-infected" = 1
+  )
+)
+
+setup_file
+#> [1] "/tmp/Rtmp8c5ige/experiment-1eb786b163.xml"
+
+setup_file |> inspect_experiment_file()
+#> <experiments>
+#>   <experiment name="Degree" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="false" timeLimit="50">
 #>     <setup>setup</setup>
 #>     <go>go</go>
 #>     <metrics>
 #>       <metric>count turtles with [infected?]</metric>
 #>     </metrics>
 #>     <constants>
-#>       <enumeratedValueSet variable="variant">
-#>         <value value="&quot;mobile&quot;"></value>
+#>       <enumeratedValueSet variable="num-people">
+#>         <value value="200"></value>
 #>       </enumeratedValueSet>
-#>       <steppedValueSet variable="num-people" first="50" step="50" last="200"></steppedValueSet>
-#>       <enumeratedValueSet variable="connections-per-node">
-#>         <value value="4.1"></value>
+#>       <steppedValueSet variable="connections-per-node" first="0.5" step="0.5" last="4"></steppedValueSet>
+#>       <enumeratedValueSet variable="disease-decay">
+#>         <value value="10"></value>
+#>       </enumeratedValueSet>
+#>       <enumeratedValueSet variable="variant">
+#>         <value value="&quot;network&quot;"></value>
 #>       </enumeratedValueSet>
 #>       <enumeratedValueSet variable="num-infected">
 #>         <value value="1"></value>
 #>       </enumeratedValueSet>
-#>       <enumeratedValueSet variable="disease-decay">
-#>         <value value="0"></value>
+#>     </constants>
+#>   </experiment>
+#> </experiments>
+
+### Environmental
+
+setup_file <- create_experiment(
+  name = "Environmental",
+  repetitions = 10,
+  sequential_run_order = TRUE,
+  run_metrics_every_step = FALSE,
+  time_limit = NULL,
+  setup = 'setup',
+  go = 'go',
+  metrics = 'ticks',
+  constants = list(
+    "num-people" = 200,
+    "connections-per-node" = 4,
+    "disease-decay" = list(
+      first = 0,
+      step = 1,
+      last = 10
+    ),
+    "variant" = "environmental",
+    "num-infected" = 1
+  )
+)
+
+setup_file
+#> [1] "/tmp/Rtmp8c5ige/experiment-1eb7463cd627.xml"
+
+setup_file |> inspect_experiment_file()
+#> <experiments>
+#>   <experiment name="Environmental" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="false">
+#>     <setup>setup</setup>
+#>     <go>go</go>
+#>     <metrics>
+#>       <metric>ticks</metric>
+#>     </metrics>
+#>     <constants>
+#>       <enumeratedValueSet variable="num-people">
+#>         <value value="200"></value>
+#>       </enumeratedValueSet>
+#>       <enumeratedValueSet variable="connections-per-node">
+#>         <value value="4"></value>
+#>       </enumeratedValueSet>
+#>       <steppedValueSet variable="disease-decay" first="0" step="1" last="10"></steppedValueSet>
+#>       <enumeratedValueSet variable="variant">
+#>         <value value="&quot;environmental&quot;"></value>
+#>       </enumeratedValueSet>
+#>       <enumeratedValueSet variable="num-infected">
+#>         <value value="1"></value>
 #>       </enumeratedValueSet>
 #>     </constants>
 #>   </experiment>

@@ -37,7 +37,7 @@
 
     <a class="navbar-brand me-2" href="index.html">logolink</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.1.9000</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,7 +86,7 @@
 <p><strong>Note</strong>: The CRAN release of <code>logolink</code> breaks with the recent NetLogo patch updates because the BehaviorSpace XML format changed. The details are in this <a href="https://github.com/NetLogo/NetLogo/issues/2560" class="external-link">GitHub issue</a>. If your experiments fail to run, install the development version of <code>logolink</code> from GitHub as shown in the Installation section below. An updated CRAN release will be submitted soon.</p>
 </blockquote>
 <p><code>logolink</code> is an <a href="https://www.r-project.org/" class="external-link">R</a> package that simplifies setting up and running <a href="https://www.netlogo.org/" class="external-link">NetLogo</a> simulations directly from R. It offers a modern, streamlined interface for running models, following the <a href="https://tidyverse.tidyverse.org/articles/manifesto.html" class="external-link">tidyverse principles</a> and integrating seamlessly with the broader <a href="https://tidyverse.org/" class="external-link">tidyverse ecosystem</a>.</p>
-<p>The package is designed to work with NetLogo <strong>7.0.1 and above</strong>. If you need support for earlier NetLogo releases (up to 7.0.0), use an older version of this package.</p>
+<p>The package is designed to work with NetLogo <strong>7.0.1 and above</strong>. If you need support for earlier NetLogo releases (up to 7.0.0), use an older version of the package.</p>
 <blockquote>
 <p>If you find this project useful, please consider giving it a star!   <a href="https://github.com/danielvartan/logolink/" class="external-link"><img src="https://img.shields.io/github/stars/danielvartan/logolink" alt="GitHub Repository Stars"></a></p>
 </blockquote>
@@ -198,8 +198,8 @@
 <div class="section level3">
 <h3 id="running-an-experiment">Running an Experiment<a class="anchor" aria-label="anchor" href="#running-an-experiment"></a>
 </h3>
-<p>With the experiment file created, you can now run your model using the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a> function. This function will execute the NetLogo model with the specified parameters and return the results as a <a href="https://tibble.tidyverse.org/" class="external-link">tidy data frame</a>.</p>
-<p>First, you need to specify the path to your NetLogo model. In this example, we will use the <em>Wolf Sheep Simple 5</em> model that comes with any NetLogo installation.</p>
+<p>With the experiment file created, you can now run your model using the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a> function. This function will execute the NetLogo model with the specified parameters and return the results as a <a href="https://r4ds.hadley.nz/data-tidy.html" class="external-link">tidy data frames</a>.</p>
+<p>First, you need to specify the path to your NetLogo model. In this example, we will use the <em>Wolf Sheep Predation</em> model that comes with any NetLogo installation.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model_path</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="reference/find_netlogo_home.html">find_netlogo_home</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -218,18 +218,51 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Rows: 110,110</span></span>
-<span><span class="co">#&gt; Columns: 10</span></span>
-<span><span class="co">#&gt; $ run_number             &lt;dbl&gt; 3, 4, 6, 5, 8, 9, 7, 2, 1, 8, 5, 3, 4, 2, 6,…</span></span>
-<span><span class="co">#&gt; $ number_of_sheep        &lt;dbl&gt; 500, 500, 500, 500, 500, 500, 500, 500, 500,…</span></span>
-<span><span class="co">#&gt; $ number_of_wolves       &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…</span></span>
-<span><span class="co">#&gt; $ movement_cost          &lt;dbl&gt; 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,…</span></span>
-<span><span class="co">#&gt; $ grass_regrowth_rate    &lt;dbl&gt; 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3,…</span></span>
-<span><span class="co">#&gt; $ energy_gain_from_grass &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,…</span></span>
-<span><span class="co">#&gt; $ energy_gain_from_sheep &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…</span></span>
-<span><span class="co">#&gt; $ step                   &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1,…</span></span>
-<span><span class="co">#&gt; $ count_wolves           &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…</span></span>
-<span><span class="co">#&gt; $ count_sheep            &lt;dbl&gt; 500, 500, 500, 500, 500, 500, 500, 500, 500,…</span></span></code></pre></div>
+<span><span class="co">#&gt; List of 5</span></span>
+<span><span class="co">#&gt;  $ metadata   :List of 5</span></span>
+<span><span class="co">#&gt;   ..$ timestamp       : POSIXct[1:1], format: "2025-12-23 19:57:38"</span></span>
+<span><span class="co">#&gt;   ..$ netlogo_version : chr "7.0.3"</span></span>
+<span><span class="co">#&gt;   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"</span></span>
+<span><span class="co">#&gt;   ..$ experiment_name : chr "Wolf Sheep Simple Model Analysis"</span></span>
+<span><span class="co">#&gt;   ..$ world_dimensions: Named int [1:4] -17 17 -17 17</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:4] "min-pxcor" "max-pxcor" "min-pycor" "max-pycor"</span></span>
+<span><span class="co">#&gt;  $ table      : tibble [110,110 × 10] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;   ..$ run_number            : num [1:110110] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;   ..$ number_of_sheep       : num [1:110110] 500 500 500 500 500 500 500 500 500 500 ...</span></span>
+<span><span class="co">#&gt;   ..$ number_of_wolves      : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
+<span><span class="co">#&gt;   ..$ movement_cost         : num [1:110110] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 ...</span></span>
+<span><span class="co">#&gt;   ..$ grass_regrowth_rate   : num [1:110110] 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 ...</span></span>
+<span><span class="co">#&gt;   ..$ energy_gain_from_grass: num [1:110110] 2 2 2 2 2 2 2 2 2 2 ...</span></span>
+<span><span class="co">#&gt;   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
+<span><span class="co">#&gt;   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
+<span><span class="co">#&gt;   ..$ count_sheep           : num [1:110110] 500 500 500 498 498 497 497 496 495 494 ...</span></span>
+<span><span class="co">#&gt;  $ spreadsheet:List of 2</span></span>
+<span><span class="co">#&gt;   ..$ statistics: tibble [330 × 13] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;   ..$ measures  : tibble [330,330 × 4] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ lists      : tibble [0 × 9] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;   ..$ reporter              : chr(0) </span></span>
+<span><span class="co">#&gt;   ..$ run_number            : chr(0) </span></span>
+<span><span class="co">#&gt;   ..$ number_of_sheep       : chr(0) </span></span>
+<span><span class="co">#&gt;   ..$ number_of_wolves      : chr(0) </span></span>
+<span><span class="co">#&gt;   ..$ movement_cost         : chr(0) </span></span>
+<span><span class="co">#&gt;   ..$ grass_regrowth_rate   : chr(0) </span></span>
+<span><span class="co">#&gt;   ..$ energy_gain_from_grass: chr(0) </span></span>
+<span><span class="co">#&gt;   ..$ energy_gain_from_sheep: chr(0) </span></span>
+<span><span class="co">#&gt;   ..$ step                  : chr(0) </span></span>
+<span><span class="co">#&gt;  $ statistics : tibble [11,011 × 12] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;   ..$ scenario              : int [1:11011] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">#&gt;   ..$ number_of_sheep       : num [1:11011] 500 500 500 500 500 500 500 500 500 500 ...</span></span>
+<span><span class="co">#&gt;   ..$ number_of_wolves      : num [1:11011] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
+<span><span class="co">#&gt;   ..$ movement_cost         : num [1:11011] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 ...</span></span>
+<span><span class="co">#&gt;   ..$ grass_regrowth_rate   : num [1:11011] 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 ...</span></span>
+<span><span class="co">#&gt;   ..$ energy_gain_from_grass: num [1:11011] 2 2 2 2 2 2 2 2 2 2 ...</span></span>
+<span><span class="co">#&gt;   ..$ energy_gain_from_sheep: num [1:11011] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
+<span><span class="co">#&gt;   ..$ step                  : num [1:11011] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;   ..$ mean_count_wolves     : num [1:11011] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
+<span><span class="co">#&gt;   ..$ std_count_wolves      : num [1:11011] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span><span class="co">#&gt;   ..$ mean_count_sheep      : num [1:11011] 500 498 498 496 494 ...</span></span>
+<span><span class="co">#&gt;   ..$ std_count_sheep       : num [1:11011] 0 0.831 1.432 1.446 1.625 ...</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="analyzing-the-data-bonus-section">Analyzing the Data (Bonus Section)<a class="anchor" aria-label="anchor" href="#analyzing-the-data-bonus-section"></a>
@@ -237,9 +270,12 @@
 <p>Below is a simple example of how to visualize the results using <a href="https://ggplot2.tidyverse.org/" class="external-link"><code>ggplot2</code></a>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">results</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">extract2</a></span><span class="op">(</span><span class="st">"table"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html" class="external-link">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>    .by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">step</span>, <span class="va">number_of_wolves</span><span class="op">)</span></span>
@@ -250,21 +286,108 @@
 <span></span>
 <span><span class="va">data</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>number_of_wolves <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">number_of_wolves</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">ggplot</span><span class="op">(</span></span>
-<span>    <span class="fu">aes</span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span></span>
 <span>      x <span class="op">=</span> <span class="va">step</span>,</span>
 <span>      y <span class="op">=</span> <span class="va">count_sheep</span>,</span>
 <span>      group <span class="op">=</span> <span class="va">number_of_wolves</span>,</span>
 <span>      color <span class="op">=</span> <span class="va">number_of_wolves</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">labs</span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>      x <span class="op">=</span> <span class="st">"Time Step"</span>,</span>
 <span>      y <span class="op">=</span> <span class="st">"Average Number of Sheep"</span>,</span>
 <span>      color <span class="op">=</span> <span class="st">"Wolves"</span></span>
 <span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/readme-wolf-sheep-model-plot-1.png" data-fig-alt="Line plot showing the average number of sheep over time for different initial numbers of wolves."></p>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/readme-wolf-sheep-model-plot-1-1.png" data-fig-alt="Line plot showing the average number of sheep over time for different initial numbers of wolves."></p>
+</div>
+<div class="section level3">
+<h3 id="visualizing-the-netlogo-world-bonus-section">Visualizing the NetLogo World (Bonus Section)<a class="anchor" aria-label="anchor" href="#visualizing-the-netlogo-world-bonus-section"></a>
+</h3>
+<p><code>logolink</code> also provides functions to capture screenshots of the NetLogo world during the simulation. This is useful for capturing special states and for preparing materials for publication.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/create_experiment.html">create_experiment</a></span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="st">"Wolf Sheep Simple Model Analysis"</span>,</span>
+<span>  repetitions <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  sequential_run_order <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  run_metrics_every_step <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  setup <span class="op">=</span> <span class="st">"setup"</span>,</span>
+<span>  go <span class="op">=</span> <span class="st">"go"</span>,</span>
+<span>  time_limit <span class="op">=</span> <span class="fl">500</span>,</span>
+<span>  run_metrics_condition <span class="op">=</span> <span class="st">'ticks mod 100 = 0'</span>,</span>
+<span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">'[xcor] of sheep'</span>,</span>
+<span>    <span class="st">'[ycor] of sheep'</span>,</span>
+<span>    <span class="st">'[xcor] of wolves'</span>,</span>
+<span>    <span class="st">'[ycor] of wolves'</span>,</span>
+<span>    <span class="st">'[pxcor] of patches'</span>,</span>
+<span>    <span class="st">'[pycor] of patches'</span>,</span>
+<span>    <span class="st">'[pcolor] of patches'</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  constants <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    <span class="st">"number-of-sheep"</span> <span class="op">=</span> <span class="fl">500</span>,</span>
+<span>    <span class="st">"number-of-wolves"</span> <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>    <span class="st">"movement-cost"</span> <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>    <span class="st">"grass-regrowth-rate"</span> <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span>    <span class="st">"energy-gain-from-grass"</span> <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>    <span class="st">"energy-gain-from-sheep"</span> <span class="op">=</span> <span class="fl">5</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span></span>
+<span>  <span class="va">model_path</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/run_experiment.html">run_experiment</a></span><span class="op">(</span>setup_file <span class="op">=</span> <span class="va">setup_file</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">turtle_shapes</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"logolink"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span>full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">plot_data</span> <span class="op">&lt;-</span></span>
+<span>  <span class="va">results</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">extract2</a></span><span class="op">(</span><span class="st">"lists"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">run_number</span> <span class="op">==</span> <span class="fl">1</span>, <span class="va">step</span> <span class="op">==</span> <span class="fl">500</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/YuLab-SMU/ggimage" class="external-link">ggimage</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'tidyr'</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:magrittr':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     extract</span></span>
+<span></span>
+<span><span class="va">plot_data</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/plot_patches.html">plot_patches</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggimage/man/geom_image.html" class="external-link">geom_image</a></span><span class="op">(</span></span>
+<span>    data <span class="op">=</span> <span class="va">plot_data</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="va">xcor_of_sheep</span><span class="op">)</span>,</span>
+<span>    mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span></span>
+<span>      x <span class="op">=</span> <span class="va">xcor_of_sheep</span>,</span>
+<span>      y <span class="op">=</span> <span class="va">ycor_of_sheep</span>,</span>
+<span>      image <span class="op">=</span> <span class="va">turtle_shapes</span> <span class="op">|&gt;</span></span>
+<span>        <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_subset.html" class="external-link">str_subset</a></span><span class="op">(</span><span class="st">"sheep"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    size <span class="op">=</span> <span class="fl">0.03</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggimage/man/geom_image.html" class="external-link">geom_image</a></span><span class="op">(</span></span>
+<span>    data <span class="op">=</span> <span class="va">plot_data</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="va">xcor_of_wolves</span><span class="op">)</span>,</span>
+<span>    mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span></span>
+<span>      x <span class="op">=</span> <span class="va">xcor_of_wolves</span>,</span>
+<span>      y <span class="op">=</span> <span class="va">ycor_of_wolves</span>,</span>
+<span>      image <span class="op">=</span> <span class="va">turtle_shapes</span> <span class="op">|&gt;</span></span>
+<span>        <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_subset.html" class="external-link">str_subset</a></span><span class="op">(</span><span class="st">"wolf"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    size <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>    color <span class="op">=</span> <span class="fu"><a href="reference/parse_netlogo_color.html">parse_netlogo_color</a></span><span class="op">(</span><span class="fl">31</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/readme-wolf-sheep-model-plot-2-1.png"></p>
 <p>Please refer to the <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace Guide</a> for complete instructions on how to set up and run experiments in NetLogo.</p>
 <p>Click <a href="https://danielvartan.github.io/logolink/reference/">here</a> to see the full list of <code>logolink</code> functions.</p>
 </div>
@@ -273,16 +396,16 @@
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
 <p>If you use this package in your research, please cite it to acknowledge the effort put into its development and maintenance. Your citation helps support its continued improvement.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"logolink"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; To cite logolink in publications use:</span></span>
-<span><span class="co">#&gt;</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Vartanian, D. (2025). logolink: An interface for running NetLogo</span></span>
 <span><span class="co">#&gt;   simulations from R [Computer software]. CRAN.</span></span>
 <span><span class="co">#&gt;   https://doi.org/10.32614/CRAN.package.logolink</span></span>
-<span><span class="co">#&gt;</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
-<span><span class="co">#&gt;</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   @Misc{,</span></span>
 <span><span class="co">#&gt;     title = {logolink: An interface for running NetLogo simulations from R},</span></span>
 <span><span class="co">#&gt;     author = {Daniel Vartanian},</span></span>
@@ -314,7 +437,7 @@ this program. If not, see &lt;https://www.gnu.org/licenses/&gt;.</code></pre>
 </h2>
 <p><a href="https://www.contributor-covenant.org/version/3/0/code_of_conduct/" class="external-link"><img src="https://img.shields.io/badge/Contributor%20Covenant-3.0-4baaaa.svg"></a></p>
 <p>Contributions are always welcome! Whether you want to report bugs, suggest new features, or help improve the code or documentation, your input makes a difference.</p>
-<p>Before opening a new issue, please take a moment to review our <a href="https://danielvartan.github.io/logolink/CONTRIBUTING.html">Guidelines for Contributing</a> and check the <a href="https://github.com/danielvartan/logolink/issues" class="external-link">issues tab</a> to see if your topic has already been reported.</p>
+<p>Before opening a new issue, please check the <a href="https://github.com/danielvartan/logolink/issues" class="external-link">issues tab</a> to see if your topic has already been reported.</p>
 <p><a href="https://github.com/sponsors/danielvartan" class="external-link"><img src="https://img.shields.io/static/v1?label=Sponsor&amp;message=%E2%9D%A4&amp;logo=GitHub&amp;color=%23fe8e86"></a></p>
 <p>You can also support the development of <code>logolink</code> by becoming a sponsor.</p>
 <p>Click <a href="https://github.com/sponsors/danielvartan" class="external-link">here</a> to make a donation. Please mention <code>logolink</code> in your donation message.</p>
@@ -371,7 +494,6 @@ This work was supported by the Department of Science and Technology of the Secre
 <div class="community">
 <h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
-<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>

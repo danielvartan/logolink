@@ -1,5 +1,14 @@
 # Parse NetLogo lists
 
+**Note**: We recommend using this function **only when necessary**, as
+it can be computationally intensive for large datasets and may not
+handle all edge cases. NetLogo provides a special output format called
+*lists* that exports list metrics in a tabular structure. If your
+experiment includes metrics that return NetLogo lists, include `"lists"`
+in the `outputs` argument of
+[`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
+to capture this output.
+
 `parse_netlogo_list()` parses NetLogo-style lists represented as strings
 (e.g., `"[1 2 3]"`) into R lists. It automatically detects
 [`numeric`](https://rdrr.io/r/base/numeric.html),
@@ -62,7 +71,8 @@ Other utility functions:
 [`find_netlogo_console()`](https://danielvartan.github.io/logolink/reference/find_netlogo_console.md),
 [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md),
 [`find_netlogo_version()`](https://danielvartan.github.io/logolink/reference/find_netlogo_version.md),
-[`inspect_experiment_file()`](https://danielvartan.github.io/logolink/reference/inspect_experiment_file.md)
+[`inspect_experiment_file()`](https://danielvartan.github.io/logolink/reference/inspect_experiment_file.md),
+[`parse_netlogo_color()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_color.md)
 
 ## Examples
 

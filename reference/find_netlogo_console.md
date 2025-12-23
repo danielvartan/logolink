@@ -44,12 +44,14 @@ Other utility functions:
 [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md),
 [`find_netlogo_version()`](https://danielvartan.github.io/logolink/reference/find_netlogo_version.md),
 [`inspect_experiment_file()`](https://danielvartan.github.io/logolink/reference/inspect_experiment_file.md),
+[`parse_netlogo_color()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_color.md),
 [`parse_netlogo_list()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_list.md)
 
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
+# \dontrun{
   find_netlogo_console()
-} # }
+#> /opt/NetLogo-7.0.3/bin/NetLogo
+# }
 ```
