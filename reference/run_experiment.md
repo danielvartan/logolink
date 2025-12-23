@@ -266,28 +266,28 @@ Other NetLogo functions:
 # \dontrun{
   model_path |> run_experiment(setup_file = setup_file)
 #> ℹ Running model
-#> ✔ Running model [21.3s]
+#> ✔ Running model [21s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [10ms]
+#> ✔ Gathering metadata [9ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [97ms]
+#> ✔ Processing table output [95ms]
 #> 
 #> ℹ Processing spreadsheet output
-#> ✔ Processing spreadsheet output [766ms]
+#> ✔ Processing spreadsheet output [616ms]
 #> 
 #> ℹ Processing list output
 #> ! The experiment produced no lists results.
 #> ℹ Processing list output
-#> ✔ Processing list output [30ms]
+#> ✔ Processing list output [29ms]
 #> 
 #> ℹ Processing statistics output
-#> ✔ Processing statistics output [14ms]
+#> ✔ Processing statistics output [8ms]
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2025-12-23 23:09:23 GMT"
+#> [1] "2025-12-23 23:25:34 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -394,28 +394,28 @@ Other NetLogo functions:
       experiment = "Wolf Sheep Simple model analysis"
     )
 #> ℹ Running model
-#> ✔ Running model [17.7s]
+#> ✔ Running model [17.5s]
 #> 
 #> ℹ Gathering metadata
 #> ✔ Gathering metadata [9ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [34ms]
+#> ✔ Processing table output [33ms]
 #> 
 #> ℹ Processing spreadsheet output
-#> ✔ Processing spreadsheet output [67ms]
+#> ✔ Processing spreadsheet output [72ms]
 #> 
 #> ℹ Processing list output
 #> ! The experiment produced no lists results.
 #> ℹ Processing list output
-#> ✔ Processing list output [36ms]
+#> ✔ Processing list output [28ms]
 #> 
 #> ℹ Processing statistics output
 #> ✔ Processing statistics output [8ms]
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2025-12-23 23:09:46 GMT"
+#> [1] "2025-12-23 23:25:57 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -474,15 +474,15 @@ Other NetLogo functions:
 #>    run_number reporter                      measure  value
 #>         <dbl> <chr>                           <dbl>  <dbl>
 #>  1          1 [step]                              1  1000 
-#>  2          1 count wolves                        1    17 
-#>  3          1 count sheep                         1    90 
-#>  4          1 sum [grass-amount] of patches       1 11252.
+#>  2          1 count wolves                        1     9 
+#>  3          1 count sheep                         1    50 
+#>  4          1 sum [grass-amount] of patches       1 11803.
 #>  5          2 [step]                              1  1000 
-#>  6          2 count wolves                        1    18 
-#>  7          2 count sheep                         1    74 
-#>  8          2 sum [grass-amount] of patches       1 11383.
+#>  6          2 count wolves                        1    15 
+#>  7          2 count sheep                         1    62 
+#>  8          2 sum [grass-amount] of patches       1 11640.
 #>  9          3 [step]                              1  1000 
-#> 10          3 count wolves                        1    10 
+#> 10          3 count wolves                        1    11 
 #> # ℹ 430 more rows
 #> 
 #> 

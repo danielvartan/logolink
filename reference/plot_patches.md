@@ -127,20 +127,20 @@ These metrics must be available within the `lists` output of
       outputs = c("table", "lists")
     )
 #> ℹ Running model
-#> ✔ Running model [3.1s]
+#> ✔ Running model [3.2s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [14ms]
+#> ✔ Gathering metadata [10ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [269ms]
+#> ✔ Processing table output [279ms]
 #> 
 #> ℹ Processing list output
 #> ✔ Processing list output [9ms]
 #> 
 #> ℹ The experiment run produced the following messages:
 #> 
-#> Dec 23, 2025 11:09:15 PM java.util.prefs.FileSystemPreferences$1 run
+#> Dec 23, 2025 11:25:20 PM java.util.prefs.FileSystemPreferences$1 run
 #> INFO: Created user preferences directory.
 # }
 
@@ -197,9 +197,6 @@ These metrics must be available within the `lists` output of
       ),
       size = 0.04
     )
-#> Error in geom_image(data = drop_na(plot_data, xcor_of_sheep), mapping = aes(x = xcor_of_sheep,     y = ycor_of_sheep, image = head(str_subset(turtle_shapes,         "sheep"), 1)), size = 0.035): Problem while converting geom to grob.
-#> ℹ Error occurred in the 2nd layer.
-#> Caused by error in `loadNamespace()`:
-#> ! there is no package called ‘rsvg’
+
 # }
 ```
