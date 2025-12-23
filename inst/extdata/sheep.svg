@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 300 300"
+   width="300"
+   height="300"
+   version="1.1"
+   id="svg7"
+   sodipodi:docname="sheep.svg"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#">
+  <defs
+     id="defs7" />
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showguides="true"
+     inkscape:zoom="3.7382378"
+     inkscape:cx="221.22723"
+     inkscape:cy="121.58135"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2" />
+  <!-- Shape: sheep -->
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Background"
+     sodipodi:insensitive="true"
+     style="display:none">
+    <rect
+       style="fill:#ff00ff;fill-opacity:1;stroke-width:12.8227;stroke-linecap:square;stroke-miterlimit:0"
+       id="rect1"
+       width="300"
+       height="300"
+       x="0"
+       y="0" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Shape">
+    <ellipse
+       cx="244.33675"
+       cy="108.97028"
+       fill="#ffffff"
+       stroke="#ffffff"
+       stroke-width="1"
+       id="circle1"
+       rx="43.970562"
+       ry="43.970612"
+       style="fill:#8d8d8d;fill-opacity:1;stroke:#8d8d8d;stroke-opacity:1" />
+    <ellipse
+       cx="148.40099"
+       cy="145.94556"
+       fill="#ffffff"
+       stroke="#ffffff"
+       stroke-width="1"
+       id="circle2"
+       rx="80.945808"
+       ry="80.9459" />
+    <ellipse
+       cx="207.36151"
+       cy="164.93288"
+       fill="#ffffff"
+       stroke="#ffffff"
+       stroke-width="1"
+       id="circle3"
+       rx="59.959854"
+       ry="59.959923" />
+    <path
+       id="polygon3"
+       style="fill:#8d8d8d;fill-opacity:1;stroke:#8d8d8d;stroke-opacity:1"
+       d="m 247.49952,71.99915 a 33.499998,33.499998 0 0 0 -33.49898,33.50089 33.499998,33.499998 0 0 0 6.80338,20.23617 33.499998,33.499998 0 0 0 0.004,0.006 l 19.19253,39.25864 h 15.00027 l 22.99976,-45.00076 h -0.30098 a 33.499998,33.499998 0 0 0 3.30104,-14.49992 33.499998,33.499998 0 0 0 -33.50093,-33.50089 z"
+       transform="matrix(0.99933095,0,0,0.99933208,-2.4979914,0.04308072)" />
+    <rect
+       x="161.39229"
+       y="222.89413"
+       width="14.989964"
+       height="74.949905"
+       fill="#ffffff"
+       stroke="#ffffff"
+       stroke-width="1"
+       id="rect4" />
+    <polygon
+       points="30,285 30,240 15,195 45,210 45,285 "
+       fill="#ffffff"
+       stroke="#ffffff"
+       stroke-width="1"
+       id="polygon4"
+       transform="matrix(0.99933095,0,0,0.99933208,-2.4979914,0.04308072)" />
+    <ellipse
+       cx="75.449821"
+       cy="157.93755"
+       fill="#ffffff"
+       stroke="#ffffff"
+       stroke-width="1"
+       id="circle5"
+       rx="74.949821"
+       ry="74.949905" />
+    <rect
+       x="62.458519"
+       y="220.89548"
+       width="14.989964"
+       height="74.949905"
+       fill="#ffffff"
+       stroke="#ffffff"
+       stroke-width="1"
+       id="rect5" />
+    <polygon
+       points="210,285 210,240 240,210 195,210 195,285 "
+       fill="#ffffff"
+       stroke="#ffffff"
+       stroke-width="1"
+       id="polygon5"
+       transform="matrix(0.99933095,0,0,0.99933208,-2.4979914,0.04308072)" />
+    <polygon
+       points="302,99 294,83 276,85 285,105 "
+       fill="#8d8dff"
+       stroke="#8d8dff"
+       stroke-width="1"
+       id="polygon6"
+       transform="matrix(0.99933095,0,0,0.99933208,-2.4979914,0.04308072)"
+       style="fill:#8d8d8d;fill-opacity:1;stroke:#8d8d8d;stroke-opacity:1" />
+    <polygon
+       points="193,99 201,83 219,85 210,105 "
+       fill="#8d8dff"
+       stroke="#8d8dff"
+       stroke-width="1"
+       id="polygon7"
+       transform="matrix(0.99933095,0,0,0.99933208,-2.4979914,0.04308072)"
+       style="fill:#8d8d8d;fill-opacity:1;stroke:#8d8d8d;stroke-opacity:1" />
+  </g>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+      <cc:Work
+         rdf:about="">
+        <cc:license
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>
