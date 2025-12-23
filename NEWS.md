@@ -1,20 +1,25 @@
-# logolink 0.1.0.9000 (development version)
+# logolink 1.0.0.9000 (development version)
 
 ### Breaking Changes
 
-- Added support for NetLogo 7.0.1 and above. This NetLogo patch release changed the XML structure of BehaviorSpace experiments; `logolink` now supports the new format. See this [GitHub issue](https://github.com/NetLogo/NetLogo/issues/2560) to learn more.
+- `logolink` now works only with NetLogo 7.0.1 and above. This NetLogo patch release changed the XML structure of BehaviorSpace experiments; See this [GitHub issue](https://github.com/NetLogo/NetLogo/issues/2560) to learn more.
+- `run_experiment()` had the `parse` argument removed. The function now offer an option to return a [lists output](https://docs.netlogo.org/behaviorspace.html#lists-output) via the new `output` parameter. Results containing data in NetLogo's lists format are returned as `character` vectors. See `run_experiment()` documentation for details.
+- `run_experiment()` had the `netlogo_path` argument removed. The package now tries to automatically detect the NetLogo installation using helper functions. Users can still manually specify the path to NetLogo. See the updated documentation for details.
 
 ### New Features and Improvements
 
-- Added [`lifecycle`](https://lifecycle.r-lib.org/) as a dependency.
-- Added the parameter `timeout` to `run_experiment()` to specify the maximum time (in seconds) to wait for an experiment to complete before terminating it.
-- Added support for non-tabular data in `run_experiment()`. The function now prints those outputs to the console.
-- Added `find_netlogo_home()`, `find_netlogo_console()`, and `find_netlogo_version()`. These functions use heuristics to automatically detect NetLogo installations on Windows, macOS, and Linux.
-- Added the parameter `file` to `create_experiment()`, allowing the user to specify the output file path for the generated BehaviorSpace experiment XML file.
-- Added new unit tests.
-- Deprecated the `netlogo_path` argument in `run_experiment()`. The package now tries to automatically detect the NetLogo installation using helper functions. Users can still manually specify the path to NetLogo; see the updated documentation for details.
-- Improved the heuristics in `parse_netlogo_list()`.
-- Improved the documentation.
+- `run_experiment()` now have a `timeout` parameter to specify the maximum time (in seconds) to wait for an experiment to complete before terminating it.
+- `run_experiment()` now prints to the R console any messages returned by NetLogo while running the simulation.
+- `find_netlogo_home()`, `find_netlogo_console()`, and `find_netlogo_version()` were introduced to the package. These functions use heuristics to automatically detect NetLogo installations on Windows, macOS, and Linux.
+- `create_experiment()` now have a `file` parameter, allowing the user to specify the output file path for the generated BehaviorSpace experiment XML file.
+- `create_experiment()` now supports multiple commands in arguments like `setup` and `go` as character vectors.
+- `create_experiment()` now supports vectors in `constants` for enumerated value sets.
+- `create_experiment()` now supports [subexperiments](https://docs.netlogo.org/behaviorspace.html#subexperiment-syntax).
+- `create_experiment()` is now feature complete. It attends all the functionalities described in the [XML File Format](https://github.com/NetLogo/NetLogo/wiki/XML-File-Format#behaviorspace-experiments) documentation.
+- `parse_netlogo_list()` now have better heuristics.
+- `parse_netlogo_color()` was introduced to parse NetLogo color strings into approximate hex color codes.
+- New unit tests were implemented.
+- The documentation was updated to reflect the changes in the package.
 
 # logolink 0.1.0
 
