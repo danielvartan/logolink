@@ -25,7 +25,7 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="1.869119"
-     inkscape:cx="104.86224"
+     inkscape:cx="105.39725"
      inkscape:cy="157.02585"
      inkscape:window-width="1920"
      inkscape:window-height="1011"
@@ -73,21 +73,21 @@
      inkscape:label="Shape"
      sodipodi:insensitive="true">
     <polygon
-       points="122,252 114,242 102,241 89,224 94,181 64,113 46,119 31,150 32,164 61,204 57,242 85,266 91,271 101,271 96,257 89,257 70,242 75,225 97,249 112,252 "
+       points="89,224 94,181 64,113 46,119 31,150 32,164 61,204 57,242 85,266 91,271 101,271 96,257 89,257 70,242 75,225 97,249 112,252 122,252 114,242 102,241 "
        fill="#8D8DFF"
        stroke="#8D8DFF"
        stroke-width="1"
        id="polygon1"
        style="fill:#000000;stroke:#000000" />
     <polygon
-       points="237,66 226,71 216,73 219,56 229,42 "
+       points="219,56 229,42 237,66 226,71 216,73 "
        fill="#8D8DFF"
        stroke="#8D8DFF"
        stroke-width="1"
        id="polygon2"
        style="fill:#000000;stroke:#000000" />
     <polygon
-       points="257,70 260,89 285,110 272,124 234,116 218,134 209,150 204,163 192,178 169,185 154,189 129,189 89,180 69,166 63,113 124,110 160,111 170,104 181,106 213,69 226,62 "
+       points="272,124 234,116 218,134 209,150 204,163 192,178 169,185 154,189 129,189 89,180 69,166 63,113 124,110 160,111 170,104 181,106 213,69 226,62 257,70 260,89 285,110 "
        fill="#8D8DFF"
        stroke="#8D8DFF"
        stroke-width="1"
@@ -112,28 +112,28 @@
        id="line6"
        style="stroke:#000000" />
     <polygon
-       points="14,128 6,143 8,165 8,181 7,197 4,233 23,201 28,184 30,169 28,153 48,145 50,121 36,119 24,123 "
+       points="8,181 7,197 4,233 23,201 28,184 30,169 28,153 48,145 50,121 36,119 24,123 14,128 6,143 8,165 "
        fill="#8D8DFF"
        stroke="#8D8DFF"
        stroke-width="1"
        id="polygon7"
        style="fill:#000000;stroke:#000000" />
     <polygon
-       points="197,273 202,267 187,260 186,236 194,167 171,181 178,263 187,277 "
+       points="186,236 194,167 171,181 178,263 187,277 197,273 202,267 187,260 "
        fill="#8D8DFF"
        stroke="#8D8DFF"
        stroke-width="1"
        id="polygon8"
        style="fill:#000000;stroke:#000000" />
     <polygon
-       points="222,256 222,248 212,245 205,230 205,155 187,163 195,240 214,260 "
+       points="205,230 205,155 187,163 195,240 214,260 222,256 222,248 212,245 "
        fill="#8D8DFF"
        stroke="#8D8DFF"
        stroke-width="1"
        id="polygon9"
        style="fill:#000000;stroke:#000000" />
     <polygon
-       points="244,68 233,73 223,75 226,58 245,44 "
+       points="226,58 245,44 244,68 233,73 223,75 "
        fill="#8D8DFF"
        stroke="#8D8DFF"
        stroke-width="1"
@@ -158,7 +158,7 @@
        id="line11"
        style="stroke:#000000" />
     <polygon
-       points="248,98 244,92 235,90 250,91 255,99 "
+       points="250,91 255,99 248,98 244,92 235,90 "
        fill="#ffffff"
        stroke="#ffffff"
        stroke-width="1"
@@ -210,12 +210,12 @@
        id="line17"
        style="stroke:#000000" />
     <polygon
-       points="224,72 230,67 228,54 222,62 "
+       points="222,62 224,72 230,67 228,54 "
        fill="#ffffff"
        stroke="#ffffff"
        stroke-width="1"
        id="polygon17"
-       style="stroke:#000000" />
+       style="fill:#000000;stroke:#000000" />
     <line
        x1="246"
        y1="67"

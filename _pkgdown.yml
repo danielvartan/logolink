@@ -38,14 +38,21 @@ reference:
   - create_experiment
   - run_experiment
 
+- title: Plots
+  desc: >
+    Functions to help visualizing NetLogo outputs.
+  contents:
+  - plot_patches
+
 - title: Utilities
   desc: >
-    Helper functions for NetLogo integration.
+    Utility functions functions for NetLogo integration.
   contents:
   - find_netlogo_home
   - find_netlogo_console
   - find_netlogo_version
   - inspect_experiment_file
+  - parse_netlogo_color
   - parse_netlogo_list
 
 authors:

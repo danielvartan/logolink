@@ -18,6 +18,8 @@
 - `create_experiment()` is now feature complete. It attends all the functionalities described in the [XML File Format](https://github.com/NetLogo/NetLogo/wiki/XML-File-Format#behaviorspace-experiments) documentation.
 - `parse_netlogo_list()` now have better heuristics.
 - `parse_netlogo_color()` was introduced to parse NetLogo color strings into approximate hex color codes.
+- `plot_patches()` was introduced to visualize NetLogo patches data as a grid and
+serve as a foundation for NetLog world visualizations.
 - New unit tests were implemented.
 - The documentation was updated to reflect the changes in the package.
 
