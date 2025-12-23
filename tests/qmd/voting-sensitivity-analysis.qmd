@@ -1,11 +1,4 @@
-```{r}
-#| label: Setup
-#| include: false
-
-library(here)
-
-source(here("R", ".setup.R"))
-```
+# Voting Sensitivity Model Experiments
 
 ## Overview
 

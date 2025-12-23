@@ -15,14 +15,17 @@ jobs:
     runs-on: ubuntu-latest
     # Only restrict concurrency for non-PR jobs
     concurrency:
-      group: pkgdown-${{ github.event_name != 'pull_request' || github.run_id }}
+      group: pkgdown-${{github.event_name != 'pull_request' || github.run_id}}
     env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_PAT: ${{secrets.GITHUB_TOKEN}}
     permissions:
       contents: write
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Set up NetLogo
+        uses: danielvartan/netlogo-actions/setup-netlogo@v1
 
       - name: Set up Pandoc
         uses: r-lib/actions/setup-pandoc@v2
@@ -32,14 +35,20 @@ jobs:
         with:
           use-public-rspm: true
 
-      - name: Install R Dependencies
+      - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::pkgdown, local::.
           needs: website
+          upgrade: 'TRUE'
 
-      - name: Build Site
-        run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
+      - name: Build site
+        run: |
+          pkgdown::build_site_github_pages(
+            new_process = FALSE,
+            install = FALSE,
+            run_dont_run = TRUE
+          )
         shell: Rscript {0}
 
       - name: Deploy to GitHub Pages 🚀

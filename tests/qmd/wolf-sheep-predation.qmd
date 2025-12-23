@@ -1,11 +1,4 @@
-```{r}
-#| label: Setup
-#| include: false
-
-library(here)
-
-source(here("R", ".setup.R"))
-```
+# Wolf Sheep Predation Model Experiments
 
 ## Overview
 
@@ -82,6 +75,59 @@ setup_file <- create_experiment(
 results <-
   model_path |>
   run_experiment(setup_file = setup_file)
+```
+
+```{r}
+results |> glimpse()
+```
+
+###  Agent Attributes Extraction
+
+#### Create Experiment Mirror
+
+```{r}
+#| label: Agent Attributes Extraction
+
+setup_file <- create_experiment(
+  name = "Agent Attributes Extraction",
+  repetitions = 1,
+  sequential_run_order = TRUE,
+  run_metrics_every_step = TRUE,
+  time_limit = 1,
+  metrics = c(
+    '[who] of sheep',
+    '[xcor] of sheep',
+    '[ycor] of sheep',
+    '[shape] of sheep',
+    '[color] of sheep',
+    '[who] of wolves',
+    '[xcor] of wolves',
+    '[ycor] of wolves',
+    '[shape] of wolves',
+    '[color] of wolves',
+    '[pxcor] of patches',
+    '[pycor] of patches',
+    '[pcolor] of patches'
+  ),
+  constants = list(
+    "model-version" = "sheep-wolves-grass"
+  )
+)
+```
+
+```{r}
+inspect_experiment_file(setup_file)
+```
+
+#### Run Experiment
+
+```{r}
+results <-
+  model_path |>
+  run_experiment(
+    setup_file = setup_file,
+    outputs = c("table", "lists")
+  )
 ```
 
 ```{r}

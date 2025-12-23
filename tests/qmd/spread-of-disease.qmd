@@ -1,11 +1,4 @@
-```{r}
-#| label: Setup
-#| include: false
-
-library(here)
-
-source(here("R", ".setup.R"))
-```
+# Spread of Disease Model Experiments
 
 ## Overview
 
@@ -51,7 +44,7 @@ setup_file <- create_experiment(
   sequential_run_order = TRUE,
   run_metrics_every_step = TRUE,
   time_limit = 1000,
-  setup = 'setup'
+  setup = 'setup',
   go = 'go',
   metrics = 'count turtles with [infected?]',
   constants = list(
@@ -99,7 +92,7 @@ setup_file <- create_experiment(
   sequential_run_order = TRUE,
   run_metrics_every_step = FALSE,
   time_limit = NULL,
-  setup = 'setup'
+  setup = 'setup',
   go = 'go',
   metrics = 'ticks',
   constants = list(
@@ -138,7 +131,6 @@ results <-
 results |> glimpse()
 ```
 
-
 ### Degree
 
 #### Create Experiment Mirror
@@ -152,7 +144,7 @@ setup_file <- create_experiment(
   sequential_run_order = TRUE,
   run_metrics_every_step = FALSE,
   time_limit = 50,
-  setup = 'setup'
+  setup = 'setup',
   go = 'go',
   metrics = 'count turtles with [infected?]',
   constants = list(
@@ -204,7 +196,7 @@ setup_file <- create_experiment(
   sequential_run_order = TRUE,
   run_metrics_every_step = FALSE,
   time_limit = NULL,
-  setup = 'setup'
+  setup = 'setup',
   go = 'go',
   metrics = 'ticks',
   constants = list(

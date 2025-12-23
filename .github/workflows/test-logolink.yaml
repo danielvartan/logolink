@@ -1,0 +1,70 @@
+on:
+  push:
+    branches: [main, master]
+
+name: "NetLogo Check"
+
+jobs:
+  run-logolink:
+    runs-on: ubuntu-latest
+    name: Run Experiments with logolink
+    permissions:
+      contents: write
+      pages: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            test/qmd
+          sparse-checkout-cone-mode: false
+
+      - name: Install dependencies
+        run: |
+          # Install dependencies
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq \
+            libfontconfig1-dev pandoc
+
+      - name: Set up NetLogo
+        uses: danielvartan/netlogo-actions/setup-netlogo@v1
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+
+      - name: Check if renv is initialized
+        id: renv-check
+        run: |
+          # Check if renv is initialized
+          if [ -f "renv.lock" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Install and initialize renv
+        if: steps.renv-check.outputs.exists == 'false'
+        run: |
+          # Install and initialize renv
+          install.packages("renv")
+          renv::init()
+        shell: Rscript {0}
+
+      - name: Install logolink
+        if: steps.renv-check.outputs.exists == 'false'
+        run: |
+          # Install logolink
+          renv::install("danielvartan/logolink")
+          renv::snapshot()
+        shell: Rscript {0}
+
+      - name: Set up renv
+        uses: r-lib/actions/setup-renv@v2
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Render Quarto
+        run: |
+          # Render Quarto
+          quarto render
