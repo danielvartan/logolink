@@ -52,7 +52,11 @@ find_netlogo_version <- function(
   } else {
     out <-
       executable_path |>
-      system2(args = c("--version"), stdout = TRUE, stderr = TRUE) |>
+      system2(
+        args = c("--headless --version"),
+        stdout = TRUE,
+        stderr = TRUE
+      ) |>
       stringr::str_remove_all("NetLogo") |>
       stringr::str_squish()
   }

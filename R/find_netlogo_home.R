@@ -32,6 +32,8 @@
 find_netlogo_home <- function() {
   netlogo_home <- Sys.getenv("NETLOGO_HOME")
 
+  netlogo_home <- ""
+
   if ((!netlogo_home == "") && dir.exists(netlogo_home)) {
     normalizePath(netlogo_home)
   } else {

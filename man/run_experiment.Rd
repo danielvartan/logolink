@@ -8,11 +8,11 @@ run_experiment(
   model_path,
   setup_file = NULL,
   experiment = NULL,
+  outputs = c("table", "spreadsheet", "lists", "statistics"),
   other_arguments = NULL,
-  parse = TRUE,
   timeout = Inf,
-  netlogo_home = find_netlogo_home(),
-  netlogo_path = lifecycle::deprecated()
+  tidy_outputs = TRUE,
+  netlogo_home = find_netlogo_home()
 )
 }
 \arguments{
@@ -30,17 +30,20 @@ BehaviorSpace interface (default: \code{NULL}).}
 specifying the name of the experiment defined in the NetLogo model file
 (default: \code{NULL}).}
 
+\item{outputs}{(optional) A \code{\link[base:character]{character}} vector
+specifying which output types to generate from the experiment. Valid
+options are: \code{"table"}, \code{"spreadsheet"}, \code{"lists"}, and
+\code{"statistics"}. At least one of \code{"table"} or \code{"spreadsheet"} must be
+included. See the BehaviorSpace documentation on
+\href{https://docs.netlogo.org/behaviorspace.html#run-options-formats}{formats}
+for details about each output type.
+(default: \code{c("table", "spreadsheet", "lists", "statistics")}).}
+
 \item{other_arguments}{(optional) A \code{\link[base:character]{character}} vector
 specifying any additional command-line arguments to pass to the NetLogo
 executable. For example, you can use \code{c("--threads 4")} to specify the
 number of threads. See the \emph{Details} section for more information
 (default: \code{NULL}).}
-
-\item{parse}{(optional) A \code{\link[base:logical]{logical}} flag indicating
-whether to parse NetLogo lists in the output data frame. If \code{TRUE}, columns
-containing NetLogo lists (e.g., \verb{[1 2 3]}) will be converted to R lists
-using \code{\link[=parse_netlogo_list]{parse_netlogo_list()}}. If \code{FALSE}, columns
-remain as \code{\link[base:character]{character}} strings (default: \code{TRUE}).}
 
 \item{timeout}{(optional) A \code{\link[base:numeric]{numeric}} value specifying the
 maximum time (in seconds) to wait for the NetLogo process to complete. If
@@ -48,30 +51,39 @@ the process exceeds this time limit, it will be terminated, and the
 function will return the available output up to that point. Use \code{Inf} for
 no time limit (default: \code{Inf}).}
 
+\item{tidy_outputs}{(optional) A \code{\link[base:logical]{logical}} flag
+indicating whether to tidy the output data frames. If \code{TRUE}, output
+data frames are arranged according to
+\href{https://r4ds.hadley.nz/data-tidy.html}{tidy data principles}
+(default: \code{TRUE}).}
+
 \item{netlogo_home}{(optional) A \code{\link[base:character]{character}} string
 specifying the path to the NetLogo installation directory. If not provided,
 the function will try to find it automatically using
 \code{\link[=find_netlogo_home]{find_netlogo_home()}}
 (default: \code{find_netlogo_home()}).}
-
-\item{netlogo_path}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use the
-\code{NETLOGO_HOME} or \code{NETLOGO_CONSOLE} environment variables instead. See
-the \emph{Details} section for more information.}
 }
 \value{
-A \code{\link[tibble:tibble]{tibble}} containing the results of the
+A \code{\link[dplyr:reexports]{tibble}} containing the results of the
 experiment. Column names are cleaned using
-\code{\link[janitor:clean_names]{clean_names()}}. If \code{parse = TRUE},
+\code{\link[janitor:clean_names]{clean_names()}}. If \code{parse_lists = TRUE},
 columns containing NetLogo lists are converted to R list-columns.
-Returns a \code{\link[tibble:tibble]{tibble}} with zero rows if the experiment
+Returns a \code{\link[dplyr:reexports]{tibble}} with zero rows if the experiment
 produced no results (with a warning).
 }
 \description{
 \code{run_experiment()} runs a NetLogo BehaviorSpace experiment in headless mode
-and returns the results as a \link[dplyr:reexports]{tidy data frame}. It can be
-used with \code{\link[=create_experiment]{create_experiment()}} to create the
-experiment XML file on the fly, or with an existing experiment stored in the
-NetLogo model file.
+and returns a list with results as a
+\href{https://r4ds.hadley.nz/data-tidy.html}{tidy data frames}. It can be used
+with \code{\link[=create_experiment]{create_experiment()}} to create the experiment
+XML file on the fly, or with an existing experiment stored in the NetLogo
+model file.
+
+To avoid issues with list parsing, \code{run_experiment()} includes support for
+the special \emph{lists} output format. If your experiment includes metrics that
+return NetLogo lists, include \code{"lists"} in the \code{outputs} argument to capture
+this output. Columns containing NetLogo lists are returned as
+\code{\link[base:character]{character}} vectors.
 
 The function tries to locate the NetLogo installation automatically.
 This is usually successful, but if it fails, you will need to set it
@@ -101,6 +113,22 @@ the NetLogo executable or binary. On Windows, a typical path is something
 like \verb{C:\\Program Files\\NetLogo 7.0.2\\NetLogo.exe}.
 }
 
+\subsection{Handling NetLogo Lists}{
+
+NetLogo uses a specific syntax for lists (e.g., \code{"[1 2 3]"}) that is
+incompatible with standard CSV formats. To address this, NetLogo provides a
+special output format called \emph{lists} that exports list metrics in a tabular
+structure. If your experiment includes metrics that return NetLogo lists,
+include \code{"lists"} in the \code{outputs} argument to capture this output. Columns
+containing NetLogo lists are returned as \code{\link[base:character]{character}}
+vectors.
+
+The \code{\link[=parse_netlogo_list]{parse_netlogo_list()}} function is available
+for parsing list values embedded in other outputs. However, we recommend
+using it only when necessary, as it can be computationally intensive for
+large datasets and may not handle all edge cases.
+}
+
 \subsection{Additional Command-Line Arguments}{
 
 You can pass additional command-line arguments to the NetLogo executable
@@ -126,6 +154,9 @@ file extension).
 \item \code{--setup-file}: Specifies the path to the experiment XML file.
 \item \code{--experiment}: Specifies the name of the experiment defined in the model.
 \item \code{--table}: Specifies the output file for the results table.
+\item \code{--spreadsheet}: Specifies the output file for the spreadsheet results.
+\item \code{--lists}: Specifies the output file for the lists results.
+\item \code{--stats}: Specifies the output file for the statistics results.
 }
 
 For a complete list of available options, please refer to the
@@ -162,7 +193,7 @@ Keep in mind that excessive non-tabular output may clutter your R console.
     )
 }
 
-# Using `create_experiment()` to Create an Experiment -----
+# Creating an Experiment -----
 
 \dontrun{
   setup_file <- create_experiment(
@@ -197,25 +228,6 @@ Keep in mind that excessive non-tabular output may clutter your R console.
 
 \dontrun{
   model_path |> run_experiment(setup_file = setup_file)
-  ## Expected output:
-  #> # A tibble: 110,110 × 10
-  #>   run_number number_of_sheep number_of_wolves movement_cost
-  #>         <dbl>           <dbl>            <dbl>         <dbl>
-  #>  1          3             500                5           0.5
-  #>  2          9             500                5           0.5
-  #>  3          4             500                5           0.5
-  #>  4          1             500                5           0.5
-  #>  5          6             500                5           0.5
-  #>  6          8             500                5           0.5
-  #>  7          7             500                5           0.5
-  #>  8          2             500                5           0.5
-  #>  9          5             500                5           0.5
-  #> 10          2             500                5           0.5
-  #>  # 110,100 more rows
-  #>  # 6 more variables: grass_regrowth_rate <dbl>,
-  #>  # energy_gain_from_grass <dbl>, energy_gain_from_sheep <dbl>,
-  #>  # step <dbl>, count_wolves <dbl>, count_sheep <dbl>
-  #>  # Use `print(n = ...)` to see more rows
 }
 
 # Running an Experiment Defined in the NetLogo Model File -----
@@ -225,26 +237,6 @@ Keep in mind that excessive non-tabular output may clutter your R console.
     run_experiment(
       experiment = "Wolf Sheep Simple model analysis"
     )
-  ## Expected output:
-  #> # A tibble: 110 × 11
-  #>    run_number energy_gain_from_grass number_of_wolves movement_cost
-  #>         <dbl>                  <dbl>            <dbl>         <dbl>
-  #>  1          4                      2                5           0.5
-  #>  2          8                      2                5           0.5
-  #>  3          2                      2                5           0.5
-  #>  4          9                      2                5           0.5
-  #>  5          1                      2                5           0.5
-  #>  6          5                      2                5           0.5
-  #>  7          7                      2                5           0.5
-  #>  8          3                      2                5           0.5
-  #>  9          6                      2                5           0.5
-  #> 10         12                      2                6           0.5
-  #> # 100 more rows
-  #> # 7 more variables: energy_gain_from_sheep <dbl>,
-  #> # number_of_sheep <dbl>, grass_regrowth_rate <dbl>, step <dbl>,
-  #> # count_wolves <dbl>, count_sheep <dbl>,
-  #> # sum_grass_amount_of_patches <dbl>
-  #> # Use `print(n = ...)` to see more rows
 }
 }
 \seealso{

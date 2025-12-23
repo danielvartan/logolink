@@ -43,6 +43,7 @@ Other utility functions:
 \code{\link{find_netlogo_home}()},
 \code{\link{find_netlogo_version}()},
 \code{\link{inspect_experiment_file}()},
+\code{\link{parse_netlogo_color}()},
 \code{\link{parse_netlogo_list}()}
 }
 \concept{utility functions}

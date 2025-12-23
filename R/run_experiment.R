@@ -3,10 +3,17 @@
 #' @description
 #'
 #' `run_experiment()` runs a NetLogo BehaviorSpace experiment in headless mode
-#' and returns the results as a [tidy data frame][dplyr::tibble()]. It can be
-#' used with [`create_experiment()`][create_experiment()] to create the
-#' experiment XML file on the fly, or with an existing experiment stored in the
-#' NetLogo model file.
+#' and returns a list with results as a
+#' [tidy data frames](https://r4ds.hadley.nz/data-tidy.html). It can be used
+#' with [`create_experiment()`][create_experiment()] to create the experiment
+#' XML file on the fly, or with an existing experiment stored in the NetLogo
+#' model file.
+#'
+#' To avoid issues with list parsing, `run_experiment()` includes support for
+#' the special *lists* output format. If your experiment includes metrics that
+#' return NetLogo lists, include `"lists"` in the `outputs` argument to capture
+#' this output. Columns containing NetLogo lists are returned as
+#' [`character`][base::character()] vectors.
 #'
 #' The function tries to locate the NetLogo installation automatically.
 #' This is usually successful, but if it fails, you will need to set it
@@ -37,6 +44,21 @@
 #' the NetLogo executable or binary. On Windows, a typical path is something
 #' like `C:\Program Files\NetLogo 7.0.2\NetLogo.exe`.
 #'
+#' ## Handling NetLogo Lists
+#'
+#' NetLogo uses a specific syntax for lists (e.g., `"[1 2 3]"`) that is
+#' incompatible with standard CSV formats. To address this, NetLogo provides a
+#' special output format called *lists* that exports list metrics in a tabular
+#' structure. If your experiment includes metrics that return NetLogo lists,
+#' include `"lists"` in the `outputs` argument to capture this output. Columns
+#' containing NetLogo lists are returned as [`character`][base::character()]
+#' vectors.
+#'
+#' The [`parse_netlogo_list()`][parse_netlogo_list()] function is available
+#' for parsing list values embedded in other outputs. However, we recommend
+#' using it only when necessary, as it can be computationally intensive for
+#' large datasets and may not handle all edge cases.
+#'
 #' ## Additional Command-Line Arguments
 #'
 #' You can pass additional command-line arguments to the NetLogo executable
@@ -63,6 +85,9 @@
 #' - `--setup-file`: Specifies the path to the experiment XML file.
 #' - `--experiment`: Specifies the name of the experiment defined in the model.
 #' - `--table`: Specifies the output file for the results table.
+#' - `--spreadsheet`: Specifies the output file for the spreadsheet results.
+#' - `--lists`: Specifies the output file for the lists results.
+#' - `--stats`: Specifies the output file for the statistics results.
 #'
 #' For a complete list of available options, please refer to the
 #' [BehaviorSpace Guide](
@@ -94,31 +119,36 @@
 #' @param experiment (optional) A [`character`][base::character()] string
 #'   specifying the name of the experiment defined in the NetLogo model file
 #'   (default: `NULL`).
+#' @param outputs (optional) A [`character`][base::character()] vector
+#'   specifying which output types to generate from the experiment. Valid
+#'   options are: `"table"`, `"spreadsheet"`, `"lists"`, and
+#'   `"statistics"`. At least one of `"table"` or `"spreadsheet"` must be
+#'   included. See the BehaviorSpace documentation on
+#'   [formats](https://docs.netlogo.org/behaviorspace.html#run-options-formats)
+#'   for details about each output type.
+#'   (default: `c("table", "spreadsheet", "lists", "statistics")`).
 #' @param other_arguments (optional) A [`character`][base::character()] vector
 #'   specifying any additional command-line arguments to pass to the NetLogo
 #'   executable. For example, you can use `c("--threads 4")` to specify the
 #'   number of threads. See the *Details* section for more information
 #'   (default: `NULL`).
-#' @param parse (optional) A [`logical`][base::logical()] flag indicating
-#'   whether to parse NetLogo lists in the output data frame. If `TRUE`, columns
-#'   containing NetLogo lists (e.g., `[1 2 3]`) will be converted to R lists
-#'   using [`parse_netlogo_list()`][parse_netlogo_list()]. If `FALSE`, columns
-#'   remain as [`character`][base::character()] strings (default: `TRUE`).
 #' @param timeout (optional) A [`numeric`][base::numeric()] value specifying the
 #'   maximum time (in seconds) to wait for the NetLogo process to complete. If
 #'   the process exceeds this time limit, it will be terminated, and the
 #'   function will return the available output up to that point. Use `Inf` for
 #'   no time limit (default: `Inf`).
+#' @param tidy_outputs (optional) A [`logical`][base::logical()] flag
+#'   indicating whether to tidy the output data frames. If `TRUE`, output
+#'   data frames are arranged according to
+#'   [tidy data principles](https://r4ds.hadley.nz/data-tidy.html)
+#'   (default: `TRUE`).
 #' @template params-netlogo-home
-#' @param netlogo_path `r lifecycle::badge("deprecated")` Use the
-#'   `NETLOGO_HOME` or `NETLOGO_CONSOLE` environment variables instead. See
-#'   the *Details* section for more information.
 #'
-#' @return A [`tibble`][tibble::tibble()] containing the results of the
+#' @return A [`tibble`][dplyr::tibble()] containing the results of the
 #'   experiment. Column names are cleaned using
-#'   [`clean_names()`][janitor::clean_names()]. If `parse = TRUE`,
+#'   [`clean_names()`][janitor::clean_names()]. If `parse_lists = TRUE`,
 #'   columns containing NetLogo lists are converted to R list-columns.
-#'   Returns a [`tibble`][tibble::tibble()] with zero rows if the experiment
+#'   Returns a [`tibble`][dplyr::tibble()] with zero rows if the experiment
 #'   produced no results (with a warning).
 #'
 #' @family NetLogo functions
@@ -138,7 +168,7 @@
 #'     )
 #' }
 #'
-#' # Using `create_experiment()` to Create an Experiment -----
+#' # Creating an Experiment -----
 #'
 #' \dontrun{
 #'   setup_file <- create_experiment(
@@ -173,25 +203,6 @@
 #'
 #' \dontrun{
 #'   model_path |> run_experiment(setup_file = setup_file)
-#'   ## Expected output:
-#'   #> # A tibble: 110,110 × 10
-#'   #>   run_number number_of_sheep number_of_wolves movement_cost
-#'   #>         <dbl>           <dbl>            <dbl>         <dbl>
-#'   #>  1          3             500                5           0.5
-#'   #>  2          9             500                5           0.5
-#'   #>  3          4             500                5           0.5
-#'   #>  4          1             500                5           0.5
-#'   #>  5          6             500                5           0.5
-#'   #>  6          8             500                5           0.5
-#'   #>  7          7             500                5           0.5
-#'   #>  8          2             500                5           0.5
-#'   #>  9          5             500                5           0.5
-#'   #> 10          2             500                5           0.5
-#'   #>  # 110,100 more rows
-#'   #>  # 6 more variables: grass_regrowth_rate <dbl>,
-#'   #>  # energy_gain_from_grass <dbl>, energy_gain_from_sheep <dbl>,
-#'   #>  # step <dbl>, count_wolves <dbl>, count_sheep <dbl>
-#'   #>  # Use `print(n = ...)` to see more rows
 #' }
 #'
 #' # Running an Experiment Defined in the NetLogo Model File -----
@@ -201,38 +212,20 @@
 #'     run_experiment(
 #'       experiment = "Wolf Sheep Simple model analysis"
 #'     )
-#'   ## Expected output:
-#'   #> # A tibble: 110 × 11
-#'   #>    run_number energy_gain_from_grass number_of_wolves movement_cost
-#'   #>         <dbl>                  <dbl>            <dbl>         <dbl>
-#'   #>  1          4                      2                5           0.5
-#'   #>  2          8                      2                5           0.5
-#'   #>  3          2                      2                5           0.5
-#'   #>  4          9                      2                5           0.5
-#'   #>  5          1                      2                5           0.5
-#'   #>  6          5                      2                5           0.5
-#'   #>  7          7                      2                5           0.5
-#'   #>  8          3                      2                5           0.5
-#'   #>  9          6                      2                5           0.5
-#'   #> 10         12                      2                6           0.5
-#'   #> # 100 more rows
-#'   #> # 7 more variables: energy_gain_from_sheep <dbl>,
-#'   #> # number_of_sheep <dbl>, grass_regrowth_rate <dbl>, step <dbl>,
-#'   #> # count_wolves <dbl>, count_sheep <dbl>,
-#'   #> # sum_grass_amount_of_patches <dbl>
-#'   #> # Use `print(n = ...)` to see more rows
 #' }
 run_experiment <- function(
   model_path,
   setup_file = NULL,
   experiment = NULL,
+  outputs = c("table", "spreadsheet", "lists", "statistics"),
   other_arguments = NULL,
-  parse = TRUE,
   timeout = Inf,
-  netlogo_home = find_netlogo_home(),
-  netlogo_path = lifecycle::deprecated()
+  tidy_outputs = TRUE,
+  netlogo_home = find_netlogo_home()
 ) {
   model_path_choices <- c("nlogo", "nlogo3d", "nlogox", "nlogox3d")
+
+  outputs_choices <- c("table", "spreadsheet", "lists", "statistics")
 
   reserved_arguments <- c(
     "--headless",
@@ -249,41 +242,38 @@ run_experiment <- function(
   checkmate::assert_string(setup_file, null.ok = TRUE)
   checkmate::assert_string(experiment, null.ok = TRUE)
   assert_pick_one(setup_file, experiment)
+  checkmate::assert_character(outputs, min.len = 1)
+  checkmate::assert_subset(outputs, outputs_choices)
   checkmate::assert_character(other_arguments, null.ok = TRUE)
   assert_other_arguments(other_arguments, reserved_arguments, null_ok = TRUE)
-  checkmate::assert_flag(parse)
   checkmate::assert_number(timeout, lower = 0)
+  checkmate::assert_flag(tidy_outputs)
   checkmate::assert_string(netlogo_home)
 
   if (!is.null(setup_file)) {
     checkmate::assert_file_exists(setup_file, extension = "xml")
   }
 
-  if (lifecycle::is_present(netlogo_path)) {
-    lifecycle::deprecate_warn(
-      when = "0.1.0.9000",
-      what = "run_experiment(netlogo_path)",
-      details = paste0(
-        "Specifying the NetLogo path via the `netlogo_path` argument ",
-        "is deprecated. See the `run_experiment()` documentation ",
-        "(`?run_experiment`) for more information on setting the NetLogo ",
-        "installation path."
+  if (!any(c("table", "spreadsheet") %in% outputs)) {
+    cli::cli_abort(
+      paste0(
+        "At least one of {.strong {cli::col_blue('table')}} or ",
+        "{.strong {cli::col_red('spreadsheet')}} ",
+        "must be included in the {.strong outputs} argument."
       )
     )
-
-    checkmate::assert_string(netlogo_path)
-    checkmate::assert_file_exists(netlogo_path)
-
-    netlogo_console <- netlogo_path
-  } else {
-    netlogo_console <- find_netlogo_console(netlogo_home)
   }
 
+  netlogo_console <- find_netlogo_console(netlogo_home)
   assert_netlogo_console(netlogo_console)
 
-  file <- temp_file(pattern = "table-", fileext = ".csv")
   model_path <- fs::path_expand(model_path)
   timeout <- ifelse(is.infinite(timeout), 0, as.integer(timeout))
+
+  output_arguments <-
+    outputs |>
+    purrr::map(run_experiment.output_argument) |>
+    purrr::list_rbind()
 
   args <- c(
     "--headless ",
@@ -303,7 +293,7 @@ run_experiment <- function(
       glue::glue("--experiment {glue::double_quote(experiment)}"),
       ""
     ),
-    glue::glue("--table {glue::double_quote(file)}"),
+    output_arguments |> magrittr::extract2("command"),
     other_arguments
   )
 
@@ -353,45 +343,113 @@ run_experiment <- function(
     }
   }
 
-  cli::cli_progress_step("Reading output")
-
   out <-
-    file |>
-    readr::read_delim(delim = ",", skip = 6) |>
-    janitor::clean_names() |>
-    suppressWarnings() |>
-    suppressMessages()
-
-  cli::cli_progress_done()
-
-  if (isTRUE(parse)) {
-    cli::cli_progress_step("Parsing lists")
-
-    out <-
-      out |>
-      dplyr::mutate(
-        dplyr::across(
-          .cols = dplyr::everything(),
-          .fns = parse_netlogo_list
-        )
-      )
-
-    cli::cli_progress_done()
-  }
-
-  if (nrow(out) == 0) {
-    cli::cli_alert_warning("The experiment run did not return any results.")
-  }
+    outputs |>
+    run_experiment.gather_outputs(
+      arguments = output_arguments,
+      tidy_outputs = tidy_outputs
+    )
 
   if (!length(system2_output) == 0) {
     cli::cli_alert_info(
       paste0(
-        "The experiment run generated the following non-tabular output:",
+        "The experiment run produced the following messages:",
         "\n\n",
         paste(system2_output, collapse = "\n")
       )
     )
   }
+
+  out
+}
+
+run_experiment.output_argument <- function(output) {
+  outputs_choices <- c("table", "spreadsheet", "lists", "statistics")
+
+  checkmate::assert_string(output)
+  checkmate::assert_choice(output, outputs_choices)
+
+  argument <- ifelse(
+    output == "statistics",
+    "stats",
+    paste0(output)
+  )
+
+  file <- temp_file(pattern = paste0(output, "-"), fileext = ".csv")
+
+  dplyr::tibble(
+    argument = argument,
+    file = file,
+    command = glue::glue("--{argument} {glue::double_quote(file)}")
+  )
+}
+
+run_experiment.gather_outputs <- function(
+  outputs,
+  arguments,
+  tidy_outputs = TRUE
+) {
+  outputs_choices <- c("table", "spreadsheet", "lists", "statistics")
+
+  checkmate::assert_subset(outputs, outputs_choices)
+  checkmate::assert_tibble(arguments)
+  checkmate::assert_flag(tidy_outputs)
+
+  # R CMD Check variable bindings fix.
+  # nolint start
+  argument <- NULL
+  # nolint end
+
+  cli::cli_progress_step("Gathering metadata")
+
+  out <- list(
+    metadata = arguments |>
+      dplyr::pull(file) |>
+      magrittr::extract(1) |>
+      read_experiment_metadata()
+  )
+
+  if ("table" %in% outputs) {
+    cli::cli_progress_step("Processing table output")
+
+    out$table <-
+      arguments |>
+      dplyr::filter(argument == "table") |>
+      dplyr::pull(file) |>
+      read_experiment_table(tidy_outputs)
+  }
+
+  if ("spreadsheet" %in% outputs) {
+    cli::cli_progress_step("Processing spreadsheet output")
+
+    out$spreadsheet <-
+      arguments |>
+      dplyr::filter(argument == "spreadsheet") |>
+      dplyr::pull(file) |>
+      read_experiment_spreadsheet(tidy_outputs)
+  }
+
+  if ("lists" %in% outputs) {
+    cli::cli_progress_step("Processing list output")
+
+    out$lists <-
+      arguments |>
+      dplyr::filter(argument == "lists") |>
+      dplyr::pull(file) |>
+      read_experiment_lists(tidy_outputs)
+  }
+
+  if ("statistics" %in% outputs) {
+    cli::cli_progress_step("Processing statistics output")
+
+    out$statistics <-
+      arguments |>
+      dplyr::filter(argument == "stats") |>
+      dplyr::pull(file) |>
+      read_experiment_statistics(tidy_outputs)
+  }
+
+  cli::cli_process_done()
 
   out
 }
