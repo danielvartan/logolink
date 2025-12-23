@@ -127,20 +127,20 @@ These metrics must be available within the `lists` output of
       outputs = c("table", "lists")
     )
 #> ℹ Running model
-#> ✔ Running model [3.2s]
+#> ✔ Running model [3.3s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [14ms]
+#> ✔ Gathering metadata [24ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [263ms]
+#> ✔ Processing table output [302ms]
 #> 
 #> ℹ Processing list output
 #> ✔ Processing list output [9ms]
 #> 
 #> ℹ The experiment run produced the following messages:
 #> 
-#> Dec 23, 2025 11:36:46 PM java.util.prefs.FileSystemPreferences$1 run
+#> Dec 23, 2025 11:46:16 PM java.util.prefs.FileSystemPreferences$1 run
 #> INFO: Created user preferences directory.
 # }
 
