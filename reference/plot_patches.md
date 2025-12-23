@@ -130,17 +130,17 @@ These metrics must be available within the `lists` output of
 #> ✔ Running model [3.2s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [10ms]
+#> ✔ Gathering metadata [14ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [279ms]
+#> ✔ Processing table output [263ms]
 #> 
 #> ℹ Processing list output
 #> ✔ Processing list output [9ms]
 #> 
 #> ℹ The experiment run produced the following messages:
 #> 
-#> Dec 23, 2025 11:25:20 PM java.util.prefs.FileSystemPreferences$1 run
+#> Dec 23, 2025 11:36:46 PM java.util.prefs.FileSystemPreferences$1 run
 #> INFO: Created user preferences directory.
 # }
 
