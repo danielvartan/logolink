@@ -41,6 +41,23 @@ cat(
   ),
   badge_cran_download(type = "grand-total"),
   badge_github_actions(action = "R-CMD-check.yaml"),
+  badge_github_actions(
+    ref = "danielvartan/logolink",
+    action = "NetLogo Check",
+    alt = "NetLogo Check Badge"
+  ),
+  paste0(
+    "[![",
+    "FAIR checklist badge",
+    "](",
+    "https://img.shields.io/badge/",
+    "fairsoftwarechecklist.net", "-",
+    "-",
+    "00a7d9",
+    ")](",
+    "https://fairsoftwarechecklist.net/v0.2/?f=31&a=32113&i=32322&r=133",
+    ")"
+  ),
   badge_codecov(),
   badge_license(
     license = "GPLv3",

@@ -70,6 +70,7 @@ Suggests:
     ggimage (>= 0.3.4),
     knitr (>= 1.50),
     lifecycle (>= 1.0.4),
+    rsvg (>= 2.7.0),
     scales (>= 1.4.0),
     spelling (>= 2.3.2),
     testthat (>= 3.3.0),

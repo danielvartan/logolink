@@ -13,6 +13,10 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![](http://cranlogs.r-pkg.org/badges/grand-total/logolink)](https://cran.r-project.org/package=logolink)
 [![R build
 status](https://github.com/danielvartan/logolink/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/danielvartan/logolink/actions)
+[![NetLogo Check
+Badge](https://github.com/danielvartan/logolink/workflows/NetLogo%20Check/badge.svg)](https://github.com/danielvartan/logolink/actions)
+[![FAIR checklist
+badge](https://img.shields.io/badge/fairsoftwarechecklist.net--00a7d9)](https://fairsoftwarechecklist.net/v0.2/?f=31&a=32113&i=32322&r=133)
 [![](https://codecov.io/gh/danielvartan/logolink/branch/main/graph/badge.svg)](https://app.codecov.io/gh/danielvartan/logolink)
 [![GNU GPLv3
 License](https://img.shields.io/badge/license-GPLv3-bd0000.svg)](https://www.gnu.org/licenses/gpl-3.0)
@@ -239,7 +243,7 @@ library(dplyr)
 results |> glimpse()
 #> List of 5
 #>  $ metadata   :List of 5
-#>   ..$ timestamp       : POSIXct[1:1], format: "2025-12-23 19:57:38"
+#>   ..$ timestamp       : POSIXct[1:1], format: "2025-12-23 20:15:54"
 #>   ..$ netlogo_version : chr "7.0.3"
 #>   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"
 #>   ..$ experiment_name : chr "Wolf Sheep Simple Model Analysis"
@@ -255,7 +259,7 @@ results |> glimpse()
 #>   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
 #>   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ count_sheep           : num [1:110110] 500 500 500 498 498 497 497 496 495 494 ...
+#>   ..$ count_sheep           : num [1:110110] 500 497 496 495 493 492 490 488 487 487 ...
 #>  $ spreadsheet:List of 2
 #>   ..$ statistics: tibble [330 × 13] (S3: tbl_df/tbl/data.frame)
 #>   ..$ measures  : tibble [330,330 × 4] (S3: tbl_df/tbl/data.frame)
@@ -280,8 +284,8 @@ results |> glimpse()
 #>   ..$ step                  : num [1:11011] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ mean_count_wolves     : num [1:11011] 5 5 5 5 5 5 5 5 5 5 ...
 #>   ..$ std_count_wolves      : num [1:11011] 0 0 0 0 0 0 0 0 0 0 ...
-#>   ..$ mean_count_sheep      : num [1:11011] 500 498 498 496 494 ...
-#>   ..$ std_count_sheep       : num [1:11011] 0 0.831 1.432 1.446 1.625 ...
+#>   ..$ mean_count_sheep      : num [1:11011] 500 498 496 495 493 ...
+#>   ..$ std_count_sheep       : num [1:11011] 0 1.14 0.9 1.25 1.51 ...
 ```
 
 ### Analyzing the Data (Bonus Section)

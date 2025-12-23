@@ -418,6 +418,21 @@ references:
   doi: 10.32614/CRAN.package.lifecycle
   version: '>= 1.0.4'
 - type: software
+  title: rsvg
+  abstract: 'rsvg: Render SVG Images into PDF, PNG, (Encapsulated) PostScript, or
+    Bitmap Arrays'
+  notes: Suggests
+  url: https://docs.ropensci.org/rsvg/
+  repository: https://CRAN.R-project.org/package=rsvg
+  authors:
+  - family-names: Ooms
+    given-names: Jeroen
+    email: jeroenooms@gmail.com
+    orcid: https://orcid.org/0000-0002-4035-0289
+  year: '2025'
+  doi: 10.32614/CRAN.package.rsvg
+  version: '>= 2.7.0'
+- type: software
   title: scales
   abstract: 'scales: Scale Functions for Visualization'
   notes: Suggests
