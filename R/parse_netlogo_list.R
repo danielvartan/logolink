@@ -2,6 +2,13 @@
 #'
 #' @description
 #'
+#' **Note**: We recommend using this function **only when necessary**, as it can
+#' be computationally intensive for large datasets and may not handle all edge
+#' cases. NetLogo provides a special output format called *lists* that exports
+#' list metrics in a tabular structure. If your experiment includes metrics that
+#' return NetLogo lists, include `"lists"` in the `outputs` argument of
+#' [`run_experiment()`][run_experiment()] to capture this output.
+#'
 #' `parse_netlogo_list()` parses NetLogo-style lists represented as strings
 #' (e.g., `"[1 2 3]"`) into R lists. It automatically detects
 #' [`numeric`][base::numeric()], [`integer`][base::integer()],

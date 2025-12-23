@@ -22,6 +22,13 @@ nested lists (for mixed-type or nested lists).
 }
 }
 \description{
+\strong{Note}: We recommend using this function \strong{only when necessary}, as it can
+be computationally intensive for large datasets and may not handle all edge
+cases. NetLogo provides a special output format called \emph{lists} that exports
+list metrics in a tabular structure. If your experiment includes metrics that
+return NetLogo lists, include \code{"lists"} in the \code{outputs} argument of
+\code{\link[=run_experiment]{run_experiment()}} to capture this output.
+
 \code{parse_netlogo_list()} parses NetLogo-style lists represented as strings
 (e.g., \code{"[1 2 3]"}) into R lists. It automatically detects
 \code{\link[base:numeric]{numeric}}, \code{\link[base:integer]{integer}},
