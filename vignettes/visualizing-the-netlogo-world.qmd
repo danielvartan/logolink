@@ -3,9 +3,10 @@ title: "Visualizing the NetLogo World"
 format:
   html:
     toc: true
+    html-math-method: mathjax
 engine: knitr
 vignette: >
-  %\VignetteIndexEntry{Plotting the NetLogo World in R}
+  %\VignetteIndexEntry{Visualizing the NetLogo World"}
   %\VignetteEngine{quarto::html}
   %\VignetteEncoding{UTF-8}
 ---

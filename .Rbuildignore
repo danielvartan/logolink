@@ -1,8 +1,8 @@
 ^_brand\.yml$
 ^_pkgdown\.yml$
-^_quarto\.yml$
 ^_quarto-gfm\.yml$
 ^_quarto-html\.yml$
+^_quarto\.yml$
 ^.quarto$
 ^.vscode$
 ^\.github$
@@ -18,8 +18,8 @@
 ^data-raw$
 ^doc$
 ^docs$
-^LICENSE$
 ^LICENSE\.md$
+^LICENSE$
 ^man-roxygen$
 ^Meta$
 ^pkgdown$
@@ -29,3 +29,5 @@
 ^README\.rmarkdow$
 ^tests/qmd$
 ^ttf$
+^vignettes/.quarto$
+^vignettes/*_files$

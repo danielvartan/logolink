@@ -19,7 +19,7 @@
 - `parse_netlogo_list()` now have better heuristics.
 - `parse_netlogo_color()` was introduced to parse NetLogo color strings into approximate hex color codes.
 - New unit tests were implemented.
-- A new vignette showing how to visualize the NetLogo world using [`ggplot2`](https://ggplot2.tidyverse.org/) was added.
+- A [new vignette](https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html) showing how to visualize the NetLogo world using [`ggplot2`](https://ggplot2.tidyverse.org/) was added.
 - The documentation was updated to reflect the changes in the package.
 
 # logolink 0.1.0
