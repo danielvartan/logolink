@@ -210,13 +210,22 @@ results <-
   run_experiment(setup_file = setup_file)
 ```
 
+`logolink` supports the [four output
+formats](https://docs.netlogo.org/behaviorspace.html#run-options-formats)
+available in NetLogo BehaviorSpace:
+[`table`](https://docs.netlogo.org/behaviorspace.html#table-output),
+[`spreadsheet`](https://docs.netlogo.org/behaviorspace.html#spreadsheet-output),
+[`statistics`](https://docs.netlogo.org/behaviorspace.html#statistics-output),
+and [`lists`](https://docs.netlogo.org/behaviorspace.html#lists-output).
+By default, all formats are returned as a named list.
+
 ``` r
 library(dplyr)
 
 results |> glimpse()
 #> List of 5
 #>  $ metadata   :List of 5
-#>   ..$ timestamp       : POSIXct[1:1], format: "2025-12-23 20:15:54"
+#>   ..$ timestamp       : POSIXct[1:1], format: "2025-12-26 04:36:34"
 #>   ..$ netlogo_version : chr "7.0.3"
 #>   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"
 #>   ..$ experiment_name : chr "Wolf Sheep Simple Model Analysis"
@@ -232,7 +241,7 @@ results |> glimpse()
 #>   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
 #>   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ count_sheep           : num [1:110110] 500 497 496 495 493 492 490 488 487 487 ...
+#>   ..$ count_sheep           : num [1:110110] 500 498 497 496 494 492 491 489 488 487 ...
 #>  $ spreadsheet:List of 2
 #>   ..$ statistics: tibble [330 × 13] (S3: tbl_df/tbl/data.frame)
 #>   ..$ measures  : tibble [330,330 × 4] (S3: tbl_df/tbl/data.frame)
@@ -257,8 +266,8 @@ results |> glimpse()
 #>   ..$ step                  : num [1:11011] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ mean_count_wolves     : num [1:11011] 5 5 5 5 5 5 5 5 5 5 ...
 #>   ..$ std_count_wolves      : num [1:11011] 0 0 0 0 0 0 0 0 0 0 ...
-#>   ..$ mean_count_sheep      : num [1:11011] 500 498 496 495 493 ...
-#>   ..$ std_count_sheep       : num [1:11011] 0 1.14 0.9 1.25 1.51 ...
+#>   ..$ mean_count_sheep      : num [1:11011] 500 498 497 495 493 ...
+#>   ..$ std_count_sheep       : num [1:11011] 0 1.25 1.34 1.78 2.23 ...
 ```
 
 ### Analyzing the Data (Bonus Section)
@@ -306,109 +315,19 @@ data |>
 
 ### Visualizing the NetLogo World (Bonus Section)
 
-`logolink` also provides functions to capture screenshots of the NetLogo
-world during the simulation. This is useful for capturing special states
-and for preparing materials for publication.
+`logolink` also includes tutorials to help you get the most out of
+NetLogo in R. One tutorial demonstrates how to plot the NetLogo world at
+specific time steps and animate its evolution over time. You can find it
+[here](https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html).
 
-``` r
-setup_file <- create_experiment(
-  name = "Wolf Sheep Simple Model Analysis",
-  repetitions = 1,
-  sequential_run_order = TRUE,
-  run_metrics_every_step = FALSE,
-  setup = "setup",
-  go = "go",
-  time_limit = 500,
-  run_metrics_condition = 'ticks mod 100 = 0',
-  metrics = c(
-    '[xcor] of sheep',
-    '[ycor] of sheep',
-    '[xcor] of wolves',
-    '[ycor] of wolves',
-    '[pxcor] of patches',
-    '[pycor] of patches',
-    '[pcolor] of patches'
-  ),
-  constants = list(
-    "number-of-sheep" = 500,
-    "number-of-wolves" = 15,
-    "movement-cost" = 0.5,
-    "grass-regrowth-rate" = 0.3,
-    "energy-gain-from-grass" = 2,
-    "energy-gain-from-sheep" = 5
-  )
-)
-```
+![](reference/figures/netlogo-world-animation.gif)
 
-``` r
-results <-
-  model_path |>
-  run_experiment(setup_file = setup_file)
-```
-
-``` r
-turtle_shapes <-
-  system.file("extdata", package = "logolink") |>
-  list.files(full.names = TRUE)
-```
-
-``` r
-plot_data <-
-  results |>
-  extract2("lists") |>
-  dplyr::filter(run_number == 1, step == 500)
-```
-
-``` r
-library(dplyr)
-library(ggplot2)
-library(ggimage)
-library(magrittr)
-library(stringr)
-library(tidyr)
-#> 
-#> Attaching package: 'tidyr'
-#> The following object is masked from 'package:magrittr':
-#> 
-#>     extract
-
-plot_data |>
-  plot_patches() +
-  geom_image(
-    data = plot_data |>
-      drop_na(xcor_of_sheep),
-    mapping = aes(
-      x = xcor_of_sheep,
-      y = ycor_of_sheep,
-      image = turtle_shapes |>
-        str_subset("sheep") |>
-        head(1)
-    ),
-    size = 0.03
-  ) +
-  geom_image(
-    data = plot_data |>
-      drop_na(xcor_of_wolves),
-    mapping = aes(
-      x = xcor_of_wolves,
-      y = ycor_of_wolves,
-      image = turtle_shapes |>
-        str_subset("wolf") |>
-        head(1)
-    ),
-    size = 0.05,
-    color = parse_netlogo_color(31)
-  )
-```
-
-![](reference/figures/readme-wolf-sheep-model-plot-2-1.png)
+Click [here](https://danielvartan.github.io/logolink/reference/) to see
+the full list of `logolink` functions.
 
 Please refer to the [BehaviorSpace
 Guide](https://docs.netlogo.org/behaviorspace.html) for complete
 instructions on how to set up and run experiments in NetLogo.
-
-Click [here](https://danielvartan.github.io/logolink/reference/) to see
-the full list of `logolink` functions.
 
 ## Citation
 
@@ -495,13 +414,6 @@ Functions to set up and run NetLogo experiments.
 - [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
   : Run a NetLogo BehaviorSpace experiment
 
-## Plots
-
-Functions to help visualizing NetLogo outputs.
-
-- [`plot_patches()`](https://danielvartan.github.io/logolink/reference/plot_patches.md)
-  **\[experimental\]** : Plot NetLogo World Patches
-
 ## Utilities
 
 Utility functions functions for NetLogo integration.
@@ -519,3 +431,9 @@ Utility functions functions for NetLogo integration.
 - [`parse_netlogo_list()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_list.md)
   : Parse NetLogo lists
 
+# Articles
+
+### All vignettes
+
+- [Visualizing the NetLogo
+  World](https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.md):

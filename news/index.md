@@ -58,10 +58,9 @@
 - [`parse_netlogo_color()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_color.md)
   was introduced to parse NetLogo color strings into approximate hex
   color codes.
-- [`plot_patches()`](https://danielvartan.github.io/logolink/reference/plot_patches.md)
-  was introduced to visualize NetLogo patches data as a grid and serve
-  as a foundation for NetLogo world visualizations.
 - New unit tests were implemented.
+- A new vignette showing how to visualize the NetLogo world using
+  [`ggplot2`](https://ggplot2.tidyverse.org/) was added.
 - The documentation was updated to reflect the changes in the package.
 
 ## logolink 0.1.0

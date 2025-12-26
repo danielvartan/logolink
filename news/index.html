@@ -22,6 +22,10 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/visualizing-the-netlogo-world.html">Visualizing the NetLogo World</a></li>
+  </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -76,9 +80,8 @@
 <code><a href="../reference/parse_netlogo_list.html">parse_netlogo_list()</a></code> now have better heuristics.</li>
 <li>
 <code><a href="../reference/parse_netlogo_color.html">parse_netlogo_color()</a></code> was introduced to parse NetLogo color strings into approximate hex color codes.</li>
-<li>
-<code><a href="../reference/plot_patches.html">plot_patches()</a></code> was introduced to visualize NetLogo patches data as a grid and serve as a foundation for NetLogo world visualizations.</li>
 <li>New unit tests were implemented.</li>
+<li>A new vignette showing how to visualize the NetLogo world using <a href="https://ggplot2.tidyverse.org/" class="external-link"><code>ggplot2</code></a> was added.</li>
 <li>The documentation was updated to reflect the changes in the package.</li>
 </ul></div>
 </div>
