@@ -28,7 +28,6 @@ navbar:
   components:
     home: ~
     intro: ~
-    articles: ~
 
 reference:
 - title: NetLogo
@@ -37,12 +36,6 @@ reference:
   contents:
   - create_experiment
   - run_experiment
-
-- title: Plots
-  desc: >
-    Functions to help visualizing NetLogo outputs.
-  contents:
-  - plot_patches
 
 - title: Utilities
   desc: >

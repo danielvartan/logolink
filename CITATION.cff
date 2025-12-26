@@ -332,6 +332,20 @@ references:
   doi: 10.32614/CRAN.package.covr
   version: '>= 3.6.5'
 - type: software
+  title: curl
+  abstract: 'curl: A Modern and Flexible Web Client for R'
+  notes: Suggests
+  url: https://jeroen.r-universe.dev/curl
+  repository: https://CRAN.R-project.org/package=curl
+  authors:
+  - family-names: Ooms
+    given-names: Jeroen
+    email: jeroenooms@gmail.com
+    orcid: https://orcid.org/0000-0002-4035-0289
+  year: '2025'
+  doi: 10.32614/CRAN.package.curl
+  version: '>= 7.0.0'
+- type: software
   title: ggplot2
   abstract: 'ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics'
   notes: Suggests
@@ -387,6 +401,24 @@ references:
   doi: 10.32614/CRAN.package.ggimage
   version: '>= 0.3.4'
 - type: software
+  title: ggtext
+  abstract: 'ggtext: Improved Text Rendering Support for ''ggplot2'''
+  notes: Suggests
+  url: https://wilkelab.org/ggtext/
+  repository: https://CRAN.R-project.org/package=ggtext
+  authors:
+  - family-names: Wilke
+    given-names: Claus O.
+    email: wilke@austin.utexas.edu
+    orcid: https://orcid.org/0000-0002-7470-9261
+  - family-names: Wiernik
+    given-names: Brenton M.
+    email: brenton@wiernik.org
+    orcid: https://orcid.org/0000-0001-9560-6336
+  year: '2025'
+  doi: 10.32614/CRAN.package.ggtext
+  version: '>= 0.1.2'
+- type: software
   title: knitr
   abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
   notes: Suggests
@@ -417,6 +449,54 @@ references:
   year: '2025'
   doi: 10.32614/CRAN.package.lifecycle
   version: '>= 1.0.4'
+- type: software
+  title: magick
+  abstract: 'magick: Advanced Graphics and Image-Processing in R'
+  notes: Suggests
+  url: https://docs.ropensci.org/magick/
+  repository: https://CRAN.R-project.org/package=magick
+  authors:
+  - family-names: Ooms
+    given-names: Jeroen
+    email: jeroenooms@gmail.com
+    orcid: https://orcid.org/0000-0002-4035-0289
+  year: '2025'
+  doi: 10.32614/CRAN.package.magick
+  version: '>= 2.9.0'
+- type: software
+  title: quarto
+  abstract: 'quarto: R Interface to ''Quarto'' Markdown Publishing System'
+  notes: Suggests
+  url: https://quarto-dev.github.io/quarto-r/
+  repository: https://CRAN.R-project.org/package=quarto
+  authors:
+  - family-names: Allaire
+    given-names: JJ
+    email: jj@posit.co
+    orcid: https://orcid.org/0000-0003-0174-9868
+  - family-names: Dervieux
+    given-names: Christophe
+    email: cderv@posit.co
+    orcid: https://orcid.org/0000-0003-4474-2498
+  year: '2025'
+  doi: 10.32614/CRAN.package.quarto
+  version: '>= 1.5.1'
+- type: software
+  title: ragg
+  abstract: 'ragg: Graphic Devices Based on AGG'
+  notes: Suggests
+  url: https://ragg.r-lib.org
+  repository: https://CRAN.R-project.org/package=ragg
+  authors:
+  - family-names: Pedersen
+    given-names: Thomas Lin
+    email: thomas.pedersen@posit.co
+    orcid: https://orcid.org/0000-0002-5147-4711
+  - family-names: Shemanarev
+    given-names: Maxim
+  year: '2025'
+  doi: 10.32614/CRAN.package.ragg
+  version: '>= 1.5.0'
 - type: software
   title: rsvg
   abstract: 'rsvg: Render SVG Images into PDF, PNG, (Encapsulated) PostScript, or

@@ -4,7 +4,7 @@
   "identifier": "logolink",
   "description": "An interface for 'NetLogo' <https://www.netlogo.org> that enables programmatic setup and execution of simulations. Designed to facilitate integrating 'NetLogo' models into reproducible workflows by creating and running 'BehaviorSpace' experiments and retrieving their results.",
   "name": "logolink: An Interface for Running 'NetLogo' Simulations",
-  "relatedLink": "https://danielvartan.github.io/logolink/",
+  "relatedLink": ["https://danielvartan.github.io/logolink/", "https://CRAN.R-project.org/package=logolink"],
   "codeRepository": "https://github.com/danielvartan/logolink/",
   "issueTracker": "https://github.com/danielvartan/logolink/issues/",
   "license": "https://spdx.org/licenses/GPL-3.0",
@@ -104,6 +104,19 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "curl",
+      "name": "curl",
+      "version": ">= 7.0.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=curl"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
       "version": ">= 4.0.1",
@@ -130,6 +143,19 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "ggtext",
+      "name": "ggtext",
+      "version": ">= 0.1.2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggtext"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "knitr",
       "name": "knitr",
       "version": ">= 1.50",
@@ -153,6 +179,45 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=lifecycle"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "magick",
+      "name": "magick",
+      "version": ">= 2.9.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=magick"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "quarto",
+      "name": "quarto",
+      "version": ">= 1.5.1",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=quarto"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "ragg",
+      "name": "ragg",
+      "version": ">= 1.5.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ragg"
     },
     {
       "@type": "SoftwareApplication",
@@ -372,7 +437,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "500.974KB",
+  "fileSize": "708.95KB",
   "citation": [
     {
       "@type": "CreativeWork",
@@ -394,7 +459,6 @@
     }
   ],
   "releaseNotes": "https://github.com/danielvartan/logolink/blob/main/NEWS.md",
-  "readme": "https://github.com/danielvartan/logolink/blob/main/README.md",
   "contIntegration": ["https://github.com/danielvartan/logolink/actions", "https://github.com/danielvartan/logolink/actions", "https://app.codecov.io/gh/danielvartan/logolink"],
   "developmentStatus": "https://www.repostatus.org/#active",
   "keywords": ["agent-based-modeling", "apis", "behaviorspace", "complexity-science", "individual-based-modeling", "netlogo", "r-packages", "rstats", "simulations", "computational-science", "multi-agent-systems", "headless-execution", "computational-social-science", "data-science", "ecological-modeling", "environmental-modeling", "system-dynamics", "tidyverse"]
