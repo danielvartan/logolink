@@ -153,3 +153,41 @@ parse_netlogo_color <- function(x, bias = 0.1) {
     ) |>
     dplyr::pull("color")
 }
+
+parse_netlogo_color.base_colors <- c(
+  "black (0)" = "#000000",
+  "white (10)" = "#FFFFFF",
+  "gray (5)" = "#8D8D8D",
+  "red (15)" = "#D73229",
+  "orange (25)" = "#F16A15",
+  "brown (35)" = "#9D6E48",
+  "yellow (45)" = "#ECEC29",
+  "green (55)" = "#59B03C",
+  "lime (65)" = "#2CD13B",
+  "turquoise (75)" = "#1D9F78",
+  "cyan (85)" = "#54C4C4",
+  "sky (95)" = "#2D8DBE",
+  "blue (105)" = "#345DA9",
+  "violet (115)" = "#7C50A4",
+  "magenta (125)" = "#A71B6A",
+  "pink (135)" = "#D9637F"
+)
+
+parse_netlogo_color.xml_colors <- c(
+  "black (0)" = "255",
+  "white (10)" = "-1",
+  "gray (5)" = "-1920102913",
+  "red (15)" = "-684578305",
+  "orange (25)" = "-244705793",
+  "brown (35)" = "-1653716737",
+  "yellow (45)" = "-303222273",
+  "green (55)" = "1504722175",
+  "lime (65)" = "751909887",
+  "turquoise (75)" = "496990463",
+  "cyan (85)" = "1422181631",
+  "sky (95)" = "764264191",
+  "blue (105)" = "878553599",
+  "violet (115)" = "2085659903",
+  "magenta (125)" = "-1491375361",
+  "pink (135)" = "-528509185"
+)
