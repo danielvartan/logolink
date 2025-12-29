@@ -43,14 +43,14 @@ model_path <-
 
 #### Get Turtle Shapes
 
-See [`NetLogo-Shapes`](https://github.com/danielvartan/netlogo-shapes)
-for more turtle shapes.
+See [`LogoShapes`](https://github.com/danielvartan/logoshapes) for more
+turtle shapes.
 
 ``` r
 sheep_shape <-
   paste0(
     "https://raw.githubusercontent.com/danielvartan/",
-    "netlogo-shapes/main/svg/netlogo-simplified/sheep.svg"
+    "logoshapes/main/svg/netlogo-simplified/sheep.svg"
   ) |>
   curl_download(tempfile(fileext = ".svg"))
 ```
@@ -59,7 +59,7 @@ sheep_shape <-
 wolf_shape <-
   paste0(
     "https://raw.githubusercontent.com/danielvartan/",
-    "netlogo-shapes/main/svg/netlogo-simplified/wolf.svg"
+    "logoshapes/main/svg/netlogo-simplified/wolf.svg"
   ) |>
   curl_download(tempfile(fileext = ".svg"))
 ```
@@ -221,8 +221,7 @@ plot_netlogo_world <- function(
 plot_data |> plot_netlogo_world()
 ```
 
-![Plot of the NetLogo world showing patches, sheep, and wolves at step
-0.](visualizing-the-netlogo-world_files/figure-html/readme-wolf-sheep-model-plot-2-1.png)
+![](../reference/figures/vignette-wolf-sheep-model-plot-1.png)
 
 ### Animate World
 
@@ -300,4 +299,4 @@ animation |>
 animation
 ```
 
-![](visualizing-the-netlogo-world_files/figure-html/unnamed-chunk-16-1.gif)
+![](../reference/figures/vignette-wolf-sheep-model-animation-1.gif)

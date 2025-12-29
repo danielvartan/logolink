@@ -6,20 +6,6 @@
   maintainer, conceptor, copyright holder.
   [](https://orcid.org/0000-0001-7782-759X)
 
-- **[Aline Martins Carvalho](https://github.com/alinenutri/)**.
-  Scientific advisor. [](https://orcid.org/0000-0002-4900-5609)
-
-- **[Leandro Garcia](https://github.com/leandromtg/)**. Scientific
-  advisor. [](https://orcid.org/0000-0001-5947-2617)
-
-- **[Sustentarea Research and Extension
-  Center](https://www.fsp.usp.br/sustentarea/)**. Funder.
-
-- **[University of Sao Paulo (USP)](https://www5.usp.br/)**. Funder.
-
-- **[National Council for Scientific and Technological Development
-  (CNPq)](https://www.gov.br/cnpq/)**. Funder.
-
 ## Citation
 
 Source:

@@ -220,6 +220,10 @@
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">model_path</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/run_experiment.html">run_experiment</a></span><span class="op">(</span>setup_file <span class="op">=</span> <span class="va">setup_file</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="checking-the-results">Checking the Results<a class="anchor" aria-label="anchor" href="#checking-the-results"></a>
+</h3>
 <p><code>logolink</code> supports the <a href="https://docs.netlogo.org/behaviorspace.html#run-options-formats" class="external-link">four output formats</a> available in NetLogo BehaviorSpace: <a href="https://docs.netlogo.org/behaviorspace.html#table-output" class="external-link"><code>table</code></a>, <a href="https://docs.netlogo.org/behaviorspace.html#spreadsheet-output" class="external-link"><code>spreadsheet</code></a>, <a href="https://docs.netlogo.org/behaviorspace.html#statistics-output" class="external-link"><code>statistics</code></a>, and <a href="https://docs.netlogo.org/behaviorspace.html#lists-output" class="external-link"><code>lists</code></a>. By default, all formats are returned as a named list.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
@@ -227,7 +231,7 @@
 <span><span class="va">results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 5</span></span>
 <span><span class="co">#&gt;  $ metadata   :List of 5</span></span>
-<span><span class="co">#&gt;   ..$ timestamp       : POSIXct[1:1], format: "2025-12-26 04:36:34"</span></span>
+<span><span class="co">#&gt;   ..$ timestamp       : POSIXct[1:1], format: "2025-12-29 04:55:05"</span></span>
 <span><span class="co">#&gt;   ..$ netlogo_version : chr "7.0.3"</span></span>
 <span><span class="co">#&gt;   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"</span></span>
 <span><span class="co">#&gt;   ..$ experiment_name : chr "Wolf Sheep Simple Model Analysis"</span></span>
@@ -243,7 +247,7 @@
 <span><span class="co">#&gt;   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
 <span><span class="co">#&gt;   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
-<span><span class="co">#&gt;   ..$ count_sheep           : num [1:110110] 500 498 497 496 494 492 491 489 488 487 ...</span></span>
+<span><span class="co">#&gt;   ..$ count_sheep           : num [1:110110] 500 499 498 497 496 494 491 490 489 488 ...</span></span>
 <span><span class="co">#&gt;  $ spreadsheet:List of 2</span></span>
 <span><span class="co">#&gt;   ..$ statistics: tibble [330 × 13] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;   ..$ measures  : tibble [330,330 × 4] (S3: tbl_df/tbl/data.frame)</span></span>
@@ -268,8 +272,8 @@
 <span><span class="co">#&gt;   ..$ step                  : num [1:11011] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;   ..$ mean_count_wolves     : num [1:11011] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
 <span><span class="co">#&gt;   ..$ std_count_wolves      : num [1:11011] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
-<span><span class="co">#&gt;   ..$ mean_count_sheep      : num [1:11011] 500 498 497 495 493 ...</span></span>
-<span><span class="co">#&gt;   ..$ std_count_sheep       : num [1:11011] 0 1.25 1.34 1.78 2.23 ...</span></span></code></pre></div>
+<span><span class="co">#&gt;   ..$ mean_count_sheep      : num [1:11011] 500 498 496 495 493 ...</span></span>
+<span><span class="co">#&gt;   ..$ std_count_sheep       : num [1:11011] 0 0.872 1.345 1.9 2.01 ...</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="analyzing-the-data-bonus-section">Analyzing the Data (Bonus Section)<a class="anchor" aria-label="anchor" href="#analyzing-the-data-bonus-section"></a>
@@ -301,19 +305,19 @@
 <span>      color <span class="op">=</span> <span class="va">number_of_wolves</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span>      x <span class="op">=</span> <span class="st">"Time Step"</span>,</span>
-<span>      y <span class="op">=</span> <span class="st">"Average Number of Sheep"</span>,</span>
-<span>      color <span class="op">=</span> <span class="st">"Wolves"</span></span>
-<span>    <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Time Step"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Average Number of Sheep"</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"Wolves"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/readme-wolf-sheep-model-plot-1-1.png" data-fig-alt="Line plot showing the average number of sheep over time for different initial numbers of wolves."></p>
 </div>
 <div class="section level3">
 <h3 id="visualizing-the-netlogo-world-bonus-section">Visualizing the NetLogo World (Bonus Section)<a class="anchor" aria-label="anchor" href="#visualizing-the-netlogo-world-bonus-section"></a>
 </h3>
 <p><code>logolink</code> also includes tutorials to help you get the most out of NetLogo in R. One tutorial demonstrates how to plot the NetLogo world at specific time steps and animate its evolution over time. You can find it <a href="https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html">here</a>.</p>
-<p><img src="reference/figures/netlogo-world-animation.gif"></p>
+<p><img src="reference/figures/vignette-wolf-sheep-model-animation-1.gif"></p>
 <p>Click <a href="https://danielvartan.github.io/logolink/reference/">here</a> to see the full list of <code>logolink</code> functions.</p>
 <p>Please refer to the <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace Guide</a> for complete instructions on how to set up and run experiments in NetLogo.</p>
 </div>
@@ -321,6 +325,7 @@
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
+<p><a href="https://doi.org/10.32614/CRAN.package.logolink" class="external-link"><img src="https://img.shields.io/badge/doi-10.32614/CRAN.package.logolink-1284C5.svg"></a></p>
 <p>If you use this package in your research, please cite it to acknowledge the effort put into its development and maintenance. Your citation helps support its continued improvement.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"logolink"</span><span class="op">)</span></span>
@@ -372,32 +377,6 @@ this program. If not, see &lt;https://www.gnu.org/licenses/&gt;.</code></pre>
 <h2 id="acknowledgments">Acknowledgments<a class="anchor" aria-label="anchor" href="#acknowledgments"></a>
 </h2>
 <p><code>logolink</code> brand identity is based on the <a href="https://www.netlogo.org/" class="external-link">NetLogo 7</a> brand identity.</p>
-<table class="table"><tr>
-<td width="30%" valign="middle">
-<br><br><p align="center">
-<a href="https://www.fsp.usp.br/sustentarea/" class="external-link"> <img src="reference/figures/sustentarea-logo.svg" width="115" alt="Sustentarea Logo"></a>
-</p>
-<br><br>
-</td>
-<td width="70%" valign="middle">
-<p>
-This work was developed with support from the <a href="https://www.fsp.usp.br/sustentarea/" class="external-link">Sustentarea</a> Research and Extension Center at the University of São Paulo (<a href="https://www5.usp.br/" class="external-link">USP</a>).
-</p>
-</td>
-</tr></table>
-<table class="table"><tr>
-<td width="30%" valign="middle">
-<br><br><p align="center">
-<a href="https://www.gov.br/cnpq/" class="external-link"> <img src="reference/figures/cnpq-logo.svg" width="150" alt="CNPq Logo"></a>
-</p>
-<br><br>
-</td>
-<td width="70%" valign="middle">
-<p>
-This work was supported by the Department of Science and Technology of the Secretariat of Science, Technology, and Innovation and of the Health Economic-Industrial Complex (<a href="https://www.gov.br/saude/pt-br/composicao/sectics/" class="external-link">SECTICS</a>) of the <a href="https://www.gov.br/saude/pt-br/composicao/sectics/" class="external-link">Ministry of Health</a> of Brazil, and the National Council for Scientific and Technological Development (<a href="https://www.gov.br/cnpq/" class="external-link">CNPq</a>) (grant no. 444588/2023-0).
-</p>
-</td>
-</tr></table>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -436,13 +415,6 @@ This work was supported by the Department of Science and Technology of the Secre
 <ul class="list-unstyled">
 <li>
 <a href="https://github.com/danielvartan/" class="external-link">Daniel Vartanian</a> <br><small class="roles"> Author, maintainer, conceptor, copyright holder </small> <a href="https://orcid.org/0000-0001-7782-759X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
-<li>
-<a href="https://www.fsp.usp.br/sustentarea/" class="external-link">Sustentarea Research and Extension Center</a> <br><small class="roles"> Funder </small>   </li>
-<li>
-<a href="https://www5.usp.br/" class="external-link">University of Sao Paulo (USP)</a> <br><small class="roles"> Funder </small>   </li>
-<li>
-<a href="https://www.gov.br/cnpq/" class="external-link">National Council for Scientific and Technological Development (CNPq)</a> <br><small class="roles"> Funder </small>   </li>
-<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
@@ -453,7 +425,7 @@ This work was supported by the Department of Science and Technology of the Secre
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by <a href="https://github.com/danielvartan/" class="external-link">Daniel Vartanian</a>, <a href="https://www.fsp.usp.br/sustentarea/" class="external-link">Sustentarea Research and Extension Center</a>, <a href="https://www5.usp.br/" class="external-link">University of Sao Paulo (USP)</a>, <a href="https://www.gov.br/cnpq/" class="external-link">National Council for Scientific and Technological Development (CNPq)</a>.</p>
+  <p>Developed by <a href="https://github.com/danielvartan/" class="external-link">Daniel Vartanian</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

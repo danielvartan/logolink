@@ -127,13 +127,13 @@
 </div>
 </section><section class="level4"><h4 id="get-turtle-shapes">Get Turtle Shapes<a class="anchor" aria-label="anchor" href="#get-turtle-shapes"></a>
 </h4>
-<p>See <a href="https://github.com/danielvartan/netlogo-shapes" class="external-link"><code>NetLogo-Shapes</code></a> for more turtle shapes.</p>
+<p>See <a href="https://github.com/danielvartan/logoshapes" class="external-link"><code>LogoShapes</code></a> for more turtle shapes.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sheep_shape</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
 <span>    <span class="st">"https://raw.githubusercontent.com/danielvartan/"</span>,</span>
-<span>    <span class="st">"netlogo-shapes/main/svg/netlogo-simplified/sheep.svg"</span></span>
+<span>    <span class="st">"logoshapes/main/svg/netlogo-simplified/sheep.svg"</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://jeroen.r-universe.dev/curl/reference/curl_download.html" class="external-link">curl_download</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".svg"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -142,7 +142,7 @@
 <code class="sourceCode R"><span><span class="va">wolf_shape</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
 <span>    <span class="st">"https://raw.githubusercontent.com/danielvartan/"</span>,</span>
-<span>    <span class="st">"netlogo-shapes/main/svg/netlogo-simplified/wolf.svg"</span></span>
+<span>    <span class="st">"logoshapes/main/svg/netlogo-simplified/wolf.svg"</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://jeroen.r-universe.dev/curl/reference/curl_download.html" class="external-link">curl_download</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".svg"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -300,13 +300,8 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plot_data</span> <span class="op">|&gt;</span> <span class="fu">plot_netlogo_world</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure><p><img src="visualizing-the-netlogo-world_files/figure-html/readme-wolf-sheep-model-plot-2-1.png" alt="Plot of the NetLogo world showing patches, sheep, and wolves at step 0." width="672"></p>
-</figure>
 </div>
-</div>
-</div>
+<p><img src="../reference/figures/vignette-wolf-sheep-model-plot-1.png"></p>
 </section><section class="level3"><h3 id="animate-world">Animate World<a class="anchor" aria-label="anchor" href="#animate-world"></a>
 </h3>
 <div class="cell">
@@ -382,13 +377,8 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">animation</span></span></code></pre></div>
-<div class="cell-output-display">
-<div>
-<figure><p><img src="visualizing-the-netlogo-world_files/figure-html/unnamed-chunk-16-1.gif"></p>
-</figure>
 </div>
-</div>
-</div>
+<p><img src="../reference/figures/vignette-wolf-sheep-model-animation-1.gif"></p>
 </section><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
@@ -478,7 +468,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by <a href="https://github.com/danielvartan/" class="external-link">Daniel Vartanian</a>, <a href="https://www.fsp.usp.br/sustentarea/" class="external-link">Sustentarea Research and Extension Center</a>, <a href="https://www5.usp.br/" class="external-link">University of Sao Paulo (USP)</a>, <a href="https://www.gov.br/cnpq/" class="external-link">National Council for Scientific and Technological Development (CNPq)</a>.</p>
+  <p>Developed by <a href="https://github.com/danielvartan/" class="external-link">Daniel Vartanian</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

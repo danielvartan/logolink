@@ -52,6 +52,6 @@ Other utility functions:
 ``` r
 # \dontrun{
   find_netlogo_console()
-#> /opt/NetLogo-7.0.3/bin/NetLogo
+#> /opt/NetLogo 7.0.3/bin/NetLogo
 # }
 ```

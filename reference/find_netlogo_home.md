@@ -43,6 +43,6 @@ Other utility functions:
 ``` r
 # \dontrun{
   find_netlogo_home()
-#> /opt/NetLogo-7.0.3
+#> /opt/NetLogo 7.0.3
 # }
 ```
