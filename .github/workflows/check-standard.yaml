@@ -9,30 +9,23 @@ permissions: read-all
 
 jobs:
   R-CMD-check:
-    runs-on: ${{matrix.config.os}}
-
-    name: ${{matrix.config.os}} (${{matrix.config.r}})
-
     strategy:
       fail-fast: false
       matrix:
         config:
-          - {os: macos-latest,   r: 'release'}
+          - {os: macos-latest, r: 'release'}
           - {os: windows-latest, r: 'release'}
-          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
-          - {os: ubuntu-latest,   r: 'release'}
-          - {os: ubuntu-latest,   r: 'oldrel-1'}
-
+          - {os: ubuntu-latest, r: 'devel', http-user-agent: 'release'}
+          - {os: ubuntu-latest, r: 'release'}
+          - {os: ubuntu-latest, r: 'oldrel-1'}
+    name: ${{matrix.config.os}} (${{matrix.config.r}})
+    runs-on: ${{matrix.config.os}}
     env:
       GITHUB_PAT: ${{secrets.GITHUB_TOKEN}}
       R_KEEP_PKG_SOURCE: yes
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Set up NetLogo
-        uses: danielvartan/netlogo-actions/setup-netlogo@v1
 
       - name: Set up Pandoc
         uses: r-lib/actions/setup-pandoc@v2

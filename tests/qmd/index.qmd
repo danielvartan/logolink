@@ -1,6 +1,6 @@
 # Welcome {.unnumbered}
 
-This book presents the rendering of an collection of unit tests related to the [logolink](https://github.com/danielvartan/logolink/) R package. It was made for internal use only, to run with [NetLogo-Actions](https://github.com/danielvartan/netlogo-actions).
+This book presents the rendering of an collection of unit tests related to the [logolink](https://github.com/danielvartan/logolink/) R package. It was made for internal use only, to run with [logoactions](https://github.com/danielvartan/logoactions).
 
 All analyses in this document are fully reproducible and were conducted using the [Quarto](https://quarto.org/) publishing system, the [R](https://www.r-project.org/) programming language, and the [logolink](https://danielvartan.github.io/logolink/) R package. Click [here](https://github.com/danielvartan/logolink/tree/main/tests) or on the GitHub icon in the menu to explore the code.
 
