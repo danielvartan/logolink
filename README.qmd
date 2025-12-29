@@ -45,7 +45,8 @@ cat(
     x = "doi",
     y = "10.32614/CRAN.package.logolink",
     color = "1284C5",
-    url = "https://doi.org/10.32614/CRAN.package.logolink"
+    url = "https://doi.org/10.32614/CRAN.package.logolink",
+    alt = "DOI badge"
   ),
   badge_cran_download(type = "grand-total"),
   badge_github_actions(action = "R-CMD-check.yaml"),
@@ -232,6 +233,8 @@ results <-
   run_experiment(setup_file = setup_file)
 ```
 
+### Checking the Results
+
 `logolink` supports the [four output formats](https://docs.netlogo.org/behaviorspace.html#run-options-formats) available in NetLogo BehaviorSpace: [`table`](https://docs.netlogo.org/behaviorspace.html#table-output), [`spreadsheet`](https://docs.netlogo.org/behaviorspace.html#spreadsheet-output), [`statistics`](https://docs.netlogo.org/behaviorspace.html#statistics-output), and [`lists`](https://docs.netlogo.org/behaviorspace.html#lists-output). By default, all formats are returned as a named list.
 
 ```{r}
@@ -277,25 +280,40 @@ data |>
       color = number_of_wolves
     )
   ) +
-    labs(
-      x = "Time Step",
-      y = "Average Number of Sheep",
-      color = "Wolves"
-    ) +
-  geom_line()
+  geom_line() +
+  labs(
+    x = "Time Step",
+    y = "Average Number of Sheep",
+    color = "Wolves"
+  )
 ```
 
 ### Visualizing the NetLogo World (Bonus Section)
 
 `logolink` also includes tutorials to help you get the most out of NetLogo in R. One tutorial demonstrates how to plot the NetLogo world at specific time steps and animate its evolution over time. You can find it [here](https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html).
 
-![](man/figures/netlogo-world-animation.gif)
+![](man/figures/vignette-wolf-sheep-model-animation-1.gif)
 
 Click [here](https://danielvartan.github.io/logolink/reference/) to see the full list of `logolink` functions.
 
 Please refer to the [BehaviorSpace Guide](https://docs.netlogo.org/behaviorspace.html) for complete instructions on how to set up and run experiments in NetLogo.
 
 ## Citation
+
+```{r}
+#| echo: false
+#| output: asis
+
+cat(
+  badge_custom(
+    x = "doi",
+    y = "10.32614/CRAN.package.logolink",
+    color = "1284C5",
+    url = "https://doi.org/10.32614/CRAN.package.logolink",
+    alt = "DOI badge"
+  )
+)
+```
 
 If you use this package in your research, please cite it to acknowledge the effort put into its development and maintenance. Your citation helps support its continued improvement.
 
@@ -365,106 +383,3 @@ Click [here](https://github.com/sponsors/danielvartan) to make a donation. Pleas
 ## Acknowledgments
 
 `logolink` brand identity is based on the [NetLogo 7](https://www.netlogo.org/) brand identity.
-
-```{r}
-#| echo: false
-#| output: asis
-
-tags$table(
-  tags$tr(
-    tags$td(
-      tags$br(),
-      tags$br(),
-      tags$p(
-        tags$a(
-          tags$img(
-            # Don't use `here()` here.
-            src = "man/figures/sustentarea-logo.svg",
-            width = 115,
-            alt = "Sustentarea Logo"
-          ),
-          href = "https://www.fsp.usp.br/sustentarea/"
-        ),
-        align = "center"
-      ),
-      tags$br(),
-      tags$br(),
-      width = "30%",
-      valign = "middle"
-    ),
-    tags$td(
-      tags$p(
-        "This work was developed with support from the ",
-        tags$a(
-          "Sustentarea",
-          href = "https://www.fsp.usp.br/sustentarea/"
-        ),
-        " Research and Extension Center at the University of São Paulo (",
-        tags$a(
-          "USP",
-          href = "https://www5.usp.br/",
-          .noWS = "outside"
-        ),
-        ")."
-      ),
-      width = "70%",
-      valign = "middle"
-    )
-  )
-) |>
-  raw_html()
-
-tags$table(
-  tags$tr(
-    tags$td(
-      tags$br(),
-      tags$br(),
-      tags$p(
-        tags$a(
-          tags$img(
-            # Don't use `here()` here.
-            src = "man/figures/cnpq-logo.svg",
-            width = 150,
-            alt = "CNPq Logo"
-          ),
-          href = "https://www.gov.br/cnpq/"
-        ),
-        align = "center"
-      ),
-      tags$br(),
-      tags$br(),
-      width = "30%",
-      valign = "middle"
-    ),
-    tags$td(
-      tags$p(
-        "This work was supported by the Department of Science and ",
-        "Technology of the Secretariat of Science, Technology, and Innovation ",
-        "and of the Health Economic-Industrial Complex (",
-        tags$a(
-          "SECTICS",
-          href = "https://www.gov.br/saude/pt-br/composicao/sectics/",
-          .noWS = "outside"
-        ),
-        ")  of the ",
-        tags$a(
-          "Ministry of Health",
-          href = "https://www.gov.br/saude/pt-br/composicao/sectics/",
-          .noWS = "outside"
-        ), " ",
-        "of Brazil, and the National Council for Scientific and ",
-        "Technological Development (",
-        tags$a(
-          "CNPq",
-          href = "https://www.gov.br/cnpq/",
-          .noWS = "outside"
-        ),
-        ") (grant no. 444588/2023-0)."
-      ),
-      width = "70%",
-      valign = "middle"
-    )
-  )
-) |>
-  raw_html()
-```

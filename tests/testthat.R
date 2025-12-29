@@ -47,3 +47,6 @@ test_check("logolink")
 # usethis::use_revdep()
 # usethis::use_tidy_description()
 # usethis::use_version()
+
+# git tag -f <tagname>
+# git push --force origin <tagname>

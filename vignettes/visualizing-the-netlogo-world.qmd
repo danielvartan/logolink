@@ -4,6 +4,7 @@ format:
   html:
     toc: true
     html-math-method: mathjax
+eval: false
 engine: knitr
 vignette: >
   %\VignetteIndexEntry{Visualizing the NetLogo World"}
@@ -62,13 +63,13 @@ model_path <-
 
 #### Get Turtle Shapes
 
-See [`NetLogo-Shapes`](https://github.com/danielvartan/netlogo-shapes) for more turtle shapes.
+See [`LogoShapes`](https://github.com/danielvartan/logoshapes) for more turtle shapes.
 
 ```{r}
 sheep_shape <-
   paste0(
     "https://raw.githubusercontent.com/danielvartan/",
-    "netlogo-shapes/main/svg/netlogo-simplified/sheep.svg"
+    "logoshapes/main/svg/netlogo-simplified/sheep.svg"
   ) |>
   curl_download(tempfile(fileext = ".svg"))
 ```
@@ -77,7 +78,7 @@ sheep_shape <-
 wolf_shape <-
   paste0(
     "https://raw.githubusercontent.com/danielvartan/",
-    "netlogo-shapes/main/svg/netlogo-simplified/wolf.svg"
+    "logoshapes/main/svg/netlogo-simplified/wolf.svg"
   ) |>
   curl_download(tempfile(fileext = ".svg"))
 ```
@@ -130,6 +131,24 @@ results <-
 results |>
   extract2("lists") |>
   glimpse()
+#> Rows: 7,350
+#> Columns: 16
+#> $ run_number             <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+#> $ number_of_sheep        <dbl> 100, 100, 100, 100, 100, 100, 100, 100, 100, 10…
+#> $ number_of_wolves       <dbl> 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,…
+#> $ movement_cost          <dbl> 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.…
+#> $ grass_regrowth_rate    <dbl> 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.…
+#> $ energy_gain_from_grass <dbl> 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,…
+#> $ energy_gain_from_sheep <dbl> 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,…
+#> $ step                   <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+#> $ index                  <chr> "0", "1", "2", "3", "4", "5", "6", "7", "8", "9…
+#> $ pcolor_of_patches      <dbl> 56.35257, 55.37902, 55.10799, 56.12433, 55.7057…
+#> $ pxcor_of_patches       <dbl> -12, 12, 7, -16, 6, -11, 11, 8, 5, -7, -13, 13,…
+#> $ pycor_of_patches       <dbl> -6, 11, 10, 15, -14, 13, 13, 6, -9, 8, -5, -5, …
+#> $ xcor_of_sheep          <dbl> -12.6365795, 16.9131184, -8.5579481, 3.2156422,…
+#> $ xcor_of_wolves         <dbl> -17.368182, -11.239707, -13.813702, 6.141812, -…
+#> $ ycor_of_sheep          <dbl> 17.44700318, 14.04946398, 12.60102781, 10.06565…
+#> $ ycor_of_wolves         <dbl> 16.403987, -15.657477, -1.630277, -16.875925, 9…
 ```
 
 ### Prepare Data
@@ -227,6 +246,24 @@ plot_netlogo_world <- function(
 plot_data |> plot_netlogo_world()
 ```
 
+![](../man/figures/vignette-wolf-sheep-model-plot-1.png)
+
+```{r}
+#| eval: false
+#| include: false
+
+ggsave(
+  filename = "vignette-wolf-sheep-model-plot-1.png",
+  plot = get_last_plot(),
+  device = agg_png,
+  path = here("man", "figures"),
+  width = 7,
+  height = 7.4,
+  units = "in",
+  dpi = 96
+)
+```
+
 ### Animate World
 
 ```{r}
@@ -237,6 +274,7 @@ steps <- plot_data |>
 
 ```{r}
 steps
+#> [1]   0 100 200 300 400 500
 ```
 
 ```{r}
@@ -273,6 +311,9 @@ for (i in steps) {
 
   cli_progress_update()
 }
+#> Generating frames ■■■■■■                            17% | ETA:  7s
+#> Generating frames ■■■■■■■■■■■■■■■■■■■■■             67% | ETA:  2s
+#> Generating frames ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
 
 cli_progress_done()
 ```
@@ -296,7 +337,7 @@ animation |>
     here(
       "man",
       "figures",
-      "netlogo-world-animation.gif"
+      "vignette-wolf-sheep-model-animation-1.gif"
     )
   )
 ```
@@ -314,3 +355,5 @@ animation |>
 ```{r}
 animation
 ```
+
+![](../man/figures/vignette-wolf-sheep-model-animation-1.gif)

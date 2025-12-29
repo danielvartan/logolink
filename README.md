@@ -10,7 +10,8 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![CRAN Status
 Badge](https://www.r-pkg.org/badges/version-ago/logolink)](https://cran.r-project.org/package=logolink)
-[![](https://img.shields.io/badge/doi-10.32614/CRAN.package.logolink-1284C5.svg)](https://doi.org/10.32614/CRAN.package.logolink)
+[![DOI
+badge](https://img.shields.io/badge/doi-10.32614/CRAN.package.logolink-1284C5.svg)](https://doi.org/10.32614/CRAN.package.logolink)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/logolink)](https://cran.r-project.org/package=logolink)
 [![R build
 status](https://github.com/danielvartan/logolink/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/danielvartan/logolink/actions)
@@ -238,6 +239,8 @@ results <-
   run_experiment(setup_file = setup_file)
 ```
 
+### Checking the Results
+
 `logolink` supports the [four output
 formats](https://docs.netlogo.org/behaviorspace.html#run-options-formats)
 available in NetLogo BehaviorSpace:
@@ -253,7 +256,7 @@ library(dplyr)
 results |> glimpse()
 #> List of 5
 #>  $ metadata   :List of 5
-#>   ..$ timestamp       : POSIXct[1:1], format: "2025-12-26 04:36:34"
+#>   ..$ timestamp       : POSIXct[1:1], format: "2025-12-29 04:55:05"
 #>   ..$ netlogo_version : chr "7.0.3"
 #>   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"
 #>   ..$ experiment_name : chr "Wolf Sheep Simple Model Analysis"
@@ -269,7 +272,7 @@ results |> glimpse()
 #>   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
 #>   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ count_sheep           : num [1:110110] 500 498 497 496 494 492 491 489 488 487 ...
+#>   ..$ count_sheep           : num [1:110110] 500 499 498 497 496 494 491 490 489 488 ...
 #>  $ spreadsheet:List of 2
 #>   ..$ statistics: tibble [330 × 13] (S3: tbl_df/tbl/data.frame)
 #>   ..$ measures  : tibble [330,330 × 4] (S3: tbl_df/tbl/data.frame)
@@ -294,8 +297,8 @@ results |> glimpse()
 #>   ..$ step                  : num [1:11011] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ mean_count_wolves     : num [1:11011] 5 5 5 5 5 5 5 5 5 5 ...
 #>   ..$ std_count_wolves      : num [1:11011] 0 0 0 0 0 0 0 0 0 0 ...
-#>   ..$ mean_count_sheep      : num [1:11011] 500 498 497 495 493 ...
-#>   ..$ std_count_sheep       : num [1:11011] 0 1.25 1.34 1.78 2.23 ...
+#>   ..$ mean_count_sheep      : num [1:11011] 500 498 496 495 493 ...
+#>   ..$ std_count_sheep       : num [1:11011] 0 0.872 1.345 1.9 2.01 ...
 ```
 
 ### Analyzing the Data (Bonus Section)
@@ -331,12 +334,12 @@ data |>
       color = number_of_wolves
     )
   ) +
-    labs(
-      x = "Time Step",
-      y = "Average Number of Sheep",
-      color = "Wolves"
-    ) +
-  geom_line()
+  geom_line() +
+  labs(
+    x = "Time Step",
+    y = "Average Number of Sheep",
+    color = "Wolves"
+  )
 ```
 
 <img
@@ -350,7 +353,7 @@ NetLogo in R. One tutorial demonstrates how to plot the NetLogo world at
 specific time steps and animate its evolution over time. You can find it
 [here](https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html).
 
-![](man/figures/netlogo-world-animation.gif)
+![](man/figures/vignette-wolf-sheep-model-animation-1.gif)
 
 Click [here](https://danielvartan.github.io/logolink/reference/) to see
 the full list of `logolink` functions.
@@ -360,6 +363,8 @@ Guide](https://docs.netlogo.org/behaviorspace.html) for complete
 instructions on how to set up and run experiments in NetLogo.
 
 ## Citation
+
+[![](https://img.shields.io/badge/doi-10.32614/CRAN.package.logolink-1284C5.svg)](https://doi.org/10.32614/CRAN.package.logolink)
 
 If you use this package in your research, please cite it to acknowledge
 the effort put into its development and maintenance. Your citation helps
@@ -428,51 +433,3 @@ donation. Please mention `logolink` in your donation message.
 
 `logolink` brand identity is based on the [NetLogo
 7](https://www.netlogo.org/) brand identity.
-
-<table>
-  <tr>
-    <td width="30%" valign="middle">
-      <br/>
-      <br/>
-      <p align="center">
-        <a href="https://www.fsp.usp.br/sustentarea/">
-          <img src="man/figures/sustentarea-logo.svg" width="115" alt="Sustentarea Logo"/>
-        </a>
-      </p>
-      <br/>
-      <br/>
-    </td>
-    <td width="70%" valign="middle">
-      <p>
-        This work was developed with support from the 
-        <a href="https://www.fsp.usp.br/sustentarea/">Sustentarea</a>
-         Research and Extension Center at the University of São Paulo (<a href="https://www5.usp.br/">USP</a>).
-      </p>
-    </td>
-  </tr>
-</table>
-
-<table>
-  <tr>
-    <td width="30%" valign="middle">
-      <br/>
-      <br/>
-      <p align="center">
-        <a href="https://www.gov.br/cnpq/">
-          <img src="man/figures/cnpq-logo.svg" width="150" alt="CNPq Logo"/>
-        </a>
-      </p>
-      <br/>
-      <br/>
-    </td>
-    <td width="70%" valign="middle">
-      <p>
-        This work was supported by the Department of Science and 
-        Technology of the Secretariat of Science, Technology, and Innovation 
-        and of the Health Economic-Industrial Complex (<a href="https://www.gov.br/saude/pt-br/composicao/sectics/">SECTICS</a>)  of the <a href="https://www.gov.br/saude/pt-br/composicao/sectics/">Ministry of Health</a> 
-        of Brazil, and the National Council for Scientific and 
-        Technological Development (<a href="https://www.gov.br/cnpq/">CNPq</a>) (grant no. 444588/2023-0).
-      </p>
-    </td>
-  </tr>
-</table>
