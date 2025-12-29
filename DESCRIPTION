@@ -8,35 +8,6 @@ Authors@R: c(
             role = c("aut", "cre", "ccp", "cph"),
             email = "danielvartan@proton.me",
             comment = c(ORCID = "0000-0001-7782-759X")
-        ),
-        person(
-            given = "Aline Martins",
-            family = "Carvalho",
-            role = c("sad"),
-            email = "alinenutri@usp.br",
-            comment = c(ORCID = "0000-0002-4900-5609")
-        ),
-        person(
-            given = "Leandro",
-            family = "Garcia",
-            role = c("sad"),
-            email = "l.garcia@qub.ac.uk",
-            comment = c(ORCID = "0000-0001-5947-2617")
-        ),
-        person(
-            given = "Sustentarea Research and Extension Center",
-            role = c("fnd")
-        ),
-        person(
-            given = "University of Sao Paulo (USP)",
-            role = c("fnd")
-        ),
-        person(
-            given = paste0(
-                "National Council for Scientific and ",
-                "Technological Development (CNPq)"
-            ),
-            role = c("fnd")
         )
     )
 Description: An interface for 'NetLogo' <https://www.netlogo.org> that enables
@@ -47,8 +18,7 @@ License: GPL (>= 3)
 URL: https://danielvartan.github.io/logolink/,
     https://github.com/danielvartan/logolink/
 BugReports: https://github.com/danielvartan/logolink/issues/
-Depends:
-    R (>= 4.4)
+Depends: R (>= 4.4)
 Imports:
     checkmate (>= 2.3.3),
     cli (>= 3.6.5),
@@ -78,9 +48,9 @@ Suggests:
     rsvg (>= 2.7.0),
     scales (>= 1.4.0),
     spelling (>= 2.3.2),
-    testthat (>= 3.3.0),
-VignetteBuilder:
-    quarto
+    testthat (>= 3.3.0)
+SystemRequirements: NetLogo (>= 7.0.1)
+VignetteBuilder: quarto
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US

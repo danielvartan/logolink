@@ -51,16 +51,6 @@ reference:
 authors:
   Daniel Vartanian:
     href: https://github.com/danielvartan/
-  Aline Martins Carvalho:
-    href: https://github.com/alinenutri/
-  Leandro Garcia:
-    href: https://github.com/leandromtg/
-  Sustentarea Research and Extension Center:
-    href: https://www.fsp.usp.br/sustentarea/
-  University of Sao Paulo (USP):
-    href: https://www5.usp.br/
-  National Council for Scientific and Technological Development (CNPq):
-    href: https://www.gov.br/cnpq/
 
 development:
   mode: release

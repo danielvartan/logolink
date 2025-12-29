@@ -39,20 +39,6 @@
       "@id": "https://orcid.org/0000-0001-7782-759X"
     }
   ],
-  "funder": [
-    {
-      "@type": "Organization",
-      "name": "Sustentarea Research and Extension Center"
-    },
-    {
-      "@type": "Organization",
-      "name": "University of Sao Paulo (USP)"
-    },
-    {
-      "@type": "Organization",
-      "name": "National Council for Scientific and Technological Development (CNPq)"
-    }
-  ],
   "maintainer": [
     {
       "@type": "Person",
@@ -435,9 +421,9 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=xml2"
     },
-    "SystemRequirements": null
+    "SystemRequirements": "NetLogo (>= 7.0.1)"
   },
-  "fileSize": "708.95KB",
+  "fileSize": "733.233KB",
   "citation": [
     {
       "@type": "CreativeWork",
@@ -459,6 +445,7 @@
     }
   ],
   "releaseNotes": "https://github.com/danielvartan/logolink/blob/main/NEWS.md",
+  "readme": "https://github.com/danielvartan/logolink/blob/main/README.md",
   "contIntegration": ["https://github.com/danielvartan/logolink/actions", "https://github.com/danielvartan/logolink/actions", "https://app.codecov.io/gh/danielvartan/logolink"],
   "developmentStatus": "https://www.repostatus.org/#active",
   "keywords": ["agent-based-modeling", "apis", "behaviorspace", "complexity-science", "individual-based-modeling", "netlogo", "r-packages", "rstats", "simulations", "computational-science", "multi-agent-systems", "headless-execution", "computational-social-science", "data-science", "ecological-modeling", "environmental-modeling", "system-dynamics", "tidyverse"]
