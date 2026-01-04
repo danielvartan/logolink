@@ -15,7 +15,7 @@ utils::bibentry(
       comment = c(ORCID = "0000-0001-7782-759X")
     )
   ),
-  year = "2025",
+  year = "2026",
   doi = paste0(
     "10.32614/CRAN.package.",
     "logolink"
@@ -23,7 +23,7 @@ utils::bibentry(
   note = "Computer software",
   textVersion = paste0(
     "Vartanian, D", ". ",
-    "(2025)", ". ",
+    "(2026)", ". ",
     "logolink:", " ",
     "An interface for running NetLogo simulations from R", " ",
     "[Computer software]", ". ",
