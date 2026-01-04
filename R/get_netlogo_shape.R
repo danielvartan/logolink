@@ -7,8 +7,9 @@
 #'
 #' The collections and shapes available for download can be found in the
 #' LogoShapes [`svg`](https://github.com/danielvartan/logoshapes/tree/main/svg)
-#' directory. Refer to the LogoShapes documentation for more information about
-#' the different collections.
+#' directory. Refer to the
+#' [LogoShapes](https://github.com/danielvartan/logoshapes) documentation for
+#' more information about the different collections.
 #'
 #' This function requires an active internet connection and the
 #' [`httr2`](https://httr2.r-lib.org/) package.
@@ -26,7 +27,8 @@
 #'   (default: `Sys.getenv("GITHUB_PAT")`).
 #'
 #' @return A named [`character`][base::character()] vector with the file paths
-#'   to the downloaded NetLogo shapes (SVG files).
+#'   to the downloaded NetLogo shapes as
+#' [SVG](https://en.wikipedia.org/wiki/SVG) files.
 #'
 #' @family utility functions
 #' @export
@@ -42,7 +44,7 @@
 #'
 #'   file_size(shape)
 #'
-#'   shape |> image_read() |> image_ggplot()
+#'   shape |> image_read_svg() |> image_ggplot()
 #' }
 #'
 #' \dontrun{
@@ -50,7 +52,7 @@
 #'
 #'   file_size(shape)
 #'
-#'   shape |> image_read() |> image_ggplot()
+#'   shape |> image_read_svg() |> image_ggplot()
 #' }
 #'
 #' \dontrun{
@@ -58,7 +60,7 @@
 #'
 #'   file_size(shape)
 #'
-#'   shape |> image_read() |> image_ggplot()
+#'   shape |> image_read_svg() |> image_ggplot()
 #' }
 get_netlogo_shape <- function(
   shape,

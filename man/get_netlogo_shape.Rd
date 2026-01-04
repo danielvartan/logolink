@@ -29,7 +29,8 @@ with the GitHub API. This is useful when dealing with rate limits
 }
 \value{
 A named \code{\link[base:character]{character}} vector with the file paths
-to the downloaded NetLogo shapes (SVG files).
+to the downloaded NetLogo shapes as
+\href{https://en.wikipedia.org/wiki/SVG}{SVG} files.
 }
 \description{
 \code{get_netlogo_shape()} downloads NetLogo shapes from the
@@ -37,8 +38,9 @@ to the downloaded NetLogo shapes (SVG files).
 
 The collections and shapes available for download can be found in the
 LogoShapes \href{https://github.com/danielvartan/logoshapes/tree/main/svg}{\code{svg}}
-directory. Refer to the LogoShapes documentation for more information about
-the different collections.
+directory. Refer to the
+\href{https://github.com/danielvartan/logoshapes}{LogoShapes} documentation for
+more information about the different collections.
 
 This function requires an active internet connection and the
 \href{https://httr2.r-lib.org/}{\code{httr2}} package.
@@ -54,7 +56,7 @@ This function requires an active internet connection and the
 
   file_size(shape)
 
-  shape |> image_read() |> image_ggplot()
+  shape |> image_read_svg() |> image_ggplot()
 }
 
 \dontrun{
@@ -62,7 +64,7 @@ This function requires an active internet connection and the
 
   file_size(shape)
 
-  shape |> image_read() |> image_ggplot()
+  shape |> image_read_svg() |> image_ggplot()
 }
 
 \dontrun{
@@ -70,7 +72,7 @@ This function requires an active internet connection and the
 
   file_size(shape)
 
-  shape |> image_read() |> image_ggplot()
+  shape |> image_read_svg() |> image_ggplot()
 }
 }
 \seealso{

@@ -32,7 +32,8 @@ navbar:
 reference:
 - title: BehaviorSpace
   desc: >
-    Functions to set up and run NetLogo experiments using BehaviorSpace.
+    Functions to set up and run NetLogo experiments using
+    [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html).
   contents:
   - create_experiment
   - run_experiment
@@ -46,7 +47,7 @@ reference:
 
 - title: System
   desc: >
-    Functions to locate NetLogo installations.
+    Functions to manage NetLogo installations.
   contents:
   - find_netlogo_home
   - find_netlogo_console

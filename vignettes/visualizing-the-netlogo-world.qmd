@@ -342,11 +342,13 @@ animation <-
 #| include: false
 
 animation |>
-  image_write(here(
-    "man",
-    "figures",
-    "vignette-wolf-sheep-model-animation-1.gif"
-  ))
+  image_write(
+    here(
+      "man",
+      "figures",
+      "vignette-wolf-sheep-model-animation-1.gif"
+    )
+  )
 ```
 
 To save it:

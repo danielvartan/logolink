@@ -40,6 +40,7 @@ Suggests:
     ggplot2 (>= 4.0.1),
     ggimage (>= 0.3.4),
     ggtext (>= 0.1.2),
+    here (>= 1.0.2),
     httr2 (>= 1.2.1),
     knitr (>= 1.50),
     lifecycle (>= 1.0.4),
