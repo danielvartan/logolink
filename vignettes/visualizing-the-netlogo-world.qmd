@@ -7,7 +7,7 @@ format:
 engine: knitr
 eval: false
 vignette: >
-  %\VignetteIndexEntry{Visualizing the NetLogo World"}
+  %\VignetteIndexEntry{Visualizing the NetLogo World}
   %\VignetteEngine{quarto::html}
   %\VignetteEncoding{UTF-8}
 ---
@@ -22,13 +22,15 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette demonstrates how to visualize the NetLogo world using the `logolink` package. This is useful for capturing special states and for preparing materials for publication.
+Have you ever wanted to capture what's happening in your NetLogo simulation at specific moments? Maybe you need figures for a paper or just want to see how your agents move over time. In this vignette, we'll walk through how to do exactly that using `logolink`.
 
-We will use the [Wolf Sheep Simple](https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/IABM%20Textbook/chapter%204/Wolf%20Sheep%20Simple%205.nlogox) model that comes with NetLogo as an example.
+We'll work with the [Wolf Sheep Simple](https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/IABM%20Textbook/chapter%204/Wolf%20Sheep%20Simple%205.nlogox) model, a classic predator-prey simulation that ships with NetLogo. By the end, you'll have both static plots and an animated GIF showing your simulation evolving over time.
 
-### Set the Environment
+I'm assuming you have [NetLogo](https://ccl.northwestern.edu/netlogo/) 7.1+ installed and are comfortable with basic R.
 
-#### Load Packages
+## Getting Started
+
+First, let's load the packages we'll need:
 
 ```{r}
 #| output: false
@@ -41,6 +43,7 @@ library(dplyr)
 library(ggplot2)
 library(ggimage)
 library(ggtext)
+library(here)
 library(magick)
 library(magrittr)
 library(ragg)
@@ -48,7 +51,28 @@ library(stringr)
 library(tidyr)
 ```
 
-#### Define Model Path
+If any of these are missing, install them with:
+
+```r
+install.packages(
+  c(
+    "logolink",
+    "cli",
+    "curl",
+    "dplyr",
+    "ggplot2",
+    "ggimage",
+    "ggtext",
+    "magick",
+    "magrittr",
+    "ragg",
+    "stringr",
+    "tidyr"
+  )
+)
+```
+
+Now let's find our model. The `find_netlogo_home()` function locates your NetLogo installation, and from there we can navigate to the model file:
 
 ```{r}
 model_path <-
@@ -61,9 +85,7 @@ model_path <-
   )
 ```
 
-#### Get Turtle Shapes
-
-See [`LogoShapes`](https://github.com/danielvartan/logoshapes) for more turtle shapes.
+We'll also need the turtle shapes to make our plots look nice. The `get_netlogo_shape()` function grabs [SVG](https://en.wikipedia.org/wiki/SVG) files from the [LogoShapes](https://github.com/danielvartan/logoshapes) project:
 
 ```{r}
 sheep_shape <- get_netlogo_shape("sheep")
@@ -73,9 +95,9 @@ sheep_shape <- get_netlogo_shape("sheep")
 wolf_shape <- get_netlogo_shape("wolf")
 ```
 
-### Extract Agents Coordinates
+## Running the Simulation
 
-#### Create Experiment Setup
+Here's where things get interesting. We want to capture the position of every sheep, wolf, and patch at regular intervals. Let's set up an experiment that takes snapshots every 100 ticks:
 
 ```{r}
 setup_file <- create_experiment(
@@ -107,7 +129,9 @@ setup_file <- create_experiment(
 )
 ```
 
-#### Run Experiment
+The `run_metrics_condition = 'ticks mod 100 = 0'` is the key here. It tells NetLogo to only record data when the tick count is divisible by 100. With `time_limit = 500`, we get 6 snapshots: steps 0, 100, 200, 300, 400, and 500.
+
+Now let's run it using `run_experiment()`:
 
 ```{r}
 #| output: false
@@ -116,6 +140,8 @@ results <-
   model_path |>
   run_experiment(setup_file = setup_file)
 ```
+
+The results come back as a list. The `lists` element has all our agent data:
 
 ```{r}
 results |>
@@ -141,9 +167,9 @@ results |>
 #> $ ycor_of_wolves         <dbl> 16.403987, -15.657477, -1.630277, -16.875925, 9…
 ```
 
-### Prepare Data
+## Preparing the Data
 
-Parse NetLogo color codes to Hex colors using `parse_netlogo_color()`.
+NetLogo uses its own color coding system, so we need to convert those values to hex colors that [`ggplot2`](https://ggplot2.tidyverse.org/) understands:
 
 ```{r}
 plot_data <-
@@ -157,7 +183,9 @@ plot_data <-
   )
 ```
 
-### Plot World
+## Building the Plot
+
+Let's create a function that renders the world at any given step. It draws patches as a raster background, then overlays sheep and wolf icons at their coordinates:
 
 ```{r}
 plot_netlogo_world <- function(
@@ -185,8 +213,7 @@ plot_netlogo_world <- function(
     geom_raster() +
     coord_fixed(expand = FALSE) +
     geom_image(
-      data = data |>
-        drop_na(xcor_of_sheep),
+      data = data |> drop_na(xcor_of_sheep),
       mapping = aes(
         x = xcor_of_sheep,
         y = ycor_of_sheep,
@@ -195,8 +222,7 @@ plot_netlogo_world <- function(
       size = 0.04
     ) +
     geom_image(
-      data = data |>
-        drop_na(xcor_of_wolves),
+      data = data |> drop_na(xcor_of_wolves),
       mapping = aes(
         x = xcor_of_wolves,
         y = ycor_of_wolves,
@@ -214,10 +240,7 @@ plot_netlogo_world <- function(
       labs(title = paste0("Step: **", step, "**")) +
       theme(
         plot.title.position = "plot",
-        plot.title = element_markdown(
-          size = 20,
-          margin = margin(b = 10)
-        ),
+        plot.title = element_markdown(size = 20, margin = margin(b = 10)),
         plot.background = element_rect(fill = "white", color = NA),
         plot.margin = margin(1.5, 1.5, 1.5, 1.5, "line")
       )
@@ -227,13 +250,15 @@ plot_netlogo_world <- function(
 }
 ```
 
+Let's see what the initial state looks like:
+
 ```{r}
 #| label: readme-wolf-sheep-model-plot-2
 #| fig-height: 7.4
 #| fig-width: 7
 #| fig-alt: Plot of the NetLogo world showing patches, sheep, and wolves at step 0.
 
-plot_data |> plot_netlogo_world()
+plot_netlogo_world(plot_data)
 ```
 
 ![](../man/figures/vignette-wolf-sheep-model-plot-1.png)
@@ -254,18 +279,26 @@ ggsave(
 )
 ```
 
-### Animate World
+## Creating an Animation
+
+Static plots are nice, but an animation really brings the simulation to life. We'll use the [`magick`](https://docs.ropensci.org/magick/) package to stitch our snapshots together.
+
+First, let's see what steps we have:
 
 ```{r}
-steps <- plot_data |>
+steps <-
+  plot_data |>
   pull(step) |>
   unique()
 ```
+
 
 ```{r}
 steps
 #> [1]   0 100 200 300 400 500
 ```
+
+Now we'll generate a PNG for each step:
 
 ```{r}
 files <- character()
@@ -273,40 +306,28 @@ files <- character()
 cli_progress_bar("Generating frames", total = length(steps))
 
 for (i in steps) {
-  step_label <- TRUE
+  i_plot <- plot_netlogo_world(plot_data, step = i, step_label = TRUE)
 
-  i_plot <-
-    plot_data |>
-    plot_netlogo_world(
-      step = i,
-      step_label = step_label
-    )
-
-  i_file <- tempfile(
-    pattern = paste0("step-", i, "-"),
-    fileext = ".png"
-  )
+  i_file <- tempfile(pattern = paste0("step-", i, "-"), fileext = ".png")
 
   ggsave(
     filename = i_file,
     plot = i_plot,
     device = agg_png,
     width = 7,
-    height = ifelse(isTRUE(step_label), 7.4, 7),
+    height = 7.4,
     units = "in",
     dpi = 96
   )
 
-  files <- files |> append(i_file)
-
+  files <- append(files, i_file)
   cli_progress_update()
 }
-#> Generating frames ■■■■■■                            17% | ETA:  7s
-#> Generating frames ■■■■■■■■■■■■■■■■■■■■■             67% | ETA:  2s
-#> Generating frames ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s
 
 cli_progress_done()
 ```
+
+Finally, let's combine them into a GIF:
 
 ```{r}
 animation <-
@@ -320,30 +341,33 @@ animation <-
 #| eval: false
 #| include: false
 
-library(here)
-
 animation |>
-  image_write(
-    here(
-      "man",
-      "figures",
-      "vignette-wolf-sheep-model-animation-1.gif"
-    )
-  )
+  image_write(here(
+    "man",
+    "figures",
+    "vignette-wolf-sheep-model-animation-1.gif"
+  ))
 ```
+
+To save it:
 
 ```{r}
-animation |>
-  image_write(
-    tempfile(
-      pattern = "netlogo-world-animation-",
-      fileext = ".gif"
-    )
-  )
+#| eval: false
+#| output: false
+
+animation |> image_write("netlogo-world-animation.gif")
 ```
+
+And here's the result:
 
 ```{r}
 animation
 ```
 
 ![](../man/figures/vignette-wolf-sheep-model-animation-1.gif)
+
+## Wrapping up
+
+You now have the tools to visualize any NetLogo simulation. The approach is straightforward: extract agent coordinates at the time steps you care about, convert NetLogo colors to hex, and plot with ggplot2.
+
+Feel free to adapt this for your own models, just change the metrics to capture whatever agent properties you need. One caveat: animations can get memory-intensive if you're capturing many steps or have lots of agents, so start small and scale up as needed.
