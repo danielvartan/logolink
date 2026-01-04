@@ -266,16 +266,16 @@ Other NetLogo functions:
 # \dontrun{
   model_path |> run_experiment(setup_file = setup_file)
 #> ℹ Running model
-#> ✔ Running model [21.2s]
+#> ✔ Running model [21.7s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [14ms]
+#> ✔ Gathering metadata [19ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [327ms]
+#> ✔ Processing table output [350ms]
 #> 
 #> ℹ Processing spreadsheet output
-#> ✔ Processing spreadsheet output [785ms]
+#> ✔ Processing spreadsheet output [795ms]
 #> 
 #> ℹ Processing list output
 #> ! The experiment produced no lists results.
@@ -287,11 +287,11 @@ Other NetLogo functions:
 #> 
 #> ℹ The experiment run produced the following messages:
 #> 
-#> Jan 04, 2026 9:35:29 AM java.util.prefs.FileSystemPreferences$1 run
+#> Jan 04, 2026 10:24:55 AM java.util.prefs.FileSystemPreferences$1 run
 #> INFO: Created user preferences directory.
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-04 09:35:29 GMT"
+#> [1] "2026-01-04 10:24:56 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -398,28 +398,28 @@ Other NetLogo functions:
       experiment = "Wolf Sheep Simple model analysis"
     )
 #> ℹ Running model
-#> ✔ Running model [18.2s]
+#> ✔ Running model [17.6s]
 #> 
 #> ℹ Gathering metadata
 #> ✔ Gathering metadata [9ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [33ms]
+#> ✔ Processing table output [35ms]
 #> 
 #> ℹ Processing spreadsheet output
-#> ✔ Processing spreadsheet output [65ms]
+#> ✔ Processing spreadsheet output [67ms]
 #> 
 #> ℹ Processing list output
 #> ! The experiment produced no lists results.
 #> ℹ Processing list output
-#> ✔ Processing list output [34ms]
+#> ✔ Processing list output [33ms]
 #> 
 #> ℹ Processing statistics output
 #> ✔ Processing statistics output [8ms]
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-04 09:35:52 GMT"
+#> [1] "2026-01-04 10:25:20 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -478,15 +478,15 @@ Other NetLogo functions:
 #>    run_number reporter                      measure  value
 #>         <dbl> <chr>                           <dbl>  <dbl>
 #>  1          1 [step]                              1  1000 
-#>  2          1 count wolves                        1     9 
-#>  3          1 count sheep                         1    92 
-#>  4          1 sum [grass-amount] of patches       1 11132.
+#>  2          1 count wolves                        1    14 
+#>  3          1 count sheep                         1    63 
+#>  4          1 sum [grass-amount] of patches       1 11667 
 #>  5          2 [step]                              1  1000 
-#>  6          2 count wolves                        1    18 
-#>  7          2 count sheep                         1    85 
-#>  8          2 sum [grass-amount] of patches       1 11139.
+#>  6          2 count wolves                        1    16 
+#>  7          2 count sheep                         1    69 
+#>  8          2 sum [grass-amount] of patches       1 11524.
 #>  9          3 [step]                              1  1000 
-#> 10          3 count wolves                        1     5 
+#> 10          3 count wolves                        1    18 
 #> # ℹ 430 more rows
 #> 
 #> 

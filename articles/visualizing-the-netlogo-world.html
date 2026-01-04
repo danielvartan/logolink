@@ -90,12 +90,12 @@
 
 
 
-    <p>This vignette demonstrates how to visualize the NetLogo world using the <code>logolink</code> package. This is useful for capturing special states and for preparing materials for publication.</p>
-<p>We will use the <a href="https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/IABM%20Textbook/chapter%204/Wolf%20Sheep%20Simple%205.nlogox" class="external-link">Wolf Sheep Simple</a> model that comes with NetLogo as an example.</p>
-<section class="level3"><h3 id="set-the-environment">Set the Environment<a class="anchor" aria-label="anchor" href="#set-the-environment"></a>
-</h3>
-<section class="level4"><h4 id="load-packages">Load Packages<a class="anchor" aria-label="anchor" href="#load-packages"></a>
-</h4>
+    <p>Have you ever wanted to capture what’s happening in your NetLogo simulation at specific moments? Maybe you need figures for a paper or just want to see how your agents move over time. In this vignette, we’ll walk through how to do exactly that using <code>logolink</code>.</p>
+<p>We’ll work with the <a href="https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/IABM%20Textbook/chapter%204/Wolf%20Sheep%20Simple%205.nlogox" class="external-link">Wolf Sheep Simple</a> model, a classic predator-prey simulation that ships with NetLogo. By the end, you’ll have both static plots and an animated GIF showing your simulation evolving over time.</p>
+<p>I’m assuming you have <a href="https://ccl.northwestern.edu/netlogo/" class="external-link">NetLogo</a> 7.1+ installed and are comfortable with basic R.</p>
+<section class="level2"><h2 id="getting-started">Getting Started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
+</h2>
+<p>First, let’s load the packages we’ll need:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://danielvartan.github.io/logolink/">logolink</a></span><span class="op">)</span></span>
@@ -106,16 +106,34 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/YuLab-SMU/ggimage" class="external-link">ggimage</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/ggtext/" class="external-link">ggtext</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/" class="external-link">here</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/magick/" class="external-link">magick</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ragg.r-lib.org" class="external-link">ragg</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span></code></pre></div>
 </div>
-</section><section class="level4"><h4 id="define-model-path">Define Model Path<a class="anchor" aria-label="anchor" href="#define-model-path"></a>
-</h4>
+<p>If any of these are missing, install them with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"logolink"</span>,</span>
+<span>    <span class="st">"cli"</span>,</span>
+<span>    <span class="st">"curl"</span>,</span>
+<span>    <span class="st">"dplyr"</span>,</span>
+<span>    <span class="st">"ggplot2"</span>,</span>
+<span>    <span class="st">"ggimage"</span>,</span>
+<span>    <span class="st">"ggtext"</span>,</span>
+<span>    <span class="st">"magick"</span>,</span>
+<span>    <span class="st">"magrittr"</span>,</span>
+<span>    <span class="st">"ragg"</span>,</span>
+<span>    <span class="st">"stringr"</span>,</span>
+<span>    <span class="st">"tidyr"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Now let’s find our model. The <code><a href="../reference/find_netlogo_home.html">find_netlogo_home()</a></code> function locates your NetLogo installation, and from there we can navigate to the model file:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model_path</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/find_netlogo_home.html">find_netlogo_home</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span>
@@ -125,23 +143,20 @@
 <span>    <span class="st">"Wolf Sheep Simple 5.nlogox"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 </div>
-</section><section class="level4"><h4 id="get-turtle-shapes">Get Turtle Shapes<a class="anchor" aria-label="anchor" href="#get-turtle-shapes"></a>
-</h4>
-<p>See <a href="https://github.com/danielvartan/logoshapes" class="external-link"><code>LogoShapes</code></a> for more turtle shapes.</p>
+<p>We’ll also need the turtle shapes to make our plots look nice. The <code><a href="../reference/get_netlogo_shape.html">get_netlogo_shape()</a></code> function grabs <a href="https://en.wikipedia.org/wiki/SVG" class="external-link">SVG</a> files from the <a href="https://github.com/danielvartan/logoshapes" class="external-link">LogoShapes</a> project:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sheep_shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_netlogo_shape.html">get_netlogo_shape</a></span><span class="op">(</span><span class="st">"sheep"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wolf_shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_netlogo_shape.html">get_netlogo_shape</a></span><span class="op">(</span><span class="st">"wolf"</span><span class="op">)</span></span></code></pre></div>
 </div>
-</section></section><section class="level3"><h3 id="extract-agents-coordinates">Extract Agents Coordinates<a class="anchor" aria-label="anchor" href="#extract-agents-coordinates"></a>
-</h3>
-<section class="level4"><h4 id="create-experiment-setup">Create Experiment Setup<a class="anchor" aria-label="anchor" href="#create-experiment-setup"></a>
-</h4>
+</section><section class="level2"><h2 id="running-the-simulation">Running the Simulation<a class="anchor" aria-label="anchor" href="#running-the-simulation"></a>
+</h2>
+<p>Here’s where things get interesting. We want to capture the position of every sheep, wolf, and patch at regular intervals. Let’s set up an experiment that takes snapshots every 100 ticks:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_experiment.html">create_experiment</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="st">"Wolf Sheep Simple Model Analysis"</span>,</span>
 <span>  repetitions <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -170,16 +185,17 @@
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
-</section><section class="level4"><h4 id="run-experiment">Run Experiment<a class="anchor" aria-label="anchor" href="#run-experiment"></a>
-</h4>
+<p>The <code>run_metrics_condition = 'ticks mod 100 = 0'</code> is the key here. It tells NetLogo to only record data when the tick count is divisible by 100. With <code>time_limit = 500</code>, we get 6 snapshots: steps 0, 100, 200, 300, 400, and 500.</p>
+<p>Now let’s run it using <code><a href="../reference/run_experiment.html">run_experiment()</a></code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">model_path</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/run_experiment.html">run_experiment</a></span><span class="op">(</span>setup_file <span class="op">=</span> <span class="va">setup_file</span><span class="op">)</span></span></code></pre></div>
 </div>
+<p>The results come back as a list. The <code>lists</code> element has all our agent data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">extract2</a></span><span class="op">(</span><span class="st">"lists"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -202,11 +218,11 @@
 <span><span class="co">#&gt; $ ycor_of_sheep          &lt;dbl&gt; 17.44700318, 14.04946398, 12.60102781, 10.06565…</span></span>
 <span><span class="co">#&gt; $ ycor_of_wolves         &lt;dbl&gt; 16.403987, -15.657477, -1.630277, -16.875925, 9…</span></span></code></pre></div>
 </div>
-</section></section><section class="level3"><h3 id="prepare-data">Prepare Data<a class="anchor" aria-label="anchor" href="#prepare-data"></a>
-</h3>
-<p>Parse NetLogo color codes to Hex colors using <code><a href="../reference/parse_netlogo_color.html">parse_netlogo_color()</a></code>.</p>
+</section><section class="level2"><h2 id="preparing-the-data">Preparing the Data<a class="anchor" aria-label="anchor" href="#preparing-the-data"></a>
+</h2>
+<p>NetLogo uses its own color coding system, so we need to convert those values to hex colors that <a href="https://ggplot2.tidyverse.org/" class="external-link"><code>ggplot2</code></a> understands:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plot_data</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">results</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">extract2</a></span><span class="op">(</span><span class="st">"lists"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -217,10 +233,11 @@
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 </div>
-</section><section class="level3"><h3 id="plot-world">Plot World<a class="anchor" aria-label="anchor" href="#plot-world"></a>
-</h3>
+</section><section class="level2"><h2 id="building-the-plot">Building the Plot<a class="anchor" aria-label="anchor" href="#building-the-plot"></a>
+</h2>
+<p>Let’s create a function that renders the world at any given step. It draws patches as a raster background, then overlays sheep and wolf icons at their coordinates:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plot_netlogo_world</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span></span>
 <span>  <span class="va">data</span>,</span>
 <span>  <span class="va">run_number</span> <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -246,8 +263,7 @@
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_raster</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html" class="external-link">coord_fixed</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/pkg/ggimage/man/geom_image.html" class="external-link">geom_image</a></span><span class="op">(</span></span>
-<span>      data <span class="op">=</span> <span class="va">data</span> <span class="op">|&gt;</span></span>
-<span>        <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="va">xcor_of_sheep</span><span class="op">)</span>,</span>
+<span>      data <span class="op">=</span> <span class="va">data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="va">xcor_of_sheep</span><span class="op">)</span>,</span>
 <span>      mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span></span>
 <span>        x <span class="op">=</span> <span class="va">xcor_of_sheep</span>,</span>
 <span>        y <span class="op">=</span> <span class="va">ycor_of_sheep</span>,</span>
@@ -256,8 +272,7 @@
 <span>      size <span class="op">=</span> <span class="fl">0.04</span></span>
 <span>    <span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/pkg/ggimage/man/geom_image.html" class="external-link">geom_image</a></span><span class="op">(</span></span>
-<span>      data <span class="op">=</span> <span class="va">data</span> <span class="op">|&gt;</span></span>
-<span>        <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="va">xcor_of_wolves</span><span class="op">)</span>,</span>
+<span>      data <span class="op">=</span> <span class="va">data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="va">xcor_of_wolves</span><span class="op">)</span>,</span>
 <span>      mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span></span>
 <span>        x <span class="op">=</span> <span class="va">xcor_of_wolves</span>,</span>
 <span>        y <span class="op">=</span> <span class="va">ycor_of_wolves</span>,</span>
@@ -275,10 +290,7 @@
 <span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Step: **"</span>, <span class="va">step</span>, <span class="st">"**"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
 <span>        plot.title.position <span class="op">=</span> <span class="st">"plot"</span>,</span>
-<span>        plot.title <span class="op">=</span> <span class="fu"><a href="https://wilkelab.org/ggtext/reference/element_markdown.html" class="external-link">element_markdown</a></span><span class="op">(</span></span>
-<span>          size <span class="op">=</span> <span class="fl">20</span>,</span>
-<span>          margin <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">margin</a></span><span class="op">(</span>b <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span>        <span class="op">)</span>,</span>
+<span>        plot.title <span class="op">=</span> <span class="fu"><a href="https://wilkelab.org/ggtext/reference/element_markdown.html" class="external-link">element_markdown</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span>, margin <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">margin</a></span><span class="op">(</span>b <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>        plot.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"white"</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span>,</span>
 <span>        plot.margin <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">margin</a></span><span class="op">(</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="st">"line"</span><span class="op">)</span></span>
 <span>      <span class="op">)</span></span>
@@ -287,88 +299,80 @@
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">plot_data</span> <span class="op">|&gt;</span> <span class="fu">plot_netlogo_world</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-</div>
-<p><img src="../reference/figures/vignette-wolf-sheep-model-plot-1.png"></p>
-</section><section class="level3"><h3 id="animate-world">Animate World<a class="anchor" aria-label="anchor" href="#animate-world"></a>
-</h3>
+<p>Let’s see what the initial state looks like:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">steps</span> <span class="op">&lt;-</span> <span class="va">plot_data</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="fu">plot_netlogo_world</span><span class="op">(</span><span class="va">plot_data</span><span class="op">)</span></span></code></pre></div>
+</div>
+<p><img src="../reference/figures/vignette-wolf-sheep-model-plot-1.png"></p>
+</section><section class="level2"><h2 id="creating-an-animation">Creating an Animation<a class="anchor" aria-label="anchor" href="#creating-an-animation"></a>
+</h2>
+<p>Static plots are nice, but an animation really brings the simulation to life. We’ll use the <a href="https://docs.ropensci.org/magick/" class="external-link"><code>magick</code></a> package to stitch our snapshots together.</p>
+<p>First, let’s see what steps we have:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">steps</span> <span class="op">&lt;-</span></span>
+<span>  <span class="va">plot_data</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">step</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">steps</span></span>
 <span><span class="co">#&gt; [1]   0 100 200 300 400 500</span></span></code></pre></div>
 </div>
+<p>Now we’ll generate a PNG for each step:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://cli.r-lib.org/reference/cli_progress_bar.html" class="external-link">cli_progress_bar</a></span><span class="op">(</span><span class="st">"Generating frames"</span>, total <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">steps</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">steps</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">step_label</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span>  <span class="va">i_plot</span> <span class="op">&lt;-</span> <span class="fu">plot_netlogo_world</span><span class="op">(</span><span class="va">plot_data</span>, step <span class="op">=</span> <span class="va">i</span>, step_label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="va">i_plot</span> <span class="op">&lt;-</span></span>
-<span>    <span class="va">plot_data</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">plot_netlogo_world</span><span class="op">(</span></span>
-<span>      step <span class="op">=</span> <span class="va">i</span>,</span>
-<span>      step_label <span class="op">=</span> <span class="va">step_label</span></span>
-<span>    <span class="op">)</span></span>
-<span></span>
-<span>  <span class="va">i_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span></span>
-<span>    pattern <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"step-"</span>, <span class="va">i</span>, <span class="st">"-"</span><span class="op">)</span>,</span>
-<span>    fileext <span class="op">=</span> <span class="st">".png"</span></span>
-<span>  <span class="op">)</span></span>
+<span>  <span class="va">i_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"step-"</span>, <span class="va">i</span>, <span class="st">"-"</span><span class="op">)</span>, fileext <span class="op">=</span> <span class="st">".png"</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span></span>
 <span>    filename <span class="op">=</span> <span class="va">i_file</span>,</span>
 <span>    plot <span class="op">=</span> <span class="va">i_plot</span>,</span>
 <span>    device <span class="op">=</span> <span class="va">agg_png</span>,</span>
 <span>    width <span class="op">=</span> <span class="fl">7</span>,</span>
-<span>    height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Logic.html" class="external-link">isTRUE</a></span><span class="op">(</span><span class="va">step_label</span><span class="op">)</span>, <span class="fl">7.4</span>, <span class="fl">7</span><span class="op">)</span>,</span>
+<span>    height <span class="op">=</span> <span class="fl">7.4</span>,</span>
 <span>    units <span class="op">=</span> <span class="st">"in"</span>,</span>
 <span>    dpi <span class="op">=</span> <span class="fl">96</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
-<span>  <span class="va">files</span> <span class="op">&lt;-</span> <span class="va">files</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/append.html" class="external-link">append</a></span><span class="op">(</span><span class="va">i_file</span><span class="op">)</span></span>
-<span></span>
+<span>  <span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/append.html" class="external-link">append</a></span><span class="op">(</span><span class="va">files</span>, <span class="va">i_file</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://cli.r-lib.org/reference/cli_progress_bar.html" class="external-link">cli_progress_update</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; Generating frames ■■■■■■                            17% | ETA:  7s</span></span>
-<span><span class="co">#&gt; Generating frames ■■■■■■■■■■■■■■■■■■■■■             67% | ETA:  2s</span></span>
-<span><span class="co">#&gt; Generating frames ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s</span></span>
 <span></span>
 <span><span class="fu"><a href="https://cli.r-lib.org/reference/cli_progress_bar.html" class="external-link">cli_progress_done</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
+<p>Finally, let’s combine them into a GIF:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">animation</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">files</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">image_read</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html" class="external-link">image_join</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://docs.ropensci.org/magick/reference/animation.html" class="external-link">image_animate</a></span><span class="op">(</span>fps <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">animation</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html" class="external-link">image_write</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span></span>
-<span>      pattern <span class="op">=</span> <span class="st">"netlogo-world-animation-"</span>,</span>
-<span>      fileext <span class="op">=</span> <span class="st">".gif"</span></span>
-<span>    <span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
-</div>
+<p>To save it:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">animation</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html" class="external-link">image_write</a></span><span class="op">(</span><span class="st">"netlogo-world-animation.gif"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<p>And here’s the result:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">animation</span></span></code></pre></div>
 </div>
 <p><img src="../reference/figures/vignette-wolf-sheep-model-animation-1.gif"></p>
+</section><section class="level2"><h2 id="wrapping-up">Wrapping up<a class="anchor" aria-label="anchor" href="#wrapping-up"></a>
+</h2>
+<p>You now have the tools to visualize any NetLogo simulation. The approach is straightforward: extract agent coordinates at the time steps you care about, convert NetLogo colors to hex, and plot with ggplot2.</p>
+<p>Feel free to adapt this for your own models, just change the metrics to capture whatever agent properties you need. One caveat: animations can get memory-intensive if you’re capturing many steps or have lots of agents, so start small and scale up as needed.</p>
 </section><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
