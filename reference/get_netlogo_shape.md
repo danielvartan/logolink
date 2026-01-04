@@ -7,8 +7,9 @@ GitHub.
 The collections and shapes available for download can be found in the
 LogoShapes
 [`svg`](https://github.com/danielvartan/logoshapes/tree/main/svg)
-directory. Refer to the LogoShapes documentation for more information
-about the different collections.
+directory. Refer to the
+[LogoShapes](https://github.com/danielvartan/logoshapes) documentation
+for more information about the different collections.
 
 This function requires an active internet connection and the
 [`httr2`](https://httr2.r-lib.org/) package.
@@ -53,7 +54,8 @@ get_netlogo_shape(
 ## Value
 
 A named [`character`](https://rdrr.io/r/base/character.html) vector with
-the file paths to the downloaded NetLogo shapes (SVG files).
+the file paths to the downloaded NetLogo shapes as
+[SVG](https://en.wikipedia.org/wiki/SVG) files.
 
 ## See also
 
@@ -83,9 +85,7 @@ Other utility functions:
   file_size(shape)
 #> 1.06K
 
-  shape |> image_read() |> image_ggplot()
-#> Warning: ImageMagick was built without librsvg which causes poor quality of SVG rendering.
-#> For better results use image_read_svg() which uses the rsvg package.
+  shape |> image_read_svg() |> image_ggplot()
 #> Warning: `aes_string()` was deprecated in ggplot2 3.0.0.
 #> ℹ Please use tidy evaluation idioms with `aes()`.
 #> ℹ See also `vignette("ggplot2-in-packages")` for more information.
@@ -100,9 +100,7 @@ Other utility functions:
   file_size(shape)
 #> 771
 
-  shape |> image_read() |> image_ggplot()
-#> Warning: ImageMagick was built without librsvg which causes poor quality of SVG rendering.
-#> For better results use image_read_svg() which uses the rsvg package.
+  shape |> image_read_svg() |> image_ggplot()
 
 # }
 
@@ -112,9 +110,7 @@ Other utility functions:
   file_size(shape)
 #> 785
 
-  shape |> image_read() |> image_ggplot()
-#> Warning: ImageMagick was built without librsvg which causes poor quality of SVG rendering.
-#> For better results use image_read_svg() which uses the rsvg package.
+  shape |> image_read_svg() |> image_ggplot()
 
 # }
 ```

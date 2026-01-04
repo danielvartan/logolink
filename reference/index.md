@@ -2,7 +2,8 @@
 
 ## BehaviorSpace
 
-Functions to set up and run NetLogo experiments using BehaviorSpace.
+Functions to set up and run NetLogo experiments using
+[BehaviorSpace](https://docs.netlogo.org/behaviorspace.html).
 
 - [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md)
   : Create a NetLogo BehaviorSpace experiment
@@ -20,7 +21,7 @@ Functions to parse NetLogo data types.
 
 ## System
 
-Functions to locate NetLogo installations.
+Functions to manage NetLogo installations.
 
 - [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)
   : Find NetLogo installation directory
