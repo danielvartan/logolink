@@ -1,17 +1,26 @@
 # Package index
 
-## NetLogo
+## BehaviorSpace
 
-Functions to set up and run NetLogo experiments.
+Functions to set up and run NetLogo experiments using BehaviorSpace.
 
 - [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md)
   : Create a NetLogo BehaviorSpace experiment
 - [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
   : Run a NetLogo BehaviorSpace experiment
 
-## Utilities
+## Parsing
 
-Utility functions functions for NetLogo integration.
+Functions to parse NetLogo data types.
+
+- [`parse_netlogo_color()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_color.md)
+  : Parse NetLogo colors
+- [`parse_netlogo_list()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_list.md)
+  : Parse NetLogo lists
+
+## System
+
+Functions to locate NetLogo installations.
 
 - [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)
   : Find NetLogo installation directory
@@ -19,9 +28,12 @@ Utility functions functions for NetLogo integration.
   : Find NetLogo executable file
 - [`find_netlogo_version()`](https://danielvartan.github.io/logolink/reference/find_netlogo_version.md)
   : Find NetLogo version
+
+## Utilities
+
+Utility functions functions for NetLogo integration.
+
+- [`get_netlogo_shape()`](https://danielvartan.github.io/logolink/reference/get_netlogo_shape.md)
+  : Download NetLogo shapes from LogoShapes
 - [`inspect_experiment_file()`](https://danielvartan.github.io/logolink/reference/inspect_experiment_file.md)
   : Inspect a BehaviorSpace experiment XML file
-- [`parse_netlogo_color()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_color.md)
-  : Parse NetLogo colors
-- [`parse_netlogo_list()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_list.md)
-  : Parse NetLogo lists

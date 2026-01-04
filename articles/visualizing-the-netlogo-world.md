@@ -47,21 +47,11 @@ See [`LogoShapes`](https://github.com/danielvartan/logoshapes) for more
 turtle shapes.
 
 ``` r
-sheep_shape <-
-  paste0(
-    "https://raw.githubusercontent.com/danielvartan/",
-    "logoshapes/main/svg/netlogo-simplified/sheep.svg"
-  ) |>
-  curl_download(tempfile(fileext = ".svg"))
+sheep_shape <- get_netlogo_shape("sheep")
 ```
 
 ``` r
-wolf_shape <-
-  paste0(
-    "https://raw.githubusercontent.com/danielvartan/",
-    "logoshapes/main/svg/netlogo-simplified/wolf.svg"
-  ) |>
-  curl_download(tempfile(fileext = ".svg"))
+wolf_shape <- get_netlogo_shape("wolf")
 ```
 
 ### Extract Agents Coordinates

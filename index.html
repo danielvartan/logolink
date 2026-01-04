@@ -115,7 +115,7 @@
 <p>And the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"danielvartan/logolink"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"danielvartan/logolink"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -231,7 +231,7 @@
 <span><span class="va">results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 5</span></span>
 <span><span class="co">#&gt;  $ metadata   :List of 5</span></span>
-<span><span class="co">#&gt;   ..$ timestamp       : POSIXct[1:1], format: "2025-12-29 04:55:05"</span></span>
+<span><span class="co">#&gt;   ..$ timestamp       : POSIXct[1:1], format: "2026-01-04 06:30:01"</span></span>
 <span><span class="co">#&gt;   ..$ netlogo_version : chr "7.0.3"</span></span>
 <span><span class="co">#&gt;   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"</span></span>
 <span><span class="co">#&gt;   ..$ experiment_name : chr "Wolf Sheep Simple Model Analysis"</span></span>
@@ -247,7 +247,7 @@
 <span><span class="co">#&gt;   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
 <span><span class="co">#&gt;   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
-<span><span class="co">#&gt;   ..$ count_sheep           : num [1:110110] 500 499 498 497 496 494 491 490 489 488 ...</span></span>
+<span><span class="co">#&gt;   ..$ count_sheep           : num [1:110110] 500 498 496 492 492 491 490 488 487 487 ...</span></span>
 <span><span class="co">#&gt;  $ spreadsheet:List of 2</span></span>
 <span><span class="co">#&gt;   ..$ statistics: tibble [330 × 13] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;   ..$ measures  : tibble [330,330 × 4] (S3: tbl_df/tbl/data.frame)</span></span>
@@ -272,8 +272,8 @@
 <span><span class="co">#&gt;   ..$ step                  : num [1:11011] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;   ..$ mean_count_wolves     : num [1:11011] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
 <span><span class="co">#&gt;   ..$ std_count_wolves      : num [1:11011] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
-<span><span class="co">#&gt;   ..$ mean_count_sheep      : num [1:11011] 500 498 496 495 493 ...</span></span>
-<span><span class="co">#&gt;   ..$ std_count_sheep       : num [1:11011] 0 0.872 1.345 1.9 2.01 ...</span></span></code></pre></div>
+<span><span class="co">#&gt;   ..$ mean_count_sheep      : num [1:11011] 500 498 496 494 493 ...</span></span>
+<span><span class="co">#&gt;   ..$ std_count_sheep       : num [1:11011] 0 1.25 1.33 1.5 1.47 ...</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="analyzing-the-data-bonus-section">Analyzing the Data (Bonus Section)<a class="anchor" aria-label="anchor" href="#analyzing-the-data-bonus-section"></a>

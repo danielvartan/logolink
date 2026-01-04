@@ -30,6 +30,7 @@ Other utility functions:
 [`find_netlogo_console()`](https://danielvartan.github.io/logolink/reference/find_netlogo_console.md),
 [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md),
 [`find_netlogo_version()`](https://danielvartan.github.io/logolink/reference/find_netlogo_version.md),
+[`get_netlogo_shape()`](https://danielvartan.github.io/logolink/reference/get_netlogo_shape.md),
 [`parse_netlogo_color()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_color.md),
 [`parse_netlogo_list()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_list.md)
 
