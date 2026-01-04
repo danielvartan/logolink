@@ -22,7 +22,7 @@
 #'   NetLogo installation directory. Returns an empty string (`""`) if no
 #'   installation can be found.
 #'
-#' @family utility functions
+#' @family system functions
 #' @export
 #'
 #' @examples

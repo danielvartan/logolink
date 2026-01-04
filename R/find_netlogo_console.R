@@ -22,7 +22,7 @@
 #'   NetLogo executable file. Returns an empty string (`""`) if the executable
 #'   cannot be found at any location.
 #'
-#' @family utility functions
+#' @family system functions
 #' @export
 #'
 #' @examples

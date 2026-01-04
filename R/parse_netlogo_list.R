@@ -2,18 +2,18 @@
 #'
 #' @description
 #'
+#' `parse_netlogo_list()` parses NetLogo-style lists represented as strings
+#' (e.g., `"[1 2 3]"`) into R lists. It automatically detects
+#' [`numeric`][base::numeric()], [`integer`][base::integer()],
+#' [`logical`][base::logical()], and [`character`][base::character()] types
+#' within the lists and converts them accordingly.
+#'
 #' **Note**: We recommend using this function **only when necessary**, as it can
 #' be computationally intensive for large datasets and may not handle all edge
 #' cases. NetLogo provides a special output format called *lists* that exports
 #' list metrics in a tabular structure. If your experiment includes metrics that
 #' return NetLogo lists, include `"lists"` in the `outputs` argument of
 #' [`run_experiment()`][run_experiment()] to capture this output.
-#'
-#' `parse_netlogo_list()` parses NetLogo-style lists represented as strings
-#' (e.g., `"[1 2 3]"`) into R lists. It automatically detects
-#' [`numeric`][base::numeric()], [`integer`][base::integer()],
-#' [`logical`][base::logical()], and [`character`][base::character()] types
-#' within the lists and converts them accordingly.
 #'
 #' @details
 #'
@@ -30,24 +30,22 @@
 #'
 #' NetLogo boolean values (`true`/`false`) are converted to R
 #' [`logical`][base::logical()] values (`TRUE`/`FALSE`). NetLogo
-#' [`NaN`][base::is.nan()] values are preserved as character strings.
+#' `NaN` values are parsed as R [`NaN`][base::is.nan()] .
 #'
 #' @param x An [`atomic`][checkmate::assert_atomic] vector potentially
 #'   containing NetLogo-style list strings.
 #'
-#' @return The return value will depend on the input:
-#'   - If `x` does not contain NetLogo-style lists, returns the original vector
-#'     unchanged.
-#'   - If `x` contains NetLogo-style lists, returns a [`list`][base::list()]
-#'     where each element is the parsed result of the corresponding input
-#'     element. Parsed elements may be atomic vectors (for homogeneous lists) or
-#'     nested lists (for mixed-type or nested lists).
+#' @return A [`list`][base::list()] where each element is the parsed result of
+#'   the corresponding input element. Parsed elements may be atomic vectors (for
+#'   homogeneous lists) or nested lists (for mixed-type or nested lists).
 #'
-#' @family utility functions
+#' @family parsing functions
 #' @export
 #'
 #' @examples
 #' # Scalar Examples -----
+#'
+#' 'test' |> parse_netlogo_list() # Not a NetLogo list.
 #'
 #' '[1]' |> parse_netlogo_list()
 #'
@@ -60,6 +58,8 @@
 #' '[true false true]' |> parse_netlogo_list()
 #'
 #' # Vector Examples -----
+#'
+#' '1 2 3' |> parse_netlogo_list() # Not a NetLogo list.
 #'
 #' c('["a" "b" "c"]', '["d" "e" "f"]') |> parse_netlogo_list()
 #'
@@ -90,12 +90,12 @@ parse_netlogo_list <- function(x) {
       test_unitary_list(x) &&
         !any(stringr::str_detect(x, "^\\[.*\\]$"), na.rm = TRUE)
     ) {
-      x
+      list(x)
     } else {
       x |> purrr::map(parse_netlogo_list.scalar)
     }
   } else {
-    x
+    list(x)
   }
 }
 
@@ -115,8 +115,7 @@ parse_netlogo_list.scalar <- function(x) {
       stringr::str_replace_all("\\]", ")") |>
       stringr::str_replace_all(" ", ", ") %>%
       stringr::str_replace_all("(?<=\\b)true(?=\\b)", "TRUE") |>
-      stringr::str_replace_all("(?<=\\b)false(?=\\b)", "FALSE") |>
-      stringr::str_replace_all("(?<=\\b)NaN(?=\\b)", "'NaN'") %>%
+      stringr::str_replace_all("(?<=\\b)false(?=\\b)", "FALSE") %>%
       paste0("list(", ., ")") |>
       parse(text = _) |>
       eval()
@@ -128,7 +127,7 @@ parse_netlogo_list.scalar <- function(x) {
     if (test_one_depth_list(out) && test_same_class(out)) {
       out <- unlist(out)
 
-      if (checkmate::test_integerish(out)) {
+      if (checkmate::test_integerish(out) && !any(is.nan(out))) {
         as.integer(out)
       } else {
         out
@@ -167,6 +166,6 @@ parse_netlogo_list.scalar <- function(x) {
       out
     }
   } else {
-    x
+    list(x)
   }
 }

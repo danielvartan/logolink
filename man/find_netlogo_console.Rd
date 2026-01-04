@@ -39,12 +39,8 @@ constructs the path based on \code{netlogo_home} (e.g.,
 }
 }
 \seealso{
-Other utility functions: 
+Other system functions: 
 \code{\link{find_netlogo_home}()},
-\code{\link{find_netlogo_version}()},
-\code{\link{get_netlogo_shape}()},
-\code{\link{inspect_experiment_file}()},
-\code{\link{parse_netlogo_color}()},
-\code{\link{parse_netlogo_list}()}
+\code{\link{find_netlogo_version}()}
 }
-\concept{utility functions}
+\concept{system functions}

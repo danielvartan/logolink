@@ -1,7 +1,7 @@
 testthat::test_that("`parse_netlogo_list()` | Scalar test", {
   "a" |>
     parse_netlogo_list() |>
-    testthat::expect_equal("a")
+    testthat::expect_equal(list("a"))
 
   '[1]' |>
     parse_netlogo_list() |>
@@ -25,13 +25,13 @@ testthat::test_that("`parse_netlogo_list()` | Scalar test", {
 
   "[NaN]" |>
     parse_netlogo_list() |>
-    testthat::expect_equal(list(c("NaN")))
+    testthat::expect_equal(list(c(NaN)))
 })
 
 testthat::test_that("`parse_netlogo_list()` | Vector test", {
   c("a", "b") |>
     parse_netlogo_list() |>
-    testthat::expect_equal(c("a", "b"))
+    testthat::expect_equal(list(c("a", "b")))
 
   c('["a" "b" "c"]', '["d" "e" "f"]') |>
     parse_netlogo_list() |>
@@ -55,7 +55,7 @@ testthat::test_that("`parse_netlogo_list()` | Combined test", {
     parse_netlogo_list() |>
     testthat::expect_equal(list(c("a", "b", "c"), 4:6))
 
-  c('[1.1 2.1 3.1]', '[true false true]')  |>
+  c('[1.1 2.1 3.1]', '[true false true]') |>
     parse_netlogo_list() |>
     testthat::expect_equal(list(c(1.1, 2.1, 3.1), c(TRUE, FALSE, TRUE)))
 
@@ -69,7 +69,7 @@ testthat::test_that("`parse_netlogo_list()` | Nested test", {
     parse_netlogo_list() |>
     testthat::expect_equal(list(list(c("a", "b", "c"), 1:2), 4:6))
 
-  c('["a" "b" "c" [1 2] true ["d" "c"]]')  |>
+  c('["a" "b" "c" [1 2] true ["d" "c"]]') |>
     parse_netlogo_list() |>
     testthat::expect_equal(
       list(list(c("a", "b", "c"), 1:2, TRUE, c("d", "c")))
@@ -79,17 +79,17 @@ testthat::test_that("`parse_netlogo_list()` | Nested test", {
 testthat::test_that("`parse_netlogo_list()` | Simple character test", {
   letters |>
     parse_netlogo_list() |>
-    testthat::expect_equal(letters)
+    testthat::expect_equal(list(letters))
 })
 
 testthat::test_that("`parse_netlogo_list()` | Non-character values test", {
   1:10 |>
     parse_netlogo_list() |>
-    testthat::expect_equal(1:10)
+    testthat::expect_equal(list(1:10))
 
   1:10 |>
     parse_netlogo_list.scalar() |>
-    testthat::expect_equal(1:10)
+    testthat::expect_equal(list(1:10))
 })
 
 testthat::test_that("`parse_netlogo_list()` | Error test", {

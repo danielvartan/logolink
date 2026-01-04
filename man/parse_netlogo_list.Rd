@@ -11,29 +11,23 @@ parse_netlogo_list(x)
 containing NetLogo-style list strings.}
 }
 \value{
-The return value will depend on the input:
-\itemize{
-\item If \code{x} does not contain NetLogo-style lists, returns the original vector
-unchanged.
-\item If \code{x} contains NetLogo-style lists, returns a \code{\link[base:list]{list}}
-where each element is the parsed result of the corresponding input
-element. Parsed elements may be atomic vectors (for homogeneous lists) or
-nested lists (for mixed-type or nested lists).
-}
+A \code{\link[base:list]{list}} where each element is the parsed result of
+the corresponding input element. Parsed elements may be atomic vectors (for
+homogeneous lists) or nested lists (for mixed-type or nested lists).
 }
 \description{
+\code{parse_netlogo_list()} parses NetLogo-style lists represented as strings
+(e.g., \code{"[1 2 3]"}) into R lists. It automatically detects
+\code{\link[base:numeric]{numeric}}, \code{\link[base:integer]{integer}},
+\code{\link[base:logical]{logical}}, and \code{\link[base:character]{character}} types
+within the lists and converts them accordingly.
+
 \strong{Note}: We recommend using this function \strong{only when necessary}, as it can
 be computationally intensive for large datasets and may not handle all edge
 cases. NetLogo provides a special output format called \emph{lists} that exports
 list metrics in a tabular structure. If your experiment includes metrics that
 return NetLogo lists, include \code{"lists"} in the \code{outputs} argument of
 \code{\link[=run_experiment]{run_experiment()}} to capture this output.
-
-\code{parse_netlogo_list()} parses NetLogo-style lists represented as strings
-(e.g., \code{"[1 2 3]"}) into R lists. It automatically detects
-\code{\link[base:numeric]{numeric}}, \code{\link[base:integer]{integer}},
-\code{\link[base:logical]{logical}}, and \code{\link[base:character]{character}} types
-within the lists and converts them accordingly.
 }
 \details{
 The function handles the following cases:
@@ -50,10 +44,12 @@ lists (e.g., \code{'["a" "b" [1 2]]'} becomes
 
 NetLogo boolean values (\code{true}/\code{false}) are converted to R
 \code{\link[base:logical]{logical}} values (\code{TRUE}/\code{FALSE}). NetLogo
-\code{\link[base:is.finite]{NaN}} values are preserved as character strings.
+\code{NaN} values are parsed as R \code{\link[base:is.finite]{NaN}} .
 }
 \examples{
 # Scalar Examples -----
+
+'test' |> parse_netlogo_list() # Not a NetLogo list.
 
 '[1]' |> parse_netlogo_list()
 
@@ -66,6 +62,8 @@ NetLogo boolean values (\code{true}/\code{false}) are converted to R
 '[true false true]' |> parse_netlogo_list()
 
 # Vector Examples -----
+
+'1 2 3' |> parse_netlogo_list() # Not a NetLogo list.
 
 c('["a" "b" "c"]', '["d" "e" "f"]') |> parse_netlogo_list()
 
@@ -90,12 +88,7 @@ c('["a" "b" "c" [1 2]]', '[4 5 6]') |> parse_netlogo_list()
 c('["a" "b" "c" [1 2] true ["d" "c"]]') |> parse_netlogo_list()
 }
 \seealso{
-Other utility functions: 
-\code{\link{find_netlogo_console}()},
-\code{\link{find_netlogo_home}()},
-\code{\link{find_netlogo_version}()},
-\code{\link{get_netlogo_shape}()},
-\code{\link{inspect_experiment_file}()},
+Other parsing functions: 
 \code{\link{parse_netlogo_color}()}
 }
-\concept{utility functions}
+\concept{parsing functions}

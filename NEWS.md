@@ -5,6 +5,7 @@
 - `logolink` now works only with NetLogo 7.0.1 and above. This NetLogo patch release changed the XML structure of BehaviorSpace experiments; See this [GitHub issue](https://github.com/NetLogo/NetLogo/issues/2560) to learn more.
 - `run_experiment()` had the `parse` argument removed. The function now offer an option to return a [lists output](https://docs.netlogo.org/behaviorspace.html#lists-output) via the new `output` parameter. Results containing data in NetLogo's lists format are returned as `character` vectors. See `run_experiment()` documentation for details.
 - `run_experiment()` had the `netlogo_path` argument removed. The package now tries to automatically detect the NetLogo installation using helper functions. Users can still manually specify the path to NetLogo. See the updated documentation for details.
+- `parse_netlogo_list()` now always return a `list` object. The previous behavior of returning a `vector` when possible was removed. `NaN` values are now represented as R `NaN` values instead of `"NaN"`.
 
 ### New Features and Improvements
 

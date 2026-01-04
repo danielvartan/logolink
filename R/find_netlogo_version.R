@@ -26,7 +26,7 @@
 #'   version (e.g., `"7.0.2"`). Returns an empty string (`""`) if the version
 #'   cannot be determined.
 #'
-#' @family utility functions
+#' @family system functions
 #' @export
 #'
 #' @examples

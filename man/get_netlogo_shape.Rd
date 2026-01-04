@@ -37,12 +37,13 @@ to the downloaded NetLogo shapes as
 \href{https://github.com/danielvartan/logoshapes}{LogoShapes} project on GitHub.
 
 The collections and shapes available for download can be found in the
-LogoShapes \href{https://github.com/danielvartan/logoshapes/tree/main/svg}{\code{svg}}
+\href{https://github.com/danielvartan/logoshapes}{LogoShapes} project
+\href{https://github.com/danielvartan/logoshapes/tree/main/svg}{\code{svg}}
 directory. Refer to the
 \href{https://github.com/danielvartan/logoshapes}{LogoShapes} documentation for
 more information about the different collections.
 
-This function requires an active internet connection and the
+\strong{Note}: This function requires an active internet connection and the
 \href{https://httr2.r-lib.org/}{\code{httr2}} package.
 }
 \examples{
@@ -77,11 +78,6 @@ This function requires an active internet connection and the
 }
 \seealso{
 Other utility functions: 
-\code{\link{find_netlogo_console}()},
-\code{\link{find_netlogo_home}()},
-\code{\link{find_netlogo_version}()},
-\code{\link{inspect_experiment_file}()},
-\code{\link{parse_netlogo_color}()},
-\code{\link{parse_netlogo_list}()}
+\code{\link{inspect_experiment_file}()}
 }
 \concept{utility functions}

@@ -6,12 +6,13 @@
 #' [LogoShapes](https://github.com/danielvartan/logoshapes) project on GitHub.
 #'
 #' The collections and shapes available for download can be found in the
-#' LogoShapes [`svg`](https://github.com/danielvartan/logoshapes/tree/main/svg)
+#' [LogoShapes](https://github.com/danielvartan/logoshapes) project
+#' [`svg`](https://github.com/danielvartan/logoshapes/tree/main/svg)
 #' directory. Refer to the
 #' [LogoShapes](https://github.com/danielvartan/logoshapes) documentation for
 #' more information about the different collections.
 #'
-#' This function requires an active internet connection and the
+#' **Note**: This function requires an active internet connection and the
 #' [`httr2`](https://httr2.r-lib.org/) package.
 #'
 #' @param shape A [`character`][base::character()] vector indicating the names
@@ -74,6 +75,7 @@ get_netlogo_shape <- function(
   checkmate::assert_character(shape, min.len = 1)
   checkmate::assert_directory_exists(dir)
   checkmate::assert_string(collection)
+  checkmate::assert_string(auth_token)
 
   api_response <-
     httr2::request("https://api.github.com") |>
