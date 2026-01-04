@@ -9,7 +9,7 @@ project:
   output-dir: docs
 
 book:
-  title: "🐢 logolink NetLogo tests"
+  title: "logolink NetLogo tests 🐢"
   author: "Daniel Vartanian"
   keyword: >
     Data Science, Tidyverse, rstats, APIs, Simulations,
@@ -42,9 +42,7 @@ format:
   html:
     locale: en
     language: en-us
+    code-link: true
     df-print: paged
-    cap-location: top
     fig-align: center
     callout-appearance: simple
-    lightbox: true
-    theme: [cosmo]

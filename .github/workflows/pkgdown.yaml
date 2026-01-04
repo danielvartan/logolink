@@ -7,13 +7,12 @@ on:
   workflow_dispatch:
 
 name: pkgdown.yaml
-
 permissions: read-all
 
 jobs:
   pkgdown:
+    name: Build and deploy pkgdown site
     runs-on: ubuntu-latest
-    # Only restrict concurrency for non-PR jobs
     concurrency:
       group: pkgdown-${{github.event_name != 'pull_request' || github.run_id}}
     env:
@@ -21,7 +20,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Checkout code
+      - name: Check out code
         uses: actions/checkout@v4
 
       - name: Set up NetLogo

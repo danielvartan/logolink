@@ -4,16 +4,16 @@ on:
   pull_request:
 
 name: test-coverage.yaml
-
 permissions: read-all
 
 jobs:
   test-coverage:
+    name: Test coverage
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     steps:
-      - name: Checkout Code
+      - name: Check out code
         uses: actions/checkout@v4
 
       - name: Set up R
@@ -21,13 +21,13 @@ jobs:
         with:
           use-public-rspm: true
 
-      - name: Install R Dependencies
+      - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::covr, any::xml2
           needs: coverage
 
-      - name: Test Coverage
+      - name: Test coverage
         run: |
           cov <- covr::package_coverage(
             quiet = FALSE,
@@ -39,27 +39,29 @@ jobs:
           )
 
           print(cov)
+
           covr::to_cobertura(cov)
         shell: Rscript {0}
 
-      - name: Upload Coverage to Codecov
+      - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
-          # Fail if error if not on PR, or if on PR and token is given
           fail_ci_if_error: ${{ github.event_name != 'pull_request' || secrets.CODECOV_TOKEN }}
           file: ./cobertura.xml
           plugin: noop
           disable_search: true
-          token: ${{ secrets.CODECOV_TOKEN }}
+          token: ${{secrets.CODECOV_TOKEN}}
 
-      - name: Show testthat Output
+      - name: Show testthat output
         if: always()
         run: |
-          ## --------------------------------------------------------------------
-          find '${{runner.temp}}/package' -name 'testthat.Rout*' -exec cat '{}' \; || true
+          ## -----------------------------------------------------------------
+          find '${{runner.temp}}/package' /
+            -name 'testthat.Rout*' /
+            -exec cat '{}' \; || true
         shell: bash
 
-      - name: Upload Test Results
+      - name: Upload test results
         if: failure()
         uses: actions/upload-artifact@v4
         with:

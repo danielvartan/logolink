@@ -3,8 +3,7 @@ on:
     branches: [main, master]
   pull_request:
 
-name: R-CMD-check.yaml
-
+name: R-CMD-check
 permissions: read-all
 
 jobs:
@@ -24,7 +23,7 @@ jobs:
       GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       R_KEEP_PKG_SOURCE: yes
     steps:
-      - name: Checkout code
+      - name: Check out code
         uses: actions/checkout@v4
 
       - name: Set up Pandoc
@@ -42,7 +41,6 @@ jobs:
         with:
           extra-packages: any::rcmdcheck, local::.
           needs: check
-          upgrade: 'TRUE'
 
       - name: Run R CMD check
         uses: r-lib/actions/check-r-package@v2

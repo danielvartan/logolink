@@ -54,6 +54,7 @@
     "extdata",
     "fairsoftwarechecklist",
     "favicons",
+    "funder",
     "getenv",
     "ggimage",
     "ggplot",
@@ -63,6 +64,7 @@
     "groomr",
     "hjust",
     "htmltools",
+    "httr",
     "IABM",
     "integerish",
     "knitr",
@@ -140,6 +142,7 @@
     "viridis",
     "vjust",
     "webservices",
+    "winslash",
     "wordlist",
     "xcor",
     "ycor"

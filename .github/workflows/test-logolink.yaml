@@ -3,7 +3,6 @@ on:
     branches: [main, master]
 
 name: "NetLogo Check"
-
 permissions: read-all
 
 jobs:
@@ -11,7 +10,7 @@ jobs:
     name: Run Experiments with logolink
     runs-on: ubuntu-latest
     env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     permissions:
       contents: write
       pages: write
@@ -19,9 +18,24 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Install dependencies
+      - name: Set up NetLogo
+        uses: danielvartan/logoactions/setup-netlogo@v1
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Install R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::rcmdcheck, any::knitr, any::rmarkdown, local::.
+          needs: check
+
+      - name: Install system dependencies
         run: |
-          # Install dependencies
+          # Install system dependencies
 
           sudo apt-get update -qq
 
@@ -30,20 +44,7 @@ jobs:
             pandoc
         shell: bash
 
-      - name: Set up NetLogo
-        uses: danielvartan/logoactions/setup-netlogo@v1
-
-      - name: Set up R
-        uses: r-lib/actions/setup-r@v2
-
-      - name: Install R dependencies
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::rcmdcheck, any::knitr, any::rmarkdown, local::.
-          needs: check
-          upgrade: 'TRUE'
-
-      - name: Install logolink development version
+      - name: Install logolink
         run: |
           # Install logolink
 
@@ -55,12 +56,9 @@ jobs:
           )
         shell: Rscript {0}
 
-      - name: Set up Quarto
-        uses: quarto-dev/quarto-actions/setup@v2
-
       - name: Render Quarto
         run: |
           # Render Quarto
-          cd tests/qmd
 
           quarto render
+        working-directory: './tests/qmd'
