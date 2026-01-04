@@ -91,8 +91,8 @@
 
 
     <p>Have you ever wanted to capture what’s happening in your NetLogo simulation at specific moments? Maybe you need figures for a paper or just want to see how your agents move over time. In this vignette, we’ll walk through how to do exactly that using <code>logolink</code>.</p>
-<p>We’ll work with the <a href="https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/IABM%20Textbook/chapter%204/Wolf%20Sheep%20Simple%205.nlogox" class="external-link">Wolf Sheep Simple</a> model, a classic predator-prey simulation that ships with NetLogo. By the end, you’ll have both static plots and an animated GIF showing your simulation evolving over time.</p>
-<p>I’m assuming you have <a href="https://ccl.northwestern.edu/netlogo/" class="external-link">NetLogo</a> 7.1+ installed and are comfortable with basic R.</p>
+<p>We’ll work with the <a href="https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/IABM%20Textbook/chapter%204/Wolf%20Sheep%20Simple%205.nlogox" class="external-link">Wolf Sheep Simple</a> model, a classic predator-prey simulation that ships with NetLogo. By the end, you’ll have both static plots and an animated <a href="https://en.wikipedia.org/wiki/GIF" class="external-link">GIF</a> showing your simulation evolving over time.</p>
+<p>I’m assuming you have <a href="https://ccl.northwestern.edu/netlogo/" class="external-link">NetLogo</a> 7.1.0 or or above installed and are comfortable with basic R programming.</p>
 <section class="level2"><h2 id="getting-started">Getting Started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
 </h2>
 <p>First, let’s load the packages we’ll need:</p>
@@ -143,7 +143,7 @@
 <span>    <span class="st">"Wolf Sheep Simple 5.nlogox"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 </div>
-<p>We’ll also need the turtle shapes to make our plots look nice. The <code><a href="../reference/get_netlogo_shape.html">get_netlogo_shape()</a></code> function grabs <a href="https://en.wikipedia.org/wiki/SVG" class="external-link">SVG</a> files from the <a href="https://github.com/danielvartan/logoshapes" class="external-link">LogoShapes</a> project:</p>
+<p>We’ll also need the turtle shapes to make our plots look nice. The <code><a href="../reference/get_netlogo_shape.html">get_netlogo_shape()</a></code> function grabs <a href="https://en.wikipedia.org/wiki/SVG" class="external-link">SVG</a> image files from the <a href="https://github.com/danielvartan/logoshapes" class="external-link">LogoShapes</a> project:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sheep_shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_netlogo_shape.html">get_netlogo_shape</a></span><span class="op">(</span><span class="st">"sheep"</span><span class="op">)</span></span></code></pre></div>
@@ -321,7 +321,7 @@
 <code class="sourceCode R"><span><span class="va">steps</span></span>
 <span><span class="co">#&gt; [1]   0 100 200 300 400 500</span></span></code></pre></div>
 </div>
-<p>Now we’ll generate a PNG for each step:</p>
+<p>Now we’ll generate a <a href="https://en.wikipedia.org/wiki/PNG" class="external-link">PNG</a> image file for each step:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -349,7 +349,7 @@
 <span></span>
 <span><span class="fu"><a href="https://cli.r-lib.org/reference/cli_progress_bar.html" class="external-link">cli_progress_done</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
-<p>Finally, let’s combine them into a GIF:</p>
+<p>Finally, let’s combine them into a <a href="https://en.wikipedia.org/wiki/GIF" class="external-link">GIF</a>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">animation</span> <span class="op">&lt;-</span></span>
@@ -371,7 +371,7 @@
 <p><img src="../reference/figures/vignette-wolf-sheep-model-animation-1.gif"></p>
 </section><section class="level2"><h2 id="wrapping-up">Wrapping up<a class="anchor" aria-label="anchor" href="#wrapping-up"></a>
 </h2>
-<p>You now have the tools to visualize any NetLogo simulation. The approach is straightforward: extract agent coordinates at the time steps you care about, convert NetLogo colors to hex, and plot with ggplot2.</p>
+<p>You now have the tools to visualize any NetLogo simulation. The approach is straightforward: extract agent coordinates at the time steps you care about, convert NetLogo colors to hex, and plot with <a href="https://ggplot2.tidyverse.org/" class="external-link">ggplot2</a>.</p>
 <p>Feel free to adapt this for your own models, just change the metrics to capture whatever agent properties you need. One caveat: animations can get memory-intensive if you’re capturing many steps or have lots of agents, so start small and scale up as needed.</p>
 </section><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {

@@ -8,11 +8,13 @@ walk through how to do exactly that using `logolink`.
 We’ll work with the [Wolf Sheep
 Simple](https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/IABM%20Textbook/chapter%204/Wolf%20Sheep%20Simple%205.nlogox)
 model, a classic predator-prey simulation that ships with NetLogo. By
-the end, you’ll have both static plots and an animated GIF showing your
-simulation evolving over time.
+the end, you’ll have both static plots and an animated
+[GIF](https://en.wikipedia.org/wiki/GIF) showing your simulation
+evolving over time.
 
 I’m assuming you have [NetLogo](https://ccl.northwestern.edu/netlogo/)
-7.1+ installed and are comfortable with basic R.
+7.1.0 or or above installed and are comfortable with basic R
+programming.
 
 ## Getting Started
 
@@ -74,8 +76,8 @@ model_path <-
 
 We’ll also need the turtle shapes to make our plots look nice. The
 [`get_netlogo_shape()`](https://danielvartan.github.io/logolink/reference/get_netlogo_shape.md)
-function grabs [SVG](https://en.wikipedia.org/wiki/SVG) files from the
-[LogoShapes](https://github.com/danielvartan/logoshapes) project:
+function grabs [SVG](https://en.wikipedia.org/wiki/SVG) image files from
+the [LogoShapes](https://github.com/danielvartan/logoshapes) project:
 
 ``` r
 sheep_shape <- get_netlogo_shape("sheep")
@@ -277,7 +279,8 @@ steps
 #> [1]   0 100 200 300 400 500
 ```
 
-Now we’ll generate a PNG for each step:
+Now we’ll generate a [PNG](https://en.wikipedia.org/wiki/PNG) image file
+for each step:
 
 ``` r
 files <- character()
@@ -306,7 +309,8 @@ for (i in steps) {
 cli_progress_done()
 ```
 
-Finally, let’s combine them into a GIF:
+Finally, let’s combine them into a
+[GIF](https://en.wikipedia.org/wiki/GIF):
 
 ``` r
 animation <-
@@ -334,7 +338,8 @@ animation
 
 You now have the tools to visualize any NetLogo simulation. The approach
 is straightforward: extract agent coordinates at the time steps you care
-about, convert NetLogo colors to hex, and plot with ggplot2.
+about, convert NetLogo colors to hex, and plot with
+[ggplot2](https://ggplot2.tidyverse.org/).
 
 Feel free to adapt this for your own models, just change the metrics to
 capture whatever agent properties you need. One caveat: animations can

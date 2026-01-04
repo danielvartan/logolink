@@ -266,32 +266,32 @@ Other NetLogo functions:
 # \dontrun{
   model_path |> run_experiment(setup_file = setup_file)
 #> ℹ Running model
-#> ✔ Running model [22.3s]
+#> ✔ Running model [23.1s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [20ms]
+#> ✔ Gathering metadata [15ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [337ms]
+#> ✔ Processing table output [428ms]
 #> 
 #> ℹ Processing spreadsheet output
-#> ✔ Processing spreadsheet output [815ms]
+#> ✔ Processing spreadsheet output [795ms]
 #> 
 #> ℹ Processing list output
 #> ! The experiment produced no lists results.
 #> ℹ Processing list output
-#> ✔ Processing list output [31ms]
+#> ✔ Processing list output [30ms]
 #> 
 #> ℹ Processing statistics output
 #> ✔ Processing statistics output [8ms]
 #> 
 #> ℹ The experiment run produced the following messages:
 #> 
-#> Jan 04, 2026 10:37:03 AM java.util.prefs.FileSystemPreferences$1 run
+#> Jan 04, 2026 10:44:38 AM java.util.prefs.FileSystemPreferences$1 run
 #> INFO: Created user preferences directory.
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-04 10:37:05 GMT"
+#> [1] "2026-01-04 10:44:39 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -398,28 +398,28 @@ Other NetLogo functions:
       experiment = "Wolf Sheep Simple model analysis"
     )
 #> ℹ Running model
-#> ✔ Running model [18.6s]
+#> ✔ Running model [18.1s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [10ms]
+#> ✔ Gathering metadata [9ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [35ms]
+#> ✔ Processing table output [33ms]
 #> 
 #> ℹ Processing spreadsheet output
-#> ✔ Processing spreadsheet output [68ms]
+#> ✔ Processing spreadsheet output [64ms]
 #> 
 #> ℹ Processing list output
 #> ! The experiment produced no lists results.
 #> ℹ Processing list output
-#> ✔ Processing list output [35ms]
+#> ✔ Processing list output [33ms]
 #> 
 #> ℹ Processing statistics output
 #> ✔ Processing statistics output [8ms]
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-04 10:37:29 GMT"
+#> [1] "2026-01-04 10:45:04 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -478,15 +478,15 @@ Other NetLogo functions:
 #>    run_number reporter                      measure  value
 #>         <dbl> <chr>                           <dbl>  <dbl>
 #>  1          1 [step]                              1  1000 
-#>  2          1 count wolves                        1     3 
-#>  3          1 count sheep                         1    63 
-#>  4          1 sum [grass-amount] of patches       1 11674.
+#>  2          1 count wolves                        1    16 
+#>  3          1 count sheep                         1    66 
+#>  4          1 sum [grass-amount] of patches       1 11605.
 #>  5          2 [step]                              1  1000 
 #>  6          2 count wolves                        1    13 
-#>  7          2 count sheep                         1    61 
-#>  8          2 sum [grass-amount] of patches       1 11709.
+#>  7          2 count sheep                         1    88 
+#>  8          2 sum [grass-amount] of patches       1 11062.
 #>  9          3 [step]                              1  1000 
-#> 10          3 count wolves                        1    14 
+#> 10          3 count wolves                        1    17 
 #> # ℹ 430 more rows
 #> 
 #> 
