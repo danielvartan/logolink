@@ -1,5 +1,13 @@
 # Parse NetLogo lists
 
+`parse_netlogo_list()` parses NetLogo-style lists represented as strings
+(e.g., `"[1 2 3]"`) into R lists. It automatically detects
+[`numeric`](https://rdrr.io/r/base/numeric.html),
+[`integer`](https://rdrr.io/r/base/integer.html),
+[`logical`](https://rdrr.io/r/base/logical.html), and
+[`character`](https://rdrr.io/r/base/character.html) types within the
+lists and converts them accordingly.
+
 **Note**: We recommend using this function **only when necessary**, as
 it can be computationally intensive for large datasets and may not
 handle all edge cases. NetLogo provides a special output format called
@@ -8,14 +16,6 @@ experiment includes metrics that return NetLogo lists, include `"lists"`
 in the `outputs` argument of
 [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
 to capture this output.
-
-`parse_netlogo_list()` parses NetLogo-style lists represented as strings
-(e.g., `"[1 2 3]"`) into R lists. It automatically detects
-[`numeric`](https://rdrr.io/r/base/numeric.html),
-[`integer`](https://rdrr.io/r/base/integer.html),
-[`logical`](https://rdrr.io/r/base/logical.html), and
-[`character`](https://rdrr.io/r/base/character.html) types within the
-lists and converts them accordingly.
 
 ## Usage
 
@@ -33,16 +33,10 @@ parse_netlogo_list(x)
 
 ## Value
 
-The return value will depend on the input:
-
-- If `x` does not contain NetLogo-style lists, returns the original
-  vector unchanged.
-
-- If `x` contains NetLogo-style lists, returns a
-  [`list`](https://rdrr.io/r/base/list.html) where each element is the
-  parsed result of the corresponding input element. Parsed elements may
-  be atomic vectors (for homogeneous lists) or nested lists (for
-  mixed-type or nested lists).
+A [`list`](https://rdrr.io/r/base/list.html) where each element is the
+parsed result of the corresponding input element. Parsed elements may be
+atomic vectors (for homogeneous lists) or nested lists (for mixed-type
+or nested lists).
 
 ## Details
 
@@ -62,23 +56,23 @@ The function handles the following cases:
 
 NetLogo boolean values (`true`/`false`) are converted to R
 [`logical`](https://rdrr.io/r/base/logical.html) values
-(`TRUE`/`FALSE`). NetLogo [`NaN`](https://rdrr.io/r/base/is.finite.html)
-values are preserved as character strings.
+(`TRUE`/`FALSE`). NetLogo `NaN` values are parsed as R
+[`NaN`](https://rdrr.io/r/base/is.finite.html) .
 
 ## See also
 
-Other utility functions:
-[`find_netlogo_console()`](https://danielvartan.github.io/logolink/reference/find_netlogo_console.md),
-[`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md),
-[`find_netlogo_version()`](https://danielvartan.github.io/logolink/reference/find_netlogo_version.md),
-[`get_netlogo_shape()`](https://danielvartan.github.io/logolink/reference/get_netlogo_shape.md),
-[`inspect_experiment_file()`](https://danielvartan.github.io/logolink/reference/inspect_experiment_file.md),
+Other parsing functions:
 [`parse_netlogo_color()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_color.md)
 
 ## Examples
 
 ``` r
 # Scalar Examples -----
+
+'test' |> parse_netlogo_list() # Not a NetLogo list.
+#> [[1]]
+#> [1] "test"
+#> 
 
 '[1]' |> parse_netlogo_list()
 #> [[1]]
@@ -106,6 +100,11 @@ Other utility functions:
 #> 
 
 # Vector Examples -----
+
+'1 2 3' |> parse_netlogo_list() # Not a NetLogo list.
+#> [[1]]
+#> [1] "1 2 3"
+#> 
 
 c('["a" "b" "c"]', '["d" "e" "f"]') |> parse_netlogo_list()
 #> [[1]]

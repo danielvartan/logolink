@@ -3,7 +3,7 @@
 `parse_netlogo_color()` parses NetLogo color codes (ranging from 0 to
 140) into their approximate hexadecimal color representations.
 
-This function requires the
+**Note**: This function requires the
 [`colorspace`](https://colorspace.r-forge.r-project.org/), and
 [`scales`](https://scales.r-lib.org/) packages.
 
@@ -51,12 +51,7 @@ representations from NetLogo color codes.
 
 ## See also
 
-Other utility functions:
-[`find_netlogo_console()`](https://danielvartan.github.io/logolink/reference/find_netlogo_console.md),
-[`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md),
-[`find_netlogo_version()`](https://danielvartan.github.io/logolink/reference/find_netlogo_version.md),
-[`get_netlogo_shape()`](https://danielvartan.github.io/logolink/reference/get_netlogo_shape.md),
-[`inspect_experiment_file()`](https://danielvartan.github.io/logolink/reference/inspect_experiment_file.md),
+Other parsing functions:
 [`parse_netlogo_list()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_list.md)
 
 ## Examples

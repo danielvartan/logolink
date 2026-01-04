@@ -5,27 +5,27 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Inter-0.4.10/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Parse NetLogo lists — parse_netlogo_list"><meta name="description" content='Note: We recommend using this function only when necessary, as it can
+</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Inter-0.4.10/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Parse NetLogo lists — parse_netlogo_list"><meta name="description" content='parse_netlogo_list() parses NetLogo-style lists represented as strings
+(e.g., "[1 2 3]") into R lists. It automatically detects
+numeric, integer,
+logical, and character types
+within the lists and converts them accordingly.
+Note: We recommend using this function only when necessary, as it can
 be computationally intensive for large datasets and may not handle all edge
 cases. NetLogo provides a special output format called lists that exports
 list metrics in a tabular structure. If your experiment includes metrics that
 return NetLogo lists, include "lists" in the outputs argument of
-run_experiment() to capture this output.
-parse_netlogo_list() parses NetLogo-style lists represented as strings
+run_experiment() to capture this output.'><meta property="og:description" content='parse_netlogo_list() parses NetLogo-style lists represented as strings
 (e.g., "[1 2 3]") into R lists. It automatically detects
 numeric, integer,
 logical, and character types
-within the lists and converts them accordingly.'><meta property="og:description" content='Note: We recommend using this function only when necessary, as it can
+within the lists and converts them accordingly.
+Note: We recommend using this function only when necessary, as it can
 be computationally intensive for large datasets and may not handle all edge
 cases. NetLogo provides a special output format called lists that exports
 list metrics in a tabular structure. If your experiment includes metrics that
 return NetLogo lists, include "lists" in the outputs argument of
-run_experiment() to capture this output.
-parse_netlogo_list() parses NetLogo-style lists represented as strings
-(e.g., "[1 2 3]") into R lists. It automatically detects
-numeric, integer,
-logical, and character types
-within the lists and converts them accordingly.'><meta property="og:image" content="https://danielvartan.github.io/logolink/reference/figures/og-image.png"><meta property="og:image:alt" content="logolink"></head><body>
+run_experiment() to capture this output.'><meta property="og:image" content="https://danielvartan.github.io/logolink/reference/figures/og-image.png"><meta property="og:image:alt" content="logolink"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -69,17 +69,17 @@ within the lists and converts them accordingly.'><meta property="og:image" conte
     </div>
 
     <div class="ref-description section level2">
-    <p><strong>Note</strong>: We recommend using this function <strong>only when necessary</strong>, as it can
+    <p><code>parse_netlogo_list()</code> parses NetLogo-style lists represented as strings
+(e.g., <code>"[1 2 3]"</code>) into R lists. It automatically detects
+<code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a></code>, <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></code>,
+<code><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></code>, and <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> types
+within the lists and converts them accordingly.</p>
+<p><strong>Note</strong>: We recommend using this function <strong>only when necessary</strong>, as it can
 be computationally intensive for large datasets and may not handle all edge
 cases. NetLogo provides a special output format called <em>lists</em> that exports
 list metrics in a tabular structure. If your experiment includes metrics that
 return NetLogo lists, include <code>"lists"</code> in the <code>outputs</code> argument of
 <code><a href="run_experiment.html">run_experiment()</a></code> to capture this output.</p>
-<p><code>parse_netlogo_list()</code> parses NetLogo-style lists represented as strings
-(e.g., <code>"[1 2 3]"</code>) into R lists. It automatically detects
-<code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a></code>, <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></code>,
-<code><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></code>, and <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> types
-within the lists and converts them accordingly.</p>
     </div>
 
     <div class="section level2">
@@ -98,13 +98,10 @@ containing NetLogo-style list strings.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The return value will depend on the input:</p><ul><li><p>If <code>x</code> does not contain NetLogo-style lists, returns the original vector
-unchanged.</p></li>
-<li><p>If <code>x</code> contains NetLogo-style lists, returns a <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code>
-where each element is the parsed result of the corresponding input
-element. Parsed elements may be atomic vectors (for homogeneous lists) or
-nested lists (for mixed-type or nested lists).</p></li>
-</ul></div>
+    <p>A <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> where each element is the parsed result of
+the corresponding input element. Parsed elements may be atomic vectors (for
+homogeneous lists) or nested lists (for mixed-type or nested lists).</p>
+    </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The function handles the following cases:</p><ul><li><p><strong>Homogeneous lists</strong>: Lists containing elements of the same type are
@@ -117,22 +114,22 @@ lists (e.g., <code>'["a" "b" [1 2]]'</code> becomes
 <code>list(c("a", "b"), c(1L, 2L))</code>).</p></li>
 </ul><p>NetLogo boolean values (<code>true</code>/<code>false</code>) are converted to R
 <code><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></code> values (<code>TRUE</code>/<code>FALSE</code>). NetLogo
-<code><a href="https://rdrr.io/r/base/is.finite.html" class="external-link">NaN</a></code> values are preserved as character strings.</p>
+<code>NaN</code> values are parsed as R <code><a href="https://rdrr.io/r/base/is.finite.html" class="external-link">NaN</a></code> .</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other utility functions:
-<code><a href="find_netlogo_console.html">find_netlogo_console()</a></code>,
-<code><a href="find_netlogo_home.html">find_netlogo_home()</a></code>,
-<code><a href="find_netlogo_version.html">find_netlogo_version()</a></code>,
-<code><a href="get_netlogo_shape.html">get_netlogo_shape()</a></code>,
-<code><a href="inspect_experiment_file.html">inspect_experiment_file()</a></code>,
+    <div class="dont-index"><p>Other parsing functions:
 <code><a href="parse_netlogo_color.html">parse_netlogo_color()</a></code></p></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Scalar Examples -----</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="st">'test'</span> <span class="op">|&gt;</span> <span class="fu">parse_netlogo_list</span><span class="op">(</span><span class="op">)</span> <span class="co"># Not a NetLogo list.</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "test"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="st">'[1]'</span> <span class="op">|&gt;</span> <span class="fu">parse_netlogo_list</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
@@ -160,6 +157,11 @@ lists (e.g., <code>'["a" "b" [1 2]]'</code> becomes
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Vector Examples -----</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="st">'1 2 3'</span> <span class="op">|&gt;</span> <span class="fu">parse_netlogo_list</span><span class="op">(</span><span class="op">)</span> <span class="co"># Not a NetLogo list.</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1 2 3"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'["a" "b" "c"]'</span>, <span class="st">'["d" "e" "f"]'</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">parse_netlogo_list</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>

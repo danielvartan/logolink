@@ -21,6 +21,10 @@
   automatically detect the NetLogo installation using helper functions.
   Users can still manually specify the path to NetLogo. See the updated
   documentation for details.
+- [`parse_netlogo_list()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_list.md)
+  now always return a `list` object. The previous behavior of returning
+  a `vector` when possible was removed. `NaN` values are now represented
+  as R `NaN` values instead of `"NaN"`.
 
 #### New Features and Improvements
 

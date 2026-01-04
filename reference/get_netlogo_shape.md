@@ -5,13 +5,13 @@
 GitHub.
 
 The collections and shapes available for download can be found in the
-LogoShapes
+[LogoShapes](https://github.com/danielvartan/logoshapes) project
 [`svg`](https://github.com/danielvartan/logoshapes/tree/main/svg)
 directory. Refer to the
 [LogoShapes](https://github.com/danielvartan/logoshapes) documentation
 for more information about the different collections.
 
-This function requires an active internet connection and the
+**Note**: This function requires an active internet connection and the
 [`httr2`](https://httr2.r-lib.org/) package.
 
 ## Usage
@@ -60,12 +60,7 @@ the file paths to the downloaded NetLogo shapes as
 ## See also
 
 Other utility functions:
-[`find_netlogo_console()`](https://danielvartan.github.io/logolink/reference/find_netlogo_console.md),
-[`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md),
-[`find_netlogo_version()`](https://danielvartan.github.io/logolink/reference/find_netlogo_version.md),
-[`inspect_experiment_file()`](https://danielvartan.github.io/logolink/reference/inspect_experiment_file.md),
-[`parse_netlogo_color()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_color.md),
-[`parse_netlogo_list()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_list.md)
+[`inspect_experiment_file()`](https://danielvartan.github.io/logolink/reference/inspect_experiment_file.md)
 
 ## Examples
 
