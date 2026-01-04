@@ -37,6 +37,7 @@ last one (alphabetically) is returned.
 Other utility functions: 
 \code{\link{find_netlogo_console}()},
 \code{\link{find_netlogo_version}()},
+\code{\link{get_netlogo_shape}()},
 \code{\link{inspect_experiment_file}()},
 \code{\link{parse_netlogo_color}()},
 \code{\link{parse_netlogo_list}()}

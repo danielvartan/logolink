@@ -30,6 +30,7 @@ Other utility functions:
 \code{\link{find_netlogo_console}()},
 \code{\link{find_netlogo_home}()},
 \code{\link{find_netlogo_version}()},
+\code{\link{get_netlogo_shape}()},
 \code{\link{parse_netlogo_color}()},
 \code{\link{parse_netlogo_list}()}
 }

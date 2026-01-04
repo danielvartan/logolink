@@ -24,6 +24,11 @@ NetLogo color codes.
 \description{
 \code{parse_netlogo_color()} parses NetLogo color codes (ranging from 0 to 140)
 into their approximate hexadecimal color representations.
+
+This function requires the
+\href{https://colorspace.r-forge.r-project.org/}{\code{colorspace}},
+and
+\href{https://scales.r-lib.org/}{\code{scales}} packages.
 }
 \details{
 NetLogo color codes are based on 14 hues, which can be visualized by running
@@ -68,6 +73,7 @@ Other utility functions:
 \code{\link{find_netlogo_console}()},
 \code{\link{find_netlogo_home}()},
 \code{\link{find_netlogo_version}()},
+\code{\link{get_netlogo_shape}()},
 \code{\link{inspect_experiment_file}()},
 \code{\link{parse_netlogo_list}()}
 }

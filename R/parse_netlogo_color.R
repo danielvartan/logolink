@@ -5,6 +5,11 @@
 #' `parse_netlogo_color()` parses NetLogo color codes (ranging from 0 to 140)
 #' into their approximate hexadecimal color representations.
 #'
+#' This function requires the
+#' [`colorspace`](https://colorspace.r-forge.r-project.org/),
+#' and
+#' [`scales`](https://scales.r-lib.org/) packages.
+#'
 #' @details
 #'
 #' NetLogo color codes are based on 14 hues, which can be visualized by running

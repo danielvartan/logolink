@@ -30,23 +30,34 @@ navbar:
     intro: ~
 
 reference:
-- title: NetLogo
+- title: BehaviorSpace
   desc: >
-    Functions to set up and run NetLogo experiments.
+    Functions to set up and run NetLogo experiments using BehaviorSpace.
   contents:
   - create_experiment
   - run_experiment
+
+- title: Parsing
+  desc: >
+    Functions to parse NetLogo data types.
+  contents:
+  - parse_netlogo_color
+  - parse_netlogo_list
+
+- title: System
+  desc: >
+    Functions to locate NetLogo installations.
+  contents:
+  - find_netlogo_home
+  - find_netlogo_console
+  - find_netlogo_version
 
 - title: Utilities
   desc: >
     Utility functions functions for NetLogo integration.
   contents:
-  - find_netlogo_home
-  - find_netlogo_console
-  - find_netlogo_version
+  - get_netlogo_shape
   - inspect_experiment_file
-  - parse_netlogo_color
-  - parse_netlogo_list
 
 authors:
   Daniel Vartanian:

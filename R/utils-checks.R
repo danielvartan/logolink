@@ -1,3 +1,18 @@
+assert_internet <- function() {
+  require_pkg("httr2")
+
+  if (!httr2::is_online()) {
+    cli::cli_abort(
+      paste0(
+        "An active internet connection is required to run this function. ",
+        "Please check your connection and try again."
+      )
+    )
+  } else {
+    invisible(TRUE)
+  }
+}
+
 assert_netlogo_console <- function(
   netlogo_console = find_netlogo_console()
 ) {
