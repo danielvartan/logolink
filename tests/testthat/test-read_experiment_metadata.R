@@ -1,4 +1,4 @@
-testthat::test_that("`read_experiment_table()` | General test", {
+testthat::test_that("`read_experiment_metadata()` | General test", {
   mock_file <- tempfile(fileext = ".csv")
 
   c(
@@ -27,55 +27,27 @@ testthat::test_that("`read_experiment_table()` | General test", {
   ) |>
     readr::write_lines(mock_file)
 
-  read_experiment_table(
+  read_experiment_metadata(
     file = mock_file,
-    tidy_output = TRUE
+    output_version = FALSE
   ) |>
-    checkmate::expect_tibble(nrows = 8, ncols = 10)
+    checkmate::expect_list(len = 5)
 
-  read_experiment_table(
+  # if (isTRUE(output_version)) {
+
+  read_experiment_metadata(
     file = mock_file,
-    tidy_output = FALSE
+    output_version = TRUE
   ) |>
-    checkmate::expect_tibble(nrows = 8, ncols = 10)
-})
-
-testthat::test_that("`read_experiment_table()` | Message test", {
-  mock_file <- tempfile(fileext = ".csv")
-
-  c(
-    'BehaviorSpace results (NetLogo 7.0.3), "Table version 2.0"',
-    paste0(
-      '"/home/danielvartan/.opt/netlogo-7-0-3/',
-      'models/IABM Textbook/chapter 4/Wolf Sheep Simple 5.nlogox"'
-    ),
-    '"Wolf Sheep Simple Model Analysis"',
-    '"01/05/2026 06:37:48:683 -0300"',
-    '"min-pxcor","max-pxcor","min-pycor","max-pycor"',
-    '"-17","17","-17","17"',
-    paste0(
-      '"[run number]","number-of-sheep","number-of-wolves",',
-      '"movement-cost","grass-regrowth-rate","energy-gain-from-grass",',
-      '"energy-gain-from-sheep","[step]","count wolves","count sheep"'
-    )
-  ) |>
-    readr::write_lines(mock_file)
-
-  # if (nrow(out) == 0) {
-
-  read_experiment_table(
-    file = mock_file,
-    tidy_output = FALSE
-  ) |>
-    testthat::expect_message()
+    checkmate::expect_list(len = 6)
 })
 
 testthat::test_that("`read_experiment_metadata()` | Error test", {
   # checkmate::assert_string(file)
 
-  read_experiment_table(
+  read_experiment_metadata(
     file = 1,
-    tidy_output = TRUE
+    output_version = FALSE
   ) |>
     testthat::expect_error()
 
@@ -84,26 +56,26 @@ testthat::test_that("`read_experiment_metadata()` | Error test", {
   mock_file <- tempfile(fileext = ".txt")
   mock_file |> file.create()
 
-  read_experiment_table(
+  read_experiment_metadata(
     file = tempfile(),
-    tidy_output = TRUE
+    output_version = FALSE
   ) |>
     testthat::expect_error()
 
-  read_experiment_table(
+  read_experiment_metadata(
     file = mock_file,
-    tidy_output = TRUE
+    output_version = FALSE
   ) |>
     testthat::expect_error()
 
-  # checkmate::assert_flag(tidy_output)
+  # checkmate::assert_flag(output_version)
 
   mock_file <- tempfile(fileext = ".csv")
   mock_file |> file.create()
 
-  read_experiment_table(
+  read_experiment_metadata(
     file = mock_file,
-    tidy_output = 1
+    output_version = 1
   ) |>
     testthat::expect_error()
 })

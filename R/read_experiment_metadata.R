@@ -17,7 +17,7 @@ read_experiment_metadata <- function(
     stringr::str_extract(".\\d{4}$") |>
     stringr::str_sub(1, 3) |>
     as.integer() |>
-    magrittr::multiply_by(-1) |>
+    magrittr::multiply_by(-1) %>%
     (\(x) ifelse(x >= 0, paste0("+", x), paste0("-", x)))() |>
     paste0("Etc/GMT", x = _)
 
@@ -66,7 +66,12 @@ read_experiment_metadata <- function(
       magrittr::extract2(1) |>
       stringr::str_extract("\\d+\\.\\d+(\\.\\d+)?$")
 
-    out <- out |> list(output_version = output_version)
+    out <-
+      out |>
+      append(
+        values = list(output_version = output_version),
+        after = 2
+      )
   }
 
   out

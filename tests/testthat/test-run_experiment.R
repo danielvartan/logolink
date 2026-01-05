@@ -90,6 +90,10 @@ testthat::test_that("`run_experiment()` | Error test", {
   setup_file_1 |> file.create()
   setup_file_2 |> file.create()
 
+  testthat::local_mocked_bindings(
+    assert_netlogo_console = function(...) NULL
+  )
+
   # checkmate::assert_string(model_path)
 
   run_experiment(
@@ -310,6 +314,7 @@ testthat::test_that("`run_experiment()` | Error test", {
   Sys.setenv("NETLOGO_CONSOLE" = "")
 
   testthat::local_mocked_bindings(
+    assert_netlogo_console = assert_netlogo_console,
     find_netlogo_home = function(...) "",
     sys_info = function(...) c(sysname = "linux"),
     path = function(...) ""
@@ -324,7 +329,9 @@ testthat::test_that("`run_experiment()` | Error test", {
     timeout = Inf,
     tidy_output = TRUE
   ) |>
-    testthat::expect_error()
+    testthat::expect_error() |>
+    suppressMessages() |>
+    suppressWarnings()
 
   Sys.setenv("NETLOGO_CONSOLE" = netlogo_console_backup)
 

@@ -1,6 +1,6 @@
 read_experiment_statistics <- function(file, tidy_output = TRUE) {
   checkmate::assert_string(file)
-  checkmate::assert_file_exists(file)
+  checkmate::assert_file_exists(file, extension = "csv")
   checkmate::assert_flag(tidy_output)
 
   # R CMD Check variable bindings fix.
