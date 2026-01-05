@@ -58,7 +58,14 @@ read_experiment_spreadsheet <- function(file, tidy_output = TRUE) {
     )
 
   if (nrow(data) == 0) {
-    cli::cli_alert_warning("The experiment produced no spreadsheet results.")
+    cli::cli_alert_warning(
+      paste0(
+        "The experiment produced no ",
+        "{.strong {cli::col_red('spreadsheet')}} ",
+        "results."
+      ),
+      wrap = TRUE
+    )
   } else {
     stats_data <-
       stats_data |>

@@ -18,7 +18,14 @@ read_experiment_lists <- function(file, tidy_output = TRUE) {
     janitor::clean_names()
 
   if (nrow(out) == 0) {
-    cli::cli_alert_warning("The experiment produced no lists results.")
+    cli::cli_alert_warning(
+      paste0(
+        "The experiment produced no ",
+        "{.strong {cli::col_red('lists')}} ",
+        "results."
+      ),
+      wrap = TRUE
+    )
 
     out
   } else {

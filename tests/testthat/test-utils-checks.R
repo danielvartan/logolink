@@ -18,12 +18,12 @@ testthat::test_that("`assert_internet()` | General test", {
 
 testthat::test_that("`assert_netlogo_console()` | General test", {
   mock_file <- tempfile() |> fs::path_expand()
-  file.create(mock_file)
+  mock_file |> file.create()
 
   # if ((netlogo_console == "") || !file.exists(netlogo_console)) {
 
   testthat::local_mocked_bindings(
-    path_expand = function(...) ""
+    find_netlogo_console = function(...) ""
   )
 
   assert_netlogo_console() |>
@@ -32,7 +32,7 @@ testthat::test_that("`assert_netlogo_console()` | General test", {
   # if (inherits(test, "try-error")) {
 
   testthat::local_mocked_bindings(
-    path_expand = function(...) mock_file,
+    find_netlogo_console = function(...) mock_file,
     system_2 = function(...) "test" |> `class<-`("try-error"),
   )
 
@@ -40,7 +40,7 @@ testthat::test_that("`assert_netlogo_console()` | General test", {
     testthat::expect_error()
 
   testthat::local_mocked_bindings(
-    path_expand = function(...) mock_file,
+    find_netlogo_console = function(...) mock_file,
     system_2 = function(...) "test",
   )
 

@@ -25,7 +25,14 @@ read_experiment_statistics <- function(file, tidy_output = TRUE) {
     dplyr::relocate(scenario)
 
   if (nrow(out) == 0) {
-    cli::cli_alert_warning("The experiment produced no statistics results.")
+    cli::cli_alert_warning(
+      paste0(
+        "The experiment produced no ",
+        "{.strong {cli::col_red('statistics')}} ",
+        "results."
+      ),
+      wrap = TRUE
+    )
   }
 
   out

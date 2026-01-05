@@ -22,7 +22,14 @@ read_experiment_table <- function(file, tidy_output = TRUE) {
     dplyr::arrange(run_number, step)
 
   if (nrow(out) == 0) {
-    cli::cli_alert_warning("The experiment produced no table results.")
+    cli::cli_alert_warning(
+      paste0(
+        "The experiment produced no ",
+        "{.strong {cli::col_red('table')}} ",
+        "results."
+      ),
+      wrap = TRUE
+    )
   }
 
   out
