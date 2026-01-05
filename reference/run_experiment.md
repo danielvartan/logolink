@@ -266,16 +266,16 @@ Other NetLogo functions:
 # \dontrun{
   model_path |> run_experiment(setup_file = setup_file)
 #> ℹ Running model
-#> ✔ Running model [23.3s]
+#> ✔ Running model [22s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [17ms]
+#> ✔ Gathering metadata [16ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [346ms]
+#> ✔ Processing table output [545ms]
 #> 
 #> ℹ Processing spreadsheet output
-#> ✔ Processing spreadsheet output [819ms]
+#> ✔ Processing spreadsheet output [802ms]
 #> 
 #> ℹ Processing list output
 #> ! The experiment produced no lists results.
@@ -287,11 +287,11 @@ Other NetLogo functions:
 #> 
 #> ℹ The experiment run produced the following messages:
 #> 
-#> Jan 05, 2026 1:57:54 AM java.util.prefs.FileSystemPreferences$1 run
+#> Jan 05, 2026 2:45:32 AM java.util.prefs.FileSystemPreferences$1 run
 #> INFO: Created user preferences directory.
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-05 01:57:55 GMT"
+#> [1] "2026-01-05 02:45:33 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -398,28 +398,28 @@ Other NetLogo functions:
       experiment = "Wolf Sheep Simple model analysis"
     )
 #> ℹ Running model
-#> ✔ Running model [18.4s]
+#> ✔ Running model [18s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [10ms]
+#> ✔ Gathering metadata [9ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [36ms]
+#> ✔ Processing table output [34ms]
 #> 
 #> ℹ Processing spreadsheet output
-#> ✔ Processing spreadsheet output [68ms]
+#> ✔ Processing spreadsheet output [67ms]
 #> 
 #> ℹ Processing list output
 #> ! The experiment produced no lists results.
 #> ℹ Processing list output
-#> ✔ Processing list output [35ms]
+#> ✔ Processing list output [34ms]
 #> 
 #> ℹ Processing statistics output
 #> ✔ Processing statistics output [8ms]
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-05 01:58:20 GMT"
+#> [1] "2026-01-05 02:45:57 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -475,18 +475,18 @@ Other NetLogo functions:
 #> 
 #> $spreadsheet$measures
 #> # A tibble: 440 × 4
-#>    run_number reporter                      measure value
-#>         <dbl> <chr>                           <dbl> <dbl>
-#>  1          1 [step]                              1  1000
-#>  2          1 count wolves                        1    10
-#>  3          1 count sheep                         1    41
-#>  4          1 sum [grass-amount] of patches       1 11926
-#>  5          2 [step]                              1  1000
-#>  6          2 count wolves                        1    17
-#>  7          2 count sheep                         1    61
-#>  8          2 sum [grass-amount] of patches       1 11667
-#>  9          3 [step]                              1  1000
-#> 10          3 count wolves                        1    15
+#>    run_number reporter                      measure  value
+#>         <dbl> <chr>                           <dbl>  <dbl>
+#>  1          1 [step]                              1  1000 
+#>  2          1 count wolves                        1     6 
+#>  3          1 count sheep                         1    46 
+#>  4          1 sum [grass-amount] of patches       1 11837.
+#>  5          2 [step]                              1  1000 
+#>  6          2 count wolves                        1    15 
+#>  7          2 count sheep                         1    66 
+#>  8          2 sum [grass-amount] of patches       1 11598.
+#>  9          3 [step]                              1  1000 
+#> 10          3 count wolves                        1    19 
 #> # ℹ 430 more rows
 #> 
 #> 
