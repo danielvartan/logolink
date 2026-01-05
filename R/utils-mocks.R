@@ -1,5 +1,13 @@
 # See `?testthat::local_mocked_bindings` to learn more.
 
+## `httr2`
+
+resp_body_json <- function(...) httr2::resp_body_json(...)
+resp_body_string <- function(...) httr2::resp_body_string(...)
+req_perform <- function(...) httr2::req_perform(...)
+
+# `base`
+
 require_namespace <- function(x, ..., quietly = TRUE) {
   requireNamespace(x, ..., quietly = quietly)
 }

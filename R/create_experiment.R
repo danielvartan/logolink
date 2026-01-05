@@ -2,8 +2,9 @@
 #'
 #' @description
 #'
-#' `create_experiment()` creates a NetLogo BehaviorSpace experiment XML in a
-#' temporary file that can be used to run headless experiments with the
+#' `create_experiment()` creates a NetLogo
+#' [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment XML
+#' in a temporary file that can be used to run headless experiments with the
 #' [`run_experiment()`][run_experiment()] function.
 #'
 #' Please refer to the
@@ -15,15 +16,16 @@
 #' ## Enclosing
 #'
 #' Since NetLogo only accepts double quotes for strings inside commands, we
-#' recommend always using single quotes when writing commands in R. For example,
-#' to run the `setup` command, use `'setup'`, not `"setup"`.
+#' recommend always using single quotes when writing NetLogo commands in R
+#' to avoid mistakes. For example, to run the `[1 "a" true]` command,
+#' use `'[1 "a" true]'`, not `"[1 \"a\" true]"`.
 #'
-#' ## `character` strings
+#' ## Constants and `character` strings
 #'
-#' [`character`][base::character()] strings should be passed as is, without
-#' adding quotes to them. For example, to set the variable `scenario` to
-#' `"SSP-585"`, you should use `list("scenario" = "SSP-585")`, not
-#' `list("scenario" = '"SSP-585"')`.
+#' When passing single values to constants, [`character`][base::character()]
+#' strings should be passed as is, without adding quotes to them. For example,
+#' to set the variable `scenario` to `"SSP-585"`, you should use
+#' `list("scenario" = "SSP-585")`, not `list("scenario" = '"SSP-585"')`.
 #'
 #' Insert quotes only if the command requires them. For example:
 #' `'n-values 10 ["N/A"]'`.
@@ -60,7 +62,7 @@
 #' @param name (optional) A [`character`][base::character()] string specifying
 #'   the name of the experiment (default: `""`).
 #' @param repetitions (optional) An integer number specifying the number of
-#'   times to repeat the experiment (default: `1`).
+#'   times to run the experiment (default: `1`).
 #' @param sequential_run_order (optional) A [`logical`][base::logical()] flag
 #'   indicating whether to run the experiments in sequential order
 #'   (default: `TRUE`).
@@ -69,7 +71,7 @@
 #' @param time_limit (optional) An integer number specifying the maximum number
 #'   of steps to run for each repetition. Set to `0` or `NULL` to have no time
 #'   limit (default: `1`).
-#' @param pre_experiment (optional) A [`character`][base::character()] string
+#' @param pre_experiment (optional) A [`character`][base::character()] vector
 #'   specifying the NetLogo command(s) to run before the experiment starts. This
 #'   can be a single command or multiple commands provided as a
 #'   [`character`][base::character()] vector; see the *Details > Multiple
@@ -82,19 +84,19 @@
 #'   NetLogo command(s) to run the model. This can be a single command or
 #'   multiple commands provided as a [`character`][base::character()] vector
 #'   (default: `'go'`).
-#' @param post_run (optional) A [`character`][base::character()] string
+#' @param post_run (optional) A [`character`][base::character()] vector
 #'   specifying the NetLogo command(s) to run after each run. This can be a
 #'   single command or multiple commands provided as a
 #'   [`character`][base::character()] vector (default: `NULL`).
-#' @param post_experiment (optional) A [`character`][base::character()] string
+#' @param post_experiment (optional) A [`character`][base::character()] vector
 #'   specifying the NetLogo command(s) to run after the experiment ends. This
 #'   can be a single command or multiple commands provided as a
 #'   [`character`][base::character()] vector (default: `NULL`).
-#' @param exit_condition (optional) A [`character`][base::character()] string
+#' @param exit_condition (optional) A [`character`][base::character()] vector
 #'   specifying the NetLogo command that defines the exit condition for the
 #'   experiment (default: `NULL`).
 #' @param run_metrics_condition (optional) A [`character`][base::character()]
-#'   string specifying the NetLogo command that defines the condition to record
+#'   vector specifying the NetLogo command that defines the condition to record
 #'   metrics (default: `NULL`).
 #' @param metrics A [`character`][base::character()] vector specifying the
 #'   NetLogo commands to record as metrics
@@ -105,10 +107,10 @@
 #'   `first`, `step`, and `last` elements (for stepped/varying values). See the
 #'   *Details* and *Examples* sections to learn more (default: `NULL`).
 #' @param sub_experiments (optional) A [`list`][base::list()] where each element
-#'   is a named [`list`][base::list()] specifying the constants for a
-#'   sub-experiment. Each sub-experiment uses the same structure as the
-#'   `constants` argument. See the `constants` argument documentation for
-#'   details on how to specify parameter values (default: `NULL`).
+#'   is a [`list`][base::list()] specifying the constants for a sub-experiment.
+#'   Each sub-experiment uses the same structure as the `constants` argument.
+#'   See the `constants` argument documentation for details on how to specify
+#'   parameter values (default: `NULL`).
 #' @param file (optional) A [`character`][base::character()] string specifying
 #'   the path to save the created XML file
 #'   (default: `tempfile(pattern = "experiment-", fileext = ".xml")`).

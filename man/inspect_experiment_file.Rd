@@ -16,9 +16,14 @@ its side effect of printing the XML content to the console.
 }
 \description{
 \code{inspect_experiment_file()} reads and prints the content of a
-BehaviorSpace experiment XML file to the console. This is useful for
-debugging and verifying the structure of experiment files created by
+\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace} experiment XML
+file to the console. This is useful for debugging and verifying the
+structure of experiment files created by
 \code{\link[=create_experiment]{create_experiment()}}.
+
+Please refer to the
+\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace Guide} for
+complete guidance on how to set and run experiments in NetLogo.
 }
 \examples{
 file <- create_experiment(name = "My Experiment")

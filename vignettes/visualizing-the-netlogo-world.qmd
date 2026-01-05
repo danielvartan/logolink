@@ -26,8 +26,7 @@ Have you ever wanted to capture what's happening in your NetLogo simulation at s
 
 We'll work with the [Wolf Sheep Simple](https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/IABM%20Textbook/chapter%204/Wolf%20Sheep%20Simple%205.nlogox) model, a classic predator-prey simulation that ships with NetLogo. By the end, you'll have both static plots and an animated [GIF](https://en.wikipedia.org/wiki/GIF) showing your simulation evolving over time.
 
-I'm assuming you have [NetLogo](https://ccl.northwestern.edu/netlogo/) 7.1.0 or
-or above installed and are comfortable with basic R programming.
+We're assuming you have [NetLogo](https://ccl.northwestern.edu/netlogo/) 7.1.0 or or above installed and are comfortable with R programming.
 
 ## Getting Started
 

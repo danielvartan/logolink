@@ -73,8 +73,8 @@ get_netlogo_shape <- function(
 
   assert_internet()
   checkmate::assert_character(shape, min.len = 1)
-  checkmate::assert_directory_exists(dir)
   checkmate::assert_string(collection)
+  checkmate::assert_directory_exists(dir)
   checkmate::assert_string(auth_token)
 
   api_response <-
@@ -93,8 +93,8 @@ get_netlogo_shape <- function(
 
   collection_choices <-
     api_response |>
-    httr2::req_perform() |>
-    httr2::resp_body_json() |>
+    req_perform() |>
+    resp_body_json() |>
     purrr::map_chr("name")
 
   checkmate::assert_choice(collection, collection_choices)
@@ -102,8 +102,8 @@ get_netlogo_shape <- function(
   shape_response <-
     api_response |>
     httr2::req_url_path_append(collection) |>
-    httr2::req_perform() |>
-    httr2::resp_body_json()
+    req_perform() |>
+    resp_body_json()
 
   shape_choices <-
     shape_response |>
@@ -127,8 +127,8 @@ get_netlogo_shape <- function(
 
     i_content <-
       httr2::request(i_url) |>
-      httr2::req_perform() |>
-      httr2::resp_body_string()
+      req_perform() |>
+      resp_body_string()
 
     i_file <-
       dir |>

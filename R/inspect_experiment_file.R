@@ -3,9 +3,14 @@
 #' @description
 #'
 #' `inspect_experiment_file()` reads and prints the content of a
-#' BehaviorSpace experiment XML file to the console. This is useful for
-#' debugging and verifying the structure of experiment files created by
+#' [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment XML
+#' file to the console. This is useful for debugging and verifying the
+#' structure of experiment files created by
 #' [`create_experiment()`][create_experiment()].
+#'
+#' Please refer to the
+#' [BehaviorSpace Guide](https://docs.netlogo.org/behaviorspace.html) for
+#' complete guidance on how to set and run experiments in NetLogo.
 #'
 #' @param file A [`character`][base::character()] string specifying the path to
 #'   the BehaviorSpace experiment XML file.
@@ -25,7 +30,7 @@ inspect_experiment_file <- function(file) {
   checkmate::assert_file_exists(file, access = "r", extension = "xml")
 
   file |>
-    readr::read_lines() |>
+    readLines() |>
     paste(collapse = "\n") |>
     cat()
 

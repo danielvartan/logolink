@@ -9,31 +9,64 @@ testthat::test_that("`create_experiment()` | General test", {
     checkmate::expect_string(pattern = "<experiments>")
 
   create_experiment(
-    name = "Wolf Sheep Simple Model Analysis",
+    name = "BehaviorSpace Run 3 Variable Values Per Experiments",
     repetitions = 10,
     sequential_run_order = TRUE,
-    run_metrics_every_step = TRUE,
-    setup = "setup",
-    go = "go",
-    time_limit = 1000,
-    metrics = c(
-      'count wolves',
-      'count sheep'
+    run_metrics_every_step = FALSE,
+    time_limit = 1500,
+    pre_experiment = NULL,
+    setup = c(
+      'setup',
+      paste0(
+        'print (word "sheep-reproduce: " sheep-reproduce ", ',
+        'wolf-reproduce: " wolf-reproduce)'
+      ),
+      paste0(
+        'print (word "sheep-gain-from-food: " sheep-gain-from-food ", ',
+        'wolf-gain-from-food: " wolf-gain-from-food)'
+      )
     ),
-    run_metrics_condition = NULL,
+    go = 'go',
+    post_run = c(
+      'print (word "sheep: " count sheep ", wolves: " count wolves)',
+      'print ""',
+      'wait 1'
+    ),
+    post_experiment = NULL,
+    exit_condition = NULL,
+    run_metrics_condition = 'ticks mod 10 = 0',
+    metrics = c(
+      'count sheep',
+      'count wolves',
+      'count grass'
+    ),
     constants = list(
-      "number-of-sheep" = 500,
-      "number-of-wolves" = list(
+      "model-version" = "sheep-wolves-grass",
+      "initial-number-sheep" = 100,
+      "initial-number-wolves" = list(
         first = 5,
         step = 1,
         last = 15
       ),
-      "movement-cost" = 0.5,
-      "grass-regrowth-rate" = 0.3,
-      "energy-gain-from-grass" = 2,
-      "energy-gain-from-sheep" = 5,
-      "character-constant-test" = "a string constant",
-      "logical-constant-test" = TRUE
+      "sheep-reproduce" = 4,
+      "wolf-reproduce" = 2,
+      "sheep-gain-from-food" = 4,
+      "wolf-gain-from-food" = 20,
+      "grass-regrowth-time" = 30
+    ),
+    sub_experiments = list(
+      list(
+        "sheep-reproduce" = c(1, 6, 20)
+      ),
+      list(
+        "wolf-reproduce" = c(2, 7, 15)
+      ),
+      list(
+        "sheep-gain-from-food" = c(1, 8, 15)
+      ),
+      list(
+        "wolf-gain-from-food" = c(10, 20, 30)
+      )
     ),
     file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
@@ -64,6 +97,26 @@ test_that("`create_experiment()` | Error test", {
     testthat::expect_error()
 
   # checkmate::assert_int(repetitions, lower = 1)
+
+  create_experiment(
+    name = "",
+    repetitions = "a",
+    sequential_run_order = TRUE,
+    run_metrics_every_step = FALSE,
+    time_limit = 1,
+    pre_experiment = NULL,
+    setup = "setup",
+    go = "go",
+    post_run = NULL,
+    post_experiment = NULL,
+    exit_condition = NULL,
+    run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
+    constants = NULL,
+    sub_experiments = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
+  ) |>
+    testthat::expect_error()
 
   create_experiment(
     name = "",
@@ -129,117 +182,27 @@ test_that("`create_experiment()` | Error test", {
   ) |>
     testthat::expect_error()
 
-  # checkmate::assert_string(pre_experiment, null.ok = TRUE)
-
-  create_experiment(
-    name = "",
-    repetitions = 1,
-    sequential_run_order = TRUE,
-    run_metrics_every_step = FALSE,
-    time_limit = 1,
-    pre_experiment = 1,
-    setup = "setup",
-    go = "go",
-    post_run = NULL,
-    post_experiment = NULL,
-    exit_condition = NULL,
-    run_metrics_condition = NULL,
-    metrics = c('count turtles', 'count patches'),
-    constants = NULL,
-    sub_experiments = NULL,
-    file = tempfile(pattern = "experiment-", fileext = ".xml")
-  ) |>
-    testthat::expect_error()
-
-  # checkmate::assert_string(setup)
-
-  create_experiment(
-    name = "",
-    repetitions = 1,
-    sequential_run_order = TRUE,
-    run_metrics_every_step = FALSE,
-    time_limit = 1,
-    pre_experiment = NULL,
-    setup = 1,
-    go = "go",
-    post_run = NULL,
-    post_experiment = NULL,
-    exit_condition = NULL,
-    run_metrics_condition = NULL,
-    metrics = c('count turtles', 'count patches'),
-    constants = NULL,
-    sub_experiments = NULL,
-    file = tempfile(pattern = "experiment-", fileext = ".xml")
-  ) |>
-    testthat::expect_error()
-
-  # checkmate::assert_string(go)
-
-  create_experiment(
-    name = "",
-    repetitions = 1,
-    sequential_run_order = TRUE,
-    run_metrics_every_step = FALSE,
-    time_limit = 1,
-    pre_experiment = NULL,
-    setup = "setup",
-    go = 1,
-    post_run = NULL,
-    post_experiment = NULL,
-    exit_condition = NULL,
-    run_metrics_condition = NULL,
-    metrics = c('count turtles', 'count patches'),
-    constants = NULL,
-    sub_experiments = NULL,
-    file = tempfile(pattern = "experiment-", fileext = ".xml")
-  ) |>
-    testthat::expect_error()
-
-  # checkmate::assert_string(post_run, null.ok = TRUE)
-
-  create_experiment(
-    name = "",
-    repetitions = 1,
-    sequential_run_order = TRUE,
-    run_metrics_every_step = FALSE,
-    time_limit = 1,
-    pre_experiment = NULL,
-    setup = "setup",
-    go = "go",
-    post_run = 1,
-    post_experiment = NULL,
-    exit_condition = NULL,
-    run_metrics_condition = NULL,
-    metrics = c('count turtles', 'count patches'),
-    constants = NULL,
-    sub_experiments = NULL,
-    file = tempfile(pattern = "experiment-", fileext = ".xml")
-  ) |>
-    testthat::expect_error()
-
-  # checkmate::assert_string(post_experiment, null.ok = TRUE)
-
-  create_experiment(
-    name = "",
-    repetitions = 1,
-    sequential_run_order = TRUE,
-    run_metrics_every_step = FALSE,
-    time_limit = 1,
-    pre_experiment = NULL,
-    setup = "setup",
-    go = "go",
-    post_run = NULL,
-    post_experiment = 1,
-    exit_condition = NULL,
-    run_metrics_condition = NULL,
-    metrics = c('count turtles', 'count patches'),
-    constants = NULL,
-    .sub_experiments = NULL,
-    file = tempfile(pattern = "experiment-", fileext = ".xml")
-  ) |>
-    testthat::expect_error()
-
   # checkmate::assert_int(time_limit, lower = 1)
+
+  create_experiment(
+    name = "",
+    repetitions = 1,
+    sequential_run_order = TRUE,
+    run_metrics_every_step = FALSE,
+    time_limit = "a",
+    pre_experiment = NULL,
+    setup = "setup",
+    go = "go",
+    post_run = NULL,
+    post_experiment = NULL,
+    exit_condition = NULL,
+    run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
+    constants = NULL,
+    sub_experiments = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
+  ) |>
+    testthat::expect_error()
 
   create_experiment(
     name = "",
@@ -261,7 +224,117 @@ test_that("`create_experiment()` | Error test", {
   ) |>
     testthat::expect_error()
 
-  # checkmate::assert_string(exit_condition, null.ok = TRUE)
+  # checkmate::assert_character(pre_experiment, null.ok = TRUE)
+
+  create_experiment(
+    name = "",
+    repetitions = 1,
+    sequential_run_order = TRUE,
+    run_metrics_every_step = FALSE,
+    time_limit = 1,
+    pre_experiment = 1,
+    setup = "setup",
+    go = "go",
+    post_run = NULL,
+    post_experiment = NULL,
+    exit_condition = NULL,
+    run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
+    constants = NULL,
+    sub_experiments = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
+  ) |>
+    testthat::expect_error()
+
+  # checkmate::assert_character(setup)
+
+  create_experiment(
+    name = "",
+    repetitions = 1,
+    sequential_run_order = TRUE,
+    run_metrics_every_step = FALSE,
+    time_limit = 1,
+    pre_experiment = NULL,
+    setup = 1,
+    go = "go",
+    post_run = NULL,
+    post_experiment = NULL,
+    exit_condition = NULL,
+    run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
+    constants = NULL,
+    sub_experiments = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
+  ) |>
+    testthat::expect_error()
+
+  # checkmate::assert_character(go)
+
+  create_experiment(
+    name = "",
+    repetitions = 1,
+    sequential_run_order = TRUE,
+    run_metrics_every_step = FALSE,
+    time_limit = 1,
+    pre_experiment = NULL,
+    setup = "setup",
+    go = 1,
+    post_run = NULL,
+    post_experiment = NULL,
+    exit_condition = NULL,
+    run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
+    constants = NULL,
+    sub_experiments = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
+  ) |>
+    testthat::expect_error()
+
+  # checkmate::assert_character(post_run, null.ok = TRUE)
+
+  create_experiment(
+    name = "",
+    repetitions = 1,
+    sequential_run_order = TRUE,
+    run_metrics_every_step = FALSE,
+    time_limit = 1,
+    pre_experiment = NULL,
+    setup = "setup",
+    go = "go",
+    post_run = 1,
+    post_experiment = NULL,
+    exit_condition = NULL,
+    run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
+    constants = NULL,
+    sub_experiments = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
+  ) |>
+    testthat::expect_error()
+
+  # checkmate::assert_character(post_experiment, null.ok = TRUE)
+
+  create_experiment(
+    name = "",
+    repetitions = 1,
+    sequential_run_order = TRUE,
+    run_metrics_every_step = FALSE,
+    time_limit = 1,
+    pre_experiment = NULL,
+    setup = "setup",
+    go = "go",
+    post_run = NULL,
+    post_experiment = 1,
+    exit_condition = NULL,
+    run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
+    constants = NULL,
+    .sub_experiments = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
+  ) |>
+    testthat::expect_error()
+
+  # checkmate::assert_character(exit_condition, null.ok = TRUE)
 
   create_experiment(
     name = "",
@@ -276,6 +349,28 @@ test_that("`create_experiment()` | Error test", {
     post_experiment = NULL,
     exit_condition = 1,
     run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
+    constants = NULL,
+    sub_experiments = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
+  ) |>
+    testthat::expect_error()
+
+  # checkmate::assert_character(run_metrics_condition, null.ok = TRUE)
+
+  create_experiment(
+    name = "",
+    repetitions = 1,
+    sequential_run_order = TRUE,
+    run_metrics_every_step = FALSE,
+    time_limit = 1,
+    pre_experiment = NULL,
+    setup = "setup",
+    go = "go",
+    post_run = NULL,
+    post_experiment = NULL,
+    exit_condition = NULL,
+    run_metrics_condition = 1,
     metrics = c('count turtles', 'count patches'),
     constants = NULL,
     sub_experiments = NULL,
@@ -305,29 +400,7 @@ test_that("`create_experiment()` | Error test", {
   ) |>
     testthat::expect_error()
 
-  # checkmate::assert_string(run_metrics_condition, null.ok = TRUE)
-
-  create_experiment(
-    name = "",
-    repetitions = 1,
-    sequential_run_order = TRUE,
-    run_metrics_every_step = FALSE,
-    time_limit = 1,
-    pre_experiment = NULL,
-    setup = "setup",
-    go = "go",
-    post_run = NULL,
-    post_experiment = NULL,
-    exit_condition = NULL,
-    run_metrics_condition = 1,
-    metrics = c('count turtles', 'count patches'),
-    constants = NULL,
-    sub_experiments = NULL,
-    file = tempfile(pattern = "experiment-", fileext = ".xml")
-  ) |>
-    testthat::expect_error()
-
-  # checkmate::assert_list(constants, null.ok = TRUE)
+  # checkmate::assert_list(constants, names = "named", null.ok = TRUE)
 
   create_experiment(
     name = "",
@@ -345,6 +418,28 @@ test_that("`create_experiment()` | Error test", {
     metrics = c('count turtles', 'count patches'),
     constants = "a",
     sub_experiments = NULL,
+    file = tempfile(pattern = "experiment-", fileext = ".xml")
+  ) |>
+    testthat::expect_error()
+
+  # checkmate::assert_list(sub_experiments, null.ok = TRUE)
+
+  create_experiment(
+    name = "",
+    repetitions = 1,
+    sequential_run_order = TRUE,
+    run_metrics_every_step = FALSE,
+    time_limit = 1,
+    pre_experiment = NULL,
+    setup = "setup",
+    go = "go",
+    post_run = NULL,
+    post_experiment = NULL,
+    exit_condition = NULL,
+    run_metrics_condition = NULL,
+    metrics = c('count turtles', 'count patches'),
+    constants = NULL,
+    sub_experiments = "a",
     file = tempfile(pattern = "experiment-", fileext = ".xml")
   ) |>
     testthat::expect_error()
