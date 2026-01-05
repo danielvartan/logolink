@@ -69,7 +69,7 @@ get_netlogo_shape <- function(
   dir = tempdir(),
   auth_token = Sys.getenv("GITHUB_PAT")
 ) {
-  require_pkg("httr2")
+  require_package("httr2")
 
   assert_internet()
   checkmate::assert_character(shape, min.len = 1)

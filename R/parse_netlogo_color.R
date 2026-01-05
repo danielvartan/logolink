@@ -73,7 +73,7 @@
 #'
 #' parse_netlogo_color(17.5, bias = 0.5)
 parse_netlogo_color <- function(x, bias = 0.1) {
-  require_pkg("colorspace", "grDevices", "scales")
+  require_package("colorspace", "grDevices", "scales")
 
   checkmate::assert_numeric(x, lower = 0, upper = 140)
   checkmate::assert_number(bias, lower = -1, upper = 1)

@@ -25,7 +25,7 @@ testthat::test_that("`get_netlogo_shape()` | General test", {
   )
 
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL,
+    require_package = function(...) NULL,
     assert_internet = function(...) NULL,
     req_perform = function(...) NULL,
     resp_body_json = function(...) list_response,
@@ -45,7 +45,7 @@ testthat::test_that("`get_netlogo_shape()` | Error test", {
   # checkmate::assert_character(shape, min.len = 1)
 
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL,
+    require_package = function(...) NULL,
     assert_internet = function(...) NULL
   )
 
@@ -60,7 +60,7 @@ testthat::test_that("`get_netlogo_shape()` | Error test", {
   # checkmate::assert_string(collection)
 
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL,
+    require_package = function(...) NULL,
     assert_internet = function(...) NULL
   )
 
@@ -75,7 +75,7 @@ testthat::test_that("`get_netlogo_shape()` | Error test", {
   # checkmate::assert_directory_exists(dir)
 
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL,
+    require_package = function(...) NULL,
     assert_internet = function(...) NULL
   )
 
@@ -90,7 +90,7 @@ testthat::test_that("`get_netlogo_shape()` | Error test", {
   # checkmate::assert_string(auth_token)
 
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL,
+    require_package = function(...) NULL,
     assert_internet = function(...) NULL
   )
 

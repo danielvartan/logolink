@@ -1,5 +1,5 @@
 assert_internet <- function() {
-  require_pkg("httr2")
+  require_package("httr2")
 
   if (!httr2::is_online()) {
     cli::cli_abort(

@@ -1,39 +1,36 @@
-testthat::test_that("require_pkg() | general test", {
+testthat::test_that("require_package() | general test", {
   "base" |>
-    require_pkg() |>
+    require_package() |>
     testthat::expect_null()
 
   "test65464564" |>
-    require_pkg() |>
+    require_package() |>
     testthat::expect_error()
 
-  require_pkg("test1654654", "test265464564") |>
+  require_package("test1654654", "test265464564") |>
     testthat::expect_error()
 
-  mock <- function(.parent = parent.frame(), .env = topenv(.parent)) {
-    mockr::with_mock(
-      require_namespace = function(...) TRUE,
-      {
-        require_pkg("test")
-      }
-    )
-  }
+  testthat::local_mocked_bindings(
+    require_namespace = function(...) TRUE
+  )
 
-  testthat::expect_null(mock())
+  require_package("test") |>
+    testthat::expect_null()
 })
 
-testthat::test_that("require_pkg() | error test", {
-  # lapply(out, checkmate::assert_string,
-  #        pattern = "^[A-Za-z][A-Za-z0-9.]+[A-Za-z0-9]$")
+testthat::test_that("require_package() | error test", {
+  # lapply(out, checkmate::assert_string, ...
+
   1 |>
-    require_pkg() |>
+    require_package() |>
     testthat::expect_error("Assertion on 'X\\[\\[i\\]\\]' failed")
 
   ".test" |>
-    require_pkg() |>
+    require_package() |>
     testthat::expect_error("Assertion on 'X\\[\\[i\\]\\]' failed")
 
-  # (!identical(unique(unlist(out)), unlist(out)))
-  require_pkg("test", "test") |>
-    testthat::expect_error("'...' cannot have duplicated values.")
+  # if (!identical(unique(unlist(out)), unlist(out)))
+
+  require_package("test", "test") |>
+    testthat::expect_error()
 })

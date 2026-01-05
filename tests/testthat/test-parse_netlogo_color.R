@@ -1,6 +1,6 @@
 testthat::test_that("`parse_netlogo_color()` | General test", {
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL
+    require_package = function(...) NULL
   )
 
   parse_netlogo_color(
@@ -14,7 +14,7 @@ testthat::test_that("`parse_netlogo_color()` | Bias adjustment test", {
   # Base Color
 
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL
+    require_package = function(...) NULL
   )
 
   parse_netlogo_color(
@@ -24,7 +24,7 @@ testthat::test_that("`parse_netlogo_color()` | Bias adjustment test", {
     testthat::expect_equal("#D73229")
 
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL
+    require_package = function(...) NULL
   )
 
   parse_netlogo_color(
@@ -36,7 +36,7 @@ testthat::test_that("`parse_netlogo_color()` | Bias adjustment test", {
   # Dark Shade
 
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL
+    require_package = function(...) NULL
   )
 
   parse_netlogo_color(
@@ -46,7 +46,7 @@ testthat::test_that("`parse_netlogo_color()` | Bias adjustment test", {
     testthat::expect_equal("#711610")
 
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL
+    require_package = function(...) NULL
   )
 
   parse_netlogo_color(
@@ -56,7 +56,7 @@ testthat::test_that("`parse_netlogo_color()` | Bias adjustment test", {
     testthat::expect_equal("#480200")
 
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL
+    require_package = function(...) NULL
   )
 
   parse_netlogo_color(
@@ -66,13 +66,13 @@ testthat::test_that("`parse_netlogo_color()` | Bias adjustment test", {
     testthat::expect_equal("#98312D")
 
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL
+    require_package = function(...) NULL
   )
 
   # Light Shade
 
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL
+    require_package = function(...) NULL
   )
 
   parse_netlogo_color(
@@ -82,7 +82,7 @@ testthat::test_that("`parse_netlogo_color()` | Bias adjustment test", {
     testthat::expect_equal("#FF9B98")
 
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL
+    require_package = function(...) NULL
   )
 
   parse_netlogo_color(
@@ -92,7 +92,7 @@ testthat::test_that("`parse_netlogo_color()` | Bias adjustment test", {
     testthat::expect_equal("#FF5B55")
 
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL
+    require_package = function(...) NULL
   )
 
   parse_netlogo_color(
@@ -106,7 +106,7 @@ testthat::test_that("`parse_netlogo_color()` | Error test", {
   # checkmate::assert_numeric(x, lower = 0, upper = 140)
 
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL
+    require_package = function(...) NULL
   )
 
   parse_netlogo_color(
@@ -116,7 +116,7 @@ testthat::test_that("`parse_netlogo_color()` | Error test", {
     testthat::expect_error()
 
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL
+    require_package = function(...) NULL
   )
 
   parse_netlogo_color(
@@ -126,7 +126,7 @@ testthat::test_that("`parse_netlogo_color()` | Error test", {
     testthat::expect_error()
 
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL
+    require_package = function(...) NULL
   )
 
   parse_netlogo_color(
@@ -138,7 +138,7 @@ testthat::test_that("`parse_netlogo_color()` | Error test", {
   # checkmate::assert_number(bias, lower = -1, upper = 1)
 
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL
+    require_package = function(...) NULL
   )
 
   parse_netlogo_color(
@@ -148,7 +148,7 @@ testthat::test_that("`parse_netlogo_color()` | Error test", {
     testthat::expect_error()
 
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL
+    require_package = function(...) NULL
   )
 
   parse_netlogo_color(
@@ -158,7 +158,7 @@ testthat::test_that("`parse_netlogo_color()` | Error test", {
     testthat::expect_error()
 
   testthat::local_mocked_bindings(
-    require_pkg = function(...) NULL
+    require_package = function(...) NULL
   )
 
   parse_netlogo_color(
