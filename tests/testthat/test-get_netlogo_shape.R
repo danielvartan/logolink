@@ -1,4 +1,4 @@
-testthat::test_that("`parse_netlogo_list()` | General test", {
+testthat::test_that("`get_netlogo_shape()` | General test", {
   fake_api_response <- paste0(
     '[',
     '\n',
@@ -41,7 +41,7 @@ testthat::test_that("`parse_netlogo_list()` | General test", {
     testthat::expect_type("character")
 })
 
-testthat::test_that("`parse_netlogo_list()` | Error test", {
+testthat::test_that("`get_netlogo_shape()` | Error test", {
   # checkmate::assert_character(shape, min.len = 1)
 
   testthat::local_mocked_bindings(

@@ -37,7 +37,9 @@
 #'
 #' @return A [`list`][base::list()] where each element is the parsed result of
 #'   the corresponding input element. Parsed elements may be atomic vectors (for
-#'   homogeneous lists) or nested lists (for mixed-type or nested lists).
+#'   homogeneous lists) or nested lists (for mixed-type or nested lists). If
+#'   a NetLogo list is not detected in an input element, that element is
+#'   returned as a single-element list containing the original string.
 #'
 #' @family parsing functions
 #' @export
@@ -59,7 +61,7 @@
 #'
 #' # Vector Examples -----
 #'
-#' '1 2 3' |> parse_netlogo_list() # Not a NetLogo list.
+#' c(1, 2, 3) |> parse_netlogo_list() # Not a NetLogo list.
 #'
 #' c('["a" "b" "c"]', '["d" "e" "f"]') |> parse_netlogo_list()
 #'

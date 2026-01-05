@@ -2,8 +2,8 @@
 #'
 #' @description
 #'
-#' `parse_netlogo_color()` parses NetLogo color codes (ranging from 0 to 140)
-#' into their approximate hexadecimal color representations.
+#' `parse_netlogo_color()` parses NetLogo color codes into their approximate
+#' hexadecimal color representations.
 #'
 #' **Note**: This function requires the
 #' [`colorspace`](https://colorspace.r-forge.r-project.org/),
@@ -40,6 +40,8 @@
 #' @export
 #'
 #' @examples
+#' # Simple Parsing Examples -----
+#'
 #' netlogo_base_colors <- c(
 #'   "gray" = 5,
 #'   "red" = 15,
@@ -59,11 +61,17 @@
 #'
 #' parse_netlogo_color(netlogo_base_colors)
 #'
-#' parse_netlogo_color(netlogo_base_colors, bias = 0.5)
-#'
 #' parse_netlogo_color(seq(10, 20, by = 1))
 #'
 #' parse_netlogo_color(seq(10, 20, by = 0.5))
+#'
+#' # Bias Adjustment Examples -----
+#'
+#' parse_netlogo_color(17.5, bias = 0)
+#'
+#' parse_netlogo_color(17.5, bias = -0.5)
+#'
+#' parse_netlogo_color(17.5, bias = 0.5)
 parse_netlogo_color <- function(x, bias = 0.1) {
   require_pkg("colorspace", "grDevices", "scales")
 
@@ -142,7 +150,7 @@ parse_netlogo_color <- function(x, bias = 0.1) {
             magrittr::mod(10) %>%
             magrittr::subtract(5) |>
             abs() |>
-            magrittr::multiply_by(1 + bias) |>
+            magrittr::multiply_by(1 + (-bias)) |>
             scales::rescale(to = c(0, 1), from = c(0, 5))
 
           rep(NA_character_, length(netlogo_color)) |>

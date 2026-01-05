@@ -22,8 +22,8 @@ approximate hexadecimal color representations corresponding to the input
 NetLogo color codes.
 }
 \description{
-\code{parse_netlogo_color()} parses NetLogo color codes (ranging from 0 to 140)
-into their approximate hexadecimal color representations.
+\code{parse_netlogo_color()} parses NetLogo color codes into their approximate
+hexadecimal color representations.
 
 \strong{Note}: This function requires the
 \href{https://colorspace.r-forge.r-project.org/}{\code{colorspace}},
@@ -43,6 +43,8 @@ This function provides an alternative approach for obtaining color
 representations from NetLogo color codes.
 }
 \examples{
+# Simple Parsing Examples -----
+
 netlogo_base_colors <- c(
   "gray" = 5,
   "red" = 15,
@@ -62,11 +64,17 @@ netlogo_base_colors <- c(
 
 parse_netlogo_color(netlogo_base_colors)
 
-parse_netlogo_color(netlogo_base_colors, bias = 0.5)
-
 parse_netlogo_color(seq(10, 20, by = 1))
 
 parse_netlogo_color(seq(10, 20, by = 0.5))
+
+# Bias Adjustment Examples -----
+
+parse_netlogo_color(17.5, bias = 0)
+
+parse_netlogo_color(17.5, bias = -0.5)
+
+parse_netlogo_color(17.5, bias = 0.5)
 }
 \seealso{
 Other parsing functions: 
