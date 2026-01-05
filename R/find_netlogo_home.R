@@ -32,10 +32,8 @@
 find_netlogo_home <- function() {
   netlogo_home <- Sys.getenv("NETLOGO_HOME")
 
-  netlogo_home <- ""
-
   if ((!netlogo_home == "") && dir.exists(netlogo_home)) {
-    normalizePath(netlogo_home)
+    normalizePath(netlogo_home) |> fs::path()
   } else {
     common_paths <- list(
       windows = c(
@@ -58,20 +56,16 @@ find_netlogo_home <- function() {
       purrr::map(normalizePath, mustWork = FALSE)
 
     system_name <-
-      Sys.info() |>
+      sys_info() |> # Sys.info() mock
       magrittr::extract("sysname") |>
       unname() |>
       tolower()
-
-    if (system_name == "darwin") {
-      system_name <- "macos"
-    }
 
     if (system_name == "windows") {
       paths_to_search <- common_paths$windows
     } else if (system_name == "linux") {
       paths_to_search <- common_paths$linux
-    } else if (system_name == "macos") {
+    } else if (system_name %in% c("darwin", "macos")) {
       paths_to_search <- common_paths$mac
     } else {
       paths_to_search <-
@@ -90,7 +84,7 @@ find_netlogo_home <- function() {
         stringr::str_subset("(?i)NetLogo") |>
         dplyr::last()
 
-      possible_path <- fs::path(i, netlogo_dir)
+      possible_path <- path(i, netlogo_dir)
 
       if (length(possible_path) > 0) {
         if (dir.exists(possible_path)) {
