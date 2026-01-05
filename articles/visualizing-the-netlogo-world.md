@@ -12,9 +12,8 @@ the end, you’ll have both static plots and an animated
 [GIF](https://en.wikipedia.org/wiki/GIF) showing your simulation
 evolving over time.
 
-I’m assuming you have [NetLogo](https://ccl.northwestern.edu/netlogo/)
-7.1.0 or or above installed and are comfortable with basic R
-programming.
+We’re assuming you have [NetLogo](https://ccl.northwestern.edu/netlogo/)
+7.1.0 or or above installed and are comfortable with R programming.
 
 ## Getting Started
 

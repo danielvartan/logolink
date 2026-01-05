@@ -5,13 +5,15 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Inter-0.4.10/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Create a NetLogo BehaviorSpace experiment — create_experiment"><meta name="description" content="create_experiment() creates a NetLogo BehaviorSpace experiment XML in a
-temporary file that can be used to run headless experiments with the
+</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Inter-0.4.10/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Create a NetLogo BehaviorSpace experiment — create_experiment"><meta name="description" content="create_experiment() creates a NetLogo
+BehaviorSpace experiment XML
+in a temporary file that can be used to run headless experiments with the
 run_experiment() function.
 Please refer to the
 BehaviorSpace Guide for
-complete guidance on how to set and run experiments in NetLogo."><meta property="og:description" content="create_experiment() creates a NetLogo BehaviorSpace experiment XML in a
-temporary file that can be used to run headless experiments with the
+complete guidance on how to set and run experiments in NetLogo."><meta property="og:description" content="create_experiment() creates a NetLogo
+BehaviorSpace experiment XML
+in a temporary file that can be used to run headless experiments with the
 run_experiment() function.
 Please refer to the
 BehaviorSpace Guide for
@@ -59,8 +61,9 @@ complete guidance on how to set and run experiments in NetLogo."><meta property=
     </div>
 
     <div class="ref-description section level2">
-    <p><code>create_experiment()</code> creates a NetLogo BehaviorSpace experiment XML in a
-temporary file that can be used to run headless experiments with the
+    <p><code>create_experiment()</code> creates a NetLogo
+<a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a> experiment XML
+in a temporary file that can be used to run headless experiments with the
 <code><a href="run_experiment.html">run_experiment()</a></code> function.</p>
 <p>Please refer to the
 <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace Guide</a> for
@@ -100,7 +103,7 @@ the name of the experiment (default: <code>""</code>).</p></dd>
 
 <dt id="arg-repetitions">repetitions<a class="anchor" aria-label="anchor" href="#arg-repetitions"></a></dt>
 <dd><p>(optional) An integer number specifying the number of
-times to repeat the experiment (default: <code>1</code>).</p></dd>
+times to run the experiment (default: <code>1</code>).</p></dd>
 
 
 <dt id="arg-sequential-run-order">sequential_run_order<a class="anchor" aria-label="anchor" href="#arg-sequential-run-order"></a></dt>
@@ -121,7 +124,7 @@ limit (default: <code>1</code>).</p></dd>
 
 
 <dt id="arg-pre-experiment">pre_experiment<a class="anchor" aria-label="anchor" href="#arg-pre-experiment"></a></dt>
-<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string
+<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector
 specifying the NetLogo command(s) to run before the experiment starts. This
 can be a single command or multiple commands provided as a
 <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector; see the <em>Details &gt; Multiple
@@ -143,28 +146,28 @@ multiple commands provided as a <code><a href="https://rdrr.io/r/base/character.
 
 
 <dt id="arg-post-run">post_run<a class="anchor" aria-label="anchor" href="#arg-post-run"></a></dt>
-<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string
+<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector
 specifying the NetLogo command(s) to run after each run. This can be a
 single command or multiple commands provided as a
 <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector (default: <code>NULL</code>).</p></dd>
 
 
 <dt id="arg-post-experiment">post_experiment<a class="anchor" aria-label="anchor" href="#arg-post-experiment"></a></dt>
-<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string
+<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector
 specifying the NetLogo command(s) to run after the experiment ends. This
 can be a single command or multiple commands provided as a
 <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector (default: <code>NULL</code>).</p></dd>
 
 
 <dt id="arg-exit-condition">exit_condition<a class="anchor" aria-label="anchor" href="#arg-exit-condition"></a></dt>
-<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string
+<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector
 specifying the NetLogo command that defines the exit condition for the
 experiment (default: <code>NULL</code>).</p></dd>
 
 
 <dt id="arg-run-metrics-condition">run_metrics_condition<a class="anchor" aria-label="anchor" href="#arg-run-metrics-condition"></a></dt>
 <dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code>
-string specifying the NetLogo command that defines the condition to record
+vector specifying the NetLogo command that defines the condition to record
 metrics (default: <code>NULL</code>).</p></dd>
 
 
@@ -184,10 +187,10 @@ vector (for fixed/enumerated values), or a <code><a href="https://rdrr.io/r/base
 
 <dt id="arg-sub-experiments">sub_experiments<a class="anchor" aria-label="anchor" href="#arg-sub-experiments"></a></dt>
 <dd><p>(optional) A <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> where each element
-is a named <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> specifying the constants for a
-sub-experiment. Each sub-experiment uses the same structure as the
-<code>constants</code> argument. See the <code>constants</code> argument documentation for
-details on how to specify parameter values (default: <code>NULL</code>).</p></dd>
+is a <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> specifying the constants for a sub-experiment.
+Each sub-experiment uses the same structure as the <code>constants</code> argument.
+See the <code>constants</code> argument documentation for details on how to specify
+parameter values (default: <code>NULL</code>).</p></dd>
 
 
 <dt id="arg-file">file<a class="anchor" aria-label="anchor" href="#arg-file"></a></dt>
@@ -209,18 +212,19 @@ created XML file.</p>
 
 
 <p>Since NetLogo only accepts double quotes for strings inside commands, we
-recommend always using single quotes when writing commands in R. For example,
-to run the <code>setup</code> command, use <code>'setup'</code>, not <code>"setup"</code>.</p>
+recommend always using single quotes when writing NetLogo commands in R
+to avoid mistakes. For example, to run the <code>[1 "a" true]</code> command,
+use <code>'[1 "a" true]'</code>, not <code>"[1 \"a\" true]"</code>.</p>
 </div>
 
 <div class="section">
-<h3 id="character-strings"><code>character</code> strings<a class="anchor" aria-label="anchor" href="#character-strings"></a></h3>
+<h3 id="constants-and-character-strings">Constants and <code>character</code> strings<a class="anchor" aria-label="anchor" href="#constants-and-character-strings"></a></h3>
 
 
-<p><code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> strings should be passed as is, without
-adding quotes to them. For example, to set the variable <code>scenario</code> to
-<code>"SSP-585"</code>, you should use <code>list("scenario" = "SSP-585")</code>, not
-<code>list("scenario" = '"SSP-585"')</code>.</p>
+<p>When passing single values to constants, <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code>
+strings should be passed as is, without adding quotes to them. For example,
+to set the variable <code>scenario</code> to <code>"SSP-585"</code>, you should use
+<code>list("scenario" = "SSP-585")</code>, not <code>list("scenario" = '"SSP-585"')</code>.</p>
 <p>Insert quotes only if the command requires them. For example:
 <code>'n-values 10 ["N/A"]'</code>.</p>
 </div>
@@ -293,7 +297,7 @@ use
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpdI515k/experiment-1ea0a1912a1.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpPUyWZk/experiment-210d23aa5678.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment_file.html">inspect_experiment_file</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
@@ -384,7 +388,7 @@ use
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpdI515k/experiment-1ea05fd061ab.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpPUyWZk/experiment-210d29beaa27.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment_file.html">inspect_experiment_file</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
@@ -509,7 +513,7 @@ use
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpdI515k/experiment-1ea07fbc2c59.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpPUyWZk/experiment-210d3e5db5e2.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment_file.html">inspect_experiment_file</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
@@ -604,7 +608,7 @@ use
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpdI515k/experiment-1ea073007939.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpPUyWZk/experiment-210d71d40bbf.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment_file.html">inspect_experiment_file</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
@@ -657,7 +661,7 @@ use
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpdI515k/experiment-1ea05f7908c4.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpPUyWZk/experiment-210d4c439c31.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment_file.html">inspect_experiment_file</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
@@ -710,7 +714,7 @@ use
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpdI515k/experiment-1ea0d61b612.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpPUyWZk/experiment-210d61b05c01.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment_file.html">inspect_experiment_file</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>

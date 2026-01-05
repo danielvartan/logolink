@@ -1,7 +1,9 @@
 # Create a NetLogo BehaviorSpace experiment
 
-`create_experiment()` creates a NetLogo BehaviorSpace experiment XML in
-a temporary file that can be used to run headless experiments with the
+`create_experiment()` creates a NetLogo
+[BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment
+XML in a temporary file that can be used to run headless experiments
+with the
 [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
 function.
 
@@ -41,8 +43,8 @@ create_experiment(
 
 - repetitions:
 
-  (optional) An integer number specifying the number of times to repeat
-  the experiment (default: `1`).
+  (optional) An integer number specifying the number of times to run the
+  experiment (default: `1`).
 
 - sequential_run_order:
 
@@ -64,7 +66,7 @@ create_experiment(
 - pre_experiment:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
-  string specifying the NetLogo command(s) to run before the experiment
+  vector specifying the NetLogo command(s) to run before the experiment
   starts. This can be a single command or multiple commands provided as
   a [`character`](https://rdrr.io/r/base/character.html) vector; see the
   *Details \> Multiple Commands* section for usage (default: `NULL`).
@@ -88,7 +90,7 @@ create_experiment(
 - post_run:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
-  string specifying the NetLogo command(s) to run after each run. This
+  vector specifying the NetLogo command(s) to run after each run. This
   can be a single command or multiple commands provided as a
   [`character`](https://rdrr.io/r/base/character.html) vector (default:
   `NULL`).
@@ -96,7 +98,7 @@ create_experiment(
 - post_experiment:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
-  string specifying the NetLogo command(s) to run after the experiment
+  vector specifying the NetLogo command(s) to run after the experiment
   ends. This can be a single command or multiple commands provided as a
   [`character`](https://rdrr.io/r/base/character.html) vector (default:
   `NULL`).
@@ -104,13 +106,13 @@ create_experiment(
 - exit_condition:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
-  string specifying the NetLogo command that defines the exit condition
+  vector specifying the NetLogo command that defines the exit condition
   for the experiment (default: `NULL`).
 
 - run_metrics_condition:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
-  string specifying the NetLogo command that defines the condition to
+  vector specifying the NetLogo command that defines the condition to
   record metrics (default: `NULL`).
 
 - metrics:
@@ -131,11 +133,11 @@ create_experiment(
 - sub_experiments:
 
   (optional) A [`list`](https://rdrr.io/r/base/list.html) where each
-  element is a named [`list`](https://rdrr.io/r/base/list.html)
-  specifying the constants for a sub-experiment. Each sub-experiment
-  uses the same structure as the `constants` argument. See the
-  `constants` argument documentation for details on how to specify
-  parameter values (default: `NULL`).
+  element is a [`list`](https://rdrr.io/r/base/list.html) specifying the
+  constants for a sub-experiment. Each sub-experiment uses the same
+  structure as the `constants` argument. See the `constants` argument
+  documentation for details on how to specify parameter values (default:
+  `NULL`).
 
 - file:
 
@@ -153,11 +155,13 @@ path to the created XML file.
 ### Enclosing
 
 Since NetLogo only accepts double quotes for strings inside commands, we
-recommend always using single quotes when writing commands in R. For
-example, to run the `setup` command, use `'setup'`, not `"setup"`.
+recommend always using single quotes when writing NetLogo commands in R
+to avoid mistakes. For example, to run the `[1 "a" true]` command, use
+`'[1 "a" true]'`, not `"[1 \"a\" true]"`.
 
-### `character` strings
+### Constants and `character` strings
 
+When passing single values to constants,
 [`character`](https://rdrr.io/r/base/character.html) strings should be
 passed as is, without adding quotes to them. For example, to set the
 variable `scenario` to `"SSP-585"`, you should use
@@ -233,7 +237,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpdI515k/experiment-1ea0a1912a1.xml"
+#> [1] "/tmp/RtmpPUyWZk/experiment-210d23aa5678.xml"
 
 setup_file |> inspect_experiment_file()
 #> <experiments>
@@ -324,7 +328,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpdI515k/experiment-1ea05fd061ab.xml"
+#> [1] "/tmp/RtmpPUyWZk/experiment-210d29beaa27.xml"
 
 setup_file |> inspect_experiment_file()
 #> <experiments>
@@ -449,7 +453,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpdI515k/experiment-1ea07fbc2c59.xml"
+#> [1] "/tmp/RtmpPUyWZk/experiment-210d3e5db5e2.xml"
 
 setup_file |> inspect_experiment_file()
 #> <experiments>
@@ -544,7 +548,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpdI515k/experiment-1ea073007939.xml"
+#> [1] "/tmp/RtmpPUyWZk/experiment-210d71d40bbf.xml"
 
 setup_file |> inspect_experiment_file()
 #> <experiments>
@@ -597,7 +601,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpdI515k/experiment-1ea05f7908c4.xml"
+#> [1] "/tmp/RtmpPUyWZk/experiment-210d4c439c31.xml"
 
 setup_file |> inspect_experiment_file()
 #> <experiments>
@@ -650,7 +654,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpdI515k/experiment-1ea0d61b612.xml"
+#> [1] "/tmp/RtmpPUyWZk/experiment-210d61b05c01.xml"
 
 setup_file |> inspect_experiment_file()
 #> <experiments>
