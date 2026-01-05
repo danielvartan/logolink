@@ -176,9 +176,9 @@ understands:
 plot_data <-
   results |>
   extract2("lists") |>
-  dplyr::mutate(
-    dplyr::across(
-      .cols = dplyr::matches("^pcolor_of_patches|^color_of_"),
+  mutate(
+    across(
+      .cols = matches("^pcolor_of_patches|^color_of_"),
       .fns = parse_netlogo_color
     )
   )

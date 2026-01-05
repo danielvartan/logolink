@@ -133,7 +133,9 @@ specified `output`:
   [`tibble`](https://tibble.tidyverse.org/reference/tibble.html) with
   the results of the
   [`statistics`](https://docs.netlogo.org/behaviorspace.html#statistics-output)
-  output (if requested).
+  output (if requested). See the [BehaviorSpace
+  Guide](https://docs.netlogo.org/behaviorspace.html) for details about
+  each output type.
 
 ## Details
 
@@ -294,21 +296,21 @@ Other NetLogo functions:
       setup_file = setup_file
     )
 #> ℹ Running model
-#> ✔ Running model [19.8s]
+#> ✔ Running model [19.6s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [18ms]
+#> ✔ Gathering metadata [17ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [15ms]
+#> ✔ Processing table output [14ms]
 #> 
 #> ℹ The experiment run produced the following messages:
 #> 
-#> Jan 05, 2026 10:34:01 AM java.util.prefs.FileSystemPreferences$1 run
+#> Jan 05, 2026 11:23:23 AM java.util.prefs.FileSystemPreferences$1 run
 #> INFO: Created user preferences directory.
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-05 10:34:02 GMT"
+#> [1] "2026-01-05 11:23:25 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -353,7 +355,7 @@ Other NetLogo functions:
       experiment = "Wolf Sheep Simple model analysis"
     )
 #> ℹ Running model
-#> ✔ Running model [17.8s]
+#> ✔ Running model [17.7s]
 #> 
 #> ℹ Gathering metadata
 #> ✔ Gathering metadata [9ms]
@@ -363,7 +365,7 @@ Other NetLogo functions:
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-05 10:34:23 GMT"
+#> [1] "2026-01-05 11:23:45 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
