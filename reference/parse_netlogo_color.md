@@ -1,7 +1,7 @@
 # Parse NetLogo colors
 
-`parse_netlogo_color()` parses NetLogo color codes (ranging from 0 to
-140) into their approximate hexadecimal color representations.
+`parse_netlogo_color()` parses NetLogo color codes into their
+approximate hexadecimal color representations.
 
 **Note**: This function requires the
 [`colorspace`](https://colorspace.r-forge.r-project.org/), and
@@ -57,6 +57,8 @@ Other parsing functions:
 ## Examples
 
 ``` r
+# Simple Parsing Examples -----
+
 netlogo_base_colors <- c(
   "gray" = 5,
   "red" = 15,
@@ -78,16 +80,23 @@ parse_netlogo_color(netlogo_base_colors)
 #>  [1] "#8D8D8D" "#D73229" "#F16A15" "#9D6E48" "#ECEC29" "#59B03C" "#2CD13B"
 #>  [8] "#1D9F78" "#54C4C4" "#2D8DBE" "#345DA9" "#7C50A4" "#A71B6A" "#D9637F"
 
-parse_netlogo_color(netlogo_base_colors, bias = 0.5)
-#>  [1] "#8D8D8D" "#D73229" "#F16A15" "#9D6E48" "#ECEC29" "#59B03C" "#2CD13B"
-#>  [8] "#1D9F78" "#54C4C4" "#2D8DBE" "#345DA9" "#7C50A4" "#A71B6A" "#D9637F"
-
 parse_netlogo_color(seq(10, 20, by = 1))
-#>  [1] "#8D8D8D" "#300100" "#580400" "#7A1C18" "#9C3431" "#D73229" "#FB554F"
+#>  [1] "#8D8D8D" "#4D0200" "#6B110B" "#872521" "#A33935" "#D73229" "#FB554F"
 #>  [8] "#FF8D8A" "#FFBCBB" "#FFE8E8" "#D73229"
 
 parse_netlogo_color(seq(10, 20, by = 0.5))
-#>  [1] "#8D8D8D" "#090000" "#300100" "#440200" "#580400" "#6A0F09" "#7A1C18"
-#>  [8] "#8B2825" "#9C3431" "#AE413D" "#D73229" "#E9443D" "#FB554F" "#FF716D"
+#>  [1] "#8D8D8D" "#3D0100" "#4D0200" "#5E0500" "#6B110B" "#791B17" "#872521"
+#>  [8] "#952F2B" "#A33935" "#B1433F" "#D73229" "#E9443D" "#FB554F" "#FF716D"
 #> [15] "#FF8D8A" "#FFA5A4" "#FFBCBB" "#FFD2D2" "#FFE8E8" "#FFFDFD" "#D73229"
+
+# Bias Adjustment Examples -----
+
+parse_netlogo_color(17.5, bias = 0)
+#> [1] "#FF9B98"
+
+parse_netlogo_color(17.5, bias = -0.5)
+#> [1] "#FF5B55"
+
+parse_netlogo_color(17.5, bias = 0.5)
+#> [1] "#FFCECE"
 ```

@@ -36,7 +36,9 @@ parse_netlogo_list(x)
 A [`list`](https://rdrr.io/r/base/list.html) where each element is the
 parsed result of the corresponding input element. Parsed elements may be
 atomic vectors (for homogeneous lists) or nested lists (for mixed-type
-or nested lists).
+or nested lists). If a NetLogo list is not detected in an input element,
+that element is returned as a single-element list containing the
+original string.
 
 ## Details
 
@@ -101,9 +103,9 @@ Other parsing functions:
 
 # Vector Examples -----
 
-'1 2 3' |> parse_netlogo_list() # Not a NetLogo list.
+c(1, 2, 3) |> parse_netlogo_list() # Not a NetLogo list.
 #> [[1]]
-#> [1] "1 2 3"
+#> [1] 1 2 3
 #> 
 
 c('["a" "b" "c"]', '["d" "e" "f"]') |> parse_netlogo_list()

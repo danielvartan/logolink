@@ -5,13 +5,13 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Inter-0.4.10/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Parse NetLogo colors — parse_netlogo_color"><meta name="description" content="parse_netlogo_color() parses NetLogo color codes (ranging from 0 to 140)
-into their approximate hexadecimal color representations.
+</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Inter-0.4.10/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Parse NetLogo colors — parse_netlogo_color"><meta name="description" content="parse_netlogo_color() parses NetLogo color codes into their approximate
+hexadecimal color representations.
 Note: This function requires the
 colorspace,
 and
-scales packages."><meta property="og:description" content="parse_netlogo_color() parses NetLogo color codes (ranging from 0 to 140)
-into their approximate hexadecimal color representations.
+scales packages."><meta property="og:description" content="parse_netlogo_color() parses NetLogo color codes into their approximate
+hexadecimal color representations.
 Note: This function requires the
 colorspace,
 and
@@ -59,8 +59,8 @@ scales packages."><meta property="og:image" content="https://danielvartan.github
     </div>
 
     <div class="ref-description section level2">
-    <p><code>parse_netlogo_color()</code> parses NetLogo color codes (ranging from 0 to 140)
-into their approximate hexadecimal color representations.</p>
+    <p><code>parse_netlogo_color()</code> parses NetLogo color codes into their approximate
+hexadecimal color representations.</p>
 <p><strong>Note</strong>: This function requires the
 <a href="https://colorspace.r-forge.r-project.org/" class="external-link"><code>colorspace</code></a>,
 and
@@ -115,7 +115,9 @@ representations from NetLogo color codes.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">netlogo_base_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Simple Parsing Examples -----</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">netlogo_base_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"gray"</span> <span class="op">=</span> <span class="fl">5</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"red"</span> <span class="op">=</span> <span class="fl">15</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"orange"</span> <span class="op">=</span> <span class="fl">25</span>,</span></span>
@@ -136,18 +138,25 @@ representations from NetLogo color codes.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "#8D8D8D" "#D73229" "#F16A15" "#9D6E48" "#ECEC29" "#59B03C" "#2CD13B"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [8] "#1D9F78" "#54C4C4" "#2D8DBE" "#345DA9" "#7C50A4" "#A71B6A" "#D9637F"</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">parse_netlogo_color</span><span class="op">(</span><span class="va">netlogo_base_colors</span>, bias <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "#8D8D8D" "#D73229" "#F16A15" "#9D6E48" "#ECEC29" "#59B03C" "#2CD13B"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] "#1D9F78" "#54C4C4" "#2D8DBE" "#345DA9" "#7C50A4" "#A71B6A" "#D9637F"</span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">parse_netlogo_color</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "#8D8D8D" "#300100" "#580400" "#7A1C18" "#9C3431" "#D73229" "#FB554F"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "#8D8D8D" "#4D0200" "#6B110B" "#872521" "#A33935" "#D73229" "#FB554F"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [8] "#FF8D8A" "#FFBCBB" "#FFE8E8" "#D73229"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">parse_netlogo_color</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, by <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "#8D8D8D" "#090000" "#300100" "#440200" "#580400" "#6A0F09" "#7A1C18"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] "#8B2825" "#9C3431" "#AE413D" "#D73229" "#E9443D" "#FB554F" "#FF716D"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "#8D8D8D" "#3D0100" "#4D0200" "#5E0500" "#6B110B" "#791B17" "#872521"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] "#952F2B" "#A33935" "#B1433F" "#D73229" "#E9443D" "#FB554F" "#FF716D"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [15] "#FF8D8A" "#FFA5A4" "#FFBCBB" "#FFD2D2" "#FFE8E8" "#FFFDFD" "#D73229"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Bias Adjustment Examples -----</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">parse_netlogo_color</span><span class="op">(</span><span class="fl">17.5</span>, bias <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#FF9B98"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">parse_netlogo_color</span><span class="op">(</span><span class="fl">17.5</span>, bias <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#FF5B55"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">parse_netlogo_color</span><span class="op">(</span><span class="fl">17.5</span>, bias <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#FFCECE"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
