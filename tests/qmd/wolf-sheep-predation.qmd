@@ -207,8 +207,14 @@ setup_file <- create_experiment(
   time_limit = 1500,
   setup = c(
     'setup',
-    'print (word "sheep-reproduce: " sheep-reproduce ", wolf-reproduce: " wolf-reproduce)',
-    'print (word "sheep-gain-from-food: " sheep-gain-from-food ", wolf-gain-from-food: " wolf-gain-from-food)'
+    paste0(
+      'print (word "sheep-reproduce: " sheep-reproduce ", ',
+      'wolf-reproduce: " wolf-reproduce)'
+    ),
+    paste0(
+      'print (word "sheep-gain-from-food: " sheep-gain-from-food ", ',
+      'wolf-gain-from-food: " wolf-gain-from-food)'
+    )
   ),
   go = 'go',
   post_run = c(
@@ -287,8 +293,14 @@ setup_file <- create_experiment(
   time_limit = 1500,
   setup = c(
     'setup',
-    'print (word "sheep-reproduce: " sheep-reproduce ", wolf-reproduce: " wolf-reproduce)',
-    'print (word "sheep-gain-from-food: " sheep-gain-from-food ", wolf-gain-from-food: " wolf-gain-from-food)'
+    paste0(
+      'print (word "sheep-reproduce: " sheep-reproduce ", wolf-reproduce: ',
+      '" wolf-reproduce)'
+    ),
+    paste0(
+      'print (word "sheep-gain-from-food: " sheep-gain-from-food ", ',
+      'wolf-gain-from-food: " wolf-gain-from-food)'
+    )
   ),
   go = 'go',
   post_run = c(

@@ -176,6 +176,7 @@ plot_netlogo_world <- function(
 #| label: readme-wolf-sheep-model-plot-2
 #| fig-height: 7.4
 #| fig-width: 7
+#| fig-alt: Plot of the NetLogo world
 
 plot_netlogo_world(plot_data)
 ```

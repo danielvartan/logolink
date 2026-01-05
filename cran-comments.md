@@ -1,6 +1,6 @@
 ## Release Summary
 
-This is a minor release in the 0.*.* series.
+This is a major release of `logolink` (version 1.0.0). The primary change in this release is the addition of support for NetLogo 7.0.1 and later.
 
 NetLogo 7 received a patch release (7.0.1) that addressed several issues. This update also introduced a new XML structure for BehaviorSpace experiments, which required updates to `logolink` to ensure compatibility.
 
@@ -68,7 +68,7 @@ No spelling errors found.
 ## `goodpractice` Results (Arch Linux)
 
 ```text
-♥ Ah! Rad package! Keep up the lovely work!
+♥ Aha! Fine package! Keep up the flawless work!
 ```
 
 ---

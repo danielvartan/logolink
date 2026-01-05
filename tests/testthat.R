@@ -38,14 +38,6 @@ test_check("logolink")
 # tcltk::tk_choose.files()
 # urlchecker::url_check()
 # urlchecker::url_update()
-# usethis::use_coverage()
-# usethis::use_dev_version()
-# usethis::use_github_action("check-standard")
-# usethis::use_logo(tcltk::tk_choose.files())
-# usethis::use_release_issue("#.#.#")
-# usethis::use_revdep()
-# usethis::use_tidy_description()
-# usethis::use_version()
 
 # git tag -f <tagname>
 # git push --force origin <tagname>

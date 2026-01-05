@@ -184,7 +184,7 @@ read_experiment_spreadsheet.tidy_data <- function(data, statistics) {
 
   # fmt: skip
   col_pattern <- paste0(
-    c("_final$","_min$", "_max$", "_mean$", "_total_steps$"),
+    c("_final$", "_min$", "_max$", "_mean$", "_total_steps$"),
     collapse = "|"
   )
 
