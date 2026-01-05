@@ -10,8 +10,8 @@
 #' The function uses the following detection methods in order:
 #'
 #' 1. **Console execution**: If the NetLogo console executable is found, it
-#'    runs `NetLogo_Console --version` to retrieve the version information.
-#'    This is the most reliable method.
+#'    runs `NetLogo_Console --headless --version` to retrieve the version
+#'    information. This is the most reliable method.
 #' 2. **Directory name extraction**: If the executable is not found, it
 #'    attempts to extract the version number from the installation directory
 #'    name (e.g., `netlogo-7.0.2` yields `"7.0.2"`).
@@ -38,28 +38,29 @@ find_netlogo_version <- function(
 ) {
   checkmate::assert_string(netlogo_home)
 
+  # R CMD Check variable bindings fix.
+  # nolint start
+  . <- NULL
+  # nolint end
+
   netlogo_home <- fs::path_expand(netlogo_home)
-  executable_path <- find_netlogo_console(netlogo_home)
+  netlogo_console <- find_netlogo_console(netlogo_home)
 
-  if (executable_path == "") {
-    out <-
-      netlogo_home |>
-      basename() |>
-      stringr::str_extract("\\d+.\\d+(.\\d+)?") |>
-      stringr::str_replace_all("\\D", ".")
-
-    if (is.na(out)) out <- ""
-  } else {
-    out <-
-      executable_path |>
-      system2(
+  if (netlogo_console != "" && file.exists(netlogo_console)) {
+    netlogo_console |>
+      system_2(
         args = c("--headless --version"),
         stdout = TRUE,
         stderr = TRUE
       ) |>
       stringr::str_remove_all("NetLogo") |>
       stringr::str_squish()
+  } else {
+    out <-
+      netlogo_home |>
+      basename() |>
+      stringr::str_extract("\\d+.\\d+(.\\d+)?") |>
+      stringr::str_replace_all("\\D", ".") %>%
+      ifelse(is.na(.), "", .)
   }
-
-  out
 }
