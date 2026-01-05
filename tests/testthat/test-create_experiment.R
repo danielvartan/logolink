@@ -74,7 +74,7 @@ testthat::test_that("`create_experiment()` | General test", {
     checkmate::expect_file_exists(extension = "xml")
 })
 
-test_that("`create_experiment()` | Error test", {
+testthat::test_that("`create_experiment()` | Error test", {
   # checkmate::assert_string(name)
 
   create_experiment(

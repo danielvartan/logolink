@@ -64,11 +64,11 @@ find_netlogo_home <- function() {
       tolower()
 
     if (system_name == "windows") {
-      paths_to_search <- common_paths$windows
-    } else if (system_name == "linux") {
-      paths_to_search <- common_paths$linux
+      paths_to_search <- common_paths |> magrittr::extract2("windows")
     } else if (system_name %in% c("darwin", "macos")) {
-      paths_to_search <- common_paths$mac
+      paths_to_search <- common_paths |> magrittr::extract2("macos")
+    } else if (system_name == "linux") {
+      paths_to_search <- common_paths |> magrittr::extract2("linux")
     } else {
       paths_to_search <-
         common_paths |>
