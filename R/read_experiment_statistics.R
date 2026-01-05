@@ -1,12 +1,6 @@
-read_experiment_statistics <- function(file, tidy_output = TRUE) {
+read_experiment_statistics <- function(file) {
   checkmate::assert_string(file)
   checkmate::assert_file_exists(file, extension = "csv")
-  checkmate::assert_flag(tidy_output)
-
-  # R CMD Check variable bindings fix.
-  # nolint start
-  scenario <- NULL
-  # nolint end
 
   out <-
     file |>
@@ -18,11 +12,7 @@ read_experiment_statistics <- function(file, tidy_output = TRUE) {
       show_col_types = FALSE
     ) |>
     dplyr::as_tibble() |>
-    janitor::clean_names() |>
-    dplyr::mutate(
-      scenario = dplyr::row_number()
-    ) |>
-    dplyr::relocate(scenario)
+    janitor::clean_names()
 
   if (nrow(out) == 0) {
     cli::cli_alert_warning(

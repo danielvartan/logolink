@@ -1,10 +1,10 @@
 testthat::test_that("`find_netlogo_version()` | General test", {
   netlogo_console_backup <- Sys.getenv("NETLOGO_CONSOLE")
 
-  mock_file <- tempfile() |> fs::path_expand()
-  file.create(mock_file)
+  test_file <- tempfile() |> fs::path_expand()
+  test_file |> file.create()
 
-  Sys.setenv("NETLOGO_CONSOLE" = mock_file)
+  Sys.setenv("NETLOGO_CONSOLE" = test_file)
 
   testthat::local_mocked_bindings(
     system_2 = function(...) "9.9.9",

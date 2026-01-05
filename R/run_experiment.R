@@ -433,7 +433,7 @@ run_experiment.gather_output <- function(
       argument |>
       dplyr::filter(argument == "table") |>
       dplyr::pull(file) |>
-      read_experiment_table(tidy_output)
+      read_experiment_table()
   }
 
   if ("spreadsheet" %in% output) {
@@ -463,7 +463,7 @@ run_experiment.gather_output <- function(
       argument |>
       dplyr::filter(argument == "stats") |>
       dplyr::pull(file) |>
-      read_experiment_statistics(tidy_output)
+      read_experiment_statistics()
   }
 
   cli::cli_process_done()

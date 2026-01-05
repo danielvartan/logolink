@@ -1,8 +1,8 @@
 testthat::test_that("`find_netlogo_console()` | General test", {
   netlogo_console_backup <- Sys.getenv("NETLOGO_CONSOLE")
 
-  mock_file <- tempfile() |> fs::path_expand()
-  file.create(mock_file)
+  test_file <- tempfile() |> fs::path_expand()
+  test_file |> file.create()
 
   Sys.setenv("NETLOGO_CONSOLE" = ".")
 
@@ -35,12 +35,12 @@ testthat::test_that("`find_netlogo_console()` | General test", {
 
   testthat::local_mocked_bindings(
     find_netlogo_home = function(...) "",
-    path = function(...) mock_file,
-    path_expand = function(...) mock_file
+    path = function(...) test_file,
+    path_expand = function(...) test_file
   )
 
   find_netlogo_console() |>
-    testthat::expect_equal(mock_file)
+    testthat::expect_equal(test_file)
 
   Sys.setenv("NETLOGO_CONSOLE" = netlogo_console_backup)
 })
@@ -48,8 +48,8 @@ testthat::test_that("`find_netlogo_console()` | General test", {
 testthat::test_that("`find_netlogo_console()` | Message test", {
   netlogo_console_backup <- Sys.getenv("NETLOGO_CONSOLE")
 
-  mock_file <- tempfile() |> fs::path_expand()
-  file.create(mock_file)
+  test_file <- tempfile() |> fs::path_expand()
+  test_file |> file.create()
 
   # if (netlogo_console != "" && !file.exists(netlogo_console)) {
 
@@ -58,8 +58,8 @@ testthat::test_that("`find_netlogo_console()` | Message test", {
   testthat::local_mocked_bindings(
     find_netlogo_home = function(...) "",
     sys_info = function(...) c(sysname = "linux"),
-    path = function(...) mock_file,
-    path_expand = function(...) mock_file
+    path = function(...) test_file,
+    path_expand = function(...) test_file
   )
 
   find_netlogo_console() |>

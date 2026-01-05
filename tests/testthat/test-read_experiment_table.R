@@ -1,5 +1,5 @@
 testthat::test_that("`read_experiment_table()` | General test", {
-  mock_file <- tempfile(fileext = ".csv")
+  test_file <- tempfile(fileext = ".csv")
 
   c(
     'BehaviorSpace results (NetLogo 7.0.3), "Table version 2.0"',
@@ -25,23 +25,21 @@ testthat::test_that("`read_experiment_table()` | General test", {
     '"9","500","5","0.5","0.3","2","5","0","5","500"',
     '"2","500","5","0.5","0.3","2","5","0","5","500"'
   ) |>
-    readr::write_lines(mock_file)
+    readr::write_lines(test_file)
 
   read_experiment_table(
-    file = mock_file,
-    tidy_output = TRUE
+    file = test_file
   ) |>
     checkmate::expect_tibble(nrows = 8, ncols = 10)
 
   read_experiment_table(
-    file = mock_file,
-    tidy_output = FALSE
+    file = test_file
   ) |>
     checkmate::expect_tibble(nrows = 8, ncols = 10)
 })
 
 testthat::test_that("`read_experiment_table()` | Message test", {
-  mock_file <- tempfile(fileext = ".csv")
+  test_file <- tempfile(fileext = ".csv")
 
   c(
     'BehaviorSpace results (NetLogo 7.0.3), "Table version 2.0"',
@@ -59,51 +57,36 @@ testthat::test_that("`read_experiment_table()` | Message test", {
       '"energy-gain-from-sheep","[step]","count wolves","count sheep"'
     )
   ) |>
-    readr::write_lines(mock_file)
+    readr::write_lines(test_file)
 
   # if (nrow(out) == 0) {
 
   read_experiment_table(
-    file = mock_file,
-    tidy_output = FALSE
+    file = test_file
   ) |>
     testthat::expect_message()
 })
 
-testthat::test_that("`read_experiment_metadata()` | Error test", {
+testthat::test_that("`read_experiment_table()` | Error test", {
   # checkmate::assert_string(file)
 
   read_experiment_table(
-    file = 1,
-    tidy_output = TRUE
+    file = 1
   ) |>
     testthat::expect_error()
 
   # checkmate::assert_file_exists(file, extension = "csv")
 
-  mock_file <- tempfile(fileext = ".txt")
-  mock_file |> file.create()
+  test_file <- tempfile(fileext = ".txt")
+  test_file |> file.create()
 
   read_experiment_table(
-    file = tempfile(),
-    tidy_output = TRUE
+    file = tempfile()
   ) |>
     testthat::expect_error()
 
   read_experiment_table(
-    file = mock_file,
-    tidy_output = TRUE
-  ) |>
-    testthat::expect_error()
-
-  # checkmate::assert_flag(tidy_output)
-
-  mock_file <- tempfile(fileext = ".csv")
-  mock_file |> file.create()
-
-  read_experiment_table(
-    file = mock_file,
-    tidy_output = 1
+    file = test_file
   ) |>
     testthat::expect_error()
 })

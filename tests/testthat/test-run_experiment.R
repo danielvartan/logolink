@@ -1,8 +1,8 @@
 testthat::test_that("`run_experiment()` | General test", {
-  model_path_1 <- tempfile(fileext = ".nlogox")
+  model_file_1 <- tempfile(fileext = ".nlogox")
   setup_file_1 <- tempfile(pattern = "experiment-", fileext = ".xml")
 
-  model_path_1 |> file.create()
+  model_file_1 |> file.create()
   setup_file_1 |> file.create()
 
   testthat::local_mocked_bindings(
@@ -12,7 +12,7 @@ testthat::test_that("`run_experiment()` | General test", {
   )
 
   run_experiment(
-    model_path = model_path_1,
+    model_path = model_file_1,
     setup_file = setup_file_1,
     experiment = NULL,
     output = "table",
@@ -26,10 +26,10 @@ testthat::test_that("`run_experiment()` | General test", {
 })
 
 testthat::test_that("`run_experiment()` | Message test", {
-  model_path_1 <- tempfile(fileext = ".nlogox")
+  model_file_1 <- tempfile(fileext = ".nlogox")
   setup_file_1 <- tempfile(pattern = "experiment-", fileext = ".xml")
 
-  model_path_1 |> file.create()
+  model_file_1 |> file.create()
   setup_file_1 |> file.create()
 
   # if (!is.null(status)) { [...] } else {
@@ -42,7 +42,7 @@ testthat::test_that("`run_experiment()` | Message test", {
   )
 
   run_experiment(
-    model_path = model_path_1,
+    model_path = model_file_1,
     setup_file = setup_file_1,
     experiment = NULL,
     output = "table",
@@ -64,7 +64,7 @@ testthat::test_that("`run_experiment()` | Message test", {
   )
 
   run_experiment(
-    model_path = model_path_1,
+    model_path = model_file_1,
     setup_file = setup_file_1,
     experiment = NULL,
     output = "table",
@@ -80,13 +80,13 @@ testthat::test_that("`run_experiment()` | Message test", {
 testthat::test_that("`run_experiment()` | Error test", {
   netlogo_console_backup <- Sys.getenv("NETLOGO_CONSOLE")
 
-  model_path_1 <- tempfile(fileext = ".nlogox")
-  model_path_2 <- tempfile(fileext = ".txt")
+  model_file_1 <- tempfile(fileext = ".nlogox")
+  model_file_2 <- tempfile(fileext = ".txt")
   setup_file_1 <- tempfile(pattern = "experiment-", fileext = ".xml")
   setup_file_2 <- tempfile(pattern = "experiment-", fileext = ".txt")
 
-  model_path_1 |> file.create()
-  model_path_2 |> file.create()
+  model_file_1 |> file.create()
+  model_file_2 |> file.create()
   setup_file_1 |> file.create()
   setup_file_2 |> file.create()
 
@@ -123,7 +123,7 @@ testthat::test_that("`run_experiment()` | Error test", {
   # checkmate::assert_choice(fs::path_ext(model_path), model_path_choices)
 
   run_experiment(
-    model_path = model_path_2,
+    model_path = model_file_2,
     setup_file = NULL,
     experiment = NULL,
     output = "table",
@@ -136,7 +136,7 @@ testthat::test_that("`run_experiment()` | Error test", {
   # checkmate::assert_string(setup_file, null.ok = TRUE)
 
   run_experiment(
-    model_path = model_path_1,
+    model_path = model_file_1,
     setup_file = 1,
     experiment = NULL,
     output = "table",
@@ -149,7 +149,7 @@ testthat::test_that("`run_experiment()` | Error test", {
   # checkmate::assert_string(experiment, null.ok = TRUE)
 
   run_experiment(
-    model_path = model_path_1,
+    model_path = model_file_1,
     setup_file = NULL,
     experiment = 1,
     output = "table",
@@ -162,7 +162,7 @@ testthat::test_that("`run_experiment()` | Error test", {
   # assert_pick_one(setup_file, experiment)
 
   run_experiment(
-    model_path = model_path_1,
+    model_path = model_file_1,
     setup_file = setup_file_1,
     experiment = "a",
     output = "table",
@@ -175,7 +175,7 @@ testthat::test_that("`run_experiment()` | Error test", {
   # checkmate::assert_character(output, min.len = 1)
 
   run_experiment(
-    model_path = model_path_1,
+    model_path = model_file_1,
     setup_file = setup_file_1,
     experiment = NULL,
     output = 1,
@@ -186,7 +186,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     testthat::expect_error()
 
   run_experiment(
-    model_path = model_path_1,
+    model_path = model_file_1,
     setup_file = setup_file_1,
     experiment = NULL,
     output = character(),
@@ -199,7 +199,7 @@ testthat::test_that("`run_experiment()` | Error test", {
   # checkmate::assert_subset(output, output_choices)
 
   run_experiment(
-    model_path = model_path_1,
+    model_path = model_file_1,
     setup_file = setup_file_1,
     experiment = NULL,
     output = "test",
@@ -212,7 +212,7 @@ testthat::test_that("`run_experiment()` | Error test", {
   # checkmate::assert_character(other_arguments, null.ok = TRUE)
 
   run_experiment(
-    model_path = model_path_1,
+    model_path = model_file_1,
     setup_file = setup_file_1,
     experiment = NULL,
     output = "table",
@@ -225,7 +225,7 @@ testthat::test_that("`run_experiment()` | Error test", {
   # assert_other_arguments(other_arguments, reserved_arguments, null_ok = TRUE)
 
   run_experiment(
-    model_path = model_path_1,
+    model_path = model_file_1,
     setup_file = setup_file_1,
     experiment = NULL,
     output = "table",
@@ -238,7 +238,7 @@ testthat::test_that("`run_experiment()` | Error test", {
   # checkmate::assert_number(timeout, lower = 0)
 
   run_experiment(
-    model_path = model_path_1,
+    model_path = model_file_1,
     setup_file = setup_file_1,
     experiment = NULL,
     output = "table",
@@ -249,7 +249,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     testthat::expect_error()
 
   run_experiment(
-    model_path = model_path_1,
+    model_path = model_file_1,
     setup_file = setup_file_1,
     experiment = NULL,
     output = "table",
@@ -262,7 +262,7 @@ testthat::test_that("`run_experiment()` | Error test", {
   # checkmate::assert_flag(tidy_output)
 
   run_experiment(
-    model_path = model_path_1,
+    model_path = model_file_1,
     setup_file = setup_file_1,
     experiment = NULL,
     output = "table",
@@ -275,7 +275,7 @@ testthat::test_that("`run_experiment()` | Error test", {
   # if (!is.null(setup_file)) { [...]
 
   run_experiment(
-    model_path = model_path_1,
+    model_path = model_file_1,
     setup_file = tempfile(fileext = ".xml"),
     experiment = NULL,
     output = "table",
@@ -286,7 +286,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     testthat::expect_error()
 
   run_experiment(
-    model_path = model_path_1,
+    model_path = model_file_1,
     setup_file = setup_file_2,
     experiment = NULL,
     output = "table",
@@ -299,7 +299,7 @@ testthat::test_that("`run_experiment()` | Error test", {
   # if (!any(c("table", "spreadsheet") %in% output)) {
 
   run_experiment(
-    model_path = model_path_1,
+    model_path = model_file_1,
     setup_file = setup_file_1,
     experiment = NULL,
     output = c("lists", "statistics"),
@@ -321,7 +321,7 @@ testthat::test_that("`run_experiment()` | Error test", {
   )
 
   run_experiment(
-    model_path = model_path_1,
+    model_path = model_file_1,
     setup_file = setup_file_1,
     experiment = NULL,
     output = "table",
@@ -344,7 +344,7 @@ testthat::test_that("`run_experiment()` | Error test", {
   )
 
   run_experiment(
-    model_path = model_path_1,
+    model_path = model_file_1,
     setup_file = setup_file_1,
     experiment = NULL,
     output = "table",

@@ -1,5 +1,5 @@
 testthat::test_that("`read_experiment_metadata()` | General test", {
-  mock_file <- tempfile(fileext = ".csv")
+  test_file <- tempfile(fileext = ".csv")
 
   c(
     'BehaviorSpace results (NetLogo 7.0.3), "Table version 2.0"',
@@ -25,10 +25,10 @@ testthat::test_that("`read_experiment_metadata()` | General test", {
     '"9","500","5","0.5","0.3","2","5","0","5","500"',
     '"2","500","5","0.5","0.3","2","5","0","5","500"'
   ) |>
-    readr::write_lines(mock_file)
+    readr::write_lines(test_file)
 
   read_experiment_metadata(
-    file = mock_file,
+    file = test_file,
     output_version = FALSE
   ) |>
     checkmate::expect_list(len = 5)
@@ -36,7 +36,7 @@ testthat::test_that("`read_experiment_metadata()` | General test", {
   # if (isTRUE(output_version)) {
 
   read_experiment_metadata(
-    file = mock_file,
+    file = test_file,
     output_version = TRUE
   ) |>
     checkmate::expect_list(len = 6)
@@ -53,8 +53,8 @@ testthat::test_that("`read_experiment_metadata()` | Error test", {
 
   # checkmate::assert_file_exists(file, extension = "csv")
 
-  mock_file <- tempfile(fileext = ".txt")
-  mock_file |> file.create()
+  test_file <- tempfile(fileext = ".txt")
+  test_file |> file.create()
 
   read_experiment_metadata(
     file = tempfile(),
@@ -63,18 +63,18 @@ testthat::test_that("`read_experiment_metadata()` | Error test", {
     testthat::expect_error()
 
   read_experiment_metadata(
-    file = mock_file,
+    file = test_file,
     output_version = FALSE
   ) |>
     testthat::expect_error()
 
   # checkmate::assert_flag(output_version)
 
-  mock_file <- tempfile(fileext = ".csv")
-  mock_file |> file.create()
+  test_file <- tempfile(fileext = ".csv")
+  test_file |> file.create()
 
   read_experiment_metadata(
-    file = mock_file,
+    file = test_file,
     output_version = 1
   ) |>
     testthat::expect_error()

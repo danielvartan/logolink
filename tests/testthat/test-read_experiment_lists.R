@@ -1,8 +1,8 @@
 testthat::test_that("`read_experiment_lists()` | General test", {
-  mock_file <- tempfile(fileext = ".csv")
+  test_file <- tempfile(fileext = ".csv")
 
   c(
-    'BehaviorSpace results (NetLogo 7.0.3), "Table version 2.0"',
+    'BehaviorSpace results (NetLogo 7.0.3), "Lists version 2.0"',
     paste0(
       '"/home/danielvartan/.opt/netlogo-7-0-3/',
       'models/IABM Textbook/chapter 4/Wolf Sheep Simple 5.nlogox"'
@@ -22,26 +22,26 @@ testthat::test_that("`read_experiment_lists()` | General test", {
       '"-3.1896974182627513","3.3356833706769002","4.598718018380566",'
     )
   ) |>
-    readr::write_lines(mock_file)
+    readr::write_lines(test_file)
 
   read_experiment_lists(
-    file = mock_file,
+    file = test_file,
     tidy_output = TRUE
   ) |>
     checkmate::expect_tibble(nrows = 6, ncols = 10)
 
   read_experiment_lists(
-    file = mock_file,
+    file = test_file,
     tidy_output = FALSE
   ) |>
     checkmate::expect_tibble(nrows = 1, ncols = 15)
 })
 
 testthat::test_that("`read_experiment_lists()` | Message test", {
-  mock_file <- tempfile(fileext = ".csv")
+  test_file <- tempfile(fileext = ".csv")
 
   c(
-    'BehaviorSpace results (NetLogo 7.0.3), "Table version 2.0"',
+    'BehaviorSpace results (NetLogo 7.0.3), "Lists version 2.0"',
     paste0(
       '"/home/danielvartan/.opt/netlogo-7-0-3/',
       'models/IABM Textbook/chapter 4/Wolf Sheep Simple 5.nlogox"'
@@ -56,18 +56,18 @@ testthat::test_that("`read_experiment_lists()` | Message test", {
       '"energy-gain-from-sheep","[step]","[0]","[1]","[2]","[3]","[4]","[5]"'
     )
   ) |>
-    readr::write_lines(mock_file)
+    readr::write_lines(test_file)
 
   # if (nrow(out) == 0) {
 
   read_experiment_lists(
-    file = mock_file,
+    file = test_file,
     tidy_output = FALSE
   ) |>
     testthat::expect_message()
 })
 
-testthat::test_that("`read_experiment_metadata()` | Error test", {
+testthat::test_that("`read_experiment_lists()` | Error test", {
   # checkmate::assert_string(file)
 
   read_experiment_lists(
@@ -78,8 +78,8 @@ testthat::test_that("`read_experiment_metadata()` | Error test", {
 
   # checkmate::assert_file_exists(file, extension = "csv")
 
-  mock_file <- tempfile(fileext = ".txt")
-  mock_file |> file.create()
+  test_file <- tempfile(fileext = ".txt")
+  test_file |> file.create()
 
   read_experiment_lists(
     file = tempfile(),
@@ -88,26 +88,19 @@ testthat::test_that("`read_experiment_metadata()` | Error test", {
     testthat::expect_error()
 
   read_experiment_lists(
-    file = mock_file,
+    file = test_file,
     tidy_output = TRUE
   ) |>
     testthat::expect_error()
 
   # checkmate::assert_flag(tidy_output)
 
-  mock_file <- tempfile(fileext = ".csv")
-  mock_file |> file.create()
+  test_file <- tempfile(fileext = ".csv")
+  test_file |> file.create()
 
   read_experiment_lists(
-    file = mock_file,
+    file = test_file,
     tidy_output = 1
-  ) |>
-    testthat::expect_error()
-
-  # checkmate::assert_tibble(data)
-
-  read_experiment_lists.tidy_output(
-    data = 1
   ) |>
     testthat::expect_error()
 })
