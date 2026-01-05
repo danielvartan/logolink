@@ -70,7 +70,9 @@ setup_file |> inspect_experiment_file()
 ```{r}
 results <-
   model_path |>
-  run_experiment(setup_file = setup_file)
+  run_experiment(
+    setup_file = setup_file
+  )
 ```
 
 ```{r}
@@ -124,7 +126,9 @@ experiment <- "population-density"
 ```{r}
 results <-
   model_path |>
-  run_experiment(experiment = experiment)
+  run_experiment(
+    experiment = experiment
+  )
 ```
 
 ```{r}
@@ -176,7 +180,9 @@ experiment <- "degree"
 ```{r}
 results <-
   model_path |>
-  run_experiment(experiment = experiment)
+  run_experiment(
+    experiment = experiment
+  )
 ```
 
 ```{r}
@@ -228,7 +234,9 @@ experiment <- "environmental"
 ```{r}
 results <-
   model_path |>
-  run_experiment(experiment = experiment)
+  run_experiment(
+    experiment = experiment
+  )
 ```
 
 ```{r}
@@ -284,7 +292,9 @@ experiment <- "density-and-decay"
 ```{r}
 results <-
   model_path |>
-  run_experiment(experiment = experiment)
+  run_experiment(
+    experiment = experiment
+  )
 ```
 
 ```{r}

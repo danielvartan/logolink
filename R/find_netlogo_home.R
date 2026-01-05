@@ -37,25 +37,19 @@ find_netlogo_home <- function() {
       normalizePath() |>
       path_expand()
   } else {
-    common_paths <- list(
-      windows = c(
-        "~/",
-        "C:/Program Files",
-        "C:/Program Files (x86)"
-      ),
-      macos = c(
-        "~/",
-        "/Applications/"
-      ),
-      linux = c(
-        "~/",
-        "~/.opt/",
-        "~/Applications/",
-        "/opt/"
+    if (netlogo_home != "" && !dir.exists(netlogo_home)) {
+      cli::cli_alert_warning(
+        paste0(
+          "The path specified in the ",
+          "{.strong {cli::col_red('NETLOGO_HOME')}} environment variable ",
+          "does not exist. Attempting to locate the NetLogo directory using ",
+          "default search methods."
+        ),
+        wrap = TRUE
       )
-    ) |>
-      purrr::map(fs::path_expand) |>
-      purrr::map(normalizePath, mustWork = FALSE)
+    }
+
+    common_paths <- find_netlogo_home.common_paths
 
     system_name <-
       sys_info() |> # Sys.info() mock
@@ -76,7 +70,7 @@ find_netlogo_home <- function() {
         unname()
     }
 
-    out <- ""
+    out <- NA_character_
 
     for (i in paths_to_search) {
       netlogo_dir <-
@@ -90,14 +84,49 @@ find_netlogo_home <- function() {
 
       if (length(possible_path) > 0) {
         if (dir.exists(possible_path)) {
-          out <-
-            possible_path |>
-            normalizePath() |>
-            path_expand()
+          out <- possible_path
         }
       }
     }
 
-    out
+    if (is.na(out)) {
+      cli::cli_alert_warning(
+        paste0(
+          "Could not find the NetLogo directory. ",
+          "See the ",
+          "{.strong {cli::col_red('run_experiment()')}} ",
+          "documentation ({.code ?logolink::run_experiment}) ",
+          "for more information on setting the NetLogo installation path."
+        ),
+        wrap = TRUE
+      )
+
+      ""
+    } else {
+      out |>
+        normalizePath() |>
+        path_expand()
+    }
   }
 }
+
+find_netlogo_home.common_paths <-
+  list(
+    windows = c(
+      "~/",
+      "C:/Program Files",
+      "C:/Program Files (x86)"
+    ),
+    macos = c(
+      "~/",
+      "/Applications/"
+    ),
+    linux = c(
+      "~/",
+      "~/.opt/",
+      "~/Applications/",
+      "/opt/"
+    )
+  ) |>
+  purrr::map(fs::path_expand) |>
+  purrr::map(normalizePath, mustWork = FALSE)

@@ -34,12 +34,7 @@
 #'   find_netlogo_version()
 #' }
 find_netlogo_version <- function() {
-  # R CMD Check variable bindings fix.
-  # nolint start
-  . <- NULL
-  # nolint end
-
-  netlogo_console <- find_netlogo_console()
+  netlogo_console <- find_netlogo_console() |> suppressMessages()
 
   if (netlogo_console != "" && file.exists(netlogo_console)) {
     netlogo_console |>
@@ -57,7 +52,23 @@ find_netlogo_version <- function() {
       netlogo_home |>
       basename() |>
       stringr::str_extract("\\d+.\\d+(.\\d+)?") |>
-      stringr::str_replace_all("\\D", ".") %>%
-      ifelse(is.na(.), "", .)
+      stringr::str_replace_all("\\D", ".")
+
+    if (is.na(out)) {
+      cli::cli_alert_warning(
+        paste0(
+          "Could not find the NetLogo version. ",
+          "See the ",
+          "{.strong {cli::col_red('run_experiment()')}} ",
+          "documentation ({.code ?logolink::run_experiment}) ",
+          "for more information on setting the NetLogo installation path."
+        ),
+        wrap = TRUE
+      )
+
+      ""
+    } else {
+      out
+    }
   }
 }

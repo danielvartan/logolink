@@ -66,8 +66,8 @@ testthat::test_that("`assert_other_arguments()` | General test", {
   # if (length(conflict) > 0) {
 
   assert_other_arguments(
-    other_arguments = "a",
-    reserved_arguments = "a",
+    other_arguments = "--test",
+    reserved_arguments = "--test",
     null_ok = FALSE
   ) |>
     testthat::expect_error()

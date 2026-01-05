@@ -26,7 +26,7 @@
 ^R/\.post-render\.R$
 ^R/\.setup\.R$
 ^README\.qmd$
-^README\.rmarkdow$
+^README\.rmarkdown$
 ^tests/qmd$
 ^ttf$
 ^vignettes/.quarto$

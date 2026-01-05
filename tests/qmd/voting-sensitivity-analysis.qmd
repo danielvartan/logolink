@@ -74,7 +74,9 @@ experiment <- "sensitivity-experiment"
 ```{r}
 results <-
   model_path |>
-  run_experiment(experiment = experiment)
+  run_experiment(
+    experiment = experiment
+  )
 ```
 
 ```{r}

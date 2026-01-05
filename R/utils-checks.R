@@ -14,7 +14,7 @@ assert_internet <- function() {
 }
 
 assert_netlogo_console <- function() {
-  netlogo_console <- find_netlogo_console()
+  netlogo_console <- find_netlogo_console() |> suppressMessages()
 
   if ((netlogo_console == "") || !file.exists(netlogo_console)) {
     cli::cli_abort(
@@ -22,8 +22,8 @@ assert_netlogo_console <- function() {
         "Could not find the NetLogo console. ",
         "See the ",
         "{.strong {cli::col_red('run_experiment()')}} ",
-        "documentation ({.code ?run_experiment}) for more information ",
-        "on setting the NetLogo installation path."
+        "documentation ({.code ?logolink::run_experiment}) ",
+        "for more information on setting the NetLogo installation path."
       )
     )
   }
@@ -43,8 +43,8 @@ assert_netlogo_console <- function() {
         "{.strong {cli::col_yellow(netlogo_console)}}. ",
         "See the ",
         "{.strong {cli::col_red('run_experiment()')}} ",
-        "documentation ({.code ?run_experiment}) for more information ",
-        "on setting the NetLogo installation path."
+        "documentation ({.code ?logolink::run_experiment}) ",
+        "for more information on setting the NetLogo installation path."
       )
     )
   } else {
@@ -69,11 +69,22 @@ assert_other_arguments <- function(
   if (isTRUE(null_ok) && is.null(other_arguments)) {
     invisible(TRUE)
   } else {
+    other_arguments_choices <- c(
+      "--threads",
+      "--update-plots",
+      "--min-pxcor",
+      "--max-pxcor",
+      "--min-pycor",
+      "--max-pycor"
+    )
+
     checkmate::assert_character(other_arguments)
 
     conflict <-
       other_arguments |>
-      magrittr::extract(other_arguments %in% reserved_arguments)
+      stringr::str_extract("^--[a-zA-Z0-9-]+") |>
+      unique() %>%
+      magrittr::extract(., . %in% reserved_arguments)
 
     if (length(conflict) > 0) {
       cli::cli_abort(

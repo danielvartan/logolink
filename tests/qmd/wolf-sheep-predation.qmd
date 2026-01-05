@@ -74,7 +74,9 @@ setup_file <- create_experiment(
 
 results <-
   model_path |>
-  run_experiment(setup_file = setup_file)
+  run_experiment(
+    setup_file = setup_file
+  )
 ```
 
 ```{r}
@@ -126,7 +128,7 @@ results <-
   model_path |>
   run_experiment(
     setup_file = setup_file,
-    outputs = c("table", "lists")
+    output = c("table", "lists")
   )
 ```
 
@@ -181,7 +183,9 @@ experiment <- "BehaviorSpace combinatorial"
 ```{r}
 results <-
   model_path |>
-  run_experiment(experiment = experiment)
+  run_experiment(
+    experiment = experiment
+  )
 ```
 
 ```{r}
@@ -259,7 +263,9 @@ experiment <- "BehaviorSpace run 3 experiments"
 ```{r}
 results <-
   model_path |>
-  run_experiment(experiment = experiment)
+  run_experiment(
+    experiment = experiment
+  )
 ```
 
 ```{r}
@@ -335,7 +341,9 @@ experiment <- "BehaviorSpace run 3 variable values per experiments"
 ```{r}
 results <-
   model_path |>
-  run_experiment(experiment = experiment)
+  run_experiment(
+    experiment = experiment
+  )
 ```
 
 ```{r}
@@ -395,7 +403,9 @@ experiment <- "BehaviorSpace subset"
 ```{r}
 results <-
   model_path |>
-  run_experiment(experiment = experiment)
+  run_experiment(
+    experiment = experiment
+  )
 ```
 
 ```{r}
@@ -455,7 +465,9 @@ experiment <- "New BehaviorSpace Features"
 ```{r}
 results <-
   model_path |>
-  run_experiment(experiment = experiment)
+  run_experiment(
+    experiment = experiment
+  )
 ```
 
 ```{r}
@@ -523,7 +535,9 @@ experiment <- "New BehaviorSpace Features reproducible"
 ```{r}
 results <-
   model_path |>
-  run_experiment(experiment = experiment)
+  run_experiment(
+    experiment = experiment
+  )
 ```
 
 ```{r}
@@ -579,7 +593,9 @@ experiment <- "Wolf Sheep Crossing"
 ```{r}
 results <-
   model_path |>
-  run_experiment(experiment = experiment)
+  run_experiment(
+    experiment = experiment
+  )
 ```
 
 ```{r}

@@ -36,10 +36,22 @@ find_netlogo_console <- function() {
       normalizePath() |>
       path_expand()
   } else {
+    if (netlogo_console != "" && !file.exists(netlogo_console)) {
+      cli::cli_alert_warning(
+        paste0(
+          "The path specified in the ",
+          "{.strong {cli::col_red('NETLOGO_CONSOLE')}} environment variable ",
+          "does not exist. Attempting to locate the NetLogo executable using ",
+          "default search methods."
+        ),
+        wrap = TRUE
+      )
+    }
+
     netlogo_home <- find_netlogo_home()
 
     system_name <-
-      sys_info() |> # Sys.info() mock
+      sys_info() |>
       magrittr::extract("sysname") |>
       unname() |>
       tolower()
@@ -50,12 +62,23 @@ find_netlogo_console <- function() {
       out <- netlogo_home |> path("NetLogo_Console")
     }
 
-    if (file.exists(out)) {
+    if (!file.exists(out)) {
+      cli::cli_alert_warning(
+        paste0(
+          "Could not find the NetLogo console. ",
+          "See the ",
+          "{.strong {cli::col_red('run_experiment()')}} ",
+          "documentation ({.code ?logolink::run_experiment}) ",
+          "for more information on setting the NetLogo installation path."
+        ),
+        wrap = TRUE
+      )
+
+      ""
+    } else {
       out |>
         normalizePath() |>
         path_expand()
-    } else {
-      ""
     }
   }
 }

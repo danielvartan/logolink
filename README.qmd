@@ -230,7 +230,9 @@ After specifying the model path, you can run the experiment with:
 
 results <-
   model_path |>
-  run_experiment(setup_file = setup_file)
+  run_experiment(
+    setup_file = setup_file
+  )
 ```
 
 ### Checking the Results

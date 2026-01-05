@@ -1,0 +1,271 @@
+# Visualizing the NetLogo World
+
+## Overview
+
+This document is a copy (2025-01-05) of the "Visualizing the NetLogo World" vignette included in the `logolink` package. It is provided here for testing purposes.
+
+## Getting Started
+
+```{r}
+#| output: false
+
+library(logolink)
+
+library(cli)
+library(curl)
+library(dplyr)
+library(ggplot2)
+library(ggimage)
+library(ggtext)
+library(here)
+library(magick)
+library(magrittr)
+library(ragg)
+library(stringr)
+library(tidyr)
+```
+
+```{r}
+model_path <-
+  find_netlogo_home() |>
+  file.path(
+    "models",
+    "IABM Textbook",
+    "chapter 4",
+    "Wolf Sheep Simple 5.nlogox"
+  )
+```
+
+```{r}
+sheep_shape <- get_netlogo_shape("sheep")
+```
+
+```{r}
+wolf_shape <- get_netlogo_shape("wolf")
+```
+
+## Running the Simulation
+
+```{r}
+setup_file <- create_experiment(
+  name = "Wolf Sheep Simple Model Analysis",
+  repetitions = 1,
+  sequential_run_order = TRUE,
+  run_metrics_every_step = FALSE,
+  setup = "setup",
+  go = "go",
+  time_limit = 500,
+  run_metrics_condition = 'ticks mod 100 = 0',
+  metrics = c(
+    '[xcor] of sheep',
+    '[ycor] of sheep',
+    '[xcor] of wolves',
+    '[ycor] of wolves',
+    '[pxcor] of patches',
+    '[pycor] of patches',
+    '[pcolor] of patches'
+  ),
+  constants = list(
+    "number-of-sheep" = 100,
+    "number-of-wolves" = 15,
+    "movement-cost" = 0.5,
+    "grass-regrowth-rate" = 0.3,
+    "energy-gain-from-grass" = 2,
+    "energy-gain-from-sheep" = 5
+  )
+)
+```
+
+```{r}
+#| output: false
+
+results <-
+  model_path |>
+  run_experiment(
+    setup_file = setup_file,
+    output = c("table", "lists")
+  )
+```
+
+```{r}
+results |>
+  extract2("lists") |>
+  glimpse()
+```
+
+## Preparing the Data
+
+```{r}
+plot_data <-
+  results |>
+  extract2("lists") |>
+  dplyr::mutate(
+    dplyr::across(
+      .cols = dplyr::matches("^pcolor_of_patches|^color_of_"),
+      .fns = parse_netlogo_color
+    )
+  )
+```
+
+## Building the Plot
+
+```{r}
+plot_netlogo_world <- function(
+  data,
+  run_number = 1,
+  step = 0,
+  step_label = TRUE
+) {
+  data <-
+    data |>
+    filter(
+      run_number == .env$run_number,
+      step == .env$step
+    )
+
+  plot <-
+    data |>
+    ggplot(
+      aes(
+        x = pxcor_of_patches,
+        y = pycor_of_patches,
+        fill = pcolor_of_patches
+      )
+    ) +
+    geom_raster() +
+    coord_fixed(expand = FALSE) +
+    geom_image(
+      data = data |> drop_na(xcor_of_sheep),
+      mapping = aes(
+        x = xcor_of_sheep,
+        y = ycor_of_sheep,
+        image = sheep_shape
+      ),
+      size = 0.04
+    ) +
+    geom_image(
+      data = data |> drop_na(xcor_of_wolves),
+      mapping = aes(
+        x = xcor_of_wolves,
+        y = ycor_of_wolves,
+        image = wolf_shape
+      ),
+      size = 0.055,
+      color = parse_netlogo_color(31)
+    ) +
+    scale_fill_identity(na.value = parse_netlogo_color(7.5)) +
+    theme_void() +
+    theme(legend.position = "none")
+
+  if (isTRUE(step_label)) {
+    plot +
+      labs(title = paste0("Step: **", step, "**")) +
+      theme(
+        plot.title.position = "plot",
+        plot.title = element_markdown(size = 20, margin = margin(b = 10)),
+        plot.background = element_rect(fill = "white", color = NA),
+        plot.margin = margin(1.5, 1.5, 1.5, 1.5, "line")
+      )
+  } else {
+    plot
+  }
+}
+```
+
+```{r}
+#| label: readme-wolf-sheep-model-plot-2
+#| fig-height: 7.4
+#| fig-width: 7
+
+plot_netlogo_world(plot_data)
+```
+
+```{r}
+#| eval: false
+#| include: false
+
+ggsave(
+  filename = "vignette-wolf-sheep-model-plot-1.png",
+  plot = get_last_plot(),
+  device = agg_png,
+  path = here("man", "figures"),
+  width = 7,
+  height = 7.4,
+  units = "in",
+  dpi = 96
+)
+```
+
+## Creating an Animation
+
+```{r}
+steps <-
+  plot_data |>
+  pull(step) |>
+  unique()
+```
+
+```{r}
+steps
+#> [1]   0 100 200 300 400 500
+```
+
+```{r}
+files <- character()
+
+cli_progress_bar("Generating frames", total = length(steps))
+
+for (i in steps) {
+  i_plot <- plot_netlogo_world(plot_data, step = i, step_label = TRUE)
+
+  i_file <- tempfile(pattern = paste0("step-", i, "-"), fileext = ".png")
+
+  ggsave(
+    filename = i_file,
+    plot = i_plot,
+    device = agg_png,
+    width = 7,
+    height = 7.4,
+    units = "in",
+    dpi = 96
+  )
+
+  files <- append(files, i_file)
+  cli_progress_update()
+}
+
+cli_progress_done()
+```
+
+```{r}
+animation <-
+  files |>
+  lapply(image_read) |>
+  image_join() |>
+  image_animate(fps = 1)
+```
+
+```{r}
+#| eval: false
+#| include: false
+
+animation |>
+  image_write(
+    here(
+      "man",
+      "figures",
+      "vignette-wolf-sheep-model-animation-1.gif"
+    )
+  )
+```
+
+```{r}
+#| eval: false
+#| output: false
+
+animation |> image_write("netlogo-world-animation.gif")
+```
+
+```{r}
+animation
+```

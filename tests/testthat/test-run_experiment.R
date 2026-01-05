@@ -1,128 +1,105 @@
 testthat::test_that("`run_experiment()` | General test", {
-  model_path <- tempfile(fileext = ".nlogox")
-  setup_file <- tempfile(pattern = "experiment-", fileext = ".xml")
-  table_file <- tempfile(pattern = "table-", fileext = ".csv")
+  model_path_1 <- tempfile(fileext = ".nlogox")
+  setup_file_1 <- tempfile(pattern = "experiment-", fileext = ".xml")
 
-  model_path |> file.create()
-  setup_file |> file.create()
-  table_file |> file.create()
-
-  c(
-    '"BehaviorSpace results (NetLogo 7.*.*)","Table version 2.0"',
-    paste0(
-      '"/opt/netlogo-7-0-0/models/IABM Textbook/chapter 4/',
-      'Wolf Sheep Simple 5.nlogox"'
-    ),
-    '"Wolf Sheep Simple Model Analysis"',
-    '"09/25/2025 18:53:53:897 -0300"',
-    '"min-pxcor","max-pxcor","min-pycor","max-pycor"',
-    '"-17","17","-17","17"',
-    paste0(
-      '"[run number]","number-of-sheep","number-of-wolves","movement-cost",',
-      '"grass-regrowth-rate","energy-gain-from-grass",',
-      '"energy-gain-from-sheep","[step]","count wolves","count sheep"'
-    ),
-    '"3","500","5","0.5","0.3","2","5","0","5","500"',
-    '"9","500","5","0.5","0.3","2","5","0","5","500"',
-    '"4","500","5","0.5","0.3","2","5","0","5","500"'
-  ) |>
-    readr::write_lines(table_file)
+  model_path_1 |> file.create()
+  setup_file_1 |> file.create()
 
   testthat::local_mocked_bindings(
     assert_netlogo_console = function(...) NULL,
     system_2 = function(...) "Test",
-    run_experiment.gather_outputs = function(...) list(table_file)
+    run_experiment.gather_output = function(...) list()
   )
 
   run_experiment(
-    model_path = model_path,
-    setup_file = setup_file,
+    model_path = model_path_1,
+    setup_file = setup_file_1,
+    experiment = NULL,
+    output = "table",
+    other_arguments = NULL,
+    timeout = Inf,
+    tidy_output = TRUE
   ) |>
-    checkmate::expect_list()
+    checkmate::expect_list() |>
+    suppressMessages() |>
+    suppressWarnings()
 })
 
-testthat::test_that("`run_experiment()` | Messages & Warnings test", {
-  model_path <- tempfile(fileext = ".nlogox")
-  setup_file <- tempfile(pattern = "experiment-", fileext = ".xml")
-  table_file_1 <- tempfile(pattern = "table-", fileext = ".csv")
-  table_file_2 <- tempfile(pattern = "table-", fileext = ".csv")
+testthat::test_that("`run_experiment()` | Message test", {
+  model_path_1 <- tempfile(fileext = ".nlogox")
+  setup_file_1 <- tempfile(pattern = "experiment-", fileext = ".xml")
 
-  model_path |> file.create()
-  setup_file |> file.create()
-  table_file_1 |> file.create()
-  table_file_2 |> file.create()
+  model_path_1 |> file.create()
+  setup_file_1 |> file.create()
 
-  dplyr::tibble(a = 1:10, b = 1:10) |> readr::write_csv(table_file_1)
+  # if (!is.null(status)) { [...] } else {
 
-  dplyr::tibble(a = character(), b = character()) |>
-    readr::write_csv(table_file_2)
+  testthat::local_mocked_bindings(
+    assert_netlogo_console = function(...) NULL,
+    find_netlogo_console = function(...) NULL,
+    system_2 = function(...) `attributes<-`(NULL, list(status = 124)),
+    run_experiment.gather_output = function(...) NULL
+  )
+
+  run_experiment(
+    model_path = model_path_1,
+    setup_file = setup_file_1,
+    experiment = NULL,
+    output = "table",
+    other_arguments = NULL,
+    timeout = Inf,
+    tidy_output = TRUE
+  ) |>
+    testthat::expect_message() |>
+    suppressMessages() |>
+    suppressWarnings()
 
   # if (!length(system2_output) == 0) {
 
   testthat::local_mocked_bindings(
     assert_netlogo_console = function(...) NULL,
+    find_netlogo_console = function(...) NULL,
     system_2 = function(...) "Test",
-    run_experiment.gather_outputs = function(...) list()
+    run_experiment.gather_output = function(...) NULL
   )
 
   run_experiment(
-    model_path = model_path,
-    setup_file = setup_file
+    model_path = model_path_1,
+    setup_file = setup_file_1,
+    experiment = NULL,
+    output = "table",
+    other_arguments = NULL,
+    timeout = Inf,
+    tidy_output = TRUE
   ) |>
-    testthat::expect_message(
-      regexp = "The experiment run produced the following messages"
-    ) |>
-    suppressMessages() |>
-    suppressWarnings()
-
-  # if (status == 124) {
-
-  testthat::local_mocked_bindings(
-    assert_netlogo_console = function(...) NULL,
-    system_2 = function(...) `attributes<-`(NULL, list(status = 124)),
-    run_experiment.gather_outputs = function(...) list()
-  )
-
-  run_experiment(
-    model_path = model_path,
-    setup_file = setup_file,
-    timeout = 1
-  ) |>
-    testthat::expect_message(
-      regexp = "The experiment timed out after."
-    ) |>
+    testthat::expect_message() |>
     suppressMessages() |>
     suppressWarnings()
 })
 
 testthat::test_that("`run_experiment()` | Error test", {
+  netlogo_console_backup <- Sys.getenv("NETLOGO_CONSOLE")
+
   model_path_1 <- tempfile(fileext = ".nlogox")
   model_path_2 <- tempfile(fileext = ".txt")
-  setup_file <- tempfile(pattern = "experiment-", fileext = ".xml")
-  table_file_1 <- tempfile(pattern = "table-", fileext = ".csv")
-  table_file_2 <- tempfile(pattern = "table-", fileext = ".csv")
+  setup_file_1 <- tempfile(pattern = "experiment-", fileext = ".xml")
+  setup_file_2 <- tempfile(pattern = "experiment-", fileext = ".txt")
 
   model_path_1 |> file.create()
   model_path_2 |> file.create()
-  setup_file |> file.create()
-  table_file_1 |> file.create()
-  table_file_2 |> file.create()
-
-  dplyr::tibble(a = 1:10, b = 1:10) |> readr::write_csv(table_file_1)
-
-  dplyr::tibble(a = character(), b = character()) |>
-    readr::write_csv(table_file_2)
+  setup_file_1 |> file.create()
+  setup_file_2 |> file.create()
 
   # checkmate::assert_string(model_path)
 
   run_experiment(
     model_path = 1,
+    setup_file = NULL,
     experiment = NULL,
-    setup_file = setup_file,
+    output = "table",
     other_arguments = NULL,
-    parse = FALSE,
     timeout = Inf,
-    tidy_outputs = TRUE
+    tidy_output = TRUE
   ) |>
     testthat::expect_error()
 
@@ -130,12 +107,12 @@ testthat::test_that("`run_experiment()` | Error test", {
 
   run_experiment(
     model_path = tempfile(fileext = ".nlogox"),
-    experiment = NULL,
     setup_file = setup_file,
+    experiment = NULL,
+    output = "table",
     other_arguments = NULL,
-    parse = FALSE,
     timeout = Inf,
-    tidy_outputs = TRUE
+    tidy_output = TRUE
   ) |>
     testthat::expect_error()
 
@@ -143,25 +120,12 @@ testthat::test_that("`run_experiment()` | Error test", {
 
   run_experiment(
     model_path = model_path_2,
+    setup_file = NULL,
     experiment = NULL,
-    setup_file = setup_file,
+    output = "table",
     other_arguments = NULL,
-    parse = FALSE,
     timeout = Inf,
-    tidy_outputs = TRUE
-  ) |>
-    testthat::expect_error()
-
-  # checkmate::assert_string(experiment, null.ok = TRUE)
-
-  run_experiment(
-    model_path = model_path_1,
-    experiment = 1,
-    setup_file = setup_file,
-    other_arguments = NULL,
-    parse = FALSE,
-    timeout = Inf,
-    tidy_outputs = TRUE
+    tidy_output = TRUE
   ) |>
     testthat::expect_error()
 
@@ -169,25 +133,75 @@ testthat::test_that("`run_experiment()` | Error test", {
 
   run_experiment(
     model_path = model_path_1,
-    experiment = NULL,
     setup_file = 1,
+    experiment = NULL,
+    output = "table",
     other_arguments = NULL,
-    parse = FALSE,
     timeout = Inf,
-    tidy_outputs = TRUE
+    tidy_output = TRUE
   ) |>
     testthat::expect_error()
 
-  # if (!is.null(setup_file)) { [...]
+  # checkmate::assert_string(experiment, null.ok = TRUE)
 
   run_experiment(
     model_path = model_path_1,
-    experiment = NULL,
-    setup_file = tempfile(fileext = ".xml"),
+    setup_file = NULL,
+    experiment = 1,
+    output = "table",
     other_arguments = NULL,
-    parse = FALSE,
     timeout = Inf,
-    tidy_outputs = TRUE
+    tidy_output = TRUE
+  ) |>
+    testthat::expect_error()
+
+  # assert_pick_one(setup_file, experiment)
+
+  run_experiment(
+    model_path = model_path_1,
+    setup_file = setup_file_1,
+    experiment = "a",
+    output = "table",
+    other_arguments = NULL,
+    timeout = Inf,
+    tidy_output = TRUE
+  ) |>
+    testthat::expect_error()
+
+  # checkmate::assert_character(output, min.len = 1)
+
+  run_experiment(
+    model_path = model_path_1,
+    setup_file = setup_file_1,
+    experiment = NULL,
+    output = 1,
+    other_arguments = NULL,
+    timeout = Inf,
+    tidy_output = TRUE
+  ) |>
+    testthat::expect_error()
+
+  run_experiment(
+    model_path = model_path_1,
+    setup_file = setup_file_1,
+    experiment = NULL,
+    output = character(),
+    other_arguments = NULL,
+    timeout = Inf,
+    tidy_output = TRUE
+  ) |>
+    testthat::expect_error()
+
+  # checkmate::assert_subset(output, output_choices)
+
+  run_experiment(
+    model_path = model_path_1,
+    setup_file = setup_file_1,
+    experiment = NULL,
+    output = "test",
+    other_arguments = NULL,
+    timeout = Inf,
+    tidy_output = TRUE
   ) |>
     testthat::expect_error()
 
@@ -195,25 +209,25 @@ testthat::test_that("`run_experiment()` | Error test", {
 
   run_experiment(
     model_path = model_path_1,
+    setup_file = setup_file_1,
     experiment = NULL,
-    setup_file = setup_file,
+    output = "table",
     other_arguments = 1,
-    parse = FALSE,
     timeout = Inf,
-    tidy_outputs = TRUE
+    tidy_output = TRUE
   ) |>
     testthat::expect_error()
 
-  # checkmate::assert_flag(parse)
+  # assert_other_arguments(other_arguments, reserved_arguments, null_ok = TRUE)
 
   run_experiment(
     model_path = model_path_1,
+    setup_file = setup_file_1,
     experiment = NULL,
-    setup_file = setup_file,
-    other_arguments = NULL,
-    parse = "",
+    output = "table",
+    other_arguments = c("--3D", "--headless"),
     timeout = Inf,
-    tidy_outputs = TRUE
+    tidy_output = TRUE
   ) |>
     testthat::expect_error()
 
@@ -221,59 +235,195 @@ testthat::test_that("`run_experiment()` | Error test", {
 
   run_experiment(
     model_path = model_path_1,
+    setup_file = setup_file_1,
     experiment = NULL,
-    setup_file = setup_file,
+    output = "table",
     other_arguments = NULL,
-    parse = TRUE,
     timeout = "a",
-    tidy_outputs = TRUE
+    tidy_output = TRUE
   ) |>
     testthat::expect_error()
 
-  # if (is.null(experiment) && is.null(setup_file)) { [...]
-
   run_experiment(
     model_path = model_path_1,
+    setup_file = setup_file_1,
     experiment = NULL,
-    setup_file = NULL,
+    output = "table",
     other_arguments = NULL,
-    parse = FALSE,
-    timeout = Inf,
-    tidy_outputs = TRUE
+    timeout = -1,
+    tidy_output = TRUE
   ) |>
     testthat::expect_error()
 
-  # if (!is.null(experiment) && !is.null(setup_file)) { [...]
+  # checkmate::assert_flag(tidy_output)
 
   run_experiment(
     model_path = model_path_1,
-    experiment = "Test",
-    setup_file = setup_file,
+    setup_file = setup_file_1,
+    experiment = NULL,
+    output = "table",
     other_arguments = NULL,
-    parse = FALSE,
     timeout = Inf,
-    tidy_outputs = TRUE
+    tidy_output = "a"
   ) |>
     testthat::expect_error()
+
+  # if (!is.null(setup_file)) { [...]
+
+  run_experiment(
+    model_path = model_path_1,
+    setup_file = tempfile(fileext = ".xml"),
+    experiment = NULL,
+    output = "table",
+    other_arguments = NULL,
+    timeout = Inf,
+    tidy_output = TRUE
+  ) |>
+    testthat::expect_error()
+
+  run_experiment(
+    model_path = model_path_1,
+    setup_file = setup_file_2,
+    experiment = NULL,
+    output = "table",
+    other_arguments = NULL,
+    timeout = Inf,
+    tidy_output = TRUE
+  ) |>
+    testthat::expect_error()
+
+  # if (!any(c("table", "spreadsheet") %in% output)) {
+
+  run_experiment(
+    model_path = model_path_1,
+    setup_file = setup_file_1,
+    experiment = NULL,
+    output = c("lists", "statistics"),
+    other_arguments = NULL,
+    timeout = Inf,
+    tidy_output = TRUE
+  ) |>
+    testthat::expect_error()
+
+  # assert_netlogo_console()
+
+  Sys.setenv("NETLOGO_CONSOLE" = "")
+
+  testthat::local_mocked_bindings(
+    find_netlogo_home = function(...) "",
+    sys_info = function(...) c(sysname = "linux"),
+    path = function(...) ""
+  )
+
+  run_experiment(
+    model_path = model_path_1,
+    setup_file = setup_file_1,
+    experiment = NULL,
+    output = "table",
+    other_arguments = NULL,
+    timeout = Inf,
+    tidy_output = TRUE
+  ) |>
+    testthat::expect_error()
+
+  Sys.setenv("NETLOGO_CONSOLE" = netlogo_console_backup)
 
   # if (!is.null(status)) { [...] } else {
 
   testthat::local_mocked_bindings(
     assert_netlogo_console = function(...) NULL,
-    system_2 = function(...) `attributes<-`("Test", list(status = 5)),
-    temp_file = function(...) table_file_1
+    find_netlogo_console = function(...) NULL,
+    system_2 = function(...) `attributes<-`("Test", list(status = 5))
   )
 
   run_experiment(
-    model_path = model_path,
+    model_path = model_path_1,
+    setup_file = setup_file_1,
     experiment = NULL,
-    setup_file = setup_file,
+    output = "table",
     other_arguments = NULL,
-    parse = TRUE,
     timeout = Inf,
-    tidy_outputs = TRUE
+    tidy_output = TRUE
   ) |>
     testthat::expect_error() |>
     suppressMessages() |>
     suppressWarnings()
+})
+
+testthat::test_that("`run_experiment.output_argument()` | General test", {
+  c("table", "spreadsheet", "lists", "statistics") |>
+    run_experiment.output_argument() |>
+    checkmate::expect_tibble(ncols = 3)
+})
+
+testthat::test_that("`run_experiment.output_argument()` | Error test", {
+  # checkmate::assert_character(output)
+
+  run_experiment.output_argument(
+    output = 1
+  ) |>
+    testthat::expect_error()
+
+  # checkmate::assert_subset(output, outputs_choices)
+
+  run_experiment.output_argument(
+    output = "test"
+  ) |>
+    testthat::expect_error()
+})
+
+testthat::test_that("`run_experiment.gather_output()` | General test", {
+  arguments <-
+    c("table", "spreadsheet", "lists", "statistics") |>
+    run_experiment.output_argument()
+
+  testthat::local_mocked_bindings(
+    read_experiment_metadata = function(...) "",
+    read_experiment_table = function(...) "",
+    read_experiment_spreadsheet = function(...) "",
+    read_experiment_lists = function(...) "",
+    read_experiment_statistics = function(...) ""
+  )
+
+  run_experiment.gather_output(
+    output = c("table", "spreadsheet", "lists", "statistics"),
+    argument = arguments,
+    tidy_output = TRUE
+  ) |>
+    checkmate::expect_list(len = 5) |>
+    suppressMessages() |>
+    suppressWarnings()
+})
+
+testthat::test_that("`run_experiment.gather_output()` | Error test", {
+  arguments <-
+    c("table", "spreadsheet", "lists", "statistics") |>
+    run_experiment.output_argument()
+
+  # checkmate::assert_subset(output, output_choices)
+
+  run_experiment.gather_output(
+    output = "test",
+    argument = arguments,
+    tidy_output = TRUE
+  ) |>
+    testthat::expect_error()
+
+  # checkmate::assert_tibble(argument, ncols = 3)
+
+  run_experiment.gather_output(
+    output = "table",
+    argument = 1,
+    tidy_output = TRUE
+  ) |>
+    testthat::expect_error()
+
+  # checkmate::assert_flag(tidy_output)
+
+  run_experiment.gather_output(
+    output = "table",
+    argument = arguments,
+    tidy_output = "a"
+  ) |>
+    testthat::expect_error()
 })

@@ -8,10 +8,10 @@ run_experiment(
   model_path,
   setup_file = NULL,
   experiment = NULL,
-  outputs = c("table", "spreadsheet", "lists", "statistics"),
+  output = "table",
   other_arguments = NULL,
   timeout = Inf,
-  tidy_outputs = TRUE
+  tidy_output = TRUE
 )
 }
 \arguments{
@@ -29,14 +29,13 @@ BehaviorSpace interface (default: \code{NULL}).}
 specifying the name of the experiment defined in the NetLogo model file
 (default: \code{NULL}).}
 
-\item{outputs}{(optional) A \code{\link[base:character]{character}} vector
+\item{output}{(optional) A \code{\link[base:character]{character}} vector
 specifying which output types to generate from the experiment. Valid
 options are: \code{"table"}, \code{"spreadsheet"}, \code{"lists"}, and
 \code{"statistics"}. At least one of \code{"table"} or \code{"spreadsheet"} must be
 included. See the BehaviorSpace documentation on
 \href{https://docs.netlogo.org/behaviorspace.html#run-options-formats}{formats}
-for details about each output type.
-(default: \code{c("table", "spreadsheet", "lists", "statistics")}).}
+for details about each output type (default: \code{c("table", "lists")}).}
 
 \item{other_arguments}{(optional) A \code{\link[base:character]{character}} vector
 specifying any additional command-line arguments to pass to the NetLogo
@@ -50,7 +49,7 @@ the process exceeds this time limit, it will be terminated, and the
 function will return the available output up to that point. Use \code{Inf} for
 no time limit (default: \code{Inf}).}
 
-\item{tidy_outputs}{(optional) A \code{\link[base:logical]{logical}} flag indicating
+\item{tidy_output}{(optional) A \code{\link[base:logical]{logical}} flag indicating
 whether to tidy the output data frames. If \code{TRUE}, output data frames are
 arranged according to \href{https://r4ds.hadley.nz/data-tidy.html}{tidy data principles}. If \code{FALSE}, only the
 default transformations from \code{\link[readr:read_delim]{read_delim()}} and
@@ -58,12 +57,24 @@ default transformations from \code{\link[readr:read_delim]{read_delim()}} and
 (default: \code{TRUE}).}
 }
 \value{
-A \code{\link[dplyr:reexports]{tibble}} containing the results of the
-experiment. Column names are cleaned using
-\code{\link[janitor:clean_names]{clean_names()}}. If \code{parse_lists = TRUE},
-columns containing NetLogo lists are converted to R list-columns.
-Returns a \code{\link[dplyr:reexports]{tibble}} with zero rows if the experiment
-produced no results (with a warning).
+A \code{\link[base:list]{list}} containing the experiment results. The list
+includes the following elements, depending on the specified \code{output}:
+\itemize{
+\item \code{metadata}: A \code{\link[base:list]{list}} with metadata about the experiment
+run.
+\item \code{table}: A \code{\link[tibble:tibble]{tibble}} with the results of the
+\href{https://docs.netlogo.org/behaviorspace.html#table-output}{\code{table}}
+output (if requested).
+\item \code{spreadsheet}: A \code{\link[tibble:tibble]{tibble}} with the results of the
+\href{https://docs.netlogo.org/behaviorspace.html#spreadsheet-output}{\code{spreadsheet}}
+output (if requested).
+\item \code{lists}: A \code{\link[tibble:tibble]{tibble}} with the results of the
+\href{https://docs.netlogo.org/behaviorspace.html#lists-output}{\code{lists}}
+output (if requested).
+\item \code{statistics}: A \code{\link[tibble:tibble]{tibble}} with the results of the
+\href{https://docs.netlogo.org/behaviorspace.html#statistics-output}{\code{statistics}}
+output (if requested).
+}
 }
 \description{
 \code{run_experiment()} runs a NetLogo
@@ -76,7 +87,7 @@ experiment stored in the NetLogo model file.
 To avoid issues with list parsing, \code{run_experiment()} includes support for
 the special \href{https://docs.netlogo.org/behaviorspace.html#lists-output}{lists}
 output format. If your experiment includes metrics that return NetLogo lists,
-include \code{"lists"} in the \code{outputs} argument to capture this output. Columns
+include \code{"lists"} in the \code{output} argument to capture this output. Columns
 containing NetLogo lists are returned as \code{\link[base:character]{character}}
 vectors.
 
@@ -116,7 +127,7 @@ incompatible with standard
 address this, NetLogo provides a special output format called
 \href{https://docs.netlogo.org/behaviorspace.html#lists-output}{lists} that
 exports list metrics in a tabular structure. If your experiment includes
-metrics that return NetLogo lists, include \code{"lists"} in the \code{outputs}
+metrics that return NetLogo lists, include \code{"lists"} in the \code{output}
 argument to capture this output. Columns containing NetLogo lists are
 returned as \code{\link[base:character]{character}} vectors.
 
@@ -224,7 +235,10 @@ excessive non-tabular output may clutter your R console.
 # Running the Experiment -----
 
 \dontrun{
-  model_path |> run_experiment(setup_file = setup_file)
+  model_path |>
+    run_experiment(
+      setup_file = setup_file
+    )
 }
 
 # Running an Experiment Defined in the NetLogo Model File -----
