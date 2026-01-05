@@ -17,8 +17,10 @@
   [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
   documentation for details.
 - [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
-  had the `netlogo_path` argument removed. The package now tries to
-  automatically detect the NetLogo installation using helper functions.
+  had the `netlogo_home` and `netlogo_path` argument removed. The
+  package now tries to automatically detect the NetLogo installation
+  using helper functions (see
+  [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)).
   Users can still manually specify the path to NetLogo. See the updated
   documentation for details.
 - [`parse_netlogo_list()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_list.md)
@@ -62,6 +64,9 @@
 - [`parse_netlogo_color()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_color.md)
   was introduced to parse NetLogo color strings into approximate hex
   color codes.
+- [`get_netlogo_shape()`](https://danielvartan.github.io/logolink/reference/get_netlogo_shape.md)
+  was introduced to retrieve NetLogo shape definitions from the
+  [`LogoShapes`](https://github.com/danielvartan/logoshapes) project.
 - New unit tests were implemented.
 - A [new
   vignette](https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html)

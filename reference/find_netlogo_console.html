@@ -57,21 +57,9 @@ the user's system.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">find_netlogo_console</span><span class="op">(</span>netlogo_home <span class="op">=</span> <span class="fu"><a href="find_netlogo_home.html">find_netlogo_home</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">find_netlogo_console</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
     </div>
 
-    <div class="section level2">
-    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-
-
-<dl><dt id="arg-netlogo-home">netlogo_home<a class="anchor" aria-label="anchor" href="#arg-netlogo-home"></a></dt>
-<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string
-specifying the path to the NetLogo installation directory. If not provided,
-the function will try to find it automatically using
-<code><a href="find_netlogo_home.html">find_netlogo_home()</a></code>
-(default: <code><a href="find_netlogo_home.html">find_netlogo_home()</a></code>).</p></dd>
-
-</dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string specifying the path to the
@@ -83,9 +71,10 @@ cannot be found at any location.</p>
     <p>The function uses the following search order:</p><ol><li><p>Checks the <code>NETLOGO_CONSOLE</code> environment variable. If set and the file
 exists, returns that path.</p></li>
 <li><p>If the environment variable is not set or the file does not exist,
-constructs the path based on <code>netlogo_home</code> (e.g.,
-<code>&lt;netlogo_home&gt;/NetLogo_Console</code> on Linux/macOS or
-<code>&lt;netlogo_home&gt;/NetLogo_Console.exe</code> on Windows).</p></li>
+constructs the path based on the output of
+<code><a href="find_netlogo_home.html">find_netlogo_home()</a></code> (e.g.,
+<code>&lt;NETLOGO_HOME&gt;/NetLogo_Console</code> on Linux/macOS or
+<code>&lt;NETLOGO_HOME&gt;/NetLogo_Console.exe</code> on Windows).</p></li>
 </ol></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

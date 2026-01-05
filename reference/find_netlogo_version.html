@@ -57,35 +57,25 @@ on the user's system.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">find_netlogo_version</span><span class="op">(</span>netlogo_home <span class="op">=</span> <span class="fu"><a href="find_netlogo_home.html">find_netlogo_home</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">find_netlogo_version</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
-    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-
-
-<dl><dt id="arg-netlogo-home">netlogo_home<a class="anchor" aria-label="anchor" href="#arg-netlogo-home"></a></dt>
-<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string
-specifying the path to the NetLogo installation directory. If not provided,
-the function will try to find it automatically using
-<code><a href="find_netlogo_home.html">find_netlogo_home()</a></code>
-(default: <code><a href="find_netlogo_home.html">find_netlogo_home()</a></code>).</p></dd>
-
-</dl></div>
-    <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string specifying the NetLogo
-version (e.g., <code>"7.0.2"</code>). Returns an empty string (<code>""</code>) if the version
+version (e.g., <code>"7.0.3"</code>). Returns an empty string (<code>""</code>) if the version
 cannot be determined.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The function uses the following detection methods in order:</p><ol><li><p><strong>Console execution</strong>: If the NetLogo console executable is found, it
+    <p>The function uses the following detection methods in order:</p><ol><li><p><strong>Console execution</strong>: If the NetLogo console executable is found
+by <code><a href="find_netlogo_console.html">find_netlogo_console()</a></code>, it
 runs <code>NetLogo_Console --headless --version</code> to retrieve the version
 information. This is the most reliable method.</p></li>
 <li><p><strong>Directory name extraction</strong>: If the executable is not found, it
 attempts to extract the version number from the installation directory
-name (e.g., <code>netlogo-7.0.2</code> yields <code>"7.0.2"</code>).</p></li>
+name returned by <code><a href="find_netlogo_home.html">find_netlogo_home()</a></code>
+(e.g., <code>NetLogo 7.0.2</code> yields <code>"7.0.2"</code>).</p></li>
 </ol><p>Note that the directory name fallback may produce slightly different
 results if the directory was renamed or uses a non-standard naming
 convention.</p>

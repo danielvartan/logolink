@@ -6,19 +6,8 @@ on the user's system.
 ## Usage
 
 ``` r
-find_netlogo_console(netlogo_home = find_netlogo_home())
+find_netlogo_console()
 ```
-
-## Arguments
-
-- netlogo_home:
-
-  (optional) A [`character`](https://rdrr.io/r/base/character.html)
-  string specifying the path to the NetLogo installation directory. If
-  not provided, the function will try to find it automatically using
-  [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)
-  (default:
-  [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)).
 
 ## Value
 
@@ -34,9 +23,10 @@ The function uses the following search order:
     file exists, returns that path.
 
 2.  If the environment variable is not set or the file does not exist,
-    constructs the path based on `netlogo_home` (e.g.,
-    `<netlogo_home>/NetLogo_Console` on Linux/macOS or
-    `<netlogo_home>/NetLogo_Console.exe` on Windows).
+    constructs the path based on the output of
+    [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)
+    (e.g., `<NETLOGO_HOME>/NetLogo_Console` on Linux/macOS or
+    `<NETLOGO_HOME>/NetLogo_Console.exe` on Windows).
 
 ## See also
 

@@ -1,18 +1,22 @@
 # Run a NetLogo BehaviorSpace experiment
 
-`run_experiment()` runs a NetLogo BehaviorSpace experiment in headless
-mode and returns a list with results as a [tidy data
+`run_experiment()` runs a NetLogo
+[BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment
+in headless mode and returns a
+[`list`](https://rdrr.io/r/base/list.html) with results as [tidy data
 frames](https://r4ds.hadley.nz/data-tidy.html). It can be used with
 [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md)
-to create the experiment XML file on the fly, or with an existing
-experiment stored in the NetLogo model file.
+to create the experiment [XML](https://en.wikipedia.org/wiki/XML) file
+on the fly, or with an existing experiment stored in the NetLogo model
+file.
 
 To avoid issues with list parsing, `run_experiment()` includes support
-for the special *lists* output format. If your experiment includes
-metrics that return NetLogo lists, include `"lists"` in the `outputs`
-argument to capture this output. Columns containing NetLogo lists are
-returned as [`character`](https://rdrr.io/r/base/character.html)
-vectors.
+for the special
+[lists](https://docs.netlogo.org/behaviorspace.html#lists-output) output
+format. If your experiment includes metrics that return NetLogo lists,
+include `"lists"` in the `outputs` argument to capture this output.
+Columns containing NetLogo lists are returned as
+[`character`](https://rdrr.io/r/base/character.html) vectors.
 
 The function tries to locate the NetLogo installation automatically.
 This is usually successful, but if it fails, you will need to set it
@@ -32,8 +36,7 @@ run_experiment(
   outputs = c("table", "spreadsheet", "lists", "statistics"),
   other_arguments = NULL,
   timeout = Inf,
-  tidy_outputs = TRUE,
-  netlogo_home = find_netlogo_home()
+  tidy_outputs = TRUE
 )
 ```
 
@@ -48,8 +51,9 @@ run_experiment(
 - setup_file:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
-  string specifying the path to an XML file containing the experiment
-  definition. This file can be created using
+  string specifying the path to an
+  [XML](https://en.wikipedia.org/wiki/XML) file containing the
+  experiment definition. This file can be created using
   [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md)
   or exported from the NetLogo BehaviorSpace interface (default:
   `NULL`).
@@ -92,16 +96,12 @@ run_experiment(
   (optional) A [`logical`](https://rdrr.io/r/base/logical.html) flag
   indicating whether to tidy the output data frames. If `TRUE`, output
   data frames are arranged according to [tidy data
-  principles](https://r4ds.hadley.nz/data-tidy.html) (default: `TRUE`).
-
-- netlogo_home:
-
-  (optional) A [`character`](https://rdrr.io/r/base/character.html)
-  string specifying the path to the NetLogo installation directory. If
-  not provided, the function will try to find it automatically using
-  [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)
-  (default:
-  [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)).
+  principles](https://r4ds.hadley.nz/data-tidy.html). If `FALSE`, only
+  the default transformations from
+  [`read_delim()`](https://readr.tidyverse.org/reference/read_delim.html)
+  and
+  [`clean_names()`](https://sfirke.github.io/janitor/reference/clean_names.html)
+  are applied to the output data (default: `TRUE`).
 
 ## Value
 
@@ -120,7 +120,7 @@ zero rows if the experiment produced no results (with a warning).
 If `run_experiment()` cannot find the NetLogo installation, you will
 need to set the path manually using the `NETLOGO_HOME` environment
 variable. On Windows, a typical path is something like
-`C:\Program Files\NetLogo 7.0.2`. You can set this variable temporarily
+`C:\Program Files\NetLogo 7.0.3`. You can set this variable temporarily
 in your R session with:
 
     Sys.setenv(NETLOGO_HOME = "PATH/TO/NETLOGO/INSTALLATION")
@@ -131,17 +131,20 @@ or permanently by adding it to your
 If even after setting the `NETLOGO_HOME` variable you still encounter
 issues, try setting a `NETLOGO_CONSOLE` environment variable with the
 path to the NetLogo executable or binary. On Windows, a typical path is
-something like `C:\Program Files\NetLogo 7.0.2\NetLogo.exe`.
+something like `C:\Program Files\NetLogo 7.0.3\NetLogo.exe`.
 
 ### Handling NetLogo Lists
 
 NetLogo uses a specific syntax for lists (e.g., `"[1 2 3]"`) that is
-incompatible with standard CSV formats. To address this, NetLogo
-provides a special output format called *lists* that exports list
-metrics in a tabular structure. If your experiment includes metrics that
-return NetLogo lists, include `"lists"` in the `outputs` argument to
-capture this output. Columns containing NetLogo lists are returned as
-[`character`](https://rdrr.io/r/base/character.html) vectors.
+incompatible with standard
+[CSV](https://en.wikipedia.org/wiki/Comma-separated_values) formats. To
+address this, NetLogo provides a special output format called
+[lists](https://docs.netlogo.org/behaviorspace.html#lists-output) that
+exports list metrics in a tabular structure. If your experiment includes
+metrics that return NetLogo lists, include `"lists"` in the `outputs`
+argument to capture this output. Columns containing NetLogo lists are
+returned as [`character`](https://rdrr.io/r/base/character.html)
+vectors.
 
 The
 [`parse_netlogo_list()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_list.md)
@@ -172,7 +175,7 @@ These are:
 - `--headless`: Ensures NetLogo runs in headless mode.
 
 - `--3D`: Specifies if the model is a 3D model (automatically set based
-  on file extension).
+  on the model file extension).
 
 - `--model`: Specifies the path to the NetLogo model file.
 
@@ -203,7 +206,7 @@ arguments accordingly. You do not need to set the `--3D` flag manually.
 ### Non-Tabular Output
 
 If the experiment generates any non-tabular output (e.g., prints, error
-messages, warnings), this output will be captured and displayed as an
+messages, warnings), it will be captured and displayed as an
 informational message after the results data frame is returned. This
 allows you to see any important messages generated during the experiment
 run. Keep in mind that excessive non-tabular output may clutter your R
@@ -266,32 +269,32 @@ Other NetLogo functions:
 # \dontrun{
   model_path |> run_experiment(setup_file = setup_file)
 #> ℹ Running model
-#> ✔ Running model [22.3s]
+#> ✔ Running model [21.4s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [14ms]
+#> ✔ Gathering metadata [17ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [384ms]
+#> ✔ Processing table output [410ms]
 #> 
 #> ℹ Processing spreadsheet output
-#> ✔ Processing spreadsheet output [795ms]
+#> ✔ Processing spreadsheet output [785ms]
 #> 
 #> ℹ Processing list output
 #> ! The experiment produced no lists results.
 #> ℹ Processing list output
-#> ✔ Processing list output [31ms]
+#> ✔ Processing list output [29ms]
 #> 
 #> ℹ Processing statistics output
 #> ✔ Processing statistics output [8ms]
 #> 
 #> ℹ The experiment run produced the following messages:
 #> 
-#> Jan 05, 2026 4:18:25 AM java.util.prefs.FileSystemPreferences$1 run
+#> Jan 05, 2026 5:07:28 AM java.util.prefs.FileSystemPreferences$1 run
 #> INFO: Created user preferences directory.
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-05 04:18:26 GMT"
+#> [1] "2026-01-05 05:07:30 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -398,16 +401,16 @@ Other NetLogo functions:
       experiment = "Wolf Sheep Simple model analysis"
     )
 #> ℹ Running model
-#> ✔ Running model [18.1s]
+#> ✔ Running model [17.9s]
 #> 
 #> ℹ Gathering metadata
 #> ✔ Gathering metadata [9ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [34ms]
+#> ✔ Processing table output [33ms]
 #> 
 #> ℹ Processing spreadsheet output
-#> ✔ Processing spreadsheet output [65ms]
+#> ✔ Processing spreadsheet output [64ms]
 #> 
 #> ℹ Processing list output
 #> ! The experiment produced no lists results.
@@ -419,7 +422,7 @@ Other NetLogo functions:
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-05 04:18:51 GMT"
+#> [1] "2026-01-05 05:07:53 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -478,15 +481,15 @@ Other NetLogo functions:
 #>    run_number reporter                      measure  value
 #>         <dbl> <chr>                           <dbl>  <dbl>
 #>  1          1 [step]                              1  1000 
-#>  2          1 count wolves                        1    16 
-#>  3          1 count sheep                         1    95 
-#>  4          1 sum [grass-amount] of patches       1 11078.
+#>  2          1 count wolves                        1    18 
+#>  3          1 count sheep                         1    56 
+#>  4          1 sum [grass-amount] of patches       1 11667.
 #>  5          2 [step]                              1  1000 
-#>  6          2 count wolves                        1    12 
-#>  7          2 count sheep                         1    58 
-#>  8          2 sum [grass-amount] of patches       1 11653.
+#>  6          2 count wolves                        1    17 
+#>  7          2 count sheep                         1    75 
+#>  8          2 sum [grass-amount] of patches       1 11552.
 #>  9          3 [step]                              1  1000 
-#> 10          3 count wolves                        1    13 
+#> 10          3 count wolves                        1    17 
 #> # ℹ 430 more rows
 #> 
 #> 
