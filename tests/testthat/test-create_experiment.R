@@ -52,7 +52,8 @@ testthat::test_that("`create_experiment()` | General test", {
       "wolf-reproduce" = 2,
       "sheep-gain-from-food" = 4,
       "wolf-gain-from-food" = 20,
-      "grass-regrowth-time" = 30
+      "grass-regrowth-time" = 30,
+      "show-energy?" = FALSE
     ),
     sub_experiments = list(
       list(

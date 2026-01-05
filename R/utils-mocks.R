@@ -6,8 +6,8 @@ require_namespace <- function(x, ..., quietly = TRUE) {
   requireNamespace(x, ..., quietly = quietly)
 }
 
-system_2 <- function(...) system2(...)
 sys_info <- function(...) Sys.info(...)
+system_2 <- function(...) system2(...)
 temp_file <- function(...) tempfile(...)
 
 ## `fs`
