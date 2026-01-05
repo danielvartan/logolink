@@ -31,6 +31,10 @@ testthat::test_that("`path_expand()` | General test", {
 
 ## `httr2`
 
+testthat::test_that("`is_online()` | General test", {
+  is_online() |> testthat::expect_equal(httr2::is_online())
+})
+
 testthat::test_that("`resp_body_json()` | General test", {
   resp_body_json() |> testthat::expect_error()
 })

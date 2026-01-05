@@ -1,7 +1,7 @@
 assert_internet <- function() {
   require_package("httr2")
 
-  if (!httr2::is_online()) {
+  if (!is_online()) {
     cli::cli_abort(
       paste0(
         "An active internet connection is required to run this function. ",
@@ -18,7 +18,7 @@ assert_netlogo_console <- function(
 ) {
   checkmate::assert_string(netlogo_console)
 
-  netlogo_console <- fs::path_expand(netlogo_console)
+  netlogo_console <- path_expand(netlogo_console)
 
   if ((netlogo_console == "") || !file.exists(netlogo_console)) {
     cli::cli_abort(
@@ -35,7 +35,7 @@ assert_netlogo_console <- function(
   test <-
     netlogo_console |>
     stringr::str_remove("\\.exe$") |>
-    system2(args = c("--help"), stdout = TRUE, stderr = TRUE) |>
+    system_2(args = c("--help"), stdout = TRUE, stderr = TRUE) |>
     try(silent = TRUE) |>
     suppressMessages() |>
     suppressWarnings()
@@ -61,6 +61,10 @@ assert_other_arguments <- function(
   reserved_arguments,
   null_ok = FALSE
 ) {
+  checkmate::assert_character(other_arguments, null.ok = TRUE)
+  checkmate::assert_character(reserved_arguments)
+  checkmate::assert_flag(null_ok)
+
   # R CMD Check variable bindings fix.
   # nolint start
   . <- NULL
@@ -70,7 +74,6 @@ assert_other_arguments <- function(
     invisible(TRUE)
   } else {
     checkmate::assert_character(other_arguments)
-    checkmate::assert_character(reserved_arguments)
 
     conflict <-
       other_arguments |>

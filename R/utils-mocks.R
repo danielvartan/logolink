@@ -17,6 +17,7 @@ path_expand <- function(...) fs::path_expand(...)
 
 ## `httr2`
 
+is_online <- function(...) httr2::is_online()
 resp_body_json <- function(...) httr2::resp_body_json(...)
 resp_body_string <- function(...) httr2::resp_body_string(...)
 req_perform <- function(...) httr2::req_perform(...)
