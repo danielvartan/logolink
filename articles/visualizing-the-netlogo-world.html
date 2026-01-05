@@ -191,7 +191,10 @@
 <div class="sourceCode cell-code" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">model_path</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="../reference/run_experiment.html">run_experiment</a></span><span class="op">(</span>setup_file <span class="op">=</span> <span class="va">setup_file</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="../reference/run_experiment.html">run_experiment</a></span><span class="op">(</span></span>
+<span>    setup_file <span class="op">=</span> <span class="va">setup_file</span>,</span>
+<span>    output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"table"</span>, <span class="st">"lists"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 </div>
 <p>The results come back as a list. The <code>lists</code> element has all our agent data:</p>
 <div class="cell">

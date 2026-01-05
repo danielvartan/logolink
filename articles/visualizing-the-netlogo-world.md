@@ -133,7 +133,10 @@ Now let’s run it using
 ``` r
 results <-
   model_path |>
-  run_experiment(setup_file = setup_file)
+  run_experiment(
+    setup_file = setup_file,
+    output = c("table", "lists")
+  )
 ```
 
 The results come back as a list. The `lists` element has all our agent

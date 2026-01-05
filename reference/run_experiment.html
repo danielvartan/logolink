@@ -14,7 +14,7 @@ experiment stored in the NetLogo model file.
 To avoid issues with list parsing, run_experiment() includes support for
 the special lists
 output format. If your experiment includes metrics that return NetLogo lists,
-include "lists" in the outputs argument to capture this output. Columns
+include "lists" in the output argument to capture this output. Columns
 containing NetLogo lists are returned as character
 vectors.
 The function tries to locate the NetLogo installation automatically.
@@ -31,7 +31,7 @@ experiment stored in the NetLogo model file.
 To avoid issues with list parsing, run_experiment() includes support for
 the special lists
 output format. If your experiment includes metrics that return NetLogo lists,
-include "lists" in the outputs argument to capture this output. Columns
+include "lists" in the output argument to capture this output. Columns
 containing NetLogo lists are returned as character
 vectors.
 The function tries to locate the NetLogo installation automatically.
@@ -92,7 +92,7 @@ experiment stored in the NetLogo model file.</p>
 <p>To avoid issues with list parsing, <code>run_experiment()</code> includes support for
 the special <a href="https://docs.netlogo.org/behaviorspace.html#lists-output" class="external-link">lists</a>
 output format. If your experiment includes metrics that return NetLogo lists,
-include <code>"lists"</code> in the <code>outputs</code> argument to capture this output. Columns
+include <code>"lists"</code> in the <code>output</code> argument to capture this output. Columns
 containing NetLogo lists are returned as <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code>
 vectors.</p>
 <p>The function tries to locate the NetLogo installation automatically.
@@ -109,10 +109,10 @@ please refer to the
 <span>  <span class="va">model_path</span>,</span>
 <span>  setup_file <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  experiment <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  outputs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"table"</span>, <span class="st">"spreadsheet"</span>, <span class="st">"lists"</span>, <span class="st">"statistics"</span><span class="op">)</span>,</span>
+<span>  output <span class="op">=</span> <span class="st">"table"</span>,</span>
 <span>  other_arguments <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  timeout <span class="op">=</span> <span class="cn">Inf</span>,</span>
-<span>  tidy_outputs <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  tidy_output <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -140,15 +140,14 @@ specifying the name of the experiment defined in the NetLogo model file
 (default: <code>NULL</code>).</p></dd>
 
 
-<dt id="arg-outputs">outputs<a class="anchor" aria-label="anchor" href="#arg-outputs"></a></dt>
+<dt id="arg-output">output<a class="anchor" aria-label="anchor" href="#arg-output"></a></dt>
 <dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vector
 specifying which output types to generate from the experiment. Valid
 options are: <code>"table"</code>, <code>"spreadsheet"</code>, <code>"lists"</code>, and
 <code>"statistics"</code>. At least one of <code>"table"</code> or <code>"spreadsheet"</code> must be
 included. See the BehaviorSpace documentation on
 <a href="https://docs.netlogo.org/behaviorspace.html#run-options-formats" class="external-link">formats</a>
-for details about each output type.
-(default: <code>c("table", "spreadsheet", "lists", "statistics")</code>).</p></dd>
+for details about each output type (default: <code>c("table", "lists")</code>).</p></dd>
 
 
 <dt id="arg-other-arguments">other_arguments<a class="anchor" aria-label="anchor" href="#arg-other-arguments"></a></dt>
@@ -167,7 +166,7 @@ function will return the available output up to that point. Use <code>Inf</code>
 no time limit (default: <code>Inf</code>).</p></dd>
 
 
-<dt id="arg-tidy-outputs">tidy_outputs<a class="anchor" aria-label="anchor" href="#arg-tidy-outputs"></a></dt>
+<dt id="arg-tidy-output">tidy_output<a class="anchor" aria-label="anchor" href="#arg-tidy-output"></a></dt>
 <dd><p>(optional) A <code><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></code> flag indicating
 whether to tidy the output data frames. If <code>TRUE</code>, output data frames are
 arranged according to <a href="https://r4ds.hadley.nz/data-tidy.html" class="external-link">tidy data principles</a>. If <code>FALSE</code>, only the
@@ -178,13 +177,22 @@ default transformations from <code><a href="https://readr.tidyverse.org/referenc
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code><a href="https://dplyr.tidyverse.org/reference/reexports.html" class="external-link">tibble</a></code> containing the results of the
-experiment. Column names are cleaned using
-<code><a href="https://sfirke.github.io/janitor/reference/clean_names.html" class="external-link">clean_names()</a></code>. If <code>parse_lists = TRUE</code>,
-columns containing NetLogo lists are converted to R list-columns.
-Returns a <code><a href="https://dplyr.tidyverse.org/reference/reexports.html" class="external-link">tibble</a></code> with zero rows if the experiment
-produced no results (with a warning).</p>
-    </div>
+    <p>A <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> containing the experiment results. The list
+includes the following elements, depending on the specified <code>output</code>:</p><ul><li><p><code>metadata</code>: A <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> with metadata about the experiment
+run.</p></li>
+<li><p><code>table</code>: A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></code> with the results of the
+<a href="https://docs.netlogo.org/behaviorspace.html#table-output" class="external-link"><code>table</code></a>
+output (if requested).</p></li>
+<li><p><code>spreadsheet</code>: A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></code> with the results of the
+<a href="https://docs.netlogo.org/behaviorspace.html#spreadsheet-output" class="external-link"><code>spreadsheet</code></a>
+output (if requested).</p></li>
+<li><p><code>lists</code>: A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></code> with the results of the
+<a href="https://docs.netlogo.org/behaviorspace.html#lists-output" class="external-link"><code>lists</code></a>
+output (if requested).</p></li>
+<li><p><code>statistics</code>: A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></code> with the results of the
+<a href="https://docs.netlogo.org/behaviorspace.html#statistics-output" class="external-link"><code>statistics</code></a>
+output (if requested).</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
 
@@ -215,7 +223,7 @@ incompatible with standard
 address this, NetLogo provides a special output format called
 <a href="https://docs.netlogo.org/behaviorspace.html#lists-output" class="external-link">lists</a> that
 exports list metrics in a tabular structure. If your experiment includes
-metrics that return NetLogo lists, include <code>"lists"</code> in the <code>outputs</code>
+metrics that return NetLogo lists, include <code>"lists"</code> in the <code>output</code>
 argument to capture this output. Columns containing NetLogo lists are
 returned as <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vectors.</p>
 <p>The <code><a href="parse_netlogo_list.html">parse_netlogo_list()</a></code> function is available
@@ -328,34 +336,26 @@ excessive non-tabular output may clutter your R console.</p>
 <span class="r-in"><span><span class="co"># Running the Experiment -----</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span>  <span class="va">model_path</span> <span class="op">|&gt;</span> <span class="fu">run_experiment</span><span class="op">(</span>setup_file <span class="op">=</span> <span class="va">setup_file</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">model_path</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>    <span class="fu">run_experiment</span><span class="op">(</span></span></span>
+<span class="r-in"><span>      setup_file <span class="op">=</span> <span class="va">setup_file</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Running model</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Running model <span style="color: #B2B2B2;">[21.4s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Running model <span style="color: #B2B2B2;">[19.8s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Gathering metadata</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Gathering metadata <span style="color: #B2B2B2;">[17ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Gathering metadata <span style="color: #B2B2B2;">[14ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Processing table output</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing table output <span style="color: #B2B2B2;">[410ms]</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Processing spreadsheet output</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing spreadsheet output <span style="color: #B2B2B2;">[785ms]</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Processing list output</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> The experiment produced no lists results.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Processing list output</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing list output <span style="color: #B2B2B2;">[29ms]</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Processing statistics output</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing statistics output <span style="color: #B2B2B2;">[8ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing table output <span style="color: #B2B2B2;">[14ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> The experiment run produced the following messages:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Jan 05, 2026 5:07:28 AM java.util.prefs.FileSystemPreferences$1 run</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Jan 05, 2026 9:03:18 AM java.util.prefs.FileSystemPreferences$1 run</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> INFO: Created user preferences directory.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$timestamp</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-01-05 05:07:30 GMT"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-01-05 09:03:19 GMT"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$netlogo_version</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "7.0.3"</span>
@@ -390,68 +390,6 @@ excessive non-tabular output may clutter your R console.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   energy_gain_from_sheep &lt;dbl&gt;, step &lt;dbl&gt;, count_wolves &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   count_sheep &lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $spreadsheet</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $spreadsheet$statistics</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 330 × 13</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    run_number number_of_sheep number_of_wolves movement_cost grass_regrowth_rate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1          500             5                0.5           0.3                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1          500             5                0.5           0.3                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 1          500             5                0.5           0.3                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2          500             5                0.5           0.3                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2          500             5                0.5           0.3                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2          500             5                0.5           0.3                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 3          500             5                0.5           0.3                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 3          500             5                0.5           0.3                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 3          500             5                0.5           0.3                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 4          500             5                0.5           0.3                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 320 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 more variables: energy_gain_from_grass &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   energy_gain_from_sheep &lt;chr&gt;, reporter &lt;chr&gt;, final &lt;chr&gt;, min &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   max &lt;chr&gt;, mean &lt;chr&gt;, total_steps &lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $spreadsheet$measures</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 330,330 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    run_number reporter measure value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>          1 [step]         1     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>          1 [step]         2     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>          1 [step]         3     2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>          1 [step]         4     3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>          1 [step]         5     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>          1 [step]         6     5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>          1 [step]         7     6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>          1 [step]         8     7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>          1 [step]         9     8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>          1 [step]        10     9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 330,320 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $lists</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 9</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 9 variables: reporter &lt;chr&gt;, run_number &lt;chr&gt;, number_of_sheep &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   number_of_wolves &lt;chr&gt;, movement_cost &lt;chr&gt;, grass_regrowth_rate &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   energy_gain_from_grass &lt;chr&gt;, energy_gain_from_sheep &lt;chr&gt;, step &lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $statistics</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 11,011 × 12</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    scenario number_of_sheep number_of_wolves movement_cost grass_regrowth_rate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>        1             500                5           0.5                 0.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>        2             500                5           0.5                 0.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>        3             500                5           0.5                 0.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>        4             500                5           0.5                 0.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>        5             500                5           0.5                 0.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>        6             500                5           0.5                 0.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>        7             500                5           0.5                 0.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>        8             500                5           0.5                 0.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>        9             500                5           0.5                 0.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>       10             500                5           0.5                 0.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 11,001 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: energy_gain_from_grass &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   energy_gain_from_sheep &lt;dbl&gt;, step &lt;dbl&gt;, mean_count_wolves &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   std_count_wolves &lt;dbl&gt;, mean_count_sheep &lt;dbl&gt;, std_count_sheep &lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Running an Experiment Defined in the NetLogo Model File -----</span></span></span>
@@ -462,28 +400,17 @@ excessive non-tabular output may clutter your R console.</p>
 <span class="r-in"><span>      experiment <span class="op">=</span> <span class="st">"Wolf Sheep Simple model analysis"</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Running model</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Running model <span style="color: #B2B2B2;">[17.9s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Running model <span style="color: #B2B2B2;">[17.8s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Gathering metadata</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Gathering metadata <span style="color: #B2B2B2;">[9ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Processing table output</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing table output <span style="color: #B2B2B2;">[33ms]</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Processing spreadsheet output</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing spreadsheet output <span style="color: #B2B2B2;">[64ms]</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Processing list output</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> The experiment produced no lists results.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Processing list output</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing list output <span style="color: #B2B2B2;">[33ms]</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Processing statistics output</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing statistics output <span style="color: #B2B2B2;">[8ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing table output <span style="color: #B2B2B2;">[8ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$timestamp</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-01-05 05:07:53 GMT"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-01-05 09:03:40 GMT"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$netlogo_version</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "7.0.3"</span>
@@ -517,70 +444,6 @@ excessive non-tabular output may clutter your R console.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: energy_gain_from_sheep &lt;dbl&gt;, number_of_sheep &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   grass_regrowth_rate &lt;dbl&gt;, step &lt;dbl&gt;, count_wolves &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   count_sheep &lt;dbl&gt;, sum_grass_amount_of_patches &lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $spreadsheet</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $spreadsheet$statistics</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 440 × 8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    run_number energy_gain_from_grass number_of_wolves movement_cost</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1          2                      5                0.5          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1          2                      5                0.5          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 1          2                      5                0.5          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 1          2                      5                0.5          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2          2                      5                0.5          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2          2                      5                0.5          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2          2                      5                0.5          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2          2                      5                0.5          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 3          2                      5                0.5          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 3          2                      5                0.5          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 430 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 more variables: energy_gain_from_sheep &lt;chr&gt;, number_of_sheep &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   grass_regrowth_rate &lt;chr&gt;, total_steps &lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $spreadsheet$measures</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 440 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    run_number reporter                      measure  value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>          1 [step]                              1  <span style="text-decoration: underline;">1</span>000 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>          1 count wolves                        1    18 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>          1 count sheep                         1    56 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>          1 sum [grass-amount] of patches       1 <span style="text-decoration: underline;">11</span>667.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>          2 [step]                              1  <span style="text-decoration: underline;">1</span>000 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>          2 count wolves                        1    17 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>          2 count sheep                         1    75 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>          2 sum [grass-amount] of patches       1 <span style="text-decoration: underline;">11</span>552.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>          3 [step]                              1  <span style="text-decoration: underline;">1</span>000 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>          3 count wolves                        1    17 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 430 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $lists</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 9</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 9 variables: reporter &lt;chr&gt;, run_number &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   energy_gain_from_grass &lt;chr&gt;, number_of_wolves &lt;chr&gt;, movement_cost &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   energy_gain_from_sheep &lt;chr&gt;, number_of_sheep &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   grass_regrowth_rate &lt;chr&gt;, step &lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $statistics</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 11 × 14</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    scenario energy_gain_from_grass number_of_wolves movement_cost</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>        1                      2                5           0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>        2                      2                6           0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>        3                      2                7           0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>        4                      2                8           0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>        5                      2                9           0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>        6                      2               10           0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>        7                      2               11           0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>        8                      2               12           0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>        9                      2               13           0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>       10                      2               14           0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>       11                      2               15           0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 10 more variables: energy_gain_from_sheep &lt;dbl&gt;, number_of_sheep &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   grass_regrowth_rate &lt;dbl&gt;, step &lt;dbl&gt;, mean_count_wolves &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   std_count_wolves &lt;dbl&gt;, mean_count_sheep &lt;dbl&gt;, std_count_sheep &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mean_sum_grass_amount_of_patches &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   std_sum_grass_amount_of_patches &lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
