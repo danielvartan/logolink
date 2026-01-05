@@ -81,8 +81,8 @@ cannot be determined.</p>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The function uses the following detection methods in order:</p><ol><li><p><strong>Console execution</strong>: If the NetLogo console executable is found, it
-runs <code>NetLogo_Console --version</code> to retrieve the version information.
-This is the most reliable method.</p></li>
+runs <code>NetLogo_Console --headless --version</code> to retrieve the version
+information. This is the most reliable method.</p></li>
 <li><p><strong>Directory name extraction</strong>: If the executable is not found, it
 attempts to extract the version number from the installation directory
 name (e.g., <code>netlogo-7.0.2</code> yields <code>"7.0.2"</code>).</p></li>

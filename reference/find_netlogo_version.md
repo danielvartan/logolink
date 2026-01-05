@@ -31,8 +31,8 @@ the version cannot be determined.
 The function uses the following detection methods in order:
 
 1.  **Console execution**: If the NetLogo console executable is found,
-    it runs `NetLogo_Console --version` to retrieve the version
-    information. This is the most reliable method.
+    it runs `NetLogo_Console --headless --version` to retrieve the
+    version information. This is the most reliable method.
 
 2.  **Directory name extraction**: If the executable is not found, it
     attempts to extract the version number from the installation
