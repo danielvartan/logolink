@@ -3,28 +3,25 @@ read_experiment_spreadsheet <- function(file, tidy_output = TRUE) {
   checkmate::assert_file_exists(file, extension = "csv")
   checkmate::assert_flag(tidy_output)
 
-  # R CMD Check variable bindings fix.
-  # nolint start
-  . <- X1 <- value <- where <- run_number <- reporter <- measure <- NULL
-  # nolint end
+  lines <-
+    file |>
+    readr::read_lines() |>
+    stringr::str_remove_all('\"')
 
-  lines <- file |> readr::read_lines()
+  run_number_index <- lines |> stringr::str_which("^\\[run number\\]")
+  reporter_index <- lines |> stringr::str_which("^\\[reporter\\]")
+  total_steps_index <- lines |> stringr::str_which("^\\[total steps\\]")
+  all_run_data_index <- lines |> stringr::str_which("^\\[all run data\\]")
 
-  data_index <-
-    lines |>
-    stringr::str_remove_all('\"') |>
-    stringr::str_which("^\\[total steps\\]") |>
-    magrittr::add(2)
-
-  stats_data <-
+  statistics <-
     file |>
     readr::read_delim(
       delim = ",",
       col_names = FALSE,
       col_types = readr::cols(.default = readr::col_character()),
       na = c("", "N/A"),
-      skip = 6,
-      n_max = data_index - 8, # the first 6 lines + 2
+      skip = run_number_index - 1,
+      n_max = total_steps_index - run_number_index + 1,
       progress = FALSE,
       show_col_types = FALSE
     ) |>
@@ -34,28 +31,20 @@ read_experiment_spreadsheet <- function(file, tidy_output = TRUE) {
     file |>
     readr::read_delim(
       delim = ",",
-      col_names = FALSE,
       col_types = readr::cols(.default = readr::col_character()),
       na = c("", "N/A"),
-      skip = 6,
+      skip = all_run_data_index - 1,
+      name_repair = "minimal",
       progress = FALSE,
       show_col_types = FALSE
     ) |>
-    dplyr::slice(-(seq(2, data_index - 8))) |>
-    dplyr::select(-1) |>
-    t() |>
-    as.data.frame() |>
-    dplyr::as_tibble() %>%
-    magrittr::set_colnames(
-      c(
-        "run_number",
-        "reporter",
-        paste0(
-          "measure_",
-          seq_len(ncol(.) - 2)
-        )
-      )
-    )
+    suppressMessages() |>
+    janitor::clean_names()
+
+  out <- list(
+    statistics = statistics,
+    data = data
+  )
 
   if (nrow(data) == 0) {
     cli::cli_alert_warning(
@@ -66,33 +55,137 @@ read_experiment_spreadsheet <- function(file, tidy_output = TRUE) {
       ),
       wrap = TRUE
     )
-  } else {
-    stats_data <-
-      stats_data |>
-      tidyr::pivot_longer(-X1) |>
-      tidyr::pivot_wider(names_from = X1, values_from = value) |>
-      dplyr::select(-1) |>
-      tidyr::fill(dplyr::everything(), .direction = "down") |>
-      janitor::clean_names()
 
+    out
+  } else {
+    if (isTRUE(tidy_output)) {
+      statistics <-
+        statistics |>
+        read_experiment_spreadsheet.tidy_settings()
+
+      data <-
+        data |>
+        read_experiment_spreadsheet.tidy_data(statistics)
+
+      out <- list(
+        statistics = statistics,
+        data = data
+      )
+    }
+
+    out
+  }
+}
+
+read_experiment_spreadsheet.tidy_settings <- function(data) {
+  checkmate::assert_tibble(data)
+
+  # R CMD Check variable bindings fix
+  # nolint start
+  final <- reporter <- total_steps <- value <- X1 <- NULL
+  # nolint end
+
+  data <-
+    data |>
+    tidyr::pivot_longer(-X1) |>
+    tidyr::pivot_wider(names_from = X1, values_from = value) |>
+    dplyr::select(-1) |>
+    tidyr::fill(dplyr::everything(), .direction = "down") |>
+    janitor::clean_names()
+
+  reporter_names <-
+    data |>
+    dplyr::pull(reporter) |>
+    unique() |>
+    janitor::make_clean_names()
+
+  data <-
+    data |>
+    tidyr::pivot_wider(
+      names_from = reporter,
+      values_from = c(final, min, max, mean, total_steps),
+      names_glue = "{reporter}_{.value}"
+    ) |>
+    dplyr::mutate(
+      dplyr::across(
+        .cols = dplyr::everything(),
+        .fns = \(x) readr::parse_guess(x, na = c("", "N/A"))
+      )
+    ) |>
+    janitor::clean_names()
+
+  for (i in reporter_names) {
     data <-
       data |>
-      dplyr::select(where(\(x) !all(is.na(x)))) |>
-      tidyr::pivot_longer(
-        cols = -c(run_number, reporter),
-        names_to = "measure"
-      ) |>
-      dplyr::mutate(
-        measure = stringr::str_remove(measure, "^measure_"),
-        dplyr::across(
-          dplyr::everything(),
-          \(x) readr::parse_guess(x, na = c("", "N/A"))
-        )
+      dplyr::relocate(
+        dplyr::starts_with(i),
+        .after = dplyr::last_col()
       )
   }
 
-  list(
-    statistics = stats_data,
-    measures = data
+  data
+}
+
+read_experiment_spreadsheet.tidy_data <- function(data, statistics) {
+  checkmate::assert_tibble(data)
+  checkmate::assert_tibble(statistics)
+
+  # R CMD Check variable bindings fix
+  # nolint start
+  reporter <- run_number <- value <- row_id <- step <- NULL
+  # nolint end
+
+  data <-
+    data |>
+    dplyr::select(-1) |>
+    dplyr::rename_with(
+      .fn = \(x) paste0(x, "_1"),
+      .cols = !dplyr::matches("\\d$")
+    ) |>
+    tidyr::pivot_longer(
+      cols = dplyr::everything(),
+      names_to = "reporter",
+      values_to = "value"
+    ) |>
+    tidyr::separate_wider_regex(
+      cols = reporter,
+      patterns = c(reporter = ".*", "_", run_number = ".*")
+    ) |>
+    dplyr::group_by(run_number, reporter) |>
+    dplyr::mutate(row_id = dplyr::row_number()) |>
+    dplyr::ungroup() |>
+    tidyr::pivot_wider(
+      names_from = reporter,
+      values_from = value
+    ) |>
+    dplyr::select(-row_id) |>
+    dplyr::mutate(
+      dplyr::across(
+        .cols = dplyr::everything(),
+        .fns = \(x) readr::parse_guess(x, na = c("", "N/A"))
+      )
+    ) |>
+    dplyr::arrange(run_number, step)
+
+  col_names <-
+    data |>
+    names() |>
+    stringr::str_subset("run_number", negate = TRUE)
+
+  # fmt: skip
+  col_pattern <- paste0(
+    c("_final$","_min$", "_max$", "_mean$", "_total_steps$"),
+    collapse = "|"
   )
+
+  data |>
+    dplyr::left_join(
+      y = statistics |>
+        dplyr::select(-dplyr::matches(col_pattern)),
+      by = "run_number",
+    ) |>
+    dplyr::relocate(
+      dplyr::all_of(col_names),
+      .after = dplyr::last_col()
+    )
 }

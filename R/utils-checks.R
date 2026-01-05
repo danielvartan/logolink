@@ -61,7 +61,7 @@ assert_other_arguments <- function(
   checkmate::assert_character(reserved_arguments)
   checkmate::assert_flag(null_ok)
 
-  # R CMD Check variable bindings fix.
+  # R CMD Check variable bindings fix
   # nolint start
   . <- NULL
   # nolint end

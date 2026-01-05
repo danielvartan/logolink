@@ -78,7 +78,7 @@ parse_netlogo_color <- function(x, bias = 0.1) {
   checkmate::assert_numeric(x, lower = 0, upper = 140)
   checkmate::assert_number(bias, lower = -1, upper = 1)
 
-  # R CMD Check variable bindings fix.
+  # R CMD Check variable bindings fix
   # nolint start
   base_color <- NULL
   # nolint end

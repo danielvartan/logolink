@@ -2,7 +2,7 @@ read_experiment_table <- function(file) {
   checkmate::assert_string(file)
   checkmate::assert_file_exists(file, extension = "csv")
 
-  # R CMD Check variable bindings fix.
+  # R CMD Check variable bindings fix
   # nolint start
   run_number <- step <- NULL
   # nolint end

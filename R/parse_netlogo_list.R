@@ -105,7 +105,7 @@ parse_netlogo_list <- function(x) {
 parse_netlogo_list.scalar <- function(x) {
   checkmate::assert_atomic(x)
 
-  # R CMD Check variable bindings fix.
+  # R CMD Check variable bindings fix
   # nolint start
   . <- NULL
   # nolint end

@@ -3,7 +3,7 @@ read_experiment_lists <- function(file, tidy_output = TRUE) {
   checkmate::assert_file_exists(file, extension = "csv")
   checkmate::assert_flag(tidy_output)
 
-  # R CMD Check variable bindings fix.
+  # R CMD Check variable bindings fix
   # nolint start
   reporter <- run_number <- step <- value <- index <- NULL
   # nolint end

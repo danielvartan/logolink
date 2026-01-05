@@ -139,6 +139,7 @@
     "tibbles",
     "tidyr",
     "tidyverse",
+    "ungroup",
     "urlchecker",
     "usethis",
     "Vartanian",
