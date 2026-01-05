@@ -12,7 +12,6 @@ test_check("logolink")
 #
 # cffr::cff_write()
 # codemetar::write_codemeta()
-# covr::codecov(token = "")
 # covr::package_coverage()
 # devtools::check()
 # devtools::check(remote = TRUE, manual = TRUE)

@@ -62,7 +62,7 @@ testthat::test_that("`read_experiment_lists()` | Message test", {
 
   read_experiment_lists(
     file = test_file,
-    tidy_output = FALSE
+    tidy_output = TRUE
   ) |>
     testthat::expect_message()
 })

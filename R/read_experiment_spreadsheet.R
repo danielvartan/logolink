@@ -18,7 +18,6 @@ read_experiment_spreadsheet <- function(file, tidy_output = TRUE) {
     readr::read_delim(
       delim = ",",
       col_names = FALSE,
-      col_types = readr::cols(.default = readr::col_character()),
       na = c("", "N/A"),
       skip = run_number_index - 1,
       n_max = total_steps_index - run_number_index + 1,
@@ -31,7 +30,6 @@ read_experiment_spreadsheet <- function(file, tidy_output = TRUE) {
     file |>
     readr::read_delim(
       delim = ",",
-      col_types = readr::cols(.default = readr::col_character()),
       na = c("", "N/A"),
       skip = all_run_data_index - 1,
       name_repair = "minimal",
@@ -61,7 +59,7 @@ read_experiment_spreadsheet <- function(file, tidy_output = TRUE) {
     if (isTRUE(tidy_output)) {
       statistics <-
         statistics |>
-        read_experiment_spreadsheet.tidy_settings()
+        read_experiment_spreadsheet.tidy_statistics()
 
       data <-
         data |>
@@ -77,7 +75,7 @@ read_experiment_spreadsheet <- function(file, tidy_output = TRUE) {
   }
 }
 
-read_experiment_spreadsheet.tidy_settings <- function(data) {
+read_experiment_spreadsheet.tidy_statistics <- function(data) {
   checkmate::assert_tibble(data)
 
   # R CMD Check variable bindings fix
@@ -87,6 +85,12 @@ read_experiment_spreadsheet.tidy_settings <- function(data) {
 
   data <-
     data |>
+    dplyr::mutate(,
+      dplyr::across(
+        .cols = dplyr::everything(),
+        .fns = as.character
+      )
+    ) |>
     tidyr::pivot_longer(-X1) |>
     tidyr::pivot_wider(names_from = X1, values_from = value) |>
     dplyr::select(-1) |>
@@ -137,6 +141,12 @@ read_experiment_spreadsheet.tidy_data <- function(data, statistics) {
 
   data <-
     data |>
+    dplyr::mutate(,
+      dplyr::across(
+        .cols = dplyr::everything(),
+        .fns = as.character
+      )
+    ) |>
     dplyr::select(-1) |>
     dplyr::rename_with(
       .fn = \(x) paste0(x, "_1"),
