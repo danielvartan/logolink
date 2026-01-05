@@ -74,6 +74,9 @@ output (if requested).
 \item \code{statistics}: A \code{\link[tibble:tibble]{tibble}} with the results of the
 \href{https://docs.netlogo.org/behaviorspace.html#statistics-output}{\code{statistics}}
 output (if requested).
+See the
+\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace Guide}
+for details about each output type.
 }
 }
 \description{

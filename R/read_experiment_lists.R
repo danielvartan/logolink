@@ -7,7 +7,6 @@ read_experiment_lists <- function(file, tidy_output = TRUE) {
     file |>
     readr::read_delim(
       delim = ",",
-      col_types = readr::cols(.default = readr::col_character()),
       na = c("", "N/A"),
       skip = 6,
       progress = FALSE,
@@ -48,7 +47,12 @@ read_experiment_lists.tidy_output <- function(data) {
   # nolint end
 
   data |>
-    dplyr::arrange(reporter, run_number, step) |>
+    dplyr::mutate(,
+      dplyr::across(
+        .cols = dplyr::everything(),
+        .fns = as.character
+      )
+    ) |>
     tidyr::pivot_longer(
       cols = dplyr::matches("^x\\d+$"),
       names_to = "index",
@@ -57,15 +61,13 @@ read_experiment_lists.tidy_output <- function(data) {
       names_from = reporter,
       values_from = value
     ) |>
-    dplyr::mutate(,
+    dplyr::mutate(
+      index = stringr::str_remove(index, "^x"),
       dplyr::across(
         .cols = dplyr::everything(),
         .fns = \(x) readr::parse_guess(x, na = c("", "N/A"))
       )
     ) |>
     janitor::clean_names() |>
-    dplyr::mutate(
-      index = stringr::str_remove(index, "^x")
-    ) |>
-    dplyr::arrange(run_number, step)
+    dplyr::arrange(run_number, step, index)
 }

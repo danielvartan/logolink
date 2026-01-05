@@ -166,6 +166,9 @@
 #'     [`statistics`](
 #'     https://docs.netlogo.org/behaviorspace.html#statistics-output)
 #'     output (if requested).
+#'    See the
+#'    [BehaviorSpace Guide](https://docs.netlogo.org/behaviorspace.html)
+#'    for details about each output type.
 #'
 #' @family NetLogo functions
 #' @export
