@@ -48,15 +48,6 @@ testthat::test_that("`assert_netlogo_console()` | General test", {
     testthat::expect_true()
 })
 
-testthat::test_that("`assert_netlogo_console()` | Error test", {
-  # checkmate::assert_string(netlogo_home)
-
-  assert_netlogo_console(
-    netlogo_home = 1
-  ) |>
-    testthat::expect_error()
-})
-
 testthat::test_that("`assert_other_arguments()` | General test", {
   assert_other_arguments(
     other_arguments = NULL,

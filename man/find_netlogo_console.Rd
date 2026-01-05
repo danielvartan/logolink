@@ -4,14 +4,7 @@
 \alias{find_netlogo_console}
 \title{Find NetLogo executable file}
 \usage{
-find_netlogo_console(netlogo_home = find_netlogo_home())
-}
-\arguments{
-\item{netlogo_home}{(optional) A \code{\link[base:character]{character}} string
-specifying the path to the NetLogo installation directory. If not provided,
-the function will try to find it automatically using
-\code{\link[=find_netlogo_home]{find_netlogo_home()}}
-(default: \code{find_netlogo_home()}).}
+find_netlogo_console()
 }
 \value{
 A \code{\link[base:character]{character}} string specifying the path to the
@@ -28,9 +21,10 @@ The function uses the following search order:
 \item Checks the \code{NETLOGO_CONSOLE} environment variable. If set and the file
 exists, returns that path.
 \item If the environment variable is not set or the file does not exist,
-constructs the path based on \code{netlogo_home} (e.g.,
-\verb{<netlogo_home>/NetLogo_Console} on Linux/macOS or
-\verb{<netlogo_home>/NetLogo_Console.exe} on Windows).
+constructs the path based on the output of
+\code{\link[=find_netlogo_home]{find_netlogo_home()}} (e.g.,
+\verb{<NETLOGO_HOME>/NetLogo_Console} on Linux/macOS or
+\verb{<NETLOGO_HOME>/NetLogo_Console.exe} on Windows).
 }
 }
 \examples{

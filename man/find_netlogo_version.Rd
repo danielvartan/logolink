@@ -4,18 +4,11 @@
 \alias{find_netlogo_version}
 \title{Find NetLogo version}
 \usage{
-find_netlogo_version(netlogo_home = find_netlogo_home())
-}
-\arguments{
-\item{netlogo_home}{(optional) A \code{\link[base:character]{character}} string
-specifying the path to the NetLogo installation directory. If not provided,
-the function will try to find it automatically using
-\code{\link[=find_netlogo_home]{find_netlogo_home()}}
-(default: \code{find_netlogo_home()}).}
+find_netlogo_version()
 }
 \value{
 A \code{\link[base:character]{character}} string specifying the NetLogo
-version (e.g., \code{"7.0.2"}). Returns an empty string (\code{""}) if the version
+version (e.g., \code{"7.0.3"}). Returns an empty string (\code{""}) if the version
 cannot be determined.
 }
 \description{
@@ -25,12 +18,14 @@ on the user's system.
 \details{
 The function uses the following detection methods in order:
 \enumerate{
-\item \strong{Console execution}: If the NetLogo console executable is found, it
+\item \strong{Console execution}: If the NetLogo console executable is found
+by \code{\link[=find_netlogo_console]{find_netlogo_console()}}, it
 runs \code{NetLogo_Console --headless --version} to retrieve the version
 information. This is the most reliable method.
 \item \strong{Directory name extraction}: If the executable is not found, it
 attempts to extract the version number from the installation directory
-name (e.g., \verb{netlogo-7.0.2} yields \code{"7.0.2"}).
+name returned by \code{\link[=find_netlogo_home]{find_netlogo_home()}}
+(e.g., \verb{NetLogo 7.0.2} yields \code{"7.0.2"}).
 }
 
 Note that the directory name fallback may produce slightly different

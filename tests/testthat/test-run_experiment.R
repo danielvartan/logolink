@@ -122,8 +122,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE,
     timeout = Inf,
-    tidy_outputs = TRUE,
-    netlogo_home = Sys.getenv("NETLOGO_HOME"),
+    tidy_outputs = TRUE
   ) |>
     testthat::expect_error()
 
@@ -136,8 +135,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE,
     timeout = Inf,
-    tidy_outputs = TRUE,
-    netlogo_home = Sys.getenv("NETLOGO_HOME"),
+    tidy_outputs = TRUE
   ) |>
     testthat::expect_error()
 
@@ -150,8 +148,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE,
     timeout = Inf,
-    tidy_outputs = TRUE,
-    netlogo_home = Sys.getenv("NETLOGO_HOME"),
+    tidy_outputs = TRUE
   ) |>
     testthat::expect_error()
 
@@ -164,8 +161,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE,
     timeout = Inf,
-    tidy_outputs = TRUE,
-    netlogo_home = Sys.getenv("NETLOGO_HOME"),
+    tidy_outputs = TRUE
   ) |>
     testthat::expect_error()
 
@@ -178,8 +174,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE,
     timeout = Inf,
-    tidy_outputs = TRUE,
-    netlogo_home = Sys.getenv("NETLOGO_HOME"),
+    tidy_outputs = TRUE
   ) |>
     testthat::expect_error()
 
@@ -192,8 +187,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE,
     timeout = Inf,
-    tidy_outputs = TRUE,
-    netlogo_home = Sys.getenv("NETLOGO_HOME"),
+    tidy_outputs = TRUE
   ) |>
     testthat::expect_error()
 
@@ -206,8 +200,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = 1,
     parse = FALSE,
     timeout = Inf,
-    tidy_outputs = TRUE,
-    netlogo_home = Sys.getenv("NETLOGO_HOME"),
+    tidy_outputs = TRUE
   ) |>
     testthat::expect_error()
 
@@ -220,8 +213,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = "",
     timeout = Inf,
-    tidy_outputs = TRUE,
-    netlogo_home = Sys.getenv("NETLOGO_HOME"),
+    tidy_outputs = TRUE
   ) |>
     testthat::expect_error()
 
@@ -234,8 +226,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = TRUE,
     timeout = "a",
-    tidy_outputs = TRUE,
-    netlogo_home = Sys.getenv("NETLOGO_HOME"),
+    tidy_outputs = TRUE
   ) |>
     testthat::expect_error()
 
@@ -248,8 +239,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE,
     timeout = Inf,
-    tidy_outputs = TRUE,
-    netlogo_home = Sys.getenv("NETLOGO_HOME"),
+    tidy_outputs = TRUE
   ) |>
     testthat::expect_error()
 
@@ -262,8 +252,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = FALSE,
     timeout = Inf,
-    tidy_outputs = TRUE,
-    netlogo_home = Sys.getenv("NETLOGO_HOME"),
+    tidy_outputs = TRUE
   ) |>
     testthat::expect_error()
 
@@ -282,8 +271,7 @@ testthat::test_that("`run_experiment()` | Error test", {
     other_arguments = NULL,
     parse = TRUE,
     timeout = Inf,
-    tidy_outputs = TRUE,
-    netlogo_home = Sys.getenv("NETLOGO_HOME"),
+    tidy_outputs = TRUE
   ) |>
     testthat::expect_error() |>
     suppressMessages() |>

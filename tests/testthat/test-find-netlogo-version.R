@@ -1,4 +1,5 @@
 testthat::test_that("`find_netlogo_version()` | General test", {
+  netlogo_home_backup <- Sys.getenv("NETLOGO_HOME")
   netlogo_console_backup <- Sys.getenv("NETLOGO_CONSOLE")
 
   mock_file <- tempfile() |> fs::path_expand()
@@ -13,19 +14,12 @@ testthat::test_that("`find_netlogo_version()` | General test", {
   find_netlogo_version() |>
     testthat::expect_equal("9.9.9")
 
+  Sys.setenv("NETLOGO_HOME" = "9.9.9")
   Sys.setenv("NETLOGO_CONSOLE" = "")
 
-  find_netlogo_version(netlogo_home = "9.9.9") |>
+  find_netlogo_version() |>
     testthat::expect_equal("9.9.9")
 
+  Sys.setenv("NETLOGO_HOME" = netlogo_home_backup)
   Sys.setenv("NETLOGO_CONSOLE" = netlogo_console_backup)
-})
-
-testthat::test_that("`find_netlogo_version()` | Error test", {
-  # checkmate::assert_string(netlogo_home)
-
-  find_netlogo_version(
-    netlogo_home = 1
-  ) |>
-    testthat::expect_error()
 })

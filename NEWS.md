@@ -4,7 +4,7 @@
 
 - `logolink` now works only with NetLogo 7.0.1 and above. This NetLogo patch release changed the XML structure of BehaviorSpace experiments; See this [GitHub issue](https://github.com/NetLogo/NetLogo/issues/2560) to learn more.
 - `run_experiment()` had the `parse` argument removed. The function now offer an option to return a [lists output](https://docs.netlogo.org/behaviorspace.html#lists-output) via the new `output` parameter. Results containing data in NetLogo's lists format are returned as `character` vectors. See `run_experiment()` documentation for details.
-- `run_experiment()` had the `netlogo_path` argument removed. The package now tries to automatically detect the NetLogo installation using helper functions. Users can still manually specify the path to NetLogo. See the updated documentation for details.
+- `run_experiment()` had the `netlogo_home` and `netlogo_path` argument removed. The package now tries to automatically detect the NetLogo installation using helper functions (see `find_netlogo_home()`). Users can still manually specify the path to NetLogo. See the updated documentation for details.
 - `parse_netlogo_list()` now always return a `list` object. The previous behavior of returning a `vector` when possible was removed. `NaN` values are now represented as R `NaN` values instead of `"NaN"`.
 
 ### New Features and Improvements
@@ -19,6 +19,7 @@
 - `create_experiment()` is now feature complete. It attends all the functionalities described in the [XML File Format](https://github.com/NetLogo/NetLogo/wiki/XML-File-Format#behaviorspace-experiments) documentation.
 - `parse_netlogo_list()` now have better heuristics.
 - `parse_netlogo_color()` was introduced to parse NetLogo color strings into approximate hex color codes.
+- `get_netlogo_shape()` was introduced to retrieve NetLogo shape definitions from the [`LogoShapes`](https://github.com/danielvartan/logoshapes) project.
 - New unit tests were implemented.
 - A [new vignette](https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html) showing how to visualize the NetLogo world using [`ggplot2`](https://ggplot2.tidyverse.org/) was added.
 - The documentation was updated to reflect the changes in the package.

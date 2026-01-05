@@ -2,18 +2,20 @@
 #'
 #' @description
 #'
-#' `run_experiment()` runs a NetLogo BehaviorSpace experiment in headless mode
-#' and returns a list with results as a
-#' [tidy data frames](https://r4ds.hadley.nz/data-tidy.html). It can be used
-#' with [`create_experiment()`][create_experiment()] to create the experiment
-#' XML file on the fly, or with an existing experiment stored in the NetLogo
-#' model file.
+#' `run_experiment()` runs a NetLogo
+#' [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment in
+#' headless mode and returns a [`list`][base::list()] with results as [tidy data
+#' frames](https://r4ds.hadley.nz/data-tidy.html). It can be used with
+#' [`create_experiment()`][create_experiment()] to create the experiment
+#' [XML](https://en.wikipedia.org/wiki/XML) file on the fly, or with an existing
+#' experiment stored in the NetLogo model file.
 #'
 #' To avoid issues with list parsing, `run_experiment()` includes support for
-#' the special *lists* output format. If your experiment includes metrics that
-#' return NetLogo lists, include `"lists"` in the `outputs` argument to capture
-#' this output. Columns containing NetLogo lists are returned as
-#' [`character`][base::character()] vectors.
+#' the special [lists](https://docs.netlogo.org/behaviorspace.html#lists-output)
+#' output format. If your experiment includes metrics that return NetLogo lists,
+#' include `"lists"` in the `outputs` argument to capture this output. Columns
+#' containing NetLogo lists are returned as [`character`][base::character()]
+#' vectors.
 #'
 #' The function tries to locate the NetLogo installation automatically.
 #' This is usually successful, but if it fails, you will need to set it
@@ -29,7 +31,7 @@
 #'
 #' If `run_experiment()` cannot find the NetLogo installation, you will need to
 #' set the path manually using the `NETLOGO_HOME` environment variable. On
-#' Windows, a typical path is something like `C:\Program Files\NetLogo 7.0.2`.
+#' Windows, a typical path is something like `C:\Program Files\NetLogo 7.0.3`.
 #' You can set this variable temporarily in your R session with:
 #'
 #' ```r
@@ -42,17 +44,19 @@
 #' If even after setting the `NETLOGO_HOME` variable you still encounter issues,
 #' try setting a `NETLOGO_CONSOLE` environment variable with the path to
 #' the NetLogo executable or binary. On Windows, a typical path is something
-#' like `C:\Program Files\NetLogo 7.0.2\NetLogo.exe`.
+#' like `C:\Program Files\NetLogo 7.0.3\NetLogo.exe`.
 #'
 #' ## Handling NetLogo Lists
 #'
 #' NetLogo uses a specific syntax for lists (e.g., `"[1 2 3]"`) that is
-#' incompatible with standard CSV formats. To address this, NetLogo provides a
-#' special output format called *lists* that exports list metrics in a tabular
-#' structure. If your experiment includes metrics that return NetLogo lists,
-#' include `"lists"` in the `outputs` argument to capture this output. Columns
-#' containing NetLogo lists are returned as [`character`][base::character()]
-#' vectors.
+#' incompatible with standard
+#' [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) formats. To
+#' address this, NetLogo provides a special output format called
+#' [lists](https://docs.netlogo.org/behaviorspace.html#lists-output) that
+#' exports list metrics in a tabular structure. If your experiment includes
+#' metrics that return NetLogo lists, include `"lists"` in the `outputs`
+#' argument to capture this output. Columns containing NetLogo lists are
+#' returned as [`character`][base::character()] vectors.
 #'
 #' The [`parse_netlogo_list()`][parse_netlogo_list()] function is available
 #' for parsing list values embedded in other outputs. However, we recommend
@@ -80,7 +84,7 @@
 #'
 #' - `--headless`: Ensures NetLogo runs in headless mode.
 #' - `--3D`: Specifies if the model is a 3D model (automatically set based on
-#'   file extension).
+#'   the model file extension).
 #' - `--model`: Specifies the path to the NetLogo model file.
 #' - `--setup-file`: Specifies the path to the experiment XML file.
 #' - `--experiment`: Specifies the name of the experiment defined in the model.
@@ -103,17 +107,17 @@
 #' ## Non-Tabular Output
 #'
 #' If the experiment generates any non-tabular output (e.g., prints, error
-#' messages, warnings), this output will be captured and displayed as an
-#' informational message after the results data frame is returned. This allows
-#' you to see any important messages generated during the experiment run.
-#' Keep in mind that excessive non-tabular output may clutter your R console.
+#' messages, warnings), it will be captured and displayed as an informational
+#' message after the results data frame is returned. This allows you to see any
+#' important messages generated during the experiment run. Keep in mind that
+#' excessive non-tabular output may clutter your R console.
 #'
 #' @param model_path A [`character`][base::character()] string specifying the
 #'   path to the NetLogo model file (with extension `.nlogo`, `.nlogo3d`,
 #'   `.nlogox`, or `.nlogox3d`).
 #' @param setup_file (optional) A [`character`][base::character()] string
-#'   specifying the path to an XML file containing the experiment definition.
-#'   This file can be created using
+#'   specifying the path to an [XML](https://en.wikipedia.org/wiki/XML) file
+#'   containing the experiment definition. This file can be created using
 #'   [`create_experiment()`][create_experiment()] or exported from the NetLogo
 #'   BehaviorSpace interface (default: `NULL`).
 #' @param experiment (optional) A [`character`][base::character()] string
@@ -137,12 +141,13 @@
 #'   the process exceeds this time limit, it will be terminated, and the
 #'   function will return the available output up to that point. Use `Inf` for
 #'   no time limit (default: `Inf`).
-#' @param tidy_outputs (optional) A [`logical`][base::logical()] flag
-#'   indicating whether to tidy the output data frames. If `TRUE`, output
-#'   data frames are arranged according to
-#'   [tidy data principles](https://r4ds.hadley.nz/data-tidy.html)
+#' @param tidy_outputs (optional) A [`logical`][base::logical()] flag indicating
+#'   whether to tidy the output data frames. If `TRUE`, output data frames are
+#'   arranged according to [tidy data
+#'   principles](https://r4ds.hadley.nz/data-tidy.html). If `FALSE`, only the
+#'   default transformations from [`read_delim()`][readr::read_delim()] and
+#'   [`clean_names()`][janitor::clean_names()] are applied to the output data
 #'   (default: `TRUE`).
-#' @template params-netlogo-home
 #'
 #' @return A [`tibble`][dplyr::tibble()] containing the results of the
 #'   experiment. Column names are cleaned using
@@ -220,8 +225,7 @@ run_experiment <- function(
   outputs = c("table", "spreadsheet", "lists", "statistics"),
   other_arguments = NULL,
   timeout = Inf,
-  tidy_outputs = TRUE,
-  netlogo_home = find_netlogo_home()
+  tidy_outputs = TRUE
 ) {
   model_path_choices <- c("nlogo", "nlogo3d", "nlogox", "nlogox3d")
 
@@ -248,7 +252,6 @@ run_experiment <- function(
   assert_other_arguments(other_arguments, reserved_arguments, null_ok = TRUE)
   checkmate::assert_number(timeout, lower = 0)
   checkmate::assert_flag(tidy_outputs)
-  checkmate::assert_string(netlogo_home)
 
   if (!is.null(setup_file)) {
     checkmate::assert_file_exists(setup_file, extension = "xml")
@@ -264,8 +267,10 @@ run_experiment <- function(
     )
   }
 
-  netlogo_console <- find_netlogo_console(netlogo_home)
-  assert_netlogo_console(netlogo_console)
+  netlogo_home <- find_netlogo_home()
+  netlogo_console <- find_netlogo_console()
+
+  assert_netlogo_console()
 
   model_path <- fs::path_expand(model_path)
   timeout <- ifelse(is.infinite(timeout), 0, as.integer(timeout))

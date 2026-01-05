@@ -37,12 +37,3 @@ testthat::test_that("`find_netlogo_console()` | General test", {
 
   Sys.setenv("NETLOGO_CONSOLE" = netlogo_console_backup)
 })
-
-testthat::test_that("`find_netlogo_console()` | Error test", {
-  # checkmate::assert_string(netlogo_home)
-
-  find_netlogo_console(
-    netlogo_home = 1
-  ) |>
-    testthat::expect_error()
-})

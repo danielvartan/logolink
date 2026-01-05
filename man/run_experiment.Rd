@@ -11,8 +11,7 @@ run_experiment(
   outputs = c("table", "spreadsheet", "lists", "statistics"),
   other_arguments = NULL,
   timeout = Inf,
-  tidy_outputs = TRUE,
-  netlogo_home = find_netlogo_home()
+  tidy_outputs = TRUE
 )
 }
 \arguments{
@@ -21,8 +20,8 @@ path to the NetLogo model file (with extension \code{.nlogo}, \code{.nlogo3d},
 \code{.nlogox}, or \code{.nlogox3d}).}
 
 \item{setup_file}{(optional) A \code{\link[base:character]{character}} string
-specifying the path to an XML file containing the experiment definition.
-This file can be created using
+specifying the path to an \href{https://en.wikipedia.org/wiki/XML}{XML} file
+containing the experiment definition. This file can be created using
 \code{\link[=create_experiment]{create_experiment()}} or exported from the NetLogo
 BehaviorSpace interface (default: \code{NULL}).}
 
@@ -51,17 +50,12 @@ the process exceeds this time limit, it will be terminated, and the
 function will return the available output up to that point. Use \code{Inf} for
 no time limit (default: \code{Inf}).}
 
-\item{tidy_outputs}{(optional) A \code{\link[base:logical]{logical}} flag
-indicating whether to tidy the output data frames. If \code{TRUE}, output
-data frames are arranged according to
-\href{https://r4ds.hadley.nz/data-tidy.html}{tidy data principles}
+\item{tidy_outputs}{(optional) A \code{\link[base:logical]{logical}} flag indicating
+whether to tidy the output data frames. If \code{TRUE}, output data frames are
+arranged according to \href{https://r4ds.hadley.nz/data-tidy.html}{tidy data principles}. If \code{FALSE}, only the
+default transformations from \code{\link[readr:read_delim]{read_delim()}} and
+\code{\link[janitor:clean_names]{clean_names()}} are applied to the output data
 (default: \code{TRUE}).}
-
-\item{netlogo_home}{(optional) A \code{\link[base:character]{character}} string
-specifying the path to the NetLogo installation directory. If not provided,
-the function will try to find it automatically using
-\code{\link[=find_netlogo_home]{find_netlogo_home()}}
-(default: \code{find_netlogo_home()}).}
 }
 \value{
 A \code{\link[dplyr:reexports]{tibble}} containing the results of the
@@ -72,18 +66,19 @@ Returns a \code{\link[dplyr:reexports]{tibble}} with zero rows if the experiment
 produced no results (with a warning).
 }
 \description{
-\code{run_experiment()} runs a NetLogo BehaviorSpace experiment in headless mode
-and returns a list with results as a
-\href{https://r4ds.hadley.nz/data-tidy.html}{tidy data frames}. It can be used
-with \code{\link[=create_experiment]{create_experiment()}} to create the experiment
-XML file on the fly, or with an existing experiment stored in the NetLogo
-model file.
+\code{run_experiment()} runs a NetLogo
+\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace} experiment in
+headless mode and returns a \code{\link[base:list]{list}} with results as \href{https://r4ds.hadley.nz/data-tidy.html}{tidy data frames}. It can be used with
+\code{\link[=create_experiment]{create_experiment()}} to create the experiment
+\href{https://en.wikipedia.org/wiki/XML}{XML} file on the fly, or with an existing
+experiment stored in the NetLogo model file.
 
 To avoid issues with list parsing, \code{run_experiment()} includes support for
-the special \emph{lists} output format. If your experiment includes metrics that
-return NetLogo lists, include \code{"lists"} in the \code{outputs} argument to capture
-this output. Columns containing NetLogo lists are returned as
-\code{\link[base:character]{character}} vectors.
+the special \href{https://docs.netlogo.org/behaviorspace.html#lists-output}{lists}
+output format. If your experiment includes metrics that return NetLogo lists,
+include \code{"lists"} in the \code{outputs} argument to capture this output. Columns
+containing NetLogo lists are returned as \code{\link[base:character]{character}}
+vectors.
 
 The function tries to locate the NetLogo installation automatically.
 This is usually successful, but if it fails, you will need to set it
@@ -98,7 +93,7 @@ please refer to the
 
 If \code{run_experiment()} cannot find the NetLogo installation, you will need to
 set the path manually using the \code{NETLOGO_HOME} environment variable. On
-Windows, a typical path is something like \verb{C:\\Program Files\\NetLogo 7.0.2}.
+Windows, a typical path is something like \verb{C:\\Program Files\\NetLogo 7.0.3}.
 You can set this variable temporarily in your R session with:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{Sys.setenv(NETLOGO_HOME = "PATH/TO/NETLOGO/INSTALLATION")
@@ -110,18 +105,20 @@ or permanently by adding it to your
 If even after setting the \code{NETLOGO_HOME} variable you still encounter issues,
 try setting a \code{NETLOGO_CONSOLE} environment variable with the path to
 the NetLogo executable or binary. On Windows, a typical path is something
-like \verb{C:\\Program Files\\NetLogo 7.0.2\\NetLogo.exe}.
+like \verb{C:\\Program Files\\NetLogo 7.0.3\\NetLogo.exe}.
 }
 
 \subsection{Handling NetLogo Lists}{
 
 NetLogo uses a specific syntax for lists (e.g., \code{"[1 2 3]"}) that is
-incompatible with standard CSV formats. To address this, NetLogo provides a
-special output format called \emph{lists} that exports list metrics in a tabular
-structure. If your experiment includes metrics that return NetLogo lists,
-include \code{"lists"} in the \code{outputs} argument to capture this output. Columns
-containing NetLogo lists are returned as \code{\link[base:character]{character}}
-vectors.
+incompatible with standard
+\href{https://en.wikipedia.org/wiki/Comma-separated_values}{CSV} formats. To
+address this, NetLogo provides a special output format called
+\href{https://docs.netlogo.org/behaviorspace.html#lists-output}{lists} that
+exports list metrics in a tabular structure. If your experiment includes
+metrics that return NetLogo lists, include \code{"lists"} in the \code{outputs}
+argument to capture this output. Columns containing NetLogo lists are
+returned as \code{\link[base:character]{character}} vectors.
 
 The \code{\link[=parse_netlogo_list]{parse_netlogo_list()}} function is available
 for parsing list values embedded in other outputs. However, we recommend
@@ -149,7 +146,7 @@ for internal use by \code{run_experiment()} and cannot be modified. These are:
 \itemize{
 \item \code{--headless}: Ensures NetLogo runs in headless mode.
 \item \verb{--3D}: Specifies if the model is a 3D model (automatically set based on
-file extension).
+the model file extension).
 \item \code{--model}: Specifies the path to the NetLogo model file.
 \item \code{--setup-file}: Specifies the path to the experiment XML file.
 \item \code{--experiment}: Specifies the name of the experiment defined in the model.
@@ -173,10 +170,10 @@ accordingly. You do not need to set the \verb{--3D} flag manually.
 \subsection{Non-Tabular Output}{
 
 If the experiment generates any non-tabular output (e.g., prints, error
-messages, warnings), this output will be captured and displayed as an
-informational message after the results data frame is returned. This allows
-you to see any important messages generated during the experiment run.
-Keep in mind that excessive non-tabular output may clutter your R console.
+messages, warnings), it will be captured and displayed as an informational
+message after the results data frame is returned. This allows you to see any
+important messages generated during the experiment run. Keep in mind that
+excessive non-tabular output may clutter your R console.
 }
 }
 \examples{

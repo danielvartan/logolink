@@ -13,12 +13,8 @@ assert_internet <- function() {
   }
 }
 
-assert_netlogo_console <- function(
-  netlogo_console = find_netlogo_console()
-) {
-  checkmate::assert_string(netlogo_console)
-
-  netlogo_console <- path_expand(netlogo_console)
+assert_netlogo_console <- function() {
+  netlogo_console <- find_netlogo_console()
 
   if ((netlogo_console == "") || !file.exists(netlogo_console)) {
     cli::cli_abort(

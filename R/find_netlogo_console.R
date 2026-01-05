@@ -12,11 +12,10 @@
 #' 1. Checks the `NETLOGO_CONSOLE` environment variable. If set and the file
 #'    exists, returns that path.
 #' 2. If the environment variable is not set or the file does not exist,
-#'    constructs the path based on `netlogo_home` (e.g.,
-#'    `<netlogo_home>/NetLogo_Console` on Linux/macOS or
-#'    `<netlogo_home>/NetLogo_Console.exe` on Windows).
-#'
-#' @template params-netlogo-home
+#'    constructs the path based on the output of
+#'    [`find_netlogo_home()`][find_netlogo_home()] (e.g.,
+#'    `<NETLOGO_HOME>/NetLogo_Console` on Linux/macOS or
+#'    `<NETLOGO_HOME>/NetLogo_Console.exe` on Windows).
 #'
 #' @return A [`character`][base::character()] string specifying the path to the
 #'   NetLogo executable file. Returns an empty string (`""`) if the executable
@@ -29,12 +28,7 @@
 #' \dontrun{
 #'   find_netlogo_console()
 #' }
-find_netlogo_console <- function(
-  netlogo_home = find_netlogo_home()
-) {
-  checkmate::assert_string(netlogo_home)
-
-  netlogo_home <- fs::path_expand(netlogo_home)
+find_netlogo_console <- function() {
   netlogo_console <- Sys.getenv("NETLOGO_CONSOLE")
 
   if (netlogo_console != "" && file.exists(netlogo_console)) {
@@ -42,6 +36,8 @@ find_netlogo_console <- function(
       normalizePath() |>
       path_expand()
   } else {
+    netlogo_home <- find_netlogo_home()
+
     system_name <-
       sys_info() |> # Sys.info() mock
       magrittr::extract("sysname") |>
