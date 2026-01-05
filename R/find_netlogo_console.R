@@ -35,30 +35,31 @@ find_netlogo_console <- function(
   checkmate::assert_string(netlogo_home)
 
   netlogo_home <- fs::path_expand(netlogo_home)
+  netlogo_console <- Sys.getenv("NETLOGO_CONSOLE")
 
-  out <- ""
-
-  if (!Sys.getenv("NETLOGO_CONSOLE") == "") {
-    out <-
-      Sys.getenv("NETLOGO_CONSOLE") |>
-      normalizePath(mustWork = FALSE)
-  }
-
-  if ((!netlogo_home == "") && !file.exists(out)) {
-    if (.Platform$OS.type == "windows") {
-      out <- fs::path(netlogo_home, "NetLogo_Console.exe")
-    } else if (Sys.info()["sysname"] == "Darwin") {
-      out <- fs::path(netlogo_home, "NetLogo_Console")
-    } else {
-      out <- fs::path(netlogo_home, "NetLogo_Console")
-    }
-  }
-
-  if (file.exists(out)) {
-    out |>
-      normalizePath(mustWork = TRUE) |>
-      fs::path_expand()
+  if (netlogo_console != "" && file.exists(netlogo_console)) {
+    netlogo_console |>
+      normalizePath() |>
+      path_expand()
   } else {
-    ""
+    system_name <-
+      sys_info() |> # Sys.info() mock
+      magrittr::extract("sysname") |>
+      unname() |>
+      tolower()
+
+    if (system_name == "windows") {
+      out <- netlogo_home |> path("NetLogo_Console.exe")
+    } else {
+      out <- netlogo_home |> path("NetLogo_Console")
+    }
+
+    if (file.exists(out)) {
+      out |>
+        normalizePath() |>
+        path_expand()
+    } else {
+      ""
+    }
   }
 }

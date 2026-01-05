@@ -24,6 +24,11 @@ testthat::test_that("`path()` | General test", {
     testthat::expect_equal(fs::path("test"))
 })
 
+testthat::test_that("`path_expand()` | General test", {
+  path_expand("test") |>
+    testthat::expect_equal(fs::path_expand("test"))
+})
+
 ## `httr2`
 
 testthat::test_that("`resp_body_json()` | General test", {

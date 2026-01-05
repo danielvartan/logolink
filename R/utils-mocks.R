@@ -13,6 +13,7 @@ temp_file <- function(...) tempfile(...)
 ## `fs`
 
 path <- function(...) fs::path(...)
+path_expand <- function(...) fs::path_expand(...)
 
 ## `httr2`
 

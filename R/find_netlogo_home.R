@@ -32,8 +32,10 @@
 find_netlogo_home <- function() {
   netlogo_home <- Sys.getenv("NETLOGO_HOME")
 
-  if ((!netlogo_home == "") && dir.exists(netlogo_home)) {
-    normalizePath(netlogo_home) |> fs::path()
+  if ((netlogo_home != "") && dir.exists(netlogo_home)) {
+    netlogo_home |>
+      normalizePath() |>
+      path_expand()
   } else {
     common_paths <- list(
       windows = c(
@@ -88,7 +90,10 @@ find_netlogo_home <- function() {
 
       if (length(possible_path) > 0) {
         if (dir.exists(possible_path)) {
-          out <- possible_path
+          out <-
+            possible_path |>
+            normalizePath() |>
+            path_expand()
         }
       }
     }
