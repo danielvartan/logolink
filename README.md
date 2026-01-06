@@ -236,7 +236,9 @@ After specifying the model path, you can run the experiment with:
 ``` r
 results <-
   model_path |>
-  run_experiment(setup_file = setup_file)
+  run_experiment(
+    setup_file = setup_file
+  )
 ```
 
 ### Checking the Results
@@ -254,15 +256,15 @@ By default, all formats are returned as a named list.
 library(dplyr)
 
 results |> glimpse()
-#> List of 5
-#>  $ metadata   :List of 5
-#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-04 06:30:01"
+#> List of 2
+#>  $ metadata:List of 5
+#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-06 17:53:03"
 #>   ..$ netlogo_version : chr "7.0.3"
 #>   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"
 #>   ..$ experiment_name : chr "Wolf Sheep Simple Model Analysis"
 #>   ..$ world_dimensions: Named int [1:4] -17 17 -17 17
 #>   .. ..- attr(*, "names")= chr [1:4] "min-pxcor" "max-pxcor" "min-pycor" "max-pycor"
-#>  $ table      : tibble [110,110 × 10] (S3: tbl_df/tbl/data.frame)
+#>  $ table   : tibble [110,110 × 10] (S3: tbl_df/tbl/data.frame)
 #>   ..$ run_number            : num [1:110110] 1 1 1 1 1 1 1 1 1 1 ...
 #>   ..$ number_of_sheep       : num [1:110110] 500 500 500 500 500 500 500 500 500 500 ...
 #>   ..$ number_of_wolves      : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
@@ -272,33 +274,7 @@ results |> glimpse()
 #>   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
 #>   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ count_sheep           : num [1:110110] 500 498 496 492 492 491 490 488 487 487 ...
-#>  $ spreadsheet:List of 2
-#>   ..$ statistics: tibble [330 × 13] (S3: tbl_df/tbl/data.frame)
-#>   ..$ measures  : tibble [330,330 × 4] (S3: tbl_df/tbl/data.frame)
-#>  $ lists      : tibble [0 × 9] (S3: tbl_df/tbl/data.frame)
-#>   ..$ reporter              : chr(0) 
-#>   ..$ run_number            : chr(0) 
-#>   ..$ number_of_sheep       : chr(0) 
-#>   ..$ number_of_wolves      : chr(0) 
-#>   ..$ movement_cost         : chr(0) 
-#>   ..$ grass_regrowth_rate   : chr(0) 
-#>   ..$ energy_gain_from_grass: chr(0) 
-#>   ..$ energy_gain_from_sheep: chr(0) 
-#>   ..$ step                  : chr(0) 
-#>  $ statistics : tibble [11,011 × 12] (S3: tbl_df/tbl/data.frame)
-#>   ..$ scenario              : int [1:11011] 1 2 3 4 5 6 7 8 9 10 ...
-#>   ..$ number_of_sheep       : num [1:11011] 500 500 500 500 500 500 500 500 500 500 ...
-#>   ..$ number_of_wolves      : num [1:11011] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ movement_cost         : num [1:11011] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 ...
-#>   ..$ grass_regrowth_rate   : num [1:11011] 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 ...
-#>   ..$ energy_gain_from_grass: num [1:11011] 2 2 2 2 2 2 2 2 2 2 ...
-#>   ..$ energy_gain_from_sheep: num [1:11011] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ step                  : num [1:11011] 0 1 2 3 4 5 6 7 8 9 ...
-#>   ..$ mean_count_wolves     : num [1:11011] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ std_count_wolves      : num [1:11011] 0 0 0 0 0 0 0 0 0 0 ...
-#>   ..$ mean_count_sheep      : num [1:11011] 500 498 496 494 493 ...
-#>   ..$ std_count_sheep       : num [1:11011] 0 1.25 1.33 1.5 1.47 ...
+#>   ..$ count_sheep           : num [1:110110] 500 498 496 495 493 493 491 490 488 487 ...
 ```
 
 ### Analyzing the Data (Bonus Section)
@@ -374,7 +350,7 @@ support its continued improvement.
 citation("logolink")
 #> To cite logolink in publications use:
 #> 
-#>   Vartanian, D. (2025). logolink: An interface for running NetLogo
+#>   Vartanian, D. (2026). logolink: An interface for running NetLogo
 #>   simulations from R [Computer software]. CRAN.
 #>   https://doi.org/10.32614/CRAN.package.logolink
 #> 
@@ -383,7 +359,7 @@ citation("logolink")
 #>   @Misc{,
 #>     title = {logolink: An interface for running NetLogo simulations from R},
 #>     author = {Daniel Vartanian},
-#>     year = {2025},
+#>     year = {2026},
 #>     doi = {10.32614/CRAN.package.logolink},
 #>     note = {Computer software},
 #>   }
