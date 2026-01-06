@@ -101,9 +101,10 @@ Other utility functions:
 
 # \dontrun{
   shape <- get_netlogo_shape("turtle", collection = "netlogo-7-0-3")
+#> Error in httr2::req_perform(...): HTTP 403 Forbidden.
 
   file_size(shape)
-#> 785
+#> 771
 
   shape |> image_read_svg() |> image_ggplot()
 

@@ -42,7 +42,6 @@ If any of these are missing, install them with:
 ``` r
 install.packages(
   c(
-    "logolink",
     "cli",
     "curl",
     "dplyr",
@@ -52,10 +51,17 @@ install.packages(
     "magick",
     "magrittr",
     "ragg",
+    "remotes",
     "stringr",
     "tidyr"
   )
 )
+```
+
+And then run:
+
+``` r
+remotes::install_github("danielvartan/logolink")
 ```
 
 Now let’s find our model. The
