@@ -6,6 +6,7 @@
 - `run_experiment()` had the `parse` argument removed. The function now offer an option to return a [lists output](https://docs.netlogo.org/behaviorspace.html#lists-output) via the new `output` parameter. Results containing data in NetLogo's lists format are returned as `character` vectors. See `run_experiment()` documentation for details.
 - `run_experiment()` had the `netlogo_home` and `netlogo_path` argument removed. The package now tries to automatically detect the NetLogo installation using helper functions (see `find_netlogo_home()`). Users can still manually specify the path to NetLogo. See the updated documentation for details.
 - `parse_netlogo_list()` now always return a `list` object. The previous behavior of returning a `vector` when possible was removed. `NaN` values are now represented as R `NaN` values instead of `"NaN"`.
+- `inspect_experiment_file()` was renamed to `inspect_experiment()`.
 
 ### New Features and Improvements
 

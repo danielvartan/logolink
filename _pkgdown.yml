@@ -58,7 +58,7 @@ reference:
     Utility functions functions for NetLogo integration.
   contents:
   - get_netlogo_shape
-  - inspect_experiment_file
+  - inspect_experiment
 
 authors:
   Daniel Vartanian:

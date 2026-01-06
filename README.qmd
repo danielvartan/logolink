@@ -199,10 +199,10 @@ setup_file <- create_experiment(
 )
 ```
 
-If you want to inspect the created experiment file, you can use the [`inspect_experiment_file`](https://danielvartan.github.io/logolink/reference/inspect_experiment_file.html) function:
+If you want to inspect the created experiment file, you can use the [`inspect_experiment`](https://danielvartan.github.io/logolink/reference/inspect_experiment.html) function:
 
 ```{r}
-setup_file |> inspect_experiment_file()
+setup_file |> inspect_experiment()
 ```
 
 ### Running an Experiment

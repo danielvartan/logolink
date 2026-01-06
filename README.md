@@ -173,11 +173,11 @@ setup_file <- create_experiment(
 ```
 
 If you want to inspect the created experiment file, you can use the
-[`inspect_experiment_file`](https://danielvartan.github.io/logolink/reference/inspect_experiment_file.html)
+[`inspect_experiment`](https://danielvartan.github.io/logolink/reference/inspect_experiment.html)
 function:
 
 ``` r
-setup_file |> inspect_experiment_file()
+setup_file |> inspect_experiment()
 #> <experiments>
 #>   <experiment name="Wolf Sheep Simple Model Analysis" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="true" timeLimit="1000">
 #>     <setup>setup</setup>
@@ -349,13 +349,13 @@ support its continued improvement.
 ``` r
 citation("logolink")
 #> To cite logolink in publications use:
-#> 
+#>
 #>   Vartanian, D. (2026). logolink: An interface for running NetLogo
 #>   simulations from R [Computer software]. CRAN.
 #>   https://doi.org/10.32614/CRAN.package.logolink
-#> 
+#>
 #> A BibTeX entry for LaTeX users is
-#> 
+#>
 #>   @Misc{,
 #>     title = {logolink: An interface for running NetLogo simulations from R},
 #>     author = {Daniel Vartanian},

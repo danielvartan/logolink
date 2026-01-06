@@ -118,7 +118,7 @@ setup_file <- create_experiment(
 ```
 
 ```{r}
-inspect_experiment_file(setup_file)
+inspect_experiment(setup_file)
 ```
 
 #### Run Experiment
@@ -169,7 +169,7 @@ setup_file <- create_experiment(
 ```
 
 ```{r}
-inspect_experiment_file(setup_file)
+inspect_experiment(setup_file)
 ```
 
 #### Define Experiment Name
@@ -255,7 +255,7 @@ setup_file <- create_experiment(
 ```
 
 ```{r}
-inspect_experiment_file(setup_file)
+inspect_experiment(setup_file)
 ```
 
 #### Define Experiment Name
@@ -339,7 +339,7 @@ setup_file <- create_experiment(
 ```
 
 ```{r}
-inspect_experiment_file(setup_file)
+inspect_experiment(setup_file)
 ```
 
 #### Define Experiment Name
@@ -401,7 +401,7 @@ setup_file <- create_experiment(
 ```
 
 ```{r}
-inspect_experiment_file(setup_file)
+inspect_experiment(setup_file)
 ```
 
 #### Define Experiment Name
@@ -463,7 +463,7 @@ setup_file <- create_experiment(
 ```
 
 ```{r}
-inspect_experiment_file(setup_file)
+inspect_experiment(setup_file)
 ```
 
 #### Define Experiment Name
@@ -533,7 +533,7 @@ setup_file <- create_experiment(
 ```
 
 ```{r}
-inspect_experiment_file(setup_file)
+inspect_experiment(setup_file)
 ```
 
 #### Define Experiment Name
@@ -591,7 +591,7 @@ setup_file <- create_experiment(
 ```
 
 ```{r}
-inspect_experiment_file(setup_file)
+inspect_experiment(setup_file)
 ```
 
 #### Define Experiment Name

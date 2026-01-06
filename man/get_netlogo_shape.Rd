@@ -78,6 +78,6 @@ more information about the different collections.
 }
 \seealso{
 Other utility functions: 
-\code{\link{inspect_experiment_file}()}
+\code{\link{inspect_experiment}()}
 }
 \concept{utility functions}

@@ -192,7 +192,7 @@ setup_file <- create_experiment(
 
 setup_file
 
-setup_file |> inspect_experiment_file()
+setup_file |> inspect_experiment()
 
 ### Behaviorspace Run 3 Experiments
 
@@ -252,7 +252,7 @@ setup_file <- create_experiment(
 
 setup_file
 
-setup_file |> inspect_experiment_file()
+setup_file |> inspect_experiment()
 
 ### BehaviorSpace Run 3 Variable Values Per Experiments
 
@@ -310,7 +310,7 @@ setup_file <- create_experiment(
 
 setup_file
 
-setup_file |> inspect_experiment_file()
+setup_file |> inspect_experiment()
 
 ## Examples from the *Spread of Disease* Model (IABM Textbook) ----
 
@@ -340,7 +340,7 @@ setup_file <- create_experiment(
 
 setup_file
 
-setup_file |> inspect_experiment_file()
+setup_file |> inspect_experiment()
 
 ### Degree
 
@@ -368,7 +368,7 @@ setup_file <- create_experiment(
 
 setup_file
 
-setup_file |> inspect_experiment_file()
+setup_file |> inspect_experiment()
 
 ### Environmental
 
@@ -396,7 +396,7 @@ setup_file <- create_experiment(
 
 setup_file
 
-setup_file |> inspect_experiment_file()
+setup_file |> inspect_experiment()
 }
 \seealso{
 Other NetLogo functions: 

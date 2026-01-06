@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `inspect_experiment_file()` reads and prints the content of a
+#' `inspect_experiment()` reads and prints the content of a
 #' [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment XML
 #' file to the console. This is useful for debugging and verifying the
 #' structure of experiment files created by
@@ -24,8 +24,8 @@
 #' @examples
 #' file <- create_experiment(name = "My Experiment")
 #'
-#' file |> inspect_experiment_file()
-inspect_experiment_file <- function(file) {
+#' file |> inspect_experiment()
+inspect_experiment <- function(file) {
   checkmate::assert_string(file)
   checkmate::assert_file_exists(file, access = "r", extension = "xml")
 
