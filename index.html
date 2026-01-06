@@ -219,7 +219,9 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">model_path</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="reference/run_experiment.html">run_experiment</a></span><span class="op">(</span>setup_file <span class="op">=</span> <span class="va">setup_file</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="reference/run_experiment.html">run_experiment</a></span><span class="op">(</span></span>
+<span>    setup_file <span class="op">=</span> <span class="va">setup_file</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="checking-the-results">Checking the Results<a class="anchor" aria-label="anchor" href="#checking-the-results"></a>
@@ -229,15 +231,15 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; List of 5</span></span>
-<span><span class="co">#&gt;  $ metadata   :List of 5</span></span>
-<span><span class="co">#&gt;   ..$ timestamp       : POSIXct[1:1], format: "2026-01-04 06:30:01"</span></span>
+<span><span class="co">#&gt; List of 2</span></span>
+<span><span class="co">#&gt;  $ metadata:List of 5</span></span>
+<span><span class="co">#&gt;   ..$ timestamp       : POSIXct[1:1], format: "2026-01-06 17:53:03"</span></span>
 <span><span class="co">#&gt;   ..$ netlogo_version : chr "7.0.3"</span></span>
 <span><span class="co">#&gt;   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"</span></span>
 <span><span class="co">#&gt;   ..$ experiment_name : chr "Wolf Sheep Simple Model Analysis"</span></span>
 <span><span class="co">#&gt;   ..$ world_dimensions: Named int [1:4] -17 17 -17 17</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:4] "min-pxcor" "max-pxcor" "min-pycor" "max-pycor"</span></span>
-<span><span class="co">#&gt;  $ table      : tibble [110,110 × 10] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ table   : tibble [110,110 × 10] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;   ..$ run_number            : num [1:110110] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;   ..$ number_of_sheep       : num [1:110110] 500 500 500 500 500 500 500 500 500 500 ...</span></span>
 <span><span class="co">#&gt;   ..$ number_of_wolves      : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
@@ -247,33 +249,7 @@
 <span><span class="co">#&gt;   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
 <span><span class="co">#&gt;   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
-<span><span class="co">#&gt;   ..$ count_sheep           : num [1:110110] 500 498 496 492 492 491 490 488 487 487 ...</span></span>
-<span><span class="co">#&gt;  $ spreadsheet:List of 2</span></span>
-<span><span class="co">#&gt;   ..$ statistics: tibble [330 × 13] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;   ..$ measures  : tibble [330,330 × 4] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  $ lists      : tibble [0 × 9] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;   ..$ reporter              : chr(0) </span></span>
-<span><span class="co">#&gt;   ..$ run_number            : chr(0) </span></span>
-<span><span class="co">#&gt;   ..$ number_of_sheep       : chr(0) </span></span>
-<span><span class="co">#&gt;   ..$ number_of_wolves      : chr(0) </span></span>
-<span><span class="co">#&gt;   ..$ movement_cost         : chr(0) </span></span>
-<span><span class="co">#&gt;   ..$ grass_regrowth_rate   : chr(0) </span></span>
-<span><span class="co">#&gt;   ..$ energy_gain_from_grass: chr(0) </span></span>
-<span><span class="co">#&gt;   ..$ energy_gain_from_sheep: chr(0) </span></span>
-<span><span class="co">#&gt;   ..$ step                  : chr(0) </span></span>
-<span><span class="co">#&gt;  $ statistics : tibble [11,011 × 12] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;   ..$ scenario              : int [1:11011] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
-<span><span class="co">#&gt;   ..$ number_of_sheep       : num [1:11011] 500 500 500 500 500 500 500 500 500 500 ...</span></span>
-<span><span class="co">#&gt;   ..$ number_of_wolves      : num [1:11011] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
-<span><span class="co">#&gt;   ..$ movement_cost         : num [1:11011] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 ...</span></span>
-<span><span class="co">#&gt;   ..$ grass_regrowth_rate   : num [1:11011] 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 ...</span></span>
-<span><span class="co">#&gt;   ..$ energy_gain_from_grass: num [1:11011] 2 2 2 2 2 2 2 2 2 2 ...</span></span>
-<span><span class="co">#&gt;   ..$ energy_gain_from_sheep: num [1:11011] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
-<span><span class="co">#&gt;   ..$ step                  : num [1:11011] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
-<span><span class="co">#&gt;   ..$ mean_count_wolves     : num [1:11011] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
-<span><span class="co">#&gt;   ..$ std_count_wolves      : num [1:11011] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
-<span><span class="co">#&gt;   ..$ mean_count_sheep      : num [1:11011] 500 498 496 494 493 ...</span></span>
-<span><span class="co">#&gt;   ..$ std_count_sheep       : num [1:11011] 0 1.25 1.33 1.5 1.47 ...</span></span></code></pre></div>
+<span><span class="co">#&gt;   ..$ count_sheep           : num [1:110110] 500 498 496 495 493 493 491 490 488 487 ...</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="analyzing-the-data-bonus-section">Analyzing the Data (Bonus Section)<a class="anchor" aria-label="anchor" href="#analyzing-the-data-bonus-section"></a>
@@ -331,7 +307,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"logolink"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; To cite logolink in publications use:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Vartanian, D. (2025). logolink: An interface for running NetLogo</span></span>
+<span><span class="co">#&gt;   Vartanian, D. (2026). logolink: An interface for running NetLogo</span></span>
 <span><span class="co">#&gt;   simulations from R [Computer software]. CRAN.</span></span>
 <span><span class="co">#&gt;   https://doi.org/10.32614/CRAN.package.logolink</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -340,7 +316,7 @@
 <span><span class="co">#&gt;   @Misc{,</span></span>
 <span><span class="co">#&gt;     title = {logolink: An interface for running NetLogo simulations from R},</span></span>
 <span><span class="co">#&gt;     author = {Daniel Vartanian},</span></span>
-<span><span class="co">#&gt;     year = {2025},</span></span>
+<span><span class="co">#&gt;     year = {2026},</span></span>
 <span><span class="co">#&gt;     doi = {10.32614/CRAN.package.logolink},</span></span>
 <span><span class="co">#&gt;     note = {Computer software},</span></span>
 <span><span class="co">#&gt;   }</span></span></code></pre></div>

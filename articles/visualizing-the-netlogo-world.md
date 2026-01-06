@@ -1,9 +1,10 @@
 # Visualizing the NetLogo World
 
-Have you ever wanted to capture what’s happening in your NetLogo
-simulation at specific moments? Maybe you need figures for a paper or
-just want to see how your agents move over time. In this vignette, we’ll
-walk through how to do exactly that using `logolink`.
+This vignette demonstrates how to capture and visualize NetLogo
+simulations at specific time steps using `logolink` and
+[`ggplot2`](https://ggplot2.tidyverse.org/). You’ll learn how to extract
+agent positions, render them as publication-ready figures, and create
+animations showing simulation dynamics over time.
 
 We’ll work with the [Wolf Sheep
 Simple](https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/IABM%20Textbook/chapter%204/Wolf%20Sheep%20Simple%205.nlogox)
@@ -13,7 +14,7 @@ the end, you’ll have both static plots and an animated
 evolving over time.
 
 We’re assuming you have [NetLogo](https://ccl.northwestern.edu/netlogo/)
-7.1.0 or or above installed and are comfortable with R programming.
+7.0.1 or above installed and are comfortable with R programming.
 
 ## Getting Started
 
