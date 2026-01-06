@@ -60,7 +60,7 @@ the file paths to the downloaded NetLogo shapes as
 ## See also
 
 Other utility functions:
-[`inspect_experiment_file()`](https://danielvartan.github.io/logolink/reference/inspect_experiment_file.md)
+[`inspect_experiment()`](https://danielvartan.github.io/logolink/reference/inspect_experiment.md)
 
 ## Examples
 
@@ -101,10 +101,9 @@ Other utility functions:
 
 # \dontrun{
   shape <- get_netlogo_shape("turtle", collection = "netlogo-7-0-3")
-#> Error in httr2::req_perform(...): HTTP 403 Forbidden.
 
   file_size(shape)
-#> 771
+#> 785
 
   shape |> image_read_svg() |> image_ggplot()
 

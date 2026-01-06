@@ -27,6 +27,8 @@
   now always return a `list` object. The previous behavior of returning
   a `vector` when possible was removed. `NaN` values are now represented
   as R `NaN` values instead of `"NaN"`.
+- `inspect_experiment_file()` was renamed to
+  [`inspect_experiment()`](https://danielvartan.github.io/logolink/reference/inspect_experiment.md).
 
 #### New Features and Improvements
 

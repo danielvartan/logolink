@@ -296,21 +296,21 @@ Other NetLogo functions:
       setup_file = setup_file
     )
 #> ℹ Running model
-#> ✔ Running model [20.8s]
+#> ✔ Running model [21.1s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [11ms]
+#> ✔ Gathering metadata [17ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [14ms]
+#> ✔ Processing table output [16ms]
 #> 
 #> ℹ The experiment run produced the following messages:
 #> 
-#> Jan 06, 2026 9:40:59 PM java.util.prefs.FileSystemPreferences$1 run
+#> Jan 06, 2026 11:55:29 PM java.util.prefs.FileSystemPreferences$1 run
 #> INFO: Created user preferences directory.
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-06 21:41:00 GMT"
+#> [1] "2026-01-06 23:55:30 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -355,7 +355,7 @@ Other NetLogo functions:
       experiment = "Wolf Sheep Simple model analysis"
     )
 #> ℹ Running model
-#> ✔ Running model [18s]
+#> ✔ Running model [18.2s]
 #> 
 #> ℹ Gathering metadata
 #> ✔ Gathering metadata [9ms]
@@ -365,7 +365,7 @@ Other NetLogo functions:
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-06 21:41:22 GMT"
+#> [1] "2026-01-06 23:55:53 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"

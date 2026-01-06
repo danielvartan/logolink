@@ -36,5 +36,5 @@ Utility functions functions for NetLogo integration.
 
 - [`get_netlogo_shape()`](https://danielvartan.github.io/logolink/reference/get_netlogo_shape.md)
   : Download NetLogo shapes from LogoShapes
-- [`inspect_experiment_file()`](https://danielvartan.github.io/logolink/reference/inspect_experiment_file.md)
+- [`inspect_experiment()`](https://danielvartan.github.io/logolink/reference/inspect_experiment.md)
   : Inspect a BehaviorSpace experiment XML file

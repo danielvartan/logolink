@@ -237,9 +237,9 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpeJ4zDq/experiment-1e8815370b20.xml"
+#> [1] "/tmp/Rtmp4sIsBZ/experiment-1e5aa33dab3.xml"
 
-setup_file |> inspect_experiment_file()
+setup_file |> inspect_experiment()
 #> <experiments>
 #>   <experiment name="BehaviorSpace Combinatorial" repetitions="1" sequentialRunOrder="true" runMetricsEveryStep="false" timeLimit="1500">
 #>     <setup>setup</setup>
@@ -328,9 +328,9 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpeJ4zDq/experiment-1e8822a37f3c.xml"
+#> [1] "/tmp/Rtmp4sIsBZ/experiment-1e5a4c8ec2b0.xml"
 
-setup_file |> inspect_experiment_file()
+setup_file |> inspect_experiment()
 #> <experiments>
 #>   <experiment name="Behaviorspace Run 3 Experiments" repetitions="1" sequentialRunOrder="true" runMetricsEveryStep="false" timeLimit="1500">
 #>     <setup>setup
@@ -453,9 +453,9 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpeJ4zDq/experiment-1e8810c7a2de.xml"
+#> [1] "/tmp/Rtmp4sIsBZ/experiment-1e5a7aff45f.xml"
 
-setup_file |> inspect_experiment_file()
+setup_file |> inspect_experiment()
 #> <experiments>
 #>   <experiment name="BehaviorSpace Run 3 Variable Values Per Experiments" repetitions="1" sequentialRunOrder="true" runMetricsEveryStep="false" timeLimit="1500">
 #>     <setup>setup
@@ -548,9 +548,9 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpeJ4zDq/experiment-1e886f452097.xml"
+#> [1] "/tmp/Rtmp4sIsBZ/experiment-1e5a296f4ee4.xml"
 
-setup_file |> inspect_experiment_file()
+setup_file |> inspect_experiment()
 #> <experiments>
 #>   <experiment name="Population Density" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="false">
 #>     <setup>setup</setup>
@@ -601,9 +601,9 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpeJ4zDq/experiment-1e8845cd74e9.xml"
+#> [1] "/tmp/Rtmp4sIsBZ/experiment-1e5a4a2c99a0.xml"
 
-setup_file |> inspect_experiment_file()
+setup_file |> inspect_experiment()
 #> <experiments>
 #>   <experiment name="Degree" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="false" timeLimit="50">
 #>     <setup>setup</setup>
@@ -654,9 +654,9 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpeJ4zDq/experiment-1e8829fca05e.xml"
+#> [1] "/tmp/Rtmp4sIsBZ/experiment-1e5a7d821a7c.xml"
 
-setup_file |> inspect_experiment_file()
+setup_file |> inspect_experiment()
 #> <experiments>
 #>   <experiment name="Environmental" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="false">
 #>     <setup>setup</setup>

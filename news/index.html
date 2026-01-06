@@ -59,6 +59,8 @@
 <code><a href="../reference/run_experiment.html">run_experiment()</a></code> had the <code>netlogo_home</code> and <code>netlogo_path</code> argument removed. The package now tries to automatically detect the NetLogo installation using helper functions (see <code><a href="../reference/find_netlogo_home.html">find_netlogo_home()</a></code>). Users can still manually specify the path to NetLogo. See the updated documentation for details.</li>
 <li>
 <code><a href="../reference/parse_netlogo_list.html">parse_netlogo_list()</a></code> now always return a <code>list</code> object. The previous behavior of returning a <code>vector</code> when possible was removed. <code>NaN</code> values are now represented as R <code>NaN</code> values instead of <code>"NaN"</code>.</li>
+<li>
+<code>inspect_experiment_file()</code> was renamed to <code><a href="../reference/inspect_experiment.html">inspect_experiment()</a></code>.</li>
 </ul></div>
 <div class="section level4">
 <h4 id="new-features-and-improvements-1-0-0-9000">New Features and Improvements<a class="anchor" aria-label="anchor" href="#new-features-and-improvements-1-0-0-9000"></a></h4>
