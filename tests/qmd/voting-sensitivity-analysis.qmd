@@ -12,8 +12,10 @@ This document tests `logolink` under the different experiments using the *Voting
 #| label: Set the Environment
 #| output: false
 
+library(checkmate)
 library(dplyr)
 library(logolink)
+library(testthat)
 ```
 
 ### Set Model Path
@@ -77,6 +79,10 @@ results <-
   run_experiment(
     experiment = experiment
   )
+```
+
+```{r}
+expect_list(results, len = 2)
 ```
 
 ```{r}

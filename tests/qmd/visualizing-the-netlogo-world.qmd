@@ -11,6 +11,9 @@ This document is a copy (2025-01-05) of the "Visualizing the NetLogo World" vign
 
 library(logolink)
 
+library(checkmate)
+library(testthat)
+
 library(cli)
 library(curl)
 library(dplyr)
@@ -85,6 +88,10 @@ results <-
     setup_file = setup_file,
     output = c("table", "lists")
   )
+```
+
+```{r}
+expect_list(results, len = 3)
 ```
 
 ```{r}

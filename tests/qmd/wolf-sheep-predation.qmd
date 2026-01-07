@@ -12,8 +12,10 @@ This document tests `logolink` under the different experiments using the *Wolf S
 #| label: Set the Environment
 #| output: false
 
+library(checkmate)
 library(dplyr)
 library(logolink)
+library(testthat)
 ```
 
 ### Set Model Path
@@ -80,6 +82,10 @@ results <-
 ```
 
 ```{r}
+expect_list(results, len = 2)
+```
+
+```{r}
 results |> glimpse()
 ```
 
@@ -130,6 +136,10 @@ results <-
     setup_file = setup_file,
     output = c("table", "lists")
   )
+```
+
+```{r}
+expect_list(results, len = 3)
 ```
 
 ```{r}
@@ -186,6 +196,10 @@ results <-
   run_experiment(
     experiment = experiment
   )
+```
+
+```{r}
+expect_list(results, len = 2)
 ```
 
 ```{r}
@@ -275,6 +289,10 @@ results <-
 ```
 
 ```{r}
+expect_list(results, len = 2)
+```
+
+```{r}
 results |> glimpse()
 ```
 
@@ -359,6 +377,10 @@ results <-
 ```
 
 ```{r}
+expect_list(results, len = 2)
+```
+
+```{r}
 results |> glimpse()
 ```
 
@@ -421,6 +443,10 @@ results <-
 ```
 
 ```{r}
+expect_list(results, len = 2)
+```
+
+```{r}
 results |> glimpse()
 ```
 
@@ -480,6 +506,10 @@ results <-
   run_experiment(
     experiment = experiment
   )
+```
+
+```{r}
+expect_list(results, len = 2)
 ```
 
 ```{r}
@@ -553,6 +583,10 @@ results <-
 ```
 
 ```{r}
+expect_list(results, len = 2)
+```
+
+```{r}
 results |> glimpse()
 ```
 
@@ -608,6 +642,10 @@ results <-
   run_experiment(
     experiment = experiment
   )
+```
+
+```{r}
+expect_list(results, len = 2)
 ```
 
 ```{r}
