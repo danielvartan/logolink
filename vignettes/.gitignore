@@ -1,7 +1,6 @@
-*
 !.gitignore
 !*.qmd
+*
 *_files
-
-/.quarto/
 **/*.quarto_ipynb
+/.quarto/

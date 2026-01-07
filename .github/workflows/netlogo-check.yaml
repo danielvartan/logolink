@@ -7,8 +7,13 @@ permissions: read-all
 
 jobs:
   run-logolink:
-    name: Run Experiments with logolink
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+        version: 'release'
+    name: ${{matrix.os}} (${{matrix.version}})
+    runs-on: ${{matrix.os}}
     env:
       GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     permissions:
@@ -20,6 +25,9 @@ jobs:
 
       - name: Set up NetLogo
         uses: danielvartan/logoactions/setup-netlogo@v1
+        with:
+          version: ${{matrix.version}}
+          cache: 'true'
 
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
@@ -34,6 +42,7 @@ jobs:
           needs: check
 
       - name: Install system dependencies
+        if: runner.os == 'Linux'
         run: |
           # Install system dependencies
 

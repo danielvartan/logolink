@@ -1,7 +1,6 @@
-*
-!.gitignore
 !_quarto.yml
+!.gitignore
 !*.qmd
-
-/.quarto/
+*
 **/*.quarto_ipynb
+/.quarto/
