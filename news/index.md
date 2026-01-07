@@ -4,10 +4,14 @@
 
 #### Breaking Changes
 
-- `logolink` now works only with NetLogo 7.0.1 and above. This NetLogo
-  patch release changed the XML structure of BehaviorSpace experiments;
-  See this [GitHub
+- `logolink` now works only with NetLogo 7.0.1 and above. The NetLogo
+  7.0.1 patch release changed the XML structure of BehaviorSpace
+  experiments; See this [GitHub
   issue](https://github.com/NetLogo/NetLogo/issues/2560) to learn more.
+- [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
+  now returns a `list` object containing the [BehaviorSpace output
+  formats](https://docs.netlogo.org/behaviorspace.html) and metadata
+  information. See the updated documentation for details.
 - [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
   had the `parse` argument removed. The function now offer an option to
   return a [lists
@@ -25,8 +29,9 @@
   documentation for details.
 - [`parse_netlogo_list()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_list.md)
   now always return a `list` object. The previous behavior of returning
-  a `vector` when possible was removed. `NaN` values are now represented
-  as R `NaN` values instead of `"NaN"`.
+  a `vector` when possible was removed.
+- [`parse_netlogo_list()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_list.md)
+  now returns `NaN` values as R `NaN` values instead of `"NaN"`.
 - `inspect_experiment_file()` was renamed to
   [`inspect_experiment()`](https://danielvartan.github.io/logolink/reference/inspect_experiment.md).
 
@@ -72,7 +77,12 @@
 - [`read_experiment()`](https://danielvartan.github.io/logolink/reference/read_experiment.md)
   was introduced to read and tidy BehaviorSpace experiment output files
   into R.
-- New unit tests were implemented.
+- The package now checks `logolink` NetLogo integration via Continuous
+  Integration (CI), performing tests on Windows, macOS, and Linux using
+  GitHub Actions from the
+  [`LogoActions`](https://github.com/danielvartan/logoactions) project.
+- New R unit tests were implemented.
+- New NetLogo unit tests were implemented.
 - A [new
   vignette](https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html)
   showing how to visualize the NetLogo world using

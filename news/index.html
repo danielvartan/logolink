@@ -52,13 +52,17 @@
 <div class="section level4">
 <h4 id="breaking-changes-1-0-0-9000">Breaking Changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-0-0-9000"></a></h4>
 <ul><li>
-<code>logolink</code> now works only with NetLogo 7.0.1 and above. This NetLogo patch release changed the XML structure of BehaviorSpace experiments; See this <a href="https://github.com/NetLogo/NetLogo/issues/2560" class="external-link">GitHub issue</a> to learn more.</li>
+<code>logolink</code> now works only with NetLogo 7.0.1 and above. The NetLogo 7.0.1 patch release changed the XML structure of BehaviorSpace experiments; See this <a href="https://github.com/NetLogo/NetLogo/issues/2560" class="external-link">GitHub issue</a> to learn more.</li>
+<li>
+<code><a href="../reference/run_experiment.html">run_experiment()</a></code> now returns a <code>list</code> object containing the <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace output formats</a> and metadata information. See the updated documentation for details.</li>
 <li>
 <code><a href="../reference/run_experiment.html">run_experiment()</a></code> had the <code>parse</code> argument removed. The function now offer an option to return a <a href="https://docs.netlogo.org/behaviorspace.html#lists-output" class="external-link">lists output</a> via the new <code>output</code> parameter. Results containing data in NetLogo’s lists format are returned as <code>character</code> vectors. See <code><a href="../reference/run_experiment.html">run_experiment()</a></code> documentation for details.</li>
 <li>
 <code><a href="../reference/run_experiment.html">run_experiment()</a></code> had the <code>netlogo_home</code> and <code>netlogo_path</code> argument removed. The package now tries to automatically detect the NetLogo installation using helper functions (see <code><a href="../reference/find_netlogo_home.html">find_netlogo_home()</a></code>). Users can still manually specify the path to NetLogo. See the updated documentation for details.</li>
 <li>
-<code><a href="../reference/parse_netlogo_list.html">parse_netlogo_list()</a></code> now always return a <code>list</code> object. The previous behavior of returning a <code>vector</code> when possible was removed. <code>NaN</code> values are now represented as R <code>NaN</code> values instead of <code>"NaN"</code>.</li>
+<code><a href="../reference/parse_netlogo_list.html">parse_netlogo_list()</a></code> now always return a <code>list</code> object. The previous behavior of returning a <code>vector</code> when possible was removed.</li>
+<li>
+<code><a href="../reference/parse_netlogo_list.html">parse_netlogo_list()</a></code> now returns <code>NaN</code> values as R <code>NaN</code> values instead of <code>"NaN"</code>.</li>
 <li>
 <code>inspect_experiment_file()</code> was renamed to <code><a href="../reference/inspect_experiment.html">inspect_experiment()</a></code>.</li>
 </ul></div>
@@ -88,7 +92,9 @@
 <code><a href="../reference/get_netlogo_shape.html">get_netlogo_shape()</a></code> was introduced to retrieve NetLogo shape definitions from the <a href="https://github.com/danielvartan/logoshapes" class="external-link"><code>LogoShapes</code></a> project.</li>
 <li>
 <code><a href="../reference/read_experiment.html">read_experiment()</a></code> was introduced to read and tidy BehaviorSpace experiment output files into R.</li>
-<li>New unit tests were implemented.</li>
+<li>The package now checks <code>logolink</code> NetLogo integration via Continuous Integration (CI), performing tests on Windows, macOS, and Linux using GitHub Actions from the <a href="https://github.com/danielvartan/logoactions" class="external-link"><code>LogoActions</code></a> project.</li>
+<li>New R unit tests were implemented.</li>
+<li>New NetLogo unit tests were implemented.</li>
 <li>A <a href="https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html">new vignette</a> showing how to visualize the NetLogo world using <a href="https://ggplot2.tidyverse.org/" class="external-link"><code>ggplot2</code></a> was added.</li>
 <li>The documentation was updated to reflect the changes in the package.</li>
 </ul></div>
