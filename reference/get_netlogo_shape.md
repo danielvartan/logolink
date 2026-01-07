@@ -21,6 +21,7 @@ get_netlogo_shape(
   shape,
   collection = "netlogo-refined",
   dir = tempdir(),
+  user_agent = "logolink <https://CRAN.R-project.org/package=logolink>",
   auth_token = Sys.getenv("GITHUB_PAT")
 )
 ```
@@ -44,12 +45,18 @@ get_netlogo_shape(
   string indicating the directory where the shapes will be saved
   (default: [`tempdir()`](https://rdrr.io/r/base/tempfile.html)).
 
+- user_agent:
+
+  (optional) A [`character`](https://rdrr.io/r/base/character.html)
+  string indicating the user agent to use for the GitHub API requests.
+  (default: `"logolink <https://CRAN.R-project.org/package=logolink>"`).
+
 - auth_token:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
   string indicating a GitHub Personal Access Token (PAT) for
   authentication with the GitHub API. This is useful when dealing with
-  rate limits (default: `Sys.getenv("GITHUB_PAT")`).
+  rate limits. (default: `Sys.getenv("GITHUB_PAT")`).
 
 ## Value
 
