@@ -89,7 +89,7 @@ expect_list(results, len = 2)
 results |> glimpse()
 ```
 
-###  Agent Attributes Extraction
+### Agent Attributes Extraction
 
 #### Create Experiment Mirror
 

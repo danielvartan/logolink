@@ -1,6 +1,8 @@
-!_quarto.yml
-!.gitignore
-!*.qmd
+# Keep `*` at the top!
+
 *
 **/*.quarto_ipynb
 /.quarto/
+!_quarto.yml
+!.gitignore
+!*.qmd

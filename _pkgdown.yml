@@ -27,7 +27,6 @@ navbar:
     - github
   components:
     home: ~
-    intro: ~
 
 reference:
 - title: BehaviorSpace
