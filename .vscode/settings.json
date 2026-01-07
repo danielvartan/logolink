@@ -46,6 +46,7 @@
     "devel",
     "dont",
     "dontrun",
+    "donttest",
     "downlit",
     "dplyr",
     "dups",
