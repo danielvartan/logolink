@@ -48,7 +48,21 @@ jobs:
       - name: Set up TinyTeX
         uses: r-lib/actions/setup-tinytex@v2
 
+      # Due to LaTeX issues on Windows,
+      # we skip --run-dontrun and --run-donttest there.
       - name: Run R CMD check
+        if: runner.os == 'Windows'
+        uses: r-lib/actions/check-r-package@v2
+        with:
+          upload-snapshots: true
+          build_args: |
+            c(
+              "--no-manual",
+              "--compact-vignettes=gs+qpdf"
+            )
+
+      - name: Run R CMD check
+        if: runner.os != 'Windows'
         uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
