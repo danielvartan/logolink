@@ -1,4 +1,4 @@
-#' Run a NetLogo BehaviorSpace experiment
+#' Run NetLogo BehaviorSpace experiment
 #'
 #' @description
 #'

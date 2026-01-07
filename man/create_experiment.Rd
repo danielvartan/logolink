@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_experiment.R
 \name{create_experiment}
 \alias{create_experiment}
-\title{Create a NetLogo BehaviorSpace experiment}
+\title{Create NetLogo BehaviorSpace experiment}
 \usage{
 create_experiment(
   name = "",

@@ -2,7 +2,7 @@
 % Please edit documentation in R/inspect_experiment.R
 \name{inspect_experiment}
 \alias{inspect_experiment}
-\title{Inspect a BehaviorSpace experiment XML file}
+\title{Inspect NetLogo BehaviorSpace experiment file}
 \usage{
 inspect_experiment(file)
 }
@@ -15,8 +15,9 @@ An \link[base:invisible]{invisible} \code{NULL}. This function is called for
 its side effect of printing the XML content to the console.
 }
 \description{
-\code{inspect_experiment()} reads and prints the content of a
-\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace} experiment XML
+\code{inspect_experiment()} reads and prints the content of a NetLogo
+\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace} experiment
+\href{https://en.wikipedia.org/wiki/XML}{XML}
 file to the console. This is useful for debugging and verifying the
 structure of experiment files created by
 \code{\link[=create_experiment]{create_experiment()}}.

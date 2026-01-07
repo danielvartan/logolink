@@ -2,7 +2,7 @@
 % Please edit documentation in R/run_experiment.R
 \name{run_experiment}
 \alias{run_experiment}
-\title{Run a NetLogo BehaviorSpace experiment}
+\title{Run NetLogo BehaviorSpace experiment}
 \usage{
 run_experiment(
   model_path,
