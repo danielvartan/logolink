@@ -22,9 +22,12 @@
 #'   (default: `"netlogo-refined"`).
 #' @param dir (optional) A [`character`][base::character()] string indicating
 #'   the directory where the shapes will be saved (default: `tempdir()`).
+#' @param user_agent (optional) A [`character`][base::character()] string
+#'   indicating the user agent to use for the GitHub API requests.
+#'   (default: `"logolink <https://CRAN.R-project.org/package=logolink>"`).
 #' @param auth_token (optional) A [`character`][base::character()] string
 #'   indicating a GitHub Personal Access Token (PAT) for authentication
-#'   with the GitHub API. This is useful when dealing with rate limits
+#'   with the GitHub API. This is useful when dealing with rate limits.
 #'   (default: `Sys.getenv("GITHUB_PAT")`).
 #'
 #' @return A named [`character`][base::character()] vector with the file paths
@@ -67,6 +70,7 @@ get_netlogo_shape <- function(
   shape,
   collection = "netlogo-refined",
   dir = tempdir(),
+  user_agent = "logolink <https://CRAN.R-project.org/package=logolink>",
   auth_token = Sys.getenv("GITHUB_PAT")
 ) {
   require_package("httr2")
@@ -75,6 +79,7 @@ get_netlogo_shape <- function(
   checkmate::assert_character(shape, min.len = 1)
   checkmate::assert_string(collection)
   checkmate::assert_directory_exists(dir)
+  checkmate::assert_string(user_agent)
   checkmate::assert_string(auth_token)
 
   api_response <-
@@ -84,9 +89,7 @@ get_netlogo_shape <- function(
     httr2::req_url_path_append("logoshapes") |>
     httr2::req_url_path_append("contents") |>
     httr2::req_url_path_append("svg") |>
-    httr2::req_user_agent(
-      "logolink <https://CRAN.R-project.org/package=logolink>"
-    )
+    httr2::req_user_agent(user_agent)
 
   if (auth_token != "") {
     api_response <-

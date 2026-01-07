@@ -8,6 +8,7 @@ get_netlogo_shape(
   shape,
   collection = "netlogo-refined",
   dir = tempdir(),
+  user_agent = "logolink <https://CRAN.R-project.org/package=logolink>",
   auth_token = Sys.getenv("GITHUB_PAT")
 )
 }
@@ -22,9 +23,13 @@ indicating the collection of shapes to download from
 \item{dir}{(optional) A \code{\link[base:character]{character}} string indicating
 the directory where the shapes will be saved (default: \code{tempdir()}).}
 
+\item{user_agent}{(optional) A \code{\link[base:character]{character}} string
+indicating the user agent to use for the GitHub API requests.
+(default: \code{"logolink <https://CRAN.R-project.org/package=logolink>"}).}
+
 \item{auth_token}{(optional) A \code{\link[base:character]{character}} string
 indicating a GitHub Personal Access Token (PAT) for authentication
-with the GitHub API. This is useful when dealing with rate limits
+with the GitHub API. This is useful when dealing with rate limits.
 (default: \code{Sys.getenv("GITHUB_PAT")}).}
 }
 \value{
