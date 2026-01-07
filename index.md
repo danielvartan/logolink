@@ -228,9 +228,10 @@ library(dplyr)
 
 results |> glimpse()
 #> List of 2
-#>  $ metadata:List of 5
-#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-06 17:53:03"
+#>  $ metadata:List of 6
+#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-07 04:20:22"
 #>   ..$ netlogo_version : chr "7.0.3"
+#>   ..$ output_version  : chr "2.0"
 #>   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"
 #>   ..$ experiment_name : chr "Wolf Sheep Simple Model Analysis"
 #>   ..$ world_dimensions: Named int [1:4] -17 17 -17 17
@@ -245,7 +246,7 @@ results |> glimpse()
 #>   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
 #>   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ count_sheep           : num [1:110110] 500 498 496 495 493 493 491 490 488 487 ...
+#>   ..$ count_sheep           : num [1:110110] 500 498 494 494 494 493 491 491 489 487 ...
 ```
 
 ### Analyzing the Data (Bonus Section)
@@ -318,13 +319,13 @@ support its continued improvement.
 ``` r
 citation("logolink")
 #> To cite logolink in publications use:
-#>
+#> 
 #>   Vartanian, D. (2026). logolink: An interface for running NetLogo
 #>   simulations from R [Computer software]. CRAN.
 #>   https://doi.org/10.32614/CRAN.package.logolink
-#>
+#> 
 #> A BibTeX entry for LaTeX users is
-#>
+#> 
 #>   @Misc{,
 #>     title = {logolink: An interface for running NetLogo simulations from R},
 #>     author = {Daniel Vartanian},
