@@ -45,6 +45,9 @@ jobs:
           extra-packages: any::rcmdcheck, local::.
           needs: check
 
+      - name: Set up TinyTeX
+        uses: r-lib/actions/setup-tinytex@v2
+
       - name: Run R CMD check
         uses: r-lib/actions/check-r-package@v2
         with:
