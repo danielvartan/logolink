@@ -3,7 +3,7 @@
 testthat::test_that("`run_experiment()` | Wolf Sheep Simple Model Analysis", {
   testthat::skip_on_cran()
   testthat::skip_on_covr()
-  # testthat::skip_if(Sys.getenv("NETLOGO_CHECK") == "FALSE")
+  # testthat::skip_if(Sys.getenv("LOGOLINK_TEST_NETLOGO") == "FALSE")
 
   testthat::skip_if(
     find_netlogo_console() |>
@@ -197,7 +197,7 @@ testthat::test_that("`run_experiment()` | Wolf Sheep Simple Model Analysis", {
 testthat::test_that("`run_experiment()` | Agent Attributes Extraction", {
   testthat::skip_on_cran()
   testthat::skip_on_covr()
-  testthat::skip_if(Sys.getenv("NETLOGO_CHECK") == "FALSE")
+  testthat::skip_if(Sys.getenv("LOGOLINK_TEST_NETLOGO") == "FALSE")
 
   testthat::skip_if(
     find_netlogo_console() |>
@@ -256,7 +256,7 @@ testthat::test_that("`run_experiment()` | Agent Attributes Extraction", {
 testthat::test_that("`run_experiment()` | BehaviorSpace Combinatorial", {
   testthat::skip_on_cran()
   testthat::skip_on_covr()
-  testthat::skip_if(Sys.getenv("NETLOGO_CHECK") == "FALSE")
+  testthat::skip_if(Sys.getenv("LOGOLINK_TEST_NETLOGO") == "FALSE")
 
   testthat::skip_if(
     find_netlogo_console() |>

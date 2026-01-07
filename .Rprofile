@@ -1,1 +1,0 @@
-Sys.setenv(NETLOGO_CHECK = TRUE)
