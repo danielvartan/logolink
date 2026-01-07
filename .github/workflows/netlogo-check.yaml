@@ -2,7 +2,7 @@ on:
   push:
     branches: [main, master]
 
-name: "NetLogo Check"
+name: NetLogo Check
 permissions: read-all
 
 jobs:

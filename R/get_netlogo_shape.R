@@ -83,7 +83,10 @@ get_netlogo_shape <- function(
     httr2::req_url_path_append("danielvartan") |>
     httr2::req_url_path_append("logoshapes") |>
     httr2::req_url_path_append("contents") |>
-    httr2::req_url_path_append("svg")
+    httr2::req_url_path_append("svg") |>
+    httr2::req_user_agent(
+      "logolink <https://CRAN.R-project.org/package=logolink>"
+    )
 
   if (auth_token != "") {
     api_response <-
@@ -108,6 +111,7 @@ get_netlogo_shape <- function(
   shape_choices <-
     shape_response |>
     purrr::map_chr("name") |>
+    stringr::str_subset("^\\.", negate = TRUE) |>
     stringr::str_remove("\\.svg$")
 
   checkmate::assert_subset(shape, shape_choices)
