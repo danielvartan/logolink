@@ -9,7 +9,7 @@ get_netlogo_shape(
   collection = "netlogo-refined",
   dir = tempdir(),
   user_agent = "logolink <https://CRAN.R-project.org/package=logolink>",
-  auth_token = Sys.getenv("GITHUB_PAT")
+  auth_token = Sys.getenv("GH_TOKEN")
 )
 }
 \arguments{
