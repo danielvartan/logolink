@@ -75,6 +75,24 @@ testthat::test_that("`assert_behaviorspace_file_output()` | Error test", {
     testthat::expect_error()
 })
 
+testthat::test_that("`assert_internet()` | General test", {
+  testthat::local_mocked_bindings(
+    require_package = function(...) NULL,
+    is_online = function(...) TRUE
+  )
+
+  assert_internet() |>
+    testthat::expect_true()
+
+  testthat::local_mocked_bindings(
+    require_package = function(...) NULL,
+    is_online = function(...) FALSE
+  )
+
+  assert_internet() |>
+    testthat::expect_error()
+})
+
 testthat::test_that("`assert_netlogo_console()` | General test", {
   test_file <- tempfile() |> fs::path_expand()
   test_file |> file.create()
