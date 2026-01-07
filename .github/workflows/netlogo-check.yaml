@@ -10,10 +10,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
-        version: 'release'
-    name: ${{matrix.os}} (${{matrix.version}})
-    runs-on: ${{matrix.os}}
+        config:
+          - {os: windows-latest, version: 'release'}
+          - {os: macos-latest, version: 'release'}
+          - {os: ubuntu-latest, version: 'release'}
+    name: "${{matrix.config.os}} (${{matrix.config.version}})"
+    runs-on: ${{matrix.config.os}}
     env:
       GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     permissions:
@@ -26,7 +28,7 @@ jobs:
       - name: Set up NetLogo
         uses: danielvartan/logoactions/setup-netlogo@v1
         with:
-          version: ${{matrix.version}}
+          version: ${{matrix.config.version}}
           cache: 'true'
 
       - name: Set up R
