@@ -143,37 +143,35 @@ to the downloaded NetLogo shapes as
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span>  <span class="va">shape</span> <span class="op">&lt;-</span> <span class="fu">get_netlogo_shape</span><span class="op">(</span><span class="st">"turtle"</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in httr2::req_perform(...):</span> HTTP 403 Forbidden.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://fs.r-lib.org/reference/file_info.html" class="external-link">file_size</a></span><span class="op">(</span><span class="va">shape</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1.06K</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'shape' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="va">shape</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html" class="external-link">image_read_svg</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/image_ggplot.html" class="external-link">image_ggplot</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>`aes_string()` was deprecated in ggplot2 3.0.0.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Please use tidy evaluation idioms with `aes()`.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> See also `vignette("ggplot2-in-packages")` for more information.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">magick</span> package.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Please report the issue at <span style="color: #0000BB; font-style: italic;">&lt;https://github.com/ropensci/magick/issues&gt;</span>.</span>
-<span class="r-plt img"><img src="get_netlogo_shape-1.png" alt="" width="700" height="433"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'shape' not found</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span>  <span class="va">shape</span> <span class="op">&lt;-</span> <span class="fu">get_netlogo_shape</span><span class="op">(</span><span class="st">"turtle"</span>, collection <span class="op">=</span> <span class="st">"netlogo-simplified"</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in httr2::req_perform(...):</span> HTTP 403 Forbidden.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://fs.r-lib.org/reference/file_info.html" class="external-link">file_size</a></span><span class="op">(</span><span class="va">shape</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 771</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'shape' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="va">shape</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html" class="external-link">image_read_svg</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/image_ggplot.html" class="external-link">image_ggplot</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="get_netlogo_shape-2.png" alt="" width="700" height="433"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'shape' not found</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span>  <span class="va">shape</span> <span class="op">&lt;-</span> <span class="fu">get_netlogo_shape</span><span class="op">(</span><span class="st">"turtle"</span>, collection <span class="op">=</span> <span class="st">"netlogo-7-0-3"</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in httr2::req_perform(...):</span> HTTP 403 Forbidden.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://fs.r-lib.org/reference/file_info.html" class="external-link">file_size</a></span><span class="op">(</span><span class="va">shape</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 785</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'shape' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="va">shape</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html" class="external-link">image_read_svg</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/image_ggplot.html" class="external-link">image_ggplot</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="get_netlogo_shape-3.png" alt="" width="700" height="433"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'shape' not found</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
