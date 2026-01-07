@@ -71,7 +71,7 @@ get_netlogo_shape <- function(
   collection = "netlogo-refined",
   dir = tempdir(),
   user_agent = "logolink <https://CRAN.R-project.org/package=logolink>",
-  auth_token = Sys.getenv("GITHUB_PAT")
+  auth_token = Sys.getenv("GH_TOKEN")
 ) {
   require_package("httr2")
 

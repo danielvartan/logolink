@@ -50,6 +50,7 @@ cat(
   ),
   badge_cran_download(type = "grand-total"),
   badge_github_actions(action = "R-CMD-check"),
+  badge_cran_checks("logolink"),
   paste0(
     "[![",
     "FAIR checklist badge",

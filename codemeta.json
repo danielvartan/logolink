@@ -473,9 +473,9 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=xml2"
     },
-    "SystemRequirements": "NetLogo (>= 7.0.1)"
+    "SystemRequirements": null
   },
-  "fileSize": "785.532KB",
+  "fileSize": "785.472KB",
   "citation": [
     {
       "@type": "CreativeWork",

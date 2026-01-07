@@ -145,6 +145,7 @@
     "tibbles",
     "tidyr",
     "tidyverse",
+    "tinytex",
     "ungroup",
     "urlchecker",
     "usethis",
