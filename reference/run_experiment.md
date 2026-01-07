@@ -303,21 +303,21 @@ Other BehaviorSpace functions:
       setup_file = setup_file
     )
 #> ℹ Running model
-#> ✔ Running model [20.6s]
+#> ✔ Running model [20.7s]
 #> 
 #> ℹ Gathering metadata
 #> ✔ Gathering metadata [19ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [15ms]
+#> ✔ Processing table output [14ms]
 #> 
 #> ℹ The experiment run produced the following messages:
 #> 
-#> Jan 07, 2026 5:21:37 AM java.util.prefs.FileSystemPreferences$1 run
+#> Jan 07, 2026 5:29:13 AM java.util.prefs.FileSystemPreferences$1 run
 #> INFO: Created user preferences directory.
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-07 05:21:38 GMT"
+#> [1] "2026-01-07 05:29:14 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -375,7 +375,7 @@ Other BehaviorSpace functions:
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-07 05:21:59 GMT"
+#> [1] "2026-01-07 05:29:36 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
