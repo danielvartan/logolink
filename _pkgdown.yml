@@ -36,9 +36,11 @@ reference:
     [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html).
   contents:
   - create_experiment
+  - inspect_experiment
   - run_experiment
+  - read_experiment
 
-- title: Parsing
+- title: Parsers
   desc: >
     Functions to parse NetLogo data types.
   contents:
@@ -58,7 +60,6 @@ reference:
     Utility functions functions for NetLogo integration.
   contents:
   - get_netlogo_shape
-  - inspect_experiment
 
 authors:
   Daniel Vartanian:

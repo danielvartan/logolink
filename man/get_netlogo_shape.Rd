@@ -76,8 +76,4 @@ more information about the different collections.
   shape |> image_read_svg() |> image_ggplot()
 }
 }
-\seealso{
-Other utility functions: 
-\code{\link{inspect_experiment}()}
-}
 \concept{utility functions}

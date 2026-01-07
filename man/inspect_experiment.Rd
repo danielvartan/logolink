@@ -31,7 +31,9 @@ file <- create_experiment(name = "My Experiment")
 file |> inspect_experiment()
 }
 \seealso{
-Other utility functions: 
-\code{\link{get_netlogo_shape}()}
+Other BehaviorSpace functions: 
+\code{\link{create_experiment}()},
+\code{\link{read_experiment}()},
+\code{\link{run_experiment}()}
 }
-\concept{utility functions}
+\concept{BehaviorSpace functions}

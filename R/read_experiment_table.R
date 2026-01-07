@@ -1,6 +1,9 @@
 read_experiment_table <- function(file) {
   checkmate::assert_string(file)
-  checkmate::assert_file_exists(file, extension = "csv")
+  checkmate::assert_file_exists(file)
+
+  assert_behaviorspace_file(file)
+  assert_behaviorspace_file_output(file)
 
   # R CMD Check variable bindings fix
   # nolint start
@@ -14,7 +17,8 @@ read_experiment_table <- function(file) {
       na = c("", "N/A"),
       skip = 6,
       progress = FALSE,
-      show_col_types = FALSE
+      show_col_types = FALSE,
+      skip_empty_rows = TRUE
     ) |>
     dplyr::as_tibble() |>
     janitor::clean_names() |>

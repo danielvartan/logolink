@@ -1,11 +1,14 @@
 read_experiment_spreadsheet <- function(file, tidy_output = TRUE) {
   checkmate::assert_string(file)
-  checkmate::assert_file_exists(file, extension = "csv")
+  checkmate::assert_file_exists(file)
   checkmate::assert_flag(tidy_output)
+
+  assert_behaviorspace_file(file)
+  assert_behaviorspace_file_output(file)
 
   lines <-
     file |>
-    readr::read_lines() |>
+    readr::read_lines(skip_empty_rows = TRUE) |>
     stringr::str_remove_all('\"')
 
   run_number_index <- lines |> stringr::str_which("^\\[run number\\]")
@@ -22,7 +25,8 @@ read_experiment_spreadsheet <- function(file, tidy_output = TRUE) {
       skip = run_number_index - 1,
       n_max = total_steps_index - run_number_index + 1,
       progress = FALSE,
-      show_col_types = FALSE
+      show_col_types = FALSE,
+      skip_empty_rows = TRUE
     ) |>
     dplyr::as_tibble()
 
@@ -34,7 +38,8 @@ read_experiment_spreadsheet <- function(file, tidy_output = TRUE) {
       skip = all_run_data_index - 1,
       name_repair = "minimal",
       progress = FALSE,
-      show_col_types = FALSE
+      show_col_types = FALSE,
+      skip_empty_rows = TRUE
     ) |>
     suppressMessages() |>
     janitor::clean_names()

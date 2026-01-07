@@ -142,35 +142,38 @@
 #'   no time limit (default: `Inf`).
 #' @param tidy_output (optional) A [`logical`][base::logical()] flag indicating
 #'   whether to tidy the output data frames. If `TRUE`, output data frames are
-#'   arranged according to [tidy data
-#'   principles](https://r4ds.hadley.nz/data-tidy.html). If `FALSE`, only the
-#'   default transformations from [`read_delim()`][readr::read_delim()] and
+#'   arranged according to
+#'   [tidy data principles](https://r4ds.hadley.nz/data-tidy.html).
+#'   If `FALSE`, only the default transformations from
+#'   [`read_delim()`][readr::read_delim()] and
 #'   [`clean_names()`][janitor::clean_names()] are applied to the output data
 #'   (default: `TRUE`).
 #'
-#' @return A [`list`][base::list()] containing the experiment results. The list
-#'   includes the following elements, depending on the specified `output`:
+#' @return A [`list`][base::list()] containing the experiment results. The
+#'   `list` includes the following elements, depending on the values specified
+#'   in the `output` parameter:
 #'   - `metadata`: A [`list`][base::list()] with metadata about the experiment
-#'     run.
+#'     run (present in all cases).
 #'   - `table`: A [`tibble`][tibble::tibble()] with the results of the
 #'     [`table`](https://docs.netlogo.org/behaviorspace.html#table-output)
-#'     output (if requested).
-#'   - `spreadsheet`: A [`tibble`][tibble::tibble()] with the results of the
+#'     output.
+#'   - `spreadsheet`: A [`list`][base::list()] with the results of the
 #'     [`spreadsheet`](
 #'     https://docs.netlogo.org/behaviorspace.html#spreadsheet-output)
-#'     output (if requested).
+#'     output containing two elements:
+#'     - `statistics`: A [`tibble`][tibble::tibble()] with data from the
+#'       output first section.
+#'     - `data`: A [`tibble`][tibble::tibble()] with data from the
+#'       output second section.
 #'   - `lists`: A [`tibble`][tibble::tibble()] with the results of the
 #'     [`lists`](https://docs.netlogo.org/behaviorspace.html#lists-output)
-#'     output (if requested).
+#'     output.
 #'   - `statistics`: A [`tibble`][tibble::tibble()] with the results of the
 #'     [`statistics`](
 #'     https://docs.netlogo.org/behaviorspace.html#statistics-output)
-#'     output (if requested).
-#'    See the
-#'    [BehaviorSpace Guide](https://docs.netlogo.org/behaviorspace.html)
-#'    for details about each output type.
+#'     output.
 #'
-#' @family NetLogo functions
+#' @family BehaviorSpace functions
 #' @export
 #'
 #' @examples

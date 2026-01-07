@@ -18,7 +18,7 @@
 #' @return An [invisible][base::invisible()] `NULL`. This function is called for
 #'   its side effect of printing the XML content to the console.
 #'
-#' @family utility functions
+#' @family BehaviorSpace functions
 #' @export
 #'
 #' @examples

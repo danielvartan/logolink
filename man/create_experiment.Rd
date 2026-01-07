@@ -399,7 +399,9 @@ setup_file
 setup_file |> inspect_experiment()
 }
 \seealso{
-Other NetLogo functions: 
+Other BehaviorSpace functions: 
+\code{\link{inspect_experiment}()},
+\code{\link{read_experiment}()},
 \code{\link{run_experiment}()}
 }
-\concept{NetLogo functions}
+\concept{BehaviorSpace functions}

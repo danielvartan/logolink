@@ -1,11 +1,11 @@
 testthat::test_that("`read_experiment_statistics()` | General test", {
-  test_file <- tempfile(fileext = ".csv")
+  test_file <- tempfile()
 
   c(
     'BehaviorSpace results (NetLogo 7.0.3), "Stats version 2.0"',
     paste0(
-      '"/home/danielvartan/.opt/netlogo-7-0-3/',
-      'models/IABM Textbook/chapter 4/Wolf Sheep Simple 5.nlogox"'
+      '"/opt/NetLogo 7-0-3/models/',
+      'IABM Textbook/chapter 4/Wolf Sheep Simple 5.nlogox"'
     ),
     '"Wolf Sheep Simple Model Analysis"',
     '"01/05/2026 08:27:36:594 -0300"',
@@ -35,13 +35,13 @@ testthat::test_that("`read_experiment_statistics()` | General test", {
 })
 
 testthat::test_that("`read_experiment_statistics()` | Message test", {
-  test_file <- tempfile(fileext = ".csv")
+  test_file <- tempfile()
 
   c(
     'BehaviorSpace results (NetLogo 7.0.3), "Stats version 2.0"',
     paste0(
-      '"/home/danielvartan/.opt/netlogo-7-0-3/',
-      'models/IABM Textbook/chapter 4/Wolf Sheep Simple 5.nlogox"'
+      '"/opt/NetLogo 7-0-3/models/',
+      'IABM Textbook/chapter 4/Wolf Sheep Simple 5.nlogox"'
     ),
     '"Wolf Sheep Simple Model Analysis"',
     '"01/05/2026 08:27:36:594 -0300"',
@@ -68,23 +68,14 @@ testthat::test_that("`read_experiment_statistics()` | Error test", {
   # checkmate::assert_string(file)
 
   read_experiment_statistics(
-    file = 1,
+    file = 1
   ) |>
     testthat::expect_error()
 
-  # checkmate::assert_file_exists(file, extension = "csv")
-
-  test_file <- tempfile(fileext = ".txt")
-  test_file |> file.create()
+  # checkmate::assert_file_exists()
 
   read_experiment_statistics(
     file = tempfile()
-  ) |>
-    testthat::expect_error()
-
-  read_experiment_statistics(
-    file = test_file,
-    tidy_output = TRUE
   ) |>
     testthat::expect_error()
 })

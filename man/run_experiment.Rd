@@ -51,32 +51,38 @@ no time limit (default: \code{Inf}).}
 
 \item{tidy_output}{(optional) A \code{\link[base:logical]{logical}} flag indicating
 whether to tidy the output data frames. If \code{TRUE}, output data frames are
-arranged according to \href{https://r4ds.hadley.nz/data-tidy.html}{tidy data principles}. If \code{FALSE}, only the
-default transformations from \code{\link[readr:read_delim]{read_delim()}} and
+arranged according to
+\href{https://r4ds.hadley.nz/data-tidy.html}{tidy data principles}.
+If \code{FALSE}, only the default transformations from
+\code{\link[readr:read_delim]{read_delim()}} and
 \code{\link[janitor:clean_names]{clean_names()}} are applied to the output data
 (default: \code{TRUE}).}
 }
 \value{
-A \code{\link[base:list]{list}} containing the experiment results. The list
-includes the following elements, depending on the specified \code{output}:
+A \code{\link[base:list]{list}} containing the experiment results. The
+\code{list} includes the following elements, depending on the values specified
+in the \code{output} parameter:
 \itemize{
 \item \code{metadata}: A \code{\link[base:list]{list}} with metadata about the experiment
-run.
+run (present in all cases).
 \item \code{table}: A \code{\link[tibble:tibble]{tibble}} with the results of the
 \href{https://docs.netlogo.org/behaviorspace.html#table-output}{\code{table}}
-output (if requested).
-\item \code{spreadsheet}: A \code{\link[tibble:tibble]{tibble}} with the results of the
+output.
+\item \code{spreadsheet}: A \code{\link[base:list]{list}} with the results of the
 \href{https://docs.netlogo.org/behaviorspace.html#spreadsheet-output}{\code{spreadsheet}}
-output (if requested).
+output containing two elements:
+\itemize{
+\item \code{statistics}: A \code{\link[tibble:tibble]{tibble}} with data from the
+output first section.
+\item \code{data}: A \code{\link[tibble:tibble]{tibble}} with data from the
+output second section.
+}
 \item \code{lists}: A \code{\link[tibble:tibble]{tibble}} with the results of the
 \href{https://docs.netlogo.org/behaviorspace.html#lists-output}{\code{lists}}
-output (if requested).
+output.
 \item \code{statistics}: A \code{\link[tibble:tibble]{tibble}} with the results of the
 \href{https://docs.netlogo.org/behaviorspace.html#statistics-output}{\code{statistics}}
-output (if requested).
-See the
-\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace Guide}
-for details about each output type.
+output.
 }
 }
 \description{
@@ -254,7 +260,9 @@ excessive non-tabular output may clutter your R console.
 }
 }
 \seealso{
-Other NetLogo functions: 
-\code{\link{create_experiment}()}
+Other BehaviorSpace functions: 
+\code{\link{create_experiment}()},
+\code{\link{inspect_experiment}()},
+\code{\link{read_experiment}()}
 }
-\concept{NetLogo functions}
+\concept{BehaviorSpace functions}

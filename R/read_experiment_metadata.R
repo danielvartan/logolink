@@ -1,18 +1,20 @@
-read_experiment_metadata <- function(
-  file,
-  output_version = FALSE
-) {
+read_experiment_metadata <- function(file) {
   checkmate::assert_string(file)
-  checkmate::assert_file_exists(file, extension = "csv")
-  checkmate::assert_flag(output_version)
+  checkmate::assert_file_exists(file)
 
-  metadata <-
+  assert_behaviorspace_file(file)
+  assert_behaviorspace_file_output(file)
+
+  file_header <-
     file |>
-    readr::read_lines(n_max = 6) |>
+    readr::read_lines(
+      n_max = 6,
+      skip_empty_rows = TRUE
+    ) |>
     stringr::str_remove_all('\"')
 
   time_zone <-
-    metadata |>
+    file_header |>
     magrittr::extract2(4) |>
     stringr::str_extract(".\\d{4}$") |>
     stringr::str_sub(1, 3) |>
@@ -22,28 +24,33 @@ read_experiment_metadata <- function(
     paste0("Etc/GMT", x = _)
 
   timestamp <-
-    metadata |>
+    file_header |>
     magrittr::extract2(4) |>
     stringr::str_replace(":(\\d{3}) ", ".\\1 ") |>
     strptime(format = "%m/%d/%Y %H:%M:%OS %z") |>
     as.POSIXct(tz = time_zone)
 
   netlogo_version <-
-    metadata |>
+    file_header |>
     magrittr::extract2(1) |>
     stringr::str_extract("(?<=NetLogo )\\d+\\.\\d+(\\.\\d+)?")
 
+  output_version <-
+    file_header |>
+    magrittr::extract2(1) |>
+    stringr::str_extract("\\d+\\.\\d+(\\.\\d+)?$")
+
   model_file <-
-    metadata |>
+    file_header |>
     magrittr::extract2(2) |>
     basename()
 
   experiment_name <-
-    metadata |>
+    file_header |>
     magrittr::extract2(3)
 
   world_dimensions <-
-    metadata |>
+    file_header |>
     magrittr::extract2(6) |>
     stringr::str_split(",") |>
     unlist() |>
@@ -52,27 +59,12 @@ read_experiment_metadata <- function(
       c("min-pxcor", "max-pxcor", "min-pycor", "max-pycor")
     )
 
-  out <- list(
+  list(
     timestamp = timestamp,
     netlogo_version = netlogo_version,
+    output_version = output_version,
     model_file = model_file,
     experiment_name = experiment_name,
     world_dimensions = world_dimensions
   )
-
-  if (isTRUE(output_version)) {
-    output_version <-
-      metadata |>
-      magrittr::extract2(1) |>
-      stringr::str_extract("\\d+\\.\\d+(\\.\\d+)?$")
-
-    out <-
-      out |>
-      append(
-        values = list(output_version = output_version),
-        after = 2
-      )
-  }
-
-  out
 }

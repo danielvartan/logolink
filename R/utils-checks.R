@@ -1,3 +1,82 @@
+assert_behaviorspace_file <- function(file) {
+  checkmate::assert_string(file)
+  checkmate::assert_file_exists(file)
+
+  file_header <-
+    file |>
+    readr::read_lines(
+      skip_empty_rows = TRUE,
+      n_max = 1
+    )
+
+  pattern <- "(?i)BehaviorSpace results"
+
+  if (!stringr::str_detect(file_header, pattern)) {
+    cli::cli_abort(
+      paste0(
+        "The file ",
+        "{.strong {cli::col_red(file)}} ",
+        "is not a valid BehaviorSpace results file."
+      )
+    )
+  } else {
+    invisible(TRUE)
+  }
+}
+
+assert_behaviorspace_file_output <- function(file) {
+  checkmate::assert_string(file)
+  checkmate::assert_file_exists(file)
+
+  file_header <-
+    file |>
+    readr::read_lines(
+      skip_empty_rows = TRUE,
+      n_max = 1
+    )
+
+  pattern_output <- paste0(
+    "(?i)",
+    paste(
+      c("Table", "Spreadsheet", "Lists", "Stats"),
+      collapse = "|"
+    )
+  )
+
+  if (!stringr::str_detect(file_header, pattern_output)) {
+    cli::cli_abort(
+      paste0(
+        "The file ",
+        "{.strong {cli::col_red(file)}} ",
+        "does not contain a valid BehaviorSpace output type ",
+        "({.emph {paste(output_tag, collapse = '/')}})."
+      )
+    )
+  }
+
+  pattern_output_version <- paste0(
+    "(?i)",
+    paste(
+      c("version 2.0"),
+      collapse = "|"
+    )
+  )
+
+  if (!stringr::str_detect(file_header, pattern_output_version)) {
+    cli::cli_abort(
+      paste0(
+        "This function only supports ",
+        "{.strong {cli::col_red('BehaviorSpace version 2.0')}} ",
+        "results files. If this is not the latest version, please open ",
+        "an issue at ",
+        "{.url https://github.com/danielvartan/logolink/issues}."
+      )
+    )
+  }
+
+  invisible(TRUE)
+}
+
 assert_internet <- function() {
   require_package("httr2")
 

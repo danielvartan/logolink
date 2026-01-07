@@ -1,11 +1,11 @@
 testthat::test_that("`read_experiment_spreadsheet()` | General test", {
-  test_file <- tempfile(fileext = ".csv")
+  test_file <- tempfile()
 
   c(
     'BehaviorSpace results (NetLogo 7.0.3), "Spreadsheet version 2.0"',
     paste0(
-      '"/home/danielvartan/.opt/netlogo-7-0-3/',
-      'models/IABM Textbook/chapter 4/Wolf Sheep Simple 5.nlogox"'
+      '"/opt/NetLogo 7-0-3/models/',
+      'IABM Textbook/chapter 4/Wolf Sheep Simple 5.nlogox"'
     ),
     '"Wolf Sheep Simple Model Analysis"',
     '"01/05/2026 09:00:05:327 -0300"',
@@ -49,13 +49,13 @@ testthat::test_that("`read_experiment_spreadsheet()` | General test", {
 })
 
 testthat::test_that("`read_experiment_spreadsheet()` | Message test", {
-  test_file <- tempfile(fileext = ".csv")
+  test_file <- tempfile()
 
   c(
     'BehaviorSpace results (NetLogo 7.0.3), "Spreadsheet version 2.0"',
     paste0(
-      '"/home/danielvartan/.opt/netlogo-7-0-3/',
-      'models/IABM Textbook/chapter 4/Wolf Sheep Simple 5.nlogox"'
+      '"/opt/NetLogo 7-0-3/models/',
+      'IABM Textbook/chapter 4/Wolf Sheep Simple 5.nlogox"'
     ),
     '"Wolf Sheep Simple Model Analysis"',
     '"01/05/2026 09:00:05:327 -0300"',
@@ -91,24 +91,21 @@ testthat::test_that("`read_experiment_spreadsheet()` | Message test", {
 testthat::test_that("`read_experiment_spreadsheet()` | Error test", {
   # checkmate::assert_string(file)
 
-  test_file <- tempfile(fileext = ".txt")
-  test_file |> file.create()
-
   read_experiment_spreadsheet(
-    file = tempfile(),
-    tidy_output = TRUE
+    file = 1
   ) |>
     testthat::expect_error()
 
+  # checkmate::assert_file_exists()
+
   read_experiment_spreadsheet(
-    file = test_file,
-    tidy_output = TRUE
+    file = tempfile()
   ) |>
     testthat::expect_error()
 
   # checkmate::assert_flag(tidy_output)
 
-  test_file <- tempfile(fileext = ".csv")
+  test_file <- tempfile()
   test_file |> file.create()
 
   read_experiment_spreadsheet(

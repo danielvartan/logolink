@@ -1,18 +1,77 @@
-testthat::test_that("`assert_internet()` | General test", {
-  testthat::local_mocked_bindings(
-    require_package = function(...) NULL,
-    is_online = function(...) TRUE
-  )
+testthat::test_that("`assert_behaviorspace_file()` | General test", {
+  test_file_1 <- tempfile()
 
-  assert_internet() |>
+  c("This is not a valid file.") |>
+    readr::write_lines(test_file_1)
+
+  test_file_2 <- tempfile()
+
+  c('BehaviorSpace results (NetLogo 7.0.3), "Lists version 2.0"') |>
+    readr::write_lines(test_file_2)
+
+  test_file_1 |>
+    assert_behaviorspace_file() |>
+    testthat::expect_error()
+
+  test_file_2 |>
+    assert_behaviorspace_file() |>
     testthat::expect_true()
+})
 
-  testthat::local_mocked_bindings(
-    require_package = function(...) NULL,
-    is_online = function(...) FALSE
-  )
+testthat::test_that("`assert_behaviorspace_file()` | Error test", {
+  # checkmate::assert_string(file)
 
-  assert_internet() |>
+  1 |>
+    assert_behaviorspace_file() |>
+    testthat::expect_error()
+
+  # checkmate::assert_file_exists(file)
+
+  tempfile() |>
+    assert_behaviorspace_file() |>
+    testthat::expect_error()
+})
+
+testthat::test_that("`assert_behaviorspace_file_output()` | General test", {
+  test_file_1 <- tempfile()
+
+  c('BehaviorSpace results (NetLogo 7.0.3), "Raster version 2.0"') |>
+    readr::write_lines(test_file_1)
+
+  test_file_2 <- tempfile()
+
+  c('BehaviorSpace results (NetLogo 7.0.3), "Table version 3.0"') |>
+    readr::write_lines(test_file_2)
+
+  test_file_3 <- tempfile()
+
+  c('BehaviorSpace results (NetLogo 7.0.3), "Table version 2.0"') |>
+    readr::write_lines(test_file_3)
+
+  test_file_1 |>
+    assert_behaviorspace_file_output() |>
+    testthat::expect_error()
+
+  test_file_2 |>
+    assert_behaviorspace_file_output() |>
+    testthat::expect_error()
+
+  test_file_3 |>
+    assert_behaviorspace_file_output() |>
+    testthat::expect_true()
+})
+
+testthat::test_that("`assert_behaviorspace_file_output()` | Error test", {
+  # checkmate::assert_string(file)
+
+  1 |>
+    assert_behaviorspace_file_output() |>
+    testthat::expect_error()
+
+  # checkmate::assert_file_exists(file)
+
+  tempfile() |>
+    assert_behaviorspace_file_output() |>
     testthat::expect_error()
 })
 

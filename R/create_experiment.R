@@ -118,7 +118,7 @@
 #' @return A [`character`][base::character()] string with the path to the
 #'   created XML file.
 #'
-#' @family NetLogo functions
+#' @family BehaviorSpace functions
 #' @export
 #'
 #' @examples

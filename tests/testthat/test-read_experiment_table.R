@@ -1,11 +1,11 @@
 testthat::test_that("`read_experiment_table()` | General test", {
-  test_file <- tempfile(fileext = ".csv")
+  test_file <- tempfile()
 
   c(
     'BehaviorSpace results (NetLogo 7.0.3), "Table version 2.0"',
     paste0(
-      '"/home/danielvartan/.opt/netlogo-7-0-3/',
-      'models/IABM Textbook/chapter 4/Wolf Sheep Simple 5.nlogox"'
+      '"/opt/NetLogo 7-0-3/models/',
+      'IABM Textbook/chapter 4/Wolf Sheep Simple 5.nlogox"'
     ),
     '"Wolf Sheep Simple Model Analysis"',
     '"01/05/2026 06:37:48:683 -0300"',
@@ -31,21 +31,16 @@ testthat::test_that("`read_experiment_table()` | General test", {
     file = test_file
   ) |>
     checkmate::expect_tibble(nrows = 8, ncols = 10)
-
-  read_experiment_table(
-    file = test_file
-  ) |>
-    checkmate::expect_tibble(nrows = 8, ncols = 10)
 })
 
 testthat::test_that("`read_experiment_table()` | Message test", {
-  test_file <- tempfile(fileext = ".csv")
+  test_file <- tempfile()
 
   c(
     'BehaviorSpace results (NetLogo 7.0.3), "Table version 2.0"',
     paste0(
-      '"/home/danielvartan/.opt/netlogo-7-0-3/',
-      'models/IABM Textbook/chapter 4/Wolf Sheep Simple 5.nlogox"'
+      '"/opt/NetLogo 7-0-3/models/',
+      'IABM Textbook/chapter 4/Wolf Sheep Simple 5.nlogox"'
     ),
     '"Wolf Sheep Simple Model Analysis"',
     '"01/05/2026 06:37:48:683 -0300"',
@@ -75,18 +70,10 @@ testthat::test_that("`read_experiment_table()` | Error test", {
   ) |>
     testthat::expect_error()
 
-  # checkmate::assert_file_exists(file, extension = "csv")
-
-  test_file <- tempfile(fileext = ".txt")
-  test_file |> file.create()
+  # checkmate::assert_file_exists()
 
   read_experiment_table(
     file = tempfile()
-  ) |>
-    testthat::expect_error()
-
-  read_experiment_table(
-    file = test_file
   ) |>
     testthat::expect_error()
 })
