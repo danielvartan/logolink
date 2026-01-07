@@ -78,34 +78,36 @@ the file paths to the downloaded NetLogo shapes as
 
 # \dontrun{
   shape <- get_netlogo_shape("turtle")
-#> Error in httr2::req_perform(...): HTTP 403 Forbidden.
 
   file_size(shape)
-#> Error: object 'shape' not found
+#> 1.06K
 
   shape |> image_read_svg() |> image_ggplot()
-#> Error: object 'shape' not found
+#> Warning: `aes_string()` was deprecated in ggplot2 3.0.0.
+#> ℹ Please use tidy evaluation idioms with `aes()`.
+#> ℹ See also `vignette("ggplot2-in-packages")` for more information.
+#> ℹ The deprecated feature was likely used in the magick package.
+#>   Please report the issue at <https://github.com/ropensci/magick/issues>.
+
 # }
 
 # \dontrun{
   shape <- get_netlogo_shape("turtle", collection = "netlogo-simplified")
-#> Error in httr2::req_perform(...): HTTP 403 Forbidden.
 
   file_size(shape)
-#> Error: object 'shape' not found
+#> 771
 
   shape |> image_read_svg() |> image_ggplot()
-#> Error: object 'shape' not found
+
 # }
 
 # \dontrun{
   shape <- get_netlogo_shape("turtle", collection = "netlogo-7-0-3")
-#> Error in httr2::req_perform(...): HTTP 403 Forbidden.
 
   file_size(shape)
-#> Error: object 'shape' not found
+#> 785
 
   shape |> image_read_svg() |> image_ggplot()
-#> Error: object 'shape' not found
+
 # }
 ```
