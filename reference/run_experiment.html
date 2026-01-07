@@ -169,32 +169,36 @@ no time limit (default: <code>Inf</code>).</p></dd>
 <dt id="arg-tidy-output">tidy_output<a class="anchor" aria-label="anchor" href="#arg-tidy-output"></a></dt>
 <dd><p>(optional) A <code><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></code> flag indicating
 whether to tidy the output data frames. If <code>TRUE</code>, output data frames are
-arranged according to <a href="https://r4ds.hadley.nz/data-tidy.html" class="external-link">tidy data principles</a>. If <code>FALSE</code>, only the
-default transformations from <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_delim()</a></code> and
+arranged according to
+<a href="https://r4ds.hadley.nz/data-tidy.html" class="external-link">tidy data principles</a>.
+If <code>FALSE</code>, only the default transformations from
+<code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_delim()</a></code> and
 <code><a href="https://sfirke.github.io/janitor/reference/clean_names.html" class="external-link">clean_names()</a></code> are applied to the output data
 (default: <code>TRUE</code>).</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> containing the experiment results. The list
-includes the following elements, depending on the specified <code>output</code>:</p><ul><li><p><code>metadata</code>: A <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> with metadata about the experiment
-run.</p></li>
+    <p>A <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> containing the experiment results. The
+<code>list</code> includes the following elements, depending on the values specified
+in the <code>output</code> parameter:</p><ul><li><p><code>metadata</code>: A <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> with metadata about the experiment
+run (present in all cases).</p></li>
 <li><p><code>table</code>: A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></code> with the results of the
 <a href="https://docs.netlogo.org/behaviorspace.html#table-output" class="external-link"><code>table</code></a>
-output (if requested).</p></li>
-<li><p><code>spreadsheet</code>: A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></code> with the results of the
+output.</p></li>
+<li><p><code>spreadsheet</code>: A <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> with the results of the
 <a href="https://docs.netlogo.org/behaviorspace.html#spreadsheet-output" class="external-link"><code>spreadsheet</code></a>
-output (if requested).</p></li>
+output containing two elements:</p><ul><li><p><code>statistics</code>: A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></code> with data from the
+output first section.</p></li>
+<li><p><code>data</code>: A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></code> with data from the
+output second section.</p></li>
+</ul></li>
 <li><p><code>lists</code>: A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></code> with the results of the
 <a href="https://docs.netlogo.org/behaviorspace.html#lists-output" class="external-link"><code>lists</code></a>
-output (if requested).</p></li>
+output.</p></li>
 <li><p><code>statistics</code>: A <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></code> with the results of the
 <a href="https://docs.netlogo.org/behaviorspace.html#statistics-output" class="external-link"><code>statistics</code></a>
-output (if requested).
-See the
-<a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace Guide</a>
-for details about each output type.</p></li>
+output.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -286,8 +290,10 @@ excessive non-tabular output may clutter your R console.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other NetLogo functions:
-<code><a href="create_experiment.html">create_experiment()</a></code></p></div>
+    <div class="dont-index"><p>Other BehaviorSpace functions:
+<code><a href="create_experiment.html">create_experiment()</a></code>,
+<code><a href="inspect_experiment.html">inspect_experiment()</a></code>,
+<code><a href="read_experiment.html">read_experiment()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -344,24 +350,27 @@ excessive non-tabular output may clutter your R console.</p>
 <span class="r-in"><span>      setup_file <span class="op">=</span> <span class="va">setup_file</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Running model</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Running model <span style="color: #B2B2B2;">[21.1s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Running model <span style="color: #B2B2B2;">[21.2s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Gathering metadata</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Gathering metadata <span style="color: #B2B2B2;">[17ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Gathering metadata <span style="color: #B2B2B2;">[21ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Processing table output</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing table output <span style="color: #B2B2B2;">[16ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing table output <span style="color: #B2B2B2;">[15ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> The experiment run produced the following messages:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Jan 06, 2026 11:55:29 PM java.util.prefs.FileSystemPreferences$1 run</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Jan 07, 2026 4:14:16 AM java.util.prefs.FileSystemPreferences$1 run</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> INFO: Created user preferences directory.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$timestamp</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-01-06 23:55:30 GMT"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-01-07 04:14:15 GMT"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$netlogo_version</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "7.0.3"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$output_version</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2.0"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$model_file</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Wolf Sheep Simple 5.nlogox"</span>
@@ -403,20 +412,23 @@ excessive non-tabular output may clutter your R console.</p>
 <span class="r-in"><span>      experiment <span class="op">=</span> <span class="st">"Wolf Sheep Simple model analysis"</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Running model</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Running model <span style="color: #B2B2B2;">[18.2s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Running model <span style="color: #B2B2B2;">[18s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Gathering metadata</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Gathering metadata <span style="color: #B2B2B2;">[9ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Gathering metadata <span style="color: #B2B2B2;">[14ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Processing table output</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing table output <span style="color: #B2B2B2;">[8ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$timestamp</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-01-06 23:55:53 GMT"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-01-07 04:14:37 GMT"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$netlogo_version</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "7.0.3"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$output_version</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2.0"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$model_file</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Wolf Sheep Simple 5.nlogox"</span>

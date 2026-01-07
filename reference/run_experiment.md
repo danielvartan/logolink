@@ -105,37 +105,42 @@ run_experiment(
 ## Value
 
 A [`list`](https://rdrr.io/r/base/list.html) containing the experiment
-results. The list includes the following elements, depending on the
-specified `output`:
+results. The `list` includes the following elements, depending on the
+values specified in the `output` parameter:
 
 - `metadata`: A [`list`](https://rdrr.io/r/base/list.html) with metadata
-  about the experiment run.
+  about the experiment run (present in all cases).
 
 - `table`: A
   [`tibble`](https://tibble.tidyverse.org/reference/tibble.html) with
   the results of the
   [`table`](https://docs.netlogo.org/behaviorspace.html#table-output)
-  output (if requested).
+  output.
 
-- `spreadsheet`: A
-  [`tibble`](https://tibble.tidyverse.org/reference/tibble.html) with
-  the results of the
+- `spreadsheet`: A [`list`](https://rdrr.io/r/base/list.html) with the
+  results of the
   [`spreadsheet`](https://docs.netlogo.org/behaviorspace.html#spreadsheet-output)
-  output (if requested).
+  output containing two elements:
+
+  - `statistics`: A
+    [`tibble`](https://tibble.tidyverse.org/reference/tibble.html) with
+    data from the output first section.
+
+  - `data`: A
+    [`tibble`](https://tibble.tidyverse.org/reference/tibble.html) with
+    data from the output second section.
 
 - `lists`: A
   [`tibble`](https://tibble.tidyverse.org/reference/tibble.html) with
   the results of the
   [`lists`](https://docs.netlogo.org/behaviorspace.html#lists-output)
-  output (if requested).
+  output.
 
 - `statistics`: A
   [`tibble`](https://tibble.tidyverse.org/reference/tibble.html) with
   the results of the
   [`statistics`](https://docs.netlogo.org/behaviorspace.html#statistics-output)
-  output (if requested). See the [BehaviorSpace
-  Guide](https://docs.netlogo.org/behaviorspace.html) for details about
-  each output type.
+  output.
 
 ## Details
 
@@ -238,8 +243,10 @@ console.
 
 ## See also
 
-Other NetLogo functions:
-[`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md)
+Other BehaviorSpace functions:
+[`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md),
+[`inspect_experiment()`](https://danielvartan.github.io/logolink/reference/inspect_experiment.md),
+[`read_experiment()`](https://danielvartan.github.io/logolink/reference/read_experiment.md)
 
 ## Examples
 
@@ -296,24 +303,27 @@ Other NetLogo functions:
       setup_file = setup_file
     )
 #> ℹ Running model
-#> ✔ Running model [21.1s]
+#> ✔ Running model [21.2s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [17ms]
+#> ✔ Gathering metadata [21ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [16ms]
+#> ✔ Processing table output [15ms]
 #> 
 #> ℹ The experiment run produced the following messages:
 #> 
-#> Jan 06, 2026 11:55:29 PM java.util.prefs.FileSystemPreferences$1 run
+#> Jan 07, 2026 4:14:16 AM java.util.prefs.FileSystemPreferences$1 run
 #> INFO: Created user preferences directory.
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-06 23:55:30 GMT"
+#> [1] "2026-01-07 04:14:15 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
+#> 
+#> $metadata$output_version
+#> [1] "2.0"
 #> 
 #> $metadata$model_file
 #> [1] "Wolf Sheep Simple 5.nlogox"
@@ -355,20 +365,23 @@ Other NetLogo functions:
       experiment = "Wolf Sheep Simple model analysis"
     )
 #> ℹ Running model
-#> ✔ Running model [18.2s]
+#> ✔ Running model [18s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [9ms]
+#> ✔ Gathering metadata [14ms]
 #> 
 #> ℹ Processing table output
 #> ✔ Processing table output [8ms]
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-06 23:55:53 GMT"
+#> [1] "2026-01-07 04:14:37 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
+#> 
+#> $metadata$output_version
+#> [1] "2.0"
 #> 
 #> $metadata$model_file
 #> [1] "Wolf Sheep Simple 5.nlogox"

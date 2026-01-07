@@ -69,6 +69,9 @@
 - [`get_netlogo_shape()`](https://danielvartan.github.io/logolink/reference/get_netlogo_shape.md)
   was introduced to retrieve NetLogo shape definitions from the
   [`LogoShapes`](https://github.com/danielvartan/logoshapes) project.
+- [`read_experiment()`](https://danielvartan.github.io/logolink/reference/read_experiment.md)
+  was introduced to read and tidy BehaviorSpace experiment output files
+  into R.
 - New unit tests were implemented.
 - A [new
   vignette](https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html)

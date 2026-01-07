@@ -31,8 +31,10 @@ the console.
 
 ## See also
 
-Other utility functions:
-[`get_netlogo_shape()`](https://danielvartan.github.io/logolink/reference/get_netlogo_shape.md)
+Other BehaviorSpace functions:
+[`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md),
+[`read_experiment()`](https://danielvartan.github.io/logolink/reference/read_experiment.md),
+[`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
 
 ## Examples
 

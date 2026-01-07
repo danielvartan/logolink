@@ -388,10 +388,14 @@ Functions to set up and run NetLogo experiments using
 
 - [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md)
   : Create a NetLogo BehaviorSpace experiment
+- [`inspect_experiment()`](https://danielvartan.github.io/logolink/reference/inspect_experiment.md)
+  : Inspect a BehaviorSpace experiment XML file
 - [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
   : Run a NetLogo BehaviorSpace experiment
+- [`read_experiment()`](https://danielvartan.github.io/logolink/reference/read_experiment.md)
+  : Read BehaviorSpace Experiment Output
 
-## Parsing
+## Parsers
 
 Functions to parse NetLogo data types.
 
@@ -417,8 +421,6 @@ Utility functions functions for NetLogo integration.
 
 - [`get_netlogo_shape()`](https://danielvartan.github.io/logolink/reference/get_netlogo_shape.md)
   : Download NetLogo shapes from LogoShapes
-- [`inspect_experiment()`](https://danielvartan.github.io/logolink/reference/inspect_experiment.md)
-  : Inspect a BehaviorSpace experiment XML file
 
 # Articles
 

@@ -201,7 +201,9 @@ to a NetLogo global variable. The value for each name can be either:
 
 ## See also
 
-Other NetLogo functions:
+Other BehaviorSpace functions:
+[`inspect_experiment()`](https://danielvartan.github.io/logolink/reference/inspect_experiment.md),
+[`read_experiment()`](https://danielvartan.github.io/logolink/reference/read_experiment.md),
 [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
 
 ## Examples
@@ -237,7 +239,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/Rtmp4sIsBZ/experiment-1e5aa33dab3.xml"
+#> [1] "/tmp/Rtmp4eB3F1/experiment-1e432f2939c.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>
@@ -328,7 +330,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/Rtmp4sIsBZ/experiment-1e5a4c8ec2b0.xml"
+#> [1] "/tmp/Rtmp4eB3F1/experiment-1e437fcd7f60.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>
@@ -453,7 +455,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/Rtmp4sIsBZ/experiment-1e5a7aff45f.xml"
+#> [1] "/tmp/Rtmp4eB3F1/experiment-1e4333536922.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>
@@ -548,7 +550,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/Rtmp4sIsBZ/experiment-1e5a296f4ee4.xml"
+#> [1] "/tmp/Rtmp4eB3F1/experiment-1e4368438d74.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>
@@ -601,7 +603,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/Rtmp4sIsBZ/experiment-1e5a4a2c99a0.xml"
+#> [1] "/tmp/Rtmp4eB3F1/experiment-1e433f1906de.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>
@@ -654,7 +656,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/Rtmp4sIsBZ/experiment-1e5a7d821a7c.xml"
+#> [1] "/tmp/Rtmp4eB3F1/experiment-1e4345d49795.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>

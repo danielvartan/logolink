@@ -57,11 +57,6 @@ A named [`character`](https://rdrr.io/r/base/character.html) vector with
 the file paths to the downloaded NetLogo shapes as
 [SVG](https://en.wikipedia.org/wiki/SVG) files.
 
-## See also
-
-Other utility functions:
-[`inspect_experiment()`](https://danielvartan.github.io/logolink/reference/inspect_experiment.md)
-
 ## Examples
 
 ``` r
