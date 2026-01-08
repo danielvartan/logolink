@@ -34,18 +34,7 @@ goodpractice::gp()
 
 ## R CMD Check Results (See *Test Environments*)
 
-There were 0 ERRORs and 0 WARNINGs.
-
-There were 1 NOTE.
-
-### Note 1
-
-```text
-Possibly misspelled words in DESCRIPTION:
-  programmatically (14:5)
-```
-
-This is a false positive. The word 'programmatically' is a valid English word.
+There were 0 ERRORs, 0 WARNINGs, and 0 NOTEs.
 
 ## `lintr` Results (Arch Linux)
 

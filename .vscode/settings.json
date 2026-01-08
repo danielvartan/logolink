@@ -103,6 +103,7 @@
     "pandoc",
     "pcolor",
     "pcor",
+    "pkgcheck",
     "pkgdown",
     "plabel",
     "purrr",
