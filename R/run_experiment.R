@@ -97,8 +97,9 @@
 #' - `--setup-file`: Specifies the path to the experiment
 #'   [XML](https://en.wikipedia.org/wiki/XML) file.
 #' - `--experiment`: Specifies the name of the experiment defined in the model.
-#' - `--table`: Specifies the output file for the results
-#'   [`table`](https://docs.netlogo.org/behaviorspace.html#table-output).
+#' - `--table`: Specifies the output file for the
+#'   [table](https://docs.netlogo.org/behaviorspace.html#table-output)
+#'   results.
 #' - `--spreadsheet`: Specifies the output file for the
 #'   [spreadsheet](
 #'   https://docs.netlogo.org/behaviorspace.html#spreadsheet-output)

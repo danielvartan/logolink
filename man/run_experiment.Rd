@@ -185,8 +185,9 @@ the model file extension).
 \item \code{--setup-file}: Specifies the path to the experiment
 \href{https://en.wikipedia.org/wiki/XML}{XML} file.
 \item \code{--experiment}: Specifies the name of the experiment defined in the model.
-\item \code{--table}: Specifies the output file for the results
-\href{https://docs.netlogo.org/behaviorspace.html#table-output}{\code{table}}.
+\item \code{--table}: Specifies the output file for the
+\href{https://docs.netlogo.org/behaviorspace.html#table-output}{table}
+results.
 \item \code{--spreadsheet}: Specifies the output file for the
 \href{https://docs.netlogo.org/behaviorspace.html#spreadsheet-output}{spreadsheet}
 results.

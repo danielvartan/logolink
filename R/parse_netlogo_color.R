@@ -29,18 +29,18 @@
 #'
 #' @param x A [`numeric`][base::numeric()] vector containing NetLogo color
 #'   codes (ranging from `0` to `140`) to be parsed into
-#'   [hexadecimal](https://en.wikipedia.org/wiki/Web_colors)
-#'   color representations.
+#'   [hexadecimal color](https://en.wikipedia.org/wiki/Web_colors)
+#'   representations.
 #' @param bias (optional) A [`numeric`][base::numeric()] value between `-1` and
 #'   `1` that adjusts the lightness or darkness of the resulting colors.
 #'   Positive values lighten colors, while negative values darken them. This
-#'   only affects shaded colors (those with shades other than 5)
+#'   only affects shaded colors (those with shades other than `5`)
 #'   (default: `0.1`).
 #'
 #' @return A [`character`][base::character()] vector containing the
 #'   approximate
-#'   [hexadecimal](https://en.wikipedia.org/wiki/Web_colors)
-#'   color representations corresponding to the input NetLogo color codes.
+#'   [hexadecimal color](https://en.wikipedia.org/wiki/Web_colors)
+#'   representations corresponding to the input NetLogo color codes.
 #'
 #' @family parsing functions
 #' @export

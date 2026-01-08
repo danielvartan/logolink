@@ -22,8 +22,8 @@ The function uses the following search order:
 exists, returns that path.
 \item If the environment variable is not set or the file does not exist,
 constructs and expands the path based on the output of
-\code{\link[=find_netlogo_home]{find_netlogo_home()}} (e.g.,
-\verb{<NETLOGO_HOME>/NetLogo_Console.exe} on Windows or
+\code{\link[=find_netlogo_home]{find_netlogo_home()}}
+(\verb{<NETLOGO_HOME>/NetLogo_Console.exe} on Windows or
 \verb{<NETLOGO_HOME>/NetLogo_Console} for other systems).
 }
 }

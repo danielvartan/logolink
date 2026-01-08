@@ -13,10 +13,9 @@
 #'    exists, returns that path.
 #' 2. If the environment variable is not set or the directory does not exist,
 #'    searches through common installation paths for directories containing
-#'    "NetLogo" (case-insensitive) in their name.
-#'
-#' If multiple NetLogo installations are found in the same directory, the
-#' last one (alphabetically) is returned.
+#'    "NetLogo" (case-insensitive) in their name. If multiple NetLogo
+#'    installations are found in the same directory, the last one
+#'    (alphabetically) is returned.
 #'
 #' @return A [`character`][base::character()] string specifying the path to the
 #'   NetLogo installation directory. Returns [`NA`][base::is.na()] if no

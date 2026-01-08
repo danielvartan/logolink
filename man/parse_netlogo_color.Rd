@@ -9,20 +9,20 @@ parse_netlogo_color(x, bias = 0.1)
 \arguments{
 \item{x}{A \code{\link[base:numeric]{numeric}} vector containing NetLogo color
 codes (ranging from \code{0} to \code{140}) to be parsed into
-\href{https://en.wikipedia.org/wiki/Web_colors}{hexadecimal}
-color representations.}
+\href{https://en.wikipedia.org/wiki/Web_colors}{hexadecimal color}
+representations.}
 
 \item{bias}{(optional) A \code{\link[base:numeric]{numeric}} value between \code{-1} and
 \code{1} that adjusts the lightness or darkness of the resulting colors.
 Positive values lighten colors, while negative values darken them. This
-only affects shaded colors (those with shades other than 5)
+only affects shaded colors (those with shades other than \code{5})
 (default: \code{0.1}).}
 }
 \value{
 A \code{\link[base:character]{character}} vector containing the
 approximate
-\href{https://en.wikipedia.org/wiki/Web_colors}{hexadecimal}
-color representations corresponding to the input NetLogo color codes.
+\href{https://en.wikipedia.org/wiki/Web_colors}{hexadecimal color}
+representations corresponding to the input NetLogo color codes.
 }
 \description{
 \code{parse_netlogo_color()} parses NetLogo color codes into their approximate

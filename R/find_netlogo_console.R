@@ -13,8 +13,8 @@
 #'    exists, returns that path.
 #' 2. If the environment variable is not set or the file does not exist,
 #'    constructs and expands the path based on the output of
-#'    [`find_netlogo_home()`][find_netlogo_home()] (e.g.,
-#'    `<NETLOGO_HOME>/NetLogo_Console.exe` on Windows or
+#'    [`find_netlogo_home()`][find_netlogo_home()]
+#'    (`<NETLOGO_HOME>/NetLogo_Console.exe` on Windows or
 #'    `<NETLOGO_HOME>/NetLogo_Console` for other systems).
 #'
 #' @return A [`character`][base::character()] string specifying the path to the

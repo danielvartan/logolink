@@ -22,11 +22,10 @@ The function uses the following search order:
 exists, returns that path.
 \item If the environment variable is not set or the directory does not exist,
 searches through common installation paths for directories containing
-"NetLogo" (case-insensitive) in their name.
+"NetLogo" (case-insensitive) in their name. If multiple NetLogo
+installations are found in the same directory, the last one
+(alphabetically) is returned.
 }
-
-If multiple NetLogo installations are found in the same directory, the
-last one (alphabetically) is returned.
 }
 \examples{
 \dontrun{

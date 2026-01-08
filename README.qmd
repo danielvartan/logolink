@@ -145,8 +145,8 @@ remotes::install_github("danielvartan/logolink")
 
 `logolink` usage is very straightforward. The main functions are:
 
-- [`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html): Create a NetLogo BehaviorSpace experiment XML file.
-- [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html): Run a NetLogo BehaviorSpace experiment.
+- [`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html): Create NetLogo BehaviorSpace experiment.
+- [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html): Run NetLogo BehaviorSpace experiment.
 
 Along with this package, you will also need NetLogo 7.0.1 or higher installed on your computer. You can download it from the [NetLogo website](https://www.netlogo.org).
 
