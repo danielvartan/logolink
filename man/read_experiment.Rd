@@ -2,19 +2,21 @@
 % Please edit documentation in R/read_experiment.R
 \name{read_experiment}
 \alias{read_experiment}
-\title{Read NetLogo BehaviorSpace Experiment Output}
+\title{Read NetLogo BehaviorSpace Experiment output}
 \usage{
 read_experiment(file, tidy_output = TRUE)
 }
 \arguments{
 \item{file}{A \code{\link[base:character]{character}} string specifying the path to
-the BehaviorSpace output
+the
+\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace}
+output
 \href{https://en.wikipedia.org/wiki/Comma-separated_values}{CSV}
 file.}
 
 \item{tidy_output}{(optional) A \code{\link[base:logical]{logical}} flag indicating
-whether to tidy the output data frames. If \code{TRUE}, output data frames are
-arranged according to
+whether to tidy the output data frames. If \code{TRUE},
+output data frames are arranged according to
 \href{https://r4ds.hadley.nz/data-tidy.html}{tidy data principles}.
 If \code{FALSE}, only the default transformations from
 \code{\link[readr:read_delim]{read_delim()}} and
@@ -52,13 +54,13 @@ output.
 \href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace}
 experiment output files as
 \href{https://r4ds.hadley.nz/data-tidy.html}{tidy data frames}.
-It automatically detects the output format (
-\href{https://docs.netlogo.org/behaviorspace.html#table-output}{Table},
+It automatically detects the output format
+(\href{https://docs.netlogo.org/behaviorspace.html#table-output}{Table},
 \href{https://docs.netlogo.org/behaviorspace.html#spreadsheet-output}{Spreadsheet},
 \href{https://docs.netlogo.org/behaviorspace.html#lists-output}{Lists}, or
-\href{https://docs.netlogo.org/behaviorspace.html#statistics-output}{Stats}
-) and parses the data accordingly. The function also extracts metadata from
-the file.
+\href{https://docs.netlogo.org/behaviorspace.html#statistics-output}{Stats})
+and parses the data accordingly. The function also extracts metadata from
+the files.
 
 Only version 2.0 (NetLogo 6.4 and later) of BehaviorSpace output files is
 supported.

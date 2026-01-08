@@ -6,9 +6,8 @@
 #' [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment in
 #' headless mode and returns a [`list`][base::list()] with results as [tidy data
 #' frames](https://r4ds.hadley.nz/data-tidy.html). It can be used with
-#' [`create_experiment()`][create_experiment()] to create the experiment
-#' [XML](https://en.wikipedia.org/wiki/XML) file on the fly, or with an existing
-#' experiment stored in the NetLogo model file.
+#' [`create_experiment()`][create_experiment()] to create and run experiments
+#' on the fly, or with an existing experiment stored in the NetLogo model file.
 #'
 #' To avoid issues with list parsing, `run_experiment()` includes support for
 #' the special [lists](https://docs.netlogo.org/behaviorspace.html#lists-output)
@@ -46,6 +45,13 @@
 #' the NetLogo executable or binary. On Windows, a typical path is something
 #' like `C:\Program Files\NetLogo 7.0.3\NetLogo.exe`.
 #'
+#' ## NetLogo 3D
+#'
+#' The function automatically detects whether the provided model is a 3D model
+#' (based on the file extension) and adjusts the command-line arguments
+#' accordingly. You do not need to set the `--3D` flag to the
+#' `other_arguments` parameter manually.
+#'
 #' ## Handling NetLogo Lists
 #'
 #' NetLogo uses a specific syntax for lists (e.g., `"[1 2 3]"`) that is
@@ -58,8 +64,8 @@
 #' argument to capture this output. Columns containing NetLogo lists are
 #' returned as [`character`][base::character()] vectors.
 #'
-#' The [`parse_netlogo_list()`][parse_netlogo_list()] function is available
-#' for parsing list values embedded in other outputs. However, we recommend
+#' The [`parse_netlogo_list()`][parse_netlogo_list()] function is available for
+#' parsing NetLogo list values embedded in other outputs. However, we recommend
 #' using it only when necessary, as it can be computationally intensive for
 #' large datasets and may not handle all edge cases.
 #'
@@ -67,7 +73,9 @@
 #'
 #' You can pass additional command-line arguments to the NetLogo executable
 #' using the `other_arguments` parameter. This can be useful for specifying
-#' options such as the number of threads to use or other NetLogo-specific flags.
+#' options such as the number of
+#' [threads](https://en.wikipedia.org/wiki/Thread_(computing))
+#' to use or other NetLogo-specific flags.
 #'
 #' For example, to specify the number of threads, you can use:
 #'
@@ -86,23 +94,26 @@
 #' - `--3D`: Specifies if the model is a 3D model (automatically set based on
 #'   the model file extension).
 #' - `--model`: Specifies the path to the NetLogo model file.
-#' - `--setup-file`: Specifies the path to the experiment XML file.
+#' - `--setup-file`: Specifies the path to the experiment
+#'   [XML](https://en.wikipedia.org/wiki/XML) file.
 #' - `--experiment`: Specifies the name of the experiment defined in the model.
-#' - `--table`: Specifies the output file for the results table.
-#' - `--spreadsheet`: Specifies the output file for the spreadsheet results.
-#' - `--lists`: Specifies the output file for the lists results.
-#' - `--stats`: Specifies the output file for the statistics results.
+#' - `--table`: Specifies the output file for the results
+#'   [`table`](https://docs.netlogo.org/behaviorspace.html#table-output).
+#' - `--spreadsheet`: Specifies the output file for the
+#'   [spreadsheet](
+#'   https://docs.netlogo.org/behaviorspace.html#spreadsheet-output)
+#'   results.
+#' - `--lists`: Specifies the output file for the
+#'   [lists](https://docs.netlogo.org/behaviorspace.html#lists-output)
+#'   results.
+#' - `--stats`: Specifies the output file for the
+#'   [statistics](https://docs.netlogo.org/behaviorspace.html#statistics-output)
+#'   results.
 #'
-#' For a complete list of available options, please refer to the
+#' For a complete list of available options, refer to the
 #' [BehaviorSpace Guide](
 #' https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line
 #' ).
-#'
-#' ## NetLogo 3D
-#'
-#' The function automatically detects whether the provided model is a 3D model
-#' (based on the file extension) and adjusts the command-line arguments
-#' accordingly. You do not need to set the `--3D` flag manually.
 #'
 #' ## Non-Tabular Output
 #'
@@ -116,10 +127,12 @@
 #'   path to the NetLogo model file (with extension `.nlogo`, `.nlogo3d`,
 #'   `.nlogox`, or `.nlogox3d`).
 #' @param setup_file (optional) A [`character`][base::character()] string
-#'   specifying the path to an [XML](https://en.wikipedia.org/wiki/XML) file
-#'   containing the experiment definition. This file can be created using
+#'   specifying the path to an
+#'   [XML](https://en.wikipedia.org/wiki/XML)
+#'   file containing the experiment definition. This file can be created using
 #'   [`create_experiment()`][create_experiment()] or exported from the NetLogo
-#'   BehaviorSpace interface (default: `NULL`).
+#'   [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html)
+#'   interface (default: `NULL`).
 #' @param experiment (optional) A [`character`][base::character()] string
 #'   specifying the name of the experiment defined in the NetLogo model file
 #'   (default: `NULL`).
@@ -127,7 +140,9 @@
 #'   specifying which output types to generate from the experiment. Valid
 #'   options are: `"table"`, `"spreadsheet"`, `"lists"`, and
 #'   `"statistics"`. At least one of `"table"` or `"spreadsheet"` must be
-#'   included. See the BehaviorSpace documentation on
+#'   included. See the
+#'   [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html)
+#'   documentation on
 #'   [formats](https://docs.netlogo.org/behaviorspace.html#run-options-formats)
 #'   for details about each output type (default: `c("table", "lists")`).
 #' @param other_arguments (optional) A [`character`][base::character()] vector
@@ -135,14 +150,15 @@
 #'   executable. For example, you can use `c("--threads 4")` to specify the
 #'   number of threads. See the *Details* section for more information
 #'   (default: `NULL`).
-#' @param timeout (optional) A [`numeric`][base::numeric()] value specifying the
+#' @param timeout (optional) A [`numeric`][base::numeric#'   file containing the experiment definition. This file can be created using
+#'   [`create_experiment()`][create_experiment()] or exported from the NetLogo()] value specifying the
 #'   maximum time (in seconds) to wait for the NetLogo process to complete. If
 #'   the process exceeds this time limit, it will be terminated, and the
 #'   function will return the available output up to that point. Use `Inf` for
 #'   no time limit (default: `Inf`).
 #' @param tidy_output (optional) A [`logical`][base::logical()] flag indicating
-#'   whether to tidy the output data frames. If `TRUE`, output data frames are
-#'   arranged according to
+#'   whether to tidy the output data frames. If `TRUE`,
+#'   output data frames are arranged according to
 #'   [tidy data principles](https://r4ds.hadley.nz/data-tidy.html).
 #'   If `FALSE`, only the default transformations from
 #'   [`read_delim()`][readr::read_delim()] and
@@ -180,7 +196,8 @@
 #' # Defining the Model -----
 #'
 #' \dontrun{
-#'   model_path <- # This model is included with NetLogo installations.
+#'   # This model is included with NetLogo installations.
+#'   model_path <-
 #'     find_netlogo_home() |>
 #'     file.path(
 #'       "models",

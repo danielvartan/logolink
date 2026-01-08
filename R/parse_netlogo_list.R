@@ -10,10 +10,11 @@
 #'
 #' **Note**: We recommend using this function **only when necessary**, as it can
 #' be computationally intensive for large datasets and may not handle all edge
-#' cases. NetLogo provides a special output format called *lists* that exports
-#' list metrics in a tabular structure. If your experiment includes metrics that
-#' return NetLogo lists, include `"lists"` in the `outputs` argument of
-#' [`run_experiment()`][run_experiment()] to capture this output.
+#' cases. NetLogo provides a special output format called
+#' [lists](https://docs.netlogo.org/behaviorspace.html#lists-output)
+#' that exports list metrics in a tabular structure. If your experiment includes
+#' metrics that return NetLogo lists, include `"lists"` in the `outputs`
+#' argument of [`run_experiment()`][run_experiment()] to capture this output.
 #'
 #' @details
 #'
@@ -24,8 +25,8 @@
 #' - **Mixed-type lists**: Lists containing elements of different types are
 #'   returned as R lists (e.g., `'[1.1 "a" true]'` becomes
 #'   `list(1.1, "a", TRUE)`).
-#' - **Nested lists**: Lists containing other lists are returned as nested R
-#'   lists (e.g., `'["a" "b" [1 2]]'` becomes
+#' - **Nested lists**: Lists containing other lists are fused with the main
+#'   list (e.g., `'["a" "b" [1 2]]'` becomes
 #'   `list(c("a", "b"), c(1L, 2L))`).
 #'
 #' NetLogo boolean values (`true`/`false`) are converted to R
@@ -33,13 +34,13 @@
 #' `NaN` values are parsed as R [`NaN`][base::is.nan()] .
 #'
 #' @param x An [`atomic`][checkmate::assert_atomic] vector potentially
-#'   containing NetLogo-style list strings.
+#'   containing NetLogo-style lists.
 #'
 #' @return A [`list`][base::list()] where each element is the parsed result of
 #'   the corresponding input element. Parsed elements may be atomic vectors (for
-#'   homogeneous lists) or nested lists (for mixed-type or nested lists). If
-#'   a NetLogo list is not detected in an input element, that element is
-#'   returned as a single-element list containing the original string.
+#'   homogeneous lists) or nested lists (for mixed-type or nested lists). If a
+#'   NetLogo list is not detected in an input element, that element is returned
+#'   as a single-element [`list`][base::list()] containing the original string.
 #'
 #' @family parsing functions
 #' @export
@@ -71,19 +72,21 @@
 #'
 #' c('[true false true]', '[false true false]') |> parse_netlogo_list()
 #'
-#' # Combined Examples -----
+#' # Mixed-Type Examples -----
 #'
-#' c('["a" "b" "c"]', '[4 5 6]') |> parse_netlogo_list()
+#' '["a" "b" 1 2]' |> parse_netlogo_list()
 #'
-#' c('[1.1 2.1 3.1]', '[true false true]') |> parse_netlogo_list()
+#' '[1.1 2.1 3.1 true false]' |> parse_netlogo_list()
 #'
-#' c('[1.1 "a" true]') |> parse_netlogo_list()
+#' '[1.1 "a" true]' |> parse_netlogo_list()
 #'
 #' # Nested Examples -----
 #'
-#' c('["a" "b" "c" [1 2]]', '[4 5 6]') |> parse_netlogo_list()
+#' '["a" "b" "c" [1 2]]' |> parse_netlogo_list()
 #'
-#' c('["a" "b" "c" [1 2] true ["d" "c"]]') |> parse_netlogo_list()
+#' '["a" "b" "c" [1 2] true ["d" "c"]]' |> parse_netlogo_list()
+#'
+#' '[[1 2] [3 4] [5 6]]' |> parse_netlogo_list()
 parse_netlogo_list <- function(x) {
   checkmate::assert_atomic(x)
 

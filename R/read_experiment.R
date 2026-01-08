@@ -1,4 +1,4 @@
-#' Read NetLogo BehaviorSpace Experiment Output
+#' Read NetLogo BehaviorSpace Experiment output
 #'
 #' @description
 #'
@@ -6,20 +6,22 @@
 #' [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html)
 #' experiment output files as
 #' [tidy data frames](https://r4ds.hadley.nz/data-tidy.html).
-#' It automatically detects the output format (
-#' [Table](https://docs.netlogo.org/behaviorspace.html#table-output),
+#' It automatically detects the output format
+#' ([Table](https://docs.netlogo.org/behaviorspace.html#table-output),
 #' [Spreadsheet](
 #' https://docs.netlogo.org/behaviorspace.html#spreadsheet-output),
 #' [Lists](https://docs.netlogo.org/behaviorspace.html#lists-output), or
-#' [Stats](https://docs.netlogo.org/behaviorspace.html#statistics-output)
-#' ) and parses the data accordingly. The function also extracts metadata from
-#' the file.
+#' [Stats](https://docs.netlogo.org/behaviorspace.html#statistics-output))
+#' and parses the data accordingly. The function also extracts metadata from
+#' the files.
 #'
 #' Only version 2.0 (NetLogo 6.4 and later) of BehaviorSpace output files is
 #' supported.
 #'
 #' @param file A [`character`][base::character()] string specifying the path to
-#'   the BehaviorSpace output
+#'   the
+#'   [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html)
+#'   output
 #'   [CSV](https://en.wikipedia.org/wiki/Comma-separated_values)
 #'   file.
 #' @inheritParams run_experiment
@@ -98,13 +100,15 @@ read_experiment <- function(file, tidy_output = TRUE) {
   out <- list(metadata = read_experiment_metadata(file))
 
   if (stringr::str_detect(file_header, "Table")) {
-    data <- file |> read_experiment_table()
+    out$table <- file |> read_experiment_table()
   } else if (stringr::str_detect(file_header, "Spreadsheet")) {
-    data <- file |> read_experiment_spreadsheet(tidy_output = tidy_output)
+    out$spreadsheet <-
+      file |>
+      read_experiment_spreadsheet(tidy_output = tidy_output)
   } else if (stringr::str_detect(file_header, "Lists")) {
-    data <- file |> read_experiment_lists(tidy_output = tidy_output)
+    out$lists <- file |> read_experiment_lists(tidy_output = tidy_output)
   } else if (stringr::str_detect(file_header, "Stats")) {
-    data <- file |> read_experiment_statistics()
+    out$statistics <- file |> read_experiment_statistics()
   } else {
     cli::cli_abort(
       paste0(
@@ -115,5 +119,5 @@ read_experiment <- function(file, tidy_output = TRUE) {
     )
   }
 
-  out |> append(list(data = data))
+  out
 }

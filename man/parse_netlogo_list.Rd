@@ -8,14 +8,14 @@ parse_netlogo_list(x)
 }
 \arguments{
 \item{x}{An \code{\link[checkmate:checkAtomic]{atomic}} vector potentially
-containing NetLogo-style list strings.}
+containing NetLogo-style lists.}
 }
 \value{
 A \code{\link[base:list]{list}} where each element is the parsed result of
 the corresponding input element. Parsed elements may be atomic vectors (for
-homogeneous lists) or nested lists (for mixed-type or nested lists). If
-a NetLogo list is not detected in an input element, that element is
-returned as a single-element list containing the original string.
+homogeneous lists) or nested lists (for mixed-type or nested lists). If a
+NetLogo list is not detected in an input element, that element is returned
+as a single-element \code{\link[base:list]{list}} containing the original string.
 }
 \description{
 \code{parse_netlogo_list()} parses NetLogo-style lists represented as strings
@@ -26,10 +26,11 @@ within the lists and converts them accordingly.
 
 \strong{Note}: We recommend using this function \strong{only when necessary}, as it can
 be computationally intensive for large datasets and may not handle all edge
-cases. NetLogo provides a special output format called \emph{lists} that exports
-list metrics in a tabular structure. If your experiment includes metrics that
-return NetLogo lists, include \code{"lists"} in the \code{outputs} argument of
-\code{\link[=run_experiment]{run_experiment()}} to capture this output.
+cases. NetLogo provides a special output format called
+\href{https://docs.netlogo.org/behaviorspace.html#lists-output}{lists}
+that exports list metrics in a tabular structure. If your experiment includes
+metrics that return NetLogo lists, include \code{"lists"} in the \code{outputs}
+argument of \code{\link[=run_experiment]{run_experiment()}} to capture this output.
 }
 \details{
 The function handles the following cases:
@@ -39,8 +40,8 @@ returned as atomic vectors (e.g., \code{"[1 2 3]"} becomes \code{c(1L, 2L, 3L)})
 \item \strong{Mixed-type lists}: Lists containing elements of different types are
 returned as R lists (e.g., \code{'[1.1 "a" true]'} becomes
 \code{list(1.1, "a", TRUE)}).
-\item \strong{Nested lists}: Lists containing other lists are returned as nested R
-lists (e.g., \code{'["a" "b" [1 2]]'} becomes
+\item \strong{Nested lists}: Lists containing other lists are fused with the main
+list (e.g., \code{'["a" "b" [1 2]]'} becomes
 \code{list(c("a", "b"), c(1L, 2L))}).
 }
 
@@ -75,19 +76,21 @@ c('[1.1 2.1 3.1]', '[4.1 5.1 6.1]') |> parse_netlogo_list()
 
 c('[true false true]', '[false true false]') |> parse_netlogo_list()
 
-# Combined Examples -----
+# Mixed-Type Examples -----
 
-c('["a" "b" "c"]', '[4 5 6]') |> parse_netlogo_list()
+'["a" "b" 1 2]' |> parse_netlogo_list()
 
-c('[1.1 2.1 3.1]', '[true false true]') |> parse_netlogo_list()
+'[1.1 2.1 3.1 true false]' |> parse_netlogo_list()
 
-c('[1.1 "a" true]') |> parse_netlogo_list()
+'[1.1 "a" true]' |> parse_netlogo_list()
 
 # Nested Examples -----
 
-c('["a" "b" "c" [1 2]]', '[4 5 6]') |> parse_netlogo_list()
+'["a" "b" "c" [1 2]]' |> parse_netlogo_list()
 
-c('["a" "b" "c" [1 2] true ["d" "c"]]') |> parse_netlogo_list()
+'["a" "b" "c" [1 2] true ["d" "c"]]' |> parse_netlogo_list()
+
+'[[1 2] [3 4] [5 6]]' |> parse_netlogo_list()
 }
 \seealso{
 Other parsing functions: 

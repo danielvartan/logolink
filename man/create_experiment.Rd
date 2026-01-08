@@ -17,7 +17,7 @@ create_experiment(
   post_experiment = NULL,
   exit_condition = NULL,
   run_metrics_condition = NULL,
-  metrics = c("count turtles", "count patches"),
+  metrics = "count turtles",
   constants = NULL,
   sub_experiments = NULL,
   file = tempfile(pattern = "experiment-", fileext = ".xml")
@@ -42,30 +42,21 @@ of steps to run for each repetition. Set to \code{0} or \code{NULL} to have no t
 limit (default: \code{1}).}
 
 \item{pre_experiment}{(optional) A \code{\link[base:character]{character}} vector
-specifying the NetLogo command(s) to run before the experiment starts. This
-can be a single command or multiple commands provided as a
-\code{\link[base:character]{character}} vector; see the \emph{Details > Multiple
-Commands} section for usage (default: \code{NULL}).}
+specifying the NetLogo command(s) to run before the experiment starts
+(default: \code{NULL}).}
 
 \item{setup}{(optional) A \code{\link[base:character]{character}} vector specifying
-the NetLogo command(s) to set up the model. This can be a single command or
-multiple commands provided as a \code{\link[base:character]{character}} vector
-(default: \code{'setup'}).}
+the NetLogo command(s) to set up the model (default: \code{'setup'}).}
 
 \item{go}{(optional) A \code{\link[base:character]{character}} vector specifying the
-NetLogo command(s) to run the model. This can be a single command or
-multiple commands provided as a \code{\link[base:character]{character}} vector
-(default: \code{'go'}).}
+NetLogo command(s) to run the model (default: \code{'go'}).}
 
 \item{post_run}{(optional) A \code{\link[base:character]{character}} vector
-specifying the NetLogo command(s) to run after each run. This can be a
-single command or multiple commands provided as a
-\code{\link[base:character]{character}} vector (default: \code{NULL}).}
+specifying the NetLogo command(s) to run after each run (default: \code{NULL}).}
 
 \item{post_experiment}{(optional) A \code{\link[base:character]{character}} vector
-specifying the NetLogo command(s) to run after the experiment ends. This
-can be a single command or multiple commands provided as a
-\code{\link[base:character]{character}} vector (default: \code{NULL}).}
+specifying the NetLogo command(s) to run after the experiment ends
+(default: \code{NULL}).}
 
 \item{exit_condition}{(optional) A \code{\link[base:character]{character}} vector
 specifying the NetLogo command that defines the exit condition for the
@@ -77,7 +68,7 @@ metrics (default: \code{NULL}).}
 
 \item{metrics}{A \code{\link[base:character]{character}} vector specifying the
 NetLogo commands to record as metrics
-(default: \code{c('count turtles', 'count patches')}).}
+(default: \code{'count turtles'}).}
 
 \item{constants}{(optional) A named \code{\link[base:list]{list}} specifying the
 parameters for the experiment. Each element can be either a scalar,
@@ -86,28 +77,29 @@ vector (for fixed/enumerated values), or a \code{\link[base:list]{list}} with
 \emph{Details} and \emph{Examples} sections to learn more (default: \code{NULL}).}
 
 \item{sub_experiments}{(optional) A \code{\link[base:list]{list}} where each element
-is a \code{\link[base:list]{list}} specifying the constants for a sub-experiment.
-Each sub-experiment uses the same structure as the \code{constants} argument.
-See the \code{constants} argument documentation for details on how to specify
-parameter values (default: \code{NULL}).}
+is also a \code{\link[base:list]{list}} specifying the constants for a
+sub-experiment. Each sub-experiment uses the same structure as the
+\code{constants} argument. See the \code{constants} argument documentation for
+details on how to specify parameter values (default: \code{NULL}).}
 
 \item{file}{(optional) A \code{\link[base:character]{character}} string specifying
-the path to save the created XML file
+the path to save the created \href{https://en.wikipedia.org/wiki/XML}{XML} file
 (default: \code{tempfile(pattern = "experiment-", fileext = ".xml")}).}
 }
 \value{
 A \code{\link[base:character]{character}} string with the path to the
-created XML file.
+created \href{https://en.wikipedia.org/wiki/XML}{XML} file.
 }
 \description{
 \code{create_experiment()} creates a NetLogo
-\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace} experiment XML
-in a temporary file that can be used to run headless experiments with the
+\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace} experiment
+\href{https://en.wikipedia.org/wiki/XML}{XML} file
+that can be used to run headless experiments with the
 \code{\link[=run_experiment]{run_experiment()}} function.
 
-Please refer to the
-\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace Guide} for
-complete guidance on how to set and run experiments in NetLogo.
+For complete guidance on setting up and running experiments in NetLogo,
+please refer to the
+\href{https://docs.netlogo.org/behaviorspace.html#creating-an-experiment-setup}{BehaviorSpace Guide}.
 }
 \details{
 \subsection{Enclosing}{
@@ -116,17 +108,6 @@ Since NetLogo only accepts double quotes for strings inside commands, we
 recommend always using single quotes when writing NetLogo commands in R
 to avoid mistakes. For example, to run the \verb{[1 "a" true]} command,
 use \code{'[1 "a" true]'}, not \verb{"[1 \\"a\\" true]"}.
-}
-
-\subsection{Constants and \code{character} strings}{
-
-When passing single values to constants, \code{\link[base:character]{character}}
-strings should be passed as is, without adding quotes to them. For example,
-to set the variable \code{scenario} to \code{"SSP-585"}, you should use
-\code{list("scenario" = "SSP-585")}, not \code{list("scenario" = '"SSP-585"')}.
-
-Insert quotes only if the command requires them. For example:
-\code{'n-values 10 ["N/A"]'}.
 }
 
 \subsection{Multiple Commands}{
@@ -158,13 +139,18 @@ stepped values). For example, to vary the variable
 use
 \code{list("initial-number-of-turtles" = list(first = 10, step = 10, last = 50))}.
 }
+
+When passing values to constants, \code{\link[base:character]{character}}
+strings should be passed as is, without adding quotes to them. For example,
+to set the variable \code{pathway} to \code{"SSP-585"}, you should use
+\code{list("pathway" = "SSP-585")}, not \code{list("pathway" = '"SSP-585"')}.
 }
 }
 \examples{
 # The examples below reproduce experiments from the NetLogo Models Library.
 # Try exporting these experiments from NetLogo and compare the XML files.
 
-## Examples from the *Wolf Sheep Predation* Model (Sample Models) ----
+## Examples from the Wolf Sheep Predation Model (Sample Models) ----
 
 ### BehaviorSpace Combinatorial
 
@@ -312,7 +298,7 @@ setup_file
 
 setup_file |> inspect_experiment()
 
-## Examples from the *Spread of Disease* Model (IABM Textbook) ----
+## Examples from the Spread of Disease Model (IABM Textbook) ----
 
 ### Population Density
 

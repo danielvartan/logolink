@@ -8,23 +8,30 @@ inspect_experiment(file)
 }
 \arguments{
 \item{file}{A \code{\link[base:character]{character}} string specifying the path to
-the BehaviorSpace experiment XML file.}
+the
+\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace}
+experiment
+\href{https://en.wikipedia.org/wiki/XML}{XML}
+file.}
 }
 \value{
 An \link[base:invisible]{invisible} \code{NULL}. This function is called for
-its side effect of printing the XML content to the console.
+its side effect of printing the
+\href{https://en.wikipedia.org/wiki/XML}{XML}
+content to the R console.
 }
 \description{
 \code{inspect_experiment()} reads and prints the content of a NetLogo
-\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace} experiment
+\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace}
+experiment
 \href{https://en.wikipedia.org/wiki/XML}{XML}
-file to the console. This is useful for debugging and verifying the
+file to the R console. This is useful for debugging and verifying the
 structure of experiment files created by
 \code{\link[=create_experiment]{create_experiment()}}.
 
-Please refer to the
-\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace Guide} for
-complete guidance on how to set and run experiments in NetLogo.
+For complete guidance on setting up and running experiments in NetLogo,
+please refer to the
+\href{https://docs.netlogo.org/behaviorspace.html#creating-an-experiment-setup}{BehaviorSpace Guide}.
 }
 \examples{
 file <- create_experiment(name = "My Experiment")

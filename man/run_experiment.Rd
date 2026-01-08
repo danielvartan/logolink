@@ -20,10 +20,12 @@ path to the NetLogo model file (with extension \code{.nlogo}, \code{.nlogo3d},
 \code{.nlogox}, or \code{.nlogox3d}).}
 
 \item{setup_file}{(optional) A \code{\link[base:character]{character}} string
-specifying the path to an \href{https://en.wikipedia.org/wiki/XML}{XML} file
-containing the experiment definition. This file can be created using
+specifying the path to an
+\href{https://en.wikipedia.org/wiki/XML}{XML}
+file containing the experiment definition. This file can be created using
 \code{\link[=create_experiment]{create_experiment()}} or exported from the NetLogo
-BehaviorSpace interface (default: \code{NULL}).}
+\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace}
+interface (default: \code{NULL}).}
 
 \item{experiment}{(optional) A \code{\link[base:character]{character}} string
 specifying the name of the experiment defined in the NetLogo model file
@@ -33,7 +35,9 @@ specifying the name of the experiment defined in the NetLogo model file
 specifying which output types to generate from the experiment. Valid
 options are: \code{"table"}, \code{"spreadsheet"}, \code{"lists"}, and
 \code{"statistics"}. At least one of \code{"table"} or \code{"spreadsheet"} must be
-included. See the BehaviorSpace documentation on
+included. See the
+\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace}
+documentation on
 \href{https://docs.netlogo.org/behaviorspace.html#run-options-formats}{formats}
 for details about each output type (default: \code{c("table", "lists")}).}
 
@@ -43,15 +47,16 @@ executable. For example, you can use \code{c("--threads 4")} to specify the
 number of threads. See the \emph{Details} section for more information
 (default: \code{NULL}).}
 
-\item{timeout}{(optional) A \code{\link[base:numeric]{numeric}} value specifying the
+\item{timeout}{(optional) A [\code{numeric}][base::numeric#'   file containing the experiment definition. This file can be created using
+\code{\link[=create_experiment]{create_experiment()}} or exported from the NetLogo()] value specifying the
 maximum time (in seconds) to wait for the NetLogo process to complete. If
 the process exceeds this time limit, it will be terminated, and the
 function will return the available output up to that point. Use \code{Inf} for
 no time limit (default: \code{Inf}).}
 
 \item{tidy_output}{(optional) A \code{\link[base:logical]{logical}} flag indicating
-whether to tidy the output data frames. If \code{TRUE}, output data frames are
-arranged according to
+whether to tidy the output data frames. If \code{TRUE},
+output data frames are arranged according to
 \href{https://r4ds.hadley.nz/data-tidy.html}{tidy data principles}.
 If \code{FALSE}, only the default transformations from
 \code{\link[readr:read_delim]{read_delim()}} and
@@ -89,9 +94,8 @@ output.
 \code{run_experiment()} runs a NetLogo
 \href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace} experiment in
 headless mode and returns a \code{\link[base:list]{list}} with results as \href{https://r4ds.hadley.nz/data-tidy.html}{tidy data frames}. It can be used with
-\code{\link[=create_experiment]{create_experiment()}} to create the experiment
-\href{https://en.wikipedia.org/wiki/XML}{XML} file on the fly, or with an existing
-experiment stored in the NetLogo model file.
+\code{\link[=create_experiment]{create_experiment()}} to create and run experiments
+on the fly, or with an existing experiment stored in the NetLogo model file.
 
 To avoid issues with list parsing, \code{run_experiment()} includes support for
 the special \href{https://docs.netlogo.org/behaviorspace.html#lists-output}{lists}
@@ -128,6 +132,14 @@ the NetLogo executable or binary. On Windows, a typical path is something
 like \verb{C:\\Program Files\\NetLogo 7.0.3\\NetLogo.exe}.
 }
 
+\subsection{NetLogo 3D}{
+
+The function automatically detects whether the provided model is a 3D model
+(based on the file extension) and adjusts the command-line arguments
+accordingly. You do not need to set the \verb{--3D} flag to the
+\code{other_arguments} parameter manually.
+}
+
 \subsection{Handling NetLogo Lists}{
 
 NetLogo uses a specific syntax for lists (e.g., \code{"[1 2 3]"}) that is
@@ -140,8 +152,8 @@ metrics that return NetLogo lists, include \code{"lists"} in the \code{output}
 argument to capture this output. Columns containing NetLogo lists are
 returned as \code{\link[base:character]{character}} vectors.
 
-The \code{\link[=parse_netlogo_list]{parse_netlogo_list()}} function is available
-for parsing list values embedded in other outputs. However, we recommend
+The \code{\link[=parse_netlogo_list]{parse_netlogo_list()}} function is available for
+parsing NetLogo list values embedded in other outputs. However, we recommend
 using it only when necessary, as it can be computationally intensive for
 large datasets and may not handle all edge cases.
 }
@@ -150,7 +162,9 @@ large datasets and may not handle all edge cases.
 
 You can pass additional command-line arguments to the NetLogo executable
 using the \code{other_arguments} parameter. This can be useful for specifying
-options such as the number of threads to use or other NetLogo-specific flags.
+options such as the number of
+\href{https://en.wikipedia.org/wiki/Thread_(computing)}{threads}
+to use or other NetLogo-specific flags.
 
 For example, to specify the number of threads, you can use:
 
@@ -168,23 +182,24 @@ for internal use by \code{run_experiment()} and cannot be modified. These are:
 \item \verb{--3D}: Specifies if the model is a 3D model (automatically set based on
 the model file extension).
 \item \code{--model}: Specifies the path to the NetLogo model file.
-\item \code{--setup-file}: Specifies the path to the experiment XML file.
+\item \code{--setup-file}: Specifies the path to the experiment
+\href{https://en.wikipedia.org/wiki/XML}{XML} file.
 \item \code{--experiment}: Specifies the name of the experiment defined in the model.
-\item \code{--table}: Specifies the output file for the results table.
-\item \code{--spreadsheet}: Specifies the output file for the spreadsheet results.
-\item \code{--lists}: Specifies the output file for the lists results.
-\item \code{--stats}: Specifies the output file for the statistics results.
+\item \code{--table}: Specifies the output file for the results
+\href{https://docs.netlogo.org/behaviorspace.html#table-output}{\code{table}}.
+\item \code{--spreadsheet}: Specifies the output file for the
+\href{https://docs.netlogo.org/behaviorspace.html#spreadsheet-output}{spreadsheet}
+results.
+\item \code{--lists}: Specifies the output file for the
+\href{https://docs.netlogo.org/behaviorspace.html#lists-output}{lists}
+results.
+\item \code{--stats}: Specifies the output file for the
+\href{https://docs.netlogo.org/behaviorspace.html#statistics-output}{statistics}
+results.
 }
 
-For a complete list of available options, please refer to the
+For a complete list of available options, refer to the
 \href{https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line}{BehaviorSpace Guide}.
-}
-
-\subsection{NetLogo 3D}{
-
-The function automatically detects whether the provided model is a 3D model
-(based on the file extension) and adjusts the command-line arguments
-accordingly. You do not need to set the \verb{--3D} flag manually.
 }
 
 \subsection{Non-Tabular Output}{
@@ -200,7 +215,8 @@ excessive non-tabular output may clutter your R console.
 # Defining the Model -----
 
 \dontrun{
-  model_path <- # This model is included with NetLogo installations.
+  # This model is included with NetLogo installations.
+  model_path <-
     find_netlogo_home() |>
     file.path(
       "models",

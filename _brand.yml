@@ -98,7 +98,6 @@ typography:
     weight: 700
   link:
     color: light-theme-blue
-    decoration: none
   monospace:
     family: Source Code Pro
     size: 1em

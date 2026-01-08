@@ -3,13 +3,15 @@
 #' @description
 #'
 #' `create_experiment()` creates a NetLogo
-#' [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment XML
-#' in a temporary file that can be used to run headless experiments with the
+#' [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment
+#' [XML](https://en.wikipedia.org/wiki/XML) file
+#' that can be used to run headless experiments with the
 #' [`run_experiment()`][run_experiment()] function.
 #'
-#' Please refer to the
-#' [BehaviorSpace Guide](https://docs.netlogo.org/behaviorspace.html) for
-#' complete guidance on how to set and run experiments in NetLogo.
+#' For complete guidance on setting up and running experiments in NetLogo,
+#' please refer to the
+#' [BehaviorSpace Guide](
+#' https://docs.netlogo.org/behaviorspace.html#creating-an-experiment-setup).
 #'
 #' @details
 #'
@@ -19,16 +21,6 @@
 #' recommend always using single quotes when writing NetLogo commands in R
 #' to avoid mistakes. For example, to run the `[1 "a" true]` command,
 #' use `'[1 "a" true]'`, not `"[1 \"a\" true]"`.
-#'
-#' ## Constants and `character` strings
-#'
-#' When passing single values to constants, [`character`][base::character()]
-#' strings should be passed as is, without adding quotes to them. For example,
-#' to set the variable `scenario` to `"SSP-585"`, you should use
-#' `list("scenario" = "SSP-585")`, not `list("scenario" = '"SSP-585"')`.
-#'
-#' Insert quotes only if the command requires them. For example:
-#' `'n-values 10 ["N/A"]'`.
 #'
 #' ## Multiple Commands
 #'
@@ -59,6 +51,11 @@
 #'   use
 #' `list("initial-number-of-turtles" = list(first = 10, step = 10, last = 50))`.
 #'
+#' When passing values to constants, [`character`][base::character()]
+#' strings should be passed as is, without adding quotes to them. For example,
+#' to set the variable `pathway` to `"SSP-585"`, you should use
+#' `list("pathway" = "SSP-585")`, not `list("pathway" = '"SSP-585"')`.
+#'
 #' @param name (optional) A [`character`][base::character()] string specifying
 #'   the name of the experiment (default: `""`).
 #' @param repetitions (optional) An integer number specifying the number of
@@ -72,26 +69,17 @@
 #'   of steps to run for each repetition. Set to `0` or `NULL` to have no time
 #'   limit (default: `1`).
 #' @param pre_experiment (optional) A [`character`][base::character()] vector
-#'   specifying the NetLogo command(s) to run before the experiment starts. This
-#'   can be a single command or multiple commands provided as a
-#'   [`character`][base::character()] vector; see the *Details > Multiple
-#'   Commands* section for usage (default: `NULL`).
+#'   specifying the NetLogo command(s) to run before the experiment starts
+#'   (default: `NULL`).
 #' @param setup (optional) A [`character`][base::character()] vector specifying
-#'   the NetLogo command(s) to set up the model. This can be a single command or
-#'   multiple commands provided as a [`character`][base::character()] vector
-#'   (default: `'setup'`).
+#'   the NetLogo command(s) to set up the model (default: `'setup'`).
 #' @param go (optional) A [`character`][base::character()] vector specifying the
-#'   NetLogo command(s) to run the model. This can be a single command or
-#'   multiple commands provided as a [`character`][base::character()] vector
-#'   (default: `'go'`).
+#'   NetLogo command(s) to run the model (default: `'go'`).
 #' @param post_run (optional) A [`character`][base::character()] vector
-#'   specifying the NetLogo command(s) to run after each run. This can be a
-#'   single command or multiple commands provided as a
-#'   [`character`][base::character()] vector (default: `NULL`).
+#'   specifying the NetLogo command(s) to run after each run (default: `NULL`).
 #' @param post_experiment (optional) A [`character`][base::character()] vector
-#'   specifying the NetLogo command(s) to run after the experiment ends. This
-#'   can be a single command or multiple commands provided as a
-#'   [`character`][base::character()] vector (default: `NULL`).
+#'   specifying the NetLogo command(s) to run after the experiment ends
+#'   (default: `NULL`).
 #' @param exit_condition (optional) A [`character`][base::character()] vector
 #'   specifying the NetLogo command that defines the exit condition for the
 #'   experiment (default: `NULL`).
@@ -100,23 +88,23 @@
 #'   metrics (default: `NULL`).
 #' @param metrics A [`character`][base::character()] vector specifying the
 #'   NetLogo commands to record as metrics
-#'   (default: `c('count turtles', 'count patches')`).
+#'   (default: `'count turtles'`).
 #' @param constants (optional) A named [`list`][base::list()] specifying the
 #'   parameters for the experiment. Each element can be either a scalar,
 #'   vector (for fixed/enumerated values), or a [`list`][base::list()] with
 #'   `first`, `step`, and `last` elements (for stepped/varying values). See the
 #'   *Details* and *Examples* sections to learn more (default: `NULL`).
 #' @param sub_experiments (optional) A [`list`][base::list()] where each element
-#'   is a [`list`][base::list()] specifying the constants for a sub-experiment.
-#'   Each sub-experiment uses the same structure as the `constants` argument.
-#'   See the `constants` argument documentation for details on how to specify
-#'   parameter values (default: `NULL`).
+#'   is also a [`list`][base::list()] specifying the constants for a
+#'   sub-experiment. Each sub-experiment uses the same structure as the
+#'   `constants` argument. See the `constants` argument documentation for
+#'   details on how to specify parameter values (default: `NULL`).
 #' @param file (optional) A [`character`][base::character()] string specifying
-#'   the path to save the created XML file
+#'   the path to save the created [XML](https://en.wikipedia.org/wiki/XML) file
 #'   (default: `tempfile(pattern = "experiment-", fileext = ".xml")`).
 #'
 #' @return A [`character`][base::character()] string with the path to the
-#'   created XML file.
+#'   created [XML](https://en.wikipedia.org/wiki/XML) file.
 #'
 #' @family BehaviorSpace functions
 #' @export
@@ -125,7 +113,7 @@
 #' # The examples below reproduce experiments from the NetLogo Models Library.
 #' # Try exporting these experiments from NetLogo and compare the XML files.
 #'
-#' ## Examples from the *Wolf Sheep Predation* Model (Sample Models) ----
+#' ## Examples from the Wolf Sheep Predation Model (Sample Models) ----
 #'
 #' ### BehaviorSpace Combinatorial
 #'
@@ -273,7 +261,7 @@
 #'
 #' setup_file |> inspect_experiment()
 #'
-#' ## Examples from the *Spread of Disease* Model (IABM Textbook) ----
+#' ## Examples from the Spread of Disease Model (IABM Textbook) ----
 #'
 #' ### Population Density
 #'
@@ -371,7 +359,7 @@ create_experiment <- function(
   post_experiment = NULL,
   exit_condition = NULL,
   run_metrics_condition = NULL,
-  metrics = c('count turtles', 'count patches'),
+  metrics = 'count turtles',
   constants = NULL,
   sub_experiments = NULL,
   file = tempfile(pattern = "experiment-", fileext = ".xml")

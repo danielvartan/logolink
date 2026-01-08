@@ -3,21 +3,29 @@
 #' @description
 #'
 #' `inspect_experiment()` reads and prints the content of a NetLogo
-#' [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment
+#' [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html)
+#' experiment
 #' [XML](https://en.wikipedia.org/wiki/XML)
-#' file to the console. This is useful for debugging and verifying the
+#' file to the R console. This is useful for debugging and verifying the
 #' structure of experiment files created by
 #' [`create_experiment()`][create_experiment()].
 #'
-#' Please refer to the
-#' [BehaviorSpace Guide](https://docs.netlogo.org/behaviorspace.html) for
-#' complete guidance on how to set and run experiments in NetLogo.
+#' For complete guidance on setting up and running experiments in NetLogo,
+#' please refer to the
+#' [BehaviorSpace Guide](
+#' https://docs.netlogo.org/behaviorspace.html#creating-an-experiment-setup).
 #'
 #' @param file A [`character`][base::character()] string specifying the path to
-#'   the BehaviorSpace experiment XML file.
+#'   the
+#'   [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html)
+#'   experiment
+#'   [XML](https://en.wikipedia.org/wiki/XML)
+#'   file.
 #'
 #' @return An [invisible][base::invisible()] `NULL`. This function is called for
-#'   its side effect of printing the XML content to the console.
+#'   its side effect of printing the
+#'   [XML](https://en.wikipedia.org/wiki/XML)
+#'   content to the R console.
 #'
 #' @family BehaviorSpace functions
 #' @export

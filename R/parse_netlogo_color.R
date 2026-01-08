@@ -3,7 +3,8 @@
 #' @description
 #'
 #' `parse_netlogo_color()` parses NetLogo color codes into their approximate
-#' hexadecimal color representations.
+#' [hexadecimal color](https://en.wikipedia.org/wiki/Web_colors)
+#' representations.
 #'
 #' **Note**: This function requires the
 #' [`colorspace`](https://colorspace.r-forge.r-project.org/),
@@ -12,29 +13,34 @@
 #'
 #' @details
 #'
-#' NetLogo color codes are based on 14 hues, which can be visualized by running
-#' [`base-colors`](https://docs.netlogo.org/dictionary.html#base-colors) in the
-#' NetLogo console. Each hue can be adjusted using shades from 0 to 9, where 0
-#' represents the darkest shade and 5 represents the base shade. Shades 6
-#' through 9 represent progressively lighter variations.
+#' NetLogo color codes are based on `14` hues, which can be visualized by
+#' running
+#' [`base-colors`](https://docs.netlogo.org/dictionary.html#base-colors)
+#' in the NetLogo console. Each hue can be adjusted using shades from `0` to
+#' `9`, where `0` represents the darkest shade and `5` represents the base
+#' shade. Shades `6` through `9` represent progressively lighter variations.
 #'
-#' Note that NetLogo also supports extracting RGB components directly with
+#' Note that NetLogo also supports extracting
+#' [RGB](https://en.wikipedia.org/wiki/RGB_color_model)
+#' components directly with
 #' [`extract-rgb`](https://docs.netlogo.org/dictionary.html#extract-rgb).
 #' This function provides an alternative approach for obtaining color
 #' representations from NetLogo color codes.
 #'
 #' @param x A [`numeric`][base::numeric()] vector containing NetLogo color
-#'   codes (ranging from 0 to 140) to be parsed into hexadecimal color
-#'   representations.
-#' @param bias (optional) A [`numeric`][base::numeric()] value between `-1`` and
-#'   `1`` that adjusts the lightness or darkness of the resulting colors.
+#'   codes (ranging from `0` to `140`) to be parsed into
+#'   [hexadecimal](https://en.wikipedia.org/wiki/Web_colors)
+#'   color representations.
+#' @param bias (optional) A [`numeric`][base::numeric()] value between `-1` and
+#'   `1` that adjusts the lightness or darkness of the resulting colors.
 #'   Positive values lighten colors, while negative values darken them. This
 #'   only affects shaded colors (those with shades other than 5)
 #'   (default: `0.1`).
 #'
 #' @return A [`character`][base::character()] vector containing the
-#'   approximate hexadecimal color representations corresponding to the input
-#'   NetLogo color codes.
+#'   approximate
+#'   [hexadecimal](https://en.wikipedia.org/wiki/Web_colors)
+#'   color representations corresponding to the input NetLogo color codes.
 #'
 #' @family parsing functions
 #' @export

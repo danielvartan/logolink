@@ -47,9 +47,10 @@ principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and
 integrating seamlessly with the broader [tidyverse
 ecosystem](https://tidyverse.org/).
 
-The package is designed to work with NetLogo **7.0.1 and above**. If you
-need support for earlier NetLogo releases (up to 7.0.0), use an older
-version of the package.
+The package is designed to work with NetLogo **7.0.1 and above**. We do
+not plan to offer support for earlier versions. See NetLogo’s
+[Transition Guide](https://docs.netlogo.org/transition.html) to upgrade
+your models if needed.
 
 > If you find this project useful, please consider giving it a star!  
 > [![GitHub Repository
@@ -67,15 +68,17 @@ maintained, follows tidyverse conventions, and is designed to be simple
 and straightforward to use.
 
 For context, [`RNetLogo`](https://CRAN.R-project.org/package=RNetLogo)
-works only with older versions (up to version 6.0.0, released in
-December 2016) and has not been updated since June 2017.
-[`nlrx`](https://CRAN.R-project.org/package=nlrx) provides a powerful
-framework for managing experiments and results, but
+supports only older versions (up to 6.0.0, released in December 2016)
+and has not been updated since June 2017.
+[`nlrx`](https://CRAN.R-project.org/package=nlrx) offers a powerful
+framework for managing experiments and results but
 [supports](https://docs.ropensci.org/nlrx/reference/supported_netlogo_versions.html)
-only up to NetLogo 6.3.0 (released in September 2022) and has [many
+only up to NetLogo 6.3.0 (released in September 2022), has additional
+system requirements, presents a steep learning curve, and has [many
 unresolved issues](https://github.com/ropensci/nlrx/issues). `logolink`
-complements these packages by focusing on simplicity, full compatibility
-with NetLogo 7, and seamless integration into modern R workflows.
+**complements** these packages by prioritizing simplicity, full
+compatibility with NetLogo 7, and seamless integration with modern R
+workflows.
 
 ## Installation
 
@@ -258,7 +261,7 @@ library(dplyr)
 results |> glimpse()
 #> List of 2
 #>  $ metadata:List of 6
-#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-07 05:09:35"
+#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-07 21:52:04"
 #>   ..$ netlogo_version : chr "7.0.3"
 #>   ..$ output_version  : chr "2.0"
 #>   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"
@@ -275,7 +278,7 @@ results |> glimpse()
 #>   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
 #>   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ count_sheep           : num [1:110110] 500 498 496 494 493 492 490 487 485 483 ...
+#>   ..$ count_sheep           : num [1:110110] 500 499 498 497 495 493 493 492 490 489 ...
 ```
 
 ### Analyzing the Data (Bonus Section)
