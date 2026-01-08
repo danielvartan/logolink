@@ -86,14 +86,11 @@ run_experiment(
 
 - timeout:
 
-  (optional) A \[`numeric`\]\[base::numeric#' file containing the
-  experiment definition. This file can be created using
-  [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md)
-  or exported from the NetLogo()\] value specifying the maximum time (in
-  seconds) to wait for the NetLogo process to complete. If the process
-  exceeds this time limit, it will be terminated, and the function will
-  return the available output up to that point. Use `Inf` for no time
-  limit (default: `Inf`).
+  (optional) A [`numeric`](https://rdrr.io/r/base/numeric.html) value
+  specifying the maximum time (in seconds) to wait for the NetLogo
+  process to complete. If the process exceeds this time limit, it will
+  be terminated, and the function will return the available output up to
+  that point. Use `Inf` for no time limit (default: `Inf`).
 
 - tidy_output:
 
@@ -318,21 +315,21 @@ Other BehaviorSpace functions:
       setup_file = setup_file
     )
 #> ℹ Running model
-#> ✔ Running model [20s]
+#> ✔ Running model [20.3s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [20ms]
+#> ✔ Gathering metadata [19ms]
 #> 
 #> ℹ Processing table output
 #> ✔ Processing table output [15ms]
 #> 
 #> ℹ The experiment run produced the following messages:
 #> 
-#> Jan 08, 2026 3:17:41 AM java.util.prefs.FileSystemPreferences$1 run
+#> Jan 08, 2026 3:55:31 AM java.util.prefs.FileSystemPreferences$1 run
 #> INFO: Created user preferences directory.
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-08 03:17:42 GMT"
+#> [1] "2026-01-08 03:55:32 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -380,17 +377,17 @@ Other BehaviorSpace functions:
       experiment = "Wolf Sheep Simple model analysis"
     )
 #> ℹ Running model
-#> ✔ Running model [18s]
+#> ✔ Running model [17.8s]
 #> 
 #> ℹ Gathering metadata
 #> ✔ Gathering metadata [14ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [9ms]
+#> ✔ Processing table output [8ms]
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-08 03:18:03 GMT"
+#> [1] "2026-01-08 03:55:53 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"

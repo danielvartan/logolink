@@ -89,9 +89,9 @@
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
 <blockquote>
-<p><strong>Note</strong>: The CRAN release of <code>logolink</code> breaks with the recent NetLogo patch updates because the BehaviorSpace XML format changed. The details are in this <a href="https://github.com/NetLogo/NetLogo/issues/2560" class="external-link">GitHub issue</a>. If your experiments fail to run, install the development version of <code>logolink</code> from GitHub as shown in the Installation section below. An updated CRAN release will be submitted soon.</p>
+<p><strong>Note</strong>: The <a href="https://cran.r-project.org/" class="external-link">CRAN</a> release of <code>logolink</code> breaks with the recent NetLogo patch updates because the <a href="https://github.com/NetLogo/NetLogo/wiki/XML-File-Format" class="external-link">BehaviorSpace XML format</a> changed. The details are in this <a href="https://github.com/NetLogo/NetLogo/issues/2560" class="external-link">GitHub issue</a>. If your experiments fail to run, install the development version of <code>logolink</code> from GitHub as shown in the Installation section below. An updated <a href="https://cran.r-project.org/" class="external-link">CRAN</a> release will be submitted soon.</p>
 </blockquote>
-<p><code>logolink</code> is an <a href="https://www.r-project.org/" class="external-link">R</a> package that simplifies setting up and running <a href="https://www.netlogo.org/" class="external-link">NetLogo</a> simulations directly from R. It offers a modern, streamlined interface for running models, following the <a href="https://tidyverse.tidyverse.org/articles/manifesto.html" class="external-link">tidyverse principles</a> and integrating seamlessly with the broader <a href="https://tidyverse.org/" class="external-link">tidyverse ecosystem</a>.</p>
+<p><code>logolink</code> is an <a href="https://www.r-project.org/" class="external-link">R</a> package that simplifies setting up and running <a href="https://www.netlogo.org/" class="external-link">NetLogo</a> simulations directly from R. It provides a modern, intuitive interface that follows <a href="https://tidyverse.tidyverse.org/articles/manifesto.html" class="external-link">tidyverse principles</a> and integrates seamlessly with the <a href="https://tidyverse.org/" class="external-link">tidyverse ecosystem</a>.</p>
 <p>The package is designed to work with NetLogo <strong>7.0.1 and above</strong>. We do not plan to offer support for earlier versions. See NetLogo’s <a href="https://docs.netlogo.org/transition.html" class="external-link">Transition Guide</a> to upgrade your models if needed.</p>
 <blockquote>
 <p>If you find this project useful, please consider giving it a star!   <a href="https://github.com/danielvartan/logolink/" class="external-link"><img src="https://img.shields.io/github/stars/danielvartan/logolink" alt="GitHub Repository Stars"></a></p>
@@ -103,8 +103,8 @@
 <div class="section level2">
 <h2 id="another-r-package-for-netlogo">Another R Package for NetLogo?<a class="anchor" aria-label="anchor" href="#another-r-package-for-netlogo"></a>
 </h2>
-<p>While other R packages connect R to NetLogo, <code>logolink</code> is currently the only one that fully supports the latest NetLogo release. It is actively maintained, follows tidyverse conventions, and is designed to be simple and straightforward to use.</p>
-<p>For context, <a href="https://CRAN.R-project.org/package=RNetLogo" class="external-link"><code>RNetLogo</code></a> supports only older versions (up to 6.0.0, released in December 2016) and has not been updated since June 2017. <a href="https://CRAN.R-project.org/package=nlrx" class="external-link"><code>nlrx</code></a> offers a powerful framework for managing experiments and results but <a href="https://docs.ropensci.org/nlrx/reference/supported_netlogo_versions.html" class="external-link">supports</a> only up to NetLogo 6.3.0 (released in September 2022), requires additional system dependencies, uses its own internal conventions that diverge from NetLogo standards, has a steep learning curve, and has <a href="https://github.com/ropensci/nlrx/issues" class="external-link">many unresolved issues</a>.</p>
+<p>While other R packages connect R to NetLogo, <code>logolink</code> is currently the only one that fully supports the latest NetLogo release. It is actively maintained, follows <a href="https://design.tidyverse.org/" class="external-link">tidyverse conventions</a>, and is designed to be simple and straightforward to use.</p>
+<p>For context, <a href="https://CRAN.R-project.org/package=RNetLogo" class="external-link"><code>RNetLogo</code></a> supports only older versions (up to 6.0.0, released in December 2016) and has not been updated since June 2017. <a href="https://CRAN.R-project.org/package=nlrx" class="external-link"><code>nlrx</code></a> offers a powerful framework for managing experiments and results, but <a href="https://docs.ropensci.org/nlrx/reference/supported_netlogo_versions.html" class="external-link">supports</a> only up to NetLogo 6.3.0 (released in September 2022), requires additional system dependencies, uses its own internal conventions that diverge from NetLogo standards, has a steep learning curve, and has <a href="https://github.com/ropensci/nlrx/issues" class="external-link">many unresolved issues</a>.</p>
 <p><code>logolink</code> <strong>complements</strong> these packages by prioritizing simplicity, offering finer control over output, ensuring full compatibility with NetLogo 7, and integrating seamlessly with modern R workflows.</p>
 </div>
 <div class="section level2">
@@ -124,9 +124,9 @@
 <p><code>logolink</code> usage is very straightforward. The main functions are:</p>
 <ul>
 <li>
-<a href="https://danielvartan.github.io/logolink/reference/create_experiment.html"><code>create_experiment</code></a>: Create a NetLogo BehaviorSpace experiment XML file.</li>
+<a href="https://danielvartan.github.io/logolink/reference/create_experiment.html"><code>create_experiment</code></a>: Create NetLogo BehaviorSpace experiment.</li>
 <li>
-<a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a>: Run a NetLogo BehaviorSpace experiment.</li>
+<a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a>: Run NetLogo BehaviorSpace experiment.</li>
 </ul>
 <p>Along with this package, you will also need NetLogo 7.0.1 or higher installed on your computer. You can download it from the <a href="https://www.netlogo.org" class="external-link">NetLogo website</a>.</p>
 <p>After installing NetLogo and <code>logolink</code>, start by loading the package with:</p>
@@ -205,8 +205,8 @@
 <div class="section level3">
 <h3 id="running-an-experiment">Running an Experiment<a class="anchor" aria-label="anchor" href="#running-an-experiment"></a>
 </h3>
-<p>With the experiment file created, you can now run your model using the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a> function. This function will execute the NetLogo model with the specified parameters and return the results as a <a href="https://r4ds.hadley.nz/data-tidy.html" class="external-link">tidy data frames</a>.</p>
-<p>First, you need to specify the path to your NetLogo model. In this example, we will use the <em>Wolf Sheep Predation</em> model that comes with any NetLogo installation.</p>
+<p>With the experiment file created, you can now run your model using the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a> function. This function will execute the NetLogo model with the specified parameters and return the results as <a href="https://r4ds.hadley.nz/data-tidy.html" class="external-link">tidy data frames</a>.</p>
+<p>First, you need to specify the path to your NetLogo model. In this example, we will use the <a href="https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/IABM%20Textbook/chapter%204/Wolf%20Sheep%20Simple%205.nlogox" class="external-link">Wolf Sheep Simple</a> model that comes with any NetLogo installation. For that, we can use the <a href="https://danielvartan.github.io/logolink/reference/find_netlogo_home.html"><code>find_netlogo_home</code></a> function to locate the NetLogo installation directory and then build the path to the model file.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model_path</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="reference/find_netlogo_home.html">find_netlogo_home</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -227,14 +227,14 @@
 <div class="section level3">
 <h3 id="checking-the-results">Checking the Results<a class="anchor" aria-label="anchor" href="#checking-the-results"></a>
 </h3>
-<p><code>logolink</code> supports the <a href="https://docs.netlogo.org/behaviorspace.html#run-options-formats" class="external-link">four output formats</a> available in NetLogo BehaviorSpace: <a href="https://docs.netlogo.org/behaviorspace.html#table-output" class="external-link"><code>table</code></a>, <a href="https://docs.netlogo.org/behaviorspace.html#spreadsheet-output" class="external-link"><code>spreadsheet</code></a>, <a href="https://docs.netlogo.org/behaviorspace.html#statistics-output" class="external-link"><code>statistics</code></a>, and <a href="https://docs.netlogo.org/behaviorspace.html#lists-output" class="external-link"><code>lists</code></a>. By default, all formats are returned as a named list.</p>
+<p><code>logolink</code> supports the <a href="https://docs.netlogo.org/behaviorspace.html#run-options-formats" class="external-link">four output formats</a> available in <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a>: <a href="https://docs.netlogo.org/behaviorspace.html#table-output" class="external-link">Table</a>, <a href="https://docs.netlogo.org/behaviorspace.html#spreadsheet-output" class="external-link">Spreadsheet</a>, <a href="https://docs.netlogo.org/behaviorspace.html#lists-output" class="external-link">Lists</a>, and <a href="https://docs.netlogo.org/behaviorspace.html#statistics-output" class="external-link">Statistics</a>. By default, only the <a href="https://docs.netlogo.org/behaviorspace.html#table-output" class="external-link">Table</a> format is returned, along with some metadata about the experiment run.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 2</span></span>
 <span><span class="co">#&gt;  $ metadata:List of 6</span></span>
-<span><span class="co">#&gt;   ..$ timestamp       : POSIXct[1:1], format: "2026-01-07 23:13:36"</span></span>
+<span><span class="co">#&gt;   ..$ timestamp       : POSIXct[1:1], format: "2026-01-08 00:44:15"</span></span>
 <span><span class="co">#&gt;   ..$ netlogo_version : chr "7.0.3"</span></span>
 <span><span class="co">#&gt;   ..$ output_version  : chr "2.0"</span></span>
 <span><span class="co">#&gt;   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"</span></span>
@@ -251,7 +251,8 @@
 <span><span class="co">#&gt;   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
 <span><span class="co">#&gt;   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
-<span><span class="co">#&gt;   ..$ count_sheep           : num [1:110110] 500 499 497 495 494 492 491 491 489 489 ...</span></span></code></pre></div>
+<span><span class="co">#&gt;   ..$ count_sheep           : num [1:110110] 500 499 498 496 495 494 491 489 488 488 ...</span></span></code></pre></div>
+<p>If you already have an file with experiment results, you can read it into R using the <a href="https://danielvartan.github.io/logolink/reference/read_experiment.html"><code>read_experiment</code></a> function, which will yield the same output structure as <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a>.</p>
 </div>
 <div class="section level3">
 <h3 id="analyzing-the-data-bonus-section">Analyzing the Data (Bonus Section)<a class="anchor" aria-label="anchor" href="#analyzing-the-data-bonus-section"></a>
@@ -294,10 +295,10 @@
 <div class="section level3">
 <h3 id="visualizing-the-netlogo-world-bonus-section">Visualizing the NetLogo World (Bonus Section)<a class="anchor" aria-label="anchor" href="#visualizing-the-netlogo-world-bonus-section"></a>
 </h3>
-<p><code>logolink</code> also includes tutorials to help you get the most out of NetLogo in R. One tutorial demonstrates how to plot the NetLogo world at specific time steps and animate its evolution over time. You can find it <a href="https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html">here</a>.</p>
+<p><code>logolink</code> also includes tutorials to help you get the most out of NetLogo in R. The <a href="https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html">Visualizing the NetLogo World</a> tutorial demonstrates how to plot the NetLogo world at specific time steps and animate its evolution over time. You can find it <a href="https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html">here</a>.</p>
 <p><img src="reference/figures/vignette-wolf-sheep-model-animation-1.gif"></p>
 <p>Click <a href="https://danielvartan.github.io/logolink/reference/">here</a> to see the full list of <code>logolink</code> functions.</p>
-<p>Please refer to the <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace Guide</a> for complete instructions on how to set up and run experiments in NetLogo.</p>
+<p>For complete guidance on setting up and running experiments in NetLogo, please refer to the <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace Guide</a>.</p>
 </div>
 </div>
 <div class="section level2">

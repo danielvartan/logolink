@@ -21,9 +21,9 @@ this vignette, you’ll have both static plots and an animated
 over time.
 
 We assume you’re already familiar with
-[NetLogo](https://ccl.northwestern.edu/netlogo/) and have version 7.0.1
-or above installed. You should also be comfortable with R programming,
-particularly with the [tidyverse](https://www.tidyverse.org/) ecosystem.
+[NetLogo](https://www.netlogo.org) and have version 7.0.1 or above
+installed. You should also be comfortable with R programming,
+particularly with the [tidyverse](https://tidyverse.org/) ecosystem.
 
 ## Setting the Stage
 

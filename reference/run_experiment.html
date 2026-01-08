@@ -160,8 +160,7 @@ number of threads. See the <em>Details</em> section for more information
 
 
 <dt id="arg-timeout">timeout<a class="anchor" aria-label="anchor" href="#arg-timeout"></a></dt>
-<dd><p>(optional) A [<code>numeric</code>][base::numeric#'   file containing the experiment definition. This file can be created using
-<code><a href="create_experiment.html">create_experiment()</a></code> or exported from the NetLogo()] value specifying the
+<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a></code> value specifying the
 maximum time (in seconds) to wait for the NetLogo process to complete. If
 the process exceeds this time limit, it will be terminated, and the
 function will return the available output up to that point. Use <code>Inf</code> for
@@ -365,21 +364,21 @@ excessive non-tabular output may clutter your R console.</p>
 <span class="r-in"><span>      setup_file <span class="op">=</span> <span class="va">setup_file</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Running model</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Running model <span style="color: #B2B2B2;">[20s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Running model <span style="color: #B2B2B2;">[20.3s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Gathering metadata</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Gathering metadata <span style="color: #B2B2B2;">[20ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Gathering metadata <span style="color: #B2B2B2;">[19ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Processing table output</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing table output <span style="color: #B2B2B2;">[15ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> The experiment run produced the following messages:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Jan 08, 2026 3:17:41 AM java.util.prefs.FileSystemPreferences$1 run</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Jan 08, 2026 3:55:31 AM java.util.prefs.FileSystemPreferences$1 run</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> INFO: Created user preferences directory.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$timestamp</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-01-08 03:17:42 GMT"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-01-08 03:55:32 GMT"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$netlogo_version</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "7.0.3"</span>
@@ -427,17 +426,17 @@ excessive non-tabular output may clutter your R console.</p>
 <span class="r-in"><span>      experiment <span class="op">=</span> <span class="st">"Wolf Sheep Simple model analysis"</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Running model</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Running model <span style="color: #B2B2B2;">[18s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Running model <span style="color: #B2B2B2;">[17.8s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Gathering metadata</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Gathering metadata <span style="color: #B2B2B2;">[14ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Processing table output</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing table output <span style="color: #B2B2B2;">[9ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing table output <span style="color: #B2B2B2;">[8ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$timestamp</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-01-08 03:18:03 GMT"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-01-08 03:55:53 GMT"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$netlogo_version</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "7.0.3"</span>
