@@ -23,7 +23,89 @@ badge_codecov() |> invisible() # To avoid unnecessary messages.
 source(here("R", ".setup.R"))
 ```
 
-<!-- badges: start -->logolink 1.0.0.9000 (development version)
+<!-- badges: start -->
+```{r}
+#| echo: false
+#| output: asis
+#| message: false
+#| warning: false
+
+cat(
+  badge_repostatus("active"),
+  paste0(
+    "[![",
+    "CRAN Status Badge",
+    "](",
+    "https://www.r-pkg.org/badges/version-ago/logolink",
+    ")](",
+    "https://cran.r-project.org/package=logolink",
+    ")"
+  ),
+  badge_custom(
+    x = "doi",
+    y = "10.32614/CRAN.package.logolink",
+    color = "1284C5",
+    url = "https://doi.org/10.32614/CRAN.package.logolink",
+    alt = "DOI badge"
+  ),
+  badge_cran_download(type = "grand-total"),
+  badge_github_actions(action = "R-CMD-check"),
+  badge_cran_checks("logolink"),
+  paste0(
+    "[![",
+    "FAIR checklist badge",
+    "](",
+    "https://img.shields.io/badge/",
+    "fairsoftwarechecklist.net", "-",
+    "-",
+    "00a7d9",
+    ")](",
+    "https://fairsoftwarechecklist.net/v0.2/?f=31&a=32113&i=32322&r=133",
+    ")"
+  ),
+  badge_codecov(),
+  badge_license(
+    license = "GPLv3",
+    color = "bd0000",
+    url = "https://www.gnu.org/licenses/gpl-3.0",
+    alt = "GNU GPLv3 License"
+  ),
+  paste0(
+    "[![",
+    "FAIR checklist badge",
+    "](",
+    "https://img.shields.io/badge/",
+    "fairsoftwarechecklist.net", "-",
+    "-",
+    "00a7d9",
+    ")](",
+    "https://fairsoftwarechecklist.net/v0.2/?f=31&a=32113&i=32322&r=133",
+    ")"
+  ),
+  paste0(
+    "[![",
+    "fair-software.eu",
+    "](",
+    "https://img.shields.io/badge/",
+    "fair--software.eu", "-",
+    "%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F",
+    "-",
+    "green",
+    ")](",
+    "https://fair-software.eu",
+    ")"
+  ),
+  badge_custom(
+    x = "Contributor%20Covenant",
+    y = "3.0",
+    color = "4baaaa",
+    url = "https://www.contributor-covenant.org/version/3/0/code_of_conduct/",
+    alt = "Contributor Covenant 3.0 Code of Conduct"
+  )
+)
+```
+<!-- badges: end -->
+
 ## Overview
 
 `logolink` is an [R](https://www.r-project.org/) package that simplifies setting up and running [NetLogo](https://www.netlogo.org/) simulations from R. It provides a modern, intuitive interface that follows [tidyverse principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and integrates seamlessly with the [tidyverse ecosystem](https://tidyverse.org/).
