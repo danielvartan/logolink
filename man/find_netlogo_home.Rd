@@ -8,7 +8,7 @@ find_netlogo_home()
 }
 \value{
 A \code{\link[base:character]{character}} string specifying the path to the
-NetLogo installation directory. Returns an empty string (\code{""}) if no
+NetLogo installation directory. Returns \code{\link[base:NA]{NA}} if no
 installation can be found.
 }
 \description{

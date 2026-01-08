@@ -8,7 +8,7 @@ find_netlogo_version()
 }
 \value{
 A \code{\link[base:character]{character}} string specifying the NetLogo
-version (e.g., \code{"7.0.3"}). Returns an empty string (\code{""}) if the version
+version (e.g., \code{"7.0.3"}). Returns \code{\link[base:NA]{NA}} if the version
 cannot be determined.
 }
 \description{

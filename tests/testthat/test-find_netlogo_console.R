@@ -27,7 +27,7 @@ testthat::test_that("`find_netlogo_console()` | General test", {
     )
 
     find_netlogo_console() |>
-      testthat::expect_equal("") |>
+      testthat::expect_equal(NA_character_) |>
       suppressMessages()
   }
 

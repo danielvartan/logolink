@@ -29,7 +29,7 @@ testthat::test_that("`find_netlogo_version()` | General test", {
   )
 
   find_netlogo_version() |>
-    testthat::expect_equal("") |>
+    testthat::expect_equal(NA_character_) |>
     suppressMessages()
 
   Sys.setenv("NETLOGO_CONSOLE" = netlogo_console_backup)

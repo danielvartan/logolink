@@ -8,7 +8,7 @@ find_netlogo_console()
 }
 \value{
 A \code{\link[base:character]{character}} string specifying the path to the
-NetLogo executable file. Returns an empty string (\code{""}) if the executable
+NetLogo executable file. Returns \code{\link[base:NA]{NA}} if the executable
 cannot be found at any location.
 }
 \description{
@@ -21,10 +21,10 @@ The function uses the following search order:
 \item Checks the \code{NETLOGO_CONSOLE} environment variable. If set and the file
 exists, returns that path.
 \item If the environment variable is not set or the file does not exist,
-constructs the path based on the output of
+constructs and expands the path based on the output of
 \code{\link[=find_netlogo_home]{find_netlogo_home()}} (e.g.,
-\verb{<NETLOGO_HOME>/NetLogo_Console} on Linux/macOS or
-\verb{<NETLOGO_HOME>/NetLogo_Console.exe} on Windows).
+\verb{<NETLOGO_HOME>/NetLogo_Console.exe} on Windows or
+\verb{<NETLOGO_HOME>/NetLogo_Console} for other systems).
 }
 }
 \examples{

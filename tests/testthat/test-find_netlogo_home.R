@@ -31,7 +31,7 @@ testthat::test_that("`find_netlogo_home()` | General test", {
   )
 
   find_netlogo_home() |>
-    testthat::expect_equal("") |>
+    testthat::expect_equal(NA_character_) |>
     suppressMessages()
 
   Sys.setenv("NETLOGO_HOME" = netlogo_home_backup)

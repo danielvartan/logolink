@@ -12,13 +12,13 @@
 #' 1. Checks the `NETLOGO_CONSOLE` environment variable. If set and the file
 #'    exists, returns that path.
 #' 2. If the environment variable is not set or the file does not exist,
-#'    constructs the path based on the output of
+#'    constructs and expands the path based on the output of
 #'    [`find_netlogo_home()`][find_netlogo_home()] (e.g.,
-#'    `<NETLOGO_HOME>/NetLogo_Console` on Linux/macOS or
-#'    `<NETLOGO_HOME>/NetLogo_Console.exe` on Windows).
+#'    `<NETLOGO_HOME>/NetLogo_Console.exe` on Windows or
+#'    `<NETLOGO_HOME>/NetLogo_Console` for other systems).
 #'
 #' @return A [`character`][base::character()] string specifying the path to the
-#'   NetLogo executable file. Returns an empty string (`""`) if the executable
+#'   NetLogo executable file. Returns [`NA`][base::is.na()] if the executable
 #'   cannot be found at any location.
 #'
 #' @family system functions
@@ -74,7 +74,7 @@ find_netlogo_console <- function() {
         wrap = TRUE
       )
 
-      ""
+      NA_character_
     } else {
       out |>
         normalizePath() |>

@@ -19,7 +19,7 @@
 #' last one (alphabetically) is returned.
 #'
 #' @return A [`character`][base::character()] string specifying the path to the
-#'   NetLogo installation directory. Returns an empty string (`""`) if no
+#'   NetLogo installation directory. Returns [`NA`][base::is.na()] if no
 #'   installation can be found.
 #'
 #' @family system functions
@@ -101,7 +101,7 @@ find_netlogo_home <- function() {
         wrap = TRUE
       )
 
-      ""
+      NA_character_
     } else {
       out |>
         normalizePath() |>
