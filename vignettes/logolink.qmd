@@ -58,7 +58,7 @@ library(logolink)
 
 `logolink` automatically detects your NetLogo installation path. If automatic detection fails, you can specify it manually. See the [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.html) documentation for details.
 
-We'll also need to specify the path to the model file. Since we're using a built-in NetLogo model, we can retrieve its path easily using the `find_netlogo_home()` function:
+We'll also need to specify the path to the model file. Since we're using a built-in NetLogo model, we can retrieve its path easily using the [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.html) function:
 
 ```{r}
 model_path <-
@@ -73,7 +73,7 @@ model_path <-
 
 ## Creating an Experiment
 
-Now that we have our environment set up, let's start by creating an experiment. We can do this using the `create_experiment` function. This function allows us to define the parameters we want to vary, the metrics we want to collect, and other settings for our simulation runs.
+Now that we have our environment set up, let's start by creating an experiment. We can do this using the [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.html) function. This function allows us to define the parameters we want to vary, the metrics we want to collect, and other settings for our simulation runs.
 
 ```{r}
 setup_file <- create_experiment(
@@ -99,14 +99,15 @@ setup_file <- create_experiment(
 )
 ```
 
-Alternatively, you can define your experiment directly within NetLogo and save it as part of the model file. If you do this, you can skip the `create_experiment` step and simply pass the experiment name to `run_experiment`.
+Alternatively, you can define your experiment directly within NetLogo and save it as part of the model file. If you do this, you can skip the [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.html) step and simply pass the experiment name to [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.html).
 
-If you're familiar with the [BehaviorSpace XML file structure](https://github.com/NetLogo/NetLogo/wiki/XML-File-Format#behaviorspace-experiments), you can easily inspect the created experiment using the `inspect_experiment` function:
+If you're familiar with the [BehaviorSpace XML file structure](https://github.com/NetLogo/NetLogo/wiki/XML-File-Format#behaviorspace-experiments), you can easily inspect the created experiment using the [`inspect_experiment`](https://danielvartan.github.io/logolink/reference/inspect_experiment.html) function:
 
 ```{r}
 setup_file |> inspect_experiment()
 #> <experiments>
-#>   <experiment name="Population Density (Runtime)" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="true" timeLimit="1000">
+#>   <experiment name="Population Density (Runtime)" repetitions="10"
+#>   sequentialRunOrder="true" runMetricsEveryStep="true" timeLimit="1000">
 #>     <setup>setup</setup>
 #>     <go>go</go>
 #>     <metrics>
@@ -116,7 +117,8 @@ setup_file |> inspect_experiment()
 #>       <enumeratedValueSet variable="variant">
 #>         <value value="&quot;mobile&quot;"></value>
 #>       </enumeratedValueSet>
-#>       <steppedValueSet variable="num-people" first="50" step="50" last="200"></steppedValueSet>
+#>       <steppedValueSet variable="num-people" first="50" step="50" last="200">
+#>       </steppedValueSet>
 #>       <enumeratedValueSet variable="connections-per-node">
 #>         <value value="4.1"></value>
 #>       </enumeratedValueSet>
@@ -133,7 +135,7 @@ setup_file |> inspect_experiment()
 
 ## Running the Simulation
 
-With our experiment defined, we can now run the simulation using the `run_experiment` function. This function takes care of launching NetLogo, executing the experiment, and collecting the results as [tidy data frames](https://r4ds.hadley.nz/data-tidy.html).
+With our experiment defined, we can now run the simulation using the [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.html) function. This function takes care of launching NetLogo, executing the experiment, and collecting the results as [tidy data frames](https://r4ds.hadley.nz/data-tidy.html).
 
 ```{r}
 #| output: false
@@ -150,7 +152,7 @@ results <-
 
 ## Checking the Results
 
-We can now examine the results. The output from `run_experiment` is a list of data frames. These can be any of the [four output formats](https://docs.netlogo.org/behaviorspace.html#run-options-formats) available in [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html): [Table](https://docs.netlogo.org/behaviorspace.html#table-output), [Spreadsheet](https://docs.netlogo.org/behaviorspace.html#spreadsheet-output), [Lists](https://docs.netlogo.org/behaviorspace.html#lists-output), and [Statistics](https://docs.netlogo.org/behaviorspace.html#statistics-output). By default, only the [Table](https://docs.netlogo.org/behaviorspace.html#table-output) format is returned, along with some metadata about the experiment run.
+We can now examine the results. The output from [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.html) is a list of data frames. These can be any of the [four output formats](https://docs.netlogo.org/behaviorspace.html#run-options-formats) available in [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html): [Table](https://docs.netlogo.org/behaviorspace.html#table-output), [Spreadsheet](https://docs.netlogo.org/behaviorspace.html#spreadsheet-output), [Lists](https://docs.netlogo.org/behaviorspace.html#lists-output), and [Statistics](https://docs.netlogo.org/behaviorspace.html#statistics-output). By default, only the [Table](https://docs.netlogo.org/behaviorspace.html#table-output) format is returned, along with some metadata about the experiment run.
 
 The `glimpse()` function from the [`dplyr`](https://dplyr.tidyverse.org/) R package can help us take a quick look at the results:
 
@@ -274,7 +276,7 @@ ggsave(
 
 ![](../man/figures/vignette-spread-of-disease-model-animation-1.gif)
 
-See the [Visualizing the NetLogo World](https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html) tutorial to learn how to do this by using `parse_netlogo_color` and `get_netlogo_shape` functions.
+See the [Visualizing the NetLogo World](https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html) tutorial to learn how to do this by using [`parse_netlogo_color()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_color.html) and [`get_netlogo_shape()`](https://danielvartan.github.io/logolink/reference/get_netlogo_shape.html) functions.
 
 You can customize these snapshots and animations as needed. Below is an example of an animation using Wilensky's [Wolf Sheep Simple](https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/IABM%20Textbook/chapter%204/Wolf%20Sheep%20Simple%205.nlogox) model.
 

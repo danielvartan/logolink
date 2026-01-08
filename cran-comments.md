@@ -68,7 +68,7 @@ No spelling errors found.
 ## `goodpractice` Results (Arch Linux)
 
 ```text
-♥ Aha! Fine package! Keep up the flawless work!
+♥ Ah! Smashing package! Keep up the breathtaking work!
 ```
 
 ---
