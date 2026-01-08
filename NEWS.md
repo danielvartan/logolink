@@ -27,6 +27,7 @@
 - The package now checks `logolink` NetLogo integration via Continuous Integration (CI), performing tests on Windows, macOS, and Linux using GitHub Actions from the [`LogoActions`](https://github.com/danielvartan/logoactions) project.
 - New R unit tests were implemented.
 - New NetLogo unit tests were implemented.
+- A [new vignette](https://danielvartan.github.io/logolink/articles/introduction-to-logolink.html) introducing the package was added.
 - A [new vignette](https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html) showing how to visualize the NetLogo world using [`ggplot2`](https://ggplot2.tidyverse.org/) was added.
 - The documentation was updated to reflect the changes in the package.
 

@@ -110,20 +110,20 @@ parse_netlogo_color <- function(x, bias = 0.1) {
       ),
       netlogo_color = dplyr::case_match(
         base_color,
-        "gray" ~ "#8d8d8d",
-        "red" ~ "#d73229",
-        "orange" ~ "#f16a15",
-        "brown" ~ "#9d6e48",
-        "yellow" ~ "#ecec29",
-        "green" ~ "#59b03c",
-        "lime" ~ "#2cd13b",
-        "turquoise" ~ "#1d9f78",
-        "cyan" ~ "#54c4c4",
-        "sky" ~ "#2d8dbe",
-        "blue" ~ "#345da9",
-        "violet" ~ "#7c50a4",
-        "magenta" ~ "#a71b6a",
-        "pink" ~ "#d9637f"
+        "gray" ~ "#8D8D8D",
+        "red" ~ "#D73229",
+        "orange" ~ "#F16A15",
+        "brown" ~ "#9D6E48",
+        "yellow" ~ "#ECEC29",
+        "green" ~ "#59B03C",
+        "lime" ~ "#2CD13B",
+        "turquoise" ~ "#1D9F78",
+        "cyan" ~ "#54C4C4",
+        "sky" ~ "#2D8DBE",
+        "blue" ~ "#345DA9",
+        "violet" ~ "#7C50A4",
+        "magenta" ~ "#A71B6A",
+        "pink" ~ "#D9637F"
       ),
       shade = dplyr::case_when(
         value %% 10 == 0 ~ "normal",
@@ -132,7 +132,7 @@ parse_netlogo_color <- function(x, bias = 0.1) {
       ),
       color = dplyr::case_when(
         value == 0 ~ "#000000",
-        value == 10 ~ "#ffffff",
+        value == 10 ~ "#FFFFFF",
         shade == "normal" ~ netlogo_color,
         shade == "lighter" ~ {
           amount <-
@@ -196,21 +196,21 @@ parse_netlogo_color.base_colors <- c(
 
 parse_netlogo_color.hex_colors <- c(
   "black" = "#000000",
-  "white" = "#ffffff",
-  "gray" = "#8d8d8d",
-  "red" = "#d73229",
-  "orange" = "#f16a15",
-  "brown" = "#9d6e48",
-  "yellow" = "#ecec29",
-  "green" = "#59b03c",
-  "lime" = "#2cd13b",
-  "turquoise" = "#1d9f78",
-  "cyan" = "#54c4c4",
-  "sky" = "#2d8dbe",
-  "blue" = "#345da9",
-  "violet" = "#7c50a4",
-  "magenta" = "#a71b6a",
-  "pink" = "#d9637f"
+  "white" = "#FFFFFF",
+  "gray" = "#8D8D8D",
+  "red" = "#D73229",
+  "orange" = "#F16A15",
+  "brown" = "#9D6E48",
+  "yellow" = "#ECEC29",
+  "green" = "#59B03C",
+  "lime" = "#2CD13B",
+  "turquoise" = "#1D9F78",
+  "cyan" = "#54C4C4",
+  "sky" = "#2D8DBE",
+  "blue" = "#345DA9",
+  "violet" = "#7C50A4",
+  "magenta" = "#A71B6A",
+  "pink" = "#D9637F"
 )
 
 parse_netlogo_color.xml_colors <- c(

@@ -425,7 +425,7 @@
       "@type": "SoftwareApplication",
       "identifier": "readr",
       "name": "readr",
-      "version": ">= 2.1.6",
+      "version": ">= 2.0.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -464,7 +464,7 @@
       "@type": "SoftwareApplication",
       "identifier": "xml2",
       "name": "xml2",
-      "version": ">= 1.5.0",
+      "version": ">= 1.4.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -475,7 +475,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "813.74KB",
+  "fileSize": "946.834KB",
   "citation": [
     {
       "@type": "CreativeWork",
