@@ -2,6 +2,8 @@
 
 ## logolink 1.0.0
 
+CRAN release: 2026-01-08
+
 #### Breaking Changes
 
 - `logolink` now works only with NetLogo 7.0.1 and above. The NetLogo
