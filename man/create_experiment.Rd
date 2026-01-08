@@ -94,7 +94,9 @@ created \href{https://en.wikipedia.org/wiki/XML}{XML} file.
 \code{create_experiment()} creates a NetLogo
 \href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace} experiment
 \href{https://en.wikipedia.org/wiki/XML}{XML} file
-that can be used to run headless experiments with the
+that can be used to run
+\href{https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line}{headless}
+experiments with the
 \code{\link[=run_experiment]{run_experiment()}} function.
 
 For complete guidance on setting up and running experiments in NetLogo,
@@ -119,7 +121,7 @@ each command as a separate element.
 For example, to run two commands in sequence for the \code{go} argument,
 you can provide:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{go = c("command-1", "command-2")
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{go = c('command-1', 'command-2')
 }\if{html}{\out{</div>}}
 }
 
@@ -143,7 +145,7 @@ use
 When passing values to constants, \code{\link[base:character]{character}}
 strings should be passed as is, without adding quotes to them. For example,
 to set the variable \code{pathway} to \code{"SSP-585"}, you should use
-\code{list("pathway" = "SSP-585")}, not \code{list("pathway" = '"SSP-585"')}.
+\code{list("pathway" = 'SSP-585')}, not \code{list("pathway" = '"SSP-585"')}.
 }
 }
 \examples{
@@ -170,7 +172,7 @@ setup_file <- create_experiment(
     'count grass'
   ),
   constants = list(
-    "model-version" = "sheep-wolves-grass",
+    "model-version" = 'sheep-wolves-grass',
     "wolf-reproduce" = c(3, 5, 10, 15),
     "wolf-gain-from-food" = c(10, 15, 30, 40)
   )
@@ -347,7 +349,7 @@ setup_file <- create_experiment(
       last = 4
     ),
     "disease-decay" = 10,
-    "variant" = "network",
+    "variant" = 'network',
     "num-infected" = 1
   )
 )
@@ -375,7 +377,7 @@ setup_file <- create_experiment(
       step = 1,
       last = 10
     ),
-    "variant" = "environmental",
+    "variant" = 'environmental',
     "num-infected" = 1
   )
 )

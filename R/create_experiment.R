@@ -5,7 +5,10 @@
 #' `create_experiment()` creates a NetLogo
 #' [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment
 #' [XML](https://en.wikipedia.org/wiki/XML) file
-#' that can be used to run headless experiments with the
+#' that can be used to run
+#' [headless](
+#' https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line)
+#' experiments with the
 #' [`run_experiment()`][run_experiment()] function.
 #'
 #' For complete guidance on setting up and running experiments in NetLogo,
@@ -32,7 +35,7 @@
 #' you can provide:
 #'
 #' ```r
-#' go = c("command-1", "command-2")
+#' go = c('command-1', 'command-2')
 #' ```
 #'
 #' ## `constants` Argument
@@ -54,7 +57,7 @@
 #' When passing values to constants, [`character`][base::character()]
 #' strings should be passed as is, without adding quotes to them. For example,
 #' to set the variable `pathway` to `"SSP-585"`, you should use
-#' `list("pathway" = "SSP-585")`, not `list("pathway" = '"SSP-585"')`.
+#' `list("pathway" = 'SSP-585')`, not `list("pathway" = '"SSP-585"')`.
 #'
 #' @param name (optional) A [`character`][base::character()] string specifying
 #'   the name of the experiment (default: `""`).
@@ -133,7 +136,7 @@
 #'     'count grass'
 #'   ),
 #'   constants = list(
-#'     "model-version" = "sheep-wolves-grass",
+#'     "model-version" = 'sheep-wolves-grass',
 #'     "wolf-reproduce" = c(3, 5, 10, 15),
 #'     "wolf-gain-from-food" = c(10, 15, 30, 40)
 #'   )
@@ -310,7 +313,7 @@
 #'       last = 4
 #'     ),
 #'     "disease-decay" = 10,
-#'     "variant" = "network",
+#'     "variant" = 'network',
 #'     "num-infected" = 1
 #'   )
 #' )
@@ -338,7 +341,7 @@
 #'       step = 1,
 #'       last = 10
 #'     ),
-#'     "variant" = "environmental",
+#'     "variant" = 'environmental',
 #'     "num-infected" = 1
 #'   )
 #' )

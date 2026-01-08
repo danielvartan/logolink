@@ -23,92 +23,10 @@ badge_codecov() |> invisible() # To avoid unnecessary messages.
 source(here("R", ".setup.R"))
 ```
 
-<!-- badges: start -->
-```{r}
-#| echo: false
-#| output: asis
-#| message: false
-#| warning: false
-
-cat(
-  badge_repostatus("active"),
-  paste0(
-    "[![",
-    "CRAN Status Badge",
-    "](",
-    "https://www.r-pkg.org/badges/version-ago/logolink",
-    ")](",
-    "https://cran.r-project.org/package=logolink",
-    ")"
-  ),
-  badge_custom(
-    x = "doi",
-    y = "10.32614/CRAN.package.logolink",
-    color = "1284C5",
-    url = "https://doi.org/10.32614/CRAN.package.logolink",
-    alt = "DOI badge"
-  ),
-  badge_cran_download(type = "grand-total"),
-  badge_github_actions(action = "R-CMD-check"),
-  badge_cran_checks("logolink"),
-  paste0(
-    "[![",
-    "FAIR checklist badge",
-    "](",
-    "https://img.shields.io/badge/",
-    "fairsoftwarechecklist.net", "-",
-    "-",
-    "00a7d9",
-    ")](",
-    "https://fairsoftwarechecklist.net/v0.2/?f=31&a=32113&i=32322&r=133",
-    ")"
-  ),
-  badge_codecov(),
-  badge_license(
-    license = "GPLv3",
-    color = "bd0000",
-    url = "https://www.gnu.org/licenses/gpl-3.0",
-    alt = "GNU GPLv3 License"
-  ),
-  paste0(
-    "[![",
-    "FAIR checklist badge",
-    "](",
-    "https://img.shields.io/badge/",
-    "fairsoftwarechecklist.net", "-",
-    "-",
-    "00a7d9",
-    ")](",
-    "https://fairsoftwarechecklist.net/v0.2/?f=31&a=32113&i=32322&r=133",
-    ")"
-  ),
-  paste0(
-    "[![",
-    "fair-software.eu",
-    "](",
-    "https://img.shields.io/badge/",
-    "fair--software.eu", "-",
-    "%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F",
-    "-",
-    "green",
-    ")](",
-    "https://fair-software.eu",
-    ")"
-  ),
-  badge_custom(
-    x = "Contributor%20Covenant",
-    y = "3.0",
-    color = "4baaaa",
-    url = "https://www.contributor-covenant.org/version/3/0/code_of_conduct/",
-    alt = "Contributor Covenant 3.0 Code of Conduct"
-  )
-)
-```
-<!-- badges: end -->
-
+<!-- badges: start -->logolink 1.0.0.9000 (development version)
 ## Overview
 
-`logolink` is an [R](https://www.r-project.org/) package that simplifies setting up and running [NetLogo](https://www.netlogo.org/) simulations directly from R. It provides a modern, intuitive interface that follows [tidyverse principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and integrates seamlessly with the [tidyverse ecosystem](https://tidyverse.org/).
+`logolink` is an [R](https://www.r-project.org/) package that simplifies setting up and running [NetLogo](https://www.netlogo.org/) simulations from R. It provides a modern, intuitive interface that follows [tidyverse principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and integrates seamlessly with the [tidyverse ecosystem](https://tidyverse.org/).
 
 The package is designed to work with NetLogo 7.0.1 and above. Earlier versions are not supported. See NetLogo's [Transition Guide](https://docs.netlogo.org/transition.html) to upgrade your models if needed.
 
@@ -162,7 +80,7 @@ To start our example analysis, we'll need to first specify the path to the NetLo
 
 This example uses Wilensky's [Wolf Sheep Simple](https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/IABM%20Textbook/chapter%204/Wolf%20Sheep%20Simple%205.nlogox) model, a classic predator-prey simulation grounded in the [Lotka-Volterra equations](https://danielvartan.github.io/lotka-volterra/) developed by Alfred J. Lotka ([1925](http://archive.org/details/elementsofphysic017171mbp)) and Vito Volterra ([1926](https://www.nature.com/articles/118558a0)). Since this model comes bundled with NetLogo, no download is required.
 
-We'll use [`find_netlogo_home`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.html) function to locate the NetLogo installation directory, then build the path to the model file:
+We'll use [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.html) function to locate the NetLogo installation directory, then build the path to the model file:
 
 ```{r}
 model_path <-
@@ -177,7 +95,7 @@ model_path <-
 
 ### Creating an Experiment
 
-To run the model from R, we'll need to setup an experiment. We can do this by setting a [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment with the [`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html) function. This function will create a [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) [XML](https://en.wikipedia.org/wiki/XML) file that contains all the information about the experiment, including the parameters to vary, the metrics to collect, and the number of runs to perform.
+To run the model from R, we'll need to setup an experiment. We can do this by setting a [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment with the [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.html) function. This function will create a [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) [XML](https://en.wikipedia.org/wiki/XML) file that contains all the information about the experiment, including the parameters to vary, the metrics to collect, and the number of runs to perform.
 
 ```{r}
 setup_file <- create_experiment(
@@ -212,7 +130,7 @@ Alternatively, you can set up your experiment [directly in NetLogo](https://docs
 
 ### Running the Simulation
 
-With the experiment file created, we can now run the model using the [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html) function. This function will execute the NetLogo model with the specified parameters and return the results as [tidy data frames](https://r4ds.hadley.nz/data-tidy.html).
+With the experiment file created, we can now run the model using the [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.html) function. This function will execute the NetLogo model with the specified parameters and return the results as [tidy data frames](https://r4ds.hadley.nz/data-tidy.html).
 
 ```{r}
 #| label: Run Experiment
@@ -238,7 +156,7 @@ library(dplyr)
 results |> glimpse()
 ```
 
-If you already have a file with experiment results, you can read it into R using the [`read_experiment`](https://danielvartan.github.io/logolink/reference/read_experiment.html) function, which will produce the same output structure as [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html).
+If you already have a file with experiment results, you can read it into R using the [`read_experiment()`](https://danielvartan.github.io/logolink/reference/read_experiment.html) function, which will produce the same output structure as [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.html).
 
 ### Analyzing the Data (Bonus Section)
 

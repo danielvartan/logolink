@@ -101,7 +101,7 @@ setup_file <- create_experiment(
 
 Alternatively, you can define your experiment directly within NetLogo and save it as part of the model file. If you do this, you can skip the [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.html) step and simply pass the experiment name to [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.html).
 
-If you're familiar with the [BehaviorSpace XML file structure](https://github.com/NetLogo/NetLogo/wiki/XML-File-Format#behaviorspace-experiments), you can easily inspect the created experiment using the [`inspect_experiment`](https://danielvartan.github.io/logolink/reference/inspect_experiment.html) function:
+If you're familiar with the [BehaviorSpace XML file structure](https://github.com/NetLogo/NetLogo/wiki/XML-File-Format#behaviorspace-experiments), you can easily inspect the created experiment using the [`inspect_experiment()`](https://danielvartan.github.io/logolink/reference/inspect_experiment.html) function:
 
 ```{r}
 setup_file |> inspect_experiment()
@@ -135,7 +135,7 @@ setup_file |> inspect_experiment()
 
 ## Running the Simulation
 
-With our experiment defined, we can now run the simulation using the [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.html) function. This function takes care of launching NetLogo, executing the experiment, and collecting the results as [tidy data frames](https://r4ds.hadley.nz/data-tidy.html).
+With our experiment defined, we can now run the simulation using the [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.html). This function takes care of launching NetLogo, executing the experiment, and collecting the results as [tidy data frames](https://r4ds.hadley.nz/data-tidy.html).
 
 ```{r}
 #| output: false
@@ -152,7 +152,9 @@ results <-
 
 ## Checking the Results
 
-We can now examine the results. The output from [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.html) is a list of data frames. These can be any of the [four output formats](https://docs.netlogo.org/behaviorspace.html#run-options-formats) available in [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html): [Table](https://docs.netlogo.org/behaviorspace.html#table-output), [Spreadsheet](https://docs.netlogo.org/behaviorspace.html#spreadsheet-output), [Lists](https://docs.netlogo.org/behaviorspace.html#lists-output), and [Statistics](https://docs.netlogo.org/behaviorspace.html#statistics-output). By default, only the [Table](https://docs.netlogo.org/behaviorspace.html#table-output) format is returned, along with some metadata about the experiment run.
+Let's examine the results.
+
+The output from [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.html) is a list of data frames. These can be any of the [four output formats](https://docs.netlogo.org/behaviorspace.html#run-options-formats) available in [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html): [Table](https://docs.netlogo.org/behaviorspace.html#table-output), [Spreadsheet](https://docs.netlogo.org/behaviorspace.html#spreadsheet-output), [Lists](https://docs.netlogo.org/behaviorspace.html#lists-output), and [Statistics](https://docs.netlogo.org/behaviorspace.html#statistics-output). By default, only the [Table](https://docs.netlogo.org/behaviorspace.html#table-output) format is returned, along with some metadata about the experiment run.
 
 The `glimpse()` function from the [`dplyr`](https://dplyr.tidyverse.org/) R package can help us take a quick look at the results:
 
@@ -523,6 +525,6 @@ animation |>
 
 ## Wrapping up
 
-You now have a basic understanding of how to use `logolink` to run NetLogo experiments directly from R. This opens up a world of possibilities for integrating agent-based modeling with statistical analysis and data visualization.
+You now have a basic understanding of how to use `logolink` to run NetLogo experiments from R. This opens up a world of possibilities for integrating agent-based modeling with statistical analysis and data visualization workflows.
 
 Click [here](https://danielvartan.github.io/logolink/reference/index.html) to explore the full list of functions available in `logolink`.

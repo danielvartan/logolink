@@ -5,35 +5,11 @@
 <!-- Install the package before rendering this file: `devtools::install()` -->
 
 <!-- badges: start -->
-[![Project Status: Active - The project has reached a stable, usable
-state and is being actively
-developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![CRAN Status
-Badge](https://www.r-pkg.org/badges/version-ago/logolink)](https://cran.r-project.org/package=logolink)
-[![DOI
-badge](https://img.shields.io/badge/doi-10.32614/CRAN.package.logolink-1284C5.svg)](https://doi.org/10.32614/CRAN.package.logolink)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/logolink)](https://cran.r-project.org/package=logolink)
-[![R build
-status](https://github.com/danielvartan/logolink/workflows/R-CMD-check/badge.svg)](https://github.com/danielvartan/logolink/actions)
-[![CRAN
-checks](https://badges.cranchecks.info/summary/logolink.svg)](https://cran.r-project.org/web/checks/check_results_logolink.html)
-[![FAIR checklist
-badge](https://img.shields.io/badge/fairsoftwarechecklist.net--00a7d9)](https://fairsoftwarechecklist.net/v0.2/?f=31&a=32113&i=32322&r=133)
-[![](https://codecov.io/gh/danielvartan/logolink/branch/main/graph/badge.svg)](https://app.codecov.io/gh/danielvartan/logolink)
-[![GNU GPLv3
-License](https://img.shields.io/badge/license-GPLv3-bd0000.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![FAIR checklist
-badge](https://img.shields.io/badge/fairsoftwarechecklist.net--00a7d9)](https://fairsoftwarechecklist.net/v0.2/?f=31&a=32113&i=32322&r=133)
-[![fair-software.eu](https://img.shields.io/badge/fair--software.eu-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F-green)](https://fair-software.eu)
-[![Contributor Covenant 3.0 Code of
-Conduct](https://img.shields.io/badge/Contributor%20Covenant-3.0-4baaaa.svg)](https://www.contributor-covenant.org/version/3/0/code_of_conduct/)
-<!-- badges: end -->
-
-## Overview
+logolink 1.0.0.9000 (development version) \## Overview
 
 `logolink` is an [R](https://www.r-project.org/) package that simplifies
 setting up and running [NetLogo](https://www.netlogo.org/) simulations
-directly from R. It provides a modern, intuitive interface that follows
+from R. It provides a modern, intuitive interface that follows
 [tidyverse
 principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and
 integrates seamlessly with the [tidyverse
@@ -133,7 +109,7 @@ Volterra ([1926](https://www.nature.com/articles/118558a0)). Since this
 model comes bundled with NetLogo, no download is required.
 
 We’ll use
-[`find_netlogo_home`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.html)
+[`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.html)
 function to locate the NetLogo installation directory, then build the
 path to the model file:
 
@@ -154,7 +130,7 @@ To run the model from R, we’ll need to setup an experiment. We can do
 this by setting a
 [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment
 with the
-[`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html)
+[`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.html)
 function. This function will create a
 [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html)
 [XML](https://en.wikipedia.org/wiki/XML) file that contains all the
@@ -201,7 +177,7 @@ with
 ### Running the Simulation
 
 With the experiment file created, we can now run the model using the
-[`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html)
+[`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.html)
 function. This function will execute the NetLogo model with the
 specified parameters and return the results as [tidy data
 frames](https://r4ds.hadley.nz/data-tidy.html).
@@ -237,7 +213,7 @@ library(dplyr)
 results |> glimpse()
 #> List of 2
 #>  $ metadata:List of 6
-#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-08 05:11:42"
+#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-08 18:42:07"
 #>   ..$ netlogo_version : chr "7.0.3"
 #>   ..$ output_version  : chr "2.0"
 #>   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"
@@ -254,14 +230,14 @@ results |> glimpse()
 #>   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
 #>   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ count_sheep           : num [1:110110] 500 499 499 498 495 494 492 489 488 486 ...
+#>   ..$ count_sheep           : num [1:110110] 500 500 498 497 495 494 494 492 490 487 ...
 ```
 
 If you already have a file with experiment results, you can read it into
 R using the
-[`read_experiment`](https://danielvartan.github.io/logolink/reference/read_experiment.html)
+[`read_experiment()`](https://danielvartan.github.io/logolink/reference/read_experiment.html)
 function, which will produce the same output structure as
-[`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html).
+[`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.html).
 
 ### Analyzing the Data (Bonus Section)
 

@@ -8,7 +8,7 @@ message: 'To cite package "logolink" in publications use:'
 type: software
 license: GPL-3.0-or-later
 title: 'logolink: An Interface for Running ''NetLogo'' Simulations'
-version: 1.0.0
+version: 1.0.1.9000
 doi: 10.32614/CRAN.package.logolink
 identifiers:
 - type: doi
@@ -207,7 +207,7 @@ references:
     orcid: https://orcid.org/0000-0002-6983-2759
   year: '2026'
   doi: 10.32614/CRAN.package.readr
-  version: '>= 2.0.0'
+  version: '>= 2.1.6'
 - type: software
   title: tidyr
   abstract: 'tidyr: Tidy Messy Data'
@@ -255,7 +255,7 @@ references:
     email: jeroenooms@gmail.com
   year: '2026'
   doi: 10.32614/CRAN.package.xml2
-  version: '>= 1.4.0'
+  version: '>= 1.5.0'
 - type: software
   title: bslib
   abstract: 'bslib: Custom ''Bootstrap'' ''Sass'' Themes for ''shiny'' and ''rmarkdown'''
