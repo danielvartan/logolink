@@ -133,7 +133,7 @@
 <span>    <span class="st">"tidyr"</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>Next, we need to locate the model. We’ll use the <code><a href="../reference/find_netlogo_home.html">find_netlogo_home()</a></code> function to find the NetLogo installation, then navigate to the model file:</p>
+<p>Next, we need to locate the model. We’ll use the <a href="https://danielvartan.github.io/logolink/reference/find_netlogo_home.html"><code>find_netlogo_home()</code></a> function to find the NetLogo installation, then navigate to the model file:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model_path</span> <span class="op">&lt;-</span></span>
@@ -145,7 +145,7 @@
 <span>    <span class="st">"Wolf Sheep Simple 5.nlogox"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 </div>
-<p>We’ll also need the turtle shapes to make our plots look nice. We’ll use the <code><a href="../reference/get_netlogo_shape.html">get_netlogo_shape()</a></code> function to download turtle <a href="https://en.wikipedia.org/wiki/SVG" class="external-link">SVG</a> image files from the <a href="https://github.com/danielvartan/logoshapes" class="external-link">LogoShapes</a> project:</p>
+<p>We’ll also need the turtle shapes to make our plots look nice. We’ll use the <a href="https://danielvartan.github.io/logolink/reference/get_netlogo_shape.html"><code>get_netlogo_shape()</code></a> function to download turtle <a href="https://en.wikipedia.org/wiki/SVG" class="external-link">SVG</a> image files from the <a href="https://github.com/danielvartan/logoshapes" class="external-link">LogoShapes</a> project:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sheep_shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_netlogo_shape.html">get_netlogo_shape</a></span><span class="op">(</span><span class="st">"sheep"</span><span class="op">)</span></span></code></pre></div>
@@ -156,7 +156,7 @@
 </div>
 </section><section class="level2"><h2 id="running-the-simulation">Running the Simulation<a class="anchor" aria-label="anchor" href="#running-the-simulation"></a>
 </h2>
-<p>Here’s where things get interesting. We want to capture data of every sheep, wolf, and patch at regular intervals. Let’s set up an experiment with <code><a href="../reference/create_experiment.html">create_experiment()</a></code> that takes these snapshots every 100 ticks:</p>
+<p>Here’s where things get interesting. We want to capture data of every sheep, wolf, and patch at regular intervals. Let’s set up an experiment with <a href="https://danielvartan.github.io/logolink/reference/create_experiment.html"><code>create_experiment()</code></a> that takes these snapshots every 100 ticks:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_experiment.html">create_experiment</a></span><span class="op">(</span></span>
@@ -188,7 +188,7 @@
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <p>The <code>run_metrics_condition = 'ticks mod 100 = 0'</code> is the key here. It tells NetLogo to record data only when the tick count is divisible by 100. With <code>time_limit = 500</code>, we get 6 snapshots: steps 0, 100, 200, 300, 400, and 500.</p>
-<p>Now let’s run it using <code><a href="../reference/run_experiment.html">run_experiment()</a></code>. Note that we specify <code>output = c("table", "lists")</code> to get both summary tables and detailed agent lists:</p>
+<p>Now let’s run it using <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment()</code></a>. Note that we specify <code>output = c("table", "lists")</code> to get both summary tables and detailed agent lists:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span></span>

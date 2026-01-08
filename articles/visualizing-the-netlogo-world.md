@@ -66,7 +66,7 @@ install.packages(
 ```
 
 Next, we need to locate the model. We’ll use the
-[`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)
+[`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.html)
 function to find the NetLogo installation, then navigate to the model
 file:
 
@@ -83,7 +83,7 @@ model_path <-
 
 We’ll also need the turtle shapes to make our plots look nice. We’ll use
 the
-[`get_netlogo_shape()`](https://danielvartan.github.io/logolink/reference/get_netlogo_shape.md)
+[`get_netlogo_shape()`](https://danielvartan.github.io/logolink/reference/get_netlogo_shape.html)
 function to download turtle [SVG](https://en.wikipedia.org/wiki/SVG)
 image files from the
 [LogoShapes](https://github.com/danielvartan/logoshapes) project:
@@ -101,7 +101,7 @@ wolf_shape <- get_netlogo_shape("wolf")
 Here’s where things get interesting. We want to capture data of every
 sheep, wolf, and patch at regular intervals. Let’s set up an experiment
 with
-[`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md)
+[`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.html)
 that takes these snapshots every 100 ticks:
 
 ``` r
@@ -140,7 +140,7 @@ tells NetLogo to record data only when the tick count is divisible by
 300, 400, and 500.
 
 Now let’s run it using
-[`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md).
+[`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.html).
 Note that we specify `output = c("table", "lists")` to get both summary
 tables and detailed agent lists:
 
