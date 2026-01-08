@@ -3,11 +3,14 @@ testthat::test_that("require_package() | General test", {
     require_package() |>
     testthat::expect_null()
 
-  "test65464564" |>
+  "a.package.that.does.not.exist" |>
     require_package() |>
     testthat::expect_error()
 
-  require_package("test1654654", "test265464564") |>
+  require_package(
+    "a.package.that.does.not.exist",
+    "another.non.existent.package"
+  ) |>
     testthat::expect_error()
 
   testthat::local_mocked_bindings(
