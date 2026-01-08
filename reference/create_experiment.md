@@ -2,14 +2,14 @@
 
 `create_experiment()` creates a NetLogo
 [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment
-XML in a temporary file that can be used to run headless experiments
-with the
+[XML](https://en.wikipedia.org/wiki/XML) file that can be used to run
+headless experiments with the
 [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
 function.
 
-Please refer to the [BehaviorSpace
-Guide](https://docs.netlogo.org/behaviorspace.html) for complete
-guidance on how to set and run experiments in NetLogo.
+For complete guidance on setting up and running experiments in NetLogo,
+please refer to the [BehaviorSpace
+Guide](https://docs.netlogo.org/behaviorspace.html#creating-an-experiment-setup).
 
 ## Usage
 
@@ -27,7 +27,7 @@ create_experiment(
   post_experiment = NULL,
   exit_condition = NULL,
   run_metrics_condition = NULL,
-  metrics = c("count turtles", "count patches"),
+  metrics = "count turtles",
   constants = NULL,
   sub_experiments = NULL,
   file = tempfile(pattern = "experiment-", fileext = ".xml")
@@ -67,41 +67,31 @@ create_experiment(
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
   vector specifying the NetLogo command(s) to run before the experiment
-  starts. This can be a single command or multiple commands provided as
-  a [`character`](https://rdrr.io/r/base/character.html) vector; see the
-  *Details \> Multiple Commands* section for usage (default: `NULL`).
+  starts (default: `NULL`).
 
 - setup:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
-  vector specifying the NetLogo command(s) to set up the model. This can
-  be a single command or multiple commands provided as a
-  [`character`](https://rdrr.io/r/base/character.html) vector (default:
+  vector specifying the NetLogo command(s) to set up the model (default:
   `'setup'`).
 
 - go:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
-  vector specifying the NetLogo command(s) to run the model. This can be
-  a single command or multiple commands provided as a
-  [`character`](https://rdrr.io/r/base/character.html) vector (default:
+  vector specifying the NetLogo command(s) to run the model (default:
   `'go'`).
 
 - post_run:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
-  vector specifying the NetLogo command(s) to run after each run. This
-  can be a single command or multiple commands provided as a
-  [`character`](https://rdrr.io/r/base/character.html) vector (default:
-  `NULL`).
+  vector specifying the NetLogo command(s) to run after each run
+  (default: `NULL`).
 
 - post_experiment:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
   vector specifying the NetLogo command(s) to run after the experiment
-  ends. This can be a single command or multiple commands provided as a
-  [`character`](https://rdrr.io/r/base/character.html) vector (default:
-  `NULL`).
+  ends (default: `NULL`).
 
 - exit_condition:
 
@@ -119,7 +109,7 @@ create_experiment(
 
   A [`character`](https://rdrr.io/r/base/character.html) vector
   specifying the NetLogo commands to record as metrics (default:
-  `c('count turtles', 'count patches')`).
+  `'count turtles'`).
 
 - constants:
 
@@ -133,22 +123,23 @@ create_experiment(
 - sub_experiments:
 
   (optional) A [`list`](https://rdrr.io/r/base/list.html) where each
-  element is a [`list`](https://rdrr.io/r/base/list.html) specifying the
-  constants for a sub-experiment. Each sub-experiment uses the same
-  structure as the `constants` argument. See the `constants` argument
-  documentation for details on how to specify parameter values (default:
-  `NULL`).
+  element is also a [`list`](https://rdrr.io/r/base/list.html)
+  specifying the constants for a sub-experiment. Each sub-experiment
+  uses the same structure as the `constants` argument. See the
+  `constants` argument documentation for details on how to specify
+  parameter values (default: `NULL`).
 
 - file:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
-  string specifying the path to save the created XML file (default:
+  string specifying the path to save the created
+  [XML](https://en.wikipedia.org/wiki/XML) file (default:
   `tempfile(pattern = "experiment-", fileext = ".xml")`).
 
 ## Value
 
 A [`character`](https://rdrr.io/r/base/character.html) string with the
-path to the created XML file.
+path to the created [XML](https://en.wikipedia.org/wiki/XML) file.
 
 ## Details
 
@@ -158,17 +149,6 @@ Since NetLogo only accepts double quotes for strings inside commands, we
 recommend always using single quotes when writing NetLogo commands in R
 to avoid mistakes. For example, to run the `[1 "a" true]` command, use
 `'[1 "a" true]'`, not `"[1 \"a\" true]"`.
-
-### Constants and `character` strings
-
-When passing single values to constants,
-[`character`](https://rdrr.io/r/base/character.html) strings should be
-passed as is, without adding quotes to them. For example, to set the
-variable `scenario` to `"SSP-585"`, you should use
-`list("scenario" = "SSP-585")`, not `list("scenario" = '"SSP-585"')`.
-
-Insert quotes only if the command requires them. For example:
-`'n-values 10 ["N/A"]'`.
 
 ### Multiple Commands
 
@@ -199,6 +179,12 @@ to a NetLogo global variable. The value for each name can be either:
   `10`, you would use
   `list("initial-number-of-turtles" = list(first = 10, step = 10, last = 50))`.
 
+When passing values to constants,
+[`character`](https://rdrr.io/r/base/character.html) strings should be
+passed as is, without adding quotes to them. For example, to set the
+variable `pathway` to `"SSP-585"`, you should use
+`list("pathway" = "SSP-585")`, not `list("pathway" = '"SSP-585"')`.
+
 ## See also
 
 Other BehaviorSpace functions:
@@ -212,7 +198,7 @@ Other BehaviorSpace functions:
 # The examples below reproduce experiments from the NetLogo Models Library.
 # Try exporting these experiments from NetLogo and compare the XML files.
 
-## Examples from the *Wolf Sheep Predation* Model (Sample Models) ----
+## Examples from the Wolf Sheep Predation Model (Sample Models) ----
 
 ### BehaviorSpace Combinatorial
 
@@ -239,7 +225,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpJCcisI/experiment-1e4b8233206.xml"
+#> [1] "/tmp/RtmpogHKAO/experiment-20c5502545a5.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>
@@ -330,7 +316,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpJCcisI/experiment-1e4b79dba701.xml"
+#> [1] "/tmp/RtmpogHKAO/experiment-20c53a1b98c1.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>
@@ -455,7 +441,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpJCcisI/experiment-1e4b302ea5a5.xml"
+#> [1] "/tmp/RtmpogHKAO/experiment-20c547d0fc31.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>
@@ -523,7 +509,7 @@ setup_file |> inspect_experiment()
 #>   </experiment>
 #> </experiments>
 
-## Examples from the *Spread of Disease* Model (IABM Textbook) ----
+## Examples from the Spread of Disease Model (IABM Textbook) ----
 
 ### Population Density
 
@@ -550,7 +536,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpJCcisI/experiment-1e4b77b44bda.xml"
+#> [1] "/tmp/RtmpogHKAO/experiment-20c5210173f2.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>
@@ -603,7 +589,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpJCcisI/experiment-1e4b217cfac7.xml"
+#> [1] "/tmp/RtmpogHKAO/experiment-20c529f5c613.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>
@@ -656,7 +642,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpJCcisI/experiment-1e4b7aa012e4.xml"
+#> [1] "/tmp/RtmpogHKAO/experiment-20c527f52740.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>

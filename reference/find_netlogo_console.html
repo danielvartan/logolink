@@ -63,7 +63,7 @@ the user's system.</p>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string specifying the path to the
-NetLogo executable file. Returns an empty string (<code>""</code>) if the executable
+NetLogo executable file. Returns <code><a href="https://rdrr.io/r/base/NA.html" class="external-link">NA</a></code> if the executable
 cannot be found at any location.</p>
     </div>
     <div class="section level2">
@@ -71,10 +71,10 @@ cannot be found at any location.</p>
     <p>The function uses the following search order:</p><ol><li><p>Checks the <code>NETLOGO_CONSOLE</code> environment variable. If set and the file
 exists, returns that path.</p></li>
 <li><p>If the environment variable is not set or the file does not exist,
-constructs the path based on the output of
+constructs and expands the path based on the output of
 <code><a href="find_netlogo_home.html">find_netlogo_home()</a></code> (e.g.,
-<code>&lt;NETLOGO_HOME&gt;/NetLogo_Console</code> on Linux/macOS or
-<code>&lt;NETLOGO_HOME&gt;/NetLogo_Console.exe</code> on Windows).</p></li>
+<code>&lt;NETLOGO_HOME&gt;/NetLogo_Console.exe</code> on Windows or
+<code>&lt;NETLOGO_HOME&gt;/NetLogo_Console</code> for other systems).</p></li>
 </ol></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

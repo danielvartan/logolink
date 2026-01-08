@@ -6,7 +6,8 @@
     }
   };
 </script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Inter-0.4.10/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Download NetLogo shapes from LogoShapes — get_netlogo_shape"><meta name="description" content="get_netlogo_shape() downloads NetLogo shapes from the
-LogoShapes project on GitHub.
+LogoShapes project on
+GitHub.
 The collections and shapes available for download can be found in the
 LogoShapes project
 svg
@@ -15,7 +16,8 @@ LogoShapes documentation for
 more information about the different collections.
 Note: This function requires an active internet connection and the
 httr2 package."><meta property="og:description" content="get_netlogo_shape() downloads NetLogo shapes from the
-LogoShapes project on GitHub.
+LogoShapes project on
+GitHub.
 The collections and shapes available for download can be found in the
 LogoShapes project
 svg
@@ -68,7 +70,8 @@ httr2 package."><meta property="og:image" content="https://danielvartan.github.i
 
     <div class="ref-description section level2">
     <p><code>get_netlogo_shape()</code> downloads NetLogo shapes from the
-<a href="https://github.com/danielvartan/logoshapes" class="external-link">LogoShapes</a> project on GitHub.</p>
+<a href="https://github.com/danielvartan/logoshapes" class="external-link">LogoShapes</a> project on
+<a href="https://github.com/" class="external-link">GitHub</a>.</p>
 <p>The collections and shapes available for download can be found in the
 <a href="https://github.com/danielvartan/logoshapes" class="external-link">LogoShapes</a> project
 <a href="https://github.com/danielvartan/logoshapes/tree/main/svg" class="external-link"><code>svg</code></a>
@@ -112,15 +115,20 @@ the directory where the shapes will be saved (default: <code><a href="https://rd
 
 <dt id="arg-user-agent">user_agent<a class="anchor" aria-label="anchor" href="#arg-user-agent"></a></dt>
 <dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string
-indicating the user agent to use for the GitHub API requests.
+indicating the user agent to use for the
+<a href="https://docs.github.com/en/rest" class="external-link">GitHub API</a>
+requests.
 (default: <code>"logolink &lt;https://CRAN.R-project.org/package=logolink&gt;"</code>).</p></dd>
 
 
 <dt id="arg-auth-token">auth_token<a class="anchor" aria-label="anchor" href="#arg-auth-token"></a></dt>
 <dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string
-indicating a GitHub Personal Access Token (PAT) for authentication
-with the GitHub API. This is useful when dealing with rate limits.
-(default: <code>Sys.getenv("GITHUB_PAT")</code>).</p></dd>
+indicating a GitHub Personal Access Token
+(<a href="https://en.wikipedia.org/wiki/Personal_access_token" class="external-link">PAT</a>)
+for authentication with the
+<a href="https://docs.github.com/en/rest" class="external-link">GitHub API</a>.
+This is useful when dealing with rate limits.
+(default: <code>Sys.getenv("GH_TOKEN")</code>).</p></dd>
 
 </dl></div>
     <div class="section level2">

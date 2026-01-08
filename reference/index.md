@@ -12,7 +12,7 @@ Functions to set up and run NetLogo experiments using
 - [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
   : Run NetLogo BehaviorSpace experiment
 - [`read_experiment()`](https://danielvartan.github.io/logolink/reference/read_experiment.md)
-  : Read NetLogo BehaviorSpace Experiment Output
+  : Read NetLogo BehaviorSpace Experiment output
 
 ## Parsers
 
@@ -36,7 +36,7 @@ Functions to manage NetLogo installations.
 
 ## Utilities
 
-Utility functions functions for NetLogo integration.
+Utility functions for NetLogo integration.
 
 - [`get_netlogo_shape()`](https://danielvartan.github.io/logolink/reference/get_netlogo_shape.md)
   : Download NetLogo shapes from LogoShapes

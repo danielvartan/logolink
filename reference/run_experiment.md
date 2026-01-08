@@ -6,9 +6,8 @@ in headless mode and returns a
 [`list`](https://rdrr.io/r/base/list.html) with results as [tidy data
 frames](https://r4ds.hadley.nz/data-tidy.html). It can be used with
 [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md)
-to create the experiment [XML](https://en.wikipedia.org/wiki/XML) file
-on the fly, or with an existing experiment stored in the NetLogo model
-file.
+to create and run experiments on the fly, or with an existing experiment
+stored in the NetLogo model file.
 
 To avoid issues with list parsing, `run_experiment()` includes support
 for the special
@@ -55,8 +54,9 @@ run_experiment(
   [XML](https://en.wikipedia.org/wiki/XML) file containing the
   experiment definition. This file can be created using
   [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md)
-  or exported from the NetLogo BehaviorSpace interface (default:
-  `NULL`).
+  or exported from the NetLogo
+  [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) interface
+  (default: `NULL`).
 
 - experiment:
 
@@ -70,7 +70,9 @@ run_experiment(
   vector specifying which output types to generate from the experiment.
   Valid options are: `"table"`, `"spreadsheet"`, `"lists"`, and
   `"statistics"`. At least one of `"table"` or `"spreadsheet"` must be
-  included. See the BehaviorSpace documentation on
+  included. See the
+  [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html)
+  documentation on
   [formats](https://docs.netlogo.org/behaviorspace.html#run-options-formats)
   for details about each output type (default: `c("table", "lists")`).
 
@@ -84,11 +86,14 @@ run_experiment(
 
 - timeout:
 
-  (optional) A [`numeric`](https://rdrr.io/r/base/numeric.html) value
-  specifying the maximum time (in seconds) to wait for the NetLogo
-  process to complete. If the process exceeds this time limit, it will
-  be terminated, and the function will return the available output up to
-  that point. Use `Inf` for no time limit (default: `Inf`).
+  (optional) A \[`numeric`\]\[base::numeric#' file containing the
+  experiment definition. This file can be created using
+  [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md)
+  or exported from the NetLogo()\] value specifying the maximum time (in
+  seconds) to wait for the NetLogo process to complete. If the process
+  exceeds this time limit, it will be terminated, and the function will
+  return the available output up to that point. Use `Inf` for no time
+  limit (default: `Inf`).
 
 - tidy_output:
 
@@ -162,6 +167,13 @@ issues, try setting a `NETLOGO_CONSOLE` environment variable with the
 path to the NetLogo executable or binary. On Windows, a typical path is
 something like `C:\Program Files\NetLogo 7.0.3\NetLogo.exe`.
 
+### NetLogo 3D
+
+The function automatically detects whether the provided model is a 3D
+model (based on the file extension) and adjusts the command-line
+arguments accordingly. You do not need to set the `--3D` flag to the
+`other_arguments` parameter manually.
+
 ### Handling NetLogo Lists
 
 NetLogo uses a specific syntax for lists (e.g., `"[1 2 3]"`) that is
@@ -177,17 +189,18 @@ vectors.
 
 The
 [`parse_netlogo_list()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_list.md)
-function is available for parsing list values embedded in other outputs.
-However, we recommend using it only when necessary, as it can be
-computationally intensive for large datasets and may not handle all edge
-cases.
+function is available for parsing NetLogo list values embedded in other
+outputs. However, we recommend using it only when necessary, as it can
+be computationally intensive for large datasets and may not handle all
+edge cases.
 
 ### Additional Command-Line Arguments
 
 You can pass additional command-line arguments to the NetLogo executable
 using the `other_arguments` parameter. This can be useful for specifying
-options such as the number of threads to use or other NetLogo-specific
-flags.
+options such as the number of
+[threads](https://en.wikipedia.org/wiki/Thread_(computing)) to use or
+other NetLogo-specific flags.
 
 For example, to specify the number of threads, you can use:
 
@@ -208,29 +221,29 @@ These are:
 
 - `--model`: Specifies the path to the NetLogo model file.
 
-- `--setup-file`: Specifies the path to the experiment XML file.
+- `--setup-file`: Specifies the path to the experiment
+  [XML](https://en.wikipedia.org/wiki/XML) file.
 
 - `--experiment`: Specifies the name of the experiment defined in the
   model.
 
-- `--table`: Specifies the output file for the results table.
+- `--table`: Specifies the output file for the results
+  [`table`](https://docs.netlogo.org/behaviorspace.html#table-output).
 
-- `--spreadsheet`: Specifies the output file for the spreadsheet
+- `--spreadsheet`: Specifies the output file for the
+  [spreadsheet](https://docs.netlogo.org/behaviorspace.html#spreadsheet-output)
   results.
 
-- `--lists`: Specifies the output file for the lists results.
+- `--lists`: Specifies the output file for the
+  [lists](https://docs.netlogo.org/behaviorspace.html#lists-output)
+  results.
 
-- `--stats`: Specifies the output file for the statistics results.
+- `--stats`: Specifies the output file for the
+  [statistics](https://docs.netlogo.org/behaviorspace.html#statistics-output)
+  results.
 
-For a complete list of available options, please refer to the
-[BehaviorSpace
+For a complete list of available options, refer to the [BehaviorSpace
 Guide](https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line).
-
-### NetLogo 3D
-
-The function automatically detects whether the provided model is a 3D
-model (based on the file extension) and adjusts the command-line
-arguments accordingly. You do not need to set the `--3D` flag manually.
 
 ### Non-Tabular Output
 
@@ -254,7 +267,8 @@ Other BehaviorSpace functions:
 # Defining the Model -----
 
 # \dontrun{
-  model_path <- # This model is included with NetLogo installations.
+  # This model is included with NetLogo installations.
+  model_path <-
     find_netlogo_home() |>
     file.path(
       "models",
@@ -303,21 +317,21 @@ Other BehaviorSpace functions:
       setup_file = setup_file
     )
 #> ℹ Running model
-#> ✔ Running model [20.5s]
+#> ✔ Running model [20.1s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [28ms]
+#> ✔ Gathering metadata [18ms]
 #> 
 #> ℹ Processing table output
 #> ✔ Processing table output [15ms]
 #> 
 #> ℹ The experiment run produced the following messages:
 #> 
-#> Jan 08, 2026 12:26:05 AM java.util.prefs.FileSystemPreferences$1 run
+#> Jan 08, 2026 2:40:26 AM java.util.prefs.FileSystemPreferences$1 run
 #> INFO: Created user preferences directory.
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-08 00:26:06 GMT"
+#> [1] "2026-01-08 02:40:27 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -365,7 +379,7 @@ Other BehaviorSpace functions:
       experiment = "Wolf Sheep Simple model analysis"
     )
 #> ℹ Running model
-#> ✔ Running model [18.1s]
+#> ✔ Running model [17.4s]
 #> 
 #> ℹ Gathering metadata
 #> ✔ Gathering metadata [13ms]
@@ -375,7 +389,7 @@ Other BehaviorSpace functions:
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-08 00:26:27 GMT"
+#> [1] "2026-01-08 02:40:48 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"

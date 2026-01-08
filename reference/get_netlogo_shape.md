@@ -2,7 +2,7 @@
 
 `get_netlogo_shape()` downloads NetLogo shapes from the
 [LogoShapes](https://github.com/danielvartan/logoshapes) project on
-GitHub.
+[GitHub](https://github.com/).
 
 The collections and shapes available for download can be found in the
 [LogoShapes](https://github.com/danielvartan/logoshapes) project
@@ -48,15 +48,18 @@ get_netlogo_shape(
 - user_agent:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
-  string indicating the user agent to use for the GitHub API requests.
-  (default: `"logolink <https://CRAN.R-project.org/package=logolink>"`).
+  string indicating the user agent to use for the [GitHub
+  API](https://docs.github.com/en/rest) requests. (default:
+  `"logolink <https://CRAN.R-project.org/package=logolink>"`).
 
 - auth_token:
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
-  string indicating a GitHub Personal Access Token (PAT) for
-  authentication with the GitHub API. This is useful when dealing with
-  rate limits. (default: `Sys.getenv("GITHUB_PAT")`).
+  string indicating a GitHub Personal Access Token
+  ([PAT](https://en.wikipedia.org/wiki/Personal_access_token)) for
+  authentication with the [GitHub API](https://docs.github.com/en/rest).
+  This is useful when dealing with rate limits. (default:
+  `Sys.getenv("GH_TOKEN")`).
 
 ## Value
 

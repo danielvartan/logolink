@@ -63,7 +63,7 @@ on the user's system.</p>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string specifying the NetLogo
-version (e.g., <code>"7.0.3"</code>). Returns an empty string (<code>""</code>) if the version
+version (e.g., <code>"7.0.3"</code>). Returns <code><a href="https://rdrr.io/r/base/NA.html" class="external-link">NA</a></code> if the version
 cannot be determined.</p>
     </div>
     <div class="section level2">
@@ -75,11 +75,10 @@ information. This is the most reliable method.</p></li>
 <li><p><strong>Directory name extraction</strong>: If the executable is not found, it
 attempts to extract the version number from the installation directory
 name returned by <code><a href="find_netlogo_home.html">find_netlogo_home()</a></code>
-(e.g., <code>NetLogo 7.0.2</code> yields <code>"7.0.2"</code>).</p></li>
-</ol><p>Note that the directory name fallback may produce slightly different
-results if the directory was renamed or uses a non-standard naming
-convention.</p>
-    </div>
+(e.g., <code>NetLogo 7.0.2</code> yields <code>"7.0.2"</code>). Note that this fallback may
+produce slightly different results if the directory was renamed or uses
+a non-standard naming convention.</p></li>
+</ol></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other system functions:

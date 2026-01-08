@@ -12,8 +12,8 @@ find_netlogo_home()
 ## Value
 
 A [`character`](https://rdrr.io/r/base/character.html) string specifying
-the path to the NetLogo installation directory. Returns an empty string
-(`""`) if no installation can be found.
+the path to the NetLogo installation directory. Returns
+[`NA`](https://rdrr.io/r/base/NA.html) if no installation can be found.
 
 ## Details
 

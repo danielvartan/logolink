@@ -12,20 +12,22 @@ logical, and character types
 within the lists and converts them accordingly.
 Note: We recommend using this function only when necessary, as it can
 be computationally intensive for large datasets and may not handle all edge
-cases. NetLogo provides a special output format called lists that exports
-list metrics in a tabular structure. If your experiment includes metrics that
-return NetLogo lists, include "lists" in the outputs argument of
-run_experiment() to capture this output.'><meta property="og:description" content='parse_netlogo_list() parses NetLogo-style lists represented as strings
+cases. NetLogo provides a special output format called
+lists
+that exports list metrics in a tabular structure. If your experiment includes
+metrics that return NetLogo lists, include "lists" in the outputs
+argument of run_experiment() to capture this output.'><meta property="og:description" content='parse_netlogo_list() parses NetLogo-style lists represented as strings
 (e.g., "[1 2 3]") into R lists. It automatically detects
 numeric, integer,
 logical, and character types
 within the lists and converts them accordingly.
 Note: We recommend using this function only when necessary, as it can
 be computationally intensive for large datasets and may not handle all edge
-cases. NetLogo provides a special output format called lists that exports
-list metrics in a tabular structure. If your experiment includes metrics that
-return NetLogo lists, include "lists" in the outputs argument of
-run_experiment() to capture this output.'><meta property="og:image" content="https://danielvartan.github.io/logolink/reference/figures/og-image.png"><meta property="og:image:alt" content="logolink"></head><body>
+cases. NetLogo provides a special output format called
+lists
+that exports list metrics in a tabular structure. If your experiment includes
+metrics that return NetLogo lists, include "lists" in the outputs
+argument of run_experiment() to capture this output.'><meta property="og:image" content="https://danielvartan.github.io/logolink/reference/figures/og-image.png"><meta property="og:image:alt" content="logolink"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -76,10 +78,11 @@ run_experiment() to capture this output.'><meta property="og:image" content="htt
 within the lists and converts them accordingly.</p>
 <p><strong>Note</strong>: We recommend using this function <strong>only when necessary</strong>, as it can
 be computationally intensive for large datasets and may not handle all edge
-cases. NetLogo provides a special output format called <em>lists</em> that exports
-list metrics in a tabular structure. If your experiment includes metrics that
-return NetLogo lists, include <code>"lists"</code> in the <code>outputs</code> argument of
-<code><a href="run_experiment.html">run_experiment()</a></code> to capture this output.</p>
+cases. NetLogo provides a special output format called
+<a href="https://docs.netlogo.org/behaviorspace.html#lists-output" class="external-link">lists</a>
+that exports list metrics in a tabular structure. If your experiment includes
+metrics that return NetLogo lists, include <code>"lists"</code> in the <code>outputs</code>
+argument of <code><a href="run_experiment.html">run_experiment()</a></code> to capture this output.</p>
     </div>
 
     <div class="section level2">
@@ -93,16 +96,16 @@ return NetLogo lists, include <code>"lists"</code> in the <code>outputs</code> a
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
 <dd><p>An <code><a href="https://mllg.github.io/checkmate/reference/checkAtomic.html" class="external-link">atomic</a></code> vector potentially
-containing NetLogo-style list strings.</p></dd>
+containing NetLogo-style lists.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> where each element is the parsed result of
 the corresponding input element. Parsed elements may be atomic vectors (for
-homogeneous lists) or nested lists (for mixed-type or nested lists). If
-a NetLogo list is not detected in an input element, that element is
-returned as a single-element list containing the original string.</p>
+homogeneous lists) or nested lists (for mixed-type or nested lists). If a
+NetLogo list is not detected in an input element, that element is returned
+as a single-element <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> containing the original string.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -111,8 +114,8 @@ returned as atomic vectors (e.g., <code>"[1 2 3]"</code> becomes <code>c(1L, 2L,
 <li><p><strong>Mixed-type lists</strong>: Lists containing elements of different types are
 returned as R lists (e.g., <code>'[1.1 "a" true]'</code> becomes
 <code>list(1.1, "a", TRUE)</code>).</p></li>
-<li><p><strong>Nested lists</strong>: Lists containing other lists are returned as nested R
-lists (e.g., <code>'["a" "b" [1 2]]'</code> becomes
+<li><p><strong>Nested lists</strong>: Lists containing other lists are fused with the main
+list (e.g., <code>'["a" "b" [1 2]]'</code> becomes
 <code>list(c("a", "b"), c(1L, 2L))</code>).</p></li>
 </ul><p>NetLogo boolean values (<code>true</code>/<code>false</code>) are converted to R
 <code><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></code> values (<code>TRUE</code>/<code>FALSE</code>). NetLogo
@@ -197,25 +200,44 @@ lists (e.g., <code>'["a" "b" [1 2]]'</code> becomes
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE  TRUE FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Combined Examples -----</span></span></span>
+<span class="r-in"><span><span class="co"># Mixed-Type Examples -----</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'["a" "b" "c"]'</span>, <span class="st">'[4 5 6]'</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">parse_netlogo_list</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="st">'["a" "b" 1 2]'</span> <span class="op">|&gt;</span> <span class="fu">parse_netlogo_list</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "a" "b" "c"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]][[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "a"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4 5 6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]][[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "b"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]][[3]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]][[4]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'[1.1 2.1 3.1]'</span>, <span class="st">'[true false true]'</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">parse_netlogo_list</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="st">'[1.1 2.1 3.1 true false]'</span> <span class="op">|&gt;</span> <span class="fu">parse_netlogo_list</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.1 2.1 3.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]][[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  TRUE FALSE  TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]][[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]][[3]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]][[4]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]][[5]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'[1.1 "a" true]'</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">parse_netlogo_list</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="st">'[1.1 "a" true]'</span> <span class="op">|&gt;</span> <span class="fu">parse_netlogo_list</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]][[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.1</span>
@@ -230,7 +252,7 @@ lists (e.g., <code>'["a" "b" [1 2]]'</code> becomes
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Nested Examples -----</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'["a" "b" "c" [1 2]]'</span>, <span class="st">'[4 5 6]'</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">parse_netlogo_list</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="st">'["a" "b" "c" [1 2]]'</span> <span class="op">|&gt;</span> <span class="fu">parse_netlogo_list</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]][[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "a" "b" "c"</span>
@@ -239,11 +261,8 @@ lists (e.g., <code>'["a" "b" [1 2]]'</code> becomes
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4 5 6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'["a" "b" "c" [1 2] true ["d" "c"]]'</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">parse_netlogo_list</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="st">'["a" "b" "c" [1 2] true ["d" "c"]]'</span> <span class="op">|&gt;</span> <span class="fu">parse_netlogo_list</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]][[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "a" "b" "c"</span>
@@ -256,6 +275,13 @@ lists (e.g., <code>'["a" "b" [1 2]]'</code> becomes
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]][[4]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "d" "c"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="st">'[[1 2] [3 4] [5 6]]'</span> <span class="op">|&gt;</span> <span class="fu">parse_netlogo_list</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]][[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 3 4 5 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>

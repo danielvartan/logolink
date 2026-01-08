@@ -8,9 +8,8 @@
 </script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Inter-0.4.10/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Run NetLogo BehaviorSpace experiment — run_experiment"><meta name="description" content='run_experiment() runs a NetLogo
 BehaviorSpace experiment in
 headless mode and returns a list with results as tidy data frames. It can be used with
-create_experiment() to create the experiment
-XML file on the fly, or with an existing
-experiment stored in the NetLogo model file.
+create_experiment() to create and run experiments
+on the fly, or with an existing experiment stored in the NetLogo model file.
 To avoid issues with list parsing, run_experiment() includes support for
 the special lists
 output format. If your experiment includes metrics that return NetLogo lists,
@@ -25,9 +24,8 @@ please refer to the
 BehaviorSpace Guide.'><meta property="og:description" content='run_experiment() runs a NetLogo
 BehaviorSpace experiment in
 headless mode and returns a list with results as tidy data frames. It can be used with
-create_experiment() to create the experiment
-XML file on the fly, or with an existing
-experiment stored in the NetLogo model file.
+create_experiment() to create and run experiments
+on the fly, or with an existing experiment stored in the NetLogo model file.
 To avoid issues with list parsing, run_experiment() includes support for
 the special lists
 output format. If your experiment includes metrics that return NetLogo lists,
@@ -86,9 +84,8 @@ BehaviorSpace Guide.'><meta property="og:image" content="https://danielvartan.gi
     <p><code>run_experiment()</code> runs a NetLogo
 <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a> experiment in
 headless mode and returns a <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></code> with results as <a href="https://r4ds.hadley.nz/data-tidy.html" class="external-link">tidy data frames</a>. It can be used with
-<code><a href="create_experiment.html">create_experiment()</a></code> to create the experiment
-<a href="https://en.wikipedia.org/wiki/XML" class="external-link">XML</a> file on the fly, or with an existing
-experiment stored in the NetLogo model file.</p>
+<code><a href="create_experiment.html">create_experiment()</a></code> to create and run experiments
+on the fly, or with an existing experiment stored in the NetLogo model file.</p>
 <p>To avoid issues with list parsing, <code>run_experiment()</code> includes support for
 the special <a href="https://docs.netlogo.org/behaviorspace.html#lists-output" class="external-link">lists</a>
 output format. If your experiment includes metrics that return NetLogo lists,
@@ -128,10 +125,12 @@ path to the NetLogo model file (with extension <code>.nlogo</code>, <code>.nlogo
 
 <dt id="arg-setup-file">setup_file<a class="anchor" aria-label="anchor" href="#arg-setup-file"></a></dt>
 <dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string
-specifying the path to an <a href="https://en.wikipedia.org/wiki/XML" class="external-link">XML</a> file
-containing the experiment definition. This file can be created using
+specifying the path to an
+<a href="https://en.wikipedia.org/wiki/XML" class="external-link">XML</a>
+file containing the experiment definition. This file can be created using
 <code><a href="create_experiment.html">create_experiment()</a></code> or exported from the NetLogo
-BehaviorSpace interface (default: <code>NULL</code>).</p></dd>
+<a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a>
+interface (default: <code>NULL</code>).</p></dd>
 
 
 <dt id="arg-experiment">experiment<a class="anchor" aria-label="anchor" href="#arg-experiment"></a></dt>
@@ -145,7 +144,9 @@ specifying the name of the experiment defined in the NetLogo model file
 specifying which output types to generate from the experiment. Valid
 options are: <code>"table"</code>, <code>"spreadsheet"</code>, <code>"lists"</code>, and
 <code>"statistics"</code>. At least one of <code>"table"</code> or <code>"spreadsheet"</code> must be
-included. See the BehaviorSpace documentation on
+included. See the
+<a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a>
+documentation on
 <a href="https://docs.netlogo.org/behaviorspace.html#run-options-formats" class="external-link">formats</a>
 for details about each output type (default: <code>c("table", "lists")</code>).</p></dd>
 
@@ -159,7 +160,8 @@ number of threads. See the <em>Details</em> section for more information
 
 
 <dt id="arg-timeout">timeout<a class="anchor" aria-label="anchor" href="#arg-timeout"></a></dt>
-<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a></code> value specifying the
+<dd><p>(optional) A [<code>numeric</code>][base::numeric#'   file containing the experiment definition. This file can be created using
+<code><a href="create_experiment.html">create_experiment()</a></code> or exported from the NetLogo()] value specifying the
 maximum time (in seconds) to wait for the NetLogo process to complete. If
 the process exceeds this time limit, it will be terminated, and the
 function will return the available output up to that point. Use <code>Inf</code> for
@@ -168,8 +170,8 @@ no time limit (default: <code>Inf</code>).</p></dd>
 
 <dt id="arg-tidy-output">tidy_output<a class="anchor" aria-label="anchor" href="#arg-tidy-output"></a></dt>
 <dd><p>(optional) A <code><a href="https://rdrr.io/r/base/logical.html" class="external-link">logical</a></code> flag indicating
-whether to tidy the output data frames. If <code>TRUE</code>, output data frames are
-arranged according to
+whether to tidy the output data frames. If <code>TRUE</code>,
+output data frames are arranged according to
 <a href="https://r4ds.hadley.nz/data-tidy.html" class="external-link">tidy data principles</a>.
 If <code>FALSE</code>, only the default transformations from
 <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_delim()</a></code> and
@@ -221,6 +223,16 @@ like <code>C:\Program Files\NetLogo 7.0.3\NetLogo.exe</code>.</p>
 </div>
 
 <div class="section">
+<h3 id="netlogo-d">NetLogo 3D<a class="anchor" aria-label="anchor" href="#netlogo-d"></a></h3>
+
+
+<p>The function automatically detects whether the provided model is a 3D model
+(based on the file extension) and adjusts the command-line arguments
+accordingly. You do not need to set the <code>--3D</code> flag to the
+<code>other_arguments</code> parameter manually.</p>
+</div>
+
+<div class="section">
 <h3 id="handling-netlogo-lists">Handling NetLogo Lists<a class="anchor" aria-label="anchor" href="#handling-netlogo-lists"></a></h3>
 
 
@@ -233,8 +245,8 @@ exports list metrics in a tabular structure. If your experiment includes
 metrics that return NetLogo lists, include <code>"lists"</code> in the <code>output</code>
 argument to capture this output. Columns containing NetLogo lists are
 returned as <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> vectors.</p>
-<p>The <code><a href="parse_netlogo_list.html">parse_netlogo_list()</a></code> function is available
-for parsing list values embedded in other outputs. However, we recommend
+<p>The <code><a href="parse_netlogo_list.html">parse_netlogo_list()</a></code> function is available for
+parsing NetLogo list values embedded in other outputs. However, we recommend
 using it only when necessary, as it can be computationally intensive for
 large datasets and may not handle all edge cases.</p>
 </div>
@@ -245,7 +257,9 @@ large datasets and may not handle all edge cases.</p>
 
 <p>You can pass additional command-line arguments to the NetLogo executable
 using the <code>other_arguments</code> parameter. This can be useful for specifying
-options such as the number of threads to use or other NetLogo-specific flags.</p>
+options such as the number of
+<a href="https://en.wikipedia.org/wiki/Thread_(computing)" class="external-link">threads</a>
+to use or other NetLogo-specific flags.</p>
 <p>For example, to specify the number of threads, you can use:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/run_experiment.html">run_experiment</a></span><span class="op">(</span></span>
 <span>  model_path <span class="op">=</span> <span class="st">"path/to/model.nlogox"</span>,</span>
@@ -257,23 +271,22 @@ for internal use by <code>run_experiment()</code> and cannot be modified. These 
 <li><p><code>--3D</code>: Specifies if the model is a 3D model (automatically set based on
 the model file extension).</p></li>
 <li><p><code>--model</code>: Specifies the path to the NetLogo model file.</p></li>
-<li><p><code>--setup-file</code>: Specifies the path to the experiment XML file.</p></li>
+<li><p><code>--setup-file</code>: Specifies the path to the experiment
+<a href="https://en.wikipedia.org/wiki/XML" class="external-link">XML</a> file.</p></li>
 <li><p><code>--experiment</code>: Specifies the name of the experiment defined in the model.</p></li>
-<li><p><code>--table</code>: Specifies the output file for the results table.</p></li>
-<li><p><code>--spreadsheet</code>: Specifies the output file for the spreadsheet results.</p></li>
-<li><p><code>--lists</code>: Specifies the output file for the lists results.</p></li>
-<li><p><code>--stats</code>: Specifies the output file for the statistics results.</p></li>
-</ul><p>For a complete list of available options, please refer to the
+<li><p><code>--table</code>: Specifies the output file for the results
+<a href="https://docs.netlogo.org/behaviorspace.html#table-output" class="external-link"><code>table</code></a>.</p></li>
+<li><p><code>--spreadsheet</code>: Specifies the output file for the
+<a href="https://docs.netlogo.org/behaviorspace.html#spreadsheet-output" class="external-link">spreadsheet</a>
+results.</p></li>
+<li><p><code>--lists</code>: Specifies the output file for the
+<a href="https://docs.netlogo.org/behaviorspace.html#lists-output" class="external-link">lists</a>
+results.</p></li>
+<li><p><code>--stats</code>: Specifies the output file for the
+<a href="https://docs.netlogo.org/behaviorspace.html#statistics-output" class="external-link">statistics</a>
+results.</p></li>
+</ul><p>For a complete list of available options, refer to the
 <a href="https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line" class="external-link">BehaviorSpace Guide</a>.</p>
-</div>
-
-<div class="section">
-<h3 id="netlogo-d">NetLogo 3D<a class="anchor" aria-label="anchor" href="#netlogo-d"></a></h3>
-
-
-<p>The function automatically detects whether the provided model is a 3D model
-(based on the file extension) and adjusts the command-line arguments
-accordingly. You do not need to set the <code>--3D</code> flag manually.</p>
 </div>
 
 <div class="section">
@@ -301,7 +314,8 @@ excessive non-tabular output may clutter your R console.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Defining the Model -----</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span>  <span class="va">model_path</span> <span class="op">&lt;-</span> <span class="co"># This model is included with NetLogo installations.</span></span></span>
+<span class="r-in"><span>  <span class="co"># This model is included with NetLogo installations.</span></span></span>
+<span class="r-in"><span>  <span class="va">model_path</span> <span class="op">&lt;-</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="find_netlogo_home.html">find_netlogo_home</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>      <span class="st">"models"</span>,</span></span>
@@ -350,21 +364,21 @@ excessive non-tabular output may clutter your R console.</p>
 <span class="r-in"><span>      setup_file <span class="op">=</span> <span class="va">setup_file</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Running model</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Running model <span style="color: #B2B2B2;">[20.5s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Running model <span style="color: #B2B2B2;">[20.1s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Gathering metadata</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Gathering metadata <span style="color: #B2B2B2;">[28ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Gathering metadata <span style="color: #B2B2B2;">[18ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Processing table output</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing table output <span style="color: #B2B2B2;">[15ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> The experiment run produced the following messages:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Jan 08, 2026 12:26:05 AM java.util.prefs.FileSystemPreferences$1 run</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Jan 08, 2026 2:40:26 AM java.util.prefs.FileSystemPreferences$1 run</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> INFO: Created user preferences directory.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$timestamp</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-01-08 00:26:06 GMT"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-01-08 02:40:27 GMT"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$netlogo_version</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "7.0.3"</span>
@@ -412,7 +426,7 @@ excessive non-tabular output may clutter your R console.</p>
 <span class="r-in"><span>      experiment <span class="op">=</span> <span class="st">"Wolf Sheep Simple model analysis"</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Running model</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Running model <span style="color: #B2B2B2;">[18.1s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Running model <span style="color: #B2B2B2;">[17.4s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Gathering metadata</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Gathering metadata <span style="color: #B2B2B2;">[13ms]</span></span>
@@ -422,7 +436,7 @@ excessive non-tabular output may clutter your R console.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$timestamp</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-01-08 00:26:27 GMT"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-01-08 02:40:48 GMT"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$netlogo_version</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "7.0.3"</span>

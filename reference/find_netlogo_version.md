@@ -12,8 +12,9 @@ find_netlogo_version()
 ## Value
 
 A [`character`](https://rdrr.io/r/base/character.html) string specifying
-the NetLogo version (e.g., `"7.0.3"`). Returns an empty string (`""`) if
-the version cannot be determined.
+the NetLogo version (e.g., `"7.0.3"`). Returns
+[`NA`](https://rdrr.io/r/base/NA.html) if the version cannot be
+determined.
 
 ## Details
 
@@ -28,11 +29,9 @@ The function uses the following detection methods in order:
     attempts to extract the version number from the installation
     directory name returned by
     [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)
-    (e.g., `NetLogo 7.0.2` yields `"7.0.2"`).
-
-Note that the directory name fallback may produce slightly different
-results if the directory was renamed or uses a non-standard naming
-convention.
+    (e.g., `NetLogo 7.0.2` yields `"7.0.2"`). Note that this fallback
+    may produce slightly different results if the directory was renamed
+    or uses a non-standard naming convention.
 
 ## See also
 

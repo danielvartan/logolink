@@ -6,22 +6,24 @@
     }
   };
 </script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Inter-0.4.10/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Inspect NetLogo BehaviorSpace experiment file — inspect_experiment"><meta name="description" content="inspect_experiment() reads and prints the content of a NetLogo
-BehaviorSpace experiment
+BehaviorSpace
+experiment
 XML
-file to the console. This is useful for debugging and verifying the
+file to the R console. This is useful for debugging and verifying the
 structure of experiment files created by
 create_experiment().
-Please refer to the
-BehaviorSpace Guide for
-complete guidance on how to set and run experiments in NetLogo."><meta property="og:description" content="inspect_experiment() reads and prints the content of a NetLogo
-BehaviorSpace experiment
+For complete guidance on setting up and running experiments in NetLogo,
+please refer to the
+BehaviorSpace Guide."><meta property="og:description" content="inspect_experiment() reads and prints the content of a NetLogo
+BehaviorSpace
+experiment
 XML
-file to the console. This is useful for debugging and verifying the
+file to the R console. This is useful for debugging and verifying the
 structure of experiment files created by
 create_experiment().
-Please refer to the
-BehaviorSpace Guide for
-complete guidance on how to set and run experiments in NetLogo."><meta property="og:image" content="https://danielvartan.github.io/logolink/reference/figures/og-image.png"><meta property="og:image:alt" content="logolink"></head><body>
+For complete guidance on setting up and running experiments in NetLogo,
+please refer to the
+BehaviorSpace Guide."><meta property="og:image" content="https://danielvartan.github.io/logolink/reference/figures/og-image.png"><meta property="og:image:alt" content="logolink"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -66,14 +68,15 @@ complete guidance on how to set and run experiments in NetLogo."><meta property=
 
     <div class="ref-description section level2">
     <p><code>inspect_experiment()</code> reads and prints the content of a NetLogo
-<a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a> experiment
+<a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a>
+experiment
 <a href="https://en.wikipedia.org/wiki/XML" class="external-link">XML</a>
-file to the console. This is useful for debugging and verifying the
+file to the R console. This is useful for debugging and verifying the
 structure of experiment files created by
 <code><a href="create_experiment.html">create_experiment()</a></code>.</p>
-<p>Please refer to the
-<a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace Guide</a> for
-complete guidance on how to set and run experiments in NetLogo.</p>
+<p>For complete guidance on setting up and running experiments in NetLogo,
+please refer to the
+<a href="https://docs.netlogo.org/behaviorspace.html#creating-an-experiment-setup" class="external-link">BehaviorSpace Guide</a>.</p>
     </div>
 
     <div class="section level2">
@@ -87,13 +90,19 @@ complete guidance on how to set and run experiments in NetLogo.</p>
 
 <dl><dt id="arg-file">file<a class="anchor" aria-label="anchor" href="#arg-file"></a></dt>
 <dd><p>A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string specifying the path to
-the BehaviorSpace experiment XML file.</p></dd>
+the
+<a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a>
+experiment
+<a href="https://en.wikipedia.org/wiki/XML" class="external-link">XML</a>
+file.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>An <a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a> <code>NULL</code>. This function is called for
-its side effect of printing the XML content to the console.</p>
+its side effect of printing the
+<a href="https://en.wikipedia.org/wiki/XML" class="external-link">XML</a>
+content to the R console.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -114,7 +123,6 @@ its side effect of printing the XML content to the console.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;go&gt;go&lt;/go&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;metrics&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;metric&gt;count turtles&lt;/metric&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;metric&gt;count patches&lt;/metric&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;/metrics&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   &lt;/experiment&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;/experiments&gt;</span>

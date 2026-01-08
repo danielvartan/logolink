@@ -92,7 +92,7 @@
 <p><strong>Note</strong>: The CRAN release of <code>logolink</code> breaks with the recent NetLogo patch updates because the BehaviorSpace XML format changed. The details are in this <a href="https://github.com/NetLogo/NetLogo/issues/2560" class="external-link">GitHub issue</a>. If your experiments fail to run, install the development version of <code>logolink</code> from GitHub as shown in the Installation section below. An updated CRAN release will be submitted soon.</p>
 </blockquote>
 <p><code>logolink</code> is an <a href="https://www.r-project.org/" class="external-link">R</a> package that simplifies setting up and running <a href="https://www.netlogo.org/" class="external-link">NetLogo</a> simulations directly from R. It offers a modern, streamlined interface for running models, following the <a href="https://tidyverse.tidyverse.org/articles/manifesto.html" class="external-link">tidyverse principles</a> and integrating seamlessly with the broader <a href="https://tidyverse.org/" class="external-link">tidyverse ecosystem</a>.</p>
-<p>The package is designed to work with NetLogo <strong>7.0.1 and above</strong>. If you need support for earlier NetLogo releases (up to 7.0.0), use an older version of the package.</p>
+<p>The package is designed to work with NetLogo <strong>7.0.1 and above</strong>. We do not plan to offer support for earlier versions. See NetLogo’s <a href="https://docs.netlogo.org/transition.html" class="external-link">Transition Guide</a> to upgrade your models if needed.</p>
 <blockquote>
 <p>If you find this project useful, please consider giving it a star!   <a href="https://github.com/danielvartan/logolink/" class="external-link"><img src="https://img.shields.io/github/stars/danielvartan/logolink" alt="GitHub Repository Stars"></a></p>
 </blockquote>
@@ -104,7 +104,8 @@
 <h2 id="another-r-package-for-netlogo">Another R Package for NetLogo?<a class="anchor" aria-label="anchor" href="#another-r-package-for-netlogo"></a>
 </h2>
 <p>While other R packages connect R to NetLogo, <code>logolink</code> is currently the only one that fully supports the latest NetLogo release. It is actively maintained, follows tidyverse conventions, and is designed to be simple and straightforward to use.</p>
-<p>For context, <a href="https://CRAN.R-project.org/package=RNetLogo" class="external-link"><code>RNetLogo</code></a> works only with older versions (up to version 6.0.0, released in December 2016) and has not been updated since June 2017. <a href="https://CRAN.R-project.org/package=nlrx" class="external-link"><code>nlrx</code></a> provides a powerful framework for managing experiments and results, but <a href="https://docs.ropensci.org/nlrx/reference/supported_netlogo_versions.html" class="external-link">supports</a> only up to NetLogo 6.3.0 (released in September 2022) and has <a href="https://github.com/ropensci/nlrx/issues" class="external-link">many unresolved issues</a>. <code>logolink</code> complements these packages by focusing on simplicity, full compatibility with NetLogo 7, and seamless integration into modern R workflows.</p>
+<p>For context, <a href="https://CRAN.R-project.org/package=RNetLogo" class="external-link"><code>RNetLogo</code></a> supports only older versions (up to 6.0.0, released in December 2016) and has not been updated since June 2017. <a href="https://CRAN.R-project.org/package=nlrx" class="external-link"><code>nlrx</code></a> offers a powerful framework for managing experiments and results but <a href="https://docs.ropensci.org/nlrx/reference/supported_netlogo_versions.html" class="external-link">supports</a> only up to NetLogo 6.3.0 (released in September 2022), requires additional system dependencies, uses its own internal conventions that diverge from NetLogo standards, has a steep learning curve, and has <a href="https://github.com/ropensci/nlrx/issues" class="external-link">many unresolved issues</a>.</p>
+<p><code>logolink</code> <strong>complements</strong> these packages by prioritizing simplicity, offering finer control over output, ensuring full compatibility with NetLogo 7, and integrating seamlessly with modern R workflows.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -233,7 +234,7 @@
 <span><span class="va">results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 2</span></span>
 <span><span class="co">#&gt;  $ metadata:List of 6</span></span>
-<span><span class="co">#&gt;   ..$ timestamp       : POSIXct[1:1], format: "2026-01-07 05:09:35"</span></span>
+<span><span class="co">#&gt;   ..$ timestamp       : POSIXct[1:1], format: "2026-01-07 23:13:36"</span></span>
 <span><span class="co">#&gt;   ..$ netlogo_version : chr "7.0.3"</span></span>
 <span><span class="co">#&gt;   ..$ output_version  : chr "2.0"</span></span>
 <span><span class="co">#&gt;   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"</span></span>
@@ -250,7 +251,7 @@
 <span><span class="co">#&gt;   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
 <span><span class="co">#&gt;   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
-<span><span class="co">#&gt;   ..$ count_sheep           : num [1:110110] 500 498 496 494 493 492 490 487 485 483 ...</span></span></code></pre></div>
+<span><span class="co">#&gt;   ..$ count_sheep           : num [1:110110] 500 499 497 495 494 492 491 491 489 489 ...</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="analyzing-the-data-bonus-section">Analyzing the Data (Bonus Section)<a class="anchor" aria-label="anchor" href="#analyzing-the-data-bonus-section"></a>

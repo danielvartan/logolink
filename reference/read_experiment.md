@@ -1,16 +1,16 @@
-# Read NetLogo BehaviorSpace Experiment Output
+# Read NetLogo BehaviorSpace Experiment output
 
 `read_experiment()` reads NetLogo
 [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment
 output files as [tidy data
 frames](https://r4ds.hadley.nz/data-tidy.html). It automatically detects
-the output format (
-[Table](https://docs.netlogo.org/behaviorspace.html#table-output),
+the output format
+([Table](https://docs.netlogo.org/behaviorspace.html#table-output),
 [Spreadsheet](https://docs.netlogo.org/behaviorspace.html#spreadsheet-output),
 [Lists](https://docs.netlogo.org/behaviorspace.html#lists-output), or
-[Stats](https://docs.netlogo.org/behaviorspace.html#statistics-output) )
+[Stats](https://docs.netlogo.org/behaviorspace.html#statistics-output))
 and parses the data accordingly. The function also extracts metadata
-from the file.
+from the files.
 
 Only version 2.0 (NetLogo 6.4 and later) of BehaviorSpace output files
 is supported.
@@ -26,7 +26,8 @@ read_experiment(file, tidy_output = TRUE)
 - file:
 
   A [`character`](https://rdrr.io/r/base/character.html) string
-  specifying the path to the BehaviorSpace output
+  specifying the path to the
+  [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) output
   [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) file.
 
 - tidy_output:
@@ -141,7 +142,7 @@ read_experiment(file)
 #>       -17        17       -17        17 
 #> 
 #> 
-#> $data
+#> $table
 #> # A tibble: 8 × 10
 #>   run_number number_of_sheep number_of_wolves movement_cost grass_regrowth_rate
 #>        <dbl>           <dbl>            <dbl>         <dbl>               <dbl>
