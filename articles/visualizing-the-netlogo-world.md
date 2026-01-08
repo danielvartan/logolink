@@ -190,7 +190,9 @@ NetLogo uses its own color coding system, so we need to convert those
 values to [hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors)
 that [`ggplot2`](https://ggplot2.tidyverse.org/) understands. We’ll use
 the [`dplyr`](https://dplyr.tidyverse.org/) package to mutate the
-relevant columns with the `parse_netlogo_color` function:
+relevant columns with the
+[`parse_netlogo_color()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_color.html)
+function:
 
 ``` r
 plot_data <-
@@ -206,9 +208,9 @@ plot_data <-
 
 ## Building the Plot
 
-Let’s create a function that renders the world at any given step. It
-must draw patches as a raster background, then overlays sheep and wolf
-icons at their coordinates.
+We need to create a function that renders the world at any given step.
+It must draw patches as a raster background, then overlays sheep and
+wolf icons at their coordinates.
 
 ``` r
 plot_netlogo_world <- function(
@@ -342,7 +344,7 @@ animation <-
   image_animate(fps = 1)
 ```
 
-To save it:
+Run the following to save it:
 
 ``` r
 animation |> image_write("netlogo-world-animation.gif")

@@ -8,14 +8,18 @@
 </script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Inter-0.4.10/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Create NetLogo BehaviorSpace experiment — create_experiment"><meta name="description" content="create_experiment() creates a NetLogo
 BehaviorSpace experiment
 XML file
-that can be used to run headless experiments with the
+that can be used to run
+headless
+experiments with the
 run_experiment() function.
 For complete guidance on setting up and running experiments in NetLogo,
 please refer to the
 BehaviorSpace Guide."><meta property="og:description" content="create_experiment() creates a NetLogo
 BehaviorSpace experiment
 XML file
-that can be used to run headless experiments with the
+that can be used to run
+headless
+experiments with the
 run_experiment() function.
 For complete guidance on setting up and running experiments in NetLogo,
 please refer to the
@@ -27,7 +31,7 @@ BehaviorSpace Guide."><meta property="og:image" content="https://danielvartan.gi
 
     <a class="navbar-brand me-2" href="../index.html">logolink</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,7 +63,7 @@ BehaviorSpace Guide."><meta property="og:image" content="https://danielvartan.gi
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Create NetLogo BehaviorSpace experiment</h1>
-      <small class="dont-index">Source: <a href="https://github.com/danielvartan/logolink/blob/v1.0.0/R/create_experiment.R" class="external-link"><code>R/create_experiment.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/danielvartan/logolink/blob/main/R/create_experiment.R" class="external-link"><code>R/create_experiment.R</code></a></small>
       <div class="d-none name"><code>create_experiment.Rd</code></div>
     </div>
 
@@ -67,7 +71,9 @@ BehaviorSpace Guide."><meta property="og:image" content="https://danielvartan.gi
     <p><code>create_experiment()</code> creates a NetLogo
 <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a> experiment
 <a href="https://en.wikipedia.org/wiki/XML" class="external-link">XML</a> file
-that can be used to run headless experiments with the
+that can be used to run
+<a href="https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line" class="external-link">headless</a>
+experiments with the
 <code><a href="run_experiment.html">run_experiment()</a></code> function.</p>
 <p>For complete guidance on setting up and running experiments in NetLogo,
 please refer to the
@@ -221,7 +227,7 @@ such cases, you can provide a <code><a href="https://rdrr.io/r/base/character.ht
 each command as a separate element.</p>
 <p>For example, to run two commands in sequence for the <code>go</code> argument,
 you can provide:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="va">go</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"command-1"</span>, <span class="st">"command-2"</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">go</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'command-1'</span>, <span class="st">'command-2'</span><span class="op">)</span></span></code></pre><p></p></div>
 </div>
 
 <div class="section">
@@ -242,7 +248,7 @@ use
 </ul><p>When passing values to constants, <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code>
 strings should be passed as is, without adding quotes to them. For example,
 to set the variable <code>pathway</code> to <code>"SSP-585"</code>, you should use
-<code>list("pathway" = "SSP-585")</code>, not <code>list("pathway" = '"SSP-585"')</code>.</p>
+<code>list("pathway" = 'SSP-585')</code>, not <code>list("pathway" = '"SSP-585"')</code>.</p>
 </div>
 
     </div>
@@ -279,14 +285,14 @@ to set the variable <code>pathway</code> to <code>"SSP-585"</code>, you should u
 <span class="r-in"><span>    <span class="st">'count grass'</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span>,</span></span>
 <span class="r-in"><span>  constants <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="st">"model-version"</span> <span class="op">=</span> <span class="st">"sheep-wolves-grass"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"model-version"</span> <span class="op">=</span> <span class="st">'sheep-wolves-grass'</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"wolf-reproduce"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">15</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"wolf-gain-from-food"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">15</span>, <span class="fl">30</span>, <span class="fl">40</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpVGeJ2K/experiment-1e6638744f6.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp8TZTou/experiment-1e5360471a4a.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment.html">inspect_experiment</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
@@ -377,7 +383,7 @@ to set the variable <code>pathway</code> to <code>"SSP-585"</code>, you should u
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpVGeJ2K/experiment-1e66643034d9.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp8TZTou/experiment-1e5362cb1907.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment.html">inspect_experiment</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
@@ -502,7 +508,7 @@ to set the variable <code>pathway</code> to <code>"SSP-585"</code>, you should u
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpVGeJ2K/experiment-1e667363ac6d.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp8TZTou/experiment-1e533a4bc0e0.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment.html">inspect_experiment</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
@@ -597,7 +603,7 @@ to set the variable <code>pathway</code> to <code>"SSP-585"</code>, you should u
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpVGeJ2K/experiment-1e66beae8f0.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp8TZTou/experiment-1e535492d04a.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment.html">inspect_experiment</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
@@ -644,13 +650,13 @@ to set the variable <code>pathway</code> to <code>"SSP-585"</code>, you should u
 <span class="r-in"><span>      last <span class="op">=</span> <span class="fl">4</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"disease-decay"</span> <span class="op">=</span> <span class="fl">10</span>,</span></span>
-<span class="r-in"><span>    <span class="st">"variant"</span> <span class="op">=</span> <span class="st">"network"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"variant"</span> <span class="op">=</span> <span class="st">'network'</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"num-infected"</span> <span class="op">=</span> <span class="fl">1</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpVGeJ2K/experiment-1e665dd89ca4.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp8TZTou/experiment-1e53dbbf901.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment.html">inspect_experiment</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
@@ -697,13 +703,13 @@ to set the variable <code>pathway</code> to <code>"SSP-585"</code>, you should u
 <span class="r-in"><span>      step <span class="op">=</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>      last <span class="op">=</span> <span class="fl">10</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span>,</span></span>
-<span class="r-in"><span>    <span class="st">"variant"</span> <span class="op">=</span> <span class="st">"environmental"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"variant"</span> <span class="op">=</span> <span class="st">'environmental'</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"num-infected"</span> <span class="op">=</span> <span class="fl">1</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpVGeJ2K/experiment-1e6630392286.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp8TZTou/experiment-1e532f24b465.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment.html">inspect_experiment</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>

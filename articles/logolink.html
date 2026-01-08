@@ -37,7 +37,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">logolink</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,7 +82,7 @@
 
 
 
-      <small class="dont-index">Source: <a href="https://github.com/danielvartan/logolink/blob/v1.0.0/vignettes/logolink.qmd" class="external-link"><code>vignettes/logolink.qmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/danielvartan/logolink/blob/main/vignettes/logolink.qmd" class="external-link"><code>vignettes/logolink.qmd</code></a></small>
       <div class="d-none name"><code></code></div>
     </div>
 
@@ -147,7 +147,7 @@
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <p>Alternatively, you can define your experiment directly within NetLogo and save it as part of the model file. If you do this, you can skip the <a href="https://danielvartan.github.io/logolink/reference/create_experiment.html"><code>create_experiment()</code></a> step and simply pass the experiment name to <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment()</code></a>.</p>
-<p>If you’re familiar with the <a href="https://github.com/NetLogo/NetLogo/wiki/XML-File-Format#behaviorspace-experiments" class="external-link">BehaviorSpace XML file structure</a>, you can easily inspect the created experiment using the <a href="https://danielvartan.github.io/logolink/reference/inspect_experiment.html"><code>inspect_experiment</code></a> function:</p>
+<p>If you’re familiar with the <a href="https://github.com/NetLogo/NetLogo/wiki/XML-File-Format#behaviorspace-experiments" class="external-link">BehaviorSpace XML file structure</a>, you can easily inspect the created experiment using the <a href="https://danielvartan.github.io/logolink/reference/inspect_experiment.html"><code>inspect_experiment()</code></a> function:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/inspect_experiment.html">inspect_experiment</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -180,7 +180,7 @@
 </div>
 </section><section class="level2"><h2 id="running-the-simulation">Running the Simulation<a class="anchor" aria-label="anchor" href="#running-the-simulation"></a>
 </h2>
-<p>With our experiment defined, we can now run the simulation using the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment()</code></a> function. This function takes care of launching NetLogo, executing the experiment, and collecting the results as <a href="https://r4ds.hadley.nz/data-tidy.html" class="external-link">tidy data frames</a>.</p>
+<p>With our experiment defined, we can now run the simulation using the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment()</code></a>. This function takes care of launching NetLogo, executing the experiment, and collecting the results as <a href="https://r4ds.hadley.nz/data-tidy.html" class="external-link">tidy data frames</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span></span>
@@ -194,7 +194,8 @@
 </div>
 </section><section class="level2"><h2 id="checking-the-results">Checking the Results<a class="anchor" aria-label="anchor" href="#checking-the-results"></a>
 </h2>
-<p>We can now examine the results. The output from <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment()</code></a> is a list of data frames. These can be any of the <a href="https://docs.netlogo.org/behaviorspace.html#run-options-formats" class="external-link">four output formats</a> available in <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a>: <a href="https://docs.netlogo.org/behaviorspace.html#table-output" class="external-link">Table</a>, <a href="https://docs.netlogo.org/behaviorspace.html#spreadsheet-output" class="external-link">Spreadsheet</a>, <a href="https://docs.netlogo.org/behaviorspace.html#lists-output" class="external-link">Lists</a>, and <a href="https://docs.netlogo.org/behaviorspace.html#statistics-output" class="external-link">Statistics</a>. By default, only the <a href="https://docs.netlogo.org/behaviorspace.html#table-output" class="external-link">Table</a> format is returned, along with some metadata about the experiment run.</p>
+<p>Let’s examine the results.</p>
+<p>The output from <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment()</code></a> is a list of data frames. These can be any of the <a href="https://docs.netlogo.org/behaviorspace.html#run-options-formats" class="external-link">four output formats</a> available in <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a>: <a href="https://docs.netlogo.org/behaviorspace.html#table-output" class="external-link">Table</a>, <a href="https://docs.netlogo.org/behaviorspace.html#spreadsheet-output" class="external-link">Spreadsheet</a>, <a href="https://docs.netlogo.org/behaviorspace.html#lists-output" class="external-link">Lists</a>, and <a href="https://docs.netlogo.org/behaviorspace.html#statistics-output" class="external-link">Statistics</a>. By default, only the <a href="https://docs.netlogo.org/behaviorspace.html#table-output" class="external-link">Table</a> format is returned, along with some metadata about the experiment run.</p>
 <p>The <code><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse()</a></code> function from the <a href="https://dplyr.tidyverse.org/" class="external-link"><code>dplyr</code></a> R package can help us take a quick look at the results:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="downlit sourceCode r">
@@ -296,7 +297,7 @@
 <p><img src="../reference/figures/vignette-wolf-sheep-model-animation-1.gif"></p>
 </section><section class="level2"><h2 id="wrapping-up">Wrapping up<a class="anchor" aria-label="anchor" href="#wrapping-up"></a>
 </h2>
-<p>You now have a basic understanding of how to use <code>logolink</code> to run NetLogo experiments directly from R. This opens up a world of possibilities for integrating agent-based modeling with statistical analysis and data visualization.</p>
+<p>You now have a basic understanding of how to use <code>logolink</code> to run NetLogo experiments from R. This opens up a world of possibilities for integrating agent-based modeling with statistical analysis and data visualization workflows.</p>
 <p>Click <a href="https://danielvartan.github.io/logolink/reference/index.html">here</a> to explore the full list of functions available in <code>logolink</code>.</p>
 </section><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {

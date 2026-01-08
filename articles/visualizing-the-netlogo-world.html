@@ -37,7 +37,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">logolink</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,7 +82,7 @@
 
 
 
-      <small class="dont-index">Source: <a href="https://github.com/danielvartan/logolink/blob/v1.0.0/vignettes/visualizing-the-netlogo-world.qmd" class="external-link"><code>vignettes/visualizing-the-netlogo-world.qmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/danielvartan/logolink/blob/main/vignettes/visualizing-the-netlogo-world.qmd" class="external-link"><code>vignettes/visualizing-the-netlogo-world.qmd</code></a></small>
       <div class="d-none name"><code></code></div>
     </div>
 
@@ -229,7 +229,7 @@
 </div>
 </section><section class="level2"><h2 id="preparing-the-data">Preparing the Data<a class="anchor" aria-label="anchor" href="#preparing-the-data"></a>
 </h2>
-<p>NetLogo uses its own color coding system, so we need to convert those values to <a href="https://en.wikipedia.org/wiki/Web_colors" class="external-link">hexadecimal colors</a> that <a href="https://ggplot2.tidyverse.org/" class="external-link"><code>ggplot2</code></a> understands. We’ll use the <a href="https://dplyr.tidyverse.org/" class="external-link"><code>dplyr</code></a> package to mutate the relevant columns with the <code>parse_netlogo_color</code> function:</p>
+<p>NetLogo uses its own color coding system, so we need to convert those values to <a href="https://en.wikipedia.org/wiki/Web_colors" class="external-link">hexadecimal colors</a> that <a href="https://ggplot2.tidyverse.org/" class="external-link"><code>ggplot2</code></a> understands. We’ll use the <a href="https://dplyr.tidyverse.org/" class="external-link"><code>dplyr</code></a> package to mutate the relevant columns with the <a href="https://danielvartan.github.io/logolink/reference/parse_netlogo_color.html"><code>parse_netlogo_color()</code></a> function:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plot_data</span> <span class="op">&lt;-</span></span>
@@ -244,7 +244,7 @@
 </div>
 </section><section class="level2"><h2 id="building-the-plot">Building the Plot<a class="anchor" aria-label="anchor" href="#building-the-plot"></a>
 </h2>
-<p>Let’s create a function that renders the world at any given step. It must draw patches as a raster background, then overlays sheep and wolf icons at their coordinates.</p>
+<p>We need to create a function that renders the world at any given step. It must draw patches as a raster background, then overlays sheep and wolf icons at their coordinates.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plot_netlogo_world</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span></span>
@@ -367,7 +367,7 @@
 <span>  <span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html" class="external-link">image_join</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://docs.ropensci.org/magick/reference/animation.html" class="external-link">image_animate</a></span><span class="op">(</span>fps <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 </div>
-<p>To save it:</p>
+<p>Run the following to save it:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">animation</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html" class="external-link">image_write</a></span><span class="op">(</span><span class="st">"netlogo-world-animation.gif"</span><span class="op">)</span></span></code></pre></div>

@@ -37,7 +37,7 @@
 
     <a class="navbar-brand me-2" href="index.html">logolink</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,11 +85,8 @@
 <!-- quarto render -->
 <!-- Install the package before rendering this file: `devtools::install()` -->
 <!-- badges: start -->
-
-<div class="section level2">
-<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
-</h2>
-<p><code>logolink</code> is an <a href="https://www.r-project.org/" class="external-link">R</a> package that simplifies setting up and running <a href="https://www.netlogo.org/" class="external-link">NetLogo</a> simulations directly from R. It provides a modern, intuitive interface that follows <a href="https://tidyverse.tidyverse.org/articles/manifesto.html" class="external-link">tidyverse principles</a> and integrates seamlessly with the <a href="https://tidyverse.org/" class="external-link">tidyverse ecosystem</a>.</p>
+<p>logolink 1.0.0.9000 (development version) ## Overview</p>
+<p><code>logolink</code> is an <a href="https://www.r-project.org/" class="external-link">R</a> package that simplifies setting up and running <a href="https://www.netlogo.org/" class="external-link">NetLogo</a> simulations from R. It provides a modern, intuitive interface that follows <a href="https://tidyverse.tidyverse.org/articles/manifesto.html" class="external-link">tidyverse principles</a> and integrates seamlessly with the <a href="https://tidyverse.org/" class="external-link">tidyverse ecosystem</a>.</p>
 <p>The package is designed to work with NetLogo 7.0.1 and above. Earlier versions are not supported. See NetLogo’s <a href="https://docs.netlogo.org/transition.html" class="external-link">Transition Guide</a> to upgrade your models if needed.</p>
 <blockquote>
 <p>If you find this project useful, please consider giving it a star!   <a href="https://github.com/danielvartan/logolink/" class="external-link"><img src="https://img.shields.io/github/stars/danielvartan/logolink" alt="GitHub Repository Stars"></a></p>
@@ -97,7 +94,6 @@
 <blockquote>
 <p>The continuous development of <code>logolink</code> depends on community support. If you can afford to do so, please consider becoming a sponsor.   <a href="https://github.com/sponsors/danielvartan" class="external-link"><img src="https://img.shields.io/static/v1?label=Sponsor&amp;message=%E2%9D%A4&amp;logo=GitHub&amp;color=%23fe8e86"></a></p>
 </blockquote>
-</div>
 <div class="section level2">
 <h2 id="another-r-package-for-netlogo">Another R Package for NetLogo?<a class="anchor" aria-label="anchor" href="#another-r-package-for-netlogo"></a>
 </h2>
@@ -136,7 +132,7 @@
 <p><code>logolink</code> will try to find out the path to the NetLogo installation automatically. This is usually successful, but if it fails, you can set it manually. See the documentation for the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a> function for more details.</p>
 <p>To start our example analysis, we’ll need to first specify the path to the NetLogo model.</p>
 <p>This example uses Wilensky’s <a href="https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/IABM%20Textbook/chapter%204/Wolf%20Sheep%20Simple%205.nlogox" class="external-link">Wolf Sheep Simple</a> model, a classic predator-prey simulation grounded in the <a href="https://danielvartan.github.io/lotka-volterra/" class="external-link">Lotka-Volterra equations</a> developed by Alfred J. Lotka (<a href="http://archive.org/details/elementsofphysic017171mbp" class="external-link">1925</a>) and Vito Volterra (<a href="https://www.nature.com/articles/118558a0" class="external-link">1926</a>). Since this model comes bundled with NetLogo, no download is required.</p>
-<p>We’ll use <a href="https://danielvartan.github.io/logolink/reference/find_netlogo_home.html"><code>find_netlogo_home</code></a> function to locate the NetLogo installation directory, then build the path to the model file:</p>
+<p>We’ll use <a href="https://danielvartan.github.io/logolink/reference/find_netlogo_home.html"><code>find_netlogo_home()</code></a> function to locate the NetLogo installation directory, then build the path to the model file:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model_path</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="reference/find_netlogo_home.html">find_netlogo_home</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -150,7 +146,7 @@
 <div class="section level3">
 <h3 id="creating-an-experiment">Creating an Experiment<a class="anchor" aria-label="anchor" href="#creating-an-experiment"></a>
 </h3>
-<p>To run the model from R, we’ll need to setup an experiment. We can do this by setting a <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a> experiment with the <a href="https://danielvartan.github.io/logolink/reference/create_experiment.html"><code>create_experiment</code></a> function. This function will create a <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a> <a href="https://en.wikipedia.org/wiki/XML" class="external-link">XML</a> file that contains all the information about the experiment, including the parameters to vary, the metrics to collect, and the number of runs to perform.</p>
+<p>To run the model from R, we’ll need to setup an experiment. We can do this by setting a <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a> experiment with the <a href="https://danielvartan.github.io/logolink/reference/create_experiment.html"><code>create_experiment()</code></a> function. This function will create a <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a> <a href="https://en.wikipedia.org/wiki/XML" class="external-link">XML</a> file that contains all the information about the experiment, including the parameters to vary, the metrics to collect, and the number of runs to perform.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/create_experiment.html">create_experiment</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="st">"Wolf Sheep Simple Model Analysis"</span>,</span>
@@ -183,7 +179,7 @@
 <div class="section level3">
 <h3 id="running-the-simulation">Running the Simulation<a class="anchor" aria-label="anchor" href="#running-the-simulation"></a>
 </h3>
-<p>With the experiment file created, we can now run the model using the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a> function. This function will execute the NetLogo model with the specified parameters and return the results as <a href="https://r4ds.hadley.nz/data-tidy.html" class="external-link">tidy data frames</a>.</p>
+<p>With the experiment file created, we can now run the model using the <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment()</code></a> function. This function will execute the NetLogo model with the specified parameters and return the results as <a href="https://r4ds.hadley.nz/data-tidy.html" class="external-link">tidy data frames</a>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">model_path</span> <span class="op">|&gt;</span></span>
@@ -204,7 +200,7 @@
 <span><span class="va">results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 2</span></span>
 <span><span class="co">#&gt;  $ metadata:List of 6</span></span>
-<span><span class="co">#&gt;   ..$ timestamp       : POSIXct[1:1], format: "2026-01-08 05:11:42"</span></span>
+<span><span class="co">#&gt;   ..$ timestamp       : POSIXct[1:1], format: "2026-01-08 18:42:07"</span></span>
 <span><span class="co">#&gt;   ..$ netlogo_version : chr "7.0.3"</span></span>
 <span><span class="co">#&gt;   ..$ output_version  : chr "2.0"</span></span>
 <span><span class="co">#&gt;   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"</span></span>
@@ -221,8 +217,8 @@
 <span><span class="co">#&gt;   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
 <span><span class="co">#&gt;   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
-<span><span class="co">#&gt;   ..$ count_sheep           : num [1:110110] 500 499 499 498 495 494 492 489 488 486 ...</span></span></code></pre></div>
-<p>If you already have a file with experiment results, you can read it into R using the <a href="https://danielvartan.github.io/logolink/reference/read_experiment.html"><code>read_experiment</code></a> function, which will produce the same output structure as <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a>.</p>
+<span><span class="co">#&gt;   ..$ count_sheep           : num [1:110110] 500 500 498 497 495 494 494 492 490 487 ...</span></span></code></pre></div>
+<p>If you already have a file with experiment results, you can read it into R using the <a href="https://danielvartan.github.io/logolink/reference/read_experiment.html"><code>read_experiment()</code></a> function, which will produce the same output structure as <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment()</code></a>.</p>
 </div>
 <div class="section level3">
 <h3 id="analyzing-the-data-bonus-section">Analyzing the Data (Bonus Section)<a class="anchor" aria-label="anchor" href="#analyzing-the-data-bonus-section"></a>

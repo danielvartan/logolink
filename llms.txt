@@ -1,10 +1,10 @@
 # logolink
 
-## Overview
+logolink 1.0.0.9000 (development version) \## Overview
 
 `logolink` is an [R](https://www.r-project.org/) package that simplifies
 setting up and running [NetLogo](https://www.netlogo.org/) simulations
-directly from R. It provides a modern, intuitive interface that follows
+from R. It provides a modern, intuitive interface that follows
 [tidyverse
 principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and
 integrates seamlessly with the [tidyverse
@@ -104,7 +104,7 @@ Volterra ([1926](https://www.nature.com/articles/118558a0)). Since this
 model comes bundled with NetLogo, no download is required.
 
 We’ll use
-[`find_netlogo_home`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.html)
+[`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.html)
 function to locate the NetLogo installation directory, then build the
 path to the model file:
 
@@ -125,7 +125,7 @@ To run the model from R, we’ll need to setup an experiment. We can do
 this by setting a
 [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment
 with the
-[`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html)
+[`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.html)
 function. This function will create a
 [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html)
 [XML](https://en.wikipedia.org/wiki/XML) file that contains all the
@@ -172,7 +172,7 @@ with
 ### Running the Simulation
 
 With the experiment file created, we can now run the model using the
-[`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html)
+[`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.html)
 function. This function will execute the NetLogo model with the
 specified parameters and return the results as [tidy data
 frames](https://r4ds.hadley.nz/data-tidy.html).
@@ -208,7 +208,7 @@ library(dplyr)
 results |> glimpse()
 #> List of 2
 #>  $ metadata:List of 6
-#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-08 05:11:42"
+#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-08 18:42:07"
 #>   ..$ netlogo_version : chr "7.0.3"
 #>   ..$ output_version  : chr "2.0"
 #>   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"
@@ -225,14 +225,14 @@ results |> glimpse()
 #>   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
 #>   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ count_sheep           : num [1:110110] 500 499 499 498 495 494 492 489 488 486 ...
+#>   ..$ count_sheep           : num [1:110110] 500 500 498 497 495 494 494 492 490 487 ...
 ```
 
 If you already have a file with experiment results, you can read it into
 R using the
-[`read_experiment`](https://danielvartan.github.io/logolink/reference/read_experiment.html)
+[`read_experiment()`](https://danielvartan.github.io/logolink/reference/read_experiment.html)
 function, which will produce the same output structure as
-[`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html).
+[`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.html).
 
 ### Analyzing the Data (Bonus Section)
 

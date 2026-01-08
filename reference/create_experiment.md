@@ -3,7 +3,8 @@
 `create_experiment()` creates a NetLogo
 [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment
 [XML](https://en.wikipedia.org/wiki/XML) file that can be used to run
-headless experiments with the
+[headless](https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line)
+experiments with the
 [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
 function.
 
@@ -160,7 +161,7 @@ command as a separate element.
 For example, to run two commands in sequence for the `go` argument, you
 can provide:
 
-    go = c("command-1", "command-2")
+    go = c('command-1', 'command-2')
 
 ### `constants` Argument
 
@@ -183,7 +184,7 @@ When passing values to constants,
 [`character`](https://rdrr.io/r/base/character.html) strings should be
 passed as is, without adding quotes to them. For example, to set the
 variable `pathway` to `"SSP-585"`, you should use
-`list("pathway" = "SSP-585")`, not `list("pathway" = '"SSP-585"')`.
+`list("pathway" = 'SSP-585')`, not `list("pathway" = '"SSP-585"')`.
 
 ## See also
 
@@ -218,14 +219,14 @@ setup_file <- create_experiment(
     'count grass'
   ),
   constants = list(
-    "model-version" = "sheep-wolves-grass",
+    "model-version" = 'sheep-wolves-grass',
     "wolf-reproduce" = c(3, 5, 10, 15),
     "wolf-gain-from-food" = c(10, 15, 30, 40)
   )
 )
 
 setup_file
-#> [1] "/tmp/RtmpVGeJ2K/experiment-1e6638744f6.xml"
+#> [1] "/tmp/Rtmp8TZTou/experiment-1e5360471a4a.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>
@@ -316,7 +317,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpVGeJ2K/experiment-1e66643034d9.xml"
+#> [1] "/tmp/Rtmp8TZTou/experiment-1e5362cb1907.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>
@@ -441,7 +442,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpVGeJ2K/experiment-1e667363ac6d.xml"
+#> [1] "/tmp/Rtmp8TZTou/experiment-1e533a4bc0e0.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>
@@ -536,7 +537,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmpVGeJ2K/experiment-1e66beae8f0.xml"
+#> [1] "/tmp/Rtmp8TZTou/experiment-1e535492d04a.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>
@@ -583,13 +584,13 @@ setup_file <- create_experiment(
       last = 4
     ),
     "disease-decay" = 10,
-    "variant" = "network",
+    "variant" = 'network',
     "num-infected" = 1
   )
 )
 
 setup_file
-#> [1] "/tmp/RtmpVGeJ2K/experiment-1e665dd89ca4.xml"
+#> [1] "/tmp/Rtmp8TZTou/experiment-1e53dbbf901.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>
@@ -636,13 +637,13 @@ setup_file <- create_experiment(
       step = 1,
       last = 10
     ),
-    "variant" = "environmental",
+    "variant" = 'environmental',
     "num-infected" = 1
   )
 )
 
 setup_file
-#> [1] "/tmp/RtmpVGeJ2K/experiment-1e6630392286.xml"
+#> [1] "/tmp/Rtmp8TZTou/experiment-1e532f24b465.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>

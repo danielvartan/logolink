@@ -9,7 +9,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/danielvartan/logolink/blob/v1.0.0/inst/CITATION)
+[`inst/CITATION`](https://github.com/danielvartan/logolink/blob/main/inst/CITATION)
 
 Vartanian, D. (2026). logolink: An interface for running NetLogo
 simulations from R \[Computer software\]. CRAN.

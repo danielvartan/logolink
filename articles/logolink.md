@@ -99,7 +99,7 @@ step and simply pass the experiment name to
 If you’re familiar with the [BehaviorSpace XML file
 structure](https://github.com/NetLogo/NetLogo/wiki/XML-File-Format#behaviorspace-experiments),
 you can easily inspect the created experiment using the
-[`inspect_experiment`](https://danielvartan.github.io/logolink/reference/inspect_experiment.html)
+[`inspect_experiment()`](https://danielvartan.github.io/logolink/reference/inspect_experiment.html)
 function:
 
 ``` r
@@ -135,9 +135,9 @@ setup_file |> inspect_experiment()
 ## Running the Simulation
 
 With our experiment defined, we can now run the simulation using the
-[`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.html)
-function. This function takes care of launching NetLogo, executing the
-experiment, and collecting the results as [tidy data
+[`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.html).
+This function takes care of launching NetLogo, executing the experiment,
+and collecting the results as [tidy data
 frames](https://r4ds.hadley.nz/data-tidy.html).
 
 ``` r
@@ -153,7 +153,9 @@ results <-
 
 ## Checking the Results
 
-We can now examine the results. The output from
+Let’s examine the results.
+
+The output from
 [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.html)
 is a list of data frames. These can be any of the [four output
 formats](https://docs.netlogo.org/behaviorspace.html#run-options-formats)
@@ -306,9 +308,9 @@ model.
 ## Wrapping up
 
 You now have a basic understanding of how to use `logolink` to run
-NetLogo experiments directly from R. This opens up a world of
-possibilities for integrating agent-based modeling with statistical
-analysis and data visualization.
+NetLogo experiments from R. This opens up a world of possibilities for
+integrating agent-based modeling with statistical analysis and data
+visualization workflows.
 
 Click
 [here](https://danielvartan.github.io/logolink/reference/index.html) to
