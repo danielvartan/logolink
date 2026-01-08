@@ -3,9 +3,6 @@
 *
 !.gitignore
 !*.qmd
-
-logolink.qmd
-
 *_files
 **/*.quarto_ipynb
 /.quarto/
