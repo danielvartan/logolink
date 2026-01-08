@@ -227,8 +227,9 @@ These are:
 - `--experiment`: Specifies the name of the experiment defined in the
   model.
 
-- `--table`: Specifies the output file for the results
-  [`table`](https://docs.netlogo.org/behaviorspace.html#table-output).
+- `--table`: Specifies the output file for the
+  [table](https://docs.netlogo.org/behaviorspace.html#table-output)
+  results.
 
 - `--spreadsheet`: Specifies the output file for the
   [spreadsheet](https://docs.netlogo.org/behaviorspace.html#spreadsheet-output)
@@ -317,21 +318,21 @@ Other BehaviorSpace functions:
       setup_file = setup_file
     )
 #> ℹ Running model
-#> ✔ Running model [20.1s]
+#> ✔ Running model [20s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [18ms]
+#> ✔ Gathering metadata [20ms]
 #> 
 #> ℹ Processing table output
 #> ✔ Processing table output [15ms]
 #> 
 #> ℹ The experiment run produced the following messages:
 #> 
-#> Jan 08, 2026 2:40:26 AM java.util.prefs.FileSystemPreferences$1 run
+#> Jan 08, 2026 3:17:41 AM java.util.prefs.FileSystemPreferences$1 run
 #> INFO: Created user preferences directory.
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-08 02:40:27 GMT"
+#> [1] "2026-01-08 03:17:42 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -379,17 +380,17 @@ Other BehaviorSpace functions:
       experiment = "Wolf Sheep Simple model analysis"
     )
 #> ℹ Running model
-#> ✔ Running model [17.4s]
+#> ✔ Running model [18s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [13ms]
+#> ✔ Gathering metadata [14ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [8ms]
+#> ✔ Processing table output [9ms]
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-08 02:40:48 GMT"
+#> [1] "2026-01-08 03:18:03 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"

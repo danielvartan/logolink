@@ -68,16 +68,15 @@ cannot be determined.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The function uses the following detection methods in order:</p><ol><li><p><strong>Console execution</strong>: If the NetLogo console executable is found
-by <code><a href="find_netlogo_console.html">find_netlogo_console()</a></code>, it
-runs <code>NetLogo_Console --headless --version</code> to retrieve the version
-information. This is the most reliable method.</p></li>
-<li><p><strong>Directory name extraction</strong>: If the executable is not found, it
-attempts to extract the version number from the installation directory
-name returned by <code><a href="find_netlogo_home.html">find_netlogo_home()</a></code>
-(e.g., <code>NetLogo 7.0.2</code> yields <code>"7.0.2"</code>). Note that this fallback may
-produce slightly different results if the directory was renamed or uses
-a non-standard naming convention.</p></li>
+    <p>The function uses the following detection methods in order:</p><ol><li><p>If the NetLogo console executable is found by
+<code><a href="find_netlogo_console.html">find_netlogo_console()</a></code>, it runs
+<code>NetLogo_Console --headless --version</code> command to retrieve the
+version information. This is the most reliable method.</p></li>
+<li><p>If the executable is not found, it attempts to extract the version number
+from the installation directory name returned by
+<code><a href="find_netlogo_home.html">find_netlogo_home()</a></code> (e.g., <code>NetLogo 7.0.2</code> yields
+<code>"7.0.2"</code>). Note that this fallback may produce slightly different results
+if the directory was renamed or uses a non-standard naming convention.</p></li>
 </ol></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

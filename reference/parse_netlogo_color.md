@@ -20,7 +20,7 @@ parse_netlogo_color(x, bias = 0.1)
 
   A [`numeric`](https://rdrr.io/r/base/numeric.html) vector containing
   NetLogo color codes (ranging from `0` to `140`) to be parsed into
-  [hexadecimal](https://en.wikipedia.org/wiki/Web_colors) color
+  [hexadecimal color](https://en.wikipedia.org/wiki/Web_colors)
   representations.
 
 - bias:
@@ -29,13 +29,14 @@ parse_netlogo_color(x, bias = 0.1)
   between `-1` and `1` that adjusts the lightness or darkness of the
   resulting colors. Positive values lighten colors, while negative
   values darken them. This only affects shaded colors (those with shades
-  other than 5) (default: `0.1`).
+  other than `5`) (default: `0.1`).
 
 ## Value
 
 A [`character`](https://rdrr.io/r/base/character.html) vector containing
-the approximate [hexadecimal](https://en.wikipedia.org/wiki/Web_colors)
-color representations corresponding to the input NetLogo color codes.
+the approximate [hexadecimal
+color](https://en.wikipedia.org/wiki/Web_colors) representations
+corresponding to the input NetLogo color codes.
 
 ## Details
 

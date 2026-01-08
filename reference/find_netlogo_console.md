@@ -26,7 +26,7 @@ The function uses the following search order:
 2.  If the environment variable is not set or the file does not exist,
     constructs and expands the path based on the output of
     [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)
-    (e.g., `<NETLOGO_HOME>/NetLogo_Console.exe` on Windows or
+    (`<NETLOGO_HOME>/NetLogo_Console.exe` on Windows or
     `<NETLOGO_HOME>/NetLogo_Console` for other systems).
 
 ## See also

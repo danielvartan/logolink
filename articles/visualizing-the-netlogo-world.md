@@ -1,22 +1,31 @@
 # Visualizing the NetLogo World
 
-This vignette demonstrates how to capture and visualize NetLogo
-simulations at specific time steps using `logolink` and
-[`ggplot2`](https://ggplot2.tidyverse.org/). You’ll learn how to extract
-agent positions, render them as publication-ready figures, and create
-animations showing simulation dynamics over time.
+## Overview
 
-We’ll work with the [Wolf Sheep
+This vignette demonstrates how to capture and visualize
+[NetLogo](https://www.netlogo.org/) simulations at specific time steps
+using `logolink` and [`ggplot2`](https://ggplot2.tidyverse.org/). You’ll
+learn how to extract agent positions, render them as publication-ready
+figures, and create animations showing simulation dynamics over time.
+
+We’ll work with Wilensky’s [Wolf Sheep
 Simple](https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/IABM%20Textbook/chapter%204/Wolf%20Sheep%20Simple%205.nlogox)
-model, a classic predator-prey simulation that ships with NetLogo. By
-the end, you’ll have both static plots and an animated
-[GIF](https://en.wikipedia.org/wiki/GIF) showing your simulation
-evolving over time.
+model, a classic predator-prey simulation based on the [Lotka-Volterra
+equations](https://danielvartan.github.io/lotka-volterra/) formulated by
+Alfred J. Lotka
+([1925](http://archive.org/details/elementsofphysic017171mbp)) and Vito
+Volterra ([1926](https://www.nature.com/articles/118558a0)). This model
+ships with NetLogo, so no separate download is needed. By the end of
+this vignette, you’ll have both static plots and an animated
+[GIF](https://en.wikipedia.org/wiki/GIF) showing the simulation evolving
+over time.
 
-We’re assuming you have [NetLogo](https://ccl.northwestern.edu/netlogo/)
-7.0.1 or above installed and are comfortable with R programming.
+We assume you’re already familiar with
+[NetLogo](https://ccl.northwestern.edu/netlogo/) and have version 7.0.1
+or above installed. You should also be comfortable with R programming,
+particularly with the [tidyverse](https://www.tidyverse.org/) ecosystem.
 
-## Getting Started
+## Setting the Stage
 
 First, let’s load the packages we’ll need:
 
@@ -37,7 +46,7 @@ library(stringr)
 library(tidyr)
 ```
 
-If any of these are missing, install them with:
+If any of these are missing in your system, install them with:
 
 ``` r
 install.packages(
@@ -64,10 +73,10 @@ And then run:
 remotes::install_github("danielvartan/logolink")
 ```
 
-Now let’s find our model. The
+Next, we need to locate the model. We’ll use the
 [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)
-function locates your NetLogo installation, and from there we can
-navigate to the model file:
+function to find your NetLogo installation, then navigate to the model
+file:
 
 ``` r
 model_path <-
@@ -80,10 +89,12 @@ model_path <-
   )
 ```
 
-We’ll also need the turtle shapes to make our plots look nice. The
+We’ll also need the turtle shapes to make our plots look nice. We’ll use
+the
 [`get_netlogo_shape()`](https://danielvartan.github.io/logolink/reference/get_netlogo_shape.md)
-function grabs [SVG](https://en.wikipedia.org/wiki/SVG) image files from
-the [LogoShapes](https://github.com/danielvartan/logoshapes) project:
+function to download turtle [SVG](https://en.wikipedia.org/wiki/SVG)
+image files from the
+[LogoShapes](https://github.com/danielvartan/logoshapes) project:
 
 ``` r
 sheep_shape <- get_netlogo_shape("sheep")
@@ -97,7 +108,7 @@ wolf_shape <- get_netlogo_shape("wolf")
 
 Here’s where things get interesting. We want to capture the position of
 every sheep, wolf, and patch at regular intervals. Let’s set up an
-experiment that takes snapshots every 100 ticks:
+experiment that takes these snapshots every 100 ticks:
 
 ``` r
 setup_file <- create_experiment(
@@ -176,8 +187,12 @@ results |>
 ## Preparing the Data
 
 NetLogo uses its own color coding system, so we need to convert those
-values to hex colors that [`ggplot2`](https://ggplot2.tidyverse.org/)
-understands:
+values to [hex colors](https://en.wikipedia.org/wiki/Web_colors) that
+[`ggplot2`](https://ggplot2.tidyverse.org/) understands. We’ll use the
+[`dplyr`](https://dplyr.tidyverse.org/) package to mutate the relevant
+columns with the
+[`parse_netlogo_color()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_color.md)
+function:
 
 ``` r
 plot_data <-
@@ -194,8 +209,8 @@ plot_data <-
 ## Building the Plot
 
 Let’s create a function that renders the world at any given step. It
-draws patches as a raster background, then overlays sheep and wolf icons
-at their coordinates:
+must draw patches as a raster background, then overlays sheep and wolf
+icons at their coordinates:
 
 ``` r
 plot_netlogo_world <- function(
@@ -270,9 +285,9 @@ plot_netlogo_world(plot_data)
 
 ## Creating an Animation
 
-Static plots are nice, but an animation really brings the simulation to
-life. We’ll use the [`magick`](https://docs.ropensci.org/magick/)
-package to stitch our snapshots together.
+Static plots are nice, but an animation really the simulation to life.
+Let’s use the [`magick`](https://docs.ropensci.org/magick/) package to
+stitch our snapshots together.
 
 First, let’s see what steps we have:
 
@@ -319,7 +334,7 @@ cli_progress_done()
 ```
 
 Finally, let’s combine them into a
-[GIF](https://en.wikipedia.org/wiki/GIF):
+[GIF](https://en.wikipedia.org/wiki/GIF) image:
 
 ``` r
 animation <-
@@ -342,6 +357,8 @@ animation
 ```
 
 ![](../reference/figures/vignette-wolf-sheep-model-animation-1.gif)
+
+Cool, right?
 
 ## Wrapping up
 

@@ -90,10 +90,12 @@
 
 
 
-    <p>This vignette demonstrates how to capture and visualize NetLogo simulations at specific time steps using <code>logolink</code> and <a href="https://ggplot2.tidyverse.org/" class="external-link"><code>ggplot2</code></a>. You’ll learn how to extract agent positions, render them as publication-ready figures, and create animations showing simulation dynamics over time.</p>
-<p>We’ll work with the <a href="https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/IABM%20Textbook/chapter%204/Wolf%20Sheep%20Simple%205.nlogox" class="external-link">Wolf Sheep Simple</a> model, a classic predator-prey simulation that ships with NetLogo. By the end, you’ll have both static plots and an animated <a href="https://en.wikipedia.org/wiki/GIF" class="external-link">GIF</a> showing your simulation evolving over time.</p>
-<p>We’re assuming you have <a href="https://ccl.northwestern.edu/netlogo/" class="external-link">NetLogo</a> 7.0.1 or above installed and are comfortable with R programming.</p>
-<section class="level2"><h2 id="getting-started">Getting Started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
+    <section class="level2"><h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p>This vignette demonstrates how to capture and visualize <a href="https://www.netlogo.org/" class="external-link">NetLogo</a> simulations at specific time steps using <code>logolink</code> and <a href="https://ggplot2.tidyverse.org/" class="external-link"><code>ggplot2</code></a>. You’ll learn how to extract agent positions, render them as publication-ready figures, and create animations showing simulation dynamics over time.</p>
+<p>We’ll work with Wilensky’s <a href="https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/IABM%20Textbook/chapter%204/Wolf%20Sheep%20Simple%205.nlogox" class="external-link">Wolf Sheep Simple</a> model, a classic predator-prey simulation based on the <a href="https://danielvartan.github.io/lotka-volterra/" class="external-link">Lotka-Volterra equations</a> formulated by Alfred J. Lotka (<a href="http://archive.org/details/elementsofphysic017171mbp" class="external-link">1925</a>) and Vito Volterra (<a href="https://www.nature.com/articles/118558a0" class="external-link">1926</a>). This model ships with NetLogo, so no separate download is needed. By the end of this vignette, you’ll have both static plots and an animated <a href="https://en.wikipedia.org/wiki/GIF" class="external-link">GIF</a> showing the simulation evolving over time.</p>
+<p>We assume you’re already familiar with <a href="https://ccl.northwestern.edu/netlogo/" class="external-link">NetLogo</a> and have version 7.0.1 or above installed. You should also be comfortable with R programming, particularly with the <a href="https://www.tidyverse.org/" class="external-link">tidyverse</a> ecosystem.</p>
+</section><section class="level2"><h2 id="setting-the-stage">Setting the Stage<a class="anchor" aria-label="anchor" href="#setting-the-stage"></a>
 </h2>
 <p>First, let’s load the packages we’ll need:</p>
 <div class="cell">
@@ -113,7 +115,7 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span></code></pre></div>
 </div>
-<p>If any of these are missing, install them with:</p>
+<p>If any of these are missing in your system, install them with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
@@ -134,7 +136,7 @@
 <p>And then run:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"danielvartan/logolink"</span><span class="op">)</span></span></code></pre></div>
-<p>Now let’s find our model. The <code><a href="../reference/find_netlogo_home.html">find_netlogo_home()</a></code> function locates your NetLogo installation, and from there we can navigate to the model file:</p>
+<p>Next, we need to locate the model. We’ll use the <code><a href="../reference/find_netlogo_home.html">find_netlogo_home()</a></code> function to find your NetLogo installation, then navigate to the model file:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model_path</span> <span class="op">&lt;-</span></span>
@@ -146,7 +148,7 @@
 <span>    <span class="st">"Wolf Sheep Simple 5.nlogox"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 </div>
-<p>We’ll also need the turtle shapes to make our plots look nice. The <code><a href="../reference/get_netlogo_shape.html">get_netlogo_shape()</a></code> function grabs <a href="https://en.wikipedia.org/wiki/SVG" class="external-link">SVG</a> image files from the <a href="https://github.com/danielvartan/logoshapes" class="external-link">LogoShapes</a> project:</p>
+<p>We’ll also need the turtle shapes to make our plots look nice. We’ll use the <code><a href="../reference/get_netlogo_shape.html">get_netlogo_shape()</a></code> function to download turtle <a href="https://en.wikipedia.org/wiki/SVG" class="external-link">SVG</a> image files from the <a href="https://github.com/danielvartan/logoshapes" class="external-link">LogoShapes</a> project:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sheep_shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_netlogo_shape.html">get_netlogo_shape</a></span><span class="op">(</span><span class="st">"sheep"</span><span class="op">)</span></span></code></pre></div>
@@ -157,7 +159,7 @@
 </div>
 </section><section class="level2"><h2 id="running-the-simulation">Running the Simulation<a class="anchor" aria-label="anchor" href="#running-the-simulation"></a>
 </h2>
-<p>Here’s where things get interesting. We want to capture the position of every sheep, wolf, and patch at regular intervals. Let’s set up an experiment that takes snapshots every 100 ticks:</p>
+<p>Here’s where things get interesting. We want to capture the position of every sheep, wolf, and patch at regular intervals. Let’s set up an experiment that takes these snapshots every 100 ticks:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_experiment.html">create_experiment</a></span><span class="op">(</span></span>
@@ -226,7 +228,7 @@
 </div>
 </section><section class="level2"><h2 id="preparing-the-data">Preparing the Data<a class="anchor" aria-label="anchor" href="#preparing-the-data"></a>
 </h2>
-<p>NetLogo uses its own color coding system, so we need to convert those values to hex colors that <a href="https://ggplot2.tidyverse.org/" class="external-link"><code>ggplot2</code></a> understands:</p>
+<p>NetLogo uses its own color coding system, so we need to convert those values to <a href="https://en.wikipedia.org/wiki/Web_colors" class="external-link">hex colors</a> that <a href="https://ggplot2.tidyverse.org/" class="external-link"><code>ggplot2</code></a> understands. We’ll use the <a href="https://dplyr.tidyverse.org/" class="external-link"><code>dplyr</code></a> package to mutate the relevant columns with the <code><a href="../reference/parse_netlogo_color.html">parse_netlogo_color()</a></code> function:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plot_data</span> <span class="op">&lt;-</span></span>
@@ -241,7 +243,7 @@
 </div>
 </section><section class="level2"><h2 id="building-the-plot">Building the Plot<a class="anchor" aria-label="anchor" href="#building-the-plot"></a>
 </h2>
-<p>Let’s create a function that renders the world at any given step. It draws patches as a raster background, then overlays sheep and wolf icons at their coordinates:</p>
+<p>Let’s create a function that renders the world at any given step. It must draw patches as a raster background, then overlays sheep and wolf icons at their coordinates:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plot_netlogo_world</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span></span>
@@ -313,7 +315,7 @@
 <p><img src="../reference/figures/vignette-wolf-sheep-model-plot-1.png"></p>
 </section><section class="level2"><h2 id="creating-an-animation">Creating an Animation<a class="anchor" aria-label="anchor" href="#creating-an-animation"></a>
 </h2>
-<p>Static plots are nice, but an animation really brings the simulation to life. We’ll use the <a href="https://docs.ropensci.org/magick/" class="external-link"><code>magick</code></a> package to stitch our snapshots together.</p>
+<p>Static plots are nice, but an animation really the simulation to life. Let’s use the <a href="https://docs.ropensci.org/magick/" class="external-link"><code>magick</code></a> package to stitch our snapshots together.</p>
 <p>First, let’s see what steps we have:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="downlit sourceCode r">
@@ -355,7 +357,7 @@
 <span></span>
 <span><span class="fu"><a href="https://cli.r-lib.org/reference/cli_progress_bar.html" class="external-link">cli_progress_done</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
-<p>Finally, let’s combine them into a <a href="https://en.wikipedia.org/wiki/GIF" class="external-link">GIF</a>:</p>
+<p>Finally, let’s combine them into a <a href="https://en.wikipedia.org/wiki/GIF" class="external-link">GIF</a> image:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">animation</span> <span class="op">&lt;-</span></span>
@@ -375,6 +377,7 @@
 <code class="sourceCode R"><span><span class="va">animation</span></span></code></pre></div>
 </div>
 <p><img src="../reference/figures/vignette-wolf-sheep-model-animation-1.gif"></p>
+<p>Cool, right?</p>
 </section><section class="level2"><h2 id="wrapping-up">Wrapping up<a class="anchor" aria-label="anchor" href="#wrapping-up"></a>
 </h2>
 <p>You now have the tools to visualize any NetLogo simulation. The approach is straightforward: extract agent coordinates at the time steps you care about, convert NetLogo colors to hex, and plot with <a href="https://ggplot2.tidyverse.org/" class="external-link">ggplot2</a>.</p>
