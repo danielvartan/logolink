@@ -24,13 +24,18 @@ indicating the collection of shapes to download from
 the directory where the shapes will be saved (default: \code{tempdir()}).}
 
 \item{user_agent}{(optional) A \code{\link[base:character]{character}} string
-indicating the user agent to use for the GitHub API requests.
+indicating the user agent to use for the
+\href{https://docs.github.com/en/rest}{GitHub API}
+requests.
 (default: \code{"logolink <https://CRAN.R-project.org/package=logolink>"}).}
 
 \item{auth_token}{(optional) A \code{\link[base:character]{character}} string
-indicating a GitHub Personal Access Token (PAT) for authentication
-with the GitHub API. This is useful when dealing with rate limits.
-(default: \code{Sys.getenv("GITHUB_PAT")}).}
+indicating a GitHub Personal Access Token
+(\href{https://en.wikipedia.org/wiki/Personal_access_token}{PAT})
+for authentication with the
+\href{https://docs.github.com/en/rest}{GitHub API}.
+This is useful when dealing with rate limits.
+(default: \code{Sys.getenv("GH_TOKEN")}).}
 }
 \value{
 A named \code{\link[base:character]{character}} vector with the file paths
@@ -39,7 +44,8 @@ to the downloaded NetLogo shapes as
 }
 \description{
 \code{get_netlogo_shape()} downloads NetLogo shapes from the
-\href{https://github.com/danielvartan/logoshapes}{LogoShapes} project on GitHub.
+\href{https://github.com/danielvartan/logoshapes}{LogoShapes} project on
+\href{https://github.com/}{GitHub}.
 
 The collections and shapes available for download can be found in the
 \href{https://github.com/danielvartan/logoshapes}{LogoShapes} project

@@ -3,7 +3,8 @@
 #' @description
 #'
 #' `get_netlogo_shape()` downloads NetLogo shapes from the
-#' [LogoShapes](https://github.com/danielvartan/logoshapes) project on GitHub.
+#' [LogoShapes](https://github.com/danielvartan/logoshapes) project on
+#' [GitHub](https://github.com/).
 #'
 #' The collections and shapes available for download can be found in the
 #' [LogoShapes](https://github.com/danielvartan/logoshapes) project
@@ -23,12 +24,17 @@
 #' @param dir (optional) A [`character`][base::character()] string indicating
 #'   the directory where the shapes will be saved (default: `tempdir()`).
 #' @param user_agent (optional) A [`character`][base::character()] string
-#'   indicating the user agent to use for the GitHub API requests.
+#'   indicating the user agent to use for the
+#'   [GitHub API](https://docs.github.com/en/rest)
+#'   requests.
 #'   (default: `"logolink <https://CRAN.R-project.org/package=logolink>"`).
 #' @param auth_token (optional) A [`character`][base::character()] string
-#'   indicating a GitHub Personal Access Token (PAT) for authentication
-#'   with the GitHub API. This is useful when dealing with rate limits.
-#'   (default: `Sys.getenv("GITHUB_PAT")`).
+#'   indicating a GitHub Personal Access Token
+#'   ([PAT](https://en.wikipedia.org/wiki/Personal_access_token))
+#'   for authentication with the
+#'   [GitHub API](https://docs.github.com/en/rest).
+#'   This is useful when dealing with rate limits.
+#'   (default: `Sys.getenv("GH_TOKEN")`).
 #'
 #' @return A named [`character`][base::character()] vector with the file paths
 #'   to the downloaded NetLogo shapes as

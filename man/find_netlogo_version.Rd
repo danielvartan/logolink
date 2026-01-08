@@ -25,12 +25,10 @@ information. This is the most reliable method.
 \item \strong{Directory name extraction}: If the executable is not found, it
 attempts to extract the version number from the installation directory
 name returned by \code{\link[=find_netlogo_home]{find_netlogo_home()}}
-(e.g., \verb{NetLogo 7.0.2} yields \code{"7.0.2"}).
+(e.g., \verb{NetLogo 7.0.2} yields \code{"7.0.2"}). Note that this fallback may
+produce slightly different results if the directory was renamed or uses
+a non-standard naming convention.
 }
-
-Note that the directory name fallback may produce slightly different
-results if the directory was renamed or uses a non-standard naming
-convention.
 }
 \examples{
 \dontrun{

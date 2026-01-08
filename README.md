@@ -73,12 +73,14 @@ and has not been updated since June 2017.
 [`nlrx`](https://CRAN.R-project.org/package=nlrx) offers a powerful
 framework for managing experiments and results but
 [supports](https://docs.ropensci.org/nlrx/reference/supported_netlogo_versions.html)
-only up to NetLogo 6.3.0 (released in September 2022), has additional
-system requirements, presents a steep learning curve, and has [many
-unresolved issues](https://github.com/ropensci/nlrx/issues). `logolink`
-**complements** these packages by prioritizing simplicity, full
-compatibility with NetLogo 7, and seamless integration with modern R
-workflows.
+only up to NetLogo 6.3.0 (released in September 2022), requires
+additional system dependencies, uses its own internal conventions that
+diverge from NetLogo standards, has a steep learning curve, and has
+[many unresolved issues](https://github.com/ropensci/nlrx/issues).
+
+`logolink` **complements** these packages by prioritizing simplicity,
+offering finer control over output, ensuring full compatibility with
+NetLogo 7, and integrating seamlessly with modern R workflows.
 
 ## Installation
 
@@ -261,7 +263,7 @@ library(dplyr)
 results |> glimpse()
 #> List of 2
 #>  $ metadata:List of 6
-#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-07 21:52:04"
+#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-07 23:13:36"
 #>   ..$ netlogo_version : chr "7.0.3"
 #>   ..$ output_version  : chr "2.0"
 #>   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"
@@ -278,7 +280,7 @@ results |> glimpse()
 #>   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
 #>   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ count_sheep           : num [1:110110] 500 499 498 497 495 493 493 492 490 489 ...
+#>   ..$ count_sheep           : num [1:110110] 500 499 497 495 494 492 491 491 489 489 ...
 ```
 
 ### Analyzing the Data (Bonus Section)
