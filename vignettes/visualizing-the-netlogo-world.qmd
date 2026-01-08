@@ -61,6 +61,7 @@ install.packages(
     "ggplot2",
     "ggimage",
     "ggtext",
+    "logolink",
     "magick",
     "magrittr",
     "ragg",
@@ -71,13 +72,7 @@ install.packages(
 )
 ```
 
-And then run:
-
-```r
-remotes::install_github("danielvartan/logolink")
-```
-
-Next, we need to locate the model. We'll use the [`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.html) function to find your NetLogo installation, then navigate to the model file:
+Next, we need to locate the model. We'll use the `find_netlogo_home()` function to find the NetLogo installation, then navigate to the model file:
 
 ```{r}
 model_path <-
@@ -90,7 +85,7 @@ model_path <-
   )
 ```
 
-We'll also need the turtle shapes to make our plots look nice. We'll use the [`get_netlogo_shape()`](https://danielvartan.github.io/logolink/reference/get_netlogo_shape.html) function to download turtle [SVG](https://en.wikipedia.org/wiki/SVG) image files from the [LogoShapes](https://github.com/danielvartan/logoshapes) project:
+We'll also need the turtle shapes to make our plots look nice. We'll use the `get_netlogo_shape()` function to download turtle [SVG](https://en.wikipedia.org/wiki/SVG) image files from the [LogoShapes](https://github.com/danielvartan/logoshapes) project:
 
 ```{r}
 sheep_shape <- get_netlogo_shape("sheep")
@@ -102,7 +97,7 @@ wolf_shape <- get_netlogo_shape("wolf")
 
 ## Running the Simulation
 
-Here's where things get interesting. We want to capture the position of every sheep, wolf, and patch at regular intervals. Let's set up an experiment with [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.html) that takes these snapshots every 100 ticks:
+Here's where things get interesting. We want to capture data of every sheep, wolf, and patch at regular intervals. Let's set up an experiment with `create_experiment()` that takes these snapshots every 100 ticks:
 
 ```{r}
 setup_file <- create_experiment(
@@ -136,7 +131,7 @@ setup_file <- create_experiment(
 
 The `run_metrics_condition = 'ticks mod 100 = 0'` is the key here. It tells NetLogo to record data only when the tick count is divisible by 100. With `time_limit = 500`, we get 6 snapshots: steps 0, 100, 200, 300, 400, and 500.
 
-Now let's run it using [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html):
+Now let's run it using `run_experiment()`. Note that we specify `output = c("table", "lists")` to get both summary tables and detailed agent lists:
 
 ```{r}
 #| output: false
@@ -181,7 +176,7 @@ results |>
 
 ## Preparing the Data
 
-NetLogo uses its own color coding system, so we need to convert those values to [hex colors](https://en.wikipedia.org/wiki/Web_colors) that [`ggplot2`](https://ggplot2.tidyverse.org/) understands. We'll use the [`dplyr`](https://dplyr.tidyverse.org/) package to mutate the relevant columns with the [`parse_netlogo_color`](https://danielvartan.github.io/logolink/reference/parse_netlogo_color.html) function:
+NetLogo uses its own color coding system, so we need to convert those values to [hexadecimal colors](https://en.wikipedia.org/wiki/Web_colors) that [`ggplot2`](https://ggplot2.tidyverse.org/) understands. We'll use the [`dplyr`](https://dplyr.tidyverse.org/) package to mutate the relevant columns with the `parse_netlogo_color` function:
 
 ```{r}
 plot_data <-
@@ -295,7 +290,7 @@ ggsave(
 
 ## Creating an Animation
 
-Static plots are nice, but an animation brings the simulation to life. Let's use the [`magick`](https://docs.ropensci.org/magick/) package to stitch our snapshots together.
+Plots are nice, but an animation brings the simulation to life. Let's use the [`magick`](https://docs.ropensci.org/magick/) package to stitch our snapshots together.
 
 First, let's see what steps we have:
 

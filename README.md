@@ -71,7 +71,7 @@ additional system dependencies, uses its own internal conventions that
 diverge from NetLogo standards, and has [many unresolved
 issues](https://github.com/ropensci/nlrx/issues).
 
-`logolink` **complements** these packages by prioritizing simplicity,
+`logolink` complements these packages by prioritizing simplicity,
 offering finer control over output, ensuring full compatibility with
 NetLogo 7, and integrating seamlessly with modern R workflows.
 
@@ -96,9 +96,9 @@ remotes::install_github("danielvartan/logolink")
 `logolink` usage is very straightforward. The main functions are:
 
 - [`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html):
-  Create NetLogo BehaviorSpace experiment.
+  Create NetLogo BehaviorSpace experiment
 - [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html):
-  Run NetLogo BehaviorSpace experiment.
+  Run NetLogo BehaviorSpace experiment
 
 Along with this package, you will also need NetLogo 7.0.1 or higher
 installed on your computer. You can download it from the [NetLogo
@@ -114,8 +114,8 @@ library(logolink)
 ```
 
 `logolink` will try to find out the path to the NetLogo installation
-automatically. This is usually successful, but if it fails, you will
-need to set it manually. In that case, see the documentation for the
+automatically. This is usually successful, but if it fails, you can set
+it manually. See the documentation for the
 [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html)
 function for more details.
 
@@ -150,8 +150,8 @@ model_path <-
 
 ### Creating an Experiment
 
-To run the model from R, we’ll first need to setup an experiment. We can
-do this by setting a
+To run the model from R, we’ll need to setup an experiment. We can do
+this by setting a
 [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment
 with the
 [`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html)
@@ -212,15 +212,6 @@ results <-
   run_experiment(
     setup_file = setup_file
   )
-#> ℹ Running model
-#> ✔ Running model [13.6s]
-#> 
-#> ℹ Gathering metadata
-#> ✔ Gathering metadata [10ms]
-#> 
-#> ℹ Processing table output
-#> ✔ Processing table output [9ms]
-#> 
 #> ✔ Running model [13.4s]
 #> ✔ Gathering metadata [15ms]
 #> ✔ Processing table output [8ms]
@@ -244,12 +235,32 @@ is returned, along with some metadata about the experiment run.
 library(dplyr)
 
 results |> glimpse()
+#> List of 2
+#>  $ metadata:List of 6
+#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-08 04:38:34"
+#>   ..$ netlogo_version : chr "7.0.3"
+#>   ..$ output_version  : chr "2.0"
+#>   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"
+#>   ..$ experiment_name : chr "Wolf Sheep Simple Model Analysis"
+#>   ..$ world_dimensions: Named int [1:4] -17 17 -17 17
+#>   .. ..- attr(*, "names")= chr [1:4] "min-pxcor" "max-pxcor" "min-pycor" "max-pycor"
+#>  $ table   : tibble [110,110 × 10] (S3: tbl_df/tbl/data.frame)
+#>   ..$ run_number            : num [1:110110] 1 1 1 1 1 1 1 1 1 1 ...
+#>   ..$ number_of_sheep       : num [1:110110] 500 500 500 500 500 500 500 500 500 500 ...
+#>   ..$ number_of_wolves      : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
+#>   ..$ movement_cost         : num [1:110110] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 ...
+#>   ..$ grass_regrowth_rate   : num [1:110110] 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 ...
+#>   ..$ energy_gain_from_grass: num [1:110110] 2 2 2 2 2 2 2 2 2 2 ...
+#>   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
+#>   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...
+#>   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
+#>   ..$ count_sheep           : num [1:110110] 500 499 497 495 494 493 492 492 491 490 ...
 ```
 
 If you already have a file with experiment results, you can read it into
 R using the
 [`read_experiment`](https://danielvartan.github.io/logolink/reference/read_experiment.html)
-function, which will yield the same output structure as
+function, which will produce the same output structure as
 [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html).
 
 ### Analyzing the Data (Bonus Section)

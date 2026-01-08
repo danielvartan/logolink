@@ -1,6 +1,6 @@
 Package: logolink
 Title: An Interface for Running 'NetLogo' Simulations
-Version: 1.0.0.9000
+Version: 1.0.0
 Authors@R: c(
         person(
             given = "Daniel",

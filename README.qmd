@@ -122,7 +122,7 @@ While other R packages connect R to NetLogo, `logolink` is currently the only on
 
 For context, [`RNetLogo`](https://CRAN.R-project.org/package=RNetLogo) supports only older versions (up to 6.0.0, released in December 2016) and has not been updated since June 2017. [`nlrx`](https://CRAN.R-project.org/package=nlrx) offers a powerful framework for managing experiments and results, but [supports](https://docs.ropensci.org/nlrx/reference/supported_netlogo_versions.html) only up to NetLogo 6.3.0 (released in September 2022), requires additional system dependencies, uses its own internal conventions that diverge from NetLogo standards, and has [many unresolved issues](https://github.com/ropensci/nlrx/issues).
 
-`logolink` **complements** these packages by prioritizing simplicity, offering finer control over output, ensuring full compatibility with NetLogo 7, and integrating seamlessly with modern R workflows.
+`logolink` complements these packages by prioritizing simplicity, offering finer control over output, ensuring full compatibility with NetLogo 7, and integrating seamlessly with modern R workflows.
 
 ## Installation
 
@@ -143,8 +143,8 @@ remotes::install_github("danielvartan/logolink")
 
 `logolink` usage is very straightforward. The main functions are:
 
-- [`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html): Create NetLogo BehaviorSpace experiment.
-- [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html): Run NetLogo BehaviorSpace experiment.
+- [`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html): Create NetLogo BehaviorSpace experiment
+- [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html): Run NetLogo BehaviorSpace experiment
 
 Along with this package, you will also need NetLogo 7.0.1 or higher installed on your computer. You can download it from the [NetLogo website](https://www.netlogo.org).
 
@@ -156,7 +156,7 @@ After installing NetLogo and `logolink`, start by loading the package with:
 library(logolink)
 ```
 
-`logolink` will try to find out the path to the NetLogo installation automatically. This is usually successful, but if it fails, you will need to set it manually. In that case, see the documentation for the [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html) function for more details.
+`logolink` will try to find out the path to the NetLogo installation automatically. This is usually successful, but if it fails, you can set it manually. See the documentation for the [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html) function for more details.
 
 To start our example analysis, we'll need to first specify the path to the NetLogo model.
 
@@ -177,7 +177,7 @@ model_path <-
 
 ### Creating an Experiment
 
-To run the model from R, we'll first need to setup an experiment. We can do this by setting a [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment with the [`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html) function. This function will create a [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) [XML](https://en.wikipedia.org/wiki/XML) file that contains all the information about the experiment, including the parameters to vary, the metrics to collect, and the number of runs to perform.
+To run the model from R, we'll need to setup an experiment. We can do this by setting a [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment with the [`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html) function. This function will create a [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) [XML](https://en.wikipedia.org/wiki/XML) file that contains all the information about the experiment, including the parameters to vary, the metrics to collect, and the number of runs to perform.
 
 ```{r}
 setup_file <- create_experiment(
@@ -216,6 +216,7 @@ With the experiment file created, we can now run the model using the [`run_exper
 
 ```{r}
 #| label: Run Experiment
+#| output: false
 
 results <-
   model_path |>
@@ -232,14 +233,12 @@ results <-
 `logolink` supports the [four output formats](https://docs.netlogo.org/behaviorspace.html#run-options-formats) available in [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html): [Table](https://docs.netlogo.org/behaviorspace.html#table-output), [Spreadsheet](https://docs.netlogo.org/behaviorspace.html#spreadsheet-output), [Lists](https://docs.netlogo.org/behaviorspace.html#lists-output), and [Statistics](https://docs.netlogo.org/behaviorspace.html#statistics-output). By default, only the [Table](https://docs.netlogo.org/behaviorspace.html#table-output) format is returned, along with some metadata about the experiment run.
 
 ```{r}
-#| output: false
-
 library(dplyr)
 
 results |> glimpse()
 ```
 
-If you already have a file with experiment results, you can read it into R using the [`read_experiment`](https://danielvartan.github.io/logolink/reference/read_experiment.html) function, which will yield the same output structure as [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html).
+If you already have a file with experiment results, you can read it into R using the [`read_experiment`](https://danielvartan.github.io/logolink/reference/read_experiment.html) function, which will produce the same output structure as [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html).
 
 ### Analyzing the Data (Bonus Section)
 

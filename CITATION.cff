@@ -8,7 +8,7 @@ message: 'To cite package "logolink" in publications use:'
 type: software
 license: GPL-3.0-or-later
 title: 'logolink: An Interface for Running ''NetLogo'' Simulations'
-version: 1.0.0.9000
+version: 1.0.0
 doi: 10.32614/CRAN.package.logolink
 identifiers:
 - type: doi
