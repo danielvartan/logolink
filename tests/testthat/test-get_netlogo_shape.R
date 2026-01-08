@@ -1,3 +1,57 @@
+testthat::test_that("`get_netlogo_shape()` | Internet test", {
+  testthat::skip_on_cran()
+  testthat::skip_on_covr()
+  testthat::skip_if_offline()
+
+  user_agent <- "logolink (Test) <https://CRAN.R-project.org/package=logolink>"
+
+  results <-
+    get_netlogo_shape(
+      shape = c("wolf", "sheep"),
+      collection = "netlogo-refined",
+      dir = tempdir(),
+      user_agent = user_agent,
+      auth_token = Sys.getenv("GH_TOKEN")
+    )
+
+  results |>
+    checkmate::expect_character(len = 2)
+
+  results |>
+    magrittr::extract(1) |>
+    file.exists() |>
+    testthat::expect_true()
+
+  results |>
+    magrittr::extract(1) |>
+    readLines(n = 2) |>
+    magrittr::extract(2) |>
+    checkmate::expect_string(pattern = "<svg")
+
+  results <-
+    get_netlogo_shape(
+      shape = c("person-business", "person-construction"),
+      collection = "netlogo-7-0-3",
+      dir = tempdir(),
+      user_agent = user_agent,
+      auth_token = Sys.getenv("GH_TOKEN")
+    )
+
+  results |>
+    checkmate::expect_character(len = 2)
+
+  results |>
+    magrittr::extract(1) |>
+    file.exists() |>
+    testthat::expect_true()
+
+  results |>
+    magrittr::extract(1) |>
+    readLines(n = 2) |>
+    magrittr::extract(2) |>
+    checkmate::expect_string(pattern = "<svg")
+})
+
 testthat::test_that("`get_netlogo_shape()` | General test", {
   fake_api_response <- paste0(
     '[',
@@ -53,7 +107,8 @@ testthat::test_that("`get_netlogo_shape()` | Error test", {
     shape = 1,
     collection = "test",
     dir = tempdir(),
-    auth_token = "test"
+    user_agent = "logolink <https://CRAN.R-project.org/package=logolink>",
+    auth_token = Sys.getenv("GH_TOKEN")
   ) |>
     testthat::expect_error()
 
@@ -68,7 +123,8 @@ testthat::test_that("`get_netlogo_shape()` | Error test", {
     shape = "test",
     collection = 1,
     dir = tempdir(),
-    auth_token = "test"
+    user_agent = "logolink <https://CRAN.R-project.org/package=logolink>",
+    auth_token = Sys.getenv("GH_TOKEN")
   ) |>
     testthat::expect_error()
 
@@ -83,7 +139,24 @@ testthat::test_that("`get_netlogo_shape()` | Error test", {
     shape = "test",
     collection = "test",
     dir = "non_existent_directory",
-    auth_token = "test"
+    user_agent = "logolink <https://CRAN.R-project.org/package=logolink>",
+    auth_token = Sys.getenv("GH_TOKEN")
+  ) |>
+    testthat::expect_error()
+
+  # checkmate::assert_string(user_agent)
+
+  testthat::local_mocked_bindings(
+    require_package = function(...) NULL,
+    assert_internet = function(...) NULL
+  )
+
+  get_netlogo_shape(
+    shape = "test",
+    collection = "test",
+    dir = tempdir(),
+    user_agent = 1,
+    auth_token = Sys.getenv("GH_TOKEN")
   ) |>
     testthat::expect_error()
 
@@ -98,6 +171,7 @@ testthat::test_that("`get_netlogo_shape()` | Error test", {
     shape = "test",
     collection = "test",
     dir = tempdir(),
+    user_agent = "logolink <https://CRAN.R-project.org/package=logolink>",
     auth_token = 1
   ) |>
     testthat::expect_error()
