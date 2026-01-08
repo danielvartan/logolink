@@ -24,18 +24,19 @@ on GitHub. It helps others discover the project and shows your support!
 
 ### Share `logolink` with Others 📣
 
-Think `logolink` is useful? Let others discover it by telling them in
-person or via social media.
+Think `logolink` is useful? Let others discover it, by telling them in
+person, via social media.
 
 ### Sponsor `logolink` 💖
 
-[![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/danielvartan)
+[![GitHub
+Sponsor](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/danielvartan)
 
-If you can, consider [sponsoring the
-project](https://github.com/sponsors/danielvartan). Your support helps
-us maintain and improve the package, and it allows us to dedicate more
-time to its development. Don’t forget to mention `logolink` in your
-sponsorship message.
+If you want to support `logolink` and its development, consider
+[sponsoring the project](https://github.com/sponsors/danielvartan). Your
+support helps us maintain and improve the project, and it allows us to
+dedicate more time to its development. Don’t forget to mention
+`logolink` in your sponsorship message.
 
 ### Cite `logolink` in Your Work 📝
 
@@ -51,7 +52,7 @@ Have an idea for a new `logolink` feature? Take a look at the
 list](https://github.com/danielvartan/logolink/issues) to see if it
 isn’t included or suggested yet. If not, suggest your idea as an [issue
 on GitHub](https://github.com/danielvartan/logolink/issues). While we
-can’t promise to implement your idea, it helps if you:
+can’t promise to implement your idea, it helps to:
 
 - Explain in detail how it would work.
 - Keep the scope as narrow as possible.
@@ -63,20 +64,20 @@ See below if you want to contribute code for your idea as well.
 Using `logolink` and discovered a bug? That’s annoying! Don’t let others
 have the same experience and report it as an [issue on
 GitHub](https://github.com/danielvartan/logolink/issues/new) so we can
-fix it. A good bug report makes it easier for us to do so. Please
+fix it. A good bug report makes it easier for us to do so, so please
 include:
 
 - The content of
   [`utils::sessionInfo()`](https://rdrr.io/r/utils/sessionInfo.html).
 - Any details about your local setup that might be helpful in
   troubleshooting.
-- Detailed steps to reproduce the bug (tip: Use the
+- Detailed steps to reproduce the bug (Tip: Use the
   [reprex](https://reprex.tidyverse.org/) package).
 
 ### Improve the Documentation 📖
 
 Noticed a typo on the website? Think a function could use a better
-example? Good documentation makes all the difference. Your help to
+example? Good documentation makes all the difference, so your help to
 improve it is very welcome!
 
 #### The Website
@@ -97,7 +98,7 @@ Functions are described as comments near their code and translated to
 documentation using [`roxygen2`](https://klutometis.github.io/roxygen/).
 If you want to improve a function description:
 
-1.  Go to the `R` directory in the [code
+1.  Go to `R/` directory in the [code
     repository](https://github.com/danielvartan/logolink).
 2.  Look for the file with the function.
 3.  [Propose a file
@@ -138,8 +139,7 @@ easier and the project history clearer. Here are the steps to follow:
     while since you worked on it, [pull changes from the original
     repo](https://help.github.com/articles/merging-an-upstream-repository-into-your-fork/)
     to your clone by using `git pull upstream main`.
-3.  Open the project in your
-    [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment).
+3.  Open the project in RStudio or other IDE of your choice.
 4.  Make your changes:
     - Write your code.
     - Test your code (bonus points for adding unit tests).

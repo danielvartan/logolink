@@ -55,9 +55,9 @@
 <ul><li>
 <code>logolink</code> now works only with NetLogo 7.0.1 and above. The NetLogo 7.0.1 patch release changed the <a href="https://github.com/NetLogo/NetLogo/wiki/XML-File-Format#behaviorspace-experiments" class="external-link">XML structure</a> of <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a> experiments; See this <a href="https://github.com/NetLogo/NetLogo/issues/2560" class="external-link">GitHub issue</a> to learn more.</li>
 <li>
-<code><a href="../reference/run_experiment.html">run_experiment()</a></code> now returns a <code>list</code> object containing the <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace output formats</a> and metadata information. See the updated documentation for details.</li>
+<code><a href="../reference/run_experiment.html">run_experiment()</a></code> now returns a <code>list</code> object containing the <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace output formats</a> and metadata information.</li>
 <li>
-<code><a href="../reference/run_experiment.html">run_experiment()</a></code> had the <code>parse</code> argument removed. The function now offer an option to return a <a href="https://docs.netlogo.org/behaviorspace.html#lists-output" class="external-link">lists output</a> via the new <code>output</code> parameter. Results containing data in NetLogo’s lists format are returned as <code>character</code> vectors. See <code><a href="../reference/run_experiment.html">run_experiment()</a></code> documentation for details.</li>
+<code><a href="../reference/run_experiment.html">run_experiment()</a></code> had the <code>parse</code> argument removed. The function now offer an option to return a <a href="https://docs.netlogo.org/behaviorspace.html#lists-output" class="external-link">lists output</a> via the new <code>output</code> parameter. Results containing data in NetLogo’s lists format are returned as <code>character</code> vectors.</li>
 <li>
 <code><a href="../reference/run_experiment.html">run_experiment()</a></code> had the <code>netlogo_home</code> and <code>netlogo_path</code> argument removed. The package now tries to automatically detect the NetLogo installation using helper functions (see <code><a href="../reference/find_netlogo_home.html">find_netlogo_home()</a></code>). Users can still manually specify the path to NetLogo. See the updated documentation for details.</li>
 <li>
@@ -88,12 +88,12 @@
 <li>
 <code><a href="../reference/parse_netlogo_list.html">parse_netlogo_list()</a></code> now have better heuristics.</li>
 <li>
-<code><a href="../reference/parse_netlogo_color.html">parse_netlogo_color()</a></code> was introduced to parse NetLogo color strings into approximate hex color codes.</li>
+<code><a href="../reference/parse_netlogo_color.html">parse_netlogo_color()</a></code> was introduced to parse NetLogo color strings into approximate <a href="https://en.wikipedia.org/wiki/Web_colors" class="external-link">hexadecimal color</a> codes.</li>
 <li>
 <code><a href="../reference/get_netlogo_shape.html">get_netlogo_shape()</a></code> was introduced to retrieve NetLogo shape definitions from the <a href="https://github.com/danielvartan/logoshapes" class="external-link"><code>LogoShapes</code></a> project.</li>
 <li>
-<code><a href="../reference/read_experiment.html">read_experiment()</a></code> was introduced to read and tidy BehaviorSpace experiment output files into R.</li>
-<li>The package now checks <code>logolink</code> NetLogo integration via Continuous Integration (CI), performing tests on Windows, macOS, and Linux using GitHub Actions from the <a href="https://github.com/danielvartan/logoactions" class="external-link"><code>LogoActions</code></a> project.</li>
+<code><a href="../reference/read_experiment.html">read_experiment()</a></code> was introduced to read and tidy <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a> experiment output files into R.</li>
+<li>The package now checks <code>logolink</code> NetLogo integration via Continuous Integration (<a href="https://en.wikipedia.org/wiki/Continuous_integration" class="external-link">CI</a>), performing tests on Windows, macOS, and Linux using GitHub Actions from the <a href="https://github.com/danielvartan/logoactions" class="external-link"><code>LogoActions</code></a> project.</li>
 <li>New R unit tests were implemented.</li>
 <li>New NetLogo unit tests were implemented.</li>
 <li>A <a href="https://danielvartan.github.io/logolink/articles/logolink.html">new vignette</a> introducing the package was added.</li>

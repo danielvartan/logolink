@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="index.html">logolink</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.1.9000</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,7 +21,12 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="articles/logolink.html">Get started</a></li>
+<li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="articles/visualizing-the-netlogo-world.html">Visualizing the NetLogo World</a></li>
+  </ul></li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json"></form></li>
@@ -58,12 +63,12 @@
 </div>
 <div class="section level3">
 <h3 id="share-logolink-with-others-">Share <code>logolink</code> with Others 📣<a class="anchor" aria-label="anchor" href="#share-logolink-with-others-"></a></h3>
-<p>Think <code>logolink</code> is useful? Let others discover it by telling them in person or via social media.</p>
+<p>Think <code>logolink</code> is useful? Let others discover it, by telling them in person, via social media.</p>
 </div>
 <div class="section level3">
 <h3 id="sponsor-logolink-">Sponsor <code>logolink</code> 💖<a class="anchor" aria-label="anchor" href="#sponsor-logolink-"></a></h3>
-<p><a href="https://github.com/sponsors/danielvartan" class="external-link"><img src="https://img.shields.io/static/v1?label=Sponsor&amp;message=%E2%9D%A4&amp;logo=GitHub&amp;color=%23fe8e86"></a></p>
-<p>If you can, consider <a href="https://github.com/sponsors/danielvartan" class="external-link">sponsoring the project</a>. Your support helps us maintain and improve the package, and it allows us to dedicate more time to its development. Don’t forget to mention <code>logolink</code> in your sponsorship message.</p>
+<p><a href="https://github.com/sponsors/danielvartan" class="external-link"><img src="https://img.shields.io/static/v1?label=Sponsor&amp;message=%E2%9D%A4&amp;logo=GitHub&amp;color=%23fe8e86" alt="GitHub Sponsor"></a></p>
+<p>If you want to support <code>logolink</code> and its development, consider <a href="https://github.com/sponsors/danielvartan" class="external-link">sponsoring the project</a>. Your support helps us maintain and improve the project, and it allows us to dedicate more time to its development. Don’t forget to mention <code>logolink</code> in your sponsorship message.</p>
 </div>
 <div class="section level3">
 <h3 id="cite-logolink-in-your-work-">Cite <code>logolink</code> in Your Work 📝<a class="anchor" aria-label="anchor" href="#cite-logolink-in-your-work-"></a></h3>
@@ -71,21 +76,21 @@
 </div>
 <div class="section level3">
 <h3 id="propose-an-idea-">Propose an Idea 💡<a class="anchor" aria-label="anchor" href="#propose-an-idea-"></a></h3>
-<p>Have an idea for a new <code>logolink</code> feature? Take a look at the <a href="https://danielvartan.github.io/logolink">documentation</a> and <a href="https://github.com/danielvartan/logolink/issues" class="external-link">issue list</a> to see if it isn’t included or suggested yet. If not, suggest your idea as an <a href="https://github.com/danielvartan/logolink/issues" class="external-link">issue on GitHub</a>. While we can’t promise to implement your idea, it helps if you:</p>
+<p>Have an idea for a new <code>logolink</code> feature? Take a look at the <a href="https://danielvartan.github.io/logolink">documentation</a> and <a href="https://github.com/danielvartan/logolink/issues" class="external-link">issue list</a> to see if it isn’t included or suggested yet. If not, suggest your idea as an <a href="https://github.com/danielvartan/logolink/issues" class="external-link">issue on GitHub</a>. While we can’t promise to implement your idea, it helps to:</p>
 <ul><li>Explain in detail how it would work.</li>
 <li>Keep the scope as narrow as possible.</li>
 </ul><p>See below if you want to contribute code for your idea as well.</p>
 </div>
 <div class="section level3">
 <h3 id="report-a-bug-">Report a Bug 🐛<a class="anchor" aria-label="anchor" href="#report-a-bug-"></a></h3>
-<p>Using <code>logolink</code> and discovered a bug? That’s annoying! Don’t let others have the same experience and report it as an <a href="https://github.com/danielvartan/logolink/issues/new" class="external-link">issue on GitHub</a> so we can fix it. A good bug report makes it easier for us to do so. Please include:</p>
+<p>Using <code>logolink</code> and discovered a bug? That’s annoying! Don’t let others have the same experience and report it as an <a href="https://github.com/danielvartan/logolink/issues/new" class="external-link">issue on GitHub</a> so we can fix it. A good bug report makes it easier for us to do so, so please include:</p>
 <ul><li>The content of <code><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">utils::sessionInfo()</a></code>.</li>
 <li>Any details about your local setup that might be helpful in troubleshooting.</li>
-<li>Detailed steps to reproduce the bug (tip: Use the <a href="https://reprex.tidyverse.org/" class="external-link">reprex</a> package).</li>
+<li>Detailed steps to reproduce the bug (Tip: Use the <a href="https://reprex.tidyverse.org/" class="external-link">reprex</a> package).</li>
 </ul></div>
 <div class="section level3">
 <h3 id="improve-the-documentation-">Improve the Documentation 📖<a class="anchor" aria-label="anchor" href="#improve-the-documentation-"></a></h3>
-<p>Noticed a typo on the website? Think a function could use a better example? Good documentation makes all the difference. Your help to improve it is very welcome!</p>
+<p>Noticed a typo on the website? Think a function could use a better example? Good documentation makes all the difference, so your help to improve it is very welcome!</p>
 <div class="section level4">
 <h4 id="the-website">The Website<a class="anchor" aria-label="anchor" href="#the-website"></a></h4>
 <p>The <a href="https://danielvartan.github.io/logolink">website</a> is generated with <a href="http://pkgdown.r-lib.org/" class="external-link"><code>pkgdown</code></a>. That means we don’t have to write any HTML: Content is pulled together from documentation in the code, vignettes, <a href="https://guides.github.com/features/mastering-markdown/" class="external-link">Markdown</a> files, the package <code>DESCRIPTION</code> and <code>_pkgdown.yml</code> settings. If you know your way around <code>pkgdown</code>, you can <a href="https://help.github.com/articles/editing-files-in-another-user-s-repository/" class="external-link">propose a file change</a> to improve documentation.</p>
@@ -93,7 +98,7 @@
 <div class="section level4">
 <h4 id="function-documentation">Function Documentation<a class="anchor" aria-label="anchor" href="#function-documentation"></a></h4>
 <p>Functions are described as comments near their code and translated to documentation using <a href="https://klutometis.github.io/roxygen/" class="external-link"><code>roxygen2</code></a>. If you want to improve a function description:</p>
-<ol style="list-style-type: decimal"><li>Go to the <code>R</code> directory in the <a href="https://github.com/danielvartan/logolink" class="external-link">code repository</a>.</li>
+<ol style="list-style-type: decimal"><li>Go to <code>R/</code> directory in the <a href="https://github.com/danielvartan/logolink" class="external-link">code repository</a>.</li>
 <li>Look for the file with the function.</li>
 <li>
 <a href="https://help.github.com/articles/editing-files-in-another-user-s-repository/" class="external-link">Propose a file change</a> to update the function documentation in the roxygen comments (starting with <code>#'</code>).</li>
@@ -114,7 +119,7 @@
 <p>We follow the <a href="https://guides.github.com/introduction/flow/" class="external-link">GitHub Flow</a> for development. This means all changes should be made in feature branches, submitted as pull requests, and reviewed before merging into the main branch. Please keep your branches focused on a single topic or fix to make reviews easier and the project history clearer. Here are the steps to follow:</p>
 <ol style="list-style-type: decimal"><li>Fork <a href="https://github.com/danielvartan/logolink" class="external-link">this repo</a> and clone it to your computer. To learn more about this process, see <a href="https://guides.github.com/activities/forking/" class="external-link">this guide</a>.</li>
 <li>If you have forked and cloned the project before, and it has been a while since you worked on it, <a href="https://help.github.com/articles/merging-an-upstream-repository-into-your-fork/" class="external-link">pull changes from the original repo</a> to your clone by using <code>git pull upstream main</code>.</li>
-<li>Open the project in your <a href="https://en.wikipedia.org/wiki/Integrated_development_environment" class="external-link">IDE</a>.</li>
+<li>Open the project in RStudio or other IDE of your choice.</li>
 <li>Make your changes:
 <ul><li>Write your code.</li>
 <li>Test your code (bonus points for adding unit tests).</li>
@@ -132,7 +137,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by <a href="https://github.com/danielvartan/" class="external-link">Daniel Vartanian</a>, <a href="https://www.fsp.usp.br/sustentarea/" class="external-link">Sustentarea Research and Extension Center</a>, <a href="https://www5.usp.br/" class="external-link">University of Sao Paulo (USP)</a>, <a href="https://www.gov.br/cnpq/" class="external-link">National Council for Scientific and Technological Development (CNPq)</a>.</p>
+  <p>Developed by <a href="https://github.com/danielvartan/" class="external-link">Daniel Vartanian</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

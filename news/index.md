@@ -13,15 +13,13 @@
 - [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
   now returns a `list` object containing the [BehaviorSpace output
   formats](https://docs.netlogo.org/behaviorspace.html) and metadata
-  information. See the updated documentation for details.
+  information.
 - [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
   had the `parse` argument removed. The function now offer an option to
   return a [lists
   output](https://docs.netlogo.org/behaviorspace.html#lists-output) via
   the new `output` parameter. Results containing data in NetLogo’s lists
-  format are returned as `character` vectors. See
-  [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
-  documentation for details.
+  format are returned as `character` vectors.
 - [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
   had the `netlogo_home` and `netlogo_path` argument removed. The
   package now tries to automatically detect the NetLogo installation
@@ -73,18 +71,21 @@
 - [`parse_netlogo_list()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_list.md)
   now have better heuristics.
 - [`parse_netlogo_color()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_color.md)
-  was introduced to parse NetLogo color strings into approximate hex
-  color codes.
+  was introduced to parse NetLogo color strings into approximate
+  [hexadecimal color](https://en.wikipedia.org/wiki/Web_colors) codes.
 - [`get_netlogo_shape()`](https://danielvartan.github.io/logolink/reference/get_netlogo_shape.md)
   was introduced to retrieve NetLogo shape definitions from the
   [`LogoShapes`](https://github.com/danielvartan/logoshapes) project.
 - [`read_experiment()`](https://danielvartan.github.io/logolink/reference/read_experiment.md)
-  was introduced to read and tidy BehaviorSpace experiment output files
-  into R.
+  was introduced to read and tidy
+  [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html)
+  experiment output files into R.
 - The package now checks `logolink` NetLogo integration via Continuous
-  Integration (CI), performing tests on Windows, macOS, and Linux using
-  GitHub Actions from the
-  [`LogoActions`](https://github.com/danielvartan/logoactions) project.
+  Integration
+  ([CI](https://en.wikipedia.org/wiki/Continuous_integration)),
+  performing tests on Windows, macOS, and Linux using GitHub Actions
+  from the [`LogoActions`](https://github.com/danielvartan/logoactions)
+  project.
 - New R unit tests were implemented.
 - New NetLogo unit tests were implemented.
 - A [new
