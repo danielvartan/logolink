@@ -1,9 +1,10 @@
-# Inspect a BehaviorSpace experiment XML file
+# Inspect NetLogo BehaviorSpace experiment file
 
-`inspect_experiment()` reads and prints the content of a
+`inspect_experiment()` reads and prints the content of a NetLogo
 [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment
-XML file to the console. This is useful for debugging and verifying the
-structure of experiment files created by
+[XML](https://en.wikipedia.org/wiki/XML) file to the console. This is
+useful for debugging and verifying the structure of experiment files
+created by
 [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md).
 
 Please refer to the [BehaviorSpace

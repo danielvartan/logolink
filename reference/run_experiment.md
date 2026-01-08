@@ -1,4 +1,4 @@
-# Run a NetLogo BehaviorSpace experiment
+# Run NetLogo BehaviorSpace experiment
 
 `run_experiment()` runs a NetLogo
 [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment
@@ -303,21 +303,21 @@ Other BehaviorSpace functions:
       setup_file = setup_file
     )
 #> ℹ Running model
-#> ✔ Running model [20.2s]
+#> ✔ Running model [20.4s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [17ms]
+#> ✔ Gathering metadata [19ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [14ms]
+#> ✔ Processing table output [16ms]
 #> 
 #> ℹ The experiment run produced the following messages:
 #> 
-#> Jan 07, 2026 8:46:45 AM java.util.prefs.FileSystemPreferences$1 run
+#> Jan 08, 2026 12:03:13 AM java.util.prefs.FileSystemPreferences$1 run
 #> INFO: Created user preferences directory.
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-07 08:46:46 GMT"
+#> [1] "2026-01-08 00:03:14 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -368,14 +368,14 @@ Other BehaviorSpace functions:
 #> ✔ Running model [17.8s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [12ms]
+#> ✔ Gathering metadata [14ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [7ms]
+#> ✔ Processing table output [9ms]
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-07 08:47:07 GMT"
+#> [1] "2026-01-08 00:03:35 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
