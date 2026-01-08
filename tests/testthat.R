@@ -37,7 +37,6 @@ test_check("logolink")
 # spelling::update_wordlist()
 # tcltk::tk_choose.files()
 # urlchecker::url_check()
-# urlchecker::url_update()
 
 # git tag -f <tagname>
 # git push --force origin <tagname>

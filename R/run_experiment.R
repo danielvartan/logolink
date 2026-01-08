@@ -151,8 +151,7 @@
 #'   executable. For example, you can use `c("--threads 4")` to specify the
 #'   number of threads. See the *Details* section for more information
 #'   (default: `NULL`).
-#' @param timeout (optional) A [`numeric`][base::numeric#'   file containing the experiment definition. This file can be created using
-#'   [`create_experiment()`][create_experiment()] or exported from the NetLogo()] value specifying the
+#' @param timeout (optional) A [`numeric`][base::numeric()] value specifying the
 #'   maximum time (in seconds) to wait for the NetLogo process to complete. If
 #'   the process exceeds this time limit, it will be terminated, and the
 #'   function will return the available output up to that point. Use `Inf` for

@@ -47,8 +47,7 @@ executable. For example, you can use \code{c("--threads 4")} to specify the
 number of threads. See the \emph{Details} section for more information
 (default: \code{NULL}).}
 
-\item{timeout}{(optional) A [\code{numeric}][base::numeric#'   file containing the experiment definition. This file can be created using
-\code{\link[=create_experiment]{create_experiment()}} or exported from the NetLogo()] value specifying the
+\item{timeout}{(optional) A \code{\link[base:numeric]{numeric}} value specifying the
 maximum time (in seconds) to wait for the NetLogo process to complete. If
 the process exceeds this time limit, it will be terminated, and the
 function will return the available output up to that point. Use \code{Inf} for

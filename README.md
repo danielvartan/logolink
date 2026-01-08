@@ -31,20 +31,22 @@ Conduct](https://img.shields.io/badge/Contributor%20Covenant-3.0-4baaaa.svg)](ht
 
 ## Overview
 
-> **Note**: The CRAN release of `logolink` breaks with the recent
-> NetLogo patch updates because the BehaviorSpace XML format changed.
-> The details are in this [GitHub
+> **Note**: The [CRAN](https://cran.r-project.org/) release of
+> `logolink` breaks with the recent NetLogo patch updates because the
+> [BehaviorSpace XML
+> format](https://github.com/NetLogo/NetLogo/wiki/XML-File-Format)
+> changed. The details are in this [GitHub
 > issue](https://github.com/NetLogo/NetLogo/issues/2560). If your
 > experiments fail to run, install the development version of `logolink`
 > from GitHub as shown in the Installation section below. An updated
-> CRAN release will be submitted soon.
+> [CRAN](https://cran.r-project.org/) release will be submitted soon.
 
 `logolink` is an [R](https://www.r-project.org/) package that simplifies
 setting up and running [NetLogo](https://www.netlogo.org/) simulations
-directly from R. It offers a modern, streamlined interface for running
-models, following the [tidyverse
+directly from R. It provides a modern, intuitive interface that follows
+[tidyverse
 principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and
-integrating seamlessly with the broader [tidyverse
+integrates seamlessly with the [tidyverse
 ecosystem](https://tidyverse.org/).
 
 The package is designed to work with NetLogo **7.0.1 and above**. We do
@@ -64,14 +66,15 @@ your models if needed.
 
 While other R packages connect R to NetLogo, `logolink` is currently the
 only one that fully supports the latest NetLogo release. It is actively
-maintained, follows tidyverse conventions, and is designed to be simple
-and straightforward to use.
+maintained, follows [tidyverse
+conventions](https://design.tidyverse.org/), and is designed to be
+simple and straightforward to use.
 
 For context, [`RNetLogo`](https://CRAN.R-project.org/package=RNetLogo)
 supports only older versions (up to 6.0.0, released in December 2016)
 and has not been updated since June 2017.
 [`nlrx`](https://CRAN.R-project.org/package=nlrx) offers a powerful
-framework for managing experiments and results but
+framework for managing experiments and results, but
 [supports](https://docs.ropensci.org/nlrx/reference/supported_netlogo_versions.html)
 only up to NetLogo 6.3.0 (released in September 2022), requires
 additional system dependencies, uses its own internal conventions that
@@ -103,9 +106,9 @@ remotes::install_github("danielvartan/logolink")
 `logolink` usage is very straightforward. The main functions are:
 
 - [`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html):
-  Create a NetLogo BehaviorSpace experiment XML file.
+  Create NetLogo BehaviorSpace experiment.
 - [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html):
-  Run a NetLogo BehaviorSpace experiment.
+  Run NetLogo BehaviorSpace experiment.
 
 Along with this package, you will also need NetLogo 7.0.1 or higher
 installed on your computer. You can download it from the [NetLogo
@@ -218,12 +221,16 @@ setup_file |> inspect_experiment()
 With the experiment file created, you can now run your model using the
 [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html)
 function. This function will execute the NetLogo model with the
-specified parameters and return the results as a [tidy data
+specified parameters and return the results as [tidy data
 frames](https://r4ds.hadley.nz/data-tidy.html).
 
 First, you need to specify the path to your NetLogo model. In this
-example, we will use the *Wolf Sheep Predation* model that comes with
-any NetLogo installation.
+example, we will use the [Wolf Sheep
+Simple](https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/IABM%20Textbook/chapter%204/Wolf%20Sheep%20Simple%205.nlogox)
+model that comes with any NetLogo installation. For that, we can use the
+[`find_netlogo_home`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.html)
+function to locate the NetLogo installation directory and then build the
+path to the model file.
 
 ``` r
 model_path <-
@@ -250,12 +257,15 @@ results <-
 
 `logolink` supports the [four output
 formats](https://docs.netlogo.org/behaviorspace.html#run-options-formats)
-available in NetLogo BehaviorSpace:
-[`table`](https://docs.netlogo.org/behaviorspace.html#table-output),
-[`spreadsheet`](https://docs.netlogo.org/behaviorspace.html#spreadsheet-output),
-[`statistics`](https://docs.netlogo.org/behaviorspace.html#statistics-output),
-and [`lists`](https://docs.netlogo.org/behaviorspace.html#lists-output).
-By default, all formats are returned as a named list.
+available in
+[BehaviorSpace](https://docs.netlogo.org/behaviorspace.html):
+[Table](https://docs.netlogo.org/behaviorspace.html#table-output),
+[Spreadsheet](https://docs.netlogo.org/behaviorspace.html#spreadsheet-output),
+[Lists](https://docs.netlogo.org/behaviorspace.html#lists-output), and
+[Statistics](https://docs.netlogo.org/behaviorspace.html#statistics-output).
+By default, only the
+[Table](https://docs.netlogo.org/behaviorspace.html#table-output) format
+is returned, along with some metadata about the experiment run.
 
 ``` r
 library(dplyr)
@@ -263,7 +273,7 @@ library(dplyr)
 results |> glimpse()
 #> List of 2
 #>  $ metadata:List of 6
-#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-07 23:13:36"
+#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-08 00:44:15"
 #>   ..$ netlogo_version : chr "7.0.3"
 #>   ..$ output_version  : chr "2.0"
 #>   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"
@@ -280,8 +290,14 @@ results |> glimpse()
 #>   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
 #>   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ count_sheep           : num [1:110110] 500 499 497 495 494 492 491 491 489 489 ...
+#>   ..$ count_sheep           : num [1:110110] 500 499 498 496 495 494 491 489 488 488 ...
 ```
+
+If you already have an file with experiment results, you can read it
+into R using the
+[`read_experiment`](https://danielvartan.github.io/logolink/reference/read_experiment.html)
+function, which will yield the same output structure as
+[`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html).
 
 ### Analyzing the Data (Bonus Section)
 
@@ -331,8 +347,10 @@ data-fig-alt="Line plot showing the average number of sheep over time for differ
 ### Visualizing the NetLogo World (Bonus Section)
 
 `logolink` also includes tutorials to help you get the most out of
-NetLogo in R. One tutorial demonstrates how to plot the NetLogo world at
-specific time steps and animate its evolution over time. You can find it
+NetLogo in R. The [Visualizing the NetLogo
+World](https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html)
+tutorial demonstrates how to plot the NetLogo world at specific time
+steps and animate its evolution over time. You can find it
 [here](https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html).
 
 ![](man/figures/vignette-wolf-sheep-model-animation-1.gif)
@@ -340,9 +358,9 @@ specific time steps and animate its evolution over time. You can find it
 Click [here](https://danielvartan.github.io/logolink/reference/) to see
 the full list of `logolink` functions.
 
-Please refer to the [BehaviorSpace
-Guide](https://docs.netlogo.org/behaviorspace.html) for complete
-instructions on how to set up and run experiments in NetLogo.
+For complete guidance on setting up and running experiments in NetLogo,
+please refer to the [BehaviorSpace
+Guide](https://docs.netlogo.org/behaviorspace.html).
 
 ## Citation
 
