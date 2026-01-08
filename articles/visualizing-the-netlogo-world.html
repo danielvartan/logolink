@@ -37,7 +37,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">logolink</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0.9000</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -123,6 +123,7 @@
 <span>    <span class="st">"ggplot2"</span>,</span>
 <span>    <span class="st">"ggimage"</span>,</span>
 <span>    <span class="st">"ggtext"</span>,</span>
+<span>    <span class="st">"logolink"</span>,</span>
 <span>    <span class="st">"magick"</span>,</span>
 <span>    <span class="st">"magrittr"</span>,</span>
 <span>    <span class="st">"ragg"</span>,</span>
@@ -131,12 +132,9 @@
 <span>    <span class="st">"tidyr"</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>And then run:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"danielvartan/logolink"</span><span class="op">)</span></span></code></pre></div>
-<p>Next, we need to locate the model. We’ll use the <a href="https://danielvartan.github.io/logolink/reference/find_netlogo_home.html"><code>find_netlogo_home()</code></a> function to find your NetLogo installation, then navigate to the model file:</p>
+<p>Next, we need to locate the model. We’ll use the <code><a href="../reference/find_netlogo_home.html">find_netlogo_home()</a></code> function to find the NetLogo installation, then navigate to the model file:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model_path</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/find_netlogo_home.html">find_netlogo_home</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span>
@@ -146,20 +144,20 @@
 <span>    <span class="st">"Wolf Sheep Simple 5.nlogox"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 </div>
-<p>We’ll also need the turtle shapes to make our plots look nice. We’ll use the <a href="https://danielvartan.github.io/logolink/reference/get_netlogo_shape.html"><code>get_netlogo_shape()</code></a> function to download turtle <a href="https://en.wikipedia.org/wiki/SVG" class="external-link">SVG</a> image files from the <a href="https://github.com/danielvartan/logoshapes" class="external-link">LogoShapes</a> project:</p>
+<p>We’ll also need the turtle shapes to make our plots look nice. We’ll use the <code><a href="../reference/get_netlogo_shape.html">get_netlogo_shape()</a></code> function to download turtle <a href="https://en.wikipedia.org/wiki/SVG" class="external-link">SVG</a> image files from the <a href="https://github.com/danielvartan/logoshapes" class="external-link">LogoShapes</a> project:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sheep_shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_netlogo_shape.html">get_netlogo_shape</a></span><span class="op">(</span><span class="st">"sheep"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wolf_shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_netlogo_shape.html">get_netlogo_shape</a></span><span class="op">(</span><span class="st">"wolf"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </section><section class="level2"><h2 id="running-the-simulation">Running the Simulation<a class="anchor" aria-label="anchor" href="#running-the-simulation"></a>
 </h2>
-<p>Here’s where things get interesting. We want to capture the position of every sheep, wolf, and patch at regular intervals. Let’s set up an experiment with <a href="https://danielvartan.github.io/logolink/reference/create_experiment.html"><code>create_experiment()</code></a> that takes these snapshots every 100 ticks:</p>
+<p>Here’s where things get interesting. We want to capture data of every sheep, wolf, and patch at regular intervals. Let’s set up an experiment with <code><a href="../reference/create_experiment.html">create_experiment()</a></code> that takes these snapshots every 100 ticks:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_experiment.html">create_experiment</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="st">"Wolf Sheep Simple Model Analysis"</span>,</span>
 <span>  repetitions <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -189,9 +187,9 @@
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <p>The <code>run_metrics_condition = 'ticks mod 100 = 0'</code> is the key here. It tells NetLogo to record data only when the tick count is divisible by 100. With <code>time_limit = 500</code>, we get 6 snapshots: steps 0, 100, 200, 300, 400, and 500.</p>
-<p>Now let’s run it using <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment</code></a>:</p>
+<p>Now let’s run it using <code><a href="../reference/run_experiment.html">run_experiment()</a></code>. Note that we specify <code>output = c("table", "lists")</code> to get both summary tables and detailed agent lists:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">model_path</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/run_experiment.html">run_experiment</a></span><span class="op">(</span></span>
@@ -205,7 +203,7 @@
 </div>
 <p>The results come back as a list. The <code>lists</code> element has all our agent data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">extract2</a></span><span class="op">(</span><span class="st">"lists"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -230,9 +228,9 @@
 </div>
 </section><section class="level2"><h2 id="preparing-the-data">Preparing the Data<a class="anchor" aria-label="anchor" href="#preparing-the-data"></a>
 </h2>
-<p>NetLogo uses its own color coding system, so we need to convert those values to <a href="https://en.wikipedia.org/wiki/Web_colors" class="external-link">hex colors</a> that <a href="https://ggplot2.tidyverse.org/" class="external-link"><code>ggplot2</code></a> understands. We’ll use the <a href="https://dplyr.tidyverse.org/" class="external-link"><code>dplyr</code></a> package to mutate the relevant columns with the <a href="https://danielvartan.github.io/logolink/reference/parse_netlogo_color.html"><code>parse_netlogo_color</code></a> function:</p>
+<p>NetLogo uses its own color coding system, so we need to convert those values to <a href="https://en.wikipedia.org/wiki/Web_colors" class="external-link">hexadecimal colors</a> that <a href="https://ggplot2.tidyverse.org/" class="external-link"><code>ggplot2</code></a> understands. We’ll use the <a href="https://dplyr.tidyverse.org/" class="external-link"><code>dplyr</code></a> package to mutate the relevant columns with the <code>parse_netlogo_color</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plot_data</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">results</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">extract2</a></span><span class="op">(</span><span class="st">"lists"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -247,7 +245,7 @@
 </h2>
 <p>Let’s create a function that renders the world at any given step. It must draw patches as a raster background, then overlays sheep and wolf icons at their coordinates.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plot_netlogo_world</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span></span>
 <span>  <span class="va">data</span>,</span>
 <span>  <span class="va">run_number</span> <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -311,29 +309,29 @@
 </div>
 <p>Let’s see what the initial state looks like:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">plot_netlogo_world</span><span class="op">(</span><span class="va">plot_data</span><span class="op">)</span></span></code></pre></div>
 </div>
 <p><img src="../reference/figures/vignette-wolf-sheep-model-plot-1.png"></p>
 </section><section class="level2"><h2 id="creating-an-animation">Creating an Animation<a class="anchor" aria-label="anchor" href="#creating-an-animation"></a>
 </h2>
-<p>Static plots are nice, but an animation brings the simulation to life. Let’s use the <a href="https://docs.ropensci.org/magick/" class="external-link"><code>magick</code></a> package to stitch our snapshots together.</p>
+<p>Plots are nice, but an animation brings the simulation to life. Let’s use the <a href="https://docs.ropensci.org/magick/" class="external-link"><code>magick</code></a> package to stitch our snapshots together.</p>
 <p>First, let’s see what steps we have:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">steps</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">plot_data</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">step</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">steps</span></span>
 <span><span class="co">#&gt; [1]   0 100 200 300 400 500</span></span></code></pre></div>
 </div>
 <p>Now we’ll generate a <a href="https://en.wikipedia.org/wiki/PNG" class="external-link">PNG</a> image file for each step:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">cli_progress_bar</span><span class="op">(</span><span class="st">"Generating frames"</span>, total <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">steps</span><span class="op">)</span><span class="op">)</span></span>
@@ -361,7 +359,7 @@
 </div>
 <p>Finally, let’s combine them into a <a href="https://en.wikipedia.org/wiki/GIF" class="external-link">GIF</a> image:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">animation</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">files</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">image_read</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -370,12 +368,12 @@
 </div>
 <p>To save it:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">animation</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html" class="external-link">image_write</a></span><span class="op">(</span><span class="st">"netlogo-world-animation.gif"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <p>And here’s the result:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">animation</span></span></code></pre></div>
 </div>
 <p><img src="../reference/figures/vignette-wolf-sheep-model-animation-1.gif"></p>

@@ -1,11 +1,13 @@
 # Changelog
 
-## logolink 1.0.0.9000 (development version)
+## logolink 1.0.0
 
 #### Breaking Changes
 
 - `logolink` now works only with NetLogo 7.0.1 and above. The NetLogo
-  7.0.1 patch release changed the XML structure of BehaviorSpace
+  7.0.1 patch release changed the [XML
+  structure](https://github.com/NetLogo/NetLogo/wiki/XML-File-Format#behaviorspace-experiments)
+  of [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html)
   experiments; See this [GitHub
   issue](https://github.com/NetLogo/NetLogo/issues/2560) to learn more.
 - [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
@@ -52,7 +54,9 @@
   Linux.
 - [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md)
   now have a `file` parameter, allowing the user to specify the output
-  file path for the generated BehaviorSpace experiment XML file.
+  file path for the generated
+  [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html)
+  experiment XML file.
 - [`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.md)
   now supports multiple commands in arguments like `setup` and `go` as
   character vectors.

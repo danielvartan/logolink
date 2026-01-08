@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">logolink</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0.9000</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,11 +48,11 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.0.9000" id="logolink-1009000-development-version">logolink 1.0.0.9000 (development version)<a class="anchor" aria-label="anchor" href="#logolink-1009000-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.0.0" id="logolink-100">logolink 1.0.0<a class="anchor" aria-label="anchor" href="#logolink-100"></a></h2>
 <div class="section level4">
-<h4 id="breaking-changes-1-0-0-9000">Breaking Changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-0-0-9000"></a></h4>
+<h4 id="breaking-changes-1-0-0">Breaking Changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-0-0"></a></h4>
 <ul><li>
-<code>logolink</code> now works only with NetLogo 7.0.1 and above. The NetLogo 7.0.1 patch release changed the XML structure of BehaviorSpace experiments; See this <a href="https://github.com/NetLogo/NetLogo/issues/2560" class="external-link">GitHub issue</a> to learn more.</li>
+<code>logolink</code> now works only with NetLogo 7.0.1 and above. The NetLogo 7.0.1 patch release changed the <a href="https://github.com/NetLogo/NetLogo/wiki/XML-File-Format#behaviorspace-experiments" class="external-link">XML structure</a> of <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a> experiments; See this <a href="https://github.com/NetLogo/NetLogo/issues/2560" class="external-link">GitHub issue</a> to learn more.</li>
 <li>
 <code><a href="../reference/run_experiment.html">run_experiment()</a></code> now returns a <code>list</code> object containing the <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace output formats</a> and metadata information. See the updated documentation for details.</li>
 <li>
@@ -67,7 +67,7 @@
 <code>inspect_experiment_file()</code> was renamed to <code><a href="../reference/inspect_experiment.html">inspect_experiment()</a></code>.</li>
 </ul></div>
 <div class="section level4">
-<h4 id="new-features-and-improvements-1-0-0-9000">New Features and Improvements<a class="anchor" aria-label="anchor" href="#new-features-and-improvements-1-0-0-9000"></a></h4>
+<h4 id="new-features-and-improvements-1-0-0">New Features and Improvements<a class="anchor" aria-label="anchor" href="#new-features-and-improvements-1-0-0"></a></h4>
 <ul><li>
 <code><a href="../reference/run_experiment.html">run_experiment()</a></code> now have a <code>timeout</code> parameter to specify the maximum time (in seconds) to wait for an experiment to complete before terminating it.</li>
 <li>
@@ -75,7 +75,7 @@
 <li>
 <code><a href="../reference/find_netlogo_home.html">find_netlogo_home()</a></code>, <code><a href="../reference/find_netlogo_console.html">find_netlogo_console()</a></code>, and <code><a href="../reference/find_netlogo_version.html">find_netlogo_version()</a></code> were introduced to the package. These functions use heuristics to automatically detect NetLogo installations on Windows, macOS, and Linux.</li>
 <li>
-<code><a href="../reference/create_experiment.html">create_experiment()</a></code> now have a <code>file</code> parameter, allowing the user to specify the output file path for the generated BehaviorSpace experiment XML file.</li>
+<code><a href="../reference/create_experiment.html">create_experiment()</a></code> now have a <code>file</code> parameter, allowing the user to specify the output file path for the generated <a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a> experiment XML file.</li>
 <li>
 <code><a href="../reference/create_experiment.html">create_experiment()</a></code> now supports multiple commands in arguments like <code>setup</code> and <code>go</code> as character vectors.</li>
 <li>

@@ -315,21 +315,21 @@ Other BehaviorSpace functions:
       setup_file = setup_file
     )
 #> ℹ Running model
-#> ✔ Running model [21.2s]
+#> ✔ Running model [21.1s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [15ms]
+#> ✔ Gathering metadata [14ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [15ms]
+#> ✔ Processing table output [14ms]
 #> 
 #> ℹ The experiment run produced the following messages:
 #> 
-#> Jan 08, 2026 7:23:01 AM java.util.prefs.FileSystemPreferences$1 run
+#> Jan 08, 2026 7:49:33 AM java.util.prefs.FileSystemPreferences$1 run
 #> INFO: Created user preferences directory.
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-08 07:23:02 GMT"
+#> [1] "2026-01-08 07:49:34 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -377,17 +377,17 @@ Other BehaviorSpace functions:
       experiment = "Wolf Sheep Simple model analysis"
     )
 #> ℹ Running model
-#> ✔ Running model [17.9s]
+#> ✔ Running model [17.8s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [14ms]
+#> ✔ Gathering metadata [13ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [9ms]
+#> ✔ Processing table output [8ms]
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-08 07:23:24 GMT"
+#> [1] "2026-01-08 07:49:56 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
