@@ -87,11 +87,11 @@ parse_netlogo_color(netlogo_base_colors)
 #>  [8] "#1D9F78" "#54C4C4" "#2D8DBE" "#345DA9" "#7C50A4" "#A71B6A" "#D9637F"
 
 parse_netlogo_color(seq(10, 20, by = 1))
-#>  [1] "#8D8D8D" "#4D0200" "#6B110B" "#872521" "#A33935" "#D73229" "#FB554F"
+#>  [1] "#FFFFFF" "#4D0200" "#6B110B" "#872521" "#A33935" "#D73229" "#FB554F"
 #>  [8] "#FF8D8A" "#FFBCBB" "#FFE8E8" "#D73229"
 
 parse_netlogo_color(seq(10, 20, by = 0.5))
-#>  [1] "#8D8D8D" "#3D0100" "#4D0200" "#5E0500" "#6B110B" "#791B17" "#872521"
+#>  [1] "#FFFFFF" "#3D0100" "#4D0200" "#5E0500" "#6B110B" "#791B17" "#872521"
 #>  [8] "#952F2B" "#A33935" "#B1433F" "#D73229" "#E9443D" "#FB554F" "#FF716D"
 #> [15] "#FF8D8A" "#FFA5A4" "#FFBCBB" "#FFD2D2" "#FFE8E8" "#FFFDFD" "#D73229"
 

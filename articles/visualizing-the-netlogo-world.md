@@ -20,10 +20,9 @@ this vignette, you’ll have both static plots and an animated
 [GIF](https://en.wikipedia.org/wiki/GIF) showing the simulation evolving
 over time.
 
-We assume you’re already familiar with
-[NetLogo](https://www.netlogo.org) and have version 7.0.1 or above
-installed. You should also be comfortable with R programming,
-particularly with the [tidyverse](https://tidyverse.org/) ecosystem.
+This guide assumes familiarity with [NetLogo](https://www.netlogo.org)
+(version 7.0.1 or above) and R programming, particularly the
+[tidyverse](https://tidyverse.org/) ecosystem.
 
 ## Setting the Stage
 
@@ -32,8 +31,6 @@ First, let’s load the packages we’ll need:
 ``` r
 library(logolink)
 
-library(cli)
-library(curl)
 library(dplyr)
 library(ggplot2)
 library(ggimage)
@@ -46,7 +43,7 @@ library(stringr)
 library(tidyr)
 ```
 
-If any of these are missing in your system, install them with:
+If any of these are missing from your system, install them with:
 
 ``` r
 install.packages(
@@ -74,7 +71,7 @@ remotes::install_github("danielvartan/logolink")
 ```
 
 Next, we need to locate the model. We’ll use the
-[`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.md)
+[`find_netlogo_home()`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.html)
 function to find your NetLogo installation, then navigate to the model
 file:
 
@@ -91,7 +88,7 @@ model_path <-
 
 We’ll also need the turtle shapes to make our plots look nice. We’ll use
 the
-[`get_netlogo_shape()`](https://danielvartan.github.io/logolink/reference/get_netlogo_shape.md)
+[`get_netlogo_shape()`](https://danielvartan.github.io/logolink/reference/get_netlogo_shape.html)
 function to download turtle [SVG](https://en.wikipedia.org/wiki/SVG)
 image files from the
 [LogoShapes](https://github.com/danielvartan/logoshapes) project:
@@ -108,7 +105,9 @@ wolf_shape <- get_netlogo_shape("wolf")
 
 Here’s where things get interesting. We want to capture the position of
 every sheep, wolf, and patch at regular intervals. Let’s set up an
-experiment that takes these snapshots every 100 ticks:
+experiment with
+[`create_experiment()`](https://danielvartan.github.io/logolink/reference/create_experiment.html)
+that takes these snapshots every 100 ticks:
 
 ``` r
 setup_file <- create_experiment(
@@ -141,12 +140,12 @@ setup_file <- create_experiment(
 ```
 
 The `run_metrics_condition = 'ticks mod 100 = 0'` is the key here. It
-tells NetLogo to only record data when the tick count is divisible by
+tells NetLogo to record data only when the tick count is divisible by
 100. With `time_limit = 500`, we get 6 snapshots: steps 0, 100, 200,
 300, 400, and 500.
 
 Now let’s run it using
-[`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md):
+[`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html):
 
 ``` r
 results <-
@@ -155,6 +154,10 @@ results <-
     setup_file = setup_file,
     output = c("table", "lists")
   )
+#> ✔ Running model [2.1s]
+#> ✔ Gathering metadata [12ms]
+#> ✔ Processing table output [33ms]
+#> ✔ Processing lists output [6ms]
 ```
 
 The results come back as a list. The `lists` element has all our agent
@@ -191,7 +194,7 @@ values to [hex colors](https://en.wikipedia.org/wiki/Web_colors) that
 [`ggplot2`](https://ggplot2.tidyverse.org/) understands. We’ll use the
 [`dplyr`](https://dplyr.tidyverse.org/) package to mutate the relevant
 columns with the
-[`parse_netlogo_color()`](https://danielvartan.github.io/logolink/reference/parse_netlogo_color.md)
+[`parse_netlogo_color`](https://danielvartan.github.io/logolink/reference/parse_netlogo_color.html)
 function:
 
 ``` r
@@ -210,7 +213,7 @@ plot_data <-
 
 Let’s create a function that renders the world at any given step. It
 must draw patches as a raster background, then overlays sheep and wolf
-icons at their coordinates:
+icons at their coordinates.
 
 ``` r
 plot_netlogo_world <- function(
@@ -285,7 +288,7 @@ plot_netlogo_world(plot_data)
 
 ## Creating an Animation
 
-Static plots are nice, but an animation really the simulation to life.
+Static plots are nice, but an animation brings the simulation to life.
 Let’s use the [`magick`](https://docs.ropensci.org/magick/) package to
 stitch our snapshots together.
 
@@ -358,8 +361,6 @@ animation
 
 ![](../reference/figures/vignette-wolf-sheep-model-animation-1.gif)
 
-Cool, right?
-
 ## Wrapping up
 
 You now have the tools to visualize any NetLogo simulation. The approach
@@ -367,7 +368,7 @@ is straightforward: extract agent coordinates at the time steps you care
 about, convert NetLogo colors to hex, and plot with
 [ggplot2](https://ggplot2.tidyverse.org/).
 
-Feel free to adapt this for your own models, just change the metrics to
+Feel free to adapt this for your own models. Just change the metrics to
 capture whatever agent properties you need. One caveat: animations can
 get memory-intensive if you’re capturing many steps or have lots of
 agents, so start small and scale up as needed.

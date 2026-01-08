@@ -2,16 +2,6 @@
 
 ## Overview
 
-> **Note**: The [CRAN](https://cran.r-project.org/) release of
-> `logolink` breaks with the recent NetLogo patch updates because the
-> [BehaviorSpace XML
-> format](https://github.com/NetLogo/NetLogo/wiki/XML-File-Format)
-> changed. The details are in this [GitHub
-> issue](https://github.com/NetLogo/NetLogo/issues/2560). If your
-> experiments fail to run, install the development version of `logolink`
-> from GitHub as shown in the Installation section below. An updated
-> [CRAN](https://cran.r-project.org/) release will be submitted soon.
-
 `logolink` is an [R](https://www.r-project.org/) package that simplifies
 setting up and running [NetLogo](https://www.netlogo.org/) simulations
 directly from R. It provides a modern, intuitive interface that follows
@@ -20,10 +10,10 @@ principles](https://tidyverse.tidyverse.org/articles/manifesto.html) and
 integrates seamlessly with the [tidyverse
 ecosystem](https://tidyverse.org/).
 
-The package is designed to work with NetLogo **7.0.1 and above**. We do
-not plan to offer support for earlier versions. See NetLogo’s
-[Transition Guide](https://docs.netlogo.org/transition.html) to upgrade
-your models if needed.
+The package is designed to work with NetLogo 7.0.1 and above. Earlier
+versions are not supported. See NetLogo’s [Transition
+Guide](https://docs.netlogo.org/transition.html) to upgrade your models
+if needed.
 
 > If you find this project useful, please consider giving it a star!  
 > [![GitHub Repository
@@ -49,8 +39,8 @@ framework for managing experiments and results, but
 [supports](https://docs.ropensci.org/nlrx/reference/supported_netlogo_versions.html)
 only up to NetLogo 6.3.0 (released in September 2022), requires
 additional system dependencies, uses its own internal conventions that
-diverge from NetLogo standards, has a steep learning curve, and has
-[many unresolved issues](https://github.com/ropensci/nlrx/issues).
+diverge from NetLogo standards, and has [many unresolved
+issues](https://github.com/ropensci/nlrx/issues).
 
 `logolink` **complements** these packages by prioritizing simplicity,
 offering finer control over output, ensuring full compatibility with
@@ -85,6 +75,8 @@ Along with this package, you will also need NetLogo 7.0.1 or higher
 installed on your computer. You can download it from the [NetLogo
 website](https://www.netlogo.org).
 
+### Setting the Stage
+
 After installing NetLogo and `logolink`, start by loading the package
 with:
 
@@ -92,35 +84,53 @@ with:
 library(logolink)
 ```
 
-### Setting the NetLogo Path
-
 `logolink` will try to find out the path to the NetLogo installation
 automatically. This is usually successful, but if it fails, you will
 need to set it manually. In that case, see the documentation for the
 [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html)
 function for more details.
 
+To start our example analysis, we’ll need to first specify the path to
+the NetLogo model.
+
+This example uses Wilensky’s [Wolf Sheep
+Simple](https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/IABM%20Textbook/chapter%204/Wolf%20Sheep%20Simple%205.nlogox)
+model, a classic predator-prey simulation grounded in the
+[Lotka-Volterra
+equations](https://danielvartan.github.io/lotka-volterra/) developed by
+Alfred J. Lotka
+([1925](http://archive.org/details/elementsofphysic017171mbp)) and Vito
+Volterra ([1926](https://www.nature.com/articles/118558a0)). Since this
+model comes bundled with NetLogo, no download is required.
+
+We’ll use
+[`find_netlogo_home`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.html)
+function to locate the NetLogo installation directory, then build the
+path to the model file:
+
+``` r
+model_path <-
+  find_netlogo_home() |>
+  file.path(
+    "models",
+    "IABM Textbook",
+    "chapter 4",
+    "Wolf Sheep Simple 5.nlogox"
+  )
+```
+
 ### Creating an Experiment
 
-To start running your model from R you first need to setup an
-experiment. You can do this by setting a
+To run the model from R, we’ll first need to setup an experiment. We can
+do this by setting a
 [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment
 with the
 [`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html)
 function. This function will create a
+[BehaviorSpace](https://docs.netlogo.org/behaviorspace.html)
 [XML](https://en.wikipedia.org/wiki/XML) file that contains all the
-information about your experiment, including the parameters to vary, the
+information about the experiment, including the parameters to vary, the
 metrics to collect, and the number of runs to perform.
-
-Alternatively, you can set up your experiment [directly in
-NetLogo](https://docs.netlogo.org/behaviorspace.html#how-it-works) and
-save it as part of your model. In this case, you can skip the
-[`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html)
-step and just provide the name of the experiment when running the model
-with
-[`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html).
-
-Example:
 
 ``` r
 setup_file <- create_experiment(
@@ -151,70 +161,21 @@ setup_file <- create_experiment(
 )
 ```
 
-If you want to inspect the created experiment file, you can use the
-[`inspect_experiment`](https://danielvartan.github.io/logolink/reference/inspect_experiment.html)
-function:
+Alternatively, you can set up your experiment [directly in
+NetLogo](https://docs.netlogo.org/behaviorspace.html#how-it-works) and
+save it as part of your model. In this case, you can skip the
+[`create_experiment`](https://danielvartan.github.io/logolink/reference/create_experiment.html)
+step and just provide the name of the experiment when running the model
+with
+[`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html).
 
-``` r
-setup_file |> inspect_experiment()
-#> <experiments>
-#>   <experiment name="Wolf Sheep Simple Model Analysis" repetitions="10" sequentialRunOrder="true" runMetricsEveryStep="true" timeLimit="1000">
-#>     <setup>setup</setup>
-#>     <go>go</go>
-#>     <metrics>
-#>       <metric>count wolves</metric>
-#>       <metric>count sheep</metric>
-#>     </metrics>
-#>     <constants>
-#>       <enumeratedValueSet variable="number-of-sheep">
-#>         <value value="500"></value>
-#>       </enumeratedValueSet>
-#>       <steppedValueSet variable="number-of-wolves" first="5" step="1" last="15"></steppedValueSet>
-#>       <enumeratedValueSet variable="movement-cost">
-#>         <value value="0.5"></value>
-#>       </enumeratedValueSet>
-#>       <enumeratedValueSet variable="grass-regrowth-rate">
-#>         <value value="0.3"></value>
-#>       </enumeratedValueSet>
-#>       <enumeratedValueSet variable="energy-gain-from-grass">
-#>         <value value="2"></value>
-#>       </enumeratedValueSet>
-#>       <enumeratedValueSet variable="energy-gain-from-sheep">
-#>         <value value="5"></value>
-#>       </enumeratedValueSet>
-#>     </constants>
-#>   </experiment>
-#> </experiments>
-```
+### Running the Simulation
 
-### Running an Experiment
-
-With the experiment file created, you can now run your model using the
+With the experiment file created, we can now run the model using the
 [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html)
 function. This function will execute the NetLogo model with the
 specified parameters and return the results as [tidy data
 frames](https://r4ds.hadley.nz/data-tidy.html).
-
-First, you need to specify the path to your NetLogo model. In this
-example, we will use the [Wolf Sheep
-Simple](https://www.netlogoweb.org/launch#https://www.netlogoweb.org/assets/modelslib/IABM%20Textbook/chapter%204/Wolf%20Sheep%20Simple%205.nlogox)
-model that comes with any NetLogo installation. For that, we can use the
-[`find_netlogo_home`](https://danielvartan.github.io/logolink/reference/find_netlogo_home.html)
-function to locate the NetLogo installation directory and then build the
-path to the model file.
-
-``` r
-model_path <-
-  find_netlogo_home() |>
-  file.path(
-    "models",
-    "IABM Textbook",
-    "chapter 4",
-    "Wolf Sheep Simple 5.nlogox"
-  )
-```
-
-After specifying the model path, you can run the experiment with:
 
 ``` r
 results <-
@@ -222,6 +183,18 @@ results <-
   run_experiment(
     setup_file = setup_file
   )
+#> ℹ Running model
+#> ✔ Running model [13.6s]
+#> 
+#> ℹ Gathering metadata
+#> ✔ Gathering metadata [10ms]
+#> 
+#> ℹ Processing table output
+#> ✔ Processing table output [9ms]
+#> 
+#> ✔ Running model [13.4s]
+#> ✔ Gathering metadata [15ms]
+#> ✔ Processing table output [8ms]
 ```
 
 ### Checking the Results
@@ -242,30 +215,10 @@ is returned, along with some metadata about the experiment run.
 library(dplyr)
 
 results |> glimpse()
-#> List of 2
-#>  $ metadata:List of 6
-#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-08 00:44:15"
-#>   ..$ netlogo_version : chr "7.0.3"
-#>   ..$ output_version  : chr "2.0"
-#>   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"
-#>   ..$ experiment_name : chr "Wolf Sheep Simple Model Analysis"
-#>   ..$ world_dimensions: Named int [1:4] -17 17 -17 17
-#>   .. ..- attr(*, "names")= chr [1:4] "min-pxcor" "max-pxcor" "min-pycor" "max-pycor"
-#>  $ table   : tibble [110,110 × 10] (S3: tbl_df/tbl/data.frame)
-#>   ..$ run_number            : num [1:110110] 1 1 1 1 1 1 1 1 1 1 ...
-#>   ..$ number_of_sheep       : num [1:110110] 500 500 500 500 500 500 500 500 500 500 ...
-#>   ..$ number_of_wolves      : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ movement_cost         : num [1:110110] 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 ...
-#>   ..$ grass_regrowth_rate   : num [1:110110] 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 0.3 ...
-#>   ..$ energy_gain_from_grass: num [1:110110] 2 2 2 2 2 2 2 2 2 2 ...
-#>   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...
-#>   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ count_sheep           : num [1:110110] 500 499 498 496 495 494 491 489 488 488 ...
 ```
 
-If you already have an file with experiment results, you can read it
-into R using the
+If you already have a file with experiment results, you can read it into
+R using the
 [`read_experiment`](https://danielvartan.github.io/logolink/reference/read_experiment.html)
 function, which will yield the same output structure as
 [`run_experiment`](https://danielvartan.github.io/logolink/reference/run_experiment.html).
@@ -319,8 +272,7 @@ data |>
 NetLogo in R. The [Visualizing the NetLogo
 World](https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html)
 tutorial demonstrates how to plot the NetLogo world at specific time
-steps and animate its evolution over time. You can find it
-[here](https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html).
+steps and animate its evolution over time.
 
 ![](reference/figures/vignette-wolf-sheep-model-animation-1.gif)
 

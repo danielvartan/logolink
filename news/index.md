@@ -84,6 +84,9 @@
 - New R unit tests were implemented.
 - New NetLogo unit tests were implemented.
 - A [new
+  vignette](https://danielvartan.github.io/logolink/articles/introduction-to-logolink.html)
+  introducing the package was added.
+- A [new
   vignette](https://danielvartan.github.io/logolink/articles/visualizing-the-netlogo-world.html)
   showing how to visualize the NetLogo world using
   [`ggplot2`](https://ggplot2.tidyverse.org/) was added.
