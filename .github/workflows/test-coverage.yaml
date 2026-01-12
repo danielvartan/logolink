@@ -11,7 +11,7 @@ jobs:
     name: Test coverage
     runs-on: ubuntu-latest
     env:
-      GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -47,17 +47,17 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
-          fail_ci_if_error: ${{github.event_name != 'pull_request' || secrets.CODECOV_TOKEN}}
+          fail_ci_if_error: ${{ github.event_name != 'pull_request' || secrets.CODECOV_TOKEN }}
           file: ./cobertura.xml
           plugin: noop
           disable_search: true
-          token: ${{secrets.CODECOV_TOKEN}}
+          token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Show testthat Output
         if: always()
         run: |
           ## --------------------------------------------------------------------
-          find '${{runner.temp}}/package' -name 'testthat.Rout*' -exec cat '{}' \; || true
+          find '${{ runner.temp }}/package' -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
 
       - name: Upload test results
@@ -65,4 +65,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage-test-failures
-          path: ${{runner.temp}}/package
+          path: ${{ runner.temp }}/package

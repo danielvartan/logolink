@@ -27,7 +27,7 @@ options(
 
 # Set Variables -----
 
-set.seed(2025)
+set.seed(2026)
 
 # Set `knitr` -----
 

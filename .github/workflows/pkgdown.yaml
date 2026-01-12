@@ -14,9 +14,9 @@ jobs:
     name: Build and deploy pkgdown site
     runs-on: ubuntu-latest
     concurrency:
-      group: pkgdown-${{github.event_name != 'pull_request' || github.run_id}}
+      group: pkgdown-${{ github.event_name != 'pull_request' || github.run_id }}
     env:
-      GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     permissions:
       contents: write
     steps:
@@ -39,7 +39,6 @@ jobs:
         with:
           extra-packages: any::pkgdown, any::rsvg, local::.
           needs: website
-          upgrade: 'TRUE'
 
       - name: Build site
         run: |
