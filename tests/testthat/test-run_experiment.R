@@ -14,11 +14,7 @@ testthat::test_that("`run_experiment()` | General test", {
   run_experiment(
     model_path = model_file_1,
     setup_file = setup_file_1,
-    experiment = NULL,
-    output = "table",
-    other_arguments = NULL,
-    timeout = Inf,
-    tidy_output = TRUE
+    output = "table"
   ) |>
     checkmate::expect_list() |>
     suppressMessages() |>
@@ -103,7 +99,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     output = "table",
     other_arguments = NULL,
     timeout = Inf,
-    tidy_output = TRUE
+    tidy_output = TRUE,
+    output_dir = temp_dir()
   ) |>
     testthat::expect_error()
 
@@ -116,7 +113,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     output = "table",
     other_arguments = NULL,
     timeout = Inf,
-    tidy_output = TRUE
+    tidy_output = TRUE,
+    output_dir = temp_dir()
   ) |>
     testthat::expect_error()
 
@@ -129,7 +127,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     output = "table",
     other_arguments = NULL,
     timeout = Inf,
-    tidy_output = TRUE
+    tidy_output = TRUE,
+    output_dir = temp_dir()
   ) |>
     testthat::expect_error()
 
@@ -142,7 +141,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     output = "table",
     other_arguments = NULL,
     timeout = Inf,
-    tidy_output = TRUE
+    tidy_output = TRUE,
+    output_dir = temp_dir()
   ) |>
     testthat::expect_error()
 
@@ -155,7 +155,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     output = "table",
     other_arguments = NULL,
     timeout = Inf,
-    tidy_output = TRUE
+    tidy_output = TRUE,
+    output_dir = temp_dir()
   ) |>
     testthat::expect_error()
 
@@ -168,7 +169,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     output = "table",
     other_arguments = NULL,
     timeout = Inf,
-    tidy_output = TRUE
+    tidy_output = TRUE,
+    output_dir = temp_dir()
   ) |>
     testthat::expect_error()
 
@@ -181,7 +183,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     output = 1,
     other_arguments = NULL,
     timeout = Inf,
-    tidy_output = TRUE
+    tidy_output = TRUE,
+    output_dir = temp_dir()
   ) |>
     testthat::expect_error()
 
@@ -192,7 +195,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     output = character(),
     other_arguments = NULL,
     timeout = Inf,
-    tidy_output = TRUE
+    tidy_output = TRUE,
+    output_dir = temp_dir()
   ) |>
     testthat::expect_error()
 
@@ -205,7 +209,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     output = "test",
     other_arguments = NULL,
     timeout = Inf,
-    tidy_output = TRUE
+    tidy_output = TRUE,
+    output_dir = temp_dir()
   ) |>
     testthat::expect_error()
 
@@ -218,7 +223,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     output = "table",
     other_arguments = 1,
     timeout = Inf,
-    tidy_output = TRUE
+    tidy_output = TRUE,
+    output_dir = temp_dir()
   ) |>
     testthat::expect_error()
 
@@ -231,7 +237,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     output = "table",
     other_arguments = c("--3D", "--headless"),
     timeout = Inf,
-    tidy_output = TRUE
+    tidy_output = TRUE,
+    output_dir = temp_dir()
   ) |>
     testthat::expect_error()
 
@@ -244,7 +251,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     output = "table",
     other_arguments = NULL,
     timeout = "a",
-    tidy_output = TRUE
+    tidy_output = TRUE,
+    output_dir = temp_dir()
   ) |>
     testthat::expect_error()
 
@@ -255,7 +263,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     output = "table",
     other_arguments = NULL,
     timeout = -1,
-    tidy_output = TRUE
+    tidy_output = TRUE,
+    output_dir = temp_dir()
   ) |>
     testthat::expect_error()
 
@@ -268,7 +277,22 @@ testthat::test_that("`run_experiment()` | Error test", {
     output = "table",
     other_arguments = NULL,
     timeout = Inf,
-    tidy_output = "a"
+    tidy_output = "a",
+    output_dir = temp_dir()
+  ) |>
+    testthat::expect_error()
+
+  # checkmate::assert_directory_exists(output_dir)
+
+  run_experiment(
+    model_path = model_file_1,
+    setup_file = setup_file_1,
+    experiment = NULL,
+    output = "table",
+    other_arguments = NULL,
+    timeout = Inf,
+    tidy_output = TRUE,
+    output_dir = "_non_existing_directory_"
   ) |>
     testthat::expect_error()
 
@@ -281,7 +305,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     output = "table",
     other_arguments = NULL,
     timeout = Inf,
-    tidy_output = TRUE
+    tidy_output = TRUE,
+    output_dir = temp_dir()
   ) |>
     testthat::expect_error()
 
@@ -292,7 +317,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     output = "table",
     other_arguments = NULL,
     timeout = Inf,
-    tidy_output = TRUE
+    tidy_output = TRUE,
+    output_dir = temp_dir()
   ) |>
     testthat::expect_error()
 
@@ -305,7 +331,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     output = c("lists", "statistics"),
     other_arguments = NULL,
     timeout = Inf,
-    tidy_output = TRUE
+    tidy_output = TRUE,
+    output_dir = temp_dir()
   ) |>
     testthat::expect_error()
 
@@ -327,7 +354,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     output = "table",
     other_arguments = NULL,
     timeout = Inf,
-    tidy_output = TRUE
+    tidy_output = TRUE,
+    output_dir = temp_dir()
   ) |>
     testthat::expect_error() |>
     suppressMessages() |>
@@ -350,7 +378,8 @@ testthat::test_that("`run_experiment()` | Error test", {
     output = "table",
     other_arguments = NULL,
     timeout = Inf,
-    tidy_output = TRUE
+    tidy_output = TRUE,
+    output_dir = temp_dir()
   ) |>
     testthat::expect_error() |>
     suppressMessages() |>
@@ -358,8 +387,10 @@ testthat::test_that("`run_experiment()` | Error test", {
 })
 
 testthat::test_that("`run_experiment.output_argument()` | General test", {
-  c("table", "spreadsheet", "lists", "statistics") |>
-    run_experiment.output_argument() |>
+  run_experiment.output_argument(
+    output = c("table", "spreadsheet", "lists", "statistics"),
+    output_dir = temp_dir()
+  ) |>
     checkmate::expect_tibble(ncols = 3)
 })
 
@@ -367,14 +398,24 @@ testthat::test_that("`run_experiment.output_argument()` | Error test", {
   # checkmate::assert_character(output)
 
   run_experiment.output_argument(
-    output = 1
+    output = 1,
+    output_dir = temp_dir()
   ) |>
     testthat::expect_error()
 
   # checkmate::assert_subset(output, outputs_choices)
 
   run_experiment.output_argument(
-    output = "test"
+    output = "test",
+    output_dir = temp_dir()
+  ) |>
+    testthat::expect_error()
+
+  # checkmate::assert_directory_exists(output_dir)
+
+  run_experiment.output_argument(
+    output = "table",
+    output_dir = "_non_existing_directory_"
   ) |>
     testthat::expect_error()
 })

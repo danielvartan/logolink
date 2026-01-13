@@ -8,6 +8,7 @@ require_namespace <- function(x, ..., quietly = TRUE) {
 
 sys_info <- function(...) Sys.info(...)
 system_2 <- function(...) system2(...)
+temp_dir <- function(...) tempdir(...)
 temp_file <- function(...) tempfile(...)
 
 ## `fs`

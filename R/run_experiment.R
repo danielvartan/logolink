@@ -124,6 +124,24 @@
 #' important messages generated during the experiment run. Keep in mind that
 #' excessive non-tabular output may clutter your R console.
 #'
+#' @section Troubleshoot:
+#'
+#' [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) has known issues
+#' when running in headless mode. While we are collaborating with the NetLogo
+#' developers to address these problems in future patch releases, here are some
+#' known issues and potential workarounds:
+#'
+#' ## All Results Returning as `0`
+#'
+#' If your model halts during the experiment in headless mode, it may result in
+#' all results being returned as `0`. This issue can also occur if the constants
+#' or `setup`/`go` procedures are not defined correctly. Verify your experiment
+#' definition to ensure that all parameters and procedures are properly
+#' configured.
+#'
+#' See this [issue ticket](https://github.com/NetLogo/NetLogo/issues/1386)
+#' to learn more.
+#'
 #' @param model_path A [`character`][base::character()] string specifying the
 #'   path to the NetLogo model file (with extension `.nlogo`, `.nlogo3d`,
 #'   `.nlogox`, or `.nlogox3d`).
@@ -164,6 +182,9 @@
 #'   [`read_delim()`][readr::read_delim()] and
 #'   [`clean_names()`][janitor::clean_names()] are applied to the output data
 #'   (default: `TRUE`).
+#' @param output_dir (optional) A [`character`][base::character()] string
+#'   specifying the directory where the NetLogo experiment output files must be
+#'   stored during the experiment run (default: `tempdir()`).
 #'
 #' @return A [`list`][base::list()] containing the experiment results. The
 #'   `list` includes the following elements, depending on the values specified
@@ -262,7 +283,8 @@ run_experiment <- function(
   output = "table",
   other_arguments = NULL,
   timeout = Inf,
-  tidy_output = TRUE
+  tidy_output = TRUE,
+  output_dir = tempdir()
 ) {
   model_path_choices <- c("nlogo", "nlogo3d", "nlogox", "nlogox3d")
   output_choices <- c("table", "spreadsheet", "lists", "statistics")
@@ -292,6 +314,7 @@ run_experiment <- function(
   assert_other_arguments(other_arguments, reserved_arguments, null_ok = TRUE)
   checkmate::assert_number(timeout, lower = 0)
   checkmate::assert_flag(tidy_output)
+  checkmate::assert_directory_exists(output_dir)
 
   if (!is.null(setup_file)) {
     checkmate::assert_file_exists(setup_file, extension = "xml")
@@ -310,7 +333,11 @@ run_experiment <- function(
   netlogo_console <- find_netlogo_console()
   model_path <- fs::path_expand(model_path)
   timeout <- ifelse(is.infinite(timeout), 0, as.integer(timeout))
-  output_argument <- run_experiment.output_argument(output)
+
+  output_argument <- run_experiment.output_argument(
+    output,
+    output_dir = ifelse(output_dir == tempdir(), temp_dir(), output_dir)
+  )
 
   arguments <- c(
     "--headless ",
@@ -399,11 +426,12 @@ run_experiment <- function(
   out
 }
 
-run_experiment.output_argument <- function(output) {
+run_experiment.output_argument <- function(output, output_dir = temp_dir()) {
   outputs_choices <- c("table", "spreadsheet", "lists", "statistics")
 
   checkmate::assert_character(output)
   checkmate::assert_subset(output, outputs_choices)
+  checkmate::assert_directory_exists(output_dir)
 
   output |>
     purrr::map(
@@ -414,7 +442,16 @@ run_experiment.output_argument <- function(output) {
           x
         )
 
-        file <- temp_file(pattern = paste0(x, "-"), fileext = ".csv")
+        file <- path(
+          output_dir,
+          paste0(
+            x,
+            "-",
+            Sys.time() |>
+              stringr::str_replace_all("\\D", "-"),
+            ".csv"
+          )
+        )
 
         dplyr::tibble(
           argument = argument,

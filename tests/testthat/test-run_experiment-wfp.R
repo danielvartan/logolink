@@ -54,11 +54,7 @@ testthat::test_that("`run_experiment()` | Wolf Sheep Simple Model Analysis", {
     model_path |>
     run_experiment(
       setup_file = setup_file,
-      experiment = NULL,
-      output = c("table", "spreadsheet", "lists", "statistics"),
-      other_arguments = NULL,
-      timeout = Inf,
-      tidy_output = TRUE
+      output = c("table", "spreadsheet", "lists", "statistics")
     ) |>
     suppressMessages() |>
     suppressWarnings()

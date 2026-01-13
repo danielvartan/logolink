@@ -1,6 +1,7 @@
 # logolink 1.0.1.9000 (development version)
 
 - Patch changes were added to the documentation.
+- `run_experiment()` now have an `output_dir` parameter to specify the directory where NetLogo experiment output files are stored.
 
 # logolink 1.0.0
 

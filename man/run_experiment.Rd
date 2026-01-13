@@ -11,7 +11,8 @@ run_experiment(
   output = "table",
   other_arguments = NULL,
   timeout = Inf,
-  tidy_output = TRUE
+  tidy_output = TRUE,
+  output_dir = tempdir()
 )
 }
 \arguments{
@@ -61,6 +62,10 @@ If \code{FALSE}, only the default transformations from
 \code{\link[readr:read_delim]{read_delim()}} and
 \code{\link[janitor:clean_names]{clean_names()}} are applied to the output data
 (default: \code{TRUE}).}
+
+\item{output_dir}{(optional) A \code{\link[base:character]{character}} string
+specifying the directory where the NetLogo experiment output files must be
+stored during the experiment run (default: \code{tempdir()}).}
 }
 \value{
 A \code{\link[base:list]{list}} containing the experiment results. The
@@ -211,6 +216,26 @@ important messages generated during the experiment run. Keep in mind that
 excessive non-tabular output may clutter your R console.
 }
 }
+\section{Troubleshoot}{
+
+
+\href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace} has known issues
+when running in headless mode. While we are collaborating with the NetLogo
+developers to address these problems in future patch releases, here are some
+known issues and potential workarounds:
+\subsection{All Results Returning as \code{0}}{
+
+If your model halts during the experiment in headless mode, it may result in
+all results being returned as \code{0}. This issue can also occur if the constants
+or \code{setup}/\code{go} procedures are not defined correctly. Verify your experiment
+definition to ensure that all parameters and procedures are properly
+configured.
+
+See this \href{https://github.com/NetLogo/NetLogo/issues/1386}{issue ticket}
+to learn more.
+}
+}
+
 \examples{
 # Defining the Model -----
 
