@@ -6,6 +6,7 @@
 - [`run_experiment()`](https://danielvartan.github.io/logolink/reference/run_experiment.md)
   now have an `output_dir` parameter to specify the directory where
   NetLogo experiment output files are stored.
+- Package dependencies were updated to their latest versions.
 
 ## logolink 1.0.0
 
