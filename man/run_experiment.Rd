@@ -65,7 +65,7 @@ If \code{FALSE}, only the default transformations from
 
 \item{output_dir}{(optional) A \code{\link[base:character]{character}} string
 specifying the directory where the NetLogo experiment output files must be
-stored during the experiment run (default: \code{tempdir()}).}
+stored (default: \code{tempdir()}).}
 }
 \value{
 A \code{\link[base:list]{list}} containing the experiment results. The

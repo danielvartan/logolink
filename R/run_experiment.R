@@ -127,15 +127,18 @@
 #' @section Troubleshoot:
 #'
 #' [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) has known issues
-#' when running in headless mode. While we are collaborating with the NetLogo
-#' developers to address these problems in future patch releases, here are some
-#' known issues and potential workarounds:
+#' when running in
+#' [headless](
+#' https://docs.netlogo.org/behaviorspace#running-from-the-command-line)
+#' mode. While we are collaborating with the NetLogo developers to address these
+#' problems in future patch releases, here are some known issues and potential
+#' workarounds.
 #'
 #' ## All Results Returning as `0`
 #'
-#' If your model halts during the experiment in headless mode, it may result in
-#' all results being returned as `0`. This issue can also occur if the constants
-#' or `setup`/`go` procedures are not defined correctly. Verify your experiment
+#' If your model halts during the experiment mode, it may result in all results
+#' being returned as `0`. This issue can also occur if the constants or
+#' `setup`/`go` procedures are not defined correctly. Verify your experiment
 #' definition to ensure that all parameters and procedures are properly
 #' configured.
 #'
@@ -184,7 +187,7 @@
 #'   (default: `TRUE`).
 #' @param output_dir (optional) A [`character`][base::character()] string
 #'   specifying the directory where the NetLogo experiment output files must be
-#'   stored during the experiment run (default: `tempdir()`).
+#'   stored (default: `tempdir()`).
 #'
 #' @return A [`list`][base::list()] containing the experiment results. The
 #'   `list` includes the following elements, depending on the values specified
