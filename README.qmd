@@ -48,6 +48,16 @@ cat(
     url = "https://doi.org/10.32614/CRAN.package.logolink",
     alt = "DOI badge"
   ),
+  paste0(
+    "[![",
+    "CRAN Downloads",
+    "](",
+    "https://cranlogs.r-pkg.org/badges/grand-total/logolink",
+    ")](",
+    "https://danielvartan-cran-logs.share.connect.posit.cloud/",
+    "?package=logolink",
+    ")"
+  ),
   badge_cran_download(type = "grand-total"),
   badge_github_actions(action = "R-CMD-check"),
   badge_cran_checks("logolink"),
