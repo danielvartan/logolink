@@ -110,7 +110,8 @@ please refer to the
 <span>  output <span class="op">=</span> <span class="st">"table"</span>,</span>
 <span>  other_arguments <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  timeout <span class="op">=</span> <span class="cn">Inf</span>,</span>
-<span>  tidy_output <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  tidy_output <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  output_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -177,6 +178,12 @@ If <code>FALSE</code>, only the default transformations from
 <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_delim()</a></code> and
 <code><a href="https://sfirke.github.io/janitor/reference/clean_names.html" class="external-link">clean_names()</a></code> are applied to the output data
 (default: <code>TRUE</code>).</p></dd>
+
+
+<dt id="arg-output-dir">output_dir<a class="anchor" aria-label="anchor" href="#arg-output-dir"></a></dt>
+<dd><p>(optional) A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></code> string
+specifying the directory where the NetLogo experiment output files must be
+stored during the experiment run (default: <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>).</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -303,6 +310,28 @@ excessive non-tabular output may clutter your R console.</p>
 
     </div>
     <div class="section level2">
+    <h2 id="troubleshoot">Troubleshoot<a class="anchor" aria-label="anchor" href="#troubleshoot"></a></h2>
+
+
+
+<p><a href="https://docs.netlogo.org/behaviorspace.html" class="external-link">BehaviorSpace</a> has known issues
+when running in headless mode. While we are collaborating with the NetLogo
+developers to address these problems in future patch releases, here are some
+known issues and potential workarounds:</p><div class="section">
+<h3 id="all-results-returning-as-">All Results Returning as <code>0</code><a class="anchor" aria-label="anchor" href="#all-results-returning-as-"></a></h3>
+
+
+<p>If your model halts during the experiment in headless mode, it may result in
+all results being returned as <code>0</code>. This issue can also occur if the constants
+or <code>setup</code>/<code>go</code> procedures are not defined correctly. Verify your experiment
+definition to ensure that all parameters and procedures are properly
+configured.</p>
+<p>See this <a href="https://github.com/NetLogo/NetLogo/issues/1386" class="external-link">issue ticket</a>
+to learn more.</p>
+</div>
+
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other BehaviorSpace functions:
 <code><a href="create_experiment.html">create_experiment()</a></code>,
@@ -365,21 +394,21 @@ excessive non-tabular output may clutter your R console.</p>
 <span class="r-in"><span>      setup_file <span class="op">=</span> <span class="va">setup_file</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Running model</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Running model <span style="color: #B2B2B2;">[20s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Running model <span style="color: #B2B2B2;">[20.6s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Gathering metadata</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Gathering metadata <span style="color: #B2B2B2;">[19ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Gathering metadata <span style="color: #B2B2B2;">[22ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Processing table output</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing table output <span style="color: #B2B2B2;">[15ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> The experiment run produced the following messages:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Jan 11, 2026 12:50:09 AM java.util.prefs.FileSystemPreferences$1 run</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Jan 13, 2026 9:46:51 PM java.util.prefs.FileSystemPreferences$1 run</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> INFO: Created user preferences directory.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$timestamp</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-01-11 00:50:10 GMT"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-01-13 21:46:52 GMT"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$netlogo_version</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "7.0.3"</span>
@@ -427,17 +456,17 @@ excessive non-tabular output may clutter your R console.</p>
 <span class="r-in"><span>      experiment <span class="op">=</span> <span class="st">"Wolf Sheep Simple model analysis"</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Running model</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Running model <span style="color: #B2B2B2;">[18s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Running model <span style="color: #B2B2B2;">[18.3s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Gathering metadata</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Gathering metadata <span style="color: #B2B2B2;">[14ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Gathering metadata <span style="color: #B2B2B2;">[13ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Processing table output</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing table output <span style="color: #B2B2B2;">[9ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Processing table output <span style="color: #B2B2B2;">[8ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$timestamp</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-01-11 00:50:31 GMT"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2026-01-13 21:47:14 GMT"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $metadata$netlogo_version</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "7.0.3"</span>

@@ -35,7 +35,8 @@ run_experiment(
   output = "table",
   other_arguments = NULL,
   timeout = Inf,
-  tidy_output = TRUE
+  tidy_output = TRUE,
+  output_dir = tempdir()
 )
 ```
 
@@ -103,6 +104,13 @@ run_experiment(
   and
   [`clean_names()`](https://sfirke.github.io/janitor/reference/clean_names.html)
   are applied to the output data (default: `TRUE`).
+
+- output_dir:
+
+  (optional) A [`character`](https://rdrr.io/r/base/character.html)
+  string specifying the directory where the NetLogo experiment output
+  files must be stored during the experiment run (default:
+  [`tempdir()`](https://rdrr.io/r/base/tempfile.html)).
 
 ## Value
 
@@ -252,6 +260,24 @@ allows you to see any important messages generated during the experiment
 run. Keep in mind that excessive non-tabular output may clutter your R
 console.
 
+## Troubleshoot
+
+[BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) has known
+issues when running in headless mode. While we are collaborating with
+the NetLogo developers to address these problems in future patch
+releases, here are some known issues and potential workarounds:
+
+### All Results Returning as `0`
+
+If your model halts during the experiment in headless mode, it may
+result in all results being returned as `0`. This issue can also occur
+if the constants or `setup`/`go` procedures are not defined correctly.
+Verify your experiment definition to ensure that all parameters and
+procedures are properly configured.
+
+See this [issue ticket](https://github.com/NetLogo/NetLogo/issues/1386)
+to learn more.
+
 ## See also
 
 Other BehaviorSpace functions:
@@ -315,21 +341,21 @@ Other BehaviorSpace functions:
       setup_file = setup_file
     )
 #> ℹ Running model
-#> ✔ Running model [20s]
+#> ✔ Running model [20.6s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [19ms]
+#> ✔ Gathering metadata [22ms]
 #> 
 #> ℹ Processing table output
 #> ✔ Processing table output [15ms]
 #> 
 #> ℹ The experiment run produced the following messages:
 #> 
-#> Jan 11, 2026 12:50:09 AM java.util.prefs.FileSystemPreferences$1 run
+#> Jan 13, 2026 9:46:51 PM java.util.prefs.FileSystemPreferences$1 run
 #> INFO: Created user preferences directory.
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-11 00:50:10 GMT"
+#> [1] "2026-01-13 21:46:52 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -377,17 +403,17 @@ Other BehaviorSpace functions:
       experiment = "Wolf Sheep Simple model analysis"
     )
 #> ℹ Running model
-#> ✔ Running model [18s]
+#> ✔ Running model [18.3s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [14ms]
+#> ✔ Gathering metadata [13ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [9ms]
+#> ✔ Processing table output [8ms]
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-11 00:50:31 GMT"
+#> [1] "2026-01-13 21:47:14 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
