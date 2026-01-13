@@ -109,7 +109,7 @@ run_experiment(
 
   (optional) A [`character`](https://rdrr.io/r/base/character.html)
   string specifying the directory where the NetLogo experiment output
-  files must be stored during the experiment run (default:
+  files must be stored (default:
   [`tempdir()`](https://rdrr.io/r/base/tempfile.html)).
 
 ## Value
@@ -341,21 +341,21 @@ Other BehaviorSpace functions:
       setup_file = setup_file
     )
 #> ℹ Running model
-#> ✔ Running model [20.6s]
+#> ✔ Running model [20.4s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [22ms]
+#> ✔ Gathering metadata [20ms]
 #> 
 #> ℹ Processing table output
 #> ✔ Processing table output [15ms]
 #> 
 #> ℹ The experiment run produced the following messages:
 #> 
-#> Jan 13, 2026 9:46:51 PM java.util.prefs.FileSystemPreferences$1 run
+#> Jan 13, 2026 10:07:57 PM java.util.prefs.FileSystemPreferences$1 run
 #> INFO: Created user preferences directory.
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-13 21:46:52 GMT"
+#> [1] "2026-01-13 22:07:58 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -403,17 +403,17 @@ Other BehaviorSpace functions:
       experiment = "Wolf Sheep Simple model analysis"
     )
 #> ℹ Running model
-#> ✔ Running model [18.3s]
+#> ✔ Running model [17.7s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [13ms]
+#> ✔ Gathering metadata [14ms]
 #> 
 #> ℹ Processing table output
 #> ✔ Processing table output [8ms]
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-13 21:47:14 GMT"
+#> [1] "2026-01-13 22:08:19 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
