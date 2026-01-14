@@ -6,6 +6,7 @@
 testthat::test_that("`run_experiment()` | Population Density (Runtime)", {
   testthat::skip_on_cran()
   testthat::skip_on_covr()
+  testthat::skip_if(is.na(find_netlogo_console()))
   testthat::skip_if(Sys.getenv("LOGOLINK_TEST_NETLOGO") == "FALSE")
 
   testthat::skip_if(

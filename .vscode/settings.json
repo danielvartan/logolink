@@ -122,6 +122,7 @@
     "revdep",
     "revdepcheck",
     "rmarkdown",
+    "ropensci",
     "Roxygen",
     "Rproj",
     "Rscript",
