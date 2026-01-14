@@ -10,23 +10,24 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![CRAN Status
 Badge](https://www.r-pkg.org/badges/version-ago/logolink)](https://cran.r-project.org/package=logolink)
-[![DOI
-badge](https://img.shields.io/badge/doi-10.32614/CRAN.package.logolink-1284C5.svg)](https://doi.org/10.32614/CRAN.package.logolink)
 [![CRAN
 Downloads](https://cranlogs.r-pkg.org/badges/grand-total/logolink)](https://danielvartan-cran-logs.share.connect.posit.cloud/?package=logolink)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/logolink)](https://cran.r-project.org/package=logolink)
+[![DOI
+badge](https://img.shields.io/badge/doi-10.32614/CRAN.package.logolink-1284C5.svg)](https://doi.org/10.32614/CRAN.package.logolink)
 [![R build
 status](https://github.com/danielvartan/logolink/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/danielvartan/logolink/actions)
+[![R build
+status](https://github.com/danielvartan/logolink/workflows/pkgcheck.yaml/badge.svg)](https://github.com/danielvartan/logolink/actions)
 [![CRAN
 checks](https://badges.cranchecks.info/summary/logolink.svg)](https://cran.r-project.org/web/checks/check_results_logolink.html)
+[![](https://codecov.io/gh/danielvartan/logolink/branch/main/graph/badge.svg)](https://app.codecov.io/gh/danielvartan/logolink)
 [![FAIR checklist
 badge](https://img.shields.io/badge/fairsoftwarechecklist.net--00a7d9)](https://fairsoftwarechecklist.net/v0.2/?f=31&a=32113&i=32322&r=133)
-[![](https://codecov.io/gh/danielvartan/logolink/branch/main/graph/badge.svg)](https://app.codecov.io/gh/danielvartan/logolink)
-[![GNU GPLv3
-License](https://img.shields.io/badge/license-GPLv3-bd0000.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![FAIR checklist
 badge](https://img.shields.io/badge/fairsoftwarechecklist.net--00a7d9)](https://fairsoftwarechecklist.net/v0.2/?f=31&a=32113&i=32322&r=133)
 [![fair-software.eu](https://img.shields.io/badge/fair--software.eu-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8F-green)](https://fair-software.eu)
+[![GNU GPLv3
+License](https://img.shields.io/badge/license-GPLv3-bd0000.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Contributor Covenant 3.0 Code of
 Conduct](https://img.shields.io/badge/Contributor%20Covenant-3.0-4baaaa.svg)](https://www.contributor-covenant.org/version/3/0/code_of_conduct/)
 <!-- badges: end -->
@@ -239,7 +240,7 @@ library(dplyr)
 results |> glimpse()
 #> List of 2
 #>  $ metadata:List of 6
-#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-14 00:34:32"
+#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-14 01:24:37"
 #>   ..$ netlogo_version : chr "7.0.3"
 #>   ..$ output_version  : chr "2.0"
 #>   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"
@@ -256,7 +257,7 @@ results |> glimpse()
 #>   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
 #>   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ count_sheep           : num [1:110110] 500 498 494 493 491 491 488 485 483 481 ...
+#>   ..$ count_sheep           : num [1:110110] 500 497 496 496 495 491 490 489 486 486 ...
 ```
 
 If you already have a file with experiment results, you can read it into

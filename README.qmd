@@ -41,13 +41,6 @@ cat(
     "https://cran.r-project.org/package=logolink",
     ")"
   ),
-  badge_custom(
-    x = "doi",
-    y = "10.32614/CRAN.package.logolink",
-    color = "1284C5",
-    url = "https://doi.org/10.32614/CRAN.package.logolink",
-    alt = "DOI badge"
-  ),
   paste0(
     "[![",
     "CRAN Downloads",
@@ -58,9 +51,17 @@ cat(
     "?package=logolink",
     ")"
   ),
-  badge_cran_download(type = "grand-total"),
+  badge_custom(
+    x = "doi",
+    y = "10.32614/CRAN.package.logolink",
+    color = "1284C5",
+    url = "https://doi.org/10.32614/CRAN.package.logolink",
+    alt = "DOI badge"
+  ),
   badge_github_actions(action = "R-CMD-check.yaml"),
+  badge_github_actions(action = "pkgcheck.yaml"),
   badge_cran_checks("logolink"),
+  badge_codecov(),
   paste0(
     "[![",
     "FAIR checklist badge",
@@ -72,13 +73,6 @@ cat(
     ")](",
     "https://fairsoftwarechecklist.net/v0.2/?f=31&a=32113&i=32322&r=133",
     ")"
-  ),
-  badge_codecov(),
-  badge_license(
-    license = "GPLv3",
-    color = "bd0000",
-    url = "https://www.gnu.org/licenses/gpl-3.0",
-    alt = "GNU GPLv3 License"
   ),
   paste0(
     "[![",
@@ -104,6 +98,12 @@ cat(
     ")](",
     "https://fair-software.eu",
     ")"
+  ),
+  badge_license(
+    license = "GPLv3",
+    color = "bd0000",
+    url = "https://www.gnu.org/licenses/gpl-3.0",
+    alt = "GNU GPLv3 License"
   ),
   badge_custom(
     x = "Contributor%20Covenant",
