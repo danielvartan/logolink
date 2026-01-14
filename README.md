@@ -16,7 +16,7 @@ badge](https://img.shields.io/badge/doi-10.32614/CRAN.package.logolink-1284C5.sv
 Downloads](https://cranlogs.r-pkg.org/badges/grand-total/logolink)](https://danielvartan-cran-logs.share.connect.posit.cloud/?package=logolink)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/logolink)](https://cran.r-project.org/package=logolink)
 [![R build
-status](https://github.com/danielvartan/logolink/workflows/R-CMD-check/badge.svg)](https://github.com/danielvartan/logolink/actions)
+status](https://github.com/danielvartan/logolink/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/danielvartan/logolink/actions)
 [![CRAN
 checks](https://badges.cranchecks.info/summary/logolink.svg)](https://cran.r-project.org/web/checks/check_results_logolink.html)
 [![FAIR checklist
@@ -239,7 +239,7 @@ library(dplyr)
 results |> glimpse()
 #> List of 2
 #>  $ metadata:List of 6
-#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-13 19:11:35"
+#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-14 00:34:32"
 #>   ..$ netlogo_version : chr "7.0.3"
 #>   ..$ output_version  : chr "2.0"
 #>   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"
@@ -256,7 +256,7 @@ results |> glimpse()
 #>   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
 #>   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ count_sheep           : num [1:110110] 500 500 500 499 497 495 494 491 491 488 ...
+#>   ..$ count_sheep           : num [1:110110] 500 498 494 493 491 491 488 485 483 481 ...
 ```
 
 If you already have a file with experiment results, you can read it into

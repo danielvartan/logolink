@@ -9,12 +9,6 @@ testthat::test_that("`run_experiment()` | Population Density (Runtime)", {
   testthat::skip_if(is.na(find_netlogo_console()))
   testthat::skip_if(Sys.getenv("LOGOLINK_TEST_NETLOGO") == "FALSE")
 
-  testthat::skip_if(
-    find_netlogo_console() |>
-      suppressMessages() |>
-      identical("")
-  )
-
   model_path <-
     find_netlogo_home() |>
     file.path(
@@ -180,13 +174,8 @@ testthat::test_that("`run_experiment()` | Population Density (Runtime)", {
 testthat::test_that("`run_experiment()` | Population Density", {
   testthat::skip_on_cran()
   testthat::skip_on_covr()
+  testthat::skip_if(is.na(find_netlogo_console()))
   testthat::skip_if(Sys.getenv("LOGOLINK_TEST_NETLOGO") == "FALSE")
-
-  testthat::skip_if(
-    find_netlogo_console() |>
-      suppressMessages() |>
-      identical("")
-  )
 
   model_path <-
     find_netlogo_home() |>
@@ -238,13 +227,8 @@ testthat::test_that("`run_experiment()` | Population Density", {
 testthat::test_that("`run_experiment()` | Degree", {
   testthat::skip_on_cran()
   testthat::skip_on_covr()
+  testthat::skip_if(is.na(find_netlogo_console()))
   testthat::skip_if(Sys.getenv("LOGOLINK_TEST_NETLOGO") == "FALSE")
-
-  testthat::skip_if(
-    find_netlogo_console() |>
-      suppressMessages() |>
-      identical("")
-  )
 
   model_path <-
     find_netlogo_home() |>
@@ -296,13 +280,8 @@ testthat::test_that("`run_experiment()` | Degree", {
 testthat::test_that("`run_experiment()` | Degree", {
   testthat::skip_on_cran()
   testthat::skip_on_covr()
+  testthat::skip_if(is.na(find_netlogo_console()))
   testthat::skip_if(Sys.getenv("LOGOLINK_TEST_NETLOGO") == "FALSE")
-
-  testthat::skip_if(
-    find_netlogo_console() |>
-      suppressMessages() |>
-      identical("")
-  )
 
   model_path <-
     find_netlogo_home() |>
@@ -354,13 +333,8 @@ testthat::test_that("`run_experiment()` | Degree", {
 testthat::test_that("`run_experiment()` | Degree", {
   testthat::skip_on_cran()
   testthat::skip_on_covr()
+  testthat::skip_if(is.na(find_netlogo_console()))
   testthat::skip_if(Sys.getenv("LOGOLINK_TEST_NETLOGO") == "FALSE")
-
-  testthat::skip_if(
-    find_netlogo_console() |>
-      suppressMessages() |>
-      identical("")
-  )
 
   model_path <-
     find_netlogo_home() |>

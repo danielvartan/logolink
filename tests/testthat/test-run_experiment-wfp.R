@@ -9,12 +9,6 @@ testthat::test_that("`run_experiment()` | Wolf Sheep Simple Model Analysis", {
   testthat::skip_if(is.na(find_netlogo_console()))
   testthat::skip_if(Sys.getenv("LOGOLINK_TEST_NETLOGO") == "FALSE")
 
-  testthat::skip_if(
-    find_netlogo_console() |>
-      suppressMessages() |>
-      identical("")
-  )
-
   model_path <-
     find_netlogo_home() |>
     file.path(
@@ -197,13 +191,8 @@ testthat::test_that("`run_experiment()` | Wolf Sheep Simple Model Analysis", {
 testthat::test_that("`run_experiment()` | Agent Attributes Extraction", {
   testthat::skip_on_cran()
   testthat::skip_on_covr()
+  testthat::skip_if(is.na(find_netlogo_console()))
   testthat::skip_if(Sys.getenv("LOGOLINK_TEST_NETLOGO") == "FALSE")
-
-  testthat::skip_if(
-    find_netlogo_console() |>
-      suppressMessages() |>
-      identical("")
-  )
 
   model_path <-
     find_netlogo_home() |>
@@ -258,13 +247,8 @@ testthat::test_that("`run_experiment()` | Agent Attributes Extraction", {
 testthat::test_that("`run_experiment()` | BehaviorSpace Combinatorial", {
   testthat::skip_on_cran()
   testthat::skip_on_covr()
+  testthat::skip_if(is.na(find_netlogo_console()))
   testthat::skip_if(Sys.getenv("LOGOLINK_TEST_NETLOGO") == "FALSE")
-
-  testthat::skip_if(
-    find_netlogo_console() |>
-      suppressMessages() |>
-      identical("")
-  )
 
   model_path <-
     find_netlogo_home() |>
@@ -316,13 +300,8 @@ testthat::test_that("`run_experiment()` | BehaviorSpace Combinatorial", {
 testthat::test_that("`run_experiment()` | Behaviorspace Run 3 Experiments", {
   testthat::skip_on_cran()
   testthat::skip_on_covr()
+  testthat::skip_if(is.na(find_netlogo_console()))
   testthat::skip_if(Sys.getenv("LOGOLINK_TEST_NETLOGO") == "FALSE")
-
-  testthat::skip_if(
-    find_netlogo_console() |>
-      suppressMessages() |>
-      identical("")
-  )
 
   # Experiment mirror
   model_path <-
@@ -406,13 +385,8 @@ testthat::test_that("`run_experiment()` | Behaviorspace Run 3 Experiments", {
 testthat::test_that("`run_experiment()` | BehaviorSpace Run 3 Variable ...", {
   testthat::skip_on_cran()
   testthat::skip_on_covr()
+  testthat::skip_if(is.na(find_netlogo_console()))
   testthat::skip_if(Sys.getenv("LOGOLINK_TEST_NETLOGO") == "FALSE")
-
-  testthat::skip_if(
-    find_netlogo_console() |>
-      suppressMessages() |>
-      identical("")
-  )
 
   model_path <-
     find_netlogo_home() |>
@@ -494,13 +468,8 @@ testthat::test_that("`run_experiment()` | BehaviorSpace Run 3 Variable ...", {
 testthat::test_that("`run_experiment()` | BehaviorSpace Subset", {
   testthat::skip_on_cran()
   testthat::skip_on_covr()
+  testthat::skip_if(is.na(find_netlogo_console()))
   testthat::skip_if(Sys.getenv("LOGOLINK_TEST_NETLOGO") == "FALSE")
-
-  testthat::skip_if(
-    find_netlogo_console() |>
-      suppressMessages() |>
-      identical("")
-  )
 
   model_path <-
     find_netlogo_home() |>
@@ -560,13 +529,8 @@ testthat::test_that("`run_experiment()` | BehaviorSpace Subset", {
 testthat::test_that("`run_experiment()` | New BehaviorSpace Features", {
   testthat::skip_on_cran()
   testthat::skip_on_covr()
+  testthat::skip_if(is.na(find_netlogo_console()))
   testthat::skip_if(Sys.getenv("LOGOLINK_TEST_NETLOGO") == "FALSE")
-
-  testthat::skip_if(
-    find_netlogo_console() |>
-      suppressMessages() |>
-      identical("")
-  )
 
   model_path <-
     find_netlogo_home() |>
@@ -626,13 +590,8 @@ testthat::test_that("`run_experiment()` | New BehaviorSpace Features", {
 testthat::test_that("`run_experiment()` | New BehaviorSpace Features ...", {
   testthat::skip_on_cran()
   testthat::skip_on_covr()
+  testthat::skip_if(is.na(find_netlogo_console()))
   testthat::skip_if(Sys.getenv("LOGOLINK_TEST_NETLOGO") == "FALSE")
-
-  testthat::skip_if(
-    find_netlogo_console() |>
-      suppressMessages() |>
-      identical("")
-  )
 
   model_path <-
     find_netlogo_home() |>
@@ -701,13 +660,8 @@ testthat::test_that("`run_experiment()` | New BehaviorSpace Features ...", {
 testthat::test_that("`run_experiment()` | Wolf Sheep Crossing", {
   testthat::skip_on_cran()
   testthat::skip_on_covr()
+  testthat::skip_if(is.na(find_netlogo_console()))
   testthat::skip_if(Sys.getenv("LOGOLINK_TEST_NETLOGO") == "FALSE")
-
-  testthat::skip_if(
-    find_netlogo_console() |>
-      suppressMessages() |>
-      identical("")
-  )
 
   model_path <-
     find_netlogo_home() |>

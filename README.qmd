@@ -59,7 +59,7 @@ cat(
     ")"
   ),
   badge_cran_download(type = "grand-total"),
-  badge_github_actions(action = "R-CMD-check"),
+  badge_github_actions(action = "R-CMD-check.yaml"),
   badge_cran_checks("logolink"),
   paste0(
     "[![",
