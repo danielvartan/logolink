@@ -155,7 +155,6 @@
 <code class="sourceCode R"><span><span class="va">setup_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/create_experiment.html">create_experiment</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="st">"Wolf Sheep Simple Model Analysis"</span>,</span>
 <span>  repetitions <span class="op">=</span> <span class="fl">10</span>,</span>
-<span>  sequential_run_order <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  run_metrics_every_step <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  setup <span class="op">=</span> <span class="st">"setup"</span>,</span>
 <span>  go <span class="op">=</span> <span class="st">"go"</span>,</span>
@@ -164,7 +163,6 @@
 <span>    <span class="st">'count wolves'</span>,</span>
 <span>    <span class="st">'count sheep'</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  run_metrics_condition <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  constants <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    <span class="st">"number-of-sheep"</span> <span class="op">=</span> <span class="fl">500</span>,</span>
 <span>    <span class="st">"number-of-wolves"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -204,7 +202,7 @@
 <span><span class="va">results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 2</span></span>
 <span><span class="co">#&gt;  $ metadata:List of 6</span></span>
-<span><span class="co">#&gt;   ..$ timestamp       : POSIXct[1:1], format: "2026-01-14 01:24:37"</span></span>
+<span><span class="co">#&gt;   ..$ timestamp       : POSIXct[1:1], format: "2026-01-18 19:14:38"</span></span>
 <span><span class="co">#&gt;   ..$ netlogo_version : chr "7.0.3"</span></span>
 <span><span class="co">#&gt;   ..$ output_version  : chr "2.0"</span></span>
 <span><span class="co">#&gt;   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"</span></span>
@@ -221,7 +219,7 @@
 <span><span class="co">#&gt;   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
 <span><span class="co">#&gt;   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...</span></span>
-<span><span class="co">#&gt;   ..$ count_sheep           : num [1:110110] 500 497 496 496 495 491 490 489 486 486 ...</span></span></code></pre></div>
+<span><span class="co">#&gt;   ..$ count_sheep           : num [1:110110] 500 499 498 496 494 494 492 490 489 487 ...</span></span></code></pre></div>
 <p>If you already have a file with experiment results, you can read it into R using the <a href="https://danielvartan.github.io/logolink/reference/read_experiment.html"><code>read_experiment()</code></a> function, which will produce the same output structure as <a href="https://danielvartan.github.io/logolink/reference/run_experiment.html"><code>run_experiment()</code></a>.</p>
 </div>
 <div class="section level3">

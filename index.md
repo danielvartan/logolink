@@ -136,7 +136,6 @@ metrics to collect, and the number of runs to perform.
 setup_file <- create_experiment(
   name = "Wolf Sheep Simple Model Analysis",
   repetitions = 10,
-  sequential_run_order = TRUE,
   run_metrics_every_step = TRUE,
   setup = "setup",
   go = "go",
@@ -145,7 +144,6 @@ setup_file <- create_experiment(
     'count wolves',
     'count sheep'
   ),
-  run_metrics_condition = NULL,
   constants = list(
     "number-of-sheep" = 500,
     "number-of-wolves" = list(
@@ -208,7 +206,7 @@ library(dplyr)
 results |> glimpse()
 #> List of 2
 #>  $ metadata:List of 6
-#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-14 01:24:37"
+#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-18 19:14:38"
 #>   ..$ netlogo_version : chr "7.0.3"
 #>   ..$ output_version  : chr "2.0"
 #>   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"
@@ -225,7 +223,7 @@ results |> glimpse()
 #>   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
 #>   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ count_sheep           : num [1:110110] 500 497 496 496 495 491 490 489 486 486 ...
+#>   ..$ count_sheep           : num [1:110110] 500 499 498 496 494 494 492 490 489 487 ...
 ```
 
 If you already have a file with experiment results, you can read it into

@@ -263,17 +263,19 @@ console.
 ## Troubleshoot
 
 [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) has known
-issues when running in headless mode. While we are collaborating with
-the NetLogo developers to address these problems in future patch
-releases, here are some known issues and potential workarounds:
+issues when running in
+[headless](https://docs.netlogo.org/behaviorspace#running-from-the-command-line)
+mode. While we are collaborating with the NetLogo developers to address
+these problems in future patch releases, here are some known issues and
+potential workarounds.
 
 ### All Results Returning as `0`
 
-If your model halts during the experiment in headless mode, it may
-result in all results being returned as `0`. This issue can also occur
-if the constants or `setup`/`go` procedures are not defined correctly.
-Verify your experiment definition to ensure that all parameters and
-procedures are properly configured.
+If your model halts during the experiment mode, it may result in all
+results being returned as `0`. This issue can also occur if the
+constants or `setup`/`go` procedures are not defined correctly. Verify
+your experiment definition to ensure that all parameters and procedures
+are properly configured.
 
 See this [issue ticket](https://github.com/NetLogo/NetLogo/issues/1386)
 to learn more.
@@ -341,21 +343,17 @@ Other BehaviorSpace functions:
       setup_file = setup_file
     )
 #> ℹ Running model
-#> ✔ Running model [19.8s]
+#> ✔ Running model [20.5s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [19ms]
+#> ✔ Gathering metadata [14ms]
 #> 
 #> ℹ Processing table output
 #> ✔ Processing table output [15ms]
 #> 
-#> ℹ The experiment run produced the following messages:
-#> 
-#> Jan 14, 2026 5:11:20 AM java.util.prefs.FileSystemPreferences$1 run
-#> INFO: Created user preferences directory.
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-14 05:11:21 GMT"
+#> [1] "2026-01-18 22:30:17 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -406,14 +404,14 @@ Other BehaviorSpace functions:
 #> ✔ Running model [17.8s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [14ms]
+#> ✔ Gathering metadata [13ms]
 #> 
 #> ℹ Processing table output
 #> ✔ Processing table output [8ms]
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-14 05:11:42 GMT"
+#> [1] "2026-01-18 22:30:38 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"

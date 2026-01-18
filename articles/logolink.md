@@ -70,7 +70,6 @@ simulation runs.
 setup_file <- create_experiment(
   name = "Population Density (Runtime)",
   repetitions = 10,
-  sequential_run_order = TRUE,
   run_metrics_every_step = TRUE,
   time_limit = 1000,
   setup = 'setup',

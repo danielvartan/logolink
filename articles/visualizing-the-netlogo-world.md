@@ -107,9 +107,6 @@ that takes these snapshots every 100 ticks:
 ``` r
 setup_file <- create_experiment(
   name = "Wolf Sheep Simple Model Analysis",
-  repetitions = 1,
-  sequential_run_order = TRUE,
-  run_metrics_every_step = FALSE,
   setup = "setup",
   go = "go",
   time_limit = 500,
