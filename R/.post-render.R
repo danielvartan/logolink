@@ -44,12 +44,13 @@ file |>
 
 # Update Package Versions in `DESCRIPTION` -----
 
-update_pkg_versions(
-  ignore = c(
-    "readr",
-    "xml2"
-  )
-)
+# update_pkg_versions(
+#   ignore = c(
+#     "dplyr",
+#     "readr",
+#     "xml2"
+#   )
+# )
 
 # Update Package Year in `LICENSE` and `inst/CITATION` -----
 
