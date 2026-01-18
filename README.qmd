@@ -76,18 +76,6 @@ cat(
   ),
   paste0(
     "[![",
-    "FAIR checklist badge",
-    "](",
-    "https://img.shields.io/badge/",
-    "fairsoftwarechecklist.net", "-",
-    "-",
-    "00a7d9",
-    ")](",
-    "https://fairsoftwarechecklist.net/v0.2/?f=31&a=32113&i=32322&r=133",
-    ")"
-  ),
-  paste0(
-    "[![",
     "fair-software.eu",
     "](",
     "https://img.shields.io/badge/",
@@ -193,7 +181,6 @@ To run the model from R, we'll need to setup an experiment. We can do this by se
 setup_file <- create_experiment(
   name = "Wolf Sheep Simple Model Analysis",
   repetitions = 10,
-  sequential_run_order = TRUE,
   run_metrics_every_step = TRUE,
   setup = "setup",
   go = "go",
@@ -202,7 +189,6 @@ setup_file <- create_experiment(
     'count wolves',
     'count sheep'
   ),
-  run_metrics_condition = NULL,
   constants = list(
     "number-of-sheep" = 500,
     "number-of-wolves" = list(

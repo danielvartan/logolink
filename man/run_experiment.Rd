@@ -220,14 +220,16 @@ excessive non-tabular output may clutter your R console.
 
 
 \href{https://docs.netlogo.org/behaviorspace.html}{BehaviorSpace} has known issues
-when running in headless mode. While we are collaborating with the NetLogo
-developers to address these problems in future patch releases, here are some
-known issues and potential workarounds:
+when running in
+\href{https://docs.netlogo.org/behaviorspace#running-from-the-command-line}{headless}
+mode. While we are collaborating with the NetLogo developers to address these
+problems in future patch releases, here are some known issues and potential
+workarounds.
 \subsection{All Results Returning as \code{0}}{
 
-If your model halts during the experiment in headless mode, it may result in
-all results being returned as \code{0}. This issue can also occur if the constants
-or \code{setup}/\code{go} procedures are not defined correctly. Verify your experiment
+If your model halts during the experiment mode, it may result in all results
+being returned as \code{0}. This issue can also occur if the constants or
+\code{setup}/\code{go} procedures are not defined correctly. Verify your experiment
 definition to ensure that all parameters and procedures are properly
 configured.
 
