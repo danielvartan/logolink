@@ -343,17 +343,17 @@ Other BehaviorSpace functions:
       setup_file = setup_file
     )
 #> ℹ Running model
-#> ✔ Running model [20.5s]
+#> ✔ Running model [19.9s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [14ms]
+#> ✔ Gathering metadata [26ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [15ms]
+#> ✔ Processing table output [14ms]
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-18 22:30:17 GMT"
+#> [1] "2026-01-18 23:14:00 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -401,17 +401,17 @@ Other BehaviorSpace functions:
       experiment = "Wolf Sheep Simple model analysis"
     )
 #> ℹ Running model
-#> ✔ Running model [17.8s]
+#> ✔ Running model [18.1s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [13ms]
+#> ✔ Gathering metadata [14ms]
 #> 
 #> ℹ Processing table output
-#> ✔ Processing table output [8ms]
+#> ✔ Processing table output [9ms]
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-18 22:30:38 GMT"
+#> [1] "2026-01-18 23:14:21 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
