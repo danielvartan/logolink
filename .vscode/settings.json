@@ -121,6 +121,7 @@
     "reprex",
     "revdep",
     "revdepcheck",
+    "rlang",
     "rmarkdown",
     "ropensci",
     "Roxygen",
