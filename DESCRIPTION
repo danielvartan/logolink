@@ -48,7 +48,6 @@ Suggests:
     quarto (>= 1.5.1),
     ragg (>= 1.5.0),
     remotes (>= 2.5.0),
-    rlang (>= 1.1.7),
     rsvg (>= 2.7.0),
     scales (>= 1.4.0),
     spelling (>= 2.3.2),

@@ -18,3 +18,5 @@ jobs:
     steps:
       - name: Check package with rOpenSci's pkgcheck system
         uses: ropensci-review-tools/pkgcheck-action@main
+        with:
+          post-to-issue: false
