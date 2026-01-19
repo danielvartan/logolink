@@ -1,7 +1,8 @@
 on:
-  push:
+  workflow_run:
+    workflows: ["R-CMD-check.yaml", "test-coverage.yaml", "pkgdown.yaml"]
+    types: completed
     branches: [main, master]
-  workflow_dispatch:
 
 name: pkgcheck.yaml
 permissions: read-all
