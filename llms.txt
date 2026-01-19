@@ -206,7 +206,7 @@ library(dplyr)
 results |> glimpse()
 #> List of 2
 #>  $ metadata:List of 6
-#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-18 19:14:38"
+#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-18 21:52:23"
 #>   ..$ netlogo_version : chr "7.0.3"
 #>   ..$ output_version  : chr "2.0"
 #>   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"
@@ -223,7 +223,7 @@ results |> glimpse()
 #>   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
 #>   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ count_sheep           : num [1:110110] 500 499 498 496 494 494 492 490 489 487 ...
+#>   ..$ count_sheep           : num [1:110110] 500 497 494 490 489 487 486 483 481 479 ...
 ```
 
 If you already have a file with experiment results, you can read it into
