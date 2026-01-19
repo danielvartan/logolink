@@ -343,17 +343,17 @@ Other BehaviorSpace functions:
       setup_file = setup_file
     )
 #> ℹ Running model
-#> ✔ Running model [19.2s]
+#> ✔ Running model [20.6s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [18ms]
+#> ✔ Gathering metadata [14ms]
 #> 
 #> ℹ Processing table output
 #> ✔ Processing table output [21ms]
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-19 19:05:20 GMT"
+#> [1] "2026-01-19 19:19:09 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
@@ -404,14 +404,14 @@ Other BehaviorSpace functions:
 #> ✔ Running model [17.6s]
 #> 
 #> ℹ Gathering metadata
-#> ✔ Gathering metadata [14ms]
+#> ✔ Gathering metadata [13ms]
 #> 
 #> ℹ Processing table output
 #> ✔ Processing table output [8ms]
 #> 
 #> $metadata
 #> $metadata$timestamp
-#> [1] "2026-01-19 19:05:40 GMT"
+#> [1] "2026-01-19 19:19:30 GMT"
 #> 
 #> $metadata$netlogo_version
 #> [1] "7.0.3"
