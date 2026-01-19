@@ -59,7 +59,7 @@ cat(
     alt = "DOI badge"
   ),
   badge_github_actions(action = "R-CMD-check.yaml"),
-  badge_github_actions(action = "pkgcheck.yaml"),
+  # badge_github_actions(action = "pkgcheck.yaml"),
   badge_cran_checks("logolink"),
   badge_codecov(),
   paste0(
