@@ -1,6 +1,6 @@
 on:
   workflow_run:
-    workflows: ["R-CMD-check.yaml", "test-coverage.yaml", "pkgdown.yaml"]
+    workflows: "R-CMD-check.yaml"
     types: completed
     branches: [main, master]
 
@@ -17,6 +17,15 @@ jobs:
     permissions:
       issues: write
     steps:
+      - name: Check if all workflows succeeded
+        run: |
+          if [ "${{ github.event.workflow_run.conclusion }}" != "success" ]; then
+            echo "Previous workflow failed"
+
+            exit 1
+          fi
+        shell: bash
+
       - name: Check package with rOpenSci's pkgcheck system
         uses: ropensci-review-tools/pkgcheck-action@main
         with:
