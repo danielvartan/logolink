@@ -55,17 +55,15 @@ If any of these are missing from your system, install them with:
 ```r
 install.packages(
   c(
-    "cli",
-    "curl",
     "dplyr",
     "ggplot2",
     "ggimage",
     "ggtext",
     "logolink",
+    "here",
     "magick",
     "magrittr",
     "ragg",
-    "remotes",
     "stringr",
     "tidyr"
   )
