@@ -29,6 +29,11 @@ command:
 install.packages("logolink")
 ```
 
+`logolink` do not come with NetLogo, so make sure you have NetLogo
+installed on your computer. You can download it from the [NetLogo
+website](https://www.netlogo.org/download). `logolink` supports NetLogo
+version 7.0.1 and above.
+
 After installation, start by loading the package to access its
 functions:
 

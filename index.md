@@ -62,6 +62,10 @@ And the development version from [GitHub](https://github.com/) with:
 remotes::install_github("danielvartan/logolink")
 ```
 
+`logolink` do not install NetLogo itself. You will need to have NetLogo
+7.0.1 or higher installed on your computer to use this package. You can
+download it from the [NetLogo website](https://www.netlogo.org).
+
 ## Usage
 
 `logolink` usage is very straightforward. The main functions are:
@@ -206,7 +210,7 @@ library(dplyr)
 results |> glimpse()
 #> List of 2
 #>  $ metadata:List of 6
-#>   ..$ timestamp       : POSIXct[1:1], format: "2026-01-19 15:35:01"
+#>   ..$ timestamp       : POSIXct[1:1], format: "2026-02-11 12:46:59"
 #>   ..$ netlogo_version : chr "7.0.3"
 #>   ..$ output_version  : chr "2.0"
 #>   ..$ model_file      : chr "Wolf Sheep Simple 5.nlogox"
@@ -223,7 +227,7 @@ results |> glimpse()
 #>   ..$ energy_gain_from_sheep: num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
 #>   ..$ step                  : num [1:110110] 0 1 2 3 4 5 6 7 8 9 ...
 #>   ..$ count_wolves          : num [1:110110] 5 5 5 5 5 5 5 5 5 5 ...
-#>   ..$ count_sheep           : num [1:110110] 500 500 500 499 496 494 491 489 487 486 ...
+#>   ..$ count_sheep           : num [1:110110] 500 498 497 495 493 492 488 487 486 483 ...
 ```
 
 If you already have a file with experiment results, you can read it into
@@ -324,7 +328,7 @@ citation("logolink")
 [![](https://img.shields.io/badge/license-GPLv3-bd0000.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ``` text
-Copyright (C) 2025 Daniel Vartanian
+Copyright (C) 2026 Daniel Vartanian
 
 logolink is free software: you can redistribute it and/or modify it under the
 terms of the GNU General Public License as published by the Free Software
