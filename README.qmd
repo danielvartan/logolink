@@ -31,6 +31,15 @@ source(here("R", ".setup.R"))
 #| warning: false
 
 cat(
+  paste0(
+    "[![",
+    "Status at rOpenSci Software Peer Review",
+    "](",
+    "https://badges.ropensci.org/741_status.svg",
+    ")](",
+    "https://github.com/ropensci/software-review/issues/741",
+    ")"
+  ),
   badge_repostatus("active"),
   paste0(
     "[![",
@@ -136,6 +145,8 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("remotes")
 remotes::install_github("danielvartan/logolink")
 ```
+
+`logolink` do not install NetLogo itself. You will need to have NetLogo 7.0.1 or higher installed on your computer to use this package. You can download it from the [NetLogo website](https://www.netlogo.org).
 
 ## Usage
 
@@ -331,7 +342,7 @@ cat(
 ```
 
 ```text
-Copyright (C) 2025 Daniel Vartanian
+Copyright (C) 2026 Daniel Vartanian
 
 logolink is free software: you can redistribute it and/or modify it under the
 terms of the GNU General Public License as published by the Free Software

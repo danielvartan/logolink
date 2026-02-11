@@ -53,7 +53,7 @@
       "@type": "SoftwareApplication",
       "identifier": "bslib",
       "name": "bslib",
-      "version": ">= 0.9.0",
+      "version": ">= 0.10.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -105,7 +105,7 @@
       "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
-      "version": ">= 4.0.1",
+      "version": ">= 4.0.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -287,7 +287,7 @@
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
-      "version": ">= 3.3.0",
+      "version": ">= 3.3.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -300,7 +300,7 @@
       "@type": "SoftwareApplication",
       "identifier": "testthat",
       "name": "testthat",
-      "version": ">= 3.3.1",
+      "version": ">= 3.3.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -321,7 +321,7 @@
       "@type": "SoftwareApplication",
       "identifier": "checkmate",
       "name": "checkmate",
-      "version": ">= 2.3.3",
+      "version": ">= 2.3.4",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -347,7 +347,7 @@
       "@type": "SoftwareApplication",
       "identifier": "dplyr",
       "name": "dplyr",
-      "version": ">= 1.1.4",
+      "version": ">= 1.2.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -464,7 +464,7 @@
       "@type": "SoftwareApplication",
       "identifier": "xml2",
       "name": "xml2",
-      "version": ">= 1.5.1",
+      "version": ">= 1.5.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -475,7 +475,7 @@
     },
     "SystemRequirements": "NetLogo >= 7.0.1"
   },
-  "fileSize": "986.922KB",
+  "fileSize": "989.746KB",
   "citation": [
     {
       "@type": "CreativeWork",
@@ -500,5 +500,10 @@
   "readme": "https://github.com/danielvartan/logolink/blob/main/README.md",
   "contIntegration": ["https://github.com/danielvartan/logolink/actions", "https://github.com/danielvartan/logolink/actions", "https://app.codecov.io/gh/danielvartan/logolink"],
   "developmentStatus": "https://www.repostatus.org/#active",
+  "review": {
+    "@type": "Review",
+    "url": "https://github.com/ropensci/software-review/issues/741",
+    "provider": "https://ropensci.org"
+  },
   "keywords": ["agent-based-modeling", "apis", "behaviorspace", "complexity-science", "individual-based-modeling", "netlogo", "r-packages", "rstats", "simulations", "computational-science", "multi-agent-systems", "headless-execution", "computational-social-science", "data-science", "ecological-modeling", "environmental-modeling", "system-dynamics", "tidyverse"]
 }

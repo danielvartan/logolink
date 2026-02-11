@@ -68,7 +68,7 @@ references:
     orcid: https://orcid.org/0000-0001-9754-0393
   year: '2026'
   doi: 10.32614/CRAN.package.checkmate
-  version: '>= 2.3.3'
+  version: '>= 2.3.4'
 - type: software
   title: cli
   abstract: 'cli: Helpers for Developing Command Line Interfaces'
@@ -107,7 +107,7 @@ references:
     orcid: https://orcid.org/0000-0003-4777-038X
   year: '2026'
   doi: 10.32614/CRAN.package.dplyr
-  version: '>= 1.1.4'
+  version: '>= 1.2.0'
 - type: software
   title: fs
   abstract: 'fs: Cross-Platform File System Operations Based on ''libuv'''
@@ -255,7 +255,7 @@ references:
     email: jeroenooms@gmail.com
   year: '2026'
   doi: 10.32614/CRAN.package.xml2
-  version: '>= 1.5.1'
+  version: '>= 1.5.2'
 - type: software
   title: bslib
   abstract: 'bslib: Custom ''Bootstrap'' ''Sass'' Themes for ''shiny'' and ''rmarkdown'''
@@ -276,7 +276,7 @@ references:
     orcid: https://orcid.org/0000-0002-7111-0077
   year: '2026'
   doi: 10.32614/CRAN.package.bslib
-  version: '>= 0.9.0'
+  version: '>= 0.10.0'
 - type: software
   title: colorspace
   abstract: 'colorspace: A Toolbox for Manipulating and Assessing Colors and Palettes'
@@ -385,7 +385,7 @@ references:
     orcid: https://orcid.org/0000-0002-9335-7468
   year: '2026'
   doi: 10.32614/CRAN.package.ggplot2
-  version: '>= 4.0.1'
+  version: '>= 4.0.2'
 - type: software
   title: ggimage
   abstract: 'ggimage: Use Image in ''ggplot2'''
@@ -614,7 +614,7 @@ references:
     email: hadley@rstudio.com
   year: '2026'
   doi: 10.32614/CRAN.package.tibble
-  version: '>= 3.3.0'
+  version: '>= 3.3.1'
 - type: software
   title: testthat
   abstract: 'testthat: Unit Testing for R'
@@ -627,5 +627,5 @@ references:
     email: hadley@posit.co
   year: '2026'
   doi: 10.32614/CRAN.package.testthat
-  version: '>= 3.3.1'
+  version: '>= 3.3.2'
 
