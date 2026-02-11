@@ -34,6 +34,7 @@ Imports:
     xml2 (>= 1.5.2)
 Suggests:
     bslib (>= 0.10.0),
+    brand.yml (>= 0.1.0),
     colorspace (>= 2.1.2),
     covr (>= 3.6.5),
     curl (>= 7.0.0),
