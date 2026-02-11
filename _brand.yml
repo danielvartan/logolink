@@ -1,7 +1,5 @@
 meta:
-  name:
-    short: "logolink"
-    long: "logolink: An Interface for Running 'NetLogo' Simulations"
+  name: "logolink: An Interface for Running 'NetLogo' Simulations"
   link:
     home: https://danielvartan.github.io/logolink
     github: https://github.com/danielvartan/logolink
