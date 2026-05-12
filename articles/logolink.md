@@ -26,6 +26,7 @@ You can install `logolink` like any other R package, using the following
 command:
 
 ``` r
+
 install.packages("logolink")
 ```
 
@@ -38,6 +39,7 @@ After installation, start by loading the package to access its
 functions:
 
 ``` r
+
 library(logolink)
 ```
 
@@ -52,6 +54,7 @@ a built-in NetLogo model, we can retrieve its path easily using the
 function:
 
 ``` r
+
 model_path <-
   find_netlogo_home() |>
   file.path(
@@ -72,6 +75,7 @@ vary, the metrics we want to collect, and other settings for our
 simulation runs.
 
 ``` r
+
 setup_file <- create_experiment(
   name = "Population Density (Runtime)",
   repetitions = 10,
@@ -107,6 +111,7 @@ you can easily inspect the created experiment using the
 function:
 
 ``` r
+
 setup_file |> inspect_experiment()
 #> <experiments>
 #>   <experiment name="Population Density (Runtime)" repetitions="10"
@@ -145,6 +150,7 @@ and collecting the results as [tidy data
 frames](https://r4ds.hadley.nz/data-tidy.html).
 
 ``` r
+
 results <-
   model_path |>
   run_experiment(
@@ -178,6 +184,7 @@ function from the [`dplyr`](https://dplyr.tidyverse.org/) R package can
 help us take a quick look at the results:
 
 ``` r
+
 library(dplyr)
 
 results |> glimpse()
@@ -220,6 +227,7 @@ Why stop here, right? Let’s do some basic data wrangling using the
 data for analysis and visualization.
 
 ``` r
+
 library(dplyr)
 library(magrittr)
 
@@ -240,6 +248,7 @@ data <-
 ```
 
 ``` r
+
 data |> glimpse()
 ```
 
@@ -249,6 +258,7 @@ fraction of infected individuals changes over time for different
 population sizes along with error bars representing the standard error.
 
 ``` r
+
 library(ggplot2)
 
 data |>

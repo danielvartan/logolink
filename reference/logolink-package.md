@@ -20,3 +20,9 @@ Useful links:
 **Maintainer**: Daniel Vartanian <danielvartan@proton.me>
 ([ORCID](https://orcid.org/0000-0001-7782-759X)) \[conceptor, copyright
 holder\]
+
+Authors:
+
+- Daniel Vartanian <danielvartan@proton.me>
+  ([ORCID](https://orcid.org/0000-0001-7782-759X)) \[conceptor,
+  copyright holder\]

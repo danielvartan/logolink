@@ -52,12 +52,14 @@ You can install the released version of `logolink` from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
+
 install.packages("logolink")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("remotes")
 remotes::install_github("danielvartan/logolink")
 ```
@@ -85,6 +87,7 @@ After installing NetLogo and `logolink`, start by loading the package
 with:
 
 ``` r
+
 library(logolink)
 ```
 
@@ -113,6 +116,7 @@ function to locate the NetLogo installation directory, then build the
 path to the model file:
 
 ``` r
+
 model_path <-
   find_netlogo_home() |>
   file.path(
@@ -137,6 +141,7 @@ information about the experiment, including the parameters to vary, the
 metrics to collect, and the number of runs to perform.
 
 ``` r
+
 setup_file <- create_experiment(
   name = "Wolf Sheep Simple Model Analysis",
   repetitions = 10,
@@ -180,6 +185,7 @@ specified parameters and return the results as [tidy data
 frames](https://r4ds.hadley.nz/data-tidy.html).
 
 ``` r
+
 results <-
   model_path |>
   run_experiment(
@@ -205,6 +211,7 @@ By default, only the
 is returned, along with some metadata about the experiment run.
 
 ``` r
+
 library(dplyr)
 
 results |> glimpse()
@@ -242,6 +249,7 @@ Below is a simple example of how to visualize the results using
 [`ggplot2`](https://ggplot2.tidyverse.org/).
 
 ``` r
+
 library(dplyr)
 library(magrittr)
 
@@ -257,6 +265,7 @@ data <-
 ```
 
 ``` r
+
 library(ggplot2)
 
 data |>
@@ -305,6 +314,7 @@ the effort put into its development and maintenance. Your citation helps
 support its continued improvement.
 
 ``` r
+
 citation("logolink")
 #> To cite logolink in publications use:
 #> 

@@ -209,6 +209,20 @@ created <a href="https://en.wikipedia.org/wiki/XML" class="external-link">XML</a
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
 
 <div class="section">
+<h3 id="backslashes">Backslashes<a class="anchor" aria-label="anchor" href="#backslashes"></a></h3>
+
+
+<p>When passing file paths to NetLogo commands, use <code><a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalizePath()</a></code> with
+<code>winslash = "/"</code> to convert backslashes to forward slashes. This is
+especially important on Windows, where paths use backslashes as separators,
+which must otherwise be escaped.</p>
+<p>For example:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">constants</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  <span class="st">"data-path"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalizePath</a></span><span class="op">(</span><span class="st">"path/to/data"</span>, winslash <span class="op">=</span> <span class="st">"/"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre><p></p></div>
+</div>
+
+<div class="section">
 <h3 id="enclosing">Enclosing<a class="anchor" aria-label="anchor" href="#enclosing"></a></h3>
 
 
@@ -292,7 +306,7 @@ to set the variable <code>pathway</code> to <code>"SSP-585"</code>, you should u
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmptkW9kb/experiment-1e97135cbc2b.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp0e4Vio/experiment-1e7a5ce4895.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment.html">inspect_experiment</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
@@ -383,7 +397,7 @@ to set the variable <code>pathway</code> to <code>"SSP-585"</code>, you should u
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmptkW9kb/experiment-1e975bd9e720.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp0e4Vio/experiment-1e7a2a254184.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment.html">inspect_experiment</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
@@ -508,7 +522,7 @@ to set the variable <code>pathway</code> to <code>"SSP-585"</code>, you should u
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmptkW9kb/experiment-1e972ef7f041.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp0e4Vio/experiment-1e7a1e1faba5.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment.html">inspect_experiment</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
@@ -603,7 +617,7 @@ to set the variable <code>pathway</code> to <code>"SSP-585"</code>, you should u
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmptkW9kb/experiment-1e974de0c477.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp0e4Vio/experiment-1e7acf24e39.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment.html">inspect_experiment</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
@@ -656,7 +670,7 @@ to set the variable <code>pathway</code> to <code>"SSP-585"</code>, you should u
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmptkW9kb/experiment-1e972679ed95.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp0e4Vio/experiment-1e7a90b0c89.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment.html">inspect_experiment</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>
@@ -709,7 +723,7 @@ to set the variable <code>pathway</code> to <code>"SSP-585"</code>, you should u
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmptkW9kb/experiment-1e977d61f191.xml"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/Rtmp0e4Vio/experiment-1e7a25761013.xml"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">setup_file</span> <span class="op">|&gt;</span> <span class="fu"><a href="inspect_experiment.html">inspect_experiment</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;experiments&gt;</span>

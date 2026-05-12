@@ -144,6 +144,20 @@ path to the created [XML](https://en.wikipedia.org/wiki/XML) file.
 
 ## Details
 
+### Backslashes
+
+When passing file paths to NetLogo commands, use
+[`normalizePath()`](https://rdrr.io/r/base/normalizePath.html) with
+`winslash = "/"` to convert backslashes to forward slashes. This is
+especially important on Windows, where paths use backslashes as
+separators, which must otherwise be escaped.
+
+For example:
+
+    constants = list(
+      "data-path" = normalizePath("path/to/data", winslash = "/")
+    )
+
 ### Enclosing
 
 Since NetLogo only accepts double quotes for strings inside commands, we
@@ -226,7 +240,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmptkW9kb/experiment-1e97135cbc2b.xml"
+#> [1] "/tmp/Rtmp0e4Vio/experiment-1e7a5ce4895.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>
@@ -317,7 +331,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmptkW9kb/experiment-1e975bd9e720.xml"
+#> [1] "/tmp/Rtmp0e4Vio/experiment-1e7a2a254184.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>
@@ -442,7 +456,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmptkW9kb/experiment-1e972ef7f041.xml"
+#> [1] "/tmp/Rtmp0e4Vio/experiment-1e7a1e1faba5.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>
@@ -537,7 +551,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmptkW9kb/experiment-1e974de0c477.xml"
+#> [1] "/tmp/Rtmp0e4Vio/experiment-1e7acf24e39.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>
@@ -590,7 +604,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmptkW9kb/experiment-1e972679ed95.xml"
+#> [1] "/tmp/Rtmp0e4Vio/experiment-1e7a90b0c89.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>
@@ -643,7 +657,7 @@ setup_file <- create_experiment(
 )
 
 setup_file
-#> [1] "/tmp/RtmptkW9kb/experiment-1e977d61f191.xml"
+#> [1] "/tmp/Rtmp0e4Vio/experiment-1e7a25761013.xml"
 
 setup_file |> inspect_experiment()
 #> <experiments>

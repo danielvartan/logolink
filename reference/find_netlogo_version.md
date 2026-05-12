@@ -43,6 +43,6 @@ Other system functions:
 ``` r
 # \dontrun{
   find_netlogo_version()
-#> [1] "7.0.3"
+#> [1] "7.0.4"
 # }
 ```

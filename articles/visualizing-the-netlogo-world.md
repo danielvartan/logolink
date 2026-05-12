@@ -29,6 +29,7 @@ This guide assumes familiarity with [NetLogo](https://www.netlogo.org)
 First, let’s load the packages we’ll need:
 
 ``` r
+
 library(logolink)
 
 library(dplyr)
@@ -46,6 +47,7 @@ library(tidyr)
 If any of these are missing from your system, install them with:
 
 ``` r
+
 install.packages(
   c(
     "dplyr",
@@ -69,6 +71,7 @@ function to find the NetLogo installation, then navigate to the model
 file:
 
 ``` r
+
 model_path <-
   find_netlogo_home() |>
   file.path(
@@ -87,10 +90,12 @@ image files from the
 [LogoShapes](https://github.com/danielvartan/logoshapes) project:
 
 ``` r
+
 sheep_shape <- get_netlogo_shape("sheep")
 ```
 
 ``` r
+
 wolf_shape <- get_netlogo_shape("wolf")
 ```
 
@@ -103,6 +108,7 @@ with
 that takes these snapshots every 100 ticks:
 
 ``` r
+
 setup_file <- create_experiment(
   name = "Wolf Sheep Simple Model Analysis",
   setup = "setup",
@@ -140,6 +146,7 @@ Note that we specify `output = c("table", "lists")` to get both summary
 tables and detailed agent lists:
 
 ``` r
+
 results <-
   model_path |>
   run_experiment(
@@ -156,6 +163,7 @@ The results come back as a list. The `lists` element has all our agent
 data:
 
 ``` r
+
 results |>
   extract2("lists") |>
   glimpse()
@@ -190,6 +198,7 @@ relevant columns with the
 function:
 
 ``` r
+
 plot_data <-
   results |>
   extract2("lists") |>
@@ -208,6 +217,7 @@ It must draw patches as a raster background, then overlays sheep and
 wolf icons at their coordinates.
 
 ``` r
+
 plot_netlogo_world <- function(
   data,
   run_number = 1,
@@ -273,6 +283,7 @@ plot_netlogo_world <- function(
 Let’s see what the initial state looks like:
 
 ``` r
+
 plot_netlogo_world(plot_data)
 ```
 
@@ -287,6 +298,7 @@ our snapshots together.
 First, let’s see what steps we have:
 
 ``` r
+
 steps <-
   plot_data |>
   pull(step) |>
@@ -294,6 +306,7 @@ steps <-
 ```
 
 ``` r
+
 steps
 #> [1]   0 100 200 300 400 500
 ```
@@ -302,6 +315,7 @@ Now we’ll generate a [PNG](https://en.wikipedia.org/wiki/PNG) image file
 for each step:
 
 ``` r
+
 files <- character()
 
 cli_progress_bar("Generating frames", total = length(steps))
@@ -332,6 +346,7 @@ Finally, let’s combine them into a
 [GIF](https://en.wikipedia.org/wiki/GIF) image:
 
 ``` r
+
 animation <-
   files |>
   lapply(image_read) |>
@@ -342,12 +357,14 @@ animation <-
 Run the following to save it:
 
 ``` r
+
 animation |> image_write("netlogo-world-animation.gif")
 ```
 
 And here’s the result:
 
 ``` r
+
 animation
 ```
 
