@@ -1,0 +1,457 @@
+# Run NetLogo BehaviorSpace experiment
+
+`run_experiment()` runs a NetLogo
+[BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) experiment
+in headless mode and returns a
+[`list`](https://rdrr.io/r/base/list.html) with results as [tidy data
+frames](https://r4ds.hadley.nz/data-tidy.html). It can be used with
+[`create_experiment()`](https://danielvartan.github.io/logolink/dev/reference/create_experiment.md)
+to create and run experiments on the fly, or with an existing experiment
+stored in the NetLogo model file.
+
+To avoid issues with list parsing, `run_experiment()` includes support
+for the special
+[lists](https://docs.netlogo.org/behaviorspace.html#lists-output) output
+format. If your experiment includes metrics that return NetLogo lists,
+include `"lists"` in the `output` argument to capture this output.
+Columns containing NetLogo lists are returned as
+[`character`](https://rdrr.io/r/base/character.html) vectors.
+
+The function tries to locate the NetLogo installation automatically.
+This is usually successful, but if it fails, you will need to set it
+manually. See the *Details* section for more information.
+
+For complete guidance on setting up and running experiments in NetLogo,
+please refer to the [BehaviorSpace
+Guide](https://docs.netlogo.org/behaviorspace.html).
+
+## Usage
+
+``` r
+run_experiment(
+  model_path,
+  setup_file = NULL,
+  experiment = NULL,
+  output = "table",
+  other_arguments = NULL,
+  timeout = Inf,
+  tidy_output = TRUE,
+  output_dir = tempdir()
+)
+```
+
+## Arguments
+
+- model_path:
+
+  A [`character`](https://rdrr.io/r/base/character.html) string
+  specifying the path to the NetLogo model file (with extension
+  `.nlogo`, `.nlogo3d`, `.nlogox`, or `.nlogox3d`).
+
+- setup_file:
+
+  (optional) A [`character`](https://rdrr.io/r/base/character.html)
+  string specifying the path to an
+  [XML](https://en.wikipedia.org/wiki/XML) file containing the
+  experiment definition. This file can be created using
+  [`create_experiment()`](https://danielvartan.github.io/logolink/dev/reference/create_experiment.md)
+  or exported from the NetLogo
+  [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) interface
+  (default: `NULL`).
+
+- experiment:
+
+  (optional) A [`character`](https://rdrr.io/r/base/character.html)
+  string specifying the name of the experiment defined in the NetLogo
+  model file (default: `NULL`).
+
+- output:
+
+  (optional) A [`character`](https://rdrr.io/r/base/character.html)
+  vector specifying which output types to generate from the experiment.
+  Valid options are: `"table"`, `"spreadsheet"`, `"lists"`, and
+  `"statistics"`. At least one of `"table"` or `"spreadsheet"` must be
+  included. See the
+  [BehaviorSpace](https://docs.netlogo.org/behaviorspace.html)
+  documentation on
+  [formats](https://docs.netlogo.org/behaviorspace.html#run-options-formats)
+  for details about each output type (default: `c("table", "lists")`).
+
+- other_arguments:
+
+  (optional) A [`character`](https://rdrr.io/r/base/character.html)
+  vector specifying any additional command-line arguments to pass to the
+  NetLogo executable. For example, you can use `c("--threads 4")` to
+  specify the number of threads. See the *Details* section for more
+  information (default: `NULL`).
+
+- timeout:
+
+  (optional) A [`numeric`](https://rdrr.io/r/base/numeric.html) value
+  specifying the maximum time (in seconds) to wait for the NetLogo
+  process to complete. If the process exceeds this time limit, it will
+  be terminated, and the function will return the available output up to
+  that point. Use `Inf` for no time limit (default: `Inf`).
+
+- tidy_output:
+
+  (optional) A [`logical`](https://rdrr.io/r/base/logical.html) flag
+  indicating whether to tidy the output data frames. If `TRUE`, output
+  data frames are arranged according to [tidy data
+  principles](https://r4ds.hadley.nz/data-tidy.html). If `FALSE`, only
+  the default transformations from
+  [`read_delim()`](https://readr.tidyverse.org/reference/read_delim.html)
+  and
+  [`clean_names()`](https://sfirke.github.io/janitor/reference/clean_names.html)
+  are applied to the output data (default: `TRUE`).
+
+- output_dir:
+
+  (optional) A [`character`](https://rdrr.io/r/base/character.html)
+  string specifying the directory where the NetLogo experiment output
+  files must be stored (default:
+  [`tempdir()`](https://rdrr.io/r/base/tempfile.html)).
+
+## Value
+
+A [`list`](https://rdrr.io/r/base/list.html) containing the experiment
+results. The `list` includes the following elements, depending on the
+values specified in the `output` parameter:
+
+- `metadata`: A [`list`](https://rdrr.io/r/base/list.html) with metadata
+  about the experiment run (present in all cases).
+
+- `table`: A
+  [`tibble`](https://tibble.tidyverse.org/reference/tibble.html) with
+  the results of the
+  [`table`](https://docs.netlogo.org/behaviorspace.html#table-output)
+  output.
+
+- `spreadsheet`: A [`list`](https://rdrr.io/r/base/list.html) with the
+  results of the
+  [`spreadsheet`](https://docs.netlogo.org/behaviorspace.html#spreadsheet-output)
+  output containing two elements:
+
+  - `statistics`: A
+    [`tibble`](https://tibble.tidyverse.org/reference/tibble.html) with
+    data from the output first section.
+
+  - `data`: A
+    [`tibble`](https://tibble.tidyverse.org/reference/tibble.html) with
+    data from the output second section.
+
+- `lists`: A
+  [`tibble`](https://tibble.tidyverse.org/reference/tibble.html) with
+  the results of the
+  [`lists`](https://docs.netlogo.org/behaviorspace.html#lists-output)
+  output.
+
+- `statistics`: A
+  [`tibble`](https://tibble.tidyverse.org/reference/tibble.html) with
+  the results of the
+  [`statistics`](https://docs.netlogo.org/behaviorspace.html#statistics-output)
+  output.
+
+## Details
+
+### Setting the NetLogo Installation Path
+
+If `run_experiment()` cannot find the NetLogo installation, you will
+need to set the path manually using the `NETLOGO_HOME` environment
+variable. On Windows, a typical path is something like
+`C:\Program Files\NetLogo 7.0.3`. You can set this variable temporarily
+in your R session with:
+
+    Sys.setenv(NETLOGO_HOME = "PATH/TO/NETLOGO/INSTALLATION")
+
+or permanently by adding it to your
+[`.Renviron`](https://rstats.wtf/r-startup.html#renviron) file.
+
+If even after setting the `NETLOGO_HOME` variable you still encounter
+issues, try setting a `NETLOGO_CONSOLE` environment variable with the
+path to the NetLogo executable or binary. On Windows, a typical path is
+something like `C:\Program Files\NetLogo 7.0.3\NetLogo.exe`.
+
+### NetLogo 3D
+
+The function automatically detects whether the provided model is a 3D
+model (based on the file extension) and adjusts the command-line
+arguments accordingly. You do not need to set the `--3D` flag to the
+`other_arguments` parameter manually.
+
+### Handling NetLogo Lists
+
+NetLogo uses a specific syntax for lists (e.g., `"[1 2 3]"`) that is
+incompatible with standard
+[CSV](https://en.wikipedia.org/wiki/Comma-separated_values) formats. To
+address this, NetLogo provides a special output format called
+[lists](https://docs.netlogo.org/behaviorspace.html#lists-output) that
+exports list metrics in a tabular structure. If your experiment includes
+metrics that return NetLogo lists, include `"lists"` in the `output`
+argument to capture this output. Columns containing NetLogo lists are
+returned as [`character`](https://rdrr.io/r/base/character.html)
+vectors.
+
+The
+[`parse_netlogo_list()`](https://danielvartan.github.io/logolink/dev/reference/parse_netlogo_list.md)
+function is available for parsing NetLogo list values embedded in other
+outputs. However, we recommend using it only when necessary, as it can
+be computationally intensive for large datasets and may not handle all
+edge cases.
+
+### Additional Command-Line Arguments
+
+You can pass additional command-line arguments to the NetLogo executable
+using the `other_arguments` parameter. This can be useful for specifying
+options such as the number of
+[threads](https://en.wikipedia.org/wiki/Thread_(computing)) to use or
+other NetLogo-specific flags.
+
+For example, to specify the number of threads, you can use:
+
+    run_experiment(
+      model_path = "path/to/model.nlogox",
+      setup_file = "path/to/experiment.xml",
+      other_arguments = c("--threads 4")
+    )
+
+There are a variety of command-line options available, but some are
+reserved for internal use by `run_experiment()` and cannot be modified.
+These are:
+
+- `--headless`: Ensures NetLogo runs in headless mode.
+
+- `--3D`: Specifies if the model is a 3D model (automatically set based
+  on the model file extension).
+
+- `--model`: Specifies the path to the NetLogo model file.
+
+- `--setup-file`: Specifies the path to the experiment
+  [XML](https://en.wikipedia.org/wiki/XML) file.
+
+- `--experiment`: Specifies the name of the experiment defined in the
+  model.
+
+- `--table`: Specifies the output file for the
+  [table](https://docs.netlogo.org/behaviorspace.html#table-output)
+  results.
+
+- `--spreadsheet`: Specifies the output file for the
+  [spreadsheet](https://docs.netlogo.org/behaviorspace.html#spreadsheet-output)
+  results.
+
+- `--lists`: Specifies the output file for the
+  [lists](https://docs.netlogo.org/behaviorspace.html#lists-output)
+  results.
+
+- `--stats`: Specifies the output file for the
+  [statistics](https://docs.netlogo.org/behaviorspace.html#statistics-output)
+  results.
+
+For a complete list of available options, refer to the [BehaviorSpace
+Guide](https://docs.netlogo.org/behaviorspace.html#running-from-the-command-line).
+
+### Non-Tabular Output
+
+If the experiment generates any non-tabular output (e.g., prints, error
+messages, warnings), it will be captured and displayed as an
+informational message after the results data frame is returned. This
+allows you to see any important messages generated during the experiment
+run. Keep in mind that excessive non-tabular output may clutter your R
+console.
+
+## Troubleshoot
+
+[BehaviorSpace](https://docs.netlogo.org/behaviorspace.html) has known
+issues when running in
+[headless](https://docs.netlogo.org/behaviorspace#running-from-the-command-line)
+mode. While we are collaborating with the NetLogo developers to address
+these problems in future patch releases, here are some known issues and
+potential workarounds.
+
+### All Results Returning as `0`
+
+If your model halts during the experiment mode, it may result in all
+results being returned as `0`. This issue can also occur if the
+constants or `setup`/`go` procedures are not defined correctly. Verify
+your experiment definition to ensure that all parameters and procedures
+are properly configured.
+
+See this [issue ticket](https://github.com/NetLogo/NetLogo/issues/1386)
+to learn more.
+
+## See also
+
+Other BehaviorSpace functions:
+[`create_experiment()`](https://danielvartan.github.io/logolink/dev/reference/create_experiment.md),
+[`inspect_experiment()`](https://danielvartan.github.io/logolink/dev/reference/inspect_experiment.md),
+[`read_experiment()`](https://danielvartan.github.io/logolink/dev/reference/read_experiment.md)
+
+## Examples
+
+``` r
+# Defining the Model -----
+
+# \dontrun{
+  # This model is included with NetLogo installations.
+  model_path <-
+    find_netlogo_home() |>
+    file.path(
+      "models",
+      "IABM Textbook",
+      "chapter 4",
+      "Wolf Sheep Simple 5.nlogox"
+    )
+# }
+
+# Creating an Experiment -----
+
+# \dontrun{
+  setup_file <- create_experiment(
+    name = "Wolf Sheep Simple Model Analysis",
+    repetitions = 10,
+    sequential_run_order = TRUE,
+    run_metrics_every_step = TRUE,
+    setup = "setup",
+    go = "go",
+    time_limit = 1000,
+    metrics = c(
+      'count wolves',
+      'count sheep'
+    ),
+    run_metrics_condition = NULL,
+    constants = list(
+      "number-of-sheep" = 500,
+      "number-of-wolves" = list(
+        first = 5,
+        step = 1,
+        last = 15
+      ),
+      "movement-cost" = 0.5,
+      "grass-regrowth-rate" = 0.3,
+      "energy-gain-from-grass" = 2,
+      "energy-gain-from-sheep" = 5
+    )
+  )
+# }
+
+# Running the Experiment -----
+
+# \dontrun{
+  model_path |>
+    run_experiment(
+      setup_file = setup_file
+    )
+#> ℹ Running model
+#> ✔ Running model [20.9s]
+#> 
+#> ℹ Gathering metadata
+#> ✔ Gathering metadata [15ms]
+#> 
+#> ℹ Processing table output
+#> ✔ Processing table output [24ms]
+#> 
+#> ℹ The experiment run produced the following messages:
+#> 
+#> May 12, 2026 11:37:48 PM java.util.prefs.FileSystemPreferences$1 run
+#> INFO: Created user preferences directory.
+#> $metadata
+#> $metadata$timestamp
+#> [1] "2026-05-12 23:37:49 GMT"
+#> 
+#> $metadata$netlogo_version
+#> [1] "7.0.4"
+#> 
+#> $metadata$output_version
+#> [1] "2.0"
+#> 
+#> $metadata$model_file
+#> [1] "Wolf Sheep Simple 5.nlogox"
+#> 
+#> $metadata$experiment_name
+#> [1] "Wolf Sheep Simple Model Analysis"
+#> 
+#> $metadata$world_dimensions
+#> min-pxcor max-pxcor min-pycor max-pycor 
+#>       -17        17       -17        17 
+#> 
+#> 
+#> $table
+#> # A tibble: 110,110 × 10
+#>    run_number number_of_sheep number_of_wolves movement_cost grass_regrowth_rate
+#>         <dbl>           <dbl>            <dbl>         <dbl>               <dbl>
+#>  1          1             500                5           0.5                 0.3
+#>  2          1             500                5           0.5                 0.3
+#>  3          1             500                5           0.5                 0.3
+#>  4          1             500                5           0.5                 0.3
+#>  5          1             500                5           0.5                 0.3
+#>  6          1             500                5           0.5                 0.3
+#>  7          1             500                5           0.5                 0.3
+#>  8          1             500                5           0.5                 0.3
+#>  9          1             500                5           0.5                 0.3
+#> 10          1             500                5           0.5                 0.3
+#> # ℹ 110,100 more rows
+#> # ℹ 5 more variables: energy_gain_from_grass <dbl>,
+#> #   energy_gain_from_sheep <dbl>, step <dbl>, count_wolves <dbl>,
+#> #   count_sheep <dbl>
+#> 
+# }
+
+# Running an Experiment Defined in the NetLogo Model File -----
+
+# \dontrun{
+  model_path |>
+    run_experiment(
+      experiment = "Wolf Sheep Simple model analysis"
+    )
+#> ℹ Running model
+#> ✔ Running model [17.7s]
+#> 
+#> ℹ Gathering metadata
+#> ✔ Gathering metadata [10ms]
+#> 
+#> ℹ Processing table output
+#> ✔ Processing table output [8ms]
+#> 
+#> $metadata
+#> $metadata$timestamp
+#> [1] "2026-05-12 23:38:11 GMT"
+#> 
+#> $metadata$netlogo_version
+#> [1] "7.0.4"
+#> 
+#> $metadata$output_version
+#> [1] "2.0"
+#> 
+#> $metadata$model_file
+#> [1] "Wolf Sheep Simple 5.nlogox"
+#> 
+#> $metadata$experiment_name
+#> [1] "Wolf Sheep Simple model analysis"
+#> 
+#> $metadata$world_dimensions
+#> min-pxcor max-pxcor min-pycor max-pycor 
+#>       -17        17       -17        17 
+#> 
+#> 
+#> $table
+#> # A tibble: 110 × 11
+#>    run_number energy_gain_from_grass number_of_wolves movement_cost
+#>         <dbl>                  <dbl>            <dbl>         <dbl>
+#>  1          1                      2                5           0.5
+#>  2          2                      2                5           0.5
+#>  3          3                      2                5           0.5
+#>  4          4                      2                5           0.5
+#>  5          5                      2                5           0.5
+#>  6          6                      2                5           0.5
+#>  7          7                      2                5           0.5
+#>  8          8                      2                5           0.5
+#>  9          9                      2                5           0.5
+#> 10         10                      2                5           0.5
+#> # ℹ 100 more rows
+#> # ℹ 7 more variables: energy_gain_from_sheep <dbl>, number_of_sheep <dbl>,
+#> #   grass_regrowth_rate <dbl>, step <dbl>, count_wolves <dbl>,
+#> #   count_sheep <dbl>, sum_grass_amount_of_patches <dbl>
+#> 
+# }
+```
